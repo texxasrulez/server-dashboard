@@ -295,7 +295,7 @@ assets/js/pages/history.js
 assets/css/pages/history.css
 api/history_export.php            # export (probes/alerts)
 api/alerts_eval.php               # probe+evaluate endpoint (see API)
-state/services_status.json        # latest sample per service
+data/services_status.json        # latest sample per service
 data/services_status_history.jsonl# long history (JSONL)
 ```
 
@@ -311,7 +311,7 @@ Rule builder with cool-down and consecutive failure logic.
 Files:
 ```
 data/alerts.json                  # rules
-state/alerts_events.jsonl         # fired events
+data/alerts_events.jsonl         # fired events
 api/alerts_eval.php               # evaluator
 ```
 
@@ -425,8 +425,8 @@ curl -fsS 'https://HOSTapi/history_export.php?type=probes&limit=1000&start=0&tok
 ## 8) Data & State Files
 
 - `data/alerts.json` — alert rules (JSON)
-- `state/alerts_events.jsonl` — fired alerts (one JSON object per line)
-- `state/services_status.json` — latest status per service (JSON)
+- `data/alerts_events.jsonl` — fired alerts (one JSON object per line)
+- `data/services_status.json` — latest status per service (JSON)
 - `data/services_status_history.jsonl` — long probe history (JSONL)
 - `state/audit.log.jsonl` — audit events (JSONL)
 

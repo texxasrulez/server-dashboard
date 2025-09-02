@@ -24,23 +24,6 @@ It has lots of features, too many to list. One day I will have a better README.m
 ---
 
 ## Pages
-
-### `security.php`
-- Reads settings via `api/security_get.php`
-- Fields supported:
-  - `mail_transport`, `mail_from`, `mail_replyto`
-  - `sendmail_path`, `smtp_host`, `smtp_port`, `smtp_secure`, `smtp_user`, `smtp_pass`, `smtp_timeout`
-  - **Alert recipients**: input id `sec_email` (or `[name="email"]`), maps to `ALERT_EMAILS`
-
-**CLI examples**
-```bash
-# GET (prefill) using token
-curl -fsS 'https://YOUR_HOSTapi/security_get.php'   -H 'X-CRON-TOKEN: YOUR_TOKEN' | jq .
-
-# POST (save) using token
-curl -fsS 'https://YOUR_HOSTapi/security_set.php'   -H 'Content-Type: application/json'   -H 'X-CRON-TOKEN: YOUR_TOKEN'   --data '{"email":"admin@example.com,ops@example.com"}' | jq .
-```
-
 ### `history.php`
 - Toolbar: Range select (1h/24h/7d/30d), `Probe now`, `Refresh`, `Export JSON`
 - Loads from `api/history_export.php?type=probes&limit=1000&start=0`, filters client-side by range

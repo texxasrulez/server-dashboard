@@ -1,0 +1,36 @@
+/* userbox.css — theme-token baseline (no-flash) */
+.app-header .userbox{ position:relative; }
+.app-header .userbox .userbtn{ display:flex; align-items:center; gap:.4rem; background:transparent; border:0; color:inherit; cursor:pointer; }
+.app-header .userbox .avatar{ width:22px; height:22px; border-radius:999px; }
+
+/* Prevent first-paint flash: start hidden; show only when JS adds .is-open */
+.app-header .userbox .usermenu{
+  position:absolute; top:calc(100% + 6px); right:0; min-width:200px; padding:.35rem;
+  background: var(--menu-bg, #151a1f);
+  color: var(--menu-fg, #e6eef5);
+  border:1px solid var(--menu-border, rgba(255,255,255,.12));
+  border-radius:10px;
+  box-shadow: var(--shadow-4, rgba(0,0,0,.35) 0 12px 30px);
+
+  /* hidden baseline */
+  display: none;
+  opacity: 0;
+  transform: translateY(2px);
+
+  /* Only animate visibility/position — never bg/color to avoid bright flicker */
+  transition: opacity .14s ease, transform .14s ease;
+}
+.app-header .userbox .usermenu.is-open{
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Keep out of layout entirely when closed via [hidden] */
+.app-header .userbox .usermenu[hidden]{ display: none !important; }
+
+.app-header .userbox .usermenu a{ display:block; padding:.45rem .6rem; border-radius:8px; color:inherit; text-decoration:none; }
+.app-header .userbox .usermenu a:hover{ background: rgba(255,255,255,.06); }
+
+@media (prefers-reduced-motion: reduce){
+  .app-header .userbox .usermenu{ transition: none; }
+}

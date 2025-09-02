@@ -1,0 +1,21 @@
+/* sunrise.css — tokens only */
+:root{
+  --btn-bg: var(--surface-1);
+  --btn-border: var(--border-strong);
+  --btn-fg: var(--fg);
+
+  --bg:#fff7ec; --fg:#241b0f; --muted:#7a6a59;
+  --card:#fffdf8; --border:#f0e0c8;
+  --accent:#ff8c42; --accent-2:#ffb86b;
+  --danger:#d9534f; --warn:#d4a600; --ok:#2eaf7d;
+  --notify:#ff8200;
+}
+
+/* ensure dark, readable button text for light themes */
+.btn, button.btn, a.btn{ color: var(--fg-strong) !important; }
+.btn.primary, button.btn.primary, a.btn.primary{ color: var(--fg-strong) !important; }
+
+/* Header Domain Name Color */
+.header-image-domain{    
+	filter: brightness(0) saturate(100%) invert(63%) sepia(60%) saturate(4377%) hue-rotate(359deg) brightness(101%) contrast(107%);
+}

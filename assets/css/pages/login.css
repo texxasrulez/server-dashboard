@@ -1,0 +1,118 @@
+/* login.css */
+:root{
+  --btn-bg: var(--surface-1);
+  --btn-border: var(--border-strong);
+  --btn-fg: var(--fg);
+
+  --fg: #152f40;
+  --fg-strong: #152f40;
+  --muted: color-mix(in srgb, #152f40 55%, #152f40 45%);
+
+  /* Layered colors: page → card → alt/well (each step darker) */
+  --bg: #dff1f8;
+  --surface-1: #e8f4fb;
+  --surface-2: #cfe1ec;  /* CARD */
+  --surface-3: #bdd6e6;  /* ALT/WELL */
+
+  --card: var(--surface-2);
+  --panel: var(--surface-2);
+
+  --border: #9ec2d7;
+  --border-strong: #86b3cd;
+
+  --accent: #1f5f85;
+  --accent-2: #58a6d6;
+
+  --danger: #c23b55;
+  --warn: #b8860b;
+  --ok: #148a67;
+  --notify: #152f40;
+}
+
+.login-wrap{max-width:380px;margin:10vh auto;padding:24px;border-radius:16px;box-shadow:0 6px 30px rgba(0,0,0,.15);background:var(--panel-bg,#111)}
+.login-title{font-size:20px;margin:0 0 12px;font-weight:700;color:#fff}
+.form-row{display:flex;flex-direction:column;margin:10px 0}
+.form-row input[type=text], .form-row input[type=password]{padding:10px;border:1px solid var(--border,#333);border-radius:10px;background:var(--input-bg,transparent);color:#000}
+.btn{padding:10px 14px;border-radius:12px;border:0;background:var(--btn-bg,#2d6cdf);color:#000;cursor:pointer}
+.muted{opacity:.7;font-size:12px}
+.error{color:#ff6b6b;margin:8px 0}
+.note{background:rgba(255,255,255,.05);padding:8px;border-radius:10px;margin-top:8px}
+
+
+
+/* Hidden must always win, even if .is-open is present momentarily */
+.app-header .userbox .usermenu[hidden]{
+  display: none !important;
+  opacity: 0 !important;
+  transform: translateY(-4px) !important;
+  transition: none !important;
+}
+
+/* Normalize user button to theme variables */
+.app-header .userbox .userbtn{
+  background: var(--surface-2, transparent);
+  color: var(--text-1, inherit);
+  border: 1px solid var(--border-2, transparent);
+  border-radius: 9999px;
+  padding: .25rem .5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
+.app-header .userbox .userbtn:hover{
+  background: var(--surface-3, rgba(0,0,0,0.06));
+}
+.app-header .userbox .userbtn .role.muted{
+  color: var(--text-3, currentColor);
+}
+
+/* hr tags */
+.hr { border-color:var(--card); }
+
+/* assets/css/pages/login.css — high-contrast login text on dark cards */
+form[action*="login"],
+form#login,
+.auth-card,
+.login-card {
+  color: #fff !important;
+}
+
+/* Headings, labels, helper text */
+form[action*="login"] h1,
+form[action*="login"] h2,
+form[action*="login"] h3,
+form[action*="login"] label,
+form[action*="login"] .help,
+form[action*="login"] .message,
+.auth-card h1, .auth-card h2, .auth-card h3, .auth-card label, .auth-card .help, .auth-card .message,
+.login-card h1, .login-card h2, .login-card h3, .login-card label, .login-card .help, .login-card .message {
+  color: #fff !important;
+  text-shadow: 0 1px 1px rgba(0,0,0,.35);
+}
+
+/* Inputs + placeholders */
+form[action*="login"] input[type="text"],
+form[action*="login"] input[type="email"],
+form[action*="login"] input[type="password"],
+.auth-card input[type="text"], .auth-card input[type="email"], .auth-card input[type="password"],
+.login-card input[type="text"], .login-card input[type="email"], .login-card input[type="password"] {
+  color: #fff !important;
+}
+
+form[action*="login"] input::placeholder,
+.auth-card input::placeholder,
+.login-card input::placeholder {
+  color: rgba(255,255,255,.75) !important;
+}
+
+/* Subdued hint text */
+form[action*="login"] .hint,
+.auth-card .hint,
+.login-card .hint {
+  color: #cfd8dc !important;
+}
+
+/* Extra: make the sign-in button's text readable if theme flips it */
+form[action*="login"] button, .auth-card button, .login-card button {
+  text-shadow: 0 1px 1px rgba(0,0,0,.25);
+}

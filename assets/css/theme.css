@@ -1,0 +1,22 @@
+@import url('./themes/nord.css');
+
+
+/* Config tabs: make active pill match header emphasis with a soft glow */
+#configTabs .btn[aria-selected="true"],
+#configTabs .btn.active,
+#configTabs .btn.is-active,
+#configTabs .btn.selected,
+#configTabs .btn.current {
+  background: color-mix(in srgb, var(--btn) 18%, var(--card));
+  border-color: color-mix(in srgb, var(--btn) 45%, var(--border));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--btn) 50%, transparent),
+    0 0 10px 2px color-mix(in srgb, var(--btn) 35%, transparent);
+  transition: box-shadow .12s ease, background .12s ease, border-color .12s ease;
+}
+#configTabs .btn[aria-selected="true"]:hover,
+#configTabs .btn.active:hover {
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--btn) 60%, transparent),
+    0 0 12px 3px color-mix(in srgb, var(--btn) 45%, transparent);
+}

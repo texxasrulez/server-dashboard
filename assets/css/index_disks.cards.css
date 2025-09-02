@@ -1,0 +1,73 @@
+
+/* Disk cards (index) */
+.disk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.9rem}
+.disk-card{display:flex;align-items:center;gap:1rem;padding:1rem;border:1px solid var(--border);border-radius:14px;background:linear-gradient(180deg, color-mix(in srgb,var(--card) 96%, transparent), var(--card));box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+.disk-card .device{position:relative;width:120px;height:76px;border-radius:14px;background:linear-gradient(180deg,#2a2a2a,#1f1f1f);box-shadow:inset 0 -1px 2px rgba(0,0,0,.35);border:1px solid var(--border)}
+.disk-card .device .led{position:absolute;right:10px;top:10px;width:12px;height:12px;border-radius:50%;background:var(--up,#10b981);box-shadow:0 0 8px color-mix(in srgb, var(--up,#10b981) 60%, transparent)}
+.disk-card .device .slot{position:absolute;left:12px;right:12px;bottom:14px;height:16px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.06);overflow:hidden}
+.disk-card .device .slot .progress{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:999px;background:linear-gradient(90deg, var(--up,#2ec27e) 0%, var(--warn,#f4b400) 60%, var(--down,#ff6b6b) 100%);filter:saturate(.95)}
+.disk-card .text .title{font-weight:700;font-size:1.05rem}
+.disk-card .text .sub{color:var(--muted);font-weight:700}
+.small{font-size:.85rem}
+.muted{opacity:.8}
+@media (max-width:480px){ .disk-card .device{width:96px;height:64px} }
+
+
+/* State colors */
+.disk-card[data-state="ok"]   .device .led{background:var(--up,#10b981);box-shadow:0 0 8px color-mix(in srgb, var(--up,#10b981) 60%, transparent)}
+.disk-card[data-state="warn"] .device .led{background:var(--warn,#f4b400);box-shadow:0 0 8px color-mix(in srgb, var(--warn,#f4b400) 60%, transparent)}
+.disk-card[data-state="bad"]  .device .led{background:var(--down,#ff6b6b);box-shadow:0 0 8px color-mix(in srgb, var(--down,#ff6b6b) 60%, transparent)}
+.disk-card[data-state="warn"] .text .sub{color:var(--warn,#f4b400)}
+.disk-card[data-state="bad"]  .text .sub{color:var(--down,#ff6b6b)}
+
+
+/* Smooth animations */
+.disk-card .device .slot .progress{ transition: width 460ms cubic-bezier(.22,.61,.36,1); }
+.disk-card .device .led{ transition: background-color 260ms ease, box-shadow 260ms ease; }
+.disk-card .text .sub.updated{ animation: hddflash .7s ease; }
+@keyframes hddflash { from{ opacity:.4 } to{ opacity:1 } }
+
+
+/* Stale indicator (no recent data) */
+.disk-card[data-stale="1"] .device .led{
+  background: var(--neutral, #6b7280);
+  box-shadow: none;
+  opacity: .6;
+}
+
+/* First-render slide-in */
+.disk-card.intro{
+  opacity: 0;
+  transform: translateY(6px);
+  animation: hddSlideIn .5s ease-out forwards;
+}
+@keyframes hddSlideIn {
+  to { opacity: 1; transform: none; }
+}
+
+
+/* Hidden must always win, even if .is-open is present momentarily */
+.app-header .userbox .usermenu[hidden]{
+  display: none !important;
+  opacity: 0 !important;
+  transform: translateY(-4px) !important;
+  transition: none !important;
+}
+
+/* Normalize user button to theme variables */
+.app-header .userbox .userbtn{
+  background: var(--surface-2, transparent);
+  color: var(--text-1, inherit);
+  border: 1px solid var(--border-2, transparent);
+  border-radius: 9999px;
+  padding: .25rem .5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
+.app-header .userbox .userbtn:hover{
+  background: var(--surface-3, rgba(0,0,0,0.06));
+}
+.app-header .userbox .userbtn .role.muted{
+  color: var(--text-3, currentColor);
+}

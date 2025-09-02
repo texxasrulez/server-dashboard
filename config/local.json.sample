@@ -1,0 +1,70 @@
+{
+    "site": {
+        "name": "Sitename",
+        "base_url": "https://domain.com",
+        "timezone": "UTC",
+        "theme": "nord"
+    },
+    "integrations": {
+        "smtp": {
+            "username": "",
+            "password": ""
+        },
+        "mysql": {
+            "database": "database",
+            "username": "user",
+            "password": "password"
+        }
+    },
+    "server_tests": {
+        "rate_limit_ms": 3000,
+        "load_warn_per_core": "1",
+        "load_fail_per_core": "2",
+        "audit_log": true
+    },
+    "security": {
+        "admin_emails": [
+            ""
+        ],
+        "csrf_secret": "",
+        "api_rate_limit_ms": 600
+    },
+    "alerts": {
+        "enabled": true,
+        "cron_token": "",
+        "daily_digest": true
+    },
+    "ui": {
+        "toast_position": "bottom-right",
+        "items_per_page": 5
+    },
+    "cron": {
+        "jobs": "[]"
+    },
+    "mail": {
+        "mail_transport": "phpmail",
+        "mail_from": "",
+        "mail_replyto": "",
+        "sendmail_path": "/usr/sbin",
+        "smtp_host": "smtp.domain.com",
+        "smtp_port": 587,
+        "smtp_secure": "tls",
+        "smtp_user": "",
+        "smtp_pass": "",
+        "sec_email": []
+    },
+    "email": {
+        "enabled": true,
+        "indicator_mode": "multiple",
+        "new_email": "",
+        "new_password": "",
+        "oauth_google_client_id": "",
+        "oauth_google_client_secret": "",
+        "oauth_ms_client_id": "",
+        "oauth_ms_client_secret": "",
+        "oauth_ms_tenant": "",
+        "oauth_yahoo_client_id": "",
+        "oauth_yahoo_client_secret": "",
+        "accounts": "[]"
+    }
+}

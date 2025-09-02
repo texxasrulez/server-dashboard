@@ -1,0 +1,6 @@
+{
+    "admin_emails": [
+        "admin@domain.com"
+    ],
+    "csrf_secret": ""
+}

@@ -1,0 +1,17 @@
+/* graphite.css — tokens only */
+:root{
+  --btn-bg: var(--surface-1);
+  --btn-border: var(--border-strong);
+  --btn-fg: var(--fg);
+
+  --bg:#0b0b0d; --fg:#e5e7eb; --muted:#a3aab4;
+  --card:#121316; --border:#272a30;
+  --accent:#5aa2ff; --accent-2:#7fb2ff;
+  --danger:#f87171; --warn:#fbbf24; --ok:#10b981;
+  --notify:#464950;
+}
+
+/* Header Domain Name Color */
+.header-image-domain{    
+	filter: brightness(0) saturate(100%) invert(26%) sepia(19%) saturate(245%) hue-rotate(184deg) brightness(92%) contrast(85%);
+}

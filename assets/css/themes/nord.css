@@ -1,0 +1,76 @@
+:root{
+  --btn-bg: var(--surface-1);
+  --btn-border: var(--border-strong);
+  --btn-fg: var(--fg);
+
+  --bg:#0e1116; --fg:#e5e9f0; --muted:#a7b1c2;
+  --card:#11151b; --border:#2a3039;
+  --accent:#88c0d0; --accent-2:#81a1c1;
+  --danger:#ff5c7c; --warn:#f2c44d; --ok:#66e0a3;
+  --notify:#b5b5b5;
+}
+
+
+
+/* Hidden must always win, even if .is-open is present momentarily */
+.app-header .userbox .usermenu[hidden]{
+  display: none !important;
+  opacity: 0 !important;
+  transform: translateY(-4px) !important;
+  transition: none !important;
+}
+
+/* Normalize user button to theme variables */
+.app-header .userbox .userbtn{
+  background: var(--surface-2, transparent);
+  color: var(--text-1, inherit);
+  border: 1px solid var(--border-2, transparent);
+  border-radius: 9999px;
+  padding: .25rem .5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
+.app-header .userbox .userbtn:hover{
+  background: var(--surface-3, rgba(0,0,0,0.06));
+}
+.app-header .userbox .userbtn .role.muted{
+  color: var(--text-3, currentColor);
+}
+
+
+/* --- Button & UI tokens for Nord theme (unified look) --- */
+:root{
+  --text-color: var(--fg);
+  --surface-2: rgba(255,255,255,0.04);
+  --surface-3: rgba(255,255,255,0.06);
+
+  /* Neutral buttons by default */
+  --btn-fg: var(--fg);
+  --btn-bg: rgba(255,255,255,0.06);
+  --btn-bg-hover: rgba(255,255,255,0.10);
+  --btn-border: rgba(255,255,255,0.15);
+  --btn-secondary-bg: rgba(255,255,255,0.04);
+
+  /* Danger / Warning palette to match app */
+  --danger: #d95140;
+  --danger-fg: #fff;
+  --warning: #c9a227;
+  --warning-fg: #111;
+
+  /* Modal + chips + card tokens */
+  --modal-bg: var(--card);
+  --modal-fg: var(--fg);
+  --modal-border: var(--border);
+  --chip-bg: rgba(255,255,255,0.08);
+  --chip-br: rgba(255,255,255,0.18);
+}
+
+/* Normalize .btn on anchors to match buttons */
+a.btn{ color: var(--btn-fg); background: var(--btn-bg); border-color: var(--btn-border); }
+a.btn:hover{ background: var(--btn-bg-hover); }
+
+/* Header Domain Name Color */
+.header-image-domain{    
+	filter: brightness(0) saturate(100%) invert(86%) sepia(15%) saturate(3%) hue-rotate(349deg) brightness(85%) contrast(83%);
+}

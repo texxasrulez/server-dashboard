@@ -1,0 +1,2 @@
+Tokens in assets/css/base/10-tokens.css. Themes override tokens in assets/css/themes/<name>.css.
+Components/page css must use tokens only.

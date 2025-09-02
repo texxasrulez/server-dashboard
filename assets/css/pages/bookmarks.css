@@ -1,0 +1,77 @@
+/* assets/css/pages/bookmarks.css */
+#bookmarks-root .toolbar { display:flex; align-items:center; justify-content:space-between; margin-bottom: 1rem; }
+#bookmarks-root .controls { display:flex; gap:.75rem; align-items:center; }
+#bookmarks-root .controls .inline { display:flex; gap:.35rem; align-items:center; }
+#bookmarks-root .grid-2 { display:grid; grid-template-columns: 1.4fr 1fr; gap:1rem; align-items:start; }
+#bookmarks-root .card { background: var(--card); color: var(--fg); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; margin-bottom: 1rem; }
+#bookmarks-root .add-form .row { display:grid; grid-template-columns: 1fr 2fr 1fr auto; gap: 1rem; align-items:end; }
+#bookmarks-root .add-form label { display:flex; flex-direction:column; gap: .25rem; }
+#bookmarks-root input[type="text"], #bookmarks-root input[type="url"], #bookmarks-root select { width:100%; }
+#bookmarks-root .actions { display:flex; gap:.5rem; }
+#bookmarks-root .list .list-header, #bookmarks-root .list .list-body .row { display:grid; grid-template-columns: 2fr 2.6fr 1.3fr 1.2fr .8fr; gap:.75rem; align-items:center; }
+#bookmarks-root .list .list-header { font-weight:600; opacity:.8; border-bottom:1px solid var(--border); padding-bottom:.5rem; margin-bottom:.5rem; }
+#bookmarks-root .list .list-body .row { padding:.35rem 0; border-bottom:1px dashed var(--border); }
+#bookmarks-root .list .empty { padding:1rem; text-align:center; opacity:.7; }
+#bookmarks-root .fav { width:16px; height:16px; vertical-align:middle; border-radius:3px; }
+
+/* Categories */
+#bookmarks-root .cats h2 { margin:0 0 .5rem 0; }
+#bookmarks-root .cat-form { display:grid; grid-template-columns: 1fr auto; gap:.5rem; align-items:end; margin-bottom:.5rem; }
+#bookmarks-root .cat-list .row { display:grid; grid-template-columns: 1fr auto; gap:.5rem; align-items:center; padding:.35rem 0; border-bottom:1px dashed var(--border); }
+#bookmarks-root .cat-list .row .actions { display:flex; gap:.35rem; }
+#bookmarks-root .empty { padding:.5rem; text-align:center; opacity:.7; }
+
+
+/* Modal */
+#bmModal{ position:fixed; inset:0; background:rgba(0,0,0,.6); display:block; z-index:1000; }
+#bmModal[hidden]{ display:none; }
+#bmModal .modal-dialog{ position:absolute; top:4vh; left:50%; transform:translateX(-50%); width:min(1200px, 96vw); max-height:92vh; overflow:hidden; background:var(--card); color:var(--fg); border:1px solid var(--border); border-radius:12px; padding:1rem; }
+#bmModal .modal-close{ position:absolute; top:.5rem; right:.75rem; border:none; background:transparent; font-size:1.5rem; cursor:pointer; }
+#bmModal .modal-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:1rem; max-height: calc(92vh - 3rem); }
+#bmModal .scroll-y{ overflow:auto; max-height:50vh; border:1px dashed var(--border); padding:.5rem; border-radius:8px; }
+#bookmarks-root .list-body{ max-height:60vh; overflow:auto; }
+#bookmarks-root .cat-list{ max-height:50vh; overflow:auto; }
+
+/* Tabs area for top-right tools */
+#bookmarks-root .tabs{ display:flex; gap:.5rem; margin-left:1rem; }
+#bookmarks-root .tabs .btn.ghost{ background:transparent; border:1px dashed var(--border); }
+
+
+/* Top tabs look */
+#bookmarks-root .toolbar .tabs { display:flex; gap:.5rem; align-items:center; }
+#bookmarks-root .toolbar .tabs .btn,
+#bookmarks-root .toolbar .tabs .btn.ghost {
+  padding:.5rem .75rem; border-radius:10px; font-weight:600;
+}
+
+
+/* Single column grid when categories pane is hidden on main page */
+#bookmarks-root .grid-1 { display:block; }
+
+
+/* Two-column layout for add bookmark + add category */
+#bookmarks-root .grid-2 { display:grid; grid-template-columns: 2fr 1fr; gap:1rem; align-items:start; }
+
+/* Two top cards equal height, add-form a bit narrower */
+#bookmarks-root .grid-2{ display:grid; grid-template-columns: 1.35fr 1fr; gap:1rem; align-items:stretch; }
+#bookmarks-root .grid-2 > .card{ height:100%; display:flex; flex-direction:column; }
+#bookmarks-root .grid-2 > .card .row{ margin-top:.25rem; }
+#bookmarks-root .cats-create .hint, #bookmarks-root .cats-create .cat-list{ display:none; } /* no list on main page */
+
+/* List spans full width below top grid */
+#bookmarks-root .card.list{ grid-column: 1 / -1; }
+
+#bookmarks-root .fav{ width:16px; height:16px; margin-right:.5rem; vertical-align:-2px; border-radius:3px; }
+
+
+/* --- Bookmarks: make only the list area scroll, keep header/forms static --- */
+#bookmarks-root{ display:flex; flex-direction:column; min-height: 0; }
+#bookmarks-root .wrap, #bookmarks-root .grid-2{ min-height: 0; }
+#bookmarks-root .list{ flex:1 1 auto; display:flex; flex-direction:column; min-height: 0; }
+#bookmarks-root .list .list-body{ flex:1 1 auto; overflow:auto; }
+
+/* lock parent content container so only list scrolls */
+.content.content-locked{ overflow: hidden; }
+
+/* hr tags */
+.hr { border-color:var(--card); }

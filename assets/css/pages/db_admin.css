@@ -1,0 +1,31 @@
+/* per-page styles (optional) */
+
+
+/* Hidden must always win, even if .is-open is present momentarily */
+.app-header .userbox .usermenu[hidden]{
+  display: none !important;
+  opacity: 0 !important;
+  transform: translateY(-4px) !important;
+  transition: none !important;
+}
+
+/* Normalize user button to theme variables */
+.app-header .userbox .userbtn{
+  background: var(--surface-2, transparent);
+  color: var(--text-1, inherit);
+  border: 1px solid var(--border-2, transparent);
+  border-radius: 9999px;
+  padding: .25rem .5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
+.app-header .userbox .userbtn:hover{
+  background: var(--surface-3, rgba(0,0,0,0.06));
+}
+.app-header .userbox .userbtn .role.muted{
+  color: var(--text-3, currentColor);
+}
+
+/* hr tags */
+.hr { border-color:var(--card); }

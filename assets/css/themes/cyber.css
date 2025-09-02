@@ -1,0 +1,17 @@
+/* cyber.css — tokens only */
+:root{
+  --btn-bg: var(--surface-1);
+  --btn-border: var(--border-strong);
+  --btn-fg: var(--fg);
+
+  --bg:#080812; --fg:#e7f0ff; --muted:#a4b2d9;
+  --card:#0f0f24; --border:#262650;
+  --accent:#00e0ff; --accent-2:#7afcff;
+  --danger:#ff4d6d; --warn:#ffd166; --ok:#39ffb0;
+  --notify:#4f1f7e;
+}
+
+/* Header Domain Name Color */
+.header-image-domain{    
+	filter: brightness(0) saturate(100%) invert(16%) sepia(29%) saturate(5320%) hue-rotate(257deg) brightness(91%) contrast(100%);
+}

@@ -1,0 +1,22 @@
+/* porcelain-light (generated from cloud.css) */
+/* cloud.css — tokens only */
+:root{
+  --btn-bg: var(--surface-1);
+  --btn-border: var(--border-strong);
+  --btn-fg: var(--fg);
+
+  --bg: #faf9f7; --fg: #1f2328; --muted: #6a6f76;
+  --card: #ffffff; --border: #e5e5e0;
+  --accent: #0ea5e9; --accent-2: #ef4444;
+  --danger:#c23b55; --warn:#b8860b; --ok:#148a67;
+  --notify:#e6cdb5;
+}
+
+/* ensure dark, readable button text for light themes */
+.btn, button.btn, a.btn{ color: var(--fg-strong) !important; }
+.btn.primary, button.btn.primary, a.btn.primary{ color: var(--fg-strong) !important; }
+
+/* Header Domain Name Color */
+.header-image-domain{    
+	filter: brightness(0) saturate(100%) invert(89%) sepia(23%) saturate(416%) hue-rotate(328deg) brightness(95%) contrast(89%);
+}

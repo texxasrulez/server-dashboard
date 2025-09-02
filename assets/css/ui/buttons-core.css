@@ -1,0 +1,30 @@
+:root{
+  --btn-fg: var(--text-color, #e6e6e6);
+  --btn-bg: rgba(255,255,255,0.06);
+  --btn-bg-hover: rgba(255,255,255,0.10);
+  --btn-border: rgba(255,255,255,0.15);
+  --btn-danger-bg: #d95140;
+  --btn-danger-fg: #fff;
+  --btn-secondary-bg: rgba(255,255,255,0.04);
+}
+button.btn, .btn{
+  -webkit-appearance: none; appearance: none;
+  color: var(--btn-fg);
+  background: var(--btn-bg);
+  border: 1px solid var(--btn-border);
+  border-radius: 10px;
+  padding: 6px 10px;
+  font: inherit;
+  cursor: pointer;
+  line-height: 1.2;
+}
+.btn:hover{ background: var(--btn-bg-hover); }
+.btn.secondary{ background: var(--btn-secondary-bg); }
+.btn.danger,
+.btn[data-variant="danger"],
+.btn[data-action="delete"],
+button[class*="delete"].btn{
+  background: var(--btn-danger-bg); color: var(--btn-danger-fg);
+  border-color: var(--btn-danger-bg);
+}
+a.btn{ text-decoration: none; display: inline-flex; align-items:center; }

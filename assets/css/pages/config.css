@@ -1,0 +1,21 @@
+/* Config page spacing polish */
+#configPane label {
+  display: inline-block;
+  margin-right: 10px;     /* space between label text and input */
+}
+
+/* Also handle adjacent-sibling patterns for generated markup */
+#configPane label + input,
+#configPane label + select,
+#configPane label + textarea,
+#configPane label + .input,
+#configPane label + .select {
+  margin-left: 4px;
+}
+
+/* Keep rows pleasant without touching global CSS */
+#configPane .row,
+#configPane .form-row,
+#configPane .cfg-row {
+  column-gap: 12px;
+}

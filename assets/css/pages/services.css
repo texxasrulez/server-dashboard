@@ -1,0 +1,89 @@
+/* Card & table basics */
+.card{border:1px solid var(--border);border-radius:16px;background:linear-gradient(180deg,color-mix(in srgb,var(--card) 96%, transparent),var(--card));padding:1rem}
+.section-title{font-weight:700;font-size:1.1rem}
+.tablewrap{overflow:auto}
+.table{width:100%;border-collapse:separate;border-spacing:0}
+.table thead th{position:sticky;top:0;background:color-mix(in srgb,var(--card) 96%, transparent);z-index:1}
+.table th,.table td{padding:.6rem .75rem;border-bottom:1px solid var(--border)}
+.table th{font-weight:700;color:var(--muted);text-align:left}
+.nowrap{white-space:nowrap}
+.center{text-align:center}
+
+/* Layout helpers */
+.row{display:flex;align-items:center}
+.row.gap{gap:.5rem}
+.row.between{justify-content:space-between}
+.row.right{justify-content:flex-end}
+input#svcSearch{border:1px solid var(--border);border-radius:10px;background:color-mix(in srgb,var(--card) 92%, transparent);padding:.45rem .6rem;min-width:220px}
+
+/* Actions column uses the same nav tabs styles */
+.actions-tabs{display:flex;justify-content:flex-end}
+.actions-tabs .tabs{gap:.35rem}
+
+/* Modal */
+.modal[hidden]{display:none}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:1rem;z-index:60}
+.modal-card{width:min(820px,96vw);border:1px solid var(--border);border-radius:16px;background:linear-gradient(180deg,color-mix(in srgb,var(--card) 96%, transparent),var(--card));box-shadow:0 10px 30px rgba(0,0,0,.25);padding:1rem}
+.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.modal-head .title{font-weight:700}
+.form .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
+.form label{display:flex;flex-direction:column;font-size:.85rem;color:var(--muted)}
+.form input,.form select{border:1px solid var(--border);border-radius:10px;background:color-mix(in srgb,var(--card) 92%, transparent);padding:.45rem .6rem;margin-top:.25rem}
+
+/* Small status pill shown by "Test" */
+.pill{display:inline-block;padding:.15rem .45rem;border-radius:999px;border:1px solid var(--border);font-weight:700;font-size:.7rem;margin-left:.4rem}
+.pill.up{color:#10b981;border-color:color-mix(in srgb,#10b981 55%, var(--border))}
+.pill.warn{color:#f4b400;border-color:color-mix(in srgb,#f4b400 55%, var(--border))}
+.pill.down{color:#ff6b6b;border-color:color-mix(in srgb,#ff6b6b 55%, var(--border))}
+
+/* --- Tabs-as-buttons override (scoped to this page) ---
+   Ensures Add/Test/Edit/Delete look exactly like header pills */
+.card .tabs{display:flex;flex-wrap:wrap;gap:.5rem}
+.card .tabs a{
+  display:inline-flex;align-items:center;justify-content:center;
+  text-decoration:none;color:var(--text);
+  border:1px solid var(--border);
+  background:color-mix(in srgb,var(--card) 92%, transparent);
+  border-radius:12px;
+  padding:.35rem .8rem; line-height:1; font-weight:700;
+}
+.card .tabs.inline a{height:2.1rem}
+.card .tabs.compact a{height:1.8rem;font-size:.9rem;padding:.25rem .6rem}
+.card .tabs a:hover{filter:brightness(1.05)}
+
+/* Keep "Test Edit Delete" in a single row */
+.table thead th.actions-col{ width:220px; }
+td.actions-tabs{ white-space:nowrap; min-width:220px; }
+td.actions-tabs .tabs{ display:flex; flex-wrap:nowrap; gap:.35rem; justify-content:flex-end; }
+
+/* Also render modal buttons as header-style pills */
+.modal-card .tabs{display:flex;flex-wrap:wrap;gap:.5rem}
+.modal-card .tabs a{
+  display:inline-flex;align-items:center;justify-content:center;
+  text-decoration:none;color:var(--text);
+  border:1px solid var(--border);
+  background:color-mix(in srgb,var(--card) 92%, transparent);
+  border-radius:12px;
+  padding:.35rem .8rem; line-height:1; font-weight:700;
+}
+.modal-card .tabs.inline a{height:2.1rem}
+.modal-card .tabs.compact a{height:1.8rem;font-size:.9rem;padding:.25rem .6rem}
+.modal-card .tabs a:hover{filter:brightness(1.05)}
+
+/* Sortable headers */
+th.sortable{ cursor:pointer; }
+th.sortable:after{ content:'\25B4\25BE'; font-size:.65rem; opacity:.35; padding-left:.35rem; }
+
+/* Toggle pill for Enabled */
+.enabled-pill .tabs a{ min-width:48px; justify-content:center; }
+.enabled-pill.on  .tabs a{ border-color:color-mix(in srgb,#10b981 55%, var(--border)); color:#10b981; }
+.enabled-pill.off .tabs a{ border-color:color-mix(in srgb,#ff6b6b 55%, var(--border)); color:#ff6b6b; }
+
+/* Service status pills now map to sitewide chips */
+.pill{ display:inline-flex; align-items:center; gap:.45rem; padding:1px 8px; border-radius:999px; font-weight:600; letter-spacing:.01em; backdrop-filter:saturate(120%) blur(2px); border:1px solid var(--chip-br, rgba(255,255,255,.14)); }
+.pill.up{ color: #D9FBEA; background: linear-gradient(135deg, rgba(34,165,89,.18), rgba(34,165,89,.10)); border-color: rgba(34,165,89,.38); box-shadow: inset 0 0 0 1px rgba(34,165,89,.12), 0 1px 6px rgba(34,165,89,.22); }
+.pill.warn{ color: #FFF4D6; background: linear-gradient(135deg, rgba(201,162,39,.20), rgba(201,162,39,.12)); border-color: rgba(201,162,39,.40); box-shadow: inset 0 0 0 1px rgba(201,162,39,.16), 0 1px 6px rgba(201,162,39,.24); }
+.pill.down{ color: #FFE0DE; background: linear-gradient(135deg, rgba(217,81,64,.18), rgba(217,81,64,.10)); border-color: rgba(217,81,64,.42); box-shadow: inset 0 0 0 1px rgba(217,81,64,.14), 0 1px 6px rgba(217,81,64,.24); }
+
+/* hr tags */
+.hr { border-color:var(--card); }

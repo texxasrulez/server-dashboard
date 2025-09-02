@@ -1,0 +1,17 @@
+/* Desktop/mobile guard — applied for every theme */
+.app-header .mobile-bar{ display:none !important; } /* default: never show */
+
+@media (min-width: 721px){
+  .app-header .mobile-bar{ display:none !important; }
+  .mobile-only, #mobileDrawer{ display:none !important; }
+}
+
+@media (max-width: 720px){
+  body.is-mobile .app-header .mobile-bar{ display:flex !important; align-items:center; gap:.5rem; }
+  body.is-mobile .app-header .mobile-bar .hamburger{ display:inline-flex !important; }
+  body.is-mobile .app-header .brand,
+  body.is-mobile .app-header .tabs,
+  body.is-mobile .app-header .right,
+  body.is-mobile .app-header form.theme-picker,
+  body.is-mobile .app-header .userbox{ display:none !important; }
+}

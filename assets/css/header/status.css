@@ -1,0 +1,65 @@
+/* assets/css/header/status.css */
+#header-status{ display:flex; align-items:center; }
+#header-status .chip{
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.4rem .6rem; border-radius:999px;
+  border:1px solid var(--chip-border, rgba(148,163,184,.35));
+  background: var(--chip-bg, rgba(255,255,255,.04));
+  font-size:.85rem; line-height:1; white-space:nowrap;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+#header-status .chip .dot{ width:.5rem; height:.5rem; border-radius:999px; display:inline-block; }
+
+#header-status .chip.up   { border-color:rgba(16,185,129,.45); box-shadow:0 0 0 1px rgba(16,185,129,.15) inset; }
+#header-status .chip.down { border-color:rgba(244,63,94,.45);  box-shadow:0 0 0 1px rgba(244,63,94,.15) inset; }
+#header-status .chip.warn { border-color:rgba(250,204,21,.45); box-shadow:0 0 0 1px rgba(250,204,21,.15) inset; }
+#header-status .chip.neutral { border-color:rgba(148,163,184,.35); }
+
+#header-status .chip.up .dot   { background:#10b981; }
+#header-status .chip.down .dot { background:#f43f5e; }
+#header-status .chip.warn .dot { background:#f59e0b; }
+#header-status .chip.neutral .dot { background:#94a3b8; }
+
+#header-status .chip .label { opacity:.95; }
+#header-status .chip .count { opacity:.75; }
+
+@keyframes hs-pulse { 0%{ box-shadow:0 0 0 0 rgba(0,0,0,0) } 50%{ box-shadow:0 0 0 3px rgba(0,0,0,.06) } 100%{ box-shadow:0 0 0 0 rgba(0,0,0,0) } }
+#header-status .chip.pulse.warn,
+#header-status .chip.pulse.down{ animation: hs-pulse 1.8s ease-in-out infinite; }
+
+
+/* Hidden must always win, even if .is-open is present momentarily */
+.app-header .userbox .usermenu[hidden]{
+  display: none !important;
+  opacity: 0 !important;
+  transform: translateY(-4px) !important;
+  transition: none !important;
+}
+
+/* Normalize user button to theme variables */
+.app-header .userbox .userbtn{
+  background: var(--surface-2, transparent);
+  color: var(--text-1, inherit);
+  border: 1px solid var(--border-2, transparent);
+  border-radius: 9999px;
+  padding: .25rem .5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
+.app-header .userbox .userbtn:hover{
+  background: var(--surface-3, rgba(0,0,0,0.06));
+}
+.app-header .userbox .userbtn .role.muted{
+  color: var(--text-3, currentColor);
+}
+
+/* Mobile: compact status — green or red circle with count only */
+@media (max-width: 720px){
+  #header-status .chip{ padding:.25rem .5rem; gap:.35rem; border-radius:999px; }
+  #header-status .chip .label, #header-status .chip .dot{ display:none; }
+  #header-status .chip .count{ font-weight:600; }
+  #header-status .chip.up   { background:#10b981; border-color:#10b981; color:#081b0f; }
+  #header-status .chip.warn,
+  #header-status .chip.down { background:#f43f5e; border-color:#f43f5e; color:#1a0806; }
+}

@@ -1,0 +1,17 @@
+/* nightowl.css — tokens only */
+:root{
+  --btn-bg: var(--surface-1);
+  --btn-border: var(--border-strong);
+  --btn-fg: var(--fg);
+
+  --bg:#07090d; --fg:#d8e2ef; --muted:#97a8bb;
+  --card:#0c1118; --border:#1e2a38;
+  --accent:#5db8ff; --accent-2:#4fc3f7;
+  --danger:#f87171; --warn:#fbbf24; --ok:#34d399;
+  --notify:#94a7bc;
+}
+
+/* Header Domain Name Color */
+.header-image-domain{    
+	filter: brightness(0) saturate(100%) invert(73%) sepia(5%) saturate(1287%) hue-rotate(171deg) brightness(92%) contrast(83%);
+}

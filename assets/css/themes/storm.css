@@ -1,0 +1,17 @@
+/* storm.css — tokens only */
+:root{
+  --btn-bg: var(--surface-1);
+  --btn-border: var(--border-strong);
+  --btn-fg: var(--fg);
+
+  --bg:#0e1113; --fg:#e6edf3; --muted:#a6b2bf;
+  --card:#14181b; --border:#283039;
+  --accent:#5aa2ff; --accent-2:#7fc1ff;
+  --danger:#f7668a; --warn:#ffd166; --ok:#43e2ab;
+  --notify:#a7b4c1;
+}
+
+/* Header Domain Name Color */
+.header-image-domain{    
+	filter: brightness(0) saturate(100%) invert(78%) sepia(9%) saturate(406%) hue-rotate(170deg) brightness(90%) contrast(92%);
+}

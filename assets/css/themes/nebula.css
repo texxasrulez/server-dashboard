@@ -1,0 +1,17 @@
+/* nebula.css — tokens only */
+:root{
+  --btn-bg: var(--surface-1);
+  --btn-border: var(--border-strong);
+  --btn-fg: var(--fg);
+
+  --bg:#0b0a14; --fg:#e9e6ff; --muted:#a7a4cf;
+  --card:#111024; --border:#2a2a40;
+  --accent:#8d7aff; --accent-2:#5ecaff;
+  --danger:#ff6b8a; --warn:#ffd05a; --ok:#52e3b6;
+  --notify:#a5a1cc;
+}
+
+/* Header Domain Name Color */
+.header-image-domain{    
+	filter: brightness(0) saturate(100%) invert(86%) sepia(6%) saturate(5463%) hue-rotate(191deg) brightness(91%) contrast(75%);
+}

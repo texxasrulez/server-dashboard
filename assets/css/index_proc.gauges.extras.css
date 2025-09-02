@@ -1,0 +1,12 @@
+/* Gauge extras v3 */
+.proc-card .needle{ pointer-events:none; transition: transform 220ms cubic-bezier(.2,.9,.2,1); }
+.proc-card .needle .blade{
+  fill: var(--fg);
+  filter: drop-shadow(0 0 2px rgba(0,0,0,.35));
+  opacity: .9;
+}
+.proc-card .needle .hub{
+  fill: color-mix(in srgb, var(--card) 40%, black);
+  stroke: var(--border);
+  stroke-width: 1;
+}

@@ -1,0 +1,67 @@
+/* Users page — theme-aware polish, tighter alignment */
+
+.users-page { display: grid; gap: 1rem; }
+
+.users-grid { display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start; }
+.users-grid .card { flex: 1 1 45%; max-width: 48%; min-width: 360px; }
+@media (max-width: 980px){ .users-grid .card { flex-basis: 100%; max-width: 100%; } }
+
+/* ---- Unified form grid ---- */
+.profile-form, .users-card form { --label-w: 120px; }   /* adjust label width as needed */
+.profile-form .form-row,
+.users-card form .form-row {
+  display: grid;
+  grid-template-columns: var(--label-w) 1fr;
+  gap: .6rem;
+  margin: .5rem 0;
+}
+.profile-form .form-row > label,
+.users-card form .form-row > label { align-self: center; color: var(--muted); }
+.form-row input, .form-row select, .form-row textarea { width: 100%; }
+
+/* two-up rows (First/Last, Location/Timezone, Social pairs) */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+.grid-2 .form-row { grid-template-columns: var(--label-w) 1fr; }
+@media (max-width: 900px){ .grid-2 { grid-template-columns: 1fr; } }
+
+.profile-form textarea { width: 100%; resize: vertical; }
+
+/* Avatar preview */
+.profile-card .profile-preview{ display:flex; align-items:center; gap:1rem; margin-bottom:.6rem; }
+.profile-card .profile-preview img{
+  width:96px; height:96px; border-radius:50%; border:1px solid var(--border); object-fit:cover;
+  background: radial-gradient(60% 60% at 35% 35%, rgba(255,255,255,.10), rgba(255,255,255,0) 70%);
+}
+
+/* Admin directory */
+.users-admin .table .actions { width: 220px; }
+.users-admin .chip { margin-left: .5rem; }
+.table-wrap { overflow-x: auto; }
+.form-actions { display: inline-flex; gap: .5rem; align-items: center; }
+.form-inline { display: inline-flex; gap: .5rem; }
+.mt-6 { margin-top: .6rem; }
+.users-meta { margin: .5rem 0 0 1rem; }
+
+/* Header user button avatar background so 1x1 fallback is visible */
+.userbtn .avatar{ background: radial-gradient(60% 60% at 35% 35%, rgba(255,255,255,.10), rgba(255,255,255,0) 70%); }
+
+
+/* Hidden must always win, even if .is-open is present momentarily */
+.app-header .userbox .usermenu[hidden]{
+  display: none !important;
+  opacity: 0 !important;
+  transform: translateY(-4px) !important;
+  transition: none !important;
+}
+
+
+/* Normalize all action buttons on Users page to neutral theme tokens */
+.users-page .btn{
+  background: var(--btn-bg) !important;
+  color: var(--btn-fg) !important;
+  border-color: var(--btn-border) !important;
+}
+.users-page .btn:hover{ background: var(--btn-bg-hover) !important; }
+
+/* hr tags */
+.hr { border-color:var(--card); }

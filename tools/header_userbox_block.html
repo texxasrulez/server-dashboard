@@ -1,0 +1,14 @@
+<!-- BEGIN userbox block (drop-in, required IDs) -->
+<div class="userbox">
+  <button  class="userbtn" id="userbtn" aria-haspopup="menu" aria-expanded="false" autocomplete="off">
+    <img class="avatar" src="assets/images/header-logo.png" alt="" />
+    <span class="name"><?= h(user_display_name(current_user())) ?></span>
+    <span class="role muted">(<?= h($_SESSION['user']['role'] ?? 'user') ?>)</span>
+    <svg class="chev" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z" fill="currentColor"/></svg>
+  </button>
+  <div id="usermenu" class="usermenu" hidden>
+    <a href="<?= h(project_url('/users.php')) ?>">My Profile</a>
+    <a href="<?= h(project_url('/auth/logout.php')) ?>">Logout</a>
+  </div>
+</div>
+<!-- END userbox block -->

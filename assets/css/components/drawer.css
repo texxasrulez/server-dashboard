@@ -1,0 +1,28 @@
+
+/* Mobile Drawer */
+#mobileDrawer[hidden]{ display:none; }
+#mobileDrawer{
+  position: fixed; inset: 0; z-index: 1000;
+  display: grid; grid-template-columns: 280px 1fr;
+  background: rgba(0,0,0,.45);
+}
+#mobileDrawer .panel{
+  background: var(--card, #151a1f);
+  color: var(--fg, #e6eef2);
+  border-right: 1px solid var(--border, rgba(255,255,255,.12));
+  padding: .75rem;
+  transform: translateX(-100%);
+  transition: transform .22s ease;
+}
+#mobileDrawer.show .panel{ transform: translateX(0); }
+#mobileDrawer .backdrop{ background: transparent; }
+
+#mobileDrawer nav a{
+  display:block; padding:.5rem .6rem; border-radius:8px; text-decoration:none; color: var(--fg);
+}
+#mobileDrawer nav a:hover{ background: rgba(255,255,255,.06); }
+
+#mobileDrawer .sec{ margin-top:.75rem; padding-top:.5rem; border-top:1px solid var(--border, rgba(255,255,255,.08)); }
+#mobileDrawer .sec h4{ margin:.25rem 0 .5rem; font-size:.9rem; opacity:.8; }
+#mobileDrawer .picker { display:flex; gap:.5rem; align-items:center; }
+#mobileDrawer .picker select{ flex:1; }

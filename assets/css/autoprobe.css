@@ -1,0 +1,26 @@
+/* Auto-probe blip & modal */
+.status-blip-wrap{ display:inline-block; margin-left:.5rem; }
+#statusBlip{ display:inline-flex; align-items:center; gap:.5rem; padding:.35rem .6rem; border-radius:999px; border:1px solid var(--border); background:transparent; color:var(--text); }
+#statusBlip .dot{ width:.6rem; height:.6rem; border-radius:50%; background:color-mix(in srgb, var(--muted) 70%, transparent); display:inline-block; }
+#statusBlip.ok  { border-color:color-mix(in srgb,#10b981 55%, var(--border)); color:#10b981; }
+#statusBlip.ok .dot{ background:#10b981; }
+#statusBlip.warn{ border-color:color-mix(in srgb,#f59e0b 65%, var(--border)); color:#f59e0b; }
+#statusBlip.warn .dot{ background:#f59e0b; }
+#statusBlip.bad { border-color:color-mix(in srgb,#ef4444 65%, var(--border)); color:#ef4444; }
+#statusBlip.bad .dot{ background:#ef4444; }
+#statusBlip.neutral{ opacity:.75; }
+
+.autoprobe-modal{ position:fixed; inset:0; background:color-mix(in srgb, var(--card) 30%, #000 65%); display:flex; align-items:center; justify-content:center; z-index:9999; }
+.autoprobe-modal[hidden]{ display:none; }
+.autoprobe-modal .modal-card{ width:min(520px, 92vw); background:var(--card); border:1px solid var(--border); border-radius:16px; padding:1rem; box-shadow:0 10px 30px rgba(0,0,0,.35); }
+.autoprobe-modal .modal-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:.75rem; }
+.autoprobe-modal .form.grid.two{ display:grid; grid-template-columns: 1fr 1fr; gap:.75rem; }
+.autoprobe-modal input[type="number"]{ width:120px; padding:.4rem .5rem; border-radius:10px; border:1px solid var(--border); background:color-mix(in srgb,var(--card) 92%, transparent); color:var(--text); }
+
+/* Subtle pulse when status changes */
+@keyframes statusPulse { 
+  0% { transform: scale(1); box-shadow:none; } 
+  50% { transform: scale(1.03); box-shadow:0 0 0 .25rem color-mix(in srgb, currentColor 20%, transparent); } 
+  100% { transform: scale(1); box-shadow:none; } 
+}
+#statusBlip.flash { animation: statusPulse 900ms ease-out 1; }

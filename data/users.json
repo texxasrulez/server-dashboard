@@ -1,0 +1,26 @@
+{
+    "users": [
+        {
+            "username": "admin",
+            "password_hash": "$2y$10$/07ytCLNWmlNDcy0MKDdXuz7Vvq3EIZXE.4LVYSDtx2IbIc7Zshcy",
+            "role": "admin",
+            "created": "",
+            "profile": {
+                "first_name": "",
+                "last_name": "",
+                "email": "",
+                "website": "",
+                "avatar_url": "",
+                "bio": "",
+                "location": "",
+                "timezone": "",
+                "socials": {
+                    "twitter": "",
+                    "github": "",
+                    "mastodon": "",
+                    "linkedin": ""
+                }
+            }
+        }
+    ]
+}

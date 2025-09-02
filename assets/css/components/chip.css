@@ -1,0 +1,59 @@
+/* Sitewide glassy chip system (unified) */
+.chip{
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  padding:1px 8px;                     /* Gene-approved sizing */
+  border-radius:9999px;
+  font-weight:600;
+  letter-spacing:.01em;
+  backdrop-filter:saturate(120%) blur(2px);
+  border:1px solid var(--chip-br, rgba(255,255,255,.14));
+  background: var(--chip-bg, color-mix(in oklab, var(--surface-1, #0f1115) 12%, transparent));
+  line-height:1;
+}
+.chip .dot{ width:.45rem; height:.45rem; border-radius:9999px; display:inline-block; }
+
+/* States (map to existing semantics used across pages) */
+.chip.ok, .chip.up, .chip.success{
+  --chip-bg: linear-gradient(135deg, color-mix(in oklab, var(--ok,#22a559) 18%, transparent),
+                                     color-mix(in oklab, var(--ok,#22a559) 10%, transparent));
+  --chip-br: color-mix(in oklab, var(--ok,#22a559) 38%, transparent);
+  color: color-mix(in oklab, white 8%, var(--ok,#22a559) 92%);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--ok,#22a559) 12%, transparent),
+              0 1px 6px color-mix(in oklab, var(--ok,#22a559) 22%, transparent);
+}
+.chip.ok .dot, .chip.up .dot, .chip.success .dot{ background: var(--ok,#22a559); }
+
+.chip.bad, .chip.down, .chip.error, .chip.fail{
+  --chip-bg: linear-gradient(135deg, color-mix(in oklab, var(--error,#d95140) 18%, transparent),
+                                     color-mix(in oklab, var(--error,#d95140) 10%, transparent));
+  --chip-br: color-mix(in oklab, var(--error,#d95140) 42%, transparent);
+  color: color-mix(in oklab, white 10%, var(--error,#d95140) 90%);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--error,#d95140) 14%, transparent),
+              0 1px 6px color-mix(in oklab, var(--error,#d95140) 24%, transparent);
+}
+.chip.bad .dot, .chip.down .dot, .chip.error .dot, .chip.fail .dot{ background: var(--error,#d95140); }
+
+.chip.warn, .chip.warning{
+  --chip-bg: linear-gradient(135deg, color-mix(in oklab, var(--warn,#c9a227) 20%, transparent),
+                                     color-mix(in oklab, var(--warn,#c9a227) 12%, transparent));
+  --chip-br: color-mix(in oklab, var(--warn,#c9a227) 40%, transparent);
+  color: color-mix(in oklab, white 18%, var(--warn,#c9a227) 82%);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--warn,#c9a227) 16%, transparent),
+              0 1px 6px color-mix(in oklab, var(--warn,#c9a227) 24%, transparent);
+}
+.chip.warn .dot, .chip.warning .dot{ background: var(--warn,#c9a227); }
+
+.chip.neutral, .chip.info{
+  --chip-bg: linear-gradient(135deg, color-mix(in oklab, var(--neutral,#8aa0b3) 16%, transparent),
+                                     color-mix(in oklab, var(--neutral,#8aa0b3) 10%, transparent));
+  --chip-br: color-mix(in oklab, var(--neutral,#8aa0b3) 34%, transparent);
+  color: color-mix(in oklab, white 14%, var(--neutral,#8aa0b3) 86%);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--neutral,#8aa0b3) 12%, transparent),
+              0 1px 6px color-mix(in oklab, var(--neutral,#8aa0b3) 22%, transparent);
+}
+.chip.neutral .dot, .chip.info .dot{ background: var(--neutral,#8aa0b3); }
+
+/* Compact size some pages use */
+.chip.small{ font-size:.78rem; padding:0 6px; }

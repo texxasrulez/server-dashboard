@@ -1,0 +1,16 @@
+:root{
+  --btn-bg: var(--surface-1);
+  --btn-border: var(--border-strong);
+  --btn-fg: var(--fg);
+
+  --bg:#160d13; --fg:#f6eaf0; --muted:#caa7b8;
+  --card:#1e1219; --border:#3a2632;
+  --accent:#ff77a9; --accent-2:#d17bb3;
+  --danger:#ff5c7c; --warn:#ffc85a; --ok:#61e4a8;
+  --notify:#cf7ab2;
+}
+
+/* Header Domain Name Color */
+.header-image-domain{    
+	filter: brightness(0) saturate(100%) invert(52%) sepia(69%) saturate(304%) hue-rotate(268deg) brightness(98%) contrast(85%);
+}

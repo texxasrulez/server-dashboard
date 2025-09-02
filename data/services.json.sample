@@ -1,0 +1,158 @@
+{
+    "items": [
+        {
+            "id": "svc_1",
+            "name": "Domain Name",
+            "type": "other",
+            "host": "localhost",
+            "port": 8080,
+            "check": "http",
+            "path": "/",
+            "timeout_ms": 800,
+            "enabled": true
+        },
+        {
+            "id": "svc_2",
+            "name": "MySQL",
+            "type": "db",
+            "host": "127.0.0.1",
+            "port": 3306,
+            "check": "tcp",
+            "path": "/",
+            "timeout_ms": 800,
+            "enabled": true
+        },
+        {
+            "id": "svc_3",
+            "name": "Redis",
+            "type": "cache",
+            "host": "127.0.0.1",
+            "port": 6379,
+            "check": "tcp",
+            "path": "/",
+            "timeout_ms": 800,
+            "enabled": true
+        },
+        {
+            "id": "svc_4",
+            "name": "ClamAV",
+            "type": "other",
+            "host": "127.0.0.1",
+            "port": 3310,
+            "check": "tcp",
+            "path": "/",
+            "timeout_ms": 800,
+            "enabled": false
+        },
+        {
+            "id": "svc_5",
+            "name": "Spamassassin",
+            "type": "other",
+            "host": "127.0.0.1",
+            "port": 783,
+            "check": "tcp",
+            "path": "/",
+            "timeout_ms": 800,
+            "enabled": true
+        },
+        {
+            "id": "svc_6",
+            "name": "FTP",
+            "type": "other",
+            "host": "127.0.0.1",
+            "port": 21,
+            "check": "tcp",
+            "path": "/",
+            "timeout_ms": 800,
+            "enabled": true
+        },
+        {
+            "id": "svc_7",
+            "name": "SSH",
+            "type": "other",
+            "host": "127.0.0.1",
+            "port": 22,
+            "check": "tcp",
+            "path": "/",
+            "timeout_ms": 800,
+            "enabled": true
+        },
+        {
+            "id": "svc_8",
+            "name": "SMTP",
+            "type": "other",
+            "host": "127.0.0.1",
+            "port": 25,
+            "check": "tcp",
+            "path": "/",
+            "timeout_ms": 800,
+            "enabled": true
+        },
+        {
+            "id": "svc_9",
+            "name": "STARTTLS",
+            "type": "other",
+            "host": "127.0.0.1",
+            "port": 587,
+            "check": "tcp",
+            "path": "/",
+            "timeout_ms": 800,
+            "enabled": true
+        },
+        {
+            "id": "svc_10",
+            "name": "IMAP",
+            "type": "other",
+            "host": "127.0.0.1",
+            "port": 143,
+            "check": "tcp",
+            "path": "/",
+            "timeout_ms": 800,
+            "enabled": true
+        },
+        {
+            "id": "svc_11",
+            "name": "IMAPS",
+            "type": "other",
+            "host": "127.0.0.1",
+            "port": 993,
+            "check": "tcp",
+            "path": "/",
+            "timeout_ms": 800,
+            "enabled": true
+        },
+        {
+            "id": "svc_12",
+            "name": "POP",
+            "type": "other",
+            "host": "127.0.0.1",
+            "port": 110,
+            "check": "tcp",
+            "path": "/",
+            "timeout_ms": 800,
+            "enabled": true
+        },
+        {
+            "id": "svc_13",
+            "name": "POPS",
+            "type": "other",
+            "host": "127.0.0.1",
+            "port": 995,
+            "check": "tcp",
+            "path": "/",
+            "timeout_ms": 800,
+            "enabled": true
+        },
+        {
+            "id": "svc_14",
+            "name": "HTTPS",
+            "type": "other",
+            "host": "localhost",
+            "port": 443,
+            "check": "http",
+            "path": "/",
+            "timeout_ms": 800,
+            "enabled": true
+        }
+    ]
+}

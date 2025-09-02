@@ -1,0 +1,314 @@
+/* ==========================================================================
+   Admin Dashboard — app.css (unified components)
+   Uses theme tokens; no hard colors. Keep specificity low via :where().
+   ========================================================================== */
+
+/* Base & reset (lightweight, not destructive) */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+html, body { /* injected layout */
+  display: grid; grid-template-rows: auto 1fr auto; min-height: 100vh; height: 100%; }
+body { /* injected layout */
+  display: grid; grid-template-rows: auto 1fr auto; min-height: 100vh;
+  margin: 0;
+  background: var(--bg, #0e1114);
+  color: var(--fg, #e6eef2);
+  font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+
+/* Layout */
+.container { max-width: 980px; margin: 0 auto; padding: 1rem; }
+.content { min-height: calc(100vh - 120px); overflow: auto; }
+.footer.muted { opacity: .8; padding: .75rem 1rem; border-top: 1px solid var(--border, rgba(255,255,255,.08)); }
+
+/* Typography & utils */
+.h1 { font-size: 1.8rem; font-weight: 700; }
+.h2 { font-size: 1.4rem; font-weight: 700; }
+.small { font-size: .925em; }
+.muted { opacity: .82; }
+.mt-2 { margin-top: .5rem; }
+.mt-6 { margin-top: 1rem; }
+code, pre { font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .45rem;
+  padding: .5rem .75rem; border-radius: 10px; border: 1px solid var(--btn-border, rgba(255,255,255,.12));
+  background: var(--btn-bg, rgba(255,255,255,.04)); color: var(--btn-fg, var(--fg, #e6eef2));
+  cursor: pointer; text-decoration: none;
+}
+.btn:hover { background: var(--btn-bg-hover, rgba(255,255,255,.07)); }
+.btn.secondary { background: rgba(255,255,255,.03); }
+.btn.danger { border-color: rgba(255,0,0,.35); color: #ffb0b0; }
+
+/* Chips / tags */
+.chip {
+  display:inline-flex; align-items:center; gap:.35rem;
+  padding:.15rem .5rem; border-radius: 999px; font-size:.85em;
+  background: var(--chip-bg, rgba(255,255,255,.06)); color: var(--chip-fg, var(--fg, #e6eef2));
+  border:1px solid var(--chip-border, rgba(255,255,255,.12));
+}
+
+/* Cards */
+.card {
+  background: var(--card-bg, rgba(255,255,255,.03));
+  border: 1px solid var(--card-border, rgba(255,255,255,.08));
+  border-radius: 16px;
+  box-shadow: var(--card-shadow, rgba(0,0,0,.25) 0 6px 22px);
+  padding: .75rem 1rem;
+}
+.card-title { font-weight: 700; margin-bottom: .4rem; }
+.card-subtitle { font-weight: 600; opacity:.9; margin: .4rem 0 .2rem; }
+.note {
+  border-left: 3px solid var(--up, #59c173); padding:.5rem .75rem; background: rgba(80,255,160,.06); border-radius: 8px;
+}
+.error {
+  border-left: 3px solid var(--down, #e15f5f); padding:.5rem .75rem; background: rgba(255,80,80,.06); border-radius: 8px;
+}
+
+/* Tables */
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { border-bottom: 1px solid var(--border, rgba(255,255,255,.08)); padding: .45rem .6rem; text-align: left; }
+.table thead tr { opacity: .85; }
+.table .actions { text-align: right; white-space: nowrap; }
+
+/* Forms */
+.form-row { display:flex; flex-direction:column; gap:.3rem; margin: .5rem 0; }
+.form-row > label { font-weight:600; opacity:.9; }
+.form-row > input, .form-row > select, .form-row > textarea {
+  background: rgba(255,255,255,.04); color: var(--fg, #e6eef2);
+  border:1px solid var(--border, rgba(255,255,255,.12)); border-radius: 10px;
+  padding: .5rem .6rem;
+}
+.form-actions { display:flex; gap:.6rem; align-items:center; }
+.grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap:.75rem; }
+@media (max-width: 720px){ .grid-2 { grid-template-columns: 1fr; } }
+
+/* Header */
+.app-header {
+  display:flex; align-items:center; gap:.8rem; padding:.6rem 1rem;
+  background: var(--header-bg, #141922);
+  border-bottom: 1px solid var(--border, rgba(255,255,255,.08));
+  position: sticky; top: 0; z-index: 100;
+}
+.app-header .brand img { height: 28px; display:block; }
+.app-header .tabs { display:flex; gap:.35rem; flex-wrap: wrap; }
+.app-header .tabs a {
+  padding:.35rem .6rem; border-radius: 8px; text-decoration:none;
+  color: var(--fg, #e6eef2); opacity:.9;
+}
+.app-header .tabs a:hover { background: rgba(255,255,255,.06); }
+.app-header .spacer { flex: 1; }
+
+/* User box + dropdown — no-flash baseline */
+.app-header .userbox { position: relative; display:flex; align-items:center; gap:.5rem; }
+.app-header .userbox .userbtn { display:flex; align-items:center; gap:.4rem; background:inherit; border:0; color:inherit; cursor:pointer; }
+.app-header .userbox .avatar { width:22px; height:22px; border-radius:999px; display:block; }
+
+/* Start hidden at CSS level to avoid first-paint flash; only show when .is-open */
+.app-header .userbox .usermenu{
+  position:absolute; top:calc(100% + 6px); right:0; min-width:200px; padding:.35rem;
+  background: var(--menu-bg, #151a1f);
+  color: var(--menu-fg, #e6eef5);
+  border:1px solid var(--menu-border, rgba(255,255,255,.12));
+  border-radius:10px;
+  box-shadow: var(--shadow-4, rgba(0,0,0,.35) 0 12px 30px);
+
+  display: none;
+  opacity: 0;
+  transform: translateY(2px);
+  transition: opacity .14s ease, transform .14s ease;
+}
+.app-header .userbox .usermenu.is-open{ display:block; opacity:1; transform:translateY(0); }
+.app-header .userbox .usermenu[hidden]{ display:none !important; }
+.app-header .userbox .usermenu a { display:block; padding:.45rem .6rem; border-radius:8px; color:inherit; text-decoration:none; }
+.app-header .userbox .usermenu a:hover { background: rgba(255,255,255,.06); }
+
+/* Status pill (header) */
+#header-status { display:inline-flex; align-items:center; gap:.4rem; padding:.25rem .5rem; border-radius:999px;
+  background: var(--chip-bg, rgba(255,255,255,.06));
+  border:1px solid var(--chip-border, rgba(255,255,255,.12));
+}
+#header-status .dot { width:8px; height:8px; border-radius:999px; background: var(--up,#58d68d); box-shadow: 0 0 10px rgba(88,214,141,.45); }
+
+/* Components used frequently */
+.users-page { display:grid; grid-template-columns: 1fr; gap: 1rem; }
+.users-admin .table-wrap { max-width: 45ch; }
+.users-meta { margin:.25rem 0 0 1rem; }
+
+/* Tables in diag/tools default left and max ~45% unless content is wide */
+.diag-grid .table, .tools-grid .table { max-width: 45%; }
+
+/* Service state chips */
+.pill-up    { background: rgba(80,255,160,.08); color: #b6ffd6; border:1px solid rgba(80,255,160,.35); }
+.pill-warn  { background: rgba(255,208,96,.10); color: #ffe2a4; border:1px solid rgba(255,208,96,.40); }
+.pill-down  { background: rgba(255,96,96,.10);  color: #ffc1c1; border:1px solid rgba(255,96,96,.40); }
+
+/* Accessibility */
+:focus-visible { outline: 2px solid #88b6ff; outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce){
+  .app-header .userbox .usermenu{ transition: none; }
+}
+
+/* Mobile header tightening */
+@media (max-width: 720px){
+  .app-header{ padding:.45rem .6rem; gap:.5rem; }
+  .app-header .brand img{ height:22px; }
+  .app-header .tabs{ display:none; }
+  .app-header .theme-picker{ display:none;}
+  .app-header .hamburger{ display:inline-flex; }
+}
+.app-header .hamburger{
+  display:none; align-items:center; justify-content:center;
+  width:34px; height:34px; border-radius:8px; border:1px solid var(--border, rgba(255,255,255,.12));
+  background: var(--btn-bg, rgba(255,255,255,.04)); color: var(--btn-fg, var(--fg));
+  cursor:pointer;
+}
+.app-header .hamburger:hover{ background: var(--btn-bg-hover, rgba(255,255,255,.08)); }
+
+/* Force-hide hamburger on desktop */
+@media (min-width: 721px){ .app-header .hamburger{ display:none !important; } }
+
+
+/* Layout: fixed header & footer, scrollable content */
+html, body { height: 100%; }
+body { min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; }
+.content { overflow: auto; }
+
+/* Theme picker: style the popup menu (Chrome/Edge/Firefox) */
+.theme-picker select {
+  background-color: var(--card);
+  color: var(--fg);
+  border-color: var(--border);
+}
+
+/* The actual dropdown list */
+.theme-picker select option,
+.theme-picker select optgroup {
+  background-color: var(--card);
+  color: var(--fg);
+}
+
+/* Hover/selected row in the list */
+.theme-picker select option:hover,
+.theme-picker select option:checked {
+  background-color: color-mix(in srgb, var(--accent) 20%, var(--card));
+  color: var(--fg);
+}
+
+/* hr tags */
+.hr { border-color:var(--card); }
+
+
+/* Fieldset theming */
+fieldset{
+  border:1px solid var(--card-border, rgba(255,255,255,.12));
+  border-radius:12px;
+  padding:.6rem .8rem .8rem;
+  margin:.6rem 0 1rem;
+}
+legend{
+  padding:0 .4rem;
+  color: var(--fg, #e6eef2);
+  opacity:.9;
+}
+
+/* High-contrast mode */
+.theme-contrast{
+  --border: rgba(255,255,255,.28);
+  --card-border: rgba(255,255,255,.34);
+  --btn-border: rgba(255,255,255,.34);
+  --chip-border: rgba(255,255,255,.34);
+  --menu-border: rgba(255,255,255,.34);
+}
+.theme-contrast :focus-visible { outline: 3px solid #b0d0ff; outline-offset: 2px; }
+
+
+/* === Spacing tokens (theme-aware) === */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+}
+
+/* === Config vertical rhythm (moved from inline) === */
+#configTabs { margin-bottom: var(--space-2); }
+#configPane .field + .field { margin-top: var(--space-2) !important; }
+#configPane fieldset .field + .field { margin-top: var(--space-2) !important; }
+#configPane > * + * { margin-top: var(--space-2); }
+#configPane fieldset { margin: var(--space-3) 0 var(--space-3); padding-top: 2px; }
+
+/* === Scrollable tables with sticky header === */
+.table-scroll { overflow: auto; max-height: calc(100vh - 270px); }
+.table-scroll table { width: 100%; border-collapse: collapse; }
+.table-scroll thead th { position: sticky; top: 0; z-index: 2; }
+
+/* === Sortable headers and arrows (uses ARIA) === */
+table thead th { cursor: pointer; }
+table thead th[aria-sort="asc"]::after { content: "▲"; margin-left: .4em; font-size: .85em; opacity: .8; }
+table thead th[aria-sort="desc"]::after { content: "▼"; margin-left: .4em; font-size: .85em; opacity: .8; }
+
+
+/* Unified arrow style matching services.php */
+table th.sortable[aria-sort="asc"]::after {
+  content: "▲";
+  margin-left: .3em;
+  font-size: .75em;
+  opacity: .6;
+}
+table th.sortable[aria-sort="desc"]::after {
+  content: "▼";
+  margin-left: .3em;
+  font-size: .75em;
+  opacity: .6;
+}
+
+
+/* Sticky table headers background fix */
+.table-scroll thead th,
+table.js-sortable thead th {
+  background: var(--card, var(--bg));
+}
+
+
+/* --- Table header opacity + background fix (no bleed-through) --- */
+.table thead tr { opacity: 1; }
+.table thead th {
+  background: var(--card-bg, rgba(255,255,255,.03));
+  backdrop-filter: var(--header-backdrop, none);
+}
+
+/* content scroll container: single source of truth */
+.content { min-height: 0; overflow: auto; }
+
+
+/* -- Services table viewport-fill scroll container -- */
+#servicesTableWrap { overflow: auto; overscroll-behavior: contain; }
+#servicesTableWrap thead th { position: sticky; top: 0; z-index: 2; background: var(--card-bg, rgba(255,255,255,.03)); }
+
+.linklike{background:none;border:0;padding:0;margin:0;color:var(--link, #2a7cdb);cursor:pointer;text-decoration:none;font:inherit}
+
+.linklike:hover{text-decoration:none}
+
+/* Config tabs — loud active state matching header */
+#configTabs .btn[aria-selected="true"],
+#configTabs .btn.active,
+#configTabs .btn.is-active,
+#configTabs .btn.selected,
+#configTabs .btn.current {
+  background: var(--muted) !important;
+  color: #fff;
+  border-color: var(--muted) !important;
+  box-shadow:
+    0 0 0 3px var(--muted),
+    0 0 12px 2px var(--muted) !important;
+}
+#configTabs .btn[aria-selected="true"]:hover,
+#configTabs .btn.active:hover {
+  box-shadow:
+    0 0 0 4px var(--muted),
+    0 0 16px 3px var(--muted) !important;
+}

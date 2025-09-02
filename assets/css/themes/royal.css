@@ -1,0 +1,17 @@
+/* royal.css — tokens only */
+:root{
+  --btn-bg: var(--surface-1);
+  --btn-border: var(--border-strong);
+  --btn-fg: var(--fg);
+
+  --bg:#0a0a14; --fg:#eaeaff; --muted:#a9acd6;
+  --card:#141429; --border:#2a2a54;
+  --accent:#5a6cff; --accent-2:#8aa2ff;
+  --danger:#ff5d7a; --warn:#ffd066; --ok:#44e1a6;
+  --notify:#889ffc;
+}
+
+/* Header Domain Name Color */
+.header-image-domain{    
+	filter: brightness(0) saturate(100%) invert(60%) sepia(10%) saturate(2391%) hue-rotate(193deg) brightness(105%) contrast(102%);
+}

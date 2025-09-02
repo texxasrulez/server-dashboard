@@ -1,0 +1,17 @@
+/* cobalt.css — tokens only */
+:root{
+  --btn-bg: var(--surface-1);
+  --btn-border: var(--border-strong);
+  --btn-fg: var(--fg);
+
+  --bg:#0a0f1a; --fg:#e6f0ff; --muted:#a9b8d6;
+  --card:#0f1624; --border:#233049;
+  --accent:#4da3ff; --accent-2:#80b3ff;
+  --danger:#ff5c7c; --warn:#ffd166; --ok:#42e6a4;
+  --notify:#4da2ff;
+}
+
+/* Header Domain Name Color */
+.header-image-domain{    
+	filter: brightness(0) saturate(100%) invert(56%) sepia(52%) saturate(2166%) hue-rotate(189deg) brightness(101%) contrast(102%);
+}

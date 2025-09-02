@@ -1,0 +1,7 @@
+/* base/30-layout.css */
+.container{max-width:var(--container-max);margin:0 auto;padding-left:var(--container-pad-x);padding-right:var(--container-pad-x)}
+.container.full{max-width:none}
+.grid{display:grid;gap:var(--space-4)}
+.row{display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center}
+.spacer{flex:1 1 auto}
+@media (min-width:900px){.grid.cols-2{grid-template-columns:1fr 1fr}}

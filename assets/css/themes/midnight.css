@@ -1,0 +1,17 @@
+/* midnight.css — tokens only */
+:root{
+  --btn-bg: var(--surface-1);
+  --btn-border: var(--border-strong);
+  --btn-fg: var(--fg);
+
+  --bg:#0a0f14; --fg:#e6eff7; --muted:#9db0bf;
+  --card:#10161d; --border:#26323f;
+  --accent:#7fd1e8; --accent-2:#88c0d0;
+  --danger:#ff4658; --warn:#ffb454; --ok:#2fd18b;
+  --notify:#9baebd;
+}
+
+/* Header Domain Name Color */
+.header-image-domain{    
+	filter: brightness(0) saturate(100%) invert(76%) sepia(25%) saturate(210%) hue-rotate(164deg) brightness(88%) contrast(87%);
+}

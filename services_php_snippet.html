@@ -1,0 +1,60 @@
+<!-- Services Admin -->
+<div class="toolbar" style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem">
+  <button class="btn primary" id="newBtn">Add service</button>
+  <button class="btn" id="exportBtn">Export JSON</button>
+  <label class="btn" for="importFile">Import JSON</label>
+  <input type="file" id="importFile" accept="application/json" style="display:none" />
+</div>
+
+<div id="formWrap" class="card-like" style="padding:1rem;margin-bottom:1rem">
+  <input type="hidden" id="svcId" />
+  <div class="form-grid">
+    <div class="span2">
+      <label for="svcName">Name</label>
+      <input class="input" id="svcName" placeholder="e.g., My App" />
+    </div>
+    <div class="span2">
+      <label for="svcHost">Host</label>
+      <input class="input" id="svcHost" placeholder="e.g., 127.0.0.1 or domain" />
+    </div>
+    <div>
+      <label for="svcPort">Port</label>
+      <input class="input" id="svcPort" type="number" min="1" max="65535" value="80" />
+    </div>
+    <div>
+      <label for="svcCheck">Type</label>
+      <select class="input" id="svcCheck">
+        <option value="tcp">TCP</option>
+        <option value="http">HTTP</option>
+        <option value="ping">Ping</option>
+      </select>
+    </div>
+    <div class="span2" id="pathWrap">
+      <label for="svcPath">Path (HTTP only)</label>
+      <input class="input" id="svcPath" placeholder="/" value="/" />
+    </div>
+    <div class="switch">
+      <input type="checkbox" id="svcEnabled" />
+      <label for="svcEnabled">Enabled</label>
+    </div>
+    <div class="span2">
+      <label for="svcNotes">Notes</label>
+      <input class="input" id="svcNotes" placeholder="optional" />
+    </div>
+    <div style="align-self:end">
+      <button class="btn primary" id="saveBtn">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="card-like" style="padding:0">
+  <table class="table" id="svcTable">
+    <thead>
+      <tr>
+        <th>Name</th><th>Host</th><th>Port</th><th>Type</th><th>Path</th><th>Enabled</th><th>Status</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+<!-- /Services Admin -->

@@ -1,0 +1,17 @@
+/* slate.css — tokens only */
+:root{
+  --btn-bg: var(--surface-1);
+  --btn-border: var(--border-strong);
+  --btn-fg: var(--fg);
+
+  --bg:#0d1218; --fg:#dfe7ef; --muted:#9fb0bf;
+  --card:#121922; --border:#26303a;
+  --accent:#6aa2ff; --accent-2:#7ec2ff;
+  --danger:#ff647f; --warn:#ffcd4d; --ok:#54e1a6;
+  --notify:#a0b0bf;
+}
+
+/* Header Domain Name Color */
+.header-image-domain{    
+	filter: brightness(0) saturate(100%) invert(92%) sepia(2%) saturate(4622%) hue-rotate(179deg) brightness(77%) contrast(92%);
+}

@@ -1,0 +1,6 @@
+
+/* Minimal styles for Assets Audit modal */
+.audit-toolbar{display:flex;gap:.5rem;align-items:center;margin:.5rem 0;}
+.audit-toolbar .btn{padding:.4rem .7rem;border:1px solid #999;border-radius:6px;background:#f5f5f5;cursor:pointer}
+.audit-toolbar .btn.secondary{background:#eee}
+.audit-body pre{max-height:60vh;overflow:auto;padding:.75rem;border:1px solid #ddd;border-radius:8px;background:#fafafa}

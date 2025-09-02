@@ -1,0 +1,13 @@
+/* Minimal white "glow" around the active header tab */
+.app-header .tabs a.is-active,
+.app-header .tabs a[aria-current="page"]{
+  border-radius: 10px;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.65) inset,
+    0 0 0 1px rgba(255,255,255,.35);
+  background: rgba(255,255,255,.06);
+}
+.app-header .tabs a.is-active:hover,
+.app-header .tabs a[aria-current="page"]:hover{
+  background: rgba(255,255,255,.10);
+}

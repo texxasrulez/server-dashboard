@@ -1,0 +1,109 @@
+:root{ --danger:#ef4444; --danger-fg:#fff;
+  --bg:#0f1115; --fg:#e6e6e6; --muted:#9aa3ad;
+  --card:#171a21; --border:#2a2f36;
+  --accent:#3b82f6; --accent-2:#10b981;
+  --btn:var(--accent); --btn-fg:#fff;
+  --radius:12px; --gap:.6rem;
+  --notify:#b22222;
+}
+*{box-sizing:border-box} html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.45 system-ui,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial}
+a{color:var(--fg);text-decoration:none}
+.app-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:1rem;background:var(--card);border-bottom:1px solid var(--border);padding:.6rem .9rem}
+.app-header .brand a{font-weight:700}
+.app-header .tabs{display:flex;gap:.4rem;flex-wrap:wrap}
+.app-header .tabs a{padding:.35rem .6rem;border:1px solid var(--border);border-radius:10px}
+.app-header .tabs a.active{background:color-mix(in srgb, var(--btn) 22%, transparent); border-color: color-mix(in srgb, var(--btn) 55%, var(--border));}
+.app-header .theme-picker{margin-left:auto;display:flex;gap:.4rem;align-items:center}
+.content{padding:1rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin-bottom:1rem}
+.row{display:flex;gap:.5rem .75rem;align-items:center;flex-wrap:wrap}
+label{opacity:.9}
+input,select,textarea{background:var(--bg);border:1px solid var(--border);color:var(--fg);border-radius:10px;min-height:36px;padding:.35rem .55rem}
+input::placeholder{color:var(--muted)}
+.btn,button.btn,a.btn{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:.35rem .7rem;border-radius:10px;border:1px solid color-mix(in srgb, var(--btn) 70%, black);background:var(--btn);color:var(--btn-fg)}
+.btn.secondary{background:transparent;color:var(--fg);border-color:var(--border)}
+.btn.danger{background:color-mix(in srgb, var(--danger) 19%, transparent); color:var(--danger-fg); border-color: color-mix(in srgb, var(--danger) 60%, var(--border));}
+.btn.danger:hover{background:color-mix(in srgb, var(--danger) 28%, transparent); border-color: color-mix(in srgb, var(--danger) 75%, var(--border));}
+.tablewrap{border:1px solid var(--border);border-radius:10px;overflow:auto;max-height:68vh}
+table{width:100%;border-collapse:collapse}
+th,td{padding:8px 10px;border-bottom:1px solid var(--border)}
+thead th{position:sticky;top:0;background:var(--card);z-index:2}
+.footer{padding:1rem;border-top:1px solid var(--border)}
+
+
+/* Hidden must always win, even if .is-open is present momentarily */
+.app-header .userbox .usermenu[hidden]{
+  display: none !important;
+  opacity: 0 !important;
+  transform: translateY(-4px) !important;
+  transition: none !important;
+}
+
+/* Normalize user button to theme variables */
+.app-header .userbox .userbtn{
+  background: var(--surface-2, transparent);
+  color: var(--text-1, inherit);
+  border: 1px solid var(--border-2, transparent);
+  border-radius: 9999px;
+  padding: .25rem .5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
+.app-header .userbox .userbtn:hover{
+  background: var(--surface-3, rgba(0,0,0,0.06));
+}
+.app-header .userbox .userbtn .role.muted{
+  color: var(--text-3, currentColor);
+}
+
+
+/* Warning buttons */
+.btn.warning{
+  background: var(--warning, #c9a227);
+  color: var(--warning-fg, #111);
+  border-color: color-mix(in srgb, var(--warning, #c9a227) 80%, black);
+}
+.btn.warning:hover{
+  filter: brightness(0.95);
+}
+.btn.warning:disabled{
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+@media (min-width: 1024px){ .hamburger{ display:none !important; } }
+
+
+/* Header theme picker: follow nav active white glow */
+.app-header .theme-picker select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: var(--card);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: .35rem 1.6rem .35rem .55rem;
+}
+.app-header .theme-picker select:focus,
+.app-header .theme-picker select:focus-visible{
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.65) inset,
+    0 0 0 1px rgba(255,255,255,.35);
+  background: rgba(255,255,255,.06);
+}
+
+/* Keeps header images inline */
+.logo-container {
+  display: flex;
+  justify-content: left; /* Aligns images to the center horizontally */
+  gap: 5px; /* Adds space between the images */
+}
+
+.logo-container img {
+  max-width: 100%; /* Ensures each image takes up to 50% of the container width */
+  height: auto; /* Maintains aspect ratio */
+}

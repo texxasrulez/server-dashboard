@@ -1,0 +1,17 @@
+/* twilight.css — tokens only */
+:root{
+  --btn-bg: var(--surface-1);
+  --btn-border: var(--border-strong);
+  --btn-fg: var(--fg);
+
+  --bg:#0c0e16; --fg:#e7ecf7; --muted:#9aa9c6;
+  --card:#131727; --border:#2a2f45;
+  --accent:#7191ff; --accent-2:#9bb1ff;
+  --danger:#ff6b81; --warn:#ffd271; --ok:#67e3a6;
+  --notify:#7290ff;
+}
+
+/* Header Domain Name Color */
+.header-image-domain{    
+	filter: brightness(0) saturate(100%) invert(73%) sepia(98%) saturate(3784%) hue-rotate(202deg) brightness(97%) contrast(109%);
+}

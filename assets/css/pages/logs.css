@@ -1,0 +1,32 @@
+
+/* category badges for logs */
+.badge { padding: .15rem .5rem; border-radius: 999px; font-size: .85em; }
+.badge.security    { background: #662222; color: #f7d7d7; }
+.badge.warning     { background: #7a5d1a; color: #fff2c6; }
+.badge.database    { background: #3a2a78; color: #e6dcff; }
+.badge.network     { background: #123b5a; color: #d6ecff; }
+.badge.performance { background: #0d4d2a; color: #d5f6e3; }
+.badge.info        { background: #2b3a63; color: #dde6ff; }
+
+/* Normalize Download button to match other buttons */
+#btnDownload{background:var(--btn-bg) !important;color:var(--btn-fg) !important;border-color:var(--btn-border) !important;}
+
+/* Sticky header area for logs controls */
+#logs-toolbar{ position: sticky; top: 0; z-index: 5; background: var(--bg); padding-bottom: .25rem; }
+/* Make history table area flex-fill if page uses cards */
+
+/* Glass chips on logs */
+#histTable .chip{ font-size:.85em; }
+#histTable .chip[data-cat="security"]{ }
+#histTable .chip[data-cat="warning"]{ }
+#histTable .chip[data-cat="database"]{ }
+#histTable .chip[data-cat="network"]{ }
+#histTable .chip[data-cat="performance"]{ }
+#histTable .chip[data-cat="info"]{ }
+
+/* Sortable headers */
+th.sortable{ cursor:pointer; }
+th.sortable:after{ content:'\25B4\25BE'; font-size:.65rem; opacity:.35; padding-left:.35rem; }
+
+/* hr tags */
+.hr { border-color:var(--card); }

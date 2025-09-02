@@ -1,0 +1,21 @@
+/* cloud.css — tokens only */
+:root{
+  --btn-bg: var(--surface-1);
+  --btn-border: var(--border-strong);
+  --btn-fg: var(--fg);
+
+  --bg:#f5f7fa; --fg:#0c1116; --muted:#66727f;
+  --card:#ffffff; --border:#d8dee5;
+  --accent:#3a86ff; --accent-2:#6aa8ff;
+  --danger:#c23b55; --warn:#b8860b; --ok:#148a67;
+  --notify:#3b87ff;
+}
+
+/* ensure dark, readable button text for light themes */
+.btn, button.btn, a.btn{ color: var(--fg-strong) !important; }
+.btn.primary, button.btn.primary, a.btn.primary{ color: var(--fg-strong) !important; }
+
+/* Header Domain Name Color */
+.header-image-domain{    
+	filter: brightness(0) saturate(100%) invert(52%) sepia(61%) saturate(3908%) hue-rotate(200deg) brightness(98%) contrast(107%);
+}

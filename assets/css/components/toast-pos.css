@@ -1,0 +1,117 @@
+/* Toast position controlled by BODY class (no JS coupling)
+   Classes: toastpos-top-left | toastpos-top-center | toastpos-top-right
+            toastpos-bottom-left | toastpos-bottom-center | toastpos-bottom-right
+   Targets cover common containers used across the app. */
+
+:root { --toast-gap: 14px; }
+
+/* reset transform side-effects when switching */
+body[class*="toastpos-"] #toast-root,
+body[class*="toastpos-"] .toast-root,
+body[class*="toastpos-"] [data-toast-root],
+body[class*="toastpos-"] .toast-container,
+body[class*="toastpos-"] #notifications,
+body[class*="toastpos-"] .notifications,
+body[class*="toastpos-"] #notify,
+body[class*="toastpos-"] .notify,
+body[class*="toastpos-"] #notices,
+body[class*="toastpos-"] .notices {
+  /* do not set position, the engine owns that */
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  transform: none !important;
+}
+
+/* TOP-LEFT */
+body.toastpos-top-left #toast-root,
+body.toastpos-top-left .toast-root,
+body.toastpos-top-left [data-toast-root],
+body.toastpos-top-left .toast-container,
+body.toastpos-top-left #notifications,
+body.toastpos-top-left .notifications,
+body.toastpos-top-left #notify,
+body.toastpos-top-left .notify,
+body.toastpos-top-left #notices,
+body.toastpos-top-left .notices {
+  top: var(--toast-gap) !important;
+  left: var(--toast-gap) !important;
+}
+
+/* TOP-CENTER */
+body.toastpos-top-center #toast-root,
+body.toastpos-top-center .toast-root,
+body.toastpos-top-center [data-toast-root],
+body.toastpos-top-center .toast-container,
+body.toastpos-top-center #notifications,
+body.toastpos-top-center .notifications,
+body.toastpos-top-center #notify,
+body.toastpos-top-center .notify,
+body.toastpos-top-center #notices,
+body.toastpos-top-center .notices {
+  top: var(--toast-gap) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+/* TOP-RIGHT */
+body.toastpos-top-right #toast-root,
+body.toastpos-top-right .toast-root,
+body.toastpos-top-right [data-toast-root],
+body.toastpos-top-right .toast-container,
+body.toastpos-top-right #notifications,
+body.toastpos-top-right .notifications,
+body.toastpos-top-right #notify,
+body.toastpos-top-right .notify,
+body.toastpos-top-right #notices,
+body.toastpos-top-right .notices {
+  top: var(--toast-gap) !important;
+  right: var(--toast-gap) !important;
+}
+
+/* BOTTOM-LEFT */
+body.toastpos-bottom-left #toast-root,
+body.toastpos-bottom-left .toast-root,
+body.toastpos-bottom-left [data-toast-root],
+body.toastpos-bottom-left .toast-container,
+body.toastpos-bottom-left #notifications,
+body.toastpos-bottom-left .notifications,
+body.toastpos-bottom-left #notify,
+body.toastpos-bottom-left .notify,
+body.toastpos-bottom-left #notices,
+body.toastpos-bottom-left .notices {
+  bottom: var(--toast-gap) !important;
+  left: var(--toast-gap) !important;
+}
+
+/* BOTTOM-CENTER (default) */
+body.toastpos-bottom-center #toast-root,
+body.toastpos-bottom-center .toast-root,
+body.toastpos-bottom-center [data-toast-root],
+body.toastpos-bottom-center .toast-container,
+body.toastpos-bottom-center #notifications,
+body.toastpos-bottom-center .notifications,
+body.toastpos-bottom-center #notify,
+body.toastpos-bottom-center .notify,
+body.toastpos-bottom-center #notices,
+body.toastpos-bottom-center .notices {
+  bottom: var(--toast-gap) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+/* BOTTOM-RIGHT */
+body.toastpos-bottom-right #toast-root,
+body.toastpos-bottom-right .toast-root,
+body.toastpos-bottom-right [data-toast-root],
+body.toastpos-bottom-right .toast-container,
+body.toastpos-bottom-right #notifications,
+body.toastpos-bottom-right .notifications,
+body.toastpos-bottom-right #notify,
+body.toastpos-bottom-right .notify,
+body.toastpos-bottom-right #notices,
+body.toastpos-bottom-right .notices {
+  bottom: var(--toast-gap) !important;
+  right: var(--toast-gap) !important;
+}

@@ -1,0 +1,17 @@
+/* tealwave.css — tokens only */
+:root{
+  --btn-bg: var(--surface-1);
+  --btn-border: var(--border-strong);
+  --btn-fg: var(--fg);
+
+  --bg:#081214; --fg:#dff3f5; --muted:#9ec7cb;
+  --card:#0e1a1d; --border:#203238;
+  --accent:#00bcd4; --accent-2:#26c6da;
+  --danger:#ef5350; --warn:#ffca28; --ok:#26a69a;
+  --notify:#00bdd5;
+}
+
+/* Header Domain Name Color */
+.header-image-domain{    
+	filter: brightness(0) saturate(100%) invert(69%) sepia(60%) saturate(4235%) hue-rotate(144deg) brightness(94%) contrast(101%);
+}

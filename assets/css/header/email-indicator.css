@@ -1,0 +1,7 @@
+
+#emailNotify { line-height: 1; }
+#emailNotify[hidden] { display: none !important; }
+#emailNotify img { vertical-align: middle; }
+
+#emailNotifyWrap .emailNotify[hidden]{display:none!important;}
+#emailNotifyWrap .emailNotify img{vertical-align:middle;}

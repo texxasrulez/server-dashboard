@@ -1,0 +1,163 @@
+/* blue-dreams.css (v2) — no white backgrounds, unified text color */
+:root{
+  --btn-bg: var(--surface-1);
+  --btn-border: var(--border-strong);
+  --btn-fg: var(--fg);
+
+  --fg: #152f40;
+  --fg-strong: #152f40;
+  --muted: color-mix(in srgb, #152f40 55%, #152f40 45%);
+
+  /* Layered colors: page → card → alt/well (each step darker) */
+  --bg: #dff1f8;
+  --surface-1: #e8f4fb;
+  --surface-2: #cfe1ec;  /* CARD */
+  --surface-3: #bdd6e6;  /* ALT/WELL */
+
+  --card: var(--surface-2);
+  --panel: var(--surface-2);
+
+  --border: #9ec2d7;
+  --border-strong: #86b3cd;
+
+  --accent: #1f5f85;
+  --accent-2: #58a6d6;
+
+  --danger: #c23b55;
+  --warn: #b8860b;
+  --ok: #148a67;
+  --notify: #152f40;
+}
+
+
+/* Global */
+html, body { background: var(--bg); color: var(--fg); }
+body, .content, .container, .page, .wrap { background: var(--bg) !important; color: var(--fg) !important; }
+
+a { color: var(--accent); }
+a:hover { color: color-mix(in srgb, var(--accent) 80%, var(--bg) 20%); }
+
+/* Header / Navbar — keep mid-light so dark text remains legible */
+.header, header.navbar {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 25%, var(--bg) 75%),
+                                     color-mix(in srgb, var(--accent) 35%, var(--bg) 65%));
+  color: var(--fg);
+}
+.header a, header.navbar a { color: var(--fg) !important; }
+
+/* Panels, cards, modals, dropdowns */
+.card, .panel, .box, .modal, .dropdown-menu, .tile, .sheet {
+  background: var(--card) !important;
+  color: var(--fg);
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  box-shadow: 0 1px 0 rgba(21,47,64,.06), 0 8px 20px -12px rgba(21,47,64,.28);
+}
+
+.panel.alt, .well { background: var(--surface-3) !important; }
+
+/* Tables */
+.table, table { background: var(--surface-1); color: var(--fg); border-color: var(--border); }
+.table thead th { background: color-mix(in srgb, var(--accent-2) 35%, var(--bg) 65%); color: var(--fg); }
+.table tbody tr:nth-child(odd) { background: var(--surface-1); }
+.table tbody tr:nth-child(even) { background: var(--surface-2); }
+.table td, .table th { border-color: var(--border); }
+
+/* Buttons */
+.btn, button.btn, a.btn { 
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface-1) 90%); 
+  color: var(--fg) !important; 
+  border: 1px solid var(--border); 
+}
+.btn.primary { background: color-mix(in srgb, var(--accent) 28%, var(--surface-1) 72%); }
+.btn.secondary { background: color-mix(in srgb, var(--accent) 10%, var(--surface-2) 90%); }
+.btn:hover { filter: brightness(0.98); }
+
+/* Chips / badges */
+.chip { background: var(--surface-2); color: var(--fg); border: 1px solid var(--border); }
+.chip.ok { background: color-mix(in srgb, var(--ok) 18%, var(--surface-2) 82%); }
+.chip.fail { background: color-mix(in srgb, var(--danger) 18%, var(--surface-2) 82%); }
+.chip.warn { background: color-mix(in srgb, var(--warn) 18%, var(--surface-2) 82%); }
+
+/* Forms */
+input[type="text"], input[type="email"], input[type="password"], input[type="search"],
+input[type="number"], input[type="url"], textarea, select {
+  background: var(--surface-1);
+  color: var(--fg);
+  border: 1px solid var(--border);
+}
+::placeholder { color: color-mix(in srgb, var(--fg) 60%, var(--bg) 40%); }
+
+/* Nav active/link accents */
+.nav-active .active a, .tabs .active a { color: var(--accent); }
+hr.hr { border-color: var(--border); }
+
+/* Canvas/Charts backplates */
+canvas, .sparkplate { background: var(--surface-1); }
+
+/* Domain image hue adjustment (kept soft) */
+.header-image-domain{
+  filter: brightness(0) saturate(100%) invert(92%) sepia(7%) saturate(1773%) hue-rotate(174deg) brightness(95%) contrast(96%);
+}
+
+/* Spark/chart plates inside cards should be a touch lighter than the card */
+.sparkplate, .chart-plate {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+/* Tiny CSV badge style seen in screenshot */
+.badge, .pill, .csv-badge, .tag {
+  background: color-mix(in srgb, var(--surface-1) 70%, var(--accent-2) 30%);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+
+/* Card header/title line subtle */
+.card .title, .card h4, .panel .title {
+  color: var(--fg);
+  opacity: .9;
+}
+
+/* Chips like "All systems operational" */
+.chip { background: var(--surface-1); border: 1px solid var(--border); color: var(--fg); }
+.chip.ok { background: color-mix(in srgb, var(--ok) 18%, var(--surface-1) 82%); }
+.chip.warn { background: color-mix(in srgb, var(--warn) 18%, var(--surface-1) 82%); }
+.chip.fail { background: color-mix(in srgb, var(--danger) 18%, var(--surface-1) 82%); }
+
+/* Buttons stay soft */
+.btn, button.btn, a.btn {
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface-1) 88%);
+  color: var(--fg) !important;
+  border: 1px solid var(--border-strong);
+}
+.btn.primary { background: color-mix(in srgb, var(--accent) 28%, var(--surface-1) 72%); }
+.btn.secondary { background: color-mix(in srgb, var(--accent) 8%, var(--surface-2) 92%); }
+
+/* Table rows inside cards mimic the screenshot's soft contrast */
+.table, table { background: var(--surface-1); color: var(--fg); border-color: var(--border); }
+.table thead th { background: color-mix(in srgb, var(--accent-2) 28%, var(--surface-1) 72%); color: var(--fg); }
+.table tbody tr:nth-child(odd) { background: var(--surface-1); }
+.table tbody tr:nth-child(even) { background: var(--surface-2); }
+.table td, .table th { border-color: var(--border); }
+
+
+/* Avoid reflow on hover: outline doesn't affect layout, borders did */
+canvas.spark, canvas, .spark {
+  display:block;
+  box-sizing: border-box;
+  outline: 1px solid var(--border);
+  outline-offset: 0;
+  border: 0 !important;
+  background: var(--surface-1);
+  border-radius: 10px;
+}
+
+/* Header Domain Name Color */
+.header-image-domain{    
+	filter: brightness(0) saturate(100%) invert(15%) sepia(12%) saturate(2440%) hue-rotate(161deg) brightness(94%) contrast(93%);
+}

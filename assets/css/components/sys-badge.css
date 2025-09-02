@@ -1,0 +1,38 @@
+.sys-badge{
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.35rem .7rem; border-radius:999px;
+  border:1px solid var(--border);
+  background: linear-gradient(180deg,
+      color-mix(in srgb, var(--accent) 10%, transparent),
+      color-mix(in srgb, var(--accent) 22%, rgba(0,0,0,.2)));
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 14px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.06);
+  font-weight:600; font-size:.92rem; line-height:1;
+  white-space:nowrap; user-select:none;
+}
+.sys-badge .dot{
+  width:.6rem; height:.6rem; border-radius:50%;
+  box-shadow: 0 0 8px rgba(0,0,0,.35) inset, 0 0 6px rgba(0,0,0,.2);
+  background: var(--ok);
+}
+.sys-badge.ok { border-color: color-mix(in srgb, var(--ok) 70%, var(--border)); }
+.sys-badge.ok .dot{ background: var(--ok); }
+.sys-badge.warn{
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--warn) 14%, transparent),
+    color-mix(in srgb, var(--warn) 28%, rgba(0,0,0,.2)));
+  border-color: color-mix(in srgb, var(--warn) 70%, var(--border));
+}
+.sys-badge.warn .dot{ background: var(--warn); }
+.sys-badge.danger{
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--danger) 14%, transparent),
+    color-mix(in srgb, var(--danger) 30%, rgba(0,0,0,.25)));
+  border-color: color-mix(in srgb, var(--danger) 70%, var(--border));
+}
+.sys-badge.danger .dot{ background: var(--danger); }
+/* Slight glassier than chips but still subtle */
+@media(max-width: 900px){
+  /* Hide on smaller screens; drawer can show status instead */
+  .sys-badge{ display:none !important; }
+}

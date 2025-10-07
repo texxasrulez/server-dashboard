@@ -3,7 +3,7 @@
 [![Project license](https://img.shields.io/github/license/texxasrulez/server-dashboard?style=plastic)](https://github.com/texxasrulez/server-dashboard/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/texxasrulez/server-dashboard?style=plastic&logo=github)](https://github.com/texxasrulez/server-dashboard/stargazers)
 [![issues](https://img.shields.io/github/issues/texxasrulez/server-dashboard?style=plastic)](https://github.com/texxasrulez/server-dashboard/issues)
-[![Donate to this project using Paypal](https://img.shields.io/badge/paypal-donate-blue.svg?style=plastic&logo=paypal)](https://www.paypal.me/texxasrulez)
+[![Donate to this project using Paypal](https://img.shields.io/badge/paypal-money_please-blue.svg?style=plastic&logo=paypal)](https://www.paypal.me/texxasrulez)
 
 Here is a Server Dashboard to have an overall view of server health and status in just a few pages to check.
 It has lots of features, too many to list. One day I will have a better README.md

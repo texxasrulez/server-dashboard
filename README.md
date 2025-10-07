@@ -1,7 +1,5 @@
 # Server Dashboard
 
-[![Packagist](https://img.shields.io/packagist/dt/texxasrulez/server-dashboard?style=plastic)](https://packagist.org/packages/texxasrulez/server-dashboard)
-[![Packagist Version](https://img.shields.io/packagist/v/texxasrulez/server-dashboard?style=plastic&logo=packagist&logoColor=white)](https://packagist.org/packages/texxasrulez/server-dashboard)
 [![Project license](https://img.shields.io/github/license/texxasrulez/server-dashboard?style=plastic)](https://github.com/texxasrulez/server-dashboard/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/texxasrulez/server-dashboard?style=plastic&logo=github)](https://github.com/texxasrulez/server-dashboard/stargazers)
 [![issues](https://img.shields.io/github/issues/texxasrulez/server-dashboard)](https://github.com/texxasrulez/server-dashboard/issues)

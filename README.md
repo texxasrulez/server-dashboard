@@ -451,7 +451,11 @@ Rotate large `*.jsonl` via `logrotate` or a cron script.
 
 **Screenshot**
 
+Main Index Page
 ![Server Dashboard](assets/images/index-screenshot.png?raw=true "Server Dashboard Screenshot")
+History Page
 ![Server Dashboard](assets/images/history-screenshot.png?raw=true "Server Dashboard Screenshot")
+Config Site Page
 ![Server Dashboard](assets/images/config-site-screenshot.png?raw=true "Server Dashboard Screenshot")
+Config Email Page (with new email notification in upper right hand corner)
 ![Server Dashboard](assets/images/config-email-screenshot.png?raw=true "Server Dashboard Screenshot")

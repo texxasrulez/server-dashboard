@@ -1,11 +1,11 @@
 # Server Dashboard
 
-[![Project license](https://img.shields.io/github/license/texxasrulez/server-dashboard?style=plastic&labelColor=blue&color=coral)](https://github.com/texxasrulez/server-dashboard/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/texxasrulez/server-dashboard?style=plastic&logo=github&labelColor=blue&color=deepskyblue)](https://github.com/texxasrulez/server-dashboard/stargazers)
-[![issues](https://img.shields.io/github/issues/texxasrulez/server-dashboard?style=plastic&labelColor=blue&color=aqua)](https://github.com/texxasrulez/server-dashboard/issues)
-[![GitHub contributors](https://img.shields.io/github/contributors/texxasrulez/server-dashboard?style=plastic&logo=github&logoColor=white&labelColor=blue&color=orchid)](https://github.com/texxasrulez/server-dashboard/graphs/contributors)
-[![GitHub forks](https://img.shields.io/github/forks/texxasrulez/server-dashboard?style=plastic&logo=github&logoColor=white&labelColor=blue&color=darkorange)](https://github.com/texxasrulez/server-dashboard/forks)
-[![Donate to this project using Paypal](https://img.shields.io/badge/paypal-money_please-blue.svg?style=plastic&labelColor=blue&color=forestgreen&logo=paypal)](https://www.paypal.me/texxasrulez)
+[![Github License](https://img.shields.io/github/license/texxasrulez/server-dashboard?style=plastic&logo=github&label=License&labelColor=blue&color=coral)](https://github.com/texxasrulez/server-dashboard/LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/texxasrulez/server-dashboard?style=plastic&logo=github&label=Stars&labelColor=blue&color=deepskyblue)](https://github.com/texxasrulez/server-dashboard/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/texxasrulez/server-dashboard?style=plastic&logo=github&label=Issues&labelColor=blue&color=aqua)](https://github.com/texxasrulez/server-dashboard/issues)
+[![GitHub Contributors](https://img.shields.io/github/contributors/texxasrulez/server-dashboard?style=plastic&logo=github&logoColor=white&label=Contributors&labelColor=blue&color=orchid)](https://github.com/texxasrulez/server-dashboard/graphs/contributors)
+[![GitHub Forks](https://img.shields.io/github/forks/texxasrulez/server-dashboard?style=plastic&logo=github&logoColor=white&label=Forks&labelColor=blue&color=darkorange)](https://github.com/texxasrulez/server-dashboard/forks)
+[![Donate Paypal](https://img.shields.io/badge/Paypal-Money_Please!-blue.svg?style=plastic&labelColor=blue&color=forestgreen&logo=paypal)](https://www.paypal.me/texxasrulez)
 
 Here is a Server Dashboard to have an overall view of server health and status in just a few pages to check.
 It has lots of features, too many to list. One day I will have a better README.md

@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "P\u0159\u00edstrojov\u00fd panel serveru"
+    },
+    "nav": {
+        "history": "Historie",
+        "logs": "Protokoly",
+        "dashboard": "P\u0159\u00edstrojov\u00e1 deska",
+        "services": "Slu\u017eby",
+        "alerts": "Upozorn\u011bn\u00ed",
+        "tests": "Testy",
+        "settings": "Nastaven\u00ed",
+        "about": "O str\u00e1nk\u00e1ch"
+    },
+    "history": {
+        "title": "Historie",
+        "trends": "Trendy",
+        "range": "Rozsah",
+        "baseline": "Z\u00e1kladn\u00ed \u00fadaje",
+        "probe_now": "Sonda nyn\u00ed",
+        "refresh": "Obnovit",
+        "export_json": "Export JSON",
+        "export_alerts_json": "Export v\u00fdstrah JSON",
+        "reset_history": "Obnoven\u00ed historie",
+        "recent_alert_events": "Ned\u00e1vn\u00e9 v\u00fdstra\u017en\u00e9 ud\u00e1losti",
+        "export_preview": "N\u00e1hled exportu",
+        "close": "Zav\u0159\u00edt",
+        "copy": "Kop\u00edrovat",
+        "download": "St\u00e1hnout"
+    },
+    "logs": {
+        "title": "Protokoly",
+        "manage": "Spr\u00e1va protokol\u016f",
+        "add": "P\u0159idat",
+        "delete": "Odstranit",
+        "refresh": "Obnovit",
+        "search": "Vyhled\u00e1v\u00e1n\u00ed",
+        "filter": "Filtr",
+        "lines": "\u0158\u00e1dky",
+        "open": "Otev\u0159\u00edt",
+        "close": "Zav\u0159\u00edt",
+        "download": "St\u00e1hnout",
+        "copy": "Kop\u00edrovat"
+    },
+    "common": {
+        "save": "Ulo\u017eit",
+        "cancel": "Zru\u0161it",
+        "edit": "Upravit",
+        "delete": "Odstranit",
+        "update": "Aktualizace",
+        "create": "Vytvo\u0159it",
+        "enable": "Povolit",
+        "disable": "Zak\u00e1zat",
+        "yes": "Ano",
+        "no": "Ne",
+        "on": "Na adrese",
+        "off": "Vypnuto",
+        "confirm": "Potvr\u010fte",
+        "search": "Vyhled\u00e1v\u00e1n\u00ed",
+        "filter": "Filtr",
+        "actions": "Akce"
+    },
+    "alerts": {
+        "title": "Upozorn\u011bn\u00ed",
+        "recent_events": "Ned\u00e1vn\u00e9 v\u00fdstra\u017en\u00e9 ud\u00e1losti",
+        "history": "Historie v\u00fdstrah",
+        "export_json": "Export v\u00fdstrah JSON",
+        "no_alerts": "\u017d\u00e1dn\u00e1 upozorn\u011bn\u00ed",
+        "level": "\u00darove\u0148",
+        "message": "Zpr\u00e1va",
+        "service": "Slu\u017eba",
+        "time": "\u010cas",
+        "probe_now": "Sonda nyn\u00ed",
+        "refresh": "Obnovit",
+        "silence": "Ticho",
+        "unsilence": "Unsilence",
+        "ack": "Potvrzen\u00ed",
+        "unack": "Neuzn\u00e1n\u00ed"
+    },
+    "tests": {
+        "title": "Testy serveru",
+        "run_all": "Spus\u0165te v\u0161echny",
+        "status": "Stav",
+        "last_run": "Posledn\u00ed b\u011bh",
+        "duration": "Doba trv\u00e1n\u00ed"
+    },
+    "services": {
+        "title": "Slu\u017eby",
+        "status": "Stav",
+        "restart": "Restartov\u00e1n\u00ed",
+        "start": "Start",
+        "stop": "Zastavte"
+    }
+}

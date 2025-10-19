@@ -3,7 +3,7 @@
   'use strict';
   function $(s,c){ return (c||document).querySelector(s); }
   function ensureTip(){ var t=document.getElementById('sparkTip'); if(t) return t;
-    t=document.createElement('div'); t.id='sparkTip'; t.style.position='fixed'; t.style.zIndex=9999;
+    t=document.createElement('div', 'card'); t.id='sparkTip'; t.style.position='fixed'; t.style.zIndex=9999;
     t.style.pointerEvents='none'; t.style.padding='6px 8px'; t.style.borderRadius='8px'; t.style.fontSize='12px';
     t.style.background='rgba(15,15,15,.9)'; t.style.color='var(--text-color,#eee)'; t.style.border='1px solid rgba(255,255,255,.12)';
     t.style.boxShadow='0 4px 16px rgba(0,0,0,.35)'; t.hidden=true; document.body.appendChild(t); return t; }

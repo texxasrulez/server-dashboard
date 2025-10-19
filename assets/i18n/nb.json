@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Dashbord for server"
+    },
+    "nav": {
+        "history": "Historie",
+        "logs": "Logger",
+        "dashboard": "Dashbord",
+        "services": "Tjenester",
+        "alerts": "Varsler",
+        "tests": "Tester",
+        "settings": "Innstillinger",
+        "about": "Om"
+    },
+    "history": {
+        "title": "Historie",
+        "trends": "Trender",
+        "range": "Rekkevidde",
+        "baseline": "Grunnlinje",
+        "probe_now": "Sonde n\u00e5",
+        "refresh": "Oppdater",
+        "export_json": "Eksporter JSON",
+        "export_alerts_json": "Eksporter varsler JSON",
+        "reset_history": "Tilbakestill historikk",
+        "recent_alert_events": "Nylige varslingshendelser",
+        "export_preview": "Forh\u00e5ndsvisning av eksport",
+        "close": "Lukk",
+        "copy": "Kopi",
+        "download": "Last ned"
+    },
+    "logs": {
+        "title": "Logger",
+        "manage": "Administrer logger",
+        "add": "Legg til",
+        "delete": "Slett",
+        "refresh": "Oppdater",
+        "search": "S\u00f8k",
+        "filter": "Filter",
+        "lines": "Linjer",
+        "open": "\u00c5pen",
+        "close": "Lukk",
+        "download": "Last ned",
+        "copy": "Kopi"
+    },
+    "common": {
+        "save": "Spar",
+        "cancel": "Avbryt",
+        "edit": "Rediger",
+        "delete": "Slett",
+        "update": "Oppdatering",
+        "create": "Opprett",
+        "enable": "Aktivere",
+        "disable": "Deaktiver",
+        "yes": "Ja",
+        "no": "Nei",
+        "on": "P\u00e5",
+        "off": "Av",
+        "confirm": "Bekreft",
+        "search": "S\u00f8k",
+        "filter": "Filter",
+        "actions": "Handlinger"
+    },
+    "alerts": {
+        "title": "Varsler",
+        "recent_events": "Nylige varslingshendelser",
+        "history": "Varslingshistorikk",
+        "export_json": "Eksporter varsler JSON",
+        "no_alerts": "Ingen varsler",
+        "level": "Niv\u00e5",
+        "message": "Melding",
+        "service": "Service",
+        "time": "Tid",
+        "probe_now": "Sonde n\u00e5",
+        "refresh": "Oppdater",
+        "silence": "Stillhet",
+        "unsilence": "Taushet",
+        "ack": "Bekreft",
+        "unack": "Ikke-kjennskap"
+    },
+    "tests": {
+        "title": "Servertester",
+        "run_all": "Kj\u00f8r alle",
+        "status": "Status",
+        "last_run": "Siste kj\u00f8ring",
+        "duration": "Varighet"
+    },
+    "services": {
+        "title": "Tjenester",
+        "status": "Status",
+        "restart": "Start p\u00e5 nytt",
+        "start": "Start",
+        "stop": "Stopp"
+    }
+}

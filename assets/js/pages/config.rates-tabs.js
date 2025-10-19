@@ -1,4 +1,3 @@
-
 // Only run on the Config page
 (function(){
   'use strict';

@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Tableau de bord du serveur"
+    },
+    "nav": {
+        "history": "L'histoire",
+        "logs": "Logs",
+        "dashboard": "Tableau de bord",
+        "services": "Services",
+        "alerts": "Alertes",
+        "tests": "Tests",
+        "settings": "Param\u00e8tres",
+        "about": "A propos de"
+    },
+    "history": {
+        "title": "L'histoire",
+        "trends": "Tendances",
+        "range": "Range",
+        "baseline": "Base de r\u00e9f\u00e9rence",
+        "probe_now": "Sonder maintenant",
+        "refresh": "Rafra\u00eechir",
+        "export_json": "Export JSON",
+        "export_alerts_json": "Exporter les alertes JSON",
+        "reset_history": "R\u00e9initialiser l'historique",
+        "recent_alert_events": "\u00c9v\u00e9nements r\u00e9cents en mati\u00e8re d'alerte",
+        "export_preview": "Aper\u00e7u de l'exportation",
+        "close": "Fermer",
+        "copy": "Copie",
+        "download": "T\u00e9l\u00e9charger"
+    },
+    "logs": {
+        "title": "Logs",
+        "manage": "Manage Logs",
+        "add": "Ajouter",
+        "delete": "Supprimer",
+        "refresh": "Rafra\u00eechir",
+        "search": "Recherche",
+        "filter": "Filtre",
+        "lines": "Lignes",
+        "open": "Ouvrir",
+        "close": "Fermer",
+        "download": "T\u00e9l\u00e9charger",
+        "copy": "Copie"
+    },
+    "common": {
+        "save": "\u00c9conomiser",
+        "cancel": "Annuler",
+        "edit": "Editer",
+        "delete": "Supprimer",
+        "update": "Mise \u00e0 jour",
+        "create": "Cr\u00e9er",
+        "enable": "Activer",
+        "disable": "D\u00e9sactiver",
+        "yes": "Oui",
+        "no": "Non",
+        "on": "Sur",
+        "off": "Arr\u00eat",
+        "confirm": "Confirmer",
+        "search": "Recherche",
+        "filter": "Filtre",
+        "actions": "Actions"
+    },
+    "alerts": {
+        "title": "Alertes",
+        "recent_events": "\u00c9v\u00e9nements r\u00e9cents en mati\u00e8re d'alerte",
+        "history": "Historique des alertes",
+        "export_json": "Exporter les alertes JSON",
+        "no_alerts": "Pas d'alertes",
+        "level": "Niveau",
+        "message": "Message",
+        "service": "Service",
+        "time": "L'heure",
+        "probe_now": "Sonder maintenant",
+        "refresh": "Rafra\u00eechir",
+        "silence": "Le silence",
+        "unsilence": "Le silence",
+        "ack": "Accuser r\u00e9ception",
+        "unack": "M\u00e9connaissance"
+    },
+    "tests": {
+        "title": "Tests du serveur",
+        "run_all": "Ex\u00e9cuter tous les",
+        "status": "Statut",
+        "last_run": "Derni\u00e8re course",
+        "duration": "Dur\u00e9e de l'accord"
+    },
+    "services": {
+        "title": "Services",
+        "status": "Statut",
+        "restart": "Red\u00e9marrage",
+        "start": "D\u00e9marrage",
+        "stop": "Arr\u00eater"
+    }
+}

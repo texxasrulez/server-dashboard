@@ -9,13 +9,13 @@
 *{box-sizing:border-box} html,body{height:100%}
 body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.45 system-ui,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial}
 a{color:var(--fg);text-decoration:none}
-.app-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:1rem;background:var(--card);border-bottom:1px solid var(--border);padding:.6rem .9rem}
+.app-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:1rem;background:var(--card);border-bottom:1px solid var(--border);padding:.6rem .9rem;box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 1px 0 rgba(255, 255, 255, 0.05) inset}
 .app-header .brand a{font-weight:700}
 .app-header .tabs{display:flex;gap:.4rem;flex-wrap:wrap}
 .app-header .tabs a{padding:.35rem .6rem;border:1px solid var(--border);border-radius:10px}
 .app-header .tabs a.active{background:color-mix(in srgb, var(--btn) 22%, transparent); border-color: color-mix(in srgb, var(--btn) 55%, var(--border));}
 .app-header .theme-picker{margin-left:auto;display:flex;gap:.4rem;align-items:center}
-.content{padding:1rem}
+.content{padding:1rem;box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 1px 0 rgba(255, 255, 255, 0.05) inset}
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin-bottom:1rem}
 .row{display:flex;gap:.5rem .75rem;align-items:center;flex-wrap:wrap}
 label{opacity:.9}
@@ -106,4 +106,24 @@ thead th{position:sticky;top:0;background:var(--card);z-index:2}
 .logo-container img {
   max-width: 100%; /* Ensures each image takes up to 50% of the container width */
   height: auto; /* Maintains aspect ratio */
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+	opacity: 100; /* Hide the default icon */
+	filter: invert(1); /* Inverts the colors, making a black icon white */
+}
+
+input[type="date"] {
+    position: relative; /* Needed for positioning the pseudo-element */
+    padding-right: 30px; /* Adjust to make space for the icon */
+}
+
+input[type="date"]::after {
+    content: '\1F4C5'; /* Unicode for a calendar icon (or other icon) */
+    font-size: 20px; /* Adjust size */
+    position: absolute;
+    right: 5px; /* Adjust position */
+    top: 50%;
+    transform: translateY(-50%);
+    color: white; /* Adjust color */
 }

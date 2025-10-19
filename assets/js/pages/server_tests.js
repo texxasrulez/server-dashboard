@@ -6,7 +6,7 @@
   function ensureInfoModal(){
     var el = document.getElementById('infoModal');
     if (el) return el;
-    el = document.createElement('div');
+    el = document.createElement('div', 'card');
     el.className = 'modal'; el.id = 'infoModal'; el.setAttribute('hidden','');
     el.innerHTML = ''
       + '<div class="modal-dialog">'

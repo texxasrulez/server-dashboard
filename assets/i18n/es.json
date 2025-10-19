@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Panel del servidor"
+    },
+    "nav": {
+        "history": "Historia",
+        "logs": "Registros",
+        "dashboard": "Cuadro de mandos",
+        "services": "Servicios",
+        "alerts": "Alertas",
+        "tests": "Pruebas",
+        "settings": "Ajustes",
+        "about": "Acerca de"
+    },
+    "history": {
+        "title": "Historia",
+        "trends": "Tendencias",
+        "range": "Gama",
+        "baseline": "L\u00ednea de base",
+        "probe_now": "Sonda ahora",
+        "refresh": "Actualizar",
+        "export_json": "Exportar JSON",
+        "export_alerts_json": "Exportar alertas JSON",
+        "reset_history": "Restablecer historial",
+        "recent_alert_events": "Alertas recientes",
+        "export_preview": "Vista previa de la exportaci\u00f3n",
+        "close": "Cerrar",
+        "copy": "Copia",
+        "download": "Descargar"
+    },
+    "logs": {
+        "title": "Registros",
+        "manage": "Gestionar registros",
+        "add": "A\u00f1adir",
+        "delete": "Borrar",
+        "refresh": "Actualizar",
+        "search": "Buscar en",
+        "filter": "Filtro",
+        "lines": "L\u00edneas",
+        "open": "Abrir",
+        "close": "Cerrar",
+        "download": "Descargar",
+        "copy": "Copia"
+    },
+    "common": {
+        "save": "Guardar",
+        "cancel": "Cancelar",
+        "edit": "Editar",
+        "delete": "Borrar",
+        "update": "Actualizaci\u00f3n",
+        "create": "Cree",
+        "enable": "Activar",
+        "disable": "Desactivar",
+        "yes": "S\u00ed",
+        "no": "No",
+        "on": "En",
+        "off": "Fuera de",
+        "confirm": "Confirme",
+        "search": "Buscar en",
+        "filter": "Filtro",
+        "actions": "Acciones"
+    },
+    "alerts": {
+        "title": "Alertas",
+        "recent_events": "Alertas recientes",
+        "history": "Historial de alertas",
+        "export_json": "Exportar alertas JSON",
+        "no_alerts": "Sin alertas",
+        "level": "Nivel",
+        "message": "Mensaje",
+        "service": "Servicio",
+        "time": "Tiempo",
+        "probe_now": "Sonda ahora",
+        "refresh": "Actualizar",
+        "silence": "Silencio",
+        "unsilence": "Unsilence",
+        "ack": "Acuse recibo",
+        "unack": "Desconocimiento"
+    },
+    "tests": {
+        "title": "Pruebas de servidores",
+        "run_all": "Ejecutar todo",
+        "status": "Estado",
+        "last_run": "\u00daltima carrera",
+        "duration": "Duraci\u00f3n"
+    },
+    "services": {
+        "title": "Servicios",
+        "status": "Estado",
+        "restart": "Reinicie",
+        "start": "Inicio",
+        "stop": "Stop"
+    }
+}

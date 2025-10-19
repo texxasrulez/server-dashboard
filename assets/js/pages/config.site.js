@@ -1,4 +1,3 @@
-
 (function(){
   'use strict';
   function $(s){ return document.querySelector(s); }
@@ -20,7 +19,7 @@
       if (t.indexOf('backup & restore')>=0 || t.indexOf('backup and restore')>=0) has = true;
     });
     if (has) return;
-    var card = el('div','card');
+    var card = el('div', 'card');
     var h = el('h3'); h.textContent = 'Backup & Restore'; card.appendChild(h);
     var row = el('div'); row.style.display='flex'; row.style.flexWrap='wrap'; row.style.alignItems='center'; row.style.gap='12px';
     var exportBtn = el('button','btn'); exportBtn.textContent='Export Config';
@@ -54,7 +53,7 @@
       if (t.indexOf('backups — retention')>=0 || t.indexOf('backups - retention')>=0) exists = true;
     });
     if (exists) return;
-    var card2 = el('div','card');
+    var card2 = el('div', 'card');
     var h2 = el('h3'); h2.textContent='Backups — Retention'; card2.appendChild(h2);
     var row2 = el('div'); row2.style.display='flex'; row2.style.flexWrap='wrap'; row2.style.alignItems='center'; row2.style.gap='12px';
     var keepDefault = 20;
@@ -107,10 +106,106 @@
     var p = paneEl(); if (!p) return;
     ensureImportExport(p);
     ensureRetention(p);
+    ensureLanguage(p);
   }
   // Run on load, after a tick
   document.addEventListener('DOMContentLoaded', function(){ setTimeout(ensureSiteCards, 50); });
-  // Listen for tab clicks
+  
+  
+
+
+function ensureLanguage(pane){
+  pane = pane || paneEl(); if (!pane) return;
+  if (pane.querySelector('#siteLangSelect')) return;
+
+  function el(tag, cls){ var n=document.createElement(tag); if(cls) n.className=cls; return n; }
+  function norm(t){ return String(t||'').trim().toLowerCase(); }
+
+  // Find the Theme label exactly
+  var themeLbl = pane.querySelector('label.label[for="site.theme"]');
+  if (!themeLbl){
+    var labs = pane.querySelectorAll('label');
+    for (var i=0;i<labs.length;i++){
+      var txt = (labs[i].textContent||'').trim();
+      if (txt === 'Theme' || norm(txt) === 'theme'){ themeLbl = labs[i]; break; }
+    }
+  }
+  if (!themeLbl) return;
+
+  var themeRow = themeLbl.parentNode || null;
+  var parent = themeRow && themeRow.parentNode;
+
+  var valueCell = null;
+  if (themeRow){
+    for (var j=0;j<themeRow.children.length;j++){
+      var c = themeRow.children[j];
+      if (c !== themeLbl){ valueCell = c; break; }
+    }
+  }
+
+  var row = document.createElement('div');
+  row.className = themeRow ? themeRow.className : 'row';
+
+  var label = document.createElement('label');
+  label.className = themeLbl ? themeLbl.className : 'label';
+  label.textContent = 'Language';
+
+  var valWrap = document.createElement('div');
+  valWrap.className = valueCell ? valueCell.className : '';
+
+  var sel = document.createElement('select'); sel.className = 'input'; sel.id = 'siteLangSelect';
+  var save = document.createElement('button'); save.className = 'btn'; save.id = 'siteLangSave'; save.textContent = 'Save';
+  var st = document.createElement('span'); st.className = 'muted'; st.id = 'siteLangStatus'; st.style.marginLeft = '8px';
+
+  valWrap.appendChild(sel); valWrap.appendChild(save); valWrap.appendChild(st);
+  row.appendChild(label); row.appendChild(valWrap);
+
+  if (parent && themeRow && parent.insertBefore){
+    if (themeRow.nextSibling) parent.insertBefore(row, themeRow.nextSibling);
+    else parent.appendChild(row);
+  } else {
+    pane.appendChild(row);
+  }
+
+  var cur = 'en';
+  try { if (window.__CONFIG_DATA__ && window.__CONFIG_DATA__.i18n && window.__CONFIG_DATA__.i18n.locale){ cur = String(window.__CONFIG_DATA__.i18n.locale || 'en'); } } catch(_){}
+  fetch('api/i18n_languages.php', {credentials:'same-origin'})
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      if (!j || !j.ok || !Array.isArray(j.languages)) return;
+      sel.innerHTML='';
+      j.languages.forEach(function(it){
+        var o = document.createElement('option'); o.value = it.code; o.textContent = it.name || (it.code||'').toUpperCase();
+        if (it.code === cur) o.selected = true;
+        sel.appendChild(o);
+      });
+    }).catch(function(){});
+
+  save.addEventListener('click', function(){
+    var locale = sel.value || 'en';
+    var body = JSON.stringify({ config: { i18n: { locale: locale } } });
+    var url = 'api/config_import.php?_csrf=' + encodeURIComponent(window.__CONFIG_CSRF__||'');
+    save.disabled = true; st.textContent = 'Saving…';
+    fetch(url, { method:'POST', credentials:'same-origin', headers:{'Content-Type':'application/json'}, body: body })
+      .then(function(r){ return r.json().catch(function(){return null;}); })
+      .then(function(j){
+        if (j && j.ok) {
+          st.textContent = 'Saved';
+          try { document.documentElement.setAttribute('lang', locale); } catch(_){}
+          try { window.__CONFIG_DATA__ = window.__CONFIG_DATA__ || {}; (window.__CONFIG_DATA__.i18n = window.__CONFIG_DATA__.i18n || {}).locale = locale; } catch(_){}
+        } else {
+          st.textContent = 'Save failed';
+        }
+      })
+      .catch(function(){ st.textContent = 'Save failed'; })
+      .finally(function(){ save.disabled=false; setTimeout(function(){ st.textContent=''; }, 2000); });
+  });
+}
+
+
+
+
+// Listen for tab clicks
   document.addEventListener('click', function(e){
     var btn = e.target.closest && e.target.closest('#configTabs .btn');
     if (!btn) return;
@@ -124,3 +219,12 @@
     mo.observe(p, {childList:true, subtree:false});
   }
 })();
+
+
+  /* i18n language hook */
+  function maybeInitLanguage(){
+    if (isSiteActive()) try { ensureLanguage(paneEl()); } catch(_){}
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', maybeInitLanguage);
+  else maybeInitLanguage();
+  window.addEventListener('hashchange', maybeInitLanguage);

@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Server Dashboard"
+    },
+    "nav": {
+        "history": "Geschiedenis",
+        "logs": "Logboeken",
+        "dashboard": "Dashboard",
+        "services": "Diensten",
+        "alerts": "Waarschuwingen",
+        "tests": "Tests",
+        "settings": "Instellingen",
+        "about": "Over"
+    },
+    "history": {
+        "title": "Geschiedenis",
+        "trends": "Trends",
+        "range": "Bereik",
+        "baseline": "Basislijn",
+        "probe_now": "Nu sonderen",
+        "refresh": "Vernieuw",
+        "export_json": "JSON exporteren",
+        "export_alerts_json": "JSON-waarschuwingen exporteren",
+        "reset_history": "Geschiedenis resetten",
+        "recent_alert_events": "Recente waarschuwingsgebeurtenissen",
+        "export_preview": "Voorbeeld exporteren",
+        "close": "Sluit",
+        "copy": "Kopie",
+        "download": "Downloaden"
+    },
+    "logs": {
+        "title": "Logboeken",
+        "manage": "Logboeken beheren",
+        "add": "Voeg  toe",
+        "delete": "Verwijder",
+        "refresh": "Vernieuw",
+        "search": "Zoek op",
+        "filter": "Filter",
+        "lines": "Lijnen",
+        "open": "Open",
+        "close": "Sluit",
+        "download": "Downloaden",
+        "copy": "Kopie"
+    },
+    "common": {
+        "save": "Sla",
+        "cancel": "Annuleren",
+        "edit": "Bewerk",
+        "delete": "Verwijder",
+        "update": "Update",
+        "create": "Maak",
+        "enable": "inschakelen",
+        "disable": "uitschakelen",
+        "yes": "Ja",
+        "no": "Geen",
+        "on": "Op",
+        "off": "Uit",
+        "confirm": "Bevestig",
+        "search": "Zoek op",
+        "filter": "Filter",
+        "actions": "Acties"
+    },
+    "alerts": {
+        "title": "Waarschuwingen",
+        "recent_events": "Recente waarschuwingsgebeurtenissen",
+        "history": "Waarschuwingsgeschiedenis",
+        "export_json": "JSON-waarschuwingen exporteren",
+        "no_alerts": "Geen waarschuwingen",
+        "level": "Niveau",
+        "message": "Bericht",
+        "service": "Service",
+        "time": "Tijd",
+        "probe_now": "Nu sonderen",
+        "refresh": "Vernieuw",
+        "silence": "Stilte",
+        "unsilence": "Stilte",
+        "ack": "erkennen",
+        "unack": "Niet-erkennen"
+    },
+    "tests": {
+        "title": "Servertests",
+        "run_all": "Alles uitvoeren",
+        "status": "Status",
+        "last_run": "Laatste run",
+        "duration": "Duur"
+    },
+    "services": {
+        "title": "Diensten",
+        "status": "Status",
+        "restart": "Herstart",
+        "start": "Start",
+        "stop": "Stop"
+    }
+}

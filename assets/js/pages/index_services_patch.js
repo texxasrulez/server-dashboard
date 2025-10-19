@@ -12,7 +12,7 @@ async function renderServicesFromAPI(){
   let upCount=0;
   items.forEach(s => {
     const up = !!s.enabled; if(up) upCount++;
-    const card = document.createElement('div'); card.className='service';
+    const card = document.createElement('div', 'card'); card.className='service';
     card.innerHTML = `
       <div class="top">
         <span class="dot" style="background:${up?'var(--accent-2)':'#ff6b6b'}"></span>

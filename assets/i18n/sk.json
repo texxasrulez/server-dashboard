@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Ovl\u00e1dac\u00ed panel servera"
+    },
+    "nav": {
+        "history": "Hist\u00f3ria",
+        "logs": "Protokoly",
+        "dashboard": "Pr\u00edstrojov\u00e1 doska",
+        "services": "Slu\u017eby",
+        "alerts": "Upozornenia",
+        "tests": "Testy",
+        "settings": "Nastavenia",
+        "about": "O str\u00e1nke"
+    },
+    "history": {
+        "title": "Hist\u00f3ria",
+        "trends": "Trendy",
+        "range": "Rozsah",
+        "baseline": "Z\u00e1kladn\u00e9 \u00fadaje",
+        "probe_now": "Sonda teraz",
+        "refresh": "Obnovi\u0165",
+        "export_json": "Exportova\u0165 JSON",
+        "export_alerts_json": "Exportova\u0165 upozornenia JSON",
+        "reset_history": "Obnovenie hist\u00f3rie",
+        "recent_alert_events": "Ned\u00e1vne v\u00fdstra\u017en\u00e9 udalosti",
+        "export_preview": "N\u00e1h\u013ead exportu",
+        "close": "Zatvori\u0165",
+        "copy": "Kop\u00edrova\u0165",
+        "download": "Stiahnite si"
+    },
+    "logs": {
+        "title": "Protokoly",
+        "manage": "Spr\u00e1va protokolov",
+        "add": "Prida\u0165",
+        "delete": "Odstr\u00e1ni\u0165",
+        "refresh": "Obnovi\u0165",
+        "search": "Vyh\u013ead\u00e1vanie",
+        "filter": "Filter",
+        "lines": "Riadky",
+        "open": "Otvorte str\u00e1nku",
+        "close": "Zatvori\u0165",
+        "download": "Stiahnite si",
+        "copy": "Kop\u00edrova\u0165"
+    },
+    "common": {
+        "save": "Ulo\u017ei\u0165",
+        "cancel": "Zru\u0161i\u0165",
+        "edit": "Upravi\u0165",
+        "delete": "Odstr\u00e1ni\u0165",
+        "update": "Aktualiz\u00e1cia",
+        "create": "Vytvori\u0165 str\u00e1nku",
+        "enable": "Povolenie str\u00e1nky",
+        "disable": "Zak\u00e1za\u0165",
+        "yes": "\u00c1no",
+        "no": "Nie",
+        "on": "Na str\u00e1nke",
+        "off": "Vypnut\u00e9",
+        "confirm": "Potvr\u010fte",
+        "search": "Vyh\u013ead\u00e1vanie",
+        "filter": "Filter",
+        "actions": "\u010cinnosti"
+    },
+    "alerts": {
+        "title": "Upozornenia",
+        "recent_events": "Ned\u00e1vne v\u00fdstra\u017en\u00e9 udalosti",
+        "history": "Hist\u00f3ria upozornen\u00ed",
+        "export_json": "Exportova\u0165 upozornenia JSON",
+        "no_alerts": "\u017diadne upozornenia",
+        "level": "\u00darove\u0148",
+        "message": "Spr\u00e1va",
+        "service": "Slu\u017eba",
+        "time": "\u010cas",
+        "probe_now": "Sonda teraz",
+        "refresh": "Obnovi\u0165",
+        "silence": "Ticho",
+        "unsilence": "Unsilence",
+        "ack": "Potvrdi\u0165",
+        "unack": "Nepoznanie"
+    },
+    "tests": {
+        "title": "Testy servera",
+        "run_all": "Spusti\u0165 v\u0161etky",
+        "status": "Stav",
+        "last_run": "Posledn\u00fd beh",
+        "duration": "Trvanie"
+    },
+    "services": {
+        "title": "Slu\u017eby",
+        "status": "Stav",
+        "restart": "Re\u0161tartovanie str\u00e1nky",
+        "start": "\u0160tart",
+        "stop": "Zastavte"
+    }
+}

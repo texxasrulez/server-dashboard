@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Dasbor Server"
+    },
+    "nav": {
+        "history": "Sejarah",
+        "logs": "Log",
+        "dashboard": "Dasbor",
+        "services": "Layanan",
+        "alerts": "Peringatan",
+        "tests": "Tes",
+        "settings": "Pengaturan",
+        "about": "Tentang"
+    },
+    "history": {
+        "title": "Sejarah",
+        "trends": "Tren",
+        "range": "Jangkauan",
+        "baseline": "Baseline",
+        "probe_now": "Selidiki sekarang",
+        "refresh": "Menyegarkan",
+        "export_json": "Ekspor JSON",
+        "export_alerts_json": "Ekspor Peringatan JSON",
+        "reset_history": "Atur ulang riwayat",
+        "recent_alert_events": "Peristiwa peringatan terbaru",
+        "export_preview": "Pratinjau ekspor",
+        "close": "Tutup",
+        "copy": "Salin",
+        "download": "Unduh"
+    },
+    "logs": {
+        "title": "Log",
+        "manage": "Mengelola Log",
+        "add": "Menambahkan",
+        "delete": "Menghapus",
+        "refresh": "Menyegarkan",
+        "search": "Pencarian",
+        "filter": "Filter",
+        "lines": "Garis",
+        "open": "Buka",
+        "close": "Tutup",
+        "download": "Unduh",
+        "copy": "Salin"
+    },
+    "common": {
+        "save": "Simpan",
+        "cancel": "Batal",
+        "edit": "Sunting",
+        "delete": "Menghapus",
+        "update": "Memperbarui",
+        "create": "Membuat",
+        "enable": "Aktifkan",
+        "disable": "Nonaktifkan",
+        "yes": "Ya.",
+        "no": "Tidak.",
+        "on": "Pada",
+        "off": "Mati",
+        "confirm": "Konfirmasi",
+        "search": "Pencarian",
+        "filter": "Filter",
+        "actions": "Tindakan"
+    },
+    "alerts": {
+        "title": "Peringatan",
+        "recent_events": "Peristiwa peringatan terbaru",
+        "history": "Riwayat peringatan",
+        "export_json": "Ekspor Peringatan JSON",
+        "no_alerts": "Tidak ada peringatan",
+        "level": "Tingkat",
+        "message": "Pesan",
+        "service": "Layanan",
+        "time": "Waktu",
+        "probe_now": "Selidiki sekarang",
+        "refresh": "Menyegarkan",
+        "silence": "Diam.",
+        "unsilence": "Ketidakmampuan",
+        "ack": "Mengakui",
+        "unack": "Tidak mengakui"
+    },
+    "tests": {
+        "title": "Tes Server",
+        "run_all": "Jalankan semua",
+        "status": "Status",
+        "last_run": "Jalankan terakhir",
+        "duration": "Durasi"
+    },
+    "services": {
+        "title": "Layanan",
+        "status": "Status",
+        "restart": "Mulai ulang",
+        "start": "Mulai",
+        "stop": "Berhenti."
+    }
+}

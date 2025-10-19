@@ -1,0 +1,12 @@
+// assets/js/pages/config.boot.js — ensure Email UI loads
+(function(){
+  "use strict";
+  function ready(fn){ if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fn);} else { fn(); } }
+  ready(function(){
+    if (!/config\.php(\?|$)/.test(location.pathname)) return;
+    var marker='config-email-js'; if(document.getElementById(marker)) return;
+    var hasPane=document.getElementById('configPane');
+    if(!hasPane) return;
+    var s=document.createElement('script'); s.id=marker; s.src='assets/js/pages/config.email.js?v='+Date.now(); s.defer=true; document.head.appendChild(s);
+  });
+})();

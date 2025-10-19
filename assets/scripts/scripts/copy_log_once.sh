@@ -23,11 +23,17 @@ while IFS= read -r -d '' file; do
   parent="$(basename "$(dirname "$file")")"
   base="$(basename "$file")"
   out="${DEST_DIR}/${parent}_${base}"
-  if [[ ! -e "$out" || "$file" -nt "$out" ]]; then
+
+  src_size="$(stat -c%s "$file" 2>/dev/null || echo 0)"
+  dst_size="$(stat -c%s "$out" 2>/dev/null || echo 0)"
+
+  if [[ ! -e "$out" || "$file" -nt "$out" || "$src_size" != "$dst_size" ]]; then
     tmp="${out}.tmp.$$"
-    cp --preserve=timestamps --dereference "$file" "$tmp"
-    if ! if [[ "$(id -u)" -eq 0 ]]; then chown "${USER_NAME}:${GROUP_NAME}" "$tmp"; fi 2>/dev/null; then echo "WARN: chown failed for $tmp to ${USER_NAME}:${GROUP_NAME}" >&2; fi
+    cp --preserve=timestamps --dereference -- "$file" "$tmp"
+    if [[ "$(id -u)" -eq 0 ]]; then
+      chown "${USER_NAME}:${GROUP_NAME}" "$tmp" || echo "WARN: chown failed for $tmp to ${USER_NAME}:${GROUP_NAME}" >&2
+    fi
     chmod "${MODE}" "$tmp"
-    mv -f "$tmp" "$out"
+    mv -f -- "$tmp" "$out"
   fi
 done < <(find /var/log -type f -name '*.log' -print0)

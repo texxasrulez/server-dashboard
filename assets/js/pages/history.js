@@ -90,7 +90,7 @@
     var bar = root.querySelector('.toolbar'); if(!bar) return;
     var id='metaChipsWrap'; var ex = document.getElementById(id);
     if (ex) return ex;
-    var w = document.createElement('div'); w.id=id; w.className='row gap-sm'; w.style.marginLeft='auto';
+    var w = document.createElement('div', 'card'); w.id=id; w.className='row gap-sm'; w.style.marginLeft='auto';
     w.innerHTML =
       '<span id="zoomBadge" class="chip small" hidden></span>' +
       '<span id="lastProbeChip" class="chip small" hidden title=""></span>' +
@@ -302,8 +302,8 @@
     var root = $('#history-root'); if (!root) return;
     CURRENT_RANGE = range||CURRENT_RANGE;
     var since = sinceFromRange(CURRENT_RANGE);
-    var probesUrl = root.dataset.exportProbes + '&limit=1600&start=' + since;
-    var alertsUrl = root.dataset.exportAlerts + '&limit=600&start=' + since;
+    var probesUrl = root.dataset.exportProbes + '&limit=1600&start=' + since + '&_=' + Date.now();
+    var alertsUrl = root.dataset.exportAlerts + '&limit=600&start=' + since + '&_=' + Date.now();
     var cronUrl = 'api/cron_health.php';
     var diag = $('#diagBox'); if (diag) diag.textContent = 'Loading…';
     return Promise.all([ fetchJSON(probesUrl), fetchJSON(alertsUrl), fetchJSON(cronUrl) ]).then(function(res){
@@ -333,12 +333,14 @@
   }
 
   function wire(){
+    var selInit = document.querySelector('#rangeSelect');
+    if (selInit) { CURRENT_RANGE = selInit.value || CURRENT_RANGE; }
     ensureMetaChips(); updateMetaChips();
     var sel = $('#rangeSelect'); var baseline = $('#baselineToggle');
     var root = $('#history-root');
 
     function reload(btn){ if(btn) setBusy(btn, true); ZOOM=null; updateMetaChips(); load(sel ? sel.value : '24h').finally(function(){ if(btn) setBusy(btn, false); }); }
-    on(sel, 'change', function(){ CURRENT_RANGE = sel.value||'24h'; reload(); });
+    on(sel, 'change', function(){ CURRENT_RANGE = sel.value||'24h'; rerenderFromCache(); reload(); });
     on(baseline, 'change', rerenderFromCache);
 
     var toolbar = root.querySelector('.toolbar') || document;

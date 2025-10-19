@@ -71,7 +71,7 @@
 #bookmarks-root .list .list-body{ flex:1 1 auto; overflow:auto; }
 
 /* lock parent content container so only list scrolls */
-.content.content-locked{ overflow: hidden; }
+.content.content-locked{ overflow: auto; }
 
 /* hr tags */
 .hr { border-color:var(--card); }

@@ -1,0 +1,14 @@
+[Unit]
+Description=Log watcher to copy only .log files from /var/log into a flat destination
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/log-watcher/log-watcher.env
+ExecStart=/usr/local/bin/log_watcher.sh
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

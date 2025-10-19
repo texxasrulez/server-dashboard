@@ -33,7 +33,7 @@
 <body>
 <header class="app-header">
   <div class="brand">Header probe</div>
-  <nav class="tabs"><a href="#">Services</a><a href="#">Logs</a></nav>
+  <nav class="tabs"><a href="#"><span data-i18n="nav.services">Services</span></a><a href="#"><span data-i18n="nav.logs">Logs</span></a></nav>
   <div class="spacer"></div>
   <div class="userbox">
     <button  class="userbtn" id="userbtn" aria-haspopup="menu" aria-expanded="false" autocomplete="off">

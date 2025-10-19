@@ -57,6 +57,7 @@ code, pre { font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Libe
   border-radius: 16px;
   box-shadow: var(--card-shadow, rgba(0,0,0,.25) 0 6px 22px);
   padding: .75rem 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35), 0 1px 0 rgba(255, 255, 255, 0.05) inset;
 }
 .card-title { font-weight: 700; margin-bottom: .4rem; }
 .card-subtitle { font-weight: 600; opacity:.9; margin: .4rem 0 .2rem; }

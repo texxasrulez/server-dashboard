@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Sunucu G\u00f6sterge Tablosu"
+    },
+    "nav": {
+        "history": "Tarih",
+        "logs": "G\u00fcnl\u00fckler",
+        "dashboard": "G\u00f6sterge Tablosu",
+        "services": "Hizmetler",
+        "alerts": "Uyar\u0131lar",
+        "tests": "Testler",
+        "settings": "Ayarlar",
+        "about": "Hakk\u0131nda"
+    },
+    "history": {
+        "title": "Tarih",
+        "trends": "Trendler",
+        "range": "Menzil",
+        "baseline": "Ba\u015flang\u0131\u00e7 Noktas\u0131",
+        "probe_now": "\u015eimdi ara\u015ft\u0131r\u0131n",
+        "refresh": "Yenile",
+        "export_json": "JSON'u D\u0131\u015fa Aktar",
+        "export_alerts_json": "Uyar\u0131lar\u0131 D\u0131\u015fa Aktar JSON",
+        "reset_history": "Ge\u00e7mi\u015fi s\u0131f\u0131rla",
+        "recent_alert_events": "Son uyar\u0131 olaylar\u0131",
+        "export_preview": "D\u0131\u015fa aktarma \u00f6nizlemesi",
+        "close": "Kapat",
+        "copy": "Anla\u015f\u0131ld\u0131",
+        "download": "\u0130ndir"
+    },
+    "logs": {
+        "title": "G\u00fcnl\u00fckler",
+        "manage": "G\u00fcnl\u00fckleri Y\u00f6net",
+        "add": "Ekle",
+        "delete": "Silme",
+        "refresh": "Yenile",
+        "search": "Arama",
+        "filter": "Filtre",
+        "lines": "\u00c7izgiler",
+        "open": "A\u00e7\u0131k",
+        "close": "Kapat",
+        "download": "\u0130ndir",
+        "copy": "Anla\u015f\u0131ld\u0131"
+    },
+    "common": {
+        "save": "Kaydet",
+        "cancel": "\u0130ptal",
+        "edit": "D\u00fczenle",
+        "delete": "Silme",
+        "update": "G\u00fcncelleme",
+        "create": "Olu\u015ftur",
+        "enable": "Etkinle\u015ftir",
+        "disable": "Devre d\u0131\u015f\u0131 b\u0131rak",
+        "yes": "Evet",
+        "no": "Hay\u0131r",
+        "on": "A\u00e7\u0131k",
+        "off": "Kapal\u0131",
+        "confirm": "Onaylay\u0131n",
+        "search": "Arama",
+        "filter": "Filtre",
+        "actions": "Eylemler"
+    },
+    "alerts": {
+        "title": "Uyar\u0131lar",
+        "recent_events": "Son uyar\u0131 olaylar\u0131",
+        "history": "Uyar\u0131 ge\u00e7mi\u015fi",
+        "export_json": "Uyar\u0131lar\u0131 D\u0131\u015fa Aktar JSON",
+        "no_alerts": "Uyar\u0131 yok",
+        "level": "Seviye",
+        "message": "Mesaj",
+        "service": "Hizmet",
+        "time": "Zaman",
+        "probe_now": "\u015eimdi ara\u015ft\u0131r\u0131n",
+        "refresh": "Yenile",
+        "silence": "Sessizlik",
+        "unsilence": "Sessizlik",
+        "ack": "Onaylamak",
+        "unack": "Bilgisizlik"
+    },
+    "tests": {
+        "title": "Sunucu Testleri",
+        "run_all": "Hepsini \u00e7al\u0131\u015ft\u0131r",
+        "status": "Durum",
+        "last_run": "Son ko\u015fu",
+        "duration": "S\u00fcre"
+    },
+    "services": {
+        "title": "Hizmetler",
+        "status": "Durum",
+        "restart": "Yeniden Ba\u015flat",
+        "start": "Ba\u015flang\u0131\u00e7",
+        "stop": "Dur"
+    }
+}

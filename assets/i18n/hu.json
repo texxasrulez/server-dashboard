@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Kiszolg\u00e1l\u00f3 m\u0171szerfal"
+    },
+    "nav": {
+        "history": "T\u00f6rt\u00e9nelem",
+        "logs": "Napl\u00f3k",
+        "dashboard": "M\u0171szerfal",
+        "services": "Szolg\u00e1ltat\u00e1sok",
+        "alerts": "Riaszt\u00e1sok",
+        "tests": "Vizsg\u00e1latok",
+        "settings": "Be\u00e1ll\u00edt\u00e1sok",
+        "about": "A  oldalr\u00f3l"
+    },
+    "history": {
+        "title": "T\u00f6rt\u00e9nelem",
+        "trends": "Trendek",
+        "range": "Tartom\u00e1ny",
+        "baseline": "Alapvonal",
+        "probe_now": "Szonda most",
+        "refresh": "Friss\u00edt\u00e9s",
+        "export_json": "JSON export\u00e1l\u00e1sa",
+        "export_alerts_json": "Riaszt\u00e1sok export\u00e1l\u00e1sa JSON",
+        "reset_history": "El\u0151zm\u00e9nyek vissza\u00e1ll\u00edt\u00e1sa",
+        "recent_alert_events": "Legut\u00f3bbi riaszt\u00e1si esem\u00e9nyek",
+        "export_preview": "Export el\u0151n\u00e9zet",
+        "close": "Z\u00e1rja be a",
+        "copy": "M\u00e1sol\u00e1s",
+        "download": "Let\u00f6lt\u00e9s"
+    },
+    "logs": {
+        "title": "Napl\u00f3k",
+        "manage": "Napl\u00f3k kezel\u00e9se",
+        "add": "Add",
+        "delete": "T\u00f6r\u00f6lje a  c\u00edmet.",
+        "refresh": "Friss\u00edt\u00e9s",
+        "search": "Keres\u00e9s",
+        "filter": "Sz\u0171r\u0151",
+        "lines": "Vonalak",
+        "open": "Nyissa meg a  c\u00edmet.",
+        "close": "Z\u00e1rja be a",
+        "download": "Let\u00f6lt\u00e9s",
+        "copy": "M\u00e1sol\u00e1s"
+    },
+    "common": {
+        "save": "Ment\u00e9s",
+        "cancel": "T\u00f6r\u00f6lje",
+        "edit": "Szerkeszt\u00e9s",
+        "delete": "T\u00f6r\u00f6lje a  c\u00edmet.",
+        "update": "Friss\u00edt\u00e9s",
+        "create": "Hozzon l\u00e9tre",
+        "enable": "Enged\u00e9lyezze a",
+        "disable": "A  letilt\u00e1sa",
+        "yes": "Igen",
+        "no": "Nem",
+        "on": "A  oldalon.",
+        "off": "Off",
+        "confirm": "Meger\u0151s\u00edt\u00e9s",
+        "search": "Keres\u00e9s",
+        "filter": "Sz\u0171r\u0151",
+        "actions": "Tev\u00e9kenys\u00e9gek"
+    },
+    "alerts": {
+        "title": "Riaszt\u00e1sok",
+        "recent_events": "Legut\u00f3bbi riaszt\u00e1si esem\u00e9nyek",
+        "history": "Riaszt\u00e1si el\u0151zm\u00e9nyek",
+        "export_json": "Riaszt\u00e1sok export\u00e1l\u00e1sa JSON",
+        "no_alerts": "Nincsenek riaszt\u00e1sok",
+        "level": "Szint",
+        "message": "\u00dczenet",
+        "service": "Szolg\u00e1ltat\u00e1s",
+        "time": "Id\u0151",
+        "probe_now": "Szonda most",
+        "refresh": "Friss\u00edt\u00e9s",
+        "silence": "Csend",
+        "unsilence": "Elhallgathatatlan",
+        "ack": "Visszaigazol\u00e1s",
+        "unack": "Vissza nem ismer\u00e9s"
+    },
+    "tests": {
+        "title": "Szerver tesztek",
+        "run_all": "Futtassa az \u00f6sszes",
+        "status": "\u00c1llapot",
+        "last_run": "Utols\u00f3 fut\u00e1s",
+        "duration": "Id\u0151tartam"
+    },
+    "services": {
+        "title": "Szolg\u00e1ltat\u00e1sok",
+        "status": "\u00c1llapot",
+        "restart": "\u00dajraind\u00edt\u00e1s",
+        "start": "Ind\u00edtsa el a  oldalt.",
+        "stop": "Stop"
+    }
+}

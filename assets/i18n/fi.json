@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Palvelimen kojelauta"
+    },
+    "nav": {
+        "history": "Historia",
+        "logs": "Lokit",
+        "dashboard": "Kojelauta",
+        "services": "Palvelut",
+        "alerts": "H\u00e4lytykset",
+        "tests": "Testit",
+        "settings": "Asetukset",
+        "about": "Tietoja"
+    },
+    "history": {
+        "title": "Historia",
+        "trends": "Suuntaukset",
+        "range": "Valikoima",
+        "baseline": "Perustaso",
+        "probe_now": "Koettele nyt",
+        "refresh": "P\u00e4ivit\u00e4",
+        "export_json": "Vie JSON",
+        "export_alerts_json": "Vie h\u00e4lytykset JSON",
+        "reset_history": "Nollaa historia",
+        "recent_alert_events": "Viimeaikaiset h\u00e4lytystapahtumat",
+        "export_preview": "Viennin esikatselu",
+        "close": "Sulje",
+        "copy": "Kopioi",
+        "download": "Lataa"
+    },
+    "logs": {
+        "title": "Lokit",
+        "manage": "Hallitse lokit",
+        "add": "Lis\u00e4\u00e4",
+        "delete": "Poista",
+        "refresh": "P\u00e4ivit\u00e4",
+        "search": "Etsi",
+        "filter": "Suodatin",
+        "lines": "Rivit",
+        "open": "Avaa",
+        "close": "Sulje",
+        "download": "Lataa",
+        "copy": "Kopioi"
+    },
+    "common": {
+        "save": "Tallenna",
+        "cancel": "Peruuta",
+        "edit": "Muokkaa",
+        "delete": "Poista",
+        "update": "P\u00e4ivitys",
+        "create": "Luo",
+        "enable": "Ota k\u00e4ytt\u00f6\u00f6n",
+        "disable": "Poista k\u00e4yt\u00f6st\u00e4",
+        "yes": "Kyll\u00e4",
+        "no": "Ei",
+        "on": "Osoitteessa",
+        "off": "Off",
+        "confirm": "Vahvista",
+        "search": "Etsi",
+        "filter": "Suodatin",
+        "actions": "Toimet"
+    },
+    "alerts": {
+        "title": "H\u00e4lytykset",
+        "recent_events": "Viimeaikaiset h\u00e4lytystapahtumat",
+        "history": "H\u00e4lytyshistoria",
+        "export_json": "Vie h\u00e4lytykset JSON",
+        "no_alerts": "Ei h\u00e4lytyksi\u00e4",
+        "level": "Taso",
+        "message": "Viesti",
+        "service": "Palvelu",
+        "time": "Aika",
+        "probe_now": "Koettele nyt",
+        "refresh": "P\u00e4ivit\u00e4",
+        "silence": "Hiljaisuus",
+        "unsilence": "Hiljaisuus",
+        "ack": "Kuittaa",
+        "unack": "Unacknowledge"
+    },
+    "tests": {
+        "title": "Palvelimen testit",
+        "run_all": "Suorita kaikki",
+        "status": "Tila",
+        "last_run": "Viimeinen ajo",
+        "duration": "Kesto"
+    },
+    "services": {
+        "title": "Palvelut",
+        "status": "Tila",
+        "restart": "K\u00e4ynnist\u00e4 uudelleen",
+        "start": "Aloita",
+        "stop": "Stop"
+    }
+}

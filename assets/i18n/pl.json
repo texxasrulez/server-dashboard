@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Pulpit nawigacyjny serwera"
+    },
+    "nav": {
+        "history": "Historia",
+        "logs": "Dzienniki",
+        "dashboard": "Pulpit nawigacyjny",
+        "services": "Us\u0142ugi",
+        "alerts": "Alerty",
+        "tests": "Testy",
+        "settings": "Ustawienia",
+        "about": "O"
+    },
+    "history": {
+        "title": "Historia",
+        "trends": "Trendy",
+        "range": "Zasi\u0119g",
+        "baseline": "Linia bazowa",
+        "probe_now": "Sonda teraz",
+        "refresh": "Od\u015bwie\u017canie",
+        "export_json": "Eksport JSON",
+        "export_alerts_json": "Eksport alert\u00f3w JSON",
+        "reset_history": "Resetowanie historii",
+        "recent_alert_events": "Ostatnie zdarzenia alarmowe",
+        "export_preview": "Podgl\u0105d eksportu",
+        "close": "Zamknij",
+        "copy": "Kopia",
+        "download": "Pobierz"
+    },
+    "logs": {
+        "title": "Dzienniki",
+        "manage": "Zarz\u0105dzanie dziennikami",
+        "add": "Dodaj",
+        "delete": "Usu\u0144",
+        "refresh": "Od\u015bwie\u017canie",
+        "search": "Wyszukiwanie",
+        "filter": "Filtr",
+        "lines": "Linie",
+        "open": "Otwarty",
+        "close": "Zamknij",
+        "download": "Pobierz",
+        "copy": "Kopia"
+    },
+    "common": {
+        "save": "Zapisz",
+        "cancel": "Anuluj",
+        "edit": "Edytuj",
+        "delete": "Usu\u0144",
+        "update": "Aktualizacja",
+        "create": "Utw\u00f3rz",
+        "enable": "W\u0142\u0105cz",
+        "disable": "Wy\u0142\u0105cz",
+        "yes": "Tak",
+        "no": "Nie",
+        "on": "Na",
+        "off": "Wy\u0142.",
+        "confirm": "Potwierdzenie",
+        "search": "Wyszukiwanie",
+        "filter": "Filtr",
+        "actions": "Dzia\u0142ania"
+    },
+    "alerts": {
+        "title": "Alerty",
+        "recent_events": "Ostatnie zdarzenia alarmowe",
+        "history": "Historia alert\u00f3w",
+        "export_json": "Eksport alert\u00f3w JSON",
+        "no_alerts": "Brak alert\u00f3w",
+        "level": "Poziom",
+        "message": "Wiadomo\u015b\u0107",
+        "service": "Us\u0142uga",
+        "time": "Czas",
+        "probe_now": "Sonda teraz",
+        "refresh": "Od\u015bwie\u017canie",
+        "silence": "Cisza",
+        "unsilence": "Cisza",
+        "ack": "Potwierdzenie",
+        "unack": "Niewiedza"
+    },
+    "tests": {
+        "title": "Testy serwera",
+        "run_all": "Uruchom wszystko",
+        "status": "Status",
+        "last_run": "Ostatni bieg",
+        "duration": "Czas trwania"
+    },
+    "services": {
+        "title": "Us\u0142ugi",
+        "status": "Status",
+        "restart": "Restart",
+        "start": "Start",
+        "stop": "Stop"
+    }
+}

@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Server-dashboard"
+    },
+    "nav": {
+        "history": "Historie",
+        "logs": "Logfiler",
+        "dashboard": "Dashboard",
+        "services": "Serviceydelser",
+        "alerts": "Advarsler",
+        "tests": "Test",
+        "settings": "Indstillinger",
+        "about": "Omkring"
+    },
+    "history": {
+        "title": "Historie",
+        "trends": "Tendenser",
+        "range": "R\u00e6kkevidde",
+        "baseline": "Baseline",
+        "probe_now": "Sonde nu",
+        "refresh": "Opdatering",
+        "export_json": "Eksporter JSON",
+        "export_alerts_json": "Eksporter advarsler JSON",
+        "reset_history": "Nulstil historik",
+        "recent_alert_events": "Nylige alarmh\u00e6ndelser",
+        "export_preview": "Forh\u00e5ndsvisning af eksport",
+        "close": "Luk",
+        "copy": "Kopi",
+        "download": "Download"
+    },
+    "logs": {
+        "title": "Logfiler",
+        "manage": "Administrer logfiler",
+        "add": "Tilf\u00f8j",
+        "delete": "Sletning",
+        "refresh": "Opdatering",
+        "search": "S\u00f8g efter",
+        "filter": "Filter",
+        "lines": "Linjer",
+        "open": "\u00c5ben",
+        "close": "Luk",
+        "download": "Download",
+        "copy": "Kopi"
+    },
+    "common": {
+        "save": "Gemme",
+        "cancel": "Annuller",
+        "edit": "Rediger",
+        "delete": "Sletning",
+        "update": "Opdatering",
+        "create": "Opret",
+        "enable": "G\u00f8r det muligt",
+        "disable": "Deaktiver",
+        "yes": "Ja",
+        "no": "Nej",
+        "on": "P\u00e5",
+        "off": "Fra",
+        "confirm": "Bekr\u00e6ft",
+        "search": "S\u00f8g efter",
+        "filter": "Filter",
+        "actions": "Handlinger"
+    },
+    "alerts": {
+        "title": "Advarsler",
+        "recent_events": "Nylige alarmh\u00e6ndelser",
+        "history": "Varslingshistorik",
+        "export_json": "Eksporter advarsler JSON",
+        "no_alerts": "Ingen advarsler",
+        "level": "Niveau",
+        "message": "Besked",
+        "service": "Service",
+        "time": "Tid",
+        "probe_now": "Sonde nu",
+        "refresh": "Opdatering",
+        "silence": "Stilhed",
+        "unsilence": "Stilhed",
+        "ack": "Bekr\u00e6ft",
+        "unack": "Manglende anerkendelse"
+    },
+    "tests": {
+        "title": "Test af servere",
+        "run_all": "K\u00f8r alle",
+        "status": "Status",
+        "last_run": "Sidste l\u00f8b",
+        "duration": "Varighed"
+    },
+    "services": {
+        "title": "Serviceydelser",
+        "status": "Status",
+        "restart": "Genstart",
+        "start": "Start",
+        "stop": "Stop"
+    }
+}

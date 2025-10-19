@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Tabloul de bord al serverului"
+    },
+    "nav": {
+        "history": "Istoric",
+        "logs": "Jurnale",
+        "dashboard": "Tablou de bord",
+        "services": "Servicii",
+        "alerts": "Alerte",
+        "tests": "Teste",
+        "settings": "Set\u0103ri",
+        "about": "Despre"
+    },
+    "history": {
+        "title": "Istoric",
+        "trends": "Tendin\u021be",
+        "range": "Gama",
+        "baseline": "Linia de baz\u0103",
+        "probe_now": "Sonda\u021bi acum",
+        "refresh": "Re\u00eemprosp\u0103tare",
+        "export_json": "Export JSON",
+        "export_alerts_json": "Export alerte JSON",
+        "reset_history": "Reseta\u021bi istoricul",
+        "recent_alert_events": "Evenimente recente de alert\u0103",
+        "export_preview": "Previzualizare export",
+        "close": "\u00cenchidere",
+        "copy": "Copia\u021bi",
+        "download": "Desc\u0103rcare"
+    },
+    "logs": {
+        "title": "Jurnale",
+        "manage": "Gestiona\u021bi jurnalele",
+        "add": "Adaug\u0103",
+        "delete": "\u0218terge\u021bi",
+        "refresh": "Re\u00eemprosp\u0103tare",
+        "search": "C\u0103utare",
+        "filter": "Filtru",
+        "lines": "Linii",
+        "open": "Deschis",
+        "close": "\u00cenchidere",
+        "download": "Desc\u0103rcare",
+        "copy": "Copia\u021bi"
+    },
+    "common": {
+        "save": "Salva\u021bi",
+        "cancel": "Anuleaz\u0103",
+        "edit": "Editare",
+        "delete": "\u0218terge\u021bi",
+        "update": "Actualizare",
+        "create": "Crea\u021bi",
+        "enable": "Activare",
+        "disable": "Dezactivare",
+        "yes": "Da",
+        "no": "Nu",
+        "on": "Pe",
+        "off": "Oprit",
+        "confirm": "Confirma\u021bi",
+        "search": "C\u0103utare",
+        "filter": "Filtru",
+        "actions": "Ac\u021biuni"
+    },
+    "alerts": {
+        "title": "Alerte",
+        "recent_events": "Evenimente recente de alert\u0103",
+        "history": "Istoricul alertelor",
+        "export_json": "Export alerte JSON",
+        "no_alerts": "Nicio alert\u0103",
+        "level": "Nivel",
+        "message": "Mesaj",
+        "service": "Service",
+        "time": "Timp",
+        "probe_now": "Sonda\u021bi acum",
+        "refresh": "Re\u00eemprosp\u0103tare",
+        "silence": "T\u0103cere",
+        "unsilence": "Nesilin\u021b\u0103",
+        "ack": "Recunoa\u0219te\u021bi",
+        "unack": "Necunoa\u0219tere"
+    },
+    "tests": {
+        "title": "Teste server",
+        "run_all": "Rula\u021bi toate",
+        "status": "Statut",
+        "last_run": "Ultima rulare",
+        "duration": "Durat\u0103"
+    },
+    "services": {
+        "title": "Servicii",
+        "status": "Statut",
+        "restart": "Repornire",
+        "start": "Start",
+        "stop": "Oprire"
+    }
+}

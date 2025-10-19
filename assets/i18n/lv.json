@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Servera vad\u012bbas panelis"
+    },
+    "nav": {
+        "history": "V\u0113sture",
+        "logs": "\u017durn\u0101li",
+        "dashboard": "Vad\u012bbas panelis",
+        "services": "Pakalpojumi",
+        "alerts": "Br\u012bdin\u0101jumi",
+        "tests": "Testi",
+        "settings": "Iestat\u012bjumi",
+        "about": "Par"
+    },
+    "history": {
+        "title": "V\u0113sture",
+        "trends": "Tendences",
+        "range": "Diapazons",
+        "baseline": "Pamatl\u012bnija",
+        "probe_now": "Zond\u0113 tagad",
+        "refresh": "Atjaunin\u0101t",
+        "export_json": "Eksport\u0113t JSON",
+        "export_alerts_json": "Eksport\u0113t br\u012bdin\u0101jumus JSON",
+        "reset_history": "Atiestat\u012bt v\u0113sturi",
+        "recent_alert_events": "Nesenie br\u012bdin\u0101juma notikumi",
+        "export_preview": "Eksporta priek\u0161skat\u012bjums",
+        "close": "Aizv\u0113rt",
+        "copy": "Kop\u0113t",
+        "download": "Lejupiel\u0101d\u0113t"
+    },
+    "logs": {
+        "title": "\u017durn\u0101li",
+        "manage": "P\u0101rvald\u012bt \u017eurn\u0101lus",
+        "add": "Pievienot",
+        "delete": "Dz\u0113st",
+        "refresh": "Atjaunin\u0101t",
+        "search": "Mekl\u0113\u0161ana",
+        "filter": "Filtrs",
+        "lines": "L\u012bnijas",
+        "open": "Atv\u0113rt",
+        "close": "Aizv\u0113rt",
+        "download": "Lejupiel\u0101d\u0113t",
+        "copy": "Kop\u0113t"
+    },
+    "common": {
+        "save": "Saglab\u0101t",
+        "cancel": "Atcelt",
+        "edit": "Redi\u0123\u0113t",
+        "delete": "Dz\u0113st",
+        "update": "Atjaunin\u0101t",
+        "create": "Izveidot",
+        "enable": "Iesl\u0113gt",
+        "disable": "Atsl\u0113gt",
+        "yes": "J\u0101",
+        "no": "N\u0113",
+        "on": "Uz",
+        "off": "Izsl\u0113gts",
+        "confirm": "Apstipriniet",
+        "search": "Mekl\u0113\u0161ana",
+        "filter": "Filtrs",
+        "actions": "Darb\u012bbas"
+    },
+    "alerts": {
+        "title": "Br\u012bdin\u0101jumi",
+        "recent_events": "Nesenie br\u012bdin\u0101juma notikumi",
+        "history": "Br\u012bdin\u0101jumu v\u0113sture",
+        "export_json": "Eksport\u0113t br\u012bdin\u0101jumus JSON",
+        "no_alerts": "Nav br\u012bdin\u0101jumu",
+        "level": "L\u012bmenis",
+        "message": "Zi\u0146a",
+        "service": "Pakalpojums",
+        "time": "Laiks",
+        "probe_now": "Zond\u0113 tagad",
+        "refresh": "Atjaunin\u0101t",
+        "silence": "Klusums",
+        "unsilence": "Unsilence",
+        "ack": "Atz\u012bt",
+        "unack": "Neapzin\u0101\u0161an\u0101s"
+    },
+    "tests": {
+        "title": "Servera testi",
+        "run_all": "Palaist visus",
+        "status": "Statuss",
+        "last_run": "P\u0113d\u0113jais brauciens",
+        "duration": "Ilgums"
+    },
+    "services": {
+        "title": "Pakalpojumi",
+        "status": "Statuss",
+        "restart": "Restart\u0113jiet",
+        "start": "S\u0101kt",
+        "stop": "P\u0101rtraukt"
+    }
+}

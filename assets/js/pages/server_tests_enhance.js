@@ -23,7 +23,7 @@
   let subhead = q('.st-head');
   let headerRow = q('.st-header.row') || q('.st-header') || q('.page-subhead') || q('.page-head');
   if(!subhead){
-    subhead = document.createElement('div');
+    subhead = document.createElement('div', 'card');
     subhead.className = 'st-head';
     // If we have an existing "st-header row" keep it inside; otherwise, synthesize one
     if(headerRow){

@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Serveri armatuurlaud"
+    },
+    "nav": {
+        "history": "Ajalugu",
+        "logs": "Logid",
+        "dashboard": "Armatuurlaud",
+        "services": "Teenused",
+        "alerts": "Hoiatused",
+        "tests": "Testid",
+        "settings": "Seaded",
+        "about": "kohta"
+    },
+    "history": {
+        "title": "Ajalugu",
+        "trends": "Trendid",
+        "range": "Range",
+        "baseline": "P\u00f5hitasemel",
+        "probe_now": "Sonda n\u00fc\u00fcd",
+        "refresh": "V\u00e4rskenda",
+        "export_json": "Ekspordi JSON",
+        "export_alerts_json": "Ekspordi hoiatusteadete JSON",
+        "reset_history": "Ajaloo l\u00e4htestamine",
+        "recent_alert_events": "Hiljutised hoiatuss\u00fcndmused",
+        "export_preview": "Ekspordi eelvaade",
+        "close": "Sulge",
+        "copy": "Koopia",
+        "download": "Lae alla"
+    },
+    "logs": {
+        "title": "Logid",
+        "manage": "Logide haldamine",
+        "add": "Lisa",
+        "delete": "Kustuta",
+        "refresh": "V\u00e4rskenda",
+        "search": "Otsi",
+        "filter": "Filter",
+        "lines": "Rida",
+        "open": "Avatud",
+        "close": "Sulge",
+        "download": "Lae alla",
+        "copy": "Koopia"
+    },
+    "common": {
+        "save": "Salvesta",
+        "cancel": "T\u00fchista",
+        "edit": "Muuda",
+        "delete": "Kustuta",
+        "update": "Ajakohastamine",
+        "create": "Loo",
+        "enable": "Lubage",
+        "disable": "L\u00fclita v\u00e4lja",
+        "yes": "Jah",
+        "no": "Ei",
+        "on": "Veebilehel",
+        "off": "V\u00e4ljaspool",
+        "confirm": "Kinnitage",
+        "search": "Otsi",
+        "filter": "Filter",
+        "actions": "Meetmed"
+    },
+    "alerts": {
+        "title": "Hoiatused",
+        "recent_events": "Hiljutised hoiatuss\u00fcndmused",
+        "history": "H\u00e4irete ajalugu",
+        "export_json": "Ekspordi hoiatusteadete JSON",
+        "no_alerts": "Hoiatused puuduvad",
+        "level": "Tasand",
+        "message": "S\u00f5num",
+        "service": "Teenus",
+        "time": "Aeg",
+        "probe_now": "Sonda n\u00fc\u00fcd",
+        "refresh": "V\u00e4rskenda",
+        "silence": "Vaikus",
+        "unsilence": "Vaikimatus",
+        "ack": "Kinnita",
+        "unack": "Mitteteadmised"
+    },
+    "tests": {
+        "title": "Serveri testid",
+        "run_all": "K\u00e4ivita k\u00f5ik",
+        "status": "Staatus",
+        "last_run": "Viimane s\u00f5it",
+        "duration": "Kestus"
+    },
+    "services": {
+        "title": "Teenused",
+        "status": "Staatus",
+        "restart": "Restart",
+        "start": "Start",
+        "stop": "Stop"
+    }
+}

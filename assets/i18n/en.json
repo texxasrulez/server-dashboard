@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "services": "Services",
+    "alerts": "Alerts",
+    "tests": "Tests",
+    "settings": "Settings",
+    "about": "About"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "update": "Update",
+    "create": "Create",
+    "enable": "Enable",
+    "disable": "Disable",
+    "yes": "Yes",
+    "no": "No",
+    "on": "On",
+    "off": "Off",
+    "confirm": "Confirm",
+    "search": "Search",
+    "filter": "Filter",
+    "actions": "Actions"
+  },
+  "alerts": {
+    "title": "Alerts",
+    "recent_events": "Recent alert events",
+    "history": "Alert history",
+    "export_json": "Export Alerts JSON",
+    "no_alerts": "No alerts",
+    "level": "Level",
+    "message": "Message",
+    "service": "Service",
+    "time": "Time",
+    "probe_now": "Probe now",
+    "refresh": "Refresh",
+    "silence": "Silence",
+    "unsilence": "Unsilence",
+    "ack": "Acknowledge",
+    "unack": "Unacknowledge"
+  },
+  "tests": {
+    "title": "Server Tests",
+    "run_all": "Run all",
+    "status": "Status",
+    "last_run": "Last run",
+    "duration": "Duration"
+  },
+  "services": {
+    "title": "Services",
+    "status": "Status",
+    "restart": "Restart",
+    "start": "Start",
+    "stop": "Stop"
+  }
+}

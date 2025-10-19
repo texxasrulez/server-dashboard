@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "\u670d\u52a1\u5668\u4eea\u8868\u677f"
+    },
+    "nav": {
+        "history": "\u5386\u53f2",
+        "logs": "\u65e5\u5fd7",
+        "dashboard": "\u4eea\u8868\u677f",
+        "services": "\u670d\u52a1",
+        "alerts": "\u8b66\u62a5",
+        "tests": "\u6d4b\u8bd5",
+        "settings": "\u8bbe\u7f6e",
+        "about": "\u5173\u4e8e"
+    },
+    "history": {
+        "title": "\u5386\u53f2",
+        "trends": "\u53d1\u5c55\u8d8b\u52bf",
+        "range": "\u8303\u56f4",
+        "baseline": "\u57fa\u7ebf",
+        "probe_now": "\u7acb\u5373\u63a2\u6d4b",
+        "refresh": "\u5237\u65b0",
+        "export_json": "\u5bfc\u51fa JSON",
+        "export_alerts_json": "\u5bfc\u51fa\u8b66\u62a5 JSON",
+        "reset_history": "\u91cd\u7f6e\u5386\u53f2\u8bb0\u5f55",
+        "recent_alert_events": "\u6700\u8fd1\u7684\u8b66\u62a5\u4e8b\u4ef6",
+        "export_preview": "\u5bfc\u51fa\u9884\u89c8",
+        "close": "\u5173\u95ed",
+        "copy": "\u590d\u5236",
+        "download": "\u4e0b\u8f7d"
+    },
+    "logs": {
+        "title": "\u65e5\u5fd7",
+        "manage": "\u7ba1\u7406\u65e5\u5fd7",
+        "add": "\u6dfb\u52a0",
+        "delete": "\u5220\u9664",
+        "refresh": "\u5237\u65b0",
+        "search": "\u641c\u7d22",
+        "filter": "\u8fc7\u6ee4\u5668",
+        "lines": "\u7ebf\u8def",
+        "open": "\u5f00\u653e",
+        "close": "\u5173\u95ed",
+        "download": "\u4e0b\u8f7d",
+        "copy": "\u590d\u5236"
+    },
+    "common": {
+        "save": "\u8282\u7701",
+        "cancel": "\u53d6\u6d88",
+        "edit": "\u7f16\u8f91",
+        "delete": "\u5220\u9664",
+        "update": "\u66f4\u65b0",
+        "create": "\u521b\u5efa",
+        "enable": "\u542f\u7528",
+        "disable": "\u7981\u7528",
+        "yes": "\u662f",
+        "no": "\u6ca1\u6709",
+        "on": "\u5173\u4e8e",
+        "off": "\u5173\u95ed",
+        "confirm": "\u786e\u8ba4",
+        "search": "\u641c\u7d22",
+        "filter": "\u8fc7\u6ee4\u5668",
+        "actions": "\u884c\u52a8"
+    },
+    "alerts": {
+        "title": "\u8b66\u62a5",
+        "recent_events": "\u6700\u8fd1\u7684\u8b66\u62a5\u4e8b\u4ef6",
+        "history": "\u8b66\u62a5\u5386\u53f2",
+        "export_json": "\u5bfc\u51fa\u8b66\u62a5 JSON",
+        "no_alerts": "\u65e0\u8b66\u62a5",
+        "level": "\u7ea7\u522b",
+        "message": "\u7559\u8a00",
+        "service": "\u670d\u52a1",
+        "time": "\u65f6\u95f4",
+        "probe_now": "\u7acb\u5373\u63a2\u6d4b",
+        "refresh": "\u5237\u65b0",
+        "silence": "\u6c89\u9ed8",
+        "unsilence": "\u65e0\u58f0",
+        "ack": "\u786e\u8ba4",
+        "unack": "\u4e0d\u627f\u8ba4"
+    },
+    "tests": {
+        "title": "\u670d\u52a1\u5668\u6d4b\u8bd5",
+        "run_all": "\u8fd0\u884c\u6240\u6709",
+        "status": "\u73b0\u72b6",
+        "last_run": "\u6700\u540e\u4e00\u6b21\u8fd0\u884c",
+        "duration": "\u6301\u7eed\u65f6\u95f4"
+    },
+    "services": {
+        "title": "\u670d\u52a1",
+        "status": "\u73b0\u72b6",
+        "restart": "\u91cd\u65b0\u542f\u52a8",
+        "start": "\u5f00\u59cb",
+        "stop": "\u505c\u6b62"
+    }
+}

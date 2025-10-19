@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Painel de controlo do servidor"
+    },
+    "nav": {
+        "history": "Hist\u00f3ria",
+        "logs": "Registos",
+        "dashboard": "Painel de controlo",
+        "services": "Servi\u00e7os",
+        "alerts": "Alertas",
+        "tests": "Testes",
+        "settings": "Defini\u00e7\u00f5es",
+        "about": "Sobre"
+    },
+    "history": {
+        "title": "Hist\u00f3ria",
+        "trends": "Tend\u00eancias",
+        "range": "Gama",
+        "baseline": "Linha de base",
+        "probe_now": "Sondar agora",
+        "refresh": "Atualizar",
+        "export_json": "Exportar JSON",
+        "export_alerts_json": "Exportar alertas JSON",
+        "reset_history": "Repor o hist\u00f3rico",
+        "recent_alert_events": "Eventos de alerta recentes",
+        "export_preview": "Pr\u00e9-visualiza\u00e7\u00e3o da exporta\u00e7\u00e3o",
+        "close": "Fechar",
+        "copy": "C\u00f3pia",
+        "download": "Descarregar"
+    },
+    "logs": {
+        "title": "Registos",
+        "manage": "Gerir registos",
+        "add": "Adicionar",
+        "delete": "Eliminar",
+        "refresh": "Atualizar",
+        "search": "Pesquisar",
+        "filter": "Filtro",
+        "lines": "Linhas",
+        "open": "Aberto",
+        "close": "Fechar",
+        "download": "Descarregar",
+        "copy": "C\u00f3pia"
+    },
+    "common": {
+        "save": "Guardar",
+        "cancel": "Cancelar",
+        "edit": "Editar",
+        "delete": "Eliminar",
+        "update": "Atualiza\u00e7\u00e3o",
+        "create": "Criar",
+        "enable": "Ativar",
+        "disable": "Desativar",
+        "yes": "Sim",
+        "no": "N\u00e3o",
+        "on": "Em",
+        "off": "Desligado",
+        "confirm": "Confirmar",
+        "search": "Pesquisar",
+        "filter": "Filtro",
+        "actions": "Ac\u00e7\u00f5es"
+    },
+    "alerts": {
+        "title": "Alertas",
+        "recent_events": "Eventos de alerta recentes",
+        "history": "Hist\u00f3rico de alertas",
+        "export_json": "Exportar alertas JSON",
+        "no_alerts": "Sem alertas",
+        "level": "N\u00edvel",
+        "message": "Mensagem",
+        "service": "Servi\u00e7o",
+        "time": "Tempo",
+        "probe_now": "Sondar agora",
+        "refresh": "Atualizar",
+        "silence": "Sil\u00eancio",
+        "unsilence": "Sil\u00eancio",
+        "ack": "Reconhecer",
+        "unack": "Desconhecimento"
+    },
+    "tests": {
+        "title": "Testes de servidor",
+        "run_all": "Executar tudo",
+        "status": "Estado",
+        "last_run": "\u00daltima corrida",
+        "duration": "Dura\u00e7\u00e3o"
+    },
+    "services": {
+        "title": "Servi\u00e7os",
+        "status": "Estado",
+        "restart": "Reiniciar",
+        "start": "In\u00edcio",
+        "stop": "Parar"
+    }
+}

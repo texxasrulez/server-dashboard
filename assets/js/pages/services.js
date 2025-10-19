@@ -33,7 +33,7 @@
   function setErr(input, msg){
     if (!input) return;
     input.classList.add('is-invalid');
-    const small = document.createElement('div');
+    const small = document.createElement('div', 'card');
     small.className = 'field-msg';
     small.textContent = msg;
     if (input.parentElement) input.parentElement.appendChild(small);

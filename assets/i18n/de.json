@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Server Dashboard"
+    },
+    "nav": {
+        "history": "Geschichte",
+        "logs": "Protokolle",
+        "dashboard": "Dashboard",
+        "services": "Dienstleistungen",
+        "alerts": "Warnungen",
+        "tests": "Tests",
+        "settings": "Einstellungen",
+        "about": "\u00dcber"
+    },
+    "history": {
+        "title": "Geschichte",
+        "trends": "Trends",
+        "range": "Bereich",
+        "baseline": "Basislinie",
+        "probe_now": "Probe jetzt",
+        "refresh": "Auffrischen",
+        "export_json": "JSON exportieren",
+        "export_alerts_json": "Warnungen JSON exportieren",
+        "reset_history": "Verlauf zur\u00fccksetzen",
+        "recent_alert_events": "J\u00fcngste Alarmereignisse",
+        "export_preview": "Vorschau exportieren",
+        "close": "Schlie\u00dfen Sie",
+        "copy": "Kopieren",
+        "download": "Herunterladen"
+    },
+    "logs": {
+        "title": "Protokolle",
+        "manage": "Protokolle verwalten",
+        "add": "hinzuf\u00fcgen",
+        "delete": "L\u00f6schen",
+        "refresh": "Aktualisieren",
+        "search": "Suche",
+        "filter": "Filter",
+        "lines": "Zeilen",
+        "open": "\u00d6ffnen Sie",
+        "close": "Schlie\u00dfen Sie",
+        "download": "Herunterladen",
+        "copy": "Kopieren"
+    },
+    "common": {
+        "save": "Speichern Sie",
+        "cancel": "Abbrechen",
+        "edit": "bearbeiten",
+        "delete": "L\u00f6schen",
+        "update": "Update",
+        "create": "erstellen.",
+        "enable": "Aktivieren Sie",
+        "disable": "Deaktivieren Sie",
+        "yes": "Ja",
+        "no": "Nein",
+        "on": "Auf",
+        "off": "Aus",
+        "confirm": "Best\u00e4tigen Sie",
+        "search": "Suche",
+        "filter": "Filter",
+        "actions": "Aktionen"
+    },
+    "alerts": {
+        "title": "Warnungen",
+        "recent_events": "J\u00fcngste Alarmereignisse",
+        "history": "Geschichte des Alarms",
+        "export_json": "Warnungen JSON exportieren",
+        "no_alerts": "Keine Ausschreibungen",
+        "level": "Ebene",
+        "message": "Nachricht",
+        "service": "Dienst",
+        "time": "Zeit",
+        "probe_now": "Probe jetzt",
+        "refresh": "Aktualisieren",
+        "silence": "Schweigen",
+        "unsilence": "Schweigen",
+        "ack": "Best\u00e4tigen Sie",
+        "unack": "Unkenntnis"
+    },
+    "tests": {
+        "title": "Server-Tests",
+        "run_all": "Alle ausf\u00fchren",
+        "status": "Status",
+        "last_run": "Letzter Lauf",
+        "duration": "Dauer"
+    },
+    "services": {
+        "title": "Dienstleistungen",
+        "status": "Status",
+        "restart": "Neustart",
+        "start": "Start",
+        "stop": "Stopp"
+    }
+}

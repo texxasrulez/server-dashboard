@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Serverio prietais\u0173 skydelis"
+    },
+    "nav": {
+        "history": "Istorija",
+        "logs": "\u017durnalai",
+        "dashboard": "Prietais\u0173 skydelis",
+        "services": "Paslaugos",
+        "alerts": "\u012esp\u0117jimai",
+        "tests": "Testai",
+        "settings": "Nustatymai",
+        "about": "Apie"
+    },
+    "history": {
+        "title": "Istorija",
+        "trends": "Tendencijos",
+        "range": "Diapazonas",
+        "baseline": "Bazinis",
+        "probe_now": "Zondas dabar",
+        "refresh": "Atnaujinti",
+        "export_json": "Eksportuoti JSON",
+        "export_alerts_json": "Eksportuoti persp\u0117jimus JSON",
+        "reset_history": "Istorijos atstatymas",
+        "recent_alert_events": "Naujausi \u012fsp\u0117jimo \u012fvykiai",
+        "export_preview": "Eksporto per\u017ei\u016bra",
+        "close": "U\u017edaryti",
+        "copy": "Kopijuoti",
+        "download": "Atsisi\u0173sti"
+    },
+    "logs": {
+        "title": "\u017durnalai",
+        "manage": "Tvarkyti \u017eurnalus",
+        "add": "Prid\u0117ti",
+        "delete": "I\u0161trinti",
+        "refresh": "Atnaujinti",
+        "search": "Paie\u0161ka",
+        "filter": "Filtras",
+        "lines": "Eilut\u0117s",
+        "open": "Atviras",
+        "close": "U\u017edaryti",
+        "download": "Atsisi\u0173sti",
+        "copy": "Kopijuoti"
+    },
+    "common": {
+        "save": "I\u0161saugoti",
+        "cancel": "At\u0161aukti",
+        "edit": "Redaguoti",
+        "delete": "I\u0161trinti",
+        "update": "Atnaujinti",
+        "create": "Sukurti",
+        "enable": "\u012ejungti",
+        "disable": "I\u0161jungti",
+        "yes": "Taip",
+        "no": "Ne",
+        "on": "Svetain\u0117je",
+        "off": "I\u0161jungta",
+        "confirm": "Patvirtinkite",
+        "search": "Paie\u0161ka",
+        "filter": "Filtras",
+        "actions": "Veiksmai"
+    },
+    "alerts": {
+        "title": "\u012esp\u0117jimai",
+        "recent_events": "Naujausi \u012fsp\u0117jamieji \u012fvykiai",
+        "history": "\u012esp\u0117jimo istorija",
+        "export_json": "Eksportuoti persp\u0117jimus JSON",
+        "no_alerts": "Joki\u0173 \u012fsp\u0117jim\u0173",
+        "level": "Lygis",
+        "message": "\u017dinut\u0117",
+        "service": "Paslauga",
+        "time": "Laikas",
+        "probe_now": "Zondas dabar",
+        "refresh": "Atnaujinti",
+        "silence": "Tyla",
+        "unsilence": "Unsilence",
+        "ack": "Pripa\u017einti",
+        "unack": "Nepripa\u017einimas"
+    },
+    "tests": {
+        "title": "Serverio bandymai",
+        "run_all": "Paleisti visus",
+        "status": "Statusas",
+        "last_run": "Paskutinis paleidimas",
+        "duration": "Trukm\u0117"
+    },
+    "services": {
+        "title": "Paslaugos",
+        "status": "Statusas",
+        "restart": "I\u0161 naujo paleiskite",
+        "start": "Prad\u017eia",
+        "stop": "Sustabdyti"
+    }
+}

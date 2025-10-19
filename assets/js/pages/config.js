@@ -1,7 +1,3 @@
-/*! Combined config.js — unified UI renderer + Email accounts UI (drop-in)
-   * This file replaces separate config.boot.js and config.email.js.
-   * Keep only this script for config.php.
-*/
 (function(){
   'use strict';
 
@@ -98,7 +94,7 @@
   
 // ---- Extras injected: Alerts + SMTP test ----
 if (section === 'alerts') {
-  var btnRow = el('div'); btnRow.className='field';
+  var btnRow = el('div','card'); btnRow.className='field';
   var testBtn = el('button', 'btn secondary'); testBtn.textContent = 'Send test email';
   btnRow.appendChild(testBtn);
   pane.appendChild(btnRow);
@@ -228,7 +224,7 @@ if (section === 'site') {
 }
 // --- end Import/Export ---
 
-// --- Backups — Retention (persisted) v2.2 ---
+// --- Backups — Retention ---
 if (section === 'site') {
   try {
     var paneNode = (typeof pane!=='undefined' && pane) ? pane : (document.getElementById('configPane') || (document.getElementById('configPane') || document.getElementById('pane')));

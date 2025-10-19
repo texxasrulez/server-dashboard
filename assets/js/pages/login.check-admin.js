@@ -2,7 +2,7 @@
 (function(){
   function ready(fn){ if(document.readyState!=='loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
   function createBanner(msg){
-    var d = document.createElement('div');
+    var d = document.createElement('div', 'card');
     d.className = 'alert danger login-admin-warning';
     d.style.margin = '12px 0';
     d.style.borderRadius = '8px';

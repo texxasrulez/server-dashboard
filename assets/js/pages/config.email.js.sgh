@@ -1,0 +1,198 @@
+// assets/js/pages/config.email.js — v12 (light watcher + theme border; survives tab swaps)
+(function(){
+  "use strict";
+  var VER = "v12-watch";
+  try { console.debug("[email-ui] %s boot", VER); } catch(e){}
+
+  if (!/config\.php(\?|$)/.test(location.pathname)) return;
+
+  function $(sel, scope){ return (scope||document).querySelector(sel); }
+  function $all(sel, scope){ return Array.prototype.slice.call((scope||document).querySelectorAll(sel)); }
+  function on(el, ev, fn){ if(el) el.addEventListener(ev, fn, false); }
+  function escapeHTML(s){
+    var map={'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'};
+    return String(s||'').replace(/[&<>"']/g, function(m){ return map[m]; });
+  }
+
+  var pane = document.getElementById('configPane') || document.body;
+  var tabs = document.getElementById('configTabs');
+  var containerId = 'emailAccountsList';
+
+  function paneHasEmailSignals(){
+    var hints = [
+      /Enable Email polling/i,
+      /Indicator Mode/i,
+      /Google Client ID/i,
+      /Microsoft Client ID/i,
+      /Yahoo Client ID/i
+    ];
+    var labels = $all('label', pane);
+    for (var i=0;i<labels.length;i++){
+      var t = (labels[i].textContent||'').trim();
+      for (var j=0;j<hints.length;j++){
+        if (hints[j].test(t)) return true;
+      }
+    }
+    return false;
+  }
+
+  var hidden = null, hiddenDot = null;
+  function ensureHiddenFields(){
+    if (!hidden){
+      hidden = $('[name="email[accounts]"]', pane) || $('[name="email.accounts"]', pane);
+      if (!hidden){
+        hidden = document.createElement('input');
+        hidden.type = 'hidden';
+        hidden.name = 'email[accounts]';
+        pane.appendChild(hidden);
+      } else { try{hidden.type='hidden';}catch(e){} }
+      try{hidden.setAttribute('data-path', JSON.stringify(['email','accounts']));}catch(e){}
+      hiddenDot = $('[name="email.accounts"]', pane);
+      if (!hiddenDot){
+        hiddenDot = document.createElement('input');
+        hiddenDot.type = 'hidden';
+        hiddenDot.name = 'email.accounts';
+        hidden.parentNode.insertBefore(hiddenDot, hidden.nextSibling);
+      }
+      // Hide any visible "(managed by UI)" rows
+      $all('.form-row', pane).forEach(function(row){
+        var lbl = row.querySelector && row.querySelector('label');
+        if (lbl && /\(managed by ui\)/i.test(lbl.textContent||'')){
+          row.style.display='none';
+          var f = row.querySelector('input,textarea,select');
+          if (f) try{f.type='hidden';}catch(e){}
+        }
+      });
+    }
+  }
+
+  var accounts = null;
+  function parseList(s){ try{var j=JSON.parse(s||'[]'); return Array.isArray(j)?j:[];}catch(_){return [];} }
+  function getBoot(){ var e=window.__CONFIG_DATA__&&window.__CONFIG_DATA__.email; return (e && typeof e.accounts==='string')? e.accounts : ''; }
+  function providerFor(addr){
+    var m=String(addr||'').split('@')[1]||''; m=m.toLowerCase();
+    if (m==='gmail.com'||m==='googlemail.com') return 'google';
+    if (/(^|\.)yahoo\./.test(m)) return 'yahoo';
+    if (/(outlook|live|hotmail|msn)\.com$/.test(m)) return 'microsoft';
+    return 'other';
+  }
+  function syncHidden(){
+    if (hidden && (!hidden.dataset || !hidden.dataset.path)) { try{hidden.setAttribute('data-path', JSON.stringify(['email','accounts']));}catch(e){} }
+    ensureHiddenFields();
+    var json = JSON.stringify(accounts||[]);
+    hidden.value=json; if (hiddenDot) hiddenDot.value=json;
+  }
+  function ensureContainer(){
+    var c=document.getElementById(containerId);
+    if(!c){
+      c=document.createElement('div');
+      c.id=containerId;
+      c.style.marginTop='1rem';
+      // theme-aware divider: prefer project CSS variables if present
+      c.style.borderTop='1px solid var(--panel-border, var(--card-border, var(--divider, var(--muted, rgba(127,127,127,.25))))) )';
+      c.style.paddingTop='.75rem';
+      pane.appendChild(c);
+    }
+    return c;
+  }
+
+  function draw(){
+    ensureHiddenFields();
+    if (!accounts){
+      accounts = parseList(hidden.value || getBoot());
+      // default enabled:true if missing
+      try{accounts = (accounts||[]).map(function(a){ if(a && typeof a==='object'){ if(!('enabled' in a)) a.enabled = true; } return a; }); }catch(_){ }
+    }
+    var c = ensureContainer();
+
+    var visible = (window.__FORCE_EMAIL_UI__ === true) || paneHasEmailSignals();
+    c.style.display = visible ? '' : 'none';
+    if (!visible) return;
+
+    var html=[];
+    html.push(
+      '<div class="row" style="align-items:center;gap:.5rem;margin-bottom:.5rem"><strong>Saved Email Accounts</strong></div>',
+      '<div class="add-row" style="display:grid;grid-template-columns:1.6fr 1.2fr auto;gap:.5rem;align-items:center;margin:.5rem 0 .75rem 0">',
+      '<input id="accNewEmail" type="email" placeholder="address@domain" />',
+      '<input id="accNewPass" type="password" placeholder="Password / App password" />',
+      '<button type="button" class="btn btn-sm" id="accAddBtn">Add</button>',
+      '</div>'
+    );
+    if (!accounts.length){
+      html.push('<em style="opacity:.65">No email accounts saved yet.</em>');
+    } else {
+      html.push('<div class="acc-list">');
+      accounts.forEach(function(a,i){
+        var addr = escapeHTML(a.address||'');
+        var prov = a.provider || 'auto';
+        var poll = parseInt(a.poll_seconds||300,10);
+        var label = (function(x){return x==='google'?'Connect Google':(x==='microsoft'?'Connect Microsoft':(x==='yahoo'?'Connect Yahoo':'Connect'));})(prov==='auto'?providerFor(a.address):prov);
+        html.push(
+          '<div class="acc-row" data-idx="'+i+'" style="display:grid;grid-template-columns:auto 1.4fr .9fr .6fr auto auto;gap:.5rem;align-items:center;margin:.35rem 0">',
+          '<label class="chkwrap" title="Include in new‑mail check"><input type="checkbox" class="chk" '+((a.enabled!==false)?'checked':'')+' /></label>',          '<input class="addr" type="email" value="'+addr+'" />',
+          '<select class="prov">',
+            '<option value="auto"'+(prov==='auto'?' selected':'')+'>Auto</option>',
+            '<option value="google"'+(prov==='google'?' selected':'')+'>Google</option>',
+            '<option value="microsoft"'+(prov==='microsoft'?' selected':'')+'>Microsoft</option>',
+            '<option value="yahoo"'+(prov==='yahoo'?' selected':'')+'>Yahoo</option>',
+            '<option value="other"'+(prov==='other'?' selected':'')+'>Other</option>',
+          '</select>',
+          '<input class="ps" type="number" min="60" max="86400" step="60" value="'+poll+'" title="Poll every (seconds)" />',
+          '<button type="button" class="btn btn-sm oauth">'+label+'</button>',
+          '<button type="button" class="btn danger">Delete</button>',
+          '</div>'
+        );
+      });
+      html.push('</div>');
+    }
+    c.innerHTML = html.join('');
+
+    var addBtn = $('#accAddBtn', c);
+    if (addBtn) on(addBtn,'click', function(){
+      var e=$('#accNewEmail',c), p=$('#accNewPass',c);
+      var addr=(e&&e.value||'').trim(), pass=(p&&p.value||'').trim();
+      if(!addr) return;
+      accounts.push({address:addr,password:pass,provider:'auto',poll_seconds:300});
+      if(e) e.value=''; if(p) p.value='';
+      syncHidden(); draw();
+    });
+
+    var saveBtn = document.getElementById('btnSave');
+    if (saveBtn) on(saveBtn,'click', function(){ syncHidden(); });
+
+    $all('.acc-row', c).forEach(function(row){
+      var i = +row.getAttribute('data-idx');
+      var addr = $('.addr',row), sel=$('.prov',row), ps=$('.ps',row), del=$('.del',row), oauth=$('.oauth',row); var chk=$('.chk',row);
+      if (addr) on(addr,'change', function(){ accounts[i].address=addr.value.trim(); syncHidden(); });
+      if (chk) on(chk,'change', function(){ accounts[i].enabled=!!chk.checked; syncHidden(); });
+      if (sel)  on(sel, 'change', function(){ accounts[i].provider=sel.value; syncHidden(); });
+      if (ps)   on(ps,  'change', function(){ var v=parseInt(ps.value,10)||300; accounts[i].poll_seconds=Math.max(60,Math.min(86400,v)); ps.value = accounts[i].poll_seconds; syncHidden(); });
+      if (del)  on(del, 'click',  function(){ accounts.splice(i,1); syncHidden(); draw(); });
+      if (oauth) on(oauth,'click', function(){
+        var a=accounts[i], prov=(a.provider==='auto'?providerFor(a.address):a.provider), addr=(a.address||'').trim();
+        if(!addr){ alert('Set email address first.'); return; }
+        if(prov==='google'||prov==='microsoft'||prov==='yahoo'){
+          var url='api/email_oauth_start.php?provider='+encodeURIComponent(prov)+'&address='+encodeURIComponent(addr);
+          window.open(url,'_blank'); // new tab
+        } else { alert('OAuth not available for "'+prov+'".'); }
+      });
+    });
+  }
+
+  // Draw once
+  setTimeout(draw, 0);
+
+  // Light watcher: redraw when config pane gets replaced (tab switch) — debounced
+  var redrawTimer = null;
+  var mo = new MutationObserver(function(muts){
+    var major = muts.some(function(m){ return m.type==='childList' && m.target === pane; });
+    if (!major) return;
+    clearTimeout(redrawTimer);
+    redrawTimer = setTimeout(draw, 50);
+  });
+  mo.observe(pane, {childList:true});
+
+  // Also hook tab clicks
+  if (tabs) on(tabs, 'click', function(){ setTimeout(draw, 0); });
+
+})();

@@ -1,10 +1,3 @@
-/*! config.page.js — v19
- *  - Test email: show raw server reply in toasts (no log spelunking).
- *  - Email tab: show per-account status via email_status.php?verbose=1 and add one-click "Reconnect" for Google accounts.
- *  - After successful Save: trigger config backup (api/config_backup.php).
- *  - History "Refresh" buttons: 5s cooldown to avoid hammering.
- *  - Keeps v17 behavior (accounts -> email.accounts JSON, lowercase, gmail->google, sendmail guard, etc.).
- */
 (function(){
   "use strict";
 
@@ -44,7 +37,6 @@
     var s = document.createElement('style'); s.textContent = css; document.head.appendChild(s);
   })();
 
-  // --------- Field renderers (subset from v17 with needed helpers) ---------
   var field = {
     string: function(k, def, val){
       var w = el('div','field');

@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Server Dashboard"
+    },
+    "nav": {
+        "history": "History",
+        "logs": "Logs",
+        "dashboard": "Dashboard",
+        "services": "Services",
+        "alerts": "Alerts",
+        "tests": "Tests",
+        "settings": "Settings",
+        "about": "About"
+    },
+    "history": {
+        "title": "History",
+        "trends": "Trends",
+        "range": "Range",
+        "baseline": "Baseline",
+        "probe_now": "Probe now",
+        "refresh": "Refresh",
+        "export_json": "Export JSON",
+        "export_alerts_json": "Export Alerts JSON",
+        "reset_history": "Reset history",
+        "recent_alert_events": "Recent alert events",
+        "export_preview": "Export preview",
+        "close": "Close",
+        "copy": "Copy",
+        "download": "Download"
+    },
+    "logs": {
+        "title": "Logs",
+        "manage": "Manage Logs",
+        "add": "Add",
+        "delete": "Delete",
+        "refresh": "Refresh",
+        "search": "Search",
+        "filter": "Filter",
+        "lines": "Lines",
+        "open": "Open",
+        "close": "Close",
+        "download": "Download",
+        "copy": "Copy"
+    },
+    "common": {
+        "save": "Save",
+        "cancel": "Cancel",
+        "edit": "Edit",
+        "delete": "Delete",
+        "update": "Update",
+        "create": "Create",
+        "enable": "Enable",
+        "disable": "Disable",
+        "yes": "Yes",
+        "no": "No",
+        "on": "On",
+        "off": "Off",
+        "confirm": "Confirm",
+        "search": "Search",
+        "filter": "Filter",
+        "actions": "Actions"
+    },
+    "alerts": {
+        "title": "Alerts",
+        "recent_events": "Recent alert events",
+        "history": "Alert history",
+        "export_json": "Export Alerts JSON",
+        "no_alerts": "No alerts",
+        "level": "Level",
+        "message": "Message",
+        "service": "Service",
+        "time": "Time",
+        "probe_now": "Probe now",
+        "refresh": "Refresh",
+        "silence": "Silence",
+        "unsilence": "Unsilence",
+        "ack": "Acknowledge",
+        "unack": "Unacknowledge"
+    },
+    "tests": {
+        "title": "Server Tests",
+        "run_all": "Run all",
+        "status": "Status",
+        "last_run": "Last run",
+        "duration": "Duration"
+    },
+    "services": {
+        "title": "Services",
+        "status": "Status",
+        "restart": "Restart",
+        "start": "Start",
+        "stop": "Stop"
+    }
+}

@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Kontrollpanel f\u00f6r server"
+    },
+    "nav": {
+        "history": "Historia",
+        "logs": "Loggar",
+        "dashboard": "Instrumentpanel",
+        "services": "Tj\u00e4nster",
+        "alerts": "Varningar",
+        "tests": "Tester",
+        "settings": "Inst\u00e4llningar",
+        "about": "Om"
+    },
+    "history": {
+        "title": "Historia",
+        "trends": "Trender",
+        "range": "R\u00e4ckvidd",
+        "baseline": "Baslinje",
+        "probe_now": "Prova nu",
+        "refresh": "Uppdatera",
+        "export_json": "Exportera JSON",
+        "export_alerts_json": "Exportera varningar JSON",
+        "reset_history": "\u00c5terst\u00e4ll historik",
+        "recent_alert_events": "Nyligen intr\u00e4ffade larmh\u00e4ndelser",
+        "export_preview": "F\u00f6rhandsgranskning av export",
+        "close": "N\u00e4ra",
+        "copy": "Kopia",
+        "download": "Nedladdningar"
+    },
+    "logs": {
+        "title": "Loggar",
+        "manage": "Hantera loggar",
+        "add": "L\u00e4gg till",
+        "delete": "Radera",
+        "refresh": "Uppdatera",
+        "search": "S\u00f6k",
+        "filter": "Filter",
+        "lines": "Linjer",
+        "open": "\u00d6ppna",
+        "close": "N\u00e4ra",
+        "download": "Nedladdningar",
+        "copy": "Kopia"
+    },
+    "common": {
+        "save": "Spara",
+        "cancel": "Avbryt",
+        "edit": "Redigera",
+        "delete": "Radera",
+        "update": "Uppdatering",
+        "create": "Skapa",
+        "enable": "Aktivera",
+        "disable": "Avaktivera",
+        "yes": "Ja",
+        "no": "Nej",
+        "on": "P\u00e5",
+        "off": "Av",
+        "confirm": "Bekr\u00e4fta",
+        "search": "S\u00f6k",
+        "filter": "Filter",
+        "actions": "\u00c5tg\u00e4rder"
+    },
+    "alerts": {
+        "title": "Varningar",
+        "recent_events": "Nyligen intr\u00e4ffade larmh\u00e4ndelser",
+        "history": "Varningshistorik",
+        "export_json": "Exportera varningar JSON",
+        "no_alerts": "Inga varningar",
+        "level": "Niv\u00e5",
+        "message": "Meddelande",
+        "service": "Service",
+        "time": "Tid",
+        "probe_now": "Prova nu",
+        "refresh": "Uppdatera",
+        "silence": "Tystnad",
+        "unsilence": "Tystnad",
+        "ack": "Bekr\u00e4fta",
+        "unack": "Okunskap"
+    },
+    "tests": {
+        "title": "Test av server",
+        "run_all": "K\u00f6r alla",
+        "status": "Status",
+        "last_run": "Sista k\u00f6rningen",
+        "duration": "Varaktighet"
+    },
+    "services": {
+        "title": "Tj\u00e4nster",
+        "status": "Status",
+        "restart": "Omstart",
+        "start": "Start",
+        "stop": "Stopp"
+    }
+}

@@ -1,0 +1,94 @@
+{
+    "app": {
+        "title": "Nadzorna plo\u0161\u010da stre\u017enika"
+    },
+    "nav": {
+        "history": "Zgodovina",
+        "logs": "Dnevniki",
+        "dashboard": "Nadzorna plo\u0161\u010da",
+        "services": "Storitve",
+        "alerts": "Opozorila",
+        "tests": "Testi",
+        "settings": "Nastavitve",
+        "about": "O"
+    },
+    "history": {
+        "title": "Zgodovina",
+        "trends": "Trendi",
+        "range": "Razpon",
+        "baseline": "Osnovni",
+        "probe_now": "Sondirajte zdaj",
+        "refresh": "Osve\u017eitev",
+        "export_json": "Izvoz JSON",
+        "export_alerts_json": "Izvoz opozoril JSON",
+        "reset_history": "Ponastavitev zgodovine",
+        "recent_alert_events": "Nedavni opozorilni dogodki",
+        "export_preview": "Predogled izvoza",
+        "close": "Zapri",
+        "copy": "Kopiraj",
+        "download": "Prenesi"
+    },
+    "logs": {
+        "title": "Dnevniki",
+        "manage": "Upravljanje dnevnikov",
+        "add": "Dodaj",
+        "delete": "Izbri\u0161i",
+        "refresh": "Osve\u017eitev",
+        "search": "Iskanje",
+        "filter": "Filter",
+        "lines": "Vrstice",
+        "open": "Odpri",
+        "close": "Zapri",
+        "download": "Prenesi",
+        "copy": "Kopiraj"
+    },
+    "common": {
+        "save": "Shrani",
+        "cancel": "Prekli\u010di",
+        "edit": "Uredi",
+        "delete": "Izbri\u0161i",
+        "update": "Posodobitev",
+        "create": "Ustvarite spletno stran",
+        "enable": "Omogo\u010dite",
+        "disable": "Onemogo\u010dite",
+        "yes": "Da",
+        "no": "Ne",
+        "on": "Na spletni strani",
+        "off": "Izklopljeno",
+        "confirm": "Potrdite",
+        "search": "Iskanje",
+        "filter": "Filter",
+        "actions": "Ukrepi"
+    },
+    "alerts": {
+        "title": "Opozorila",
+        "recent_events": "Nedavni opozorilni dogodki",
+        "history": "Zgodovina opozoril",
+        "export_json": "Izvoz opozoril JSON",
+        "no_alerts": "Brez opozoril",
+        "level": "Raven",
+        "message": "Sporo\u010dilo",
+        "service": "Storitev",
+        "time": "\u010cas",
+        "probe_now": "Sondirajte zdaj",
+        "refresh": "Osve\u017eitev",
+        "silence": "Ti\u0161ina",
+        "unsilence": "Unsilence",
+        "ack": "Potrditev",
+        "unack": "Nepoznavanje"
+    },
+    "tests": {
+        "title": "Preizkusi stre\u017enika",
+        "run_all": "Izpeljite vse",
+        "status": "Status",
+        "last_run": "Zadnja vo\u017enja",
+        "duration": "Trajanje"
+    },
+    "services": {
+        "title": "Storitve",
+        "status": "Status",
+        "restart": "Ponovni zagon",
+        "start": "Za\u010detek",
+        "stop": "Ustavite"
+    }
+}

@@ -1,5 +1,6 @@
 # Server Dashboard
 
+![Downloads](https://img.shields.io/github/downloads/texxasrulez/server-dashboard/total)
 [![GitHub Downloads](https://img.shields.io/github/downloads/texxasrulez/server-dashboard/total?style=plastic&logo=github&logoColor=white&label=Downloads&labelColor=blue&color=aqua)](https://github.com/texxasrulez/server-dashboard/releases)
 [![Github License](https://img.shields.io/github/license/texxasrulez/server-dashboard?style=plastic&logo=github&label=License&labelColor=blue&color=coral)](https://github.com/texxasrulez/server-dashboard/LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/texxasrulez/server-dashboard?style=plastic&logo=github&label=Stars&labelColor=blue&color=deepskyblue)](https://github.com/texxasrulez/server-dashboard/stargazers)

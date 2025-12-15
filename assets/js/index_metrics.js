@@ -22,6 +22,25 @@
         case 'disk_total_human': val = (data.disk && data.disk.total_human) || ''; break;
         case 'disk_used_pct': val = (data.disk && data.disk.used_percent!=null) ? data.disk.used_percent+'%' : ''; break;
         case 'disk_temp_c': val = (data.disk && data.disk.temp_c!=null) ? data.disk.temp_c+'°C' : ''; break;
+        case 'cpu_temp_package':
+          val = (data.cpu && data.cpu.temps && data.cpu.temps.package!=null)
+            ? Number(data.cpu.temps.package).toFixed(1)+'°C'
+            : '';
+          break;
+        case 'cpu_temp_core_avg':
+          if (data.cpu && data.cpu.temps && data.cpu.temps.cores) {
+            const vals = Object.values(data.cpu.temps.cores).map(Number).filter(v => !isNaN(v));
+            if (vals.length) {
+              const sum = vals.reduce((a,b)=>a+b,0);
+              const avg = sum / vals.length;
+              val = avg.toFixed(1)+'°C';
+            } else {
+              val = '';
+            }
+          } else {
+            val = '';
+          }
+          break;
         default: val = ''; break;
       }
       if (val!==null) el.textContent = val;

@@ -68,6 +68,168 @@ if (!function_exists('bytes_h')) {
     return sprintf(($i>=2?'%.1f %s':'%.0f %s'), $b, $u[$i]);
   }
 }
+if (!function_exists('detect_disk_temp_c')) {
+  /**
+   * Best-effort disk temperature in °C for the filesystem that hosts $diskPath.
+   * Uses, in order:
+   *  - /sys/class/hwmon (nvme, drivetemp, ata)
+   *  - smartctl -A on the underlying block device
+   *  - hddtemp -n on the underlying block device
+   */
+  function detect_disk_temp_c($diskPath = null){
+    $tempC = null;
+
+    // 1) hwmon-based sensors (fast, no external processes)
+    $hwmonRoot = '/sys/class/hwmon';
+    if (@is_dir($hwmonRoot)) {
+      $entries = @glob($hwmonRoot . '/hwmon*');
+      if (is_array($entries)) {
+        foreach ($entries as $dir) {
+          $nameFile = $dir . '/name';
+          $name = @is_readable($nameFile) ? trim(@file_get_contents($nameFile)) : '';
+          if ($name === '') continue;
+          $lname = strtolower($name);
+          // Common disk-related sensor names
+          if (strpos($lname, 'nvme') !== false || strpos($lname, 'drivetemp') !== false || strpos($lname, 'ata') !== false) {
+            $temps = @glob($dir . '/temp*_input');
+            if (is_array($temps)) {
+              sort($temps);
+              foreach ($temps as $tf) {
+                $raw = @file_get_contents($tf);
+                if ($raw !== false && is_numeric(trim($raw))) {
+                  $val = (float)trim($raw);
+                  if ($val > 0) {
+                    $tempC = $val / 1000.0;
+                    break 2; // done
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Resolve filesystem path -> block device using df
+    $dev = null;
+    if (__find_bin('df')) {
+      $target = $diskPath ? $diskPath : '/';
+      $dfCmd  = __find_bin('df') . ' -P ' . escapeshellarg($target);
+      $raw    = __run_cmd($dfCmd);
+      if (is_string($raw) && trim($raw) !== '') {
+        $lines = preg_split('/\r?\n/', trim($raw));
+        if (count($lines) >= 2) {
+          $parts = preg_split('/\s+/', trim($lines[1]));
+          if (!empty($parts[0]) && $parts[0] !== 'Filesystem') {
+            $dev = $parts[0];
+          }
+        }
+      }
+    }
+
+    // 2) smartctl on the underlying device
+    if ($tempC === null && $dev && __find_bin('smartctl')) {
+      $out = __run_cmd(__find_bin('smartctl') . ' -A ' . escapeshellarg($dev));
+      if (is_string($out) && trim($out) !== '') {
+        $lines = preg_split('/\r?\n/', trim($out));
+        foreach ($lines as $ln) {
+          if (stripos($ln, 'Temperature') !== false) {
+            if (preg_match('/([0-9]{2,3})\s*°?C/i', $ln, $m)) {
+              $tempC = (float)$m[1];
+              break;
+            } elseif (preg_match('/\s([0-9]{2,3})\s*$/', trim($ln), $m)) {
+              $tempC = (float)$m[1];
+              break;
+            }
+          }
+        }
+      }
+    }
+
+    // 3) hddtemp fallback
+    if ($tempC === null && $dev && __find_bin('hddtemp')) {
+      $out = __run_cmd(__find_bin('hddtemp') . ' -n ' . escapeshellarg($dev));
+      if (is_string($out) && is_numeric(trim($out))) {
+        $tempC = (float)trim($out);
+      }
+    }
+
+    return $tempC !== null ? round($tempC, 1) : null;
+  }
+}
+
+
+// ------------------------------------------------------------
+// CPU temperature detection (hwmon: k10temp/coretemp/etc.)
+// ------------------------------------------------------------
+if (!function_exists('detect_cpu_temps')) {
+  /**
+   * Returns:
+   *   ['package' => float|null, 'cores' => [int => float]] or null.
+   */
+  function detect_cpu_temps(): ?array {
+    $result = [
+      'package' => null,
+      'cores'   => [],
+    ];
+
+    $hwmonRoot = '/sys/class/hwmon';
+    if (@is_dir($hwmonRoot)) {
+      $entries = @glob($hwmonRoot . '/hwmon*');
+      if (is_array($entries)) {
+        foreach ($entries as $dir) {
+          $nameFile = $dir . '/name';
+          $name = @is_readable($nameFile) ? trim(@file_get_contents($nameFile)) : '';
+          if ($name === '') continue;
+          // common CPU sensor chips
+          if (!preg_match('/(k10temp|coretemp|zenpower|cpu)/i', $name)) continue;
+
+          $temps = @glob($dir . '/temp*_input');
+          if (!is_array($temps)) continue;
+          sort($temps);
+
+          foreach ($temps as $tf) {
+            $raw = @file_get_contents($tf);
+            if ($raw === false || !is_numeric(trim($raw))) continue;
+            $val = (float)trim($raw);
+            if ($val <= 0) continue;
+            $tempC = $val / 1000.0;
+
+            $labelFile = preg_replace('/_input$/', '_label', $tf);
+            $label = @is_readable($labelFile) ? trim(@file_get_contents($labelFile)) : '';
+
+            if ($label !== '' && (stripos($label, 'package') !== false || stripos($label, 'Tctl') !== false)) {
+              $result['package'] = $tempC;
+            } else {
+              $coreIdx = null;
+              if (preg_match('/temp(\d+)_input$/', $tf, $m)) {
+                $coreIdx = (int)$m[1];
+              }
+              if ($coreIdx !== null) {
+                $result['cores'][$coreIdx] = $tempC;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    if ($result['package'] === null && empty($result['cores'])) {
+      return null;
+    }
+
+    ksort($result['cores']);
+    if ($result['package'] !== null) {
+      $result['package'] = round($result['package'], 1);
+    }
+    foreach ($result['cores'] as $k => $v) {
+      $result['cores'][$k] = round((float)$v, 1);
+    }
+    return $result;
+  }
+}
+
+
 function pick_disk_path(){
   $tried = [];
   $chosen = null;
@@ -198,6 +360,66 @@ if ($total === null) {
 }
 
 // ------------------------------------------------------------
+// Disk helpers (device + temperature via smartctl, optional)
+// ------------------------------------------------------------
+if (!function_exists('detect_disk_device_for_path')) {
+  function detect_disk_device_for_path(string $path): ?string {
+    $path = trim($path);
+    if ($path === '' || !__find_bin('df')) return null;
+    $cmd = __find_bin('df') . ' -kP ' . escapeshellarg($path);
+    $raw = __run_cmd($cmd);
+    if (!is_string($raw) || trim($raw) === '') return null;
+    $lines = preg_split('/\r?\n/', trim($raw));
+    if (count($lines) < 2) return null;
+    $parts = preg_split('/\s+/', trim($lines[1]));
+    if (count($parts) < 1) return null;
+    $fs = $parts[0];
+    // Expect something like /dev/sda1
+    if (strpos($fs, '/dev/') !== 0) return null;
+    return $fs;
+  }
+}
+
+if (!function_exists('detect_disk_temp_smartctl')) {
+  function detect_disk_temp_smartctl(?string $device): ?int {
+    $device = $device ? trim($device) : '';
+    if ($device === '' || !__find_bin('smartctl')) return null;
+
+    $cmd = __find_bin('smartctl') . ' -A ' . escapeshellarg($device);
+    $raw = __run_cmd($cmd);
+    if (!is_string($raw) || trim($raw) === '') return null;
+
+    $temp = null;
+    $lines = preg_split('/\r?\n/', trim($raw));
+
+    // Classic ATA SMART table: ID 194 or 190, last column is RAW_VALUE
+    foreach ($lines as $line) {
+      $line = trim($line);
+      if ($line === '' || !preg_match('/^\d+/', $line)) continue;
+
+      $parts = preg_split('/\s+/', $line);
+      if (count($parts) < 10) continue;
+
+      $id = (int)$parts[0];
+      if ($id === 190 || $id === 194 || stripos($parts[1] ?? '', 'temp') !== false) {
+        $rawVal = $parts[count($parts) - 1];
+        if (preg_match('/(\d+)/', $rawVal, $m)) {
+          $temp = (int)$m[1];
+          break;
+        }
+      }
+    }
+
+    // NVMe-style output: "Temperature: 36 Celsius"
+    if ($temp === null && preg_match('/Temperature[^0-9]+(\d+)\s*C/i', $raw, $m)) {
+      $temp = (int)$m[1];
+    }
+
+    return $temp;
+  }
+}
+
+// ------------------------------------------------------------
 // Disk
 // ------------------------------------------------------------
 list($diskPath, $diskTried) = pick_disk_path();
@@ -225,6 +447,10 @@ if ((!$diskPath || $disk_total === null || $disk_free === null) && __find_bin('d
     }
   }
 }
+
+// Disk temperature via SMART (best-effort)
+$disk_device = detect_disk_device_for_path($diskPath);
+$disk_temp_c = detect_disk_temp_smartctl($disk_device);
 
 // ------------------------------------------------------------
 // Processes (portable, layered fallbacks)
@@ -346,11 +572,21 @@ if (!function_exists('__net_counters')) {
     return ['rx_bytes'=>null, 'tx_bytes'=>null];
   }
 }
+$disk_temp_c = detect_disk_temp_c(isset($diskPath) ? $diskPath : null);
+
+$cpu_temps = detect_cpu_temps();
+
 $resp = [
   'uptime_seconds' => $uptime_seconds,
   'uptime_human'   => $uptime_human,
   'loadavg'        => $loadavg,
-  'cpu'            => [ 'cores'=>$cpu_cores, 'load1'=>$loadavg ? $loadavg[0] : null, 'load5'=>$loadavg ? $loadavg[1] : null, 'load15'=>$loadavg ? $loadavg[2] : null ],
+    'cpu'            => [
+    'cores'  => $cpu_cores,
+    'load1'  => $loadavg ? $loadavg[0] : null,
+    'load5'  => $loadavg ? $loadavg[1] : null,
+    'load15' => $loadavg ? $loadavg[2] : null,
+    'temps'  => $cpu_temps,
+  ],
   'memory' => [
     'total_bytes' => $total,
     'used_bytes'  => $used,
@@ -373,7 +609,8 @@ $resp = [
     'total_human'  => $disk_total ? bytes_h($disk_total) : null,
     'used_human'   => $disk_used  ? bytes_h($disk_used)  : null,
     'free_human'   => $disk_free  ? bytes_h($disk_free)  : null,
-    'temp_c'       => null,
+    'device'       => $disk_device,
+    'temp_c'       => $disk_temp_c,
   ],
   'processes' => $processes,
 ];

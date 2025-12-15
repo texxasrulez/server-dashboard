@@ -6,9 +6,8 @@ $PAGE_JS  = 'assets/js/pages/bookmarks.js';
 require_once __DIR__ . '/includes/head.php';
 ?>
 <main class="wrap" id="bookmarks-root" data-api-base="<?= h(project_url('/api/')) ?>">
-  
-
-
+ <div class="card">
+  <div class="card">
     <div class="left">
       <h1>Bookmarks</h1>
       <div class="tabs">
@@ -27,9 +26,10 @@ require_once __DIR__ . '/includes/head.php';
 <a class="btn ghost"
    id="bookmarklet"
    href="javascript:<?= htmlspecialchars($bm_js, ENT_QUOTES) ?>"
-   title="Drag this to your bookmarks bar to quickly add the current page">Add to Dashboard</a>
+   title="Drag this to your bookmarks bar to quickly add the current page">Add to Browser</a>
         <button class="btn" id="openManage" type="button">Manage Bookmarks</button>
       </div>
+      <br />
     </div>
     <div class="right">
       <div class="controls">
@@ -47,9 +47,10 @@ require_once __DIR__ . '/includes/head.php';
             <option value="host_asc">Host (A→Z)</option>
           </select>
         </label>
-        <button id="bmRefresh" class="btn">Refresh</button>
+        <button id="bmRefresh" class="btn"><span data-i18n="alerts.refresh">Refresh</span></button>
       </div>
     </div>
+   </div>
   </header>
 
   <section class="grid-2">
@@ -70,8 +71,8 @@ require_once __DIR__ . '/includes/head.php';
             <select id="bmCategory"></select>
           </label>
           <div class="actions">
-            <button id="bmSave" class="btn">Save</button>
-            <button id="bmCancel" class="btn secondary" type="button">Cancel</button>
+            <button id="bmSave" class="btn"><span data-i18n="common.save">Save</span></button>
+            <button id="bmCancel" class="btn secondary" type="button"><span data-i18n="common.cancel">Cancel</span></button>
           </div>
         </div>
       </form>
@@ -87,8 +88,8 @@ require_once __DIR__ . '/includes/head.php';
           <input type="text" id="catNameMain" placeholder="New category name">
         </label>
         <div class="actions">
-          <button id="catSaveMain" class="btn">Save</button>
-          <button id="catCancelMain" class="btn secondary" type="button">Cancel</button>
+          <button id="catSaveMain" class="btn"><span data-i18n="common.save">Save</span></button>
+          <button id="catCancelMain" class="btn secondary" type="button"><span data-i18n="common.cancel">Cancel</span></button>
         </div>
       </form>
     </section>
@@ -114,7 +115,7 @@ require_once __DIR__ . '/includes/head.php';
             <label>URL <input type="url" id="bmUrl" placeholder="https://example.com"></label>
             <label>Tags <input type="text" id="bmTags" placeholder="comma,separated,tags"></label>
             <label>Category <select id="bmCategory"></select></label>
-            <div class="actions"><button id="bmSave" class="btn">Save</button><button id="bmCancel" class="btn secondary" type="button">Cancel</button></div>
+            <div class="actions"><button id="bmSave" class="btn"><span data-i18n="common.save">Save</span></button><button id="bmCancel" class="btn secondary" type="button"><span data-i18n="common.cancel">Cancel</span></button></div>
           </form>
           <div class="hint">Display Bookmarks here with collapsible categories. Click a bookmark to display in textbox above to edit or delete.</div>
           <div id="bmListModal" class="list-body scroll-y"></div>
@@ -124,7 +125,7 @@ require_once __DIR__ . '/includes/head.php';
           <form id="catForm" class="cat-form">
             <input type="hidden" id="catId">
             <label>Name <input type="text" id="catName" placeholder="New category name"></label>
-            <div class="actions"><button id="catSave" class="btn">Save</button><button id="catCancel" class="btn secondary" type="button">Cancel</button><button id="catDelete" class="btn danger" type="button">Delete</button></div>
+            <div class="actions"><button id="catSave" class="btn"><span data-i18n="common.save">Save</span></button><button id="catCancel" class="btn secondary" type="button"><span data-i18n="common.cancel">Cancel</span></button><button id="catDelete" class="btn danger" type="button"><span data-i18n="common.delete">Delete</span></button></div>
           </form>
           <div class="hint">Categories displayed here. Click a category to display in textbox above to edit or delete category</div>
           <div id="catList" class="cat-list scroll-y" aria-live="polite"></div>
@@ -133,8 +134,8 @@ require_once __DIR__ . '/includes/head.php';
       </div>
     </div>
   </div>
-
-
+</div>
+</div>
   <script>
     document.addEventListener('DOMContentLoaded', function(){
       var c = document.querySelector('.content');

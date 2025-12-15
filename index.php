@@ -45,6 +45,14 @@
   <div id="procGrid" class="proc-grid"></div>
 </div>
 
+
+<!-- CPU Status -->
+<div class="card">
+  <div class="section-title">CPU Status</div>
+  <div id="cpuGrid" class="proc-grid"></div>
+</div>
+
+
 <!-- Hard Drive Status -->
 <div class="card">
   <div class="section-title">Hard Drive Status</div>
@@ -63,6 +71,7 @@
 <!-- renderers -->
 <script defer src="assets/js/index/services.fix.js"></script>
 <script defer src="assets/js/index/proc.render.js"></script>
+<script defer src="assets/js/index/cpu.render.js"></script>
 <script defer src="assets/js/index/disks.render.js"></script>
 
 <!-- styles -->
@@ -70,8 +79,10 @@
 <link rel="stylesheet" href="assets/css/index_proc.gauges.css" />
 <link rel="stylesheet" href="assets/css/index_disks.cards.css" />
 
+
 <!-- metrics -->
 <script defer src="assets/js/index/metrics.zoom.js"></script>
 <script defer src="assets/js/index/metrics.js"></script>
+<script defer src="assets/js/index_metrics.js"></script>
 
 <?php include __DIR__ . '/includes/foot.php'; ?>

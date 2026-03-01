@@ -1,6 +1,9 @@
 <?php
 /* api/server_test.php - read-only JSON diagnostics; NO server-state changes */
 declare(strict_types=1);
+require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_admin();
 header('Content-Type: application/json; charset=utf-8');
 
 function ini_val(string $k){ $v = ini_get($k); return $v === false ? null : $v; }

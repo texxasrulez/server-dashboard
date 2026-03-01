@@ -1,6 +1,9 @@
 <?php
 // api/logs_list.php — returns allowlisted logs from config
 require __DIR__.'/_guard.php'; guard_api(['key'=>'logs_list','require_token'=>false,'type'=>'json']);
+require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_admin();
 header('Content-Type: application/json; charset=utf-8');
 
 function cfg_get($dot, $default=null){

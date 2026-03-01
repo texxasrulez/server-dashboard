@@ -6,7 +6,7 @@ This list is prioritized, bite‑sized, and designed as **drop‑ins** on top of
 1. **Reconnect Google (OAuth) button** on Email tab, per account.
 2. **Token checker** (green/red dot + last modified) with `api/email_token_info.php` (secrets redacted).
 3. **Verbose SMTP toasts** in Send Test panel — surface transport + exact server error text.
-4. **Backup retention + prune**: keep N latest config backups (`data/backups/`), add “Prune” and “Download latest” buttons.
+4. **Backup retention + prune**: keep N latest config backups (`config/backups/`), add “Prune” and “Download latest” buttons.
 5. **Rate‑limit cron refresh** buttons (already mild; add exponential backoff on repeated clicks).
 
 ## Tier 2 — Observability

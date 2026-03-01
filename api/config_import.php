@@ -1,8 +1,11 @@
 <?php
 // api/config_import.php
 // Import JSON from uploaded file field 'file' (multipart/form-data) or raw POST JSON.
-// Writes config/local.json and/or data/security_config.json. Creates backups in state/backups/.
+// Writes config/local.json and/or data/security_config.json, keeping snapshots in config/backups/.
 // Returns JSON {ok:true, applied:{config:bool, security:bool}}.
+require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_admin();
 
 header('Content-Type: application/json; charset=utf-8');
 header('X-Robots-Tag: noindex');
@@ -10,19 +13,17 @@ header('X-Robots-Tag: noindex');
 $root = dirname(__DIR__);
 $cfgFile = $root . '/config/local.json';
 $secFile = $root . '/data/security_config.json';
-$backupDir = $root . '/state/backups';
-@mkdir($backupDir, 0775, true);
-
-// --- CSRF ---
-session_start();
-$csrf = $_POST['_csrf'] ?? ($_GET['_csrf'] ?? '');
-if (isset($_SESSION['csrf_token']) && $_SESSION['csrf_token']) {
-  if (!$csrf || !hash_equals($_SESSION['csrf_token'], $csrf)) {
-    http_response_code(403);
-    echo json_encode(['ok'=>false,'error'=>'CSRF failed']); exit;
-  }
+$backupDir = $root . '/config/backups';
+if (!is_dir($backupDir)) {
+  @mkdir($backupDir, 0775, true);
 }
 
+// --- CSRF ---
+$csrf = $_POST['_csrf'] ?? ($_GET['_csrf'] ?? '');
+if (!csrf_check($csrf)) {
+  http_response_code(403);
+  echo json_encode(['ok'=>false,'error'=>'CSRF failed']); exit;
+}
 // Read JSON body
 $raw = null;
 if (!empty($_FILES['file']) && is_uploaded_file($_FILES['file']['tmp_name'])) {
@@ -38,32 +39,39 @@ if (!is_array($data)) { echo json_encode(['ok'=>false,'error'=>'invalid json']);
 
 $applied = ['config'=>false,'security'=>false];
 
-// Helper to safe write with backup
-function write_with_backup($path, $jsonArr, $backupDir) {
-  $ok = false;
-  $ts = gmdate('Ymd_His');
-  $name = basename($path);
-  if (is_file($path)) {
-    @copy($path, $backupDir . '/' . $name . '.' . $ts . '.bak');
+function snapshot_file($path, $backupDir, $prefix) {
+  if (!is_file($path)) return null;
+  $ts = date('Ymd-His');
+  $dst = rtrim($backupDir, '/') . '/' . $prefix . '-' . $ts . '.json';
+  if (@copy($path, $dst)) {
+    @chmod($dst, 0640);
+    return $dst;
   }
+  return null;
+}
+
+// Helper to safe write with backup
+function write_with_backup($path, $jsonArr, $backupDir, $prefix) {
+  snapshot_file($path, $backupDir, $prefix);
   $tmp = $path . '.tmp';
   $bytes = @file_put_contents($tmp, json_encode($jsonArr, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));
-  if ($bytes !== false) {
-    @chmod($tmp, 0640);
-    $ok = @rename($tmp, $path);
-    if (!$ok) { @unlink($tmp); }
+  if ($bytes === false) {
+    return false;
   }
+  @chmod($tmp, 0640);
+  $ok = @rename($tmp, $path);
+  if (!$ok) { @unlink($tmp); }
   return $ok;
 }
 
 // Apply config
 if (array_key_exists('config', $data) && is_array($data['config'])) {
-  if (write_with_backup($cfgFile, $data['config'], $backupDir)) { $applied['config'] = true; }
+  if (write_with_backup($cfgFile, $data['config'], $backupDir, 'config')) { $applied['config'] = true; }
 }
 
 // Apply security
 if (array_key_exists('security', $data) && is_array($data['security'])) {
-  if (write_with_backup($secFile, $data['security'], $backupDir)) { $applied['security'] = true; }
+  if (write_with_backup($secFile, $data['security'], $backupDir, 'security')) { $applied['security'] = true; }
 }
 
 echo json_encode(['ok'=>($applied['config']||$applied['security']), 'applied'=>$applied]);

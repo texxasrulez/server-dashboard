@@ -4,7 +4,7 @@
   grid-template-columns: repeat(auto-fill, minmax(320px,1fr));
   gap:12px;
 }
-#cardsGrid .card{ padding:10px 12px; }
+#cardsGrid .card{ padding:10px 12px; border:1px solid var(--border,rgba(255,255,255,.08)); }
 .card .subtitle{ font-size:12px; opacity:.8; }
 .spark{ width:100%; height:56px; display:block; cursor:crosshair; }
 .legend .chip{ font-size:11px; }
@@ -25,5 +25,33 @@
   /* use default .chip styles */
 }
 
+#cardsGrid .svc-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.4rem;
+  margin-top:.55rem;
+}
+#cardsGrid .svc-actions .chip{
+  font-size:.78rem;
+  padding:0 .65rem;
+}
+
 /* hr tags */
 .hr { border-color:var(--card); }
+
+.sev-badge{
+  display:inline-flex;
+  align-items:center;
+  padding:.1rem .45rem;
+  border-radius:999px;
+  font-size:.75rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+.sev-warn{background:rgba(255,200,0,.18);color:#ffd66a;}
+.sev-crit{background:rgba(215,81,64,.18);color:#ff9c90;}
+.sev-info{background:rgba(80,160,255,.18);color:#a7d0ff;}
+.time-cell{display:flex;flex-direction:column;gap:2px;}
+.time-cell .time-rel{font-weight:600;}
+.time-cell .time-abs{font-size:.75rem;opacity:.75;}

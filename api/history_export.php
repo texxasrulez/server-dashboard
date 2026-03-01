@@ -7,23 +7,20 @@ header('Content-Type: application/json');
 // Admin session OR token (same rules as alerts_eval)
 $ok = false;
 if (!empty($_SESSION['user']) && (($_SESSION['user']['role'] ?? '') === 'admin')) { $ok = true; }
-$given = $_GET['token'] ?? $_POST['token'] ?? '';
-$expected = null;
-if (defined('CRON_TOKEN')) $expected = CRON_TOKEN;
-if (!$expected) $expected = getenv('DASH_CRON_TOKEN');
-if (!$expected) {
-  $tf = __DIR__ . '/../data/cron_token.txt';
-  if (is_file($tf)) $expected = trim(@file_get_contents($tf));
-}
-if ($expected && hash_equals($expected, $given)) { $ok = true; }
+$given = cron_request_token();
+if (!$ok && cron_token_is_valid($given)) { $ok = true; }
 if (!$ok) { http_response_code(403); echo json_encode(['error'=>'forbidden']); exit; }
 
 $type = $_GET['type'] ?? 'probes';
 $start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
 $end   = isset($_GET['end']) ? (int)$_GET['end'] : 0;
-$limit = isset($_GET['limit']) ? max(1, min(20000, (int)$_GET['limit'])) : 10000;
+$limitMax = 200000;
+$limit = isset($_GET['limit']) ? max(1, min($limitMax, (int)$_GET['limit'])) : 10000;
 $service_id = $_GET['service_id'] ?? null;
 $format = $_GET['format'] ?? 'json'; // 'json' or 'csv'
+$perService = ($type !== 'alerts') && (!empty($_GET['per_service']) || !empty($_GET['per_service_limit']));
+$perServiceLimit = isset($_GET['per_service_limit']) ? (int)$_GET['per_service_limit'] : $limit;
+$perServiceLimit = max(10, min(500000, $perServiceLimit));
 
 $file = null;
 $fields = [];
@@ -46,6 +43,7 @@ if (is_file($servicesFile)) {
 }
 
 $out = [];
+$grouped = [];
 if (is_file($file)) {
   $fh = @fopen($file, 'rb');
   if ($fh) {
@@ -66,16 +64,31 @@ if (is_file($file)) {
         if ($sid !== $service_id) continue;
       }
       if ($type !== 'alerts') {
-        // add service name if available
-        $sid = $obj['id'] ?? null;
+        $sid = $obj['id'] ?? ($obj['service_id'] ?? null);
         if ($sid && isset($svcMap[$sid])) {
           $obj['name'] = $svcMap[$sid]['name'] ?? ($svcMap[$sid]['host'] ?? $obj['name'] ?? '');
         }
+        if ($perService) {
+          if (!$sid) $sid = 'unknown';
+          if (!isset($grouped[$sid])) $grouped[$sid] = [];
+          $grouped[$sid][] = $obj;
+          if ($perServiceLimit && count($grouped[$sid]) > $perServiceLimit) array_shift($grouped[$sid]);
+          continue;
+        }
       }
       $out[] = $obj;
-      if (count($out) > $limit) { array_shift($out); }
+      if (!$perService && count($out) > $limit) { array_shift($out); }
     }
     fclose($fh);
+  }
+}
+
+if ($perService && $grouped) {
+  $out = [];
+  foreach ($grouped as $sid=>$items) {
+    foreach ($items as $item) {
+      $out[] = $item;
+    }
   }
 }
 

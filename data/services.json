@@ -1,10 +1,9 @@
 {
     "items": [
-    
         {
             "id": "svc_1",
             "name": "FTP",
-            "type": "other",
+            "type": "app",
             "host": "127.0.0.1",
             "port": 21,
             "check": "tcp",
@@ -15,7 +14,7 @@
         {
             "id": "svc_2",
             "name": "SSH",
-            "type": "other",
+            "type": "app",
             "host": "127.0.0.1",
             "port": 22,
             "check": "tcp",
@@ -26,7 +25,7 @@
         {
             "id": "svc_3",
             "name": "SMTP",
-            "type": "other",
+            "type": "mail",
             "host": "127.0.0.1",
             "port": 25,
             "check": "tcp",
@@ -37,7 +36,7 @@
         {
             "id": "svc_4",
             "name": "DNS",
-            "type": "other",
+            "type": "app",
             "host": "127.0.0.1",
             "port": 53,
             "check": "tcp",
@@ -47,9 +46,9 @@
         },
         {
             "id": "svc_5",
-            "name": "Domain Name",
-            "type": "app",
-            "host": "www.domain.com",
+            "name": "Genesworld.net (HTTP)",
+            "type": "other",
+            "host": "www.genesworld.net",
             "port": 80,
             "check": "http",
             "path": "/",
@@ -59,7 +58,7 @@
         {
             "id": "svc_6",
             "name": "POP",
-            "type": "other",
+            "type": "mail",
             "host": "127.0.0.1",
             "port": 110,
             "check": "tcp",
@@ -70,7 +69,7 @@
         {
             "id": "svc_7",
             "name": "IMAP",
-            "type": "other",
+            "type": "mail",
             "host": "127.0.0.1",
             "port": 143,
             "check": "tcp",
@@ -80,9 +79,9 @@
         },
         {
             "id": "svc_8",
-            "name": "HTTPS",
+            "name": "Genesworld.net (HTTPS)",
             "type": "other",
-            "host": "www.domain.com",
+            "host": "www.genesworld.net",
             "port": 443,
             "check": "http",
             "path": "/",
@@ -92,7 +91,7 @@
         {
             "id": "svc_9",
             "name": "STARTTLS",
-            "type": "other",
+            "type": "mail",
             "host": "127.0.0.1",
             "port": 587,
             "check": "tcp",
@@ -103,7 +102,7 @@
         {
             "id": "svc_10",
             "name": "Spamassassin",
-            "type": "other",
+            "type": "app",
             "host": "127.0.0.1",
             "port": 783,
             "check": "tcp",
@@ -114,7 +113,7 @@
         {
             "id": "svc_11",
             "name": "IMAPS",
-            "type": "other",
+            "type": "mail",
             "host": "127.0.0.1",
             "port": 993,
             "check": "tcp",
@@ -125,7 +124,7 @@
         {
             "id": "svc_12",
             "name": "POPS",
-            "type": "other",
+            "type": "mail",
             "host": "127.0.0.1",
             "port": 995,
             "check": "tcp",
@@ -147,10 +146,10 @@
         {
             "id": "svc_14",
             "name": "ClamAV",
-            "type": "other",
+            "type": "app",
             "host": "127.0.0.1",
             "port": 3310,
-            "check": "tcp",
+            "check": "ping",
             "path": "/",
             "timeout_ms": 800,
             "enabled": true
@@ -168,8 +167,8 @@
         },
         {
             "id": "svc_16",
-            "name": "Control Panel",
-            "type": "other",
+            "name": "Hestia CP",
+            "type": "app",
             "host": "127.0.0.1",
             "port": 8083,
             "check": "tcp",

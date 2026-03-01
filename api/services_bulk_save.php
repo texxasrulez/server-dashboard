@@ -1,7 +1,9 @@
 <?php
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/paths.php';
 require_once __DIR__ . '/../includes/logger.php';
+require_admin();
 header('Content-Type: application/json');
 
 $dataPath = DATA_DIR . '/services.json';
@@ -11,6 +13,10 @@ $payload = json_decode(file_get_contents('php://input'), true);
 if (!$payload || !isset($payload['items']) || !is_array($payload['items'])) {
   http_response_code(400);
   echo json_encode(['error'=>'Expected { items: [...] }']); exit;
+}
+if (!csrf_check_request((string)($payload['_csrf'] ?? $payload['csrf'] ?? ''))) {
+  http_response_code(403);
+  echo json_encode(['error'=>'CSRF failed']); exit;
 }
 
 foreach ($payload['items'] as &$it) {

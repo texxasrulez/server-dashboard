@@ -5,6 +5,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 require_once __DIR__ . '/../includes/init.php';
 require_once __DIR__ . '/../includes/auth.php';
+require_login();
 require_once __DIR__ . '/../lib/Config.php';
 \App\Config::init(dirname(__DIR__));
 require_once __DIR__ . '/_state_path.php';
@@ -235,6 +236,13 @@ if (!function_exists('scan_services')) {
 
 $__raw = file_get_contents('php://input');
 $__body = json_decode($__raw ?: '[]', true) ?: [];
+if (strtoupper((string)($_SERVER['REQUEST_METHOD'] ?? 'GET')) === 'POST') {
+  if (!csrf_check_request((string)($__body['_csrf'] ?? $__body['csrf'] ?? ''))) {
+    http_response_code(403);
+    echo json_encode(['ok'=>false,'error'=>'CSRF failed']);
+    exit;
+  }
+}
 $__action = $__body['action'] ?? 'quick';
 /*__BODY_PARSED__*/
 

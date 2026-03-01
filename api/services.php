@@ -3,7 +3,9 @@ $__t0 = microtime(true);
 
 // Simple file-backed service registry API
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/paths.php';
+require_admin();
 header('Content-Type: application/json');
 
 $store = __DIR__ . '/../data/services.json';
@@ -22,6 +24,11 @@ function write_services($store, $data){
 }
 
 $fn = $_GET['fn'] ?? $_POST['fn'] ?? 'list';
+if ($fn !== 'list' && !csrf_check_request()) {
+  http_response_code(403);
+  echo json_encode(['error'=>'CSRF failed']);
+  exit;
+}
 
 if ($fn === 'list') {
   $data = read_services($store);

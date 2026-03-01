@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') { http_response_code(405); echo json_
 $raw = file_get_contents('php://input');
 $body = json_decode($raw, true);
 if (!$body) $body = $_POST;
+if (!csrf_check_request((string)($body['_csrf'] ?? $body['csrf'] ?? ''))) { http_response_code(403); echo json_encode(['error'=>'CSRF failed']); exit; }
 
 $action = $body['action'] ?? null;
 $ids    = $body['ids'] ?? [];
@@ -32,6 +33,10 @@ foreach ($items as &$it) {
   if ($action === 'silence') {
     $mins = (int)($body['silence_minutes'] ?? 60);
     $it['silenced_until'] = $now + max(1,$mins)*60;
+    $changed = true;
+  }
+  if ($action === 'unsilence') {
+    if (isset($it['silenced_until'])) unset($it['silenced_until']);
     $changed = true;
   }
 }

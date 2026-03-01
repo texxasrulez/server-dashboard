@@ -35,6 +35,30 @@
   margin-top:.25rem;
   font-size:.78rem;
 }
+.service-card .tag.warn{
+  color: var(--warn);
+  border-color: rgba(241,196,15,.45);
+  box-shadow: inset 0 0 0 1px rgba(241,196,15,.12);
+}
+.service-card .tag.muted{
+  color: var(--neutral);
+  border-color: rgba(170,170,170,.35);
+}
+
+.service-card .svc-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.4rem;
+  margin-top:.55rem;
+}
+.service-card .svc-actions .chip{
+  font-size:.78rem;
+  padding:0 .65rem;
+}
+.service-card .svc-actions .chip.is-busy{
+  opacity:.65;
+  pointer-events:none;
+}
 
 /* Status pill */
 .pill{

@@ -25,7 +25,7 @@ Both plain keys and `DASH_`-prefixed variants are read, e.g. `MAIL_TRANSPORT` or
 ## Testing
 - As admin (cookie session) **or** by token:
   ```bash
-  curl -fsS 'https://<host>api/mail_test.php?to=you@example.com&token=YOUR_CRON_TOKEN' | jq .
+  curl -fsS 'https://<host>/web-admin/api/mail_test.php?to=you@example.com&token=YOUR_CRON_TOKEN' | jq .
   ```
 - Response includes `{ ok: true|false, transport, result }` and sends are logged to `state/mail.log.jsonl`.
 

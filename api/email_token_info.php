@@ -1,6 +1,9 @@
 <?php
 // api/email_token_info.php — presence & mtime of OAuth token for an address (Google)
 declare(strict_types=1);
+require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_admin();
 header('Content-Type: application/json; charset=UTF-8');
 function resp($ok, $extra = []) { echo json_encode(array_merge(['ok'=>$ok], $extra)); exit; }
 try {

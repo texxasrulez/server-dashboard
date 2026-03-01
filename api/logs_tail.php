@@ -1,6 +1,9 @@
 <?php
 // api/logs_tail.php — tail + filter a allowlisted log
 require __DIR__.'/_guard.php'; guard_api(['key'=>'logs_tail','require_token'=>false,'type'=>'json']);
+require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_admin();
 header('Content-Type: application/json; charset=utf-8');
 
 function cfg_get($dot, $default=null){

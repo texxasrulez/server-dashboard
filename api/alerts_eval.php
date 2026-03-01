@@ -121,13 +121,8 @@ function __mark_cron($which){
 
 $ok = false;
 if (!empty($_SESSION['user']) && (($_SESSION['user']['role'] ?? '') === 'admin')) { $ok = true; }
-$given = $_GET['token'] ?? $_POST['token'] ?? '';
-$expected = null;
-if (defined('CRON_TOKEN')) $expected = CRON_TOKEN;
-if (!$expected) $expected = getenv('DASH_CRON_TOKEN');
-if (!$expected) { $f = __DIR__ . '/../data/cron_token.txt'; if (file_exists($f)) $expected = trim(file_get_contents($f)); }
-if (!$expected) { $f2 = __DIR__ . '/../data/cron_token.txt'; if (is_file($f2)) $expected = trim(@file_get_contents($f2)); }
-if ($expected && hash_equals($expected, $given)) { $ok = true; }
+$given = cron_request_token();
+if (!$ok && cron_token_is_valid($given)) { $ok = true; }
 if (!$ok) { http_response_code(403); echo json_encode(['error' => 'forbidden']); exit; }
 
 $probe = ((isset($_GET['probe']) && $_GET['probe'] == '1') || (isset($_POST['probe']) && $_POST['probe'] == '1'));
@@ -174,6 +169,15 @@ $fired = [];
 
 foreach ($rules as &$r) {
   if (empty($r['enabled'])) continue;
+  $silencedUntil = isset($r['silenced_until']) ? intval($r['silenced_until']) : 0;
+  if ($silencedUntil > 1000000000000) { $silencedUntil = (int) round($silencedUntil / 1000); }
+  if ($silencedUntil > 0) {
+    if ($silencedUntil > $now) {
+      continue;
+    } else {
+      unset($r['silenced_until']);
+    }
+  }
   $sid = $r['service_id'] ?? '';
   $metric = $r['metric'] ?? 'status';
   $op = $r['op'] ?? '>';

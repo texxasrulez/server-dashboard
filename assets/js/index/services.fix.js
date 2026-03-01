@@ -5,6 +5,8 @@
 (function(){
   const Bus = (window.Dashboard && window.Dashboard.Bus) || new EventTarget();
   const DEBUG = /[?&]debugStatus=1/.test(location.search);
+  const ALERTS_BULK = 'api/alerts_bulk.php';
+  let servicesRoot = null;
 
   const LIST_CANDIDATES = [
     'api/services_list.php',
@@ -48,9 +50,19 @@
 
   function esc(s){ return String(s==null?'':s); }
   function tag(s){ return s ? `<span class="tag">${esc(s)}</span>` : ''; }
+  function relTime(ts){
+    if (!ts) return '';
+    if (ts > 1e12) ts = Math.floor(ts/1000);
+    const diff = Math.max(0, Math.floor(Date.now()/1000) - ts);
+    if (diff < 45) return 'just now';
+    const m = Math.floor(diff/60); if (m < 60) return m+'m ago';
+    const h = Math.floor(m/60); if (h < 24) return h+'h ago';
+    const d = Math.floor(h/24); return d+'d ago';
+  }
 
   function renderCard(svc){
-    const id   = esc(svc.id || '');
+    const rawId = svc.id || '';
+    const id   = esc(rawId);
     const name = esc(svc.name || svc.service || 'Service');
     const host = esc(svc.host || '');
     const port = svc.port != null ? String(svc.port) : '';
@@ -58,6 +70,29 @@
     const type = esc(svc.type || svc.category || 'other');
     const path = esc(svc.path || '');
     const url  = (check==='http' && host) ? (host.match(/^https?:/)? host : ('http://' + host + (port?(':'+port):'') + path)) : '';
+    const uptimeMeta = svc.uptime_meta || {};
+    const alertMeta = svc.alert_meta || {};
+    const lastAlertTs = alertMeta.last_alert ? alertMeta.last_alert.ts : null;
+    const silencedUntil = alertMeta.silenced_until || null;
+    const historyHref = rawId ? `history.php?service=${encodeURIComponent(rawId)}` : '';
+    const actions = [];
+    if (historyHref){
+      actions.push(`<a class="chip small neutral svc-action" href="${historyHref}" target="_blank" rel="noopener">View history</a>`);
+    }
+    if (alertMeta && Array.isArray(alertMeta.rule_ids) && alertMeta.rule_ids.length){
+      const rulesAttr = alertMeta.rule_ids.map(r => esc(r)).join(',');
+      actions.push(`<a class="chip small warn svc-action" href="#" data-action="mute" data-rules="${rulesAttr}">Silence alerts</a>`);
+    }
+    const actionsHtml = actions.length ? `<div class="svc-actions">${actions.join('')}</div>` : '';
+    const metaTags = [
+      tag(type),
+      tag(check),
+      host ? `<span class="tag">${host}${port?':'+port:''}${path}</span>` : '',
+      url ? `<a class="tag" href="${url}" target="_blank" rel="noopener">open</a>` : '',
+      (uptimeMeta && uptimeMeta.uptime_pct != null) ? `<span class="tag">uptime ${uptimeMeta.uptime_pct}%</span>` : '',
+      lastAlertTs ? `<span class="tag warn">alert ${relTime(lastAlertTs)}</span>` : '',
+      silencedUntil ? `<span class="tag muted">muted ${relTime(silencedUntil)}</span>` : ''
+    ].join(' ');
 
     return `
       <div class="card service-card" data-svc-id="${id}" data-svc-name="${name}">
@@ -72,15 +107,16 @@
           </div>
         </div>
         <div class="muted small" style="margin-top:.25rem">
-          ${tag(type)} ${tag(check)} ${host?`<span class="tag">${host}${port?':'+port:''}${path}</span>`:''}
-          ${url?`<a class="tag" href="${url}" target="_blank" rel="noopener">open</a>`:''}
+          ${metaTags}
         </div>
+        ${actionsHtml}
       </div>`;
   }
 
   async function render(){
     const root = document.getElementById('services');
     if (!root) return;
+    servicesRoot = root;
     const list = await loadList();
     root.innerHTML = list.map(renderCard).join('');
     applyCounts();
@@ -186,9 +222,51 @@
 
   async function refreshAll(){ await render(); await applyStatus(); }
 
+  async function silenceRules(ids, minutes){
+    const res = await fetch(ALERTS_BULK, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({action:'silence', ids: ids, silence_minutes: minutes})
+    });
+    if (!res.ok) throw new Error('HTTP '+res.status);
+    return res.json();
+  }
+
+  function handleCardActions(ev){
+    const btn = ev.target.closest('[data-action]');
+    if (!btn || btn.dataset.action !== 'mute') return;
+    ev.preventDefault();
+    const rules = (btn.dataset.rules||'').split(',').map(s=>s.trim()).filter(Boolean);
+    if (!rules.length){
+      window.toast && window.toast.warn && window.toast.warn('No alert rules for this service.');
+      return;
+    }
+    const card = btn.closest('.service-card');
+    const svcName = card?.dataset?.svcName || card?.dataset?.svcId || 'service';
+    const minsInput = prompt(`Mute alerts for ${svcName} (minutes):`, '60');
+    if (!minsInput) return;
+    const mins = Math.max(1, parseInt(minsInput, 10) || 60);
+    const prev = btn.textContent;
+    btn.textContent = 'Muting…';
+    btn.classList.add('is-busy');
+    silenceRules(rules, mins).then(()=>{
+      window.toast && window.toast.success && window.toast.success(`Alerts muted for ${mins}m.`);
+      refreshAll();
+    }).catch(err=>{
+      window.toast && window.toast.error && window.toast.error('Mute failed: ' + (err && err.message ? err.message : err));
+    }).finally(()=>{
+      btn.textContent = prev;
+      btn.classList.remove('is-busy');
+    });
+  }
+
   // Hooks
   Bus.addEventListener('dashboard:tick', refreshAll);
-  document.addEventListener('DOMContentLoaded', refreshAll);
+  document.addEventListener('DOMContentLoaded', ()=>{
+    servicesRoot = document.getElementById('services');
+    servicesRoot?.addEventListener('click', handleCardActions);
+    refreshAll();
+  });
   window.addEventListener('services:probeUpdate', (e)=>{
     const d = e?.detail || {};
     const arr = Array.isArray(d.results) ? d.results : (Array.isArray(d.items)? d.items : []);

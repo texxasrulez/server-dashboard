@@ -1,6 +1,12 @@
 <?php require_once __DIR__.'/_state_path.php'; ?>
 <?php
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+$ok = false;
+if (!empty($_SESSION['user']) && (($_SESSION['user']['role'] ?? '') === 'admin')) $ok = true;
+$given = cron_request_token();
+if (!$ok && cron_token_is_valid($given)) $ok = true;
+if (!$ok) { http_response_code(403); echo json_encode(['error'=>'forbidden']); exit; }
 header('Content-Type: application/json');
 
 function microtime_ms() { return (int)floor(microtime(true)*1000); }

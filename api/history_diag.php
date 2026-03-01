@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/_state_path.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_admin();
 header('Content-Type: application/json; charset=utf-8');
 $file = dashboard_state_path('services_status_history.jsonl');
 $last = 0; $cnt = 0;

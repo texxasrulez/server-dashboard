@@ -1,5 +1,5 @@
 <?php
-require __DIR__.'/_guard.php'; guard_api(['key'=>'metrics_prom','require_token'=>true,'type':'text']);
+require __DIR__.'/_guard.php'; guard_api(['key'=>'metrics_prom','require_token'=>true,'type'=>'text']);
 // api/metrics_prom.php — Prometheus text exposition metrics for Server Dashboard
 header('Content-Type: text/plain; charset=utf-8');
 header('X-Robots-Tag: noindex');
@@ -52,7 +52,7 @@ metric('server_diag_up', '1 if metrics endpoint executed', 'gauge');
 echo "server_diag_up 1\n";
 
 metric('server_diag_load1', '1-minute load average', 'gauge');
-echo "server_diag_load1{$labels} ", number_format($l1,2,'.',''), "\n";
+echo "server_diag_load1 ", number_format($l1,2,'.',''), "\n";
 metric('server_diag_load5', '5-minute load average', 'gauge');
 echo "server_diag_load5 ", number_format($l5,2,'.',''), "\n";
 metric('server_diag_load15', '15-minute load average', 'gauge');
@@ -131,4 +131,3 @@ Accept: */*
     echo "server_diag_service_http_match{$lab2} {$match}\n";
   }
 }
-

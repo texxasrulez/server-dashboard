@@ -6,6 +6,11 @@
   function el(tag, cls){ var e=document.createElement(tag); if(cls) e.className=cls; return e; }
   function isPlainObject(x){ return x && typeof x==='object' && !Array.isArray(x); }
   function toInt(x){ var n = +x; return isFinite(n) ? n : 0; }
+  function withCsrf(url){
+    var token = window.__CONFIG_CSRF__ || '';
+    var sep = url.indexOf('?') === -1 ? '?' : '&';
+    return url + sep + '_csrf=' + encodeURIComponent(token);
+  }
 
   var schema = window.__CONFIG_SCHEMA__ || {};
   var data   = window.__CONFIG_DATA__   || {};
@@ -185,6 +190,36 @@ if (isPlainObject(def) && !def.type){ var label=def._label||k; renderObject(path
 
   // ---------- Built-in enhancers ----------
   function builtinEnhancers(section, pane){
+    // Alerts tab: show hints for quick mute presets + latency defaults
+    if (String(section||'').toLowerCase() === 'alerts' && pane){
+      try{
+        var presetInput = pane.querySelector('[name="alerts.mute_presets"]');
+        if (presetInput){
+          var host = presetInput.closest('.field') || presetInput.parentElement;
+          if (host && !host.querySelector('[data-role="preset-preview"]')){
+            var preview = el('div','muted small');
+            preview.dataset.role = 'preset-preview';
+            var raw = presetInput.value || (data.alerts && data.alerts.mute_presets) || '';
+            var list = String(raw||'').split(/[\s,]+/).map(function(n){ return parseInt(n,10)||0; }).filter(function(n){ return n>0; });
+            preview.textContent = list.length
+              ? ('Quick mute buttons will offer: ' + list.map(function(n){ return n+'m'; }).join(', '))
+              : 'Add minutes separated by commas to enable quick mute buttons on Alerts.';
+            host.appendChild(preview);
+          }
+        }
+        ['latency_warn_ms','latency_fail_ms'].forEach(function(key){
+          var input = pane.querySelector('[name="alerts.service_defaults.'+key+'"]');
+          if (!input || input.dataset.hinted) return;
+          var wrap = input.closest('.field') || input.parentElement;
+          if (!wrap) return;
+          var note = el('div','muted small');
+          note.dataset.role = 'latency-default-note';
+          note.textContent = 'Used to prefill latency alert thresholds and helper text.';
+          wrap.appendChild(note);
+          input.dataset.hinted = '1';
+        });
+      }catch(_){}
+    }
   // --- Site: Backup & Restore + Retention (in-core, unified) ---
   try {
     if (String(section||'').toLowerCase() === 'site' && pane) {
@@ -225,21 +260,47 @@ if (isPlainObject(def) && !def.type){ var label=def._label||k; renderObject(path
         var keepLbl2 = el('span'); keepLbl2.textContent='files'; keepLbl2.className='muted';
 
         var stats = el('span'); stats.className='muted'; stats.textContent='(loading stats…)';
+        var latestInfo = el('div','muted'); latestInfo.style.marginTop='.4rem'; latestInfo.textContent='Last backup: (loading…)';
+
+        function humanSize(bytes){
+          if (!bytes && bytes!==0) return '';
+          var units=['B','KB','MB','GB','TB'];
+          var n=Math.abs(bytes); var u=0;
+          while(n>=1024 && u<units.length-1){ n/=1024; u++; }
+          return (bytes===0?'0':n.toFixed(n>=10||u===0?0:1))+' '+units[u];
+        }
         function refreshStats(){
-          fetch('api/config_backup.php?stats=1', {credentials:'same-origin'})
+          fetch(withCsrf('api/config_backup.php?stats=1'), {credentials:'same-origin'})
           .then(function(r){ return r.json().catch(function(){ return null; }); })
           .then(function(j){
             if(!j||!j.ok) throw new Error('stats failed');
-            var cnt=(j.count!=null? j.count : '?'); var sz=(j.total_size_human || j.total_size || '');
-            stats.textContent='(current: '+cnt+' file'+(cnt==1?'':'s')+' / '+sz+')';
+            var cnt=(j.count!=null? j.count : '?');
+            var sz=(j.total_size_human || j.total_size || '');
+            var dir=j.backup_dir || 'config/backups';
+            stats.textContent='('+dir+' · '+cnt+' file'+(cnt==1?'':'s')+' / '+sz+')';
           }).catch(function(){ stats.textContent=''; });
         }
+        function refreshLatest(){
+          fetch(withCsrf('api/config_backup.php?latest=1'), {credentials:'same-origin'})
+          .then(function(r){ return r.json().catch(function(){ return null; }); })
+          .then(function(j){
+            if(!j||!j.ok){ throw new Error('latest failed'); }
+            if(!j.exists){ latestInfo.textContent='Last backup: none yet'; return; }
+            var whenStr = j.mtime ? new Date(j.mtime*1000).toLocaleString() : '';
+            var sizeStr = j.size!=null ? humanSize(j.size) : '';
+            var text = 'Last backup: ' + (j.file || '(unknown)');
+            if (sizeStr) text += ' · ' + sizeStr;
+            if (whenStr) text += ' · ' + whenStr;
+            latestInfo.textContent = text;
+          }).catch(function(){ latestInfo.textContent='Last backup: unknown'; });
+        }
         refreshStats();
+        refreshLatest();
 
         var pruneBtn = el('button','btn'); pruneBtn.type='button'; pruneBtn.textContent='Prune now';
         pruneBtn.addEventListener('click', function(){
           var v=Math.max(5, Math.min(200, parseInt(keep.value||'20',10)));
-          fetch('api/config_backup.php?prune=1&keep='+encodeURIComponent(v), {method:'POST'})
+          fetch(withCsrf('api/config_backup.php?prune=1&keep='+encodeURIComponent(v)), {method:'POST'})
           .then(function(r){ return r.json().catch(function(){ return null; }); })
           .then(function(j){ if(j&&j.ok){ window.toast&&toast.success&&toast.success('Pruned — kept '+(j.keep||'?')+', deleted '+(j.deleted||0)); refreshStats(); } else { throw new Error((j&&j.error)||'Prune failed'); } })
           .catch(function(e){ window.toast&&toast.error&&toast.error('Prune failed: '+(e&&e.message||'unknown')); });
@@ -247,7 +308,7 @@ if (isPlainObject(def) && !def.type){ var label=def._label||k; renderObject(path
 
         var mkBtn = el('button','btn'); mkBtn.type='button'; mkBtn.textContent='Create backup now';
         mkBtn.addEventListener('click', function(){
-          fetch('api/config_backup.php', {method:'POST'})
+          fetch(withCsrf('api/config_backup.php'), {method:'POST'})
           .then(function(r){ return r.json().catch(function(){ return null; }); })
           .then(function(j){ if(j&&j.ok){ window.toast&&toast.success&&toast.success('Backup saved: '+(j.path||'')); refreshStats(); } else { throw new Error((j&&j.error)||'Backup failed'); } })
           .catch(function(e){ window.toast&&toast.error&&toast.error('Backup failed: '+(e&&e.message||'unknown')); });
@@ -255,20 +316,22 @@ if (isPlainObject(def) && !def.type){ var label=def._label||k; renderObject(path
 
         var dlBtn = el('button','btn'); dlBtn.type='button'; dlBtn.textContent='Download latest backup';
         dlBtn.addEventListener('click', function(){
-          fetch('api/config_backup.php?latest=1', {credentials:'same-origin'})
+          fetch(withCsrf('api/config_backup.php?latest=1'), {credentials:'same-origin'})
           .then(function(r){ return r.json().catch(function(){ return null; }); })
-          .then(function(j){ if(j&&j.ok&&j.exists){ window.location.href='api/config_backup.php?download_latest=1'; } else { throw new Error('No backups found'); } })
+          .then(function(j){ if(j&&j.ok&&j.exists){ window.location.href=withCsrf('api/config_backup.php?download_latest=1'); } else { throw new Error('No backups found'); } })
           .catch(function(e){ window.toast&&toast.error&&toast.error('Download failed: '+(e&&e.message||'unknown')); });
         });
 
         row2.append(keepLbl, keep, keepLbl2, stats, pruneBtn, mkBtn, dlBtn);
-        blk2.appendChild(row2); pane.appendChild(blk2);
+        blk2.appendChild(row2);
+        blk2.appendChild(latestInfo);
+        pane.appendChild(blk2);
       }
     }
   } catch(_){}
   // --- end Site: Backup & Restore + Retention ---
 
-    if (section.toLowerCase()==='email' || section.toLowerCase()==='mail'){
+    if (String(section||'').toLowerCase()==='email' || String(section||'').toLowerCase()==='mail'){
       // Remove schema-rendered "(managed by UI) accounts" field
       var dead = $('[name="email.accounts"]') || $('[name="mail.accounts"]') || $('[name="email[accounts]"]');
       if (dead && dead.closest){ var host = dead.closest('.field'); if (host && host.parentNode) host.parentNode.removeChild(host); }
@@ -393,15 +456,19 @@ if (isPlainObject(def) && !def.type){ var label=def._label||k; renderObject(path
 
               if (!host) { window.toast&&window.toast.warn&&window.toast.warn('SMTP Diagnose: host is empty'); return; }
 
-              var q = new URLSearchParams();
-              q.set('host', host);
-              if (port) q.set('port', port);
-              if (secure) q.set('secure', secure);
-              if (transport) q.set('transport', transport);
-              if (user) q.set('user', user);
-              if (pass) q.set('pass', pass);
+              var payload = {_csrf: CSRF, host: host};
+              if (port) payload.port = port;
+              if (secure) payload.secure = secure;
+              if (transport) payload.transport = transport;
+              if (user) payload.user = user;
+              if (pass) payload.pass = pass;
 
-              fetch('api/smtp_probe.php?'+String(q), {credentials:'same-origin'})
+              fetch('api/smtp_probe.php', {
+                method:'POST',
+                credentials:'same-origin',
+                headers:{'Content-Type':'application/json'},
+                body: JSON.stringify(payload)
+              })
                 .then(function(r){ return r.json().catch(function(){ return null; }); })
                 .then(function(j){
                   if (!j){ window.toast&&window.toast.error&&window.toast.error('SMTP Diagnose: network/parse error'); return; }

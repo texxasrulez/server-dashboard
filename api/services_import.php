@@ -1,11 +1,18 @@
 <?php
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/paths.php';
+require_admin();
 header('Content-Type: application/json');
 
 $dataPath = __DIR__ . '/../data/services.json';
 @mkdir(dirname($dataPath), 0775, true);
 if (!file_exists($dataPath)) file_put_contents($dataPath, json_encode(['items'=>[]], JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));
+if (!csrf_check_request()) {
+  http_response_code(403);
+  echo json_encode(['error'=>'CSRF failed']);
+  exit;
+}
 
 $raw = file_get_contents('php://input');
 $format = strtolower($_GET['format'] ?? '');

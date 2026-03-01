@@ -2,6 +2,10 @@
 // api/email_status.php — multi-account status with Gmail OAuth + IMAP fallback (robust accounts parsing)
 declare(strict_types=1);
 
+require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_admin();
+
 header('Content-Type: application/json; charset=utf-8');
 
 set_error_handler(function($no,$str){ /* swallow non-fatal */ });
@@ -10,7 +14,6 @@ set_exception_handler(function(Throwable $e){
   echo json_encode(['ok'=>false,'error'=>$e->getMessage()], JSON_UNESCAPED_SLASHES); exit;
 });
 
-require_once __DIR__ . '/../includes/init.php';
 require_once __DIR__ . '/../lib/Config.php';
 \App\Config::init(dirname(__DIR__));
 
@@ -20,6 +23,15 @@ function cfg($key, $default=null){
 }
 function json_out($arr){ echo json_encode($arr, JSON_UNESCAPED_SLASHES); exit; }
 function now(){ return time(); }
+
+function notification_link_default(string $address = ''): string {
+  $host = '';
+  if ($address && strpos($address, '@') !== false) {
+    $host = strtolower(substr(strrchr($address, '@') ?: '', 1));
+  }
+  if ($host) return 'https://' . $host . '/';
+  return 'https://' . ($_SERVER['HTTP_HOST'] ?? 'localhost') . '/';
+}
 
 function provider_guess(string $address): string {
   $host = strtolower(substr(strrchr($address, '@') ?: '', 1));
@@ -175,6 +187,7 @@ foreach ($accs as $a) {
   $addr = $a['address'];
   $prov = $a['provider'];
   $row = ['address'=>$addr,'provider'=>$prov,'unseen'=>null];
+  $notify_link = trim((string) cfg('email.notification_link', ''));
   if ($prov === 'google') {
     $res = gmail_unread_count($addr);
     $row = array_merge($row, $res);
@@ -183,8 +196,11 @@ foreach ($accs as $a) {
     $res = imap_unread_count($addr, (string)($a['password'] ?? ''));
     $row = array_merge($row, $res);
     if (!empty($res['unseen'])) $total += (int)$res['unseen'];
-    $domain = strtolower(substr(strrchr($addr, '@') ?: '', 1));
-    if (!isset($row['web']) && $domain) $row['web'] = 'https://' . $domain . '/mail/';
+  }
+  if ($notify_link !== '' && !in_array($prov, ['google','microsoft','yahoo'], true)) {
+    $row['web'] = $notify_link;
+  } elseif (!isset($row['web']) || $row['web'] === '') {
+    $row['web'] = notification_link_default($addr);
   }
   $outAccs[] = $row;
 }

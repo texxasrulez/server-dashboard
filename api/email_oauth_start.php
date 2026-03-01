@@ -2,8 +2,10 @@
 // api/email_oauth_start.php — builds a correct absolute redirect_uri (no double /api)
 declare(strict_types=1);
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../lib/Config.php';
 \App\Config::init(dirname(__DIR__));
+require_login();
 
 function base_url_from_request(): string {
     $https = (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
@@ -26,6 +28,8 @@ function b64url(string $s): string {
 
 $provider = strtolower(trim($_GET['provider'] ?? ''));
 $address  = trim($_GET['address'] ?? '');
+$nonce = bin2hex(random_bytes(16));
+$_SESSION['oauth_state_nonce'] = $nonce;
 
 if (!in_array($provider, ['google','microsoft','yahoo','outlook'], true)) {
     http_response_code(400);
@@ -52,7 +56,7 @@ switch ($provider) {
       'prompt'        => 'consent',
       'login_hint'    => $address,
       // carry provider + address so callback can file tokens per-account
-      'state'         => b64url(json_encode(['p'=>'google','a'=>$address], JSON_UNESCAPED_SLASHES)),
+      'state'         => b64url(json_encode(['p'=>'google','a'=>$address,'n'=>$nonce], JSON_UNESCAPED_SLASHES)),
     ];
     $qs = http_build_query($params, '', '&', PHP_QUERY_RFC3986);
     header('Location: ' . $auth . '?' . $qs, true, 302);

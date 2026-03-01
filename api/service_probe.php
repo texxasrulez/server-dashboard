@@ -1,6 +1,13 @@
 <?php
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
 header('Content-Type: application/json');
+
+$ok = false;
+if (!empty($_SESSION['user']) && (($_SESSION['user']['role'] ?? '') === 'admin')) $ok = true;
+$given = cron_request_token();
+if (!$ok && cron_token_is_valid($given)) $ok = true;
+if (!$ok) { http_response_code(403); echo json_encode(['error'=>'forbidden']); exit; }
 
 function microtime_ms() { return (int)floor(microtime(true)*1000); }
 function check_tcp($host,$port,$timeout=2){ $start=microtime_ms(); $fp=@fsockopen($host,(int)$port,$errno,$errstr,$timeout); $lat=microtime_ms()-$start; if(!$fp) return ['status'=>'down','latency_ms'=>$lat,'error'=>"$errno $errstr"]; fclose($fp); return ['status'=>'up','latency_ms'=>$lat]; }

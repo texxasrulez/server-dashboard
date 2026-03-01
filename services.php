@@ -7,7 +7,7 @@ require_admin();
   $PAGE_CSS   = 'assets/css/pages/services.css';
   $REQUIRE_ADMIN = true; include __DIR__.'/includes/head.php'; ?>
 <div class="card">
-  
+<div class="card">
 <div class="row between">
   <div class="section-title">Services</div>
   <div class="row gap">
@@ -15,7 +15,7 @@ require_admin();
     <nav class="tabs inline">
       <button id="btnAddService" class="btn small">Add Service</button>
       <button id="btnImport" class="btn small">Import</button>
-      <button id="btnExportJson" class="btn small">Export JSON</button>
+      <button id="btnExportJson" class="btn small"><span data-i18n="history.export_json">Export JSON</span></button>
       <button id="btnExportCsv" class="btn small">Export CSV</button>
     </nav>
     <div class="row gap" id="autoprobeWrap" style="margin-left:.5rem">
@@ -32,8 +32,8 @@ require_admin();
     <input id="importFile" type="file" accept=".json,.csv" hidden />
   </div>
 </div>
-
-  
+</div>
+ <div class="card">
     <div class="table-scroll"><table class="js-sortable table" id="servicesTable">
       <thead>
         <tr>
@@ -90,10 +90,11 @@ require_admin();
       </div>
       <div class="row between" style="margin-top:.75rem">
         <label class="row" style="gap:.35rem"><input type="checkbox" id="f_testOnSave"/><span class="muted">Test on save</span></label>
-        <div class="row gap"><button class="btn" id="saveService">Save</button></div>
+        <div class="row gap"><button class="btn" id="saveService"><span data-i18n="common.save">Save</span></button></div>
       </div>
     </form>
   </div>
+</div>
 </div>
 
 <script defer src="assets/js/pages/services.js"></script>

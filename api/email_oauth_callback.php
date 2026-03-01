@@ -2,8 +2,10 @@
 // api/email_oauth_callback.php — exchanges code for tokens; stores per account
 declare(strict_types=1);
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../lib/Config.php';
 \App\Config::init(dirname(__DIR__));
+require_login();
 
 function base_url_from_request(): string {
     $https = (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
@@ -42,6 +44,15 @@ if (!$code) {
 $stateData = json_decode(b64url_decode($state), true) ?: [];
 $provider  = $stateData['p'] ?? 'google';
 $address   = $stateData['a'] ?? '';
+$nonce     = $stateData['n'] ?? '';
+
+$expectedNonce = $_SESSION['oauth_state_nonce'] ?? '';
+unset($_SESSION['oauth_state_nonce']);
+if (!is_string($nonce) || $nonce === '' || !is_string($expectedNonce) || $expectedNonce === '' || !hash_equals($expectedNonce, $nonce)) {
+  http_response_code(400);
+  echo "<h1>Invalid OAuth state</h1>";
+  exit;
+}
 
 if ($provider !== 'google') {
   http_response_code(400);

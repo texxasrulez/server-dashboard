@@ -1,54 +1,89 @@
 <?php
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../lib/Config.php';
+require_admin();
 header('Content-Type: application/json');
 
-$SEC_FILE = DATA_DIR . '/security_config.json';
-if (!is_dir(DATA_DIR)) { @mkdir(DATA_DIR, 0775, true); }
+\App\Config::init(dirname(__DIR__));
 
 $raw = file_get_contents('php://input');
 $body = json_decode($raw, true);
 if (!is_array($body)) { echo json_encode(['ok'=>false,'error'=>'invalid body']); exit; }
 
-// preserve existing smtp_pass when client sends empty
-if (empty($body['smtp_pass']) && file_exists($SEC_FILE)) {
-  $cur_raw = @file_get_contents($SEC_FILE);
-  $cur = json_decode($cur_raw, true);
-  if (is_array($cur) && !empty($cur['smtp_pass'])) {
-    $body['smtp_pass'] = $cur['smtp_pass'];
+$csrf = (string)($body['_csrf'] ?? $body['csrf'] ?? '');
+if (!csrf_check($csrf)) { http_response_code(403); echo json_encode(['ok'=>false,'error'=>'CSRF failed']); exit; }
+unset($body['_csrf'], $body['csrf']);
+
+$normalized = [];
+foreach ($body as $k=>$v) {
+  $normalized[strtolower($k)] = $v;
+}
+
+function parse_emails($value) {
+  if (is_array($value)) {
+    return array_values(array_filter(array_map(function($v){ return trim((string)$v); }, $value)));
+  }
+  $parts = preg_split('/\s*,\s*/', (string)$value, -1, PREG_SPLIT_NO_EMPTY);
+  $out = [];
+  foreach ($parts as $p) {
+    $t = trim($p);
+    if ($t !== '') $out[] = $t;
+  }
+  return $out;
+}
+
+$patch = [];
+function assign_patch(array &$dest, array $path, $value) {
+  $node =& $dest;
+  foreach ($path as $i => $segment) {
+    if ($i === count($path)-1) {
+      $node[$segment] = $value;
+    } else {
+      if (!isset($node[$segment]) || !is_array($node[$segment])) $node[$segment] = [];
+      $node =& $node[$segment];
+    }
   }
 }
 
-// atomic write
-$tmp = $SEC_FILE . '.tmp';
-if (@file_put_contents($tmp, json_encode($body, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)) === false) {
-  echo json_encode(['ok'=>false,'error'=>'write failed']); exit;
-}
-@chmod($tmp, 0640);
-@rename($tmp, $SEC_FILE);
+$map = [
+  'mail_transport' => ['mail','mail_transport'],
+  'mail_from'      => ['mail','mail_from'],
+  'mail_replyto'   => ['mail','mail_replyto'],
+  'sendmail_path'  => ['mail','sendmail_path'],
+  'smtp_host'      => ['mail','smtp_host'],
+  'smtp_port'      => ['mail','smtp_port'],
+  'smtp_secure'    => ['mail','smtp_secure'],
+  'smtp_user'      => ['mail','smtp_user'],
+  'smtp_pass'      => ['mail','smtp_pass'],
+  'smtp_timeout'   => ['mail','smtp_timeout'],
+  'alert_emails'   => ['mail','sec_email'],
+  'sec_email'      => ['mail','sec_email'],
+  'email'          => ['mail','sec_email'],
+  'cron_token'     => ['alerts','cron_token'],
+  'admin_emails'   => ['security','admin_emails'],
+  'allowed_origins'=> ['security','allowed_origins'],
+  'ip_allowlist'   => ['security','ip_allowlist'],
+];
 
-
-// also mirror CRON_TOKEN into data/cron_token.txt for cron/probe endpoints
-try {
-  
-  // Robust cron token extraction: accept multiple shapes (flat and nested)
-  $tok = '';
-  // flat keys first (uppercase then lowercase)
-  if (!$tok && !empty($body['CRON_TOKEN'])) $tok = (string)$body['CRON_TOKEN'];
-  if (!$tok && !empty($body['cron_token'])) $tok = (string)$body['cron_token'];
-  // nested common shapes (alerts.cron_token, security.cron_token, cron.token, api.cron_token, history.token)
-  if (!$tok && isset($body['alerts']) && is_array($body['alerts']) && !empty($body['alerts']['cron_token'])) $tok = (string)$body['alerts']['cron_token'];
-  if (!$tok && isset($body['security']) && is_array($body['security']) && !empty($body['security']['cron_token'])) $tok = (string)$body['security']['cron_token'];
-  if (!$tok && isset($body['cron']) && is_array($body['cron']) && !empty($body['cron']['token'])) $tok = (string)$body['cron']['token'];
-  if (!$tok && isset($body['api']) && is_array($body['api']) && !empty($body['api']['cron_token'])) $tok = (string)$body['api']['cron_token'];
-  if (!$tok && isset($body['history']) && is_array($body['history']) && !empty($body['history']['token'])) $tok = (string)$body['history']['token'];
-  if ($tok !== '') {
-    $file = DATA_DIR . '/cron_token.txt';
-    $tmp  = $file . '.tmp';
-    @file_put_contents($tmp, $tok . PHP_EOL);
-    @chmod($tmp, 0640);
-    @rename($tmp, $file);
+foreach ($map as $key => $path) {
+  if (!array_key_exists($key, $normalized)) continue;
+  $value = $normalized[$key];
+  if ($key === 'smtp_pass' && ($value === '' || $value === null)) {
+    continue; // preserve existing
   }
-} catch (Throwable $e) { /* ignore */ }
+  if (in_array($key, ['alert_emails','sec_email','email','admin_emails','allowed_origins','ip_allowlist'], true)) {
+    $value = parse_emails($value);
+  }
+  if (in_array($key, ['smtp_port','smtp_timeout'], true)) {
+    $value = is_numeric($value) ? (int)$value : null;
+  }
+  assign_patch($patch, $path, $value);
+}
 
+if (!$patch) {
+  echo json_encode(['ok'=>false,'error'=>'no changes']); exit;
+}
 
+\App\Config::setMany($patch);
 echo json_encode(['ok'=>true]);

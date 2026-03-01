@@ -51,9 +51,9 @@
     if (p === 'yahoo' || /(^|\.)yahoo\./.test(domain))
       return "https://mail.yahoo.com/";
 
-    // Fallback: your rule → https://<domain>/mail/
-    if (domain) return "https://" + domain + "/mail/";
-    return "https://" + location.hostname + "/mail/";
+    // Fallback: https://<domain>/
+    if (domain) return "https://" + domain + "/";
+    return "https://" + location.hostname + "/";
   }
 
   function parseTolerant(txt){

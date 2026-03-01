@@ -8,13 +8,19 @@
   const api = {
     list:   ()=> fetch('api/services_list.php').then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
     upsert: (item)=> fetch('api/service_upsert.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(item)}).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
-    del:    (id)=> fetch('api/service_delete.php?id='+encodeURIComponent(id)).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
+    del:    (id)=> fetch('api/service_delete.php',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({id})}).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
     probe:  (item)=> fetch('api/service_probe.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(item)}).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
     toggle: (id)=> fetch('api/service_toggle.php',{method:'POST',body:new URLSearchParams({id})}).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
     importJson: (payload)=> fetch('api/services_import.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
     importCsv:  (csvText)=> fetch('api/services_import.php?format=csv',{method:'POST',headers:{'Content-Type':'text/csv'},body:csvText}).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
-    probeAll: ()=> fetch('api/services_probe_all.php').then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); })
+    probeAll: ()=> fetch('api/services_probe_all.php').then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
+    silenceRules: (ids, minutes)=> fetch('api/alerts_bulk.php',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({action:'silence', ids: ids, silence_minutes: minutes})
+    }).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); })
   };
+  const SERVICE_CACHE = new Map();
 
   // ---------- helpers ----------
   const isPort = (v)=> Number.isInteger(v) && v>=1 && v<=65535;
@@ -46,6 +52,21 @@
     span.textContent = s.toUpperCase();
     return span;
   }
+  function relTime(ts){
+    if (!ts) return '';
+    if (ts > 1e12) ts = Math.floor(ts / 1000);
+    const diff = Math.max(0, Math.floor(Date.now()/1000) - ts);
+    if (diff < 45) return 'just now';
+    const m = Math.floor(diff/60); if (m < 60) return m+'m ago';
+    const h = Math.floor(m/60); if (h < 24) return h+'h ago';
+    const d = Math.floor(h/24); return d+'d ago';
+  }
+  function badge(text, cls){
+    const span = document.createElement('span');
+    span.className = 'chip '+(cls||'neutral');
+    span.textContent = text;
+    return span;
+  }
 
   // Sorting
   let sortKey = null;
@@ -72,7 +93,10 @@
     const tr = document.createElement('tr');
     tr.dataset.id = it.id;
     tr.innerHTML = `
-      <td class="nowrap"><span class="nm">${it.name||''}</span><span class="muted mini-result"></span></td>
+      <td class="nowrap">
+        <div class="nm">${it.name||''}</div>
+        <div class="muted mini-result"></div>
+      </td>
       <td>${it.type||'other'}</td>
       <td>${it.host||''}</td>
       <td class="center">${it.port||''}</td>
@@ -80,14 +104,18 @@
       <td class="center">${it.timeout_ms||800} ms</td>
       <td class="center">${it.check==='http' ? (it.path||'/') : '-'}</td>
       <td class="center enabled-pill ${it.enabled?'on':'off'}">
-        <nav class="tabs compact"><a href="#" data-act="toggle">${it.enabled?'On':'Off'}</a></nav>
+        <div class="cell-center">
+          <nav class="tabs compact"><a href="#" data-act="toggle">${it.enabled?'On':'Off'}</a></nav>
+        </div>
       </td>
       <td class="actions-tabs">
-        <nav class="tabs compact">
-          <a href="#" data-act="test">Test</a>
-          <a href="#" data-act="edit">Edit</a>
-          <a href="#" data-act="del">Delete</a>
-        </nav>
+        <div class="cell-center">
+          <nav class="tabs compact">
+            <a href="#" data-act="test">Test</a>
+            <a href="#" data-act="edit">Edit</a>
+            <a href="#" data-act="del">Delete</a>
+          </nav>
+        </div>
       </td>`;
     return tr;
   }
@@ -134,11 +162,72 @@
     tbody.innerHTML='';
     try {
       const data = await api.list();
+      SERVICE_CACHE.clear();
       const items = sortItems(data.items||[]);
-      items.forEach(it => tbody.appendChild(trTemplate(it)));
+      items.forEach(it => {
+        if (it && it.id) SERVICE_CACHE.set(String(it.id), it);
+        const row = trTemplate(it);
+        tbody.appendChild(row);
+        decorateRow(row, it);
+      });
     } catch (e) {
       console.error('Failed to load services', e);
     }
+  }
+  function decorateRow(row, svc){
+    const mini = row.querySelector('.mini-result');
+    if (!mini) return;
+    mini.innerHTML = '';
+    const meta = svc.status_meta || {};
+    if (meta.status){
+      mini.appendChild(pill(meta.status));
+    }
+    const details = [];
+    if (meta.latency_ms != null) details.push(meta.latency_ms + ' ms');
+    if (meta.http_code) details.push('HTTP ' + meta.http_code);
+    if (meta.ts) details.push(relTime(meta.ts));
+    if (details.length){
+      const span = document.createElement('span');
+      span.className = 'muted';
+      span.textContent = ' ' + details.join(' · ');
+      mini.appendChild(span);
+    }
+    const uptime = svc.uptime_meta;
+    if (uptime && uptime.uptime_pct != null){
+      mini.appendChild(badge('Uptime '+uptime.uptime_pct+'%', uptime.uptime_pct >= 95 ? 'ok' : (uptime.uptime_pct >= 80 ? 'warn' : 'down')));
+    }
+    const alertMeta = svc.alert_meta || {};
+    if (alertMeta.last_alert && alertMeta.last_alert.ts){
+      const last = alertMeta.last_alert;
+      const chip = badge('Alert '+relTime(last.ts), 'warn');
+      chip.title = (last.name||'') + ' ('+(last.severity||'warn')+')';
+      mini.appendChild(chip);
+    }
+    if (alertMeta.silenced_until){
+      const mute = badge('Muted '+relTime(alertMeta.silenced_until), 'neutral');
+      mini.appendChild(mute);
+    }
+    const linkRow = document.createElement('div');
+    linkRow.className = 'svc-links';
+    if (svc.id){
+      const hist = document.createElement('a');
+      hist.className = 'chip neutral small';
+      hist.textContent = 'History';
+      hist.href = 'history.php?service=' + encodeURIComponent(svc.id);
+      hist.target = '_blank';
+      hist.rel = 'noopener';
+      linkRow.appendChild(hist);
+    }
+    if (alertMeta.rule_ids && alertMeta.rule_ids.length){
+      const muteBtn = document.createElement('a');
+      muteBtn.href = '#';
+      muteBtn.dataset.act = 'silence-service';
+      muteBtn.dataset.rules = alertMeta.rule_ids.join(',');
+      muteBtn.className = 'chip warn small';
+      muteBtn.textContent = 'Mute alerts';
+      linkRow.appendChild(muteBtn);
+    }
+    if (linkRow.childNodes.length) mini.appendChild(linkRow);
   }
 
   // Filter
@@ -153,8 +242,11 @@
     e.preventDefault();
     const tr = a.closest('tr'); if(!tr) return;
     const id = tr.dataset.id;
-    const list = await api.list();
-    const it = (list.items||[]).find(x=>x.id===id);
+    let it = SERVICE_CACHE.get(id);
+    if (!it) {
+      const list = await api.list();
+      it = (list.items||[]).find(x=>x.id===id);
+    }
     if (!it) return;
 
     const act = a.dataset.act;
@@ -173,6 +265,20 @@
         cell.classList.toggle('on', !!res.item.enabled);
         cell.classList.toggle('off', !res.item.enabled);
         cell.querySelector('a[data-act="toggle"]').textContent = res.item.enabled ? 'On':'Off';
+        SERVICE_CACHE.set(id, Object.assign({}, it, res.item));
+      }
+    } else if (act==='silence-service'){
+      const ruleIds = (a.dataset.rules||'').split(',').map(s=>s.trim()).filter(Boolean);
+      if (!ruleIds.length){ window.toast && window.toast.warn && window.toast.warn('No alert rules to mute.'); return; }
+      const minsInput = prompt('Mute related alerts for how many minutes?', '60');
+      if (!minsInput) return;
+      const mins = Math.max(1, parseInt(minsInput, 10) || 60);
+      try{
+        await api.silenceRules(ruleIds, mins);
+        window.toast && window.toast.success && window.toast.success('Alerts muted for '+mins+'m.');
+        refresh();
+      }catch(err){
+        window.toast && window.toast.error && window.toast.error('Mute failed: ' + (err.message||err));
       }
     }
   });
@@ -191,13 +297,14 @@
       }
     }catch(e){}
 
-    const mini = tr.querySelector('.mini-result'); mini.innerHTML=''; mini.appendChild(pill(res.status));
-    if(res.latency_ms!=null){
-      const t = document.createElement('span');
-      t.className='muted';
-      t.textContent = ' ' + res.latency_ms + ' ms' + (res.http_code?(' • HTTP '+res.http_code):'');
-      mini.appendChild(t);
-    }
+    decorateRow(tr, {
+      status_meta: {
+        status: res.status || 'unknown',
+        latency_ms: res.latency_ms ?? null,
+        http_code: res.http_code ?? null,
+        ts: Math.floor(Date.now()/1000)
+      }
+    });
   }
 
   // Toolbar buttons

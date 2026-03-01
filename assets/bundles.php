@@ -3,7 +3,6 @@ return [
   'js' => [
     'core' => [
       'assets/js/autoprobe.js',
-      'assets/js/header_status.js',
     ],
     'index' => [
       'assets/js/index_services_render.js',

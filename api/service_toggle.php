@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_admin();
 header('Content-Type: application/json');
+if (!csrf_check_request()) { http_response_code(403); echo json_encode(['error'=>'CSRF failed']); exit; }
 
 $id = $_POST['id'] ?? ($_GET['id'] ?? '');
 if (!$id) { http_response_code(400); echo json_encode(['error'=>'Missing id']); exit; }

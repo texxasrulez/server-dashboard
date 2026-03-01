@@ -89,11 +89,11 @@ include __DIR__ . '/includes/head.php';
 
 <!-- Page content inside the app’s normal layout -->
 <div class="card">
-  <div class="row between">
+  <div class="card">
+   <div class="row between">
     <strong><div class="section-title">Configuration: </div></strong>
     <p><span class="muted small">Edits save to <code>config/local.json</code></span></p>
-  </div>
-
+   </div>
   
 <!-- UI polish: gentle vertical rhythm between rows under all tabs -->
 <style id="config-row-spacing">
@@ -109,7 +109,7 @@ include __DIR__ . '/includes/head.php';
   #configPane fieldset { margin: 10px 0 12px; padding-top: 2px; }
 </style>
 
-  <div id="configTabs" class="tabs"></div>
+  <div id="configTabs" class="tabs"></div></div>
   <div id="configPane"></div>
   <!-- Ensure email.accounts is always included in saves (even if Email tab didn't run) -->
   <input type="hidden"

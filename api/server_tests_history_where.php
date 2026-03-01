@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/_state_path.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_admin();
 header('Content-Type: application/json; charset=utf-8');
 $dir = dirname(dashboard_state_path('history/.keep')) . '/history';
 @mkdir($dir, 0775, true);

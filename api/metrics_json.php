@@ -1,5 +1,5 @@
 <?php
-require __DIR__.'/_guard.php'; guard_api(['key'=>'metrics_json','require_token'=>true,'type':'json']);
+require __DIR__.'/_guard.php'; guard_api(['key'=>'metrics_json','require_token'=>true,'type'=>'json']);
 // api/metrics_json.php — JSON metrics for external monitoring
 header('Content-Type: application/json; charset=utf-8');
 header('X-Robots-Tag: noindex');

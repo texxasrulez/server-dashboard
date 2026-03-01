@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_admin();
 header('Content-Type: application/json');
 $cfgPath = __DIR__ . '/../config/index_refresh.json';
 if (!file_exists($cfgPath)) { echo json_encode(['interval'=>60]); exit; }

@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
 header('Content-Type: application/json');
 
 $admin_ok = false;
@@ -12,6 +13,7 @@ $raw = file_get_contents('php://input');
 $body = json_decode($raw, true);
 if (!is_array($body) || !count($body)) $body = $_POST;
 function v($k,$d=null){ global $body; return isset($body[$k]) ? $body[$k] : $d; }
+if (!csrf_check_request((string)($body['_csrf'] ?? $body['csrf'] ?? ''))) { http_response_code(403); echo json_encode(['error'=>'CSRF failed']); exit; }
 
 $id = v('id');
 $name = trim((string)v('name',''));

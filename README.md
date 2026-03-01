@@ -1,16 +1,8 @@
 # Server Dashboard
 
-[![GitHub Downloads](https://img.shields.io/github/downloads/texxasrulez/server-dashboard/total?style=plastic&logo=github&logoColor=white&label=Downloads&labelColor=blue&color=aqua)](https://github.com/texxasrulez/server-dashboard/releases)
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/texxasrulez/server-dashboard/total?style=plastic&logo=github&logoColor=white&label=Downloads&labelColor=blue&color=aqua)
-[![Github License](https://img.shields.io/github/license/texxasrulez/server-dashboard?style=plastic&logo=github&label=License&labelColor=blue&color=coral)](https://github.com/texxasrulez/server-dashboard/LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/texxasrulez/server-dashboard?style=plastic&logo=github&label=Stars&labelColor=blue&color=deepskyblue)](https://github.com/texxasrulez/server-dashboard/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/texxasrulez/server-dashboard?style=plastic&logo=github&label=Issues&labelColor=blue&color=aqua)](https://github.com/texxasrulez/server-dashboard/issues)
-[![GitHub Contributors](https://img.shields.io/github/contributors/texxasrulez/server-dashboard?style=plastic&logo=github&logoColor=white&label=Contributors&labelColor=blue&color=orchid)](https://github.com/texxasrulez/server-dashboard/graphs/contributors)
-[![GitHub Forks](https://img.shields.io/github/forks/texxasrulez/server-dashboard?style=plastic&logo=github&logoColor=white&label=Forks&labelColor=blue&color=darkorange)](https://github.com/texxasrulez/server-dashboard/forks)
-[![Donate Paypal](https://img.shields.io/badge/Paypal-Money_Please!-blue.svg?style=plastic&labelColor=blue&color=forestgreen&logo=paypal)](https://www.paypal.me/texxasrulez)
-
 Here is a Server Dashboard to have an overall view of server health and status in just a few pages to check.
-It has lots of features, too many to list. One day I will have a better README.md 
+It has lots of features, too many to list. One day I will have a better README.md
+ 
 
 ---
 
@@ -28,10 +20,39 @@ It has lots of features, too many to list. One day I will have a better README.m
    - `DASH_MAIL_TRANSPORT`, `DASH_MAIL_FROM`, `DASH_MAIL_REPLYTO`, `DASH_SMTP_HOST`, `DASH_SMTP_PORT`, `DASH_SMTP_SECURE`, `DASH_SMTP_USER`, `DASH_SMTP_PASS`, `DASH_SMTP_TIMEOUT`
    - `DASH_ALERT_EMAILS`
    - `DASH_CRON_TOKEN` (if you don’t want to set `CRON_TOKEN` in code)
+   - `BACKUP_HISTORY_KEEP_DAYS`, `BACKUP_CONFIG_KEEP_COUNT`, `BACKUP_ROTATE_KEEP_DAYS` (optional backup-prune overrides)
+
+---
+
+## Configuration
+
+- **Web UI (recommended):** visit `config.php` (admin only). Every save writes `config/local.json`, keeps `data/security_config.json` in sync for legacy pages, and offers inline backups (Config → Site → “Create backup”). Backups now live under `config/backups/` and can be pruned/downloaded from that tab.
+- **Security rotation:** use `php bin/rotate-runtime-secrets.php --apply` to rotate app-managed tokens/secrets, then rotate external provider credentials manually. Full guide: `docs/SECURITY_SECRETS.md`.
+
+- **CLI helper:** use `bin/config-cli.php` for automation/headless changes.
+
+  ```bash
+  php bin/config-cli.php get site.name
+  php bin/config-cli.php set mail.smtp_host smtp.example.net
+  php bin/config-cli.php set-json mail.sec_email '["ops@example.com","oncall@example.com"]'
+  php bin/config-cli.php unset mail.smtp_host
+  php bin/config-cli.php dump
+  ```
+
+  The CLI loads the exact same schema/validation as the UI, so secrets/cron tokens replicate into `data/security_config.json` automatically.
+
+- **API compatibility:** `api/security_get.php` / `api/security_set.php` now proxy through the same Config engine. They remain available for headless integrations but no longer require the standalone `security.php` page.
+
+- **Backups tab:** configure filesystem roots and the log watcher from Config → Backups. The UI lists the folders the Backups dashboard monitors and generates ready-to-run helpers (install command + env file snippet) for `assets/scripts/install.sh` based on your saved paths/owner/service name.
+- **Ops scripts:**
+  - `bash bin/security-policy-check.sh` (auth/CSRF regression guard)
+  - `bash bin/report-largest-files.sh --top 20` (storage growth visibility)
+  - Web server deny rules: `docs/WEBSERVER_HARDENING.md`
 
 ---
 
 ## Pages
+
 ### `history.php`
 - Toolbar: Range select (1h/24h/7d/30d), `Probe now`, `Refresh`, `Export JSON`
 - Loads from `api/history_export.php?type=probes&limit=1000&start=0`, filters client-side by range
@@ -303,7 +324,7 @@ assets/js/pages/history.js
 assets/css/pages/history.css
 api/history_export.php            # export (probes/alerts)
 api/alerts_eval.php               # probe+evaluate endpoint (see API)
-data/services_status.json        # latest sample per service
+state/services_status.json        # latest sample per service
 data/services_status_history.jsonl# long history (JSONL)
 ```
 
@@ -319,16 +340,9 @@ Rule builder with cool-down and consecutive failure logic.
 Files:
 ```
 data/alerts.json                  # rules
-data/alerts_events.jsonl         # fired events
+state/alerts_events.jsonl         # fired events
 api/alerts_eval.php               # evaluator
 ```
-
-### 5.3 Security (`security.php`)
-Mailer settings editor with GET/POST APIs and a test endpoint.
-
-- **GET** `api/security_get.php` → current settings (sanitized)
-- **Test** `api/mail_test.php?to=user@domain` (admin or token)
-- **Toasts**: loaded/saved/failed; validation for key fields
 
 ### 5.4 Services (`services.php`)
 - Themed action buttons (`.btn`, `.btn.secondary`, `.btn.warning`, `.btn.danger` for Delete)
@@ -433,8 +447,8 @@ curl -fsS 'https://HOSTapi/history_export.php?type=probes&limit=1000&start=0&tok
 ## 8) Data & State Files
 
 - `data/alerts.json` — alert rules (JSON)
-- `data/alerts_events.jsonl` — fired alerts (one JSON object per line)
-- `data/services_status.json` — latest status per service (JSON)
+- `state/alerts_events.jsonl` — fired alerts (one JSON object per line)
+- `state/services_status.json` — latest status per service (JSON)
 - `data/services_status_history.jsonl` — long probe history (JSONL)
 - `state/audit.log.jsonl` — audit events (JSONL)
 
@@ -449,14 +463,3 @@ Rotate large `*.jsonl` via `logrotate` or a cron script.
 - Client debug logging guarded by `CLIENT_DEBUG_LOG`
 
 ---
-
-**Screenshot**
-
-Main Index Page
-![Server Dashboard](assets/images/index-screenshot.png?raw=true "Server Dashboard Screenshot")
-History Page
-![Server Dashboard](assets/images/history-screenshot.png?raw=true "Server Dashboard Screenshot")
-Config Site Page
-![Server Dashboard](assets/images/config-site-screenshot.png?raw=true "Server Dashboard Screenshot")
-Config Email Page (with new email notification in upper right hand corner)
-![Server Dashboard](assets/images/config-email-screenshot.png?raw=true "Server Dashboard Screenshot")

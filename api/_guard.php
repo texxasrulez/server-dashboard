@@ -63,16 +63,45 @@ if (!function_exists('guard_api')) {
       }
       @file_put_contents($f, sprintf('%.6f', $now), LOCK_EX);
     }
+    // Optional admin requirement (session-backed)
+    if (!empty($opts['require_admin'])) {
+      require_once dirname(__DIR__) . '/includes/init.php';
+      require_once dirname(__DIR__) . '/includes/auth.php';
+      $isAdmin = function_exists('user_is_admin') ? user_is_admin() : false;
+      if (!$isAdmin) {
+        http_response_code(403);
+        if ($ct!=='text/plain') header('Content-Type: application/json; charset=utf-8');
+        echo ($ct==='text/plain') ? "forbidden\n" : json_encode(['ok'=>false,'error'=>'admin required']);
+        exit;
+      }
+    }
     // Token (only if require_token AND tokens exist)
     $need = !empty($opts['require_token']);
     $tokens = guard_read_cfg('security.api_tokens', []);
-    if ($need && is_array($tokens) && count($tokens)) {
+    if ($need) {
+      if (!is_array($tokens) || !count($tokens)) {
+        http_response_code(503);
+        if ($ct!=='text/plain') header('Content-Type: application/json; charset=utf-8');
+        echo ($ct==='text/plain') ? "misconfigured\n" : json_encode(['ok'=>false,'error'=>'token auth misconfigured']);
+        exit;
+      }
       $got = '';
       if (!empty($_GET['token'])) $got = (string)$_GET['token'];
+      if (!$got && !empty($_POST['token'])) $got = (string)$_POST['token'];
+      if (!$got && !empty($_SERVER['HTTP_X_API_TOKEN'])) $got = (string)$_SERVER['HTTP_X_API_TOKEN'];
       if (!$got && !empty($_SERVER['HTTP_AUTHORIZATION']) && stripos($_SERVER['HTTP_AUTHORIZATION'],'Bearer ')===0) {
         $got = trim(substr($_SERVER['HTTP_AUTHORIZATION'],7));
       }
-      if (!$got || !in_array($got, $tokens, true)) {
+      $ok = false;
+      if ($got) {
+        foreach ($tokens as $tok) {
+          if (is_string($tok) && $tok !== '' && hash_equals($tok, (string)$got)) {
+            $ok = true;
+            break;
+          }
+        }
+      }
+      if (!$ok) {
         http_response_code(401);
         if ($ct!=='text/plain') header('Content-Type: application/json; charset=utf-8');
         echo ($ct==='text/plain') ? "unauthorized\n" : json_encode(['ok'=>false,'error'=>'unauthorized']);

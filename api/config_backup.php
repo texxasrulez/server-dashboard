@@ -12,6 +12,10 @@
 //  1) explicit request ?keep=, POST keep
 //  2) site.backup_keep from local.json (if numeric)
 //  3) default 20
+require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_admin();
+
 header('Content-Type: application/json; charset=UTF-8');
 
 function resp($ok, $extra = []) {
@@ -32,9 +36,6 @@ function find_local_json($root) {
     $root . '/config/local.json',
     $root . '/data/local.json',
     $root . '/local.json',
-    dirname($root) . '/config/local.json',
-    dirname($root) . '/data/local.json',
-    dirname($root) . '/local.json',
   ];
   foreach ($candidates as $p) {
     if (is_readable($p)) return $p;
@@ -42,25 +43,65 @@ function find_local_json($root) {
   return null;
 }
 
-function pick_backup_dir($root, $src) {
-  if ($src) {
-    // Put backups next to local.json (config/backups or data/backups)
-    $dir = dirname($src) . '/backups';
-    return $dir;
+function canonical_backup_dir($root) {
+  return $root . '/config/backups';
+}
+
+function legacy_backup_dirs($root) {
+  return array_unique([
+    $root . '/data/backups',
+    $root . '/state/backups',
+  ]);
+}
+
+function ensure_dir($dir) {
+  if (!is_dir($dir)) {
+    if (!@mkdir($dir, 0775, true) && !is_dir($dir)) {
+      throw new Exception('cannot create backup dir');
+    }
   }
-  // Fallback: prefer config/backups, then data/backups, else default to data/backups under root
-  $pref = [$root . '/config/backups', $root . '/data/backups'];
-  foreach ($pref as $d) { if (is_dir($d) || @mkdir($d, 0775, true)) return $d; }
-  return $root . '/data/backups';
+}
+
+function migrate_legacy_backups($targetDir, array $legacyDirs) {
+  foreach ($legacyDirs as $legacy) {
+    if (!$legacy || !is_dir($legacy)) continue;
+    if (realpath($legacy) === realpath($targetDir)) continue;
+    $files = glob(rtrim($legacy, '/') . '/config-*.json');
+    if (!$files) continue;
+    foreach ($files as $src) {
+      $dst = rtrim($targetDir, '/') . '/' . basename($src);
+      if (!is_file($dst)) {
+        if (@rename($src, $dst)) continue;
+        if (@copy($src, $dst)) { @unlink($src); continue; }
+      }
+    }
+  }
+}
+
+function list_backups($backupDir) {
+  $list = glob(rtrim($backupDir, '/') . '/config-*.json');
+  if (!is_array($list)) $list = [];
+  usort($list, function($a,$b){ return @filemtime($b) - @filemtime($a); });
+  return $list;
+}
+
+function rel_backup_dir($root, $dir) {
+  $rel = ltrim(str_replace($root, '', $dir), '/');
+  return $rel !== '' ? $rel : basename($dir);
 }
 
 try {
+  $csrf = $_GET['_csrf'] ?? $_POST['_csrf'] ?? '';
+  if (!csrf_check($csrf)) {
+    http_response_code(403);
+    resp(false, ['error'=>'CSRF failed']);
+  }
   $root = dirname(__DIR__);
   $src  = find_local_json($root);
-  $backupDir = pick_backup_dir($root, $src);
-  if (!is_dir($backupDir)) {
-    if (!@mkdir($backupDir, 0775, true) && !is_dir($backupDir)) throw new Exception('cannot create backup dir');
-  }
+  $backupDir = canonical_backup_dir($root);
+  ensure_dir($backupDir);
+  migrate_legacy_backups($backupDir, legacy_backup_dirs($root));
+  $base = ['backup_dir'=>rel_backup_dir($root, $backupDir)];
 
   // Determine 'keep'
   $keep = null;
@@ -79,9 +120,7 @@ try {
   $keep = clamp_keep($keep);
 
   // helper: list backups newest->oldest
-  $list = glob($backupDir . '/config-*.json');
-  if (!is_array($list)) $list = [];
-  usort($list, function($a,$b){ return @filemtime($b) - @filemtime($a); });
+  $list = list_backups($backupDir);
 
   // stats mode
   if (isset($_GET['stats'])) {
@@ -89,16 +128,16 @@ try {
     $total = 0;
     foreach ($list as $f) { $sz = @filesize($f); if ($sz>0) $total += $sz; }
     $human = ($total>=1048576) ? round($total/1048576,2).' MB' : ($total>=1024 ? round($total/1024,2).' KB' : $total.' B');
-    resp(true, ['count'=>$count, 'total_size'=>$total, 'total_size_human'=>$human, 'keep'=>$keep, 'backup_dir'=>basename(dirname($backupDir)).'/'.basename($backupDir)]);
+    resp(true, array_merge($base, ['count'=>$count, 'total_size'=>$total, 'total_size_human'=>$human, 'keep'=>$keep]));
   }
 
   // latest info
   if (isset($_GET['latest'])) {
     if (!empty($list)) {
       $f = $list[0];
-      resp(true, ['exists'=>true, 'file'=>basename($f), 'size'=>@filesize($f), 'mtime'=>@filemtime($f), 'backup_dir'=>basename(dirname($backupDir)).'/'.basename($backupDir)]);
+      resp(true, array_merge($base, ['exists'=>true, 'file'=>basename($f), 'size'=>@filesize($f), 'mtime'=>@filemtime($f)]));
     } else {
-      resp(true, ['exists'=>false, 'backup_dir'=>basename(dirname($backupDir)).'/'.basename($backupDir)]);
+      resp(true, array_merge($base, ['exists'=>false]));
     }
   }
 
@@ -115,7 +154,7 @@ try {
       }
     }
     http_response_code(404);
-    resp(false, ['error'=>'No backup to download', 'backup_dir'=>basename(dirname($backupDir)).'/'.basename($backupDir)]);
+    resp(false, array_merge($base, ['error'=>'No backup to download']));
   }
 
   // prune-only mode
@@ -124,7 +163,7 @@ try {
     if (count($list) > $keep) {
       foreach (array_slice($list, $keep) as $f) { if (@unlink($f)) $deleted++; }
     }
-    resp(true, ['keep'=>$keep, 'deleted'=>$deleted, 'backup_dir'=>basename(dirname($backupDir)).'/'.basename($backupDir)]);
+    resp(true, array_merge($base, ['keep'=>$keep, 'deleted'=>$deleted]));
   }
 
   // default: create new backup and prune
@@ -139,16 +178,14 @@ try {
   if (file_put_contents($dst, $json) === false) throw new Exception('write failed');
 
   // prune to keep newest N
-  $list = glob($backupDir . '/config-*.json');
-  if (!is_array($list)) $list = [];
-  usort($list, function($a,$b){ return @filemtime($b) - @filemtime($a); });
+  $list = list_backups($backupDir);
   $deleted = 0;
   if (count($list) > $keep) {
     foreach (array_slice($list, $keep) as $f) { if (@unlink($f)) $deleted++; }
   }
 
-  resp(true, ['path'=>basename($dst), 'keep'=>$keep, 'deleted'=>$deleted, 'backup_dir'=>basename(dirname($backupDir)).'/'.basename($backupDir)]);
+  resp(true, array_merge($base, ['path'=>basename($dst), 'keep'=>$keep, 'deleted'=>$deleted]));
 } catch (Throwable $e) {
   http_response_code(500);
-  resp(false, ['error'=>$e->getMessage()]);
+  resp(false, array_merge(isset($base)?$base:[], ['error'=>$e->getMessage()]));
 }

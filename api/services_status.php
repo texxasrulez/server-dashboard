@@ -3,6 +3,8 @@
 $__t0 = microtime(true);
 
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_login();
 header('Content-Type: application/json');
 
 $state = dashboard_state_path('services_status.json');

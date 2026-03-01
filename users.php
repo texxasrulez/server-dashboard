@@ -154,9 +154,9 @@ $p = array_merge([
 ], (array)(user_profile_of($me['username'] ?? '') ?? ($me['profile'] ?? [])));
 if (!isset($p['socials'])) $p['socials']=['twitter'=>'','github'=>'','mastodon'=>'','linkedin'=>''];
 ?>
+<div class="card">
 <div class="users-page">
-
-  <?php if ($isAdmin): ?>
+ <?php if ($isAdmin): ?>
   <div class="card users-admin">
     <div class="card-title">User Administration <span class="chip">Admin only</span></div>
     <?php if ($amsg): ?><div class="note"><?= h($amsg) ?></div><?php endif; ?>
@@ -189,7 +189,7 @@ if (!isset($p['socials'])) $p['socials']=['twitter'=>'','github'=>'','mastodon'=
                 <input type="hidden" name="csrf" value="<?= h(csrf_token()) ?>">
                 <input type="hidden" name="admin_panel" value="delete_user">
                 <input type="hidden" name="username" value="<?= h($u['username']) ?>">
-                <button class="btn" type="submit">Delete</button>
+                <button class="btn" type="submit"><span data-i18n="common.delete">Delete</span></button>
               </form>
               <?php else: ?>
                 <span class="muted">current user</span>
@@ -306,11 +306,11 @@ if (!isset($p['socials'])) $p['socials']=['twitter'=>'','github'=>'','mastodon'=
         <div class="form-row"><label>Current password</label><input type="password" name="current" required /></div>
         <div class="form-row"><label>New password</label><input type="password" name="new1" required /></div>
         <div class="form-row"><label>Confirm new password</label><input type="password" name="new2" required /></div>
-        <div class="form-actions"><button class="btn"  type="submit">Save</button></div>
+        <div class="form-actions"><button class="btn"  type="submit"><span data-i18n="common.save">Save</span></button></div>
         <div class="muted">Signed in as <?= h($_SESSION['user']['username']??'') ?> (<?= h($_SESSION['user']['role']??'user') ?>).</div>
       </form>
     </div>
   </div>
 </div>
-
+</div>
 <?php include __DIR__.'/includes/foot.php'; ?>

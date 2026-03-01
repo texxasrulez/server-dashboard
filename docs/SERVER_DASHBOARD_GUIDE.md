@@ -56,7 +56,6 @@ web-admin/
   api/                      # JSON endpoints (e.g., server_tests.php, alerts_*.php)
   assets/                   # JS/CSS
   config.php                # Configuration UI
-  security.php              # Security (headers, mailer From/Reply-To)
   server_tests.php          # Server tests UI
   includes/                 # init/auth/mailer/etc.
   lib/                      # PHP library classes
@@ -71,15 +70,15 @@ web-admin/
 
 ## 3. Installation
 
-1. **Upload** the `` directory to your web root (or subdirectory).
+1. **Upload** the `web-admin/` directory to your web root (or subdirectory).
 2. **Create writable directories:**
    ```bash
-   mkdir -p data state/history
-   chown -R www-data:www-data data state
-   chmod -R 750 data state
+   mkdir -p web-admin/data web-admin/state/history
+   chown -R www-data:www-data web-admin/data web-admin/state
+   chmod -R 750 web-admin/data web-admin/state
    ```
 3. **Ensure PHP extensions are present** (see Requirements).
-4. **Open** `https://your-host` and log in (if your deployment uses auth). If authentication is not yet set up, protect the directory at the web server level while you configure security.
+4. **Open** `https://your-host/web-admin/` and log in (if your deployment uses auth). If authentication is not yet set up, protect the directory at the web server level while you configure security.
 
 ---
 
@@ -87,13 +86,13 @@ web-admin/
 
 ### Nginx (example)
 ```nginx
-location  {
-  alias /var/www/your-site;
+location /web-admin/ {
+  alias /var/www/your-site/web-admin/;
   index index.php;
-  try_files $uri $uri/ index.php?$query_string;
+  try_files $uri $uri/ /web-admin/index.php?$query_string;
 }
 
-location ~ ^.*\.php$ {
+location ~ ^/web-admin/.*\.php$ {
   include fastcgi_params;
   fastcgi_param SCRIPT_FILENAME $request_filename;
   fastcgi_pass unix:/run/php/php-fpm.sock;
@@ -111,7 +110,7 @@ Alias /web-admin /var/www/your-site/web-admin
 # If using FPM, proxy PHP to php-fpm; otherwise enable mod_php.
 ```
 
-> Protect with HTTPS. Consider Basic Auth or IP allowlists on `` if you do not already have app auth enabled.
+> Protect with HTTPS. Consider Basic Auth or IP allowlists on `/web-admin/` if you do not already have app auth enabled.
 
 ---
 
@@ -121,7 +120,6 @@ Alias /web-admin /var/www/your-site/web-admin
 - PHP error logging enabled (server or `php.ini`) so you can see fatals quickly.
 - You can open:
   - `config.php` (Configuration UI)
-  - `security.php` (Security & Mailer)
   - `server_tests.php` (Test suite)
 - **Security → Mailer**: set **From** and optionally **Reply-To**.
 - **Config → Alerts**: set your notification email and webhook if applicable.
@@ -219,16 +217,16 @@ Located at the bottom of **Config → Alerts**:
 ### 8.2 Scheduling Alerts
 
 **Option A — HTTP (if you prefer):**
-- Protect `api/alerts_run.php` behind Basic Auth/IP allowlist (or use a `cron_token` if your build supports it).
+- Protect `web-admin/api/alerts_run.php` behind Basic Auth/IP allowlist (or use a `cron_token` if your build supports it).
 - Cron example (runs every hour):
   ```cron
-  5 * * * * curl -fsS https://your-hostapi/alerts_run.php >/dev/null
+  5 * * * * curl -fsS https://your-host/web-admin/api/alerts_run.php >/dev/null
   ```
 
 **Option B — PHP CLI:**
 - If your PHP CLI environment is compatible with your web runtime:
   ```cron
-  5 * * * * php /var/www/your-siteapi/alerts_run.php >/dev/null 2>&1
+  5 * * * * php /var/www/your-site/web-admin/api/alerts_run.php >/dev/null 2>&1
   ```
   > If the script expects web context (e.g., headers), prefer HTTP with auth.
 
@@ -237,9 +235,9 @@ Located at the bottom of **Config → Alerts**:
 ## 9. Backups & Upgrades
 
 - **Backup before upgrades:**
-  - `` (code)
-  - `data/` (persistent config like `security_config.json`)
-  - `state/` (history)
+  - `web-admin/` (code)
+  - `web-admin/data/` (persistent config like `security_config.json`)
+  - `web-admin/state/` (history)
 - **Upgrade:**
   - Replace changed files only (as you’ve been doing).
   - Keep permissions on `data/` and `state/`.
@@ -250,7 +248,7 @@ Located at the bottom of **Config → Alerts**:
 ## 10. Security Hardening
 
 - Serve over **HTTPS**; set HSTS on your main site.
-- Restrict access to ``:
+- Restrict access to `/web-admin/`:
   - Application auth, and/or
   - Web server Basic Auth / IP allowlist.
 - Ensure `display_errors=Off` in production.

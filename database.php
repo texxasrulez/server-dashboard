@@ -2,6 +2,7 @@
 require_once __DIR__ . '/includes/init.php';
 require_once __DIR__ . '/includes/auth.php';
 $REQUIRE_ADMIN = true;
+require_admin();
 
 require_once __DIR__ . '/lib/Config.php';
 \App\Config::init(__DIR__);
@@ -177,17 +178,19 @@ include __DIR__ . '/includes/head.php';
   #dbTableWrap { overflow: auto; }
   #dbTable thead th { position: sticky; top: 0; z-index: 2; }
 </style>
-<div id="dbRoot"
+<div class="card">
+ <div id="dbRoot"
      data-scan="<?= h(project_url('/database.php?action=scan')) ?>">
   <div class="card" id="dbCard">
     <div class="row between" id="dbControls">
       <div class="section-title">Databases</div>
       <div class="row gap-sm">
-        <button id="btnRefresh" class="btn small">Refresh</button>
+        <button id="btnRefresh" class="btn small"><span data-i18n="alerts.refresh">Refresh</span></button>
       </div>
     </div>
     <div id="dbServer" class="muted small" style="margin-top:2px"></div>
-    <div id="dbTableWrap" style="margin-top:8px;">
+    </div>
+    <div class="card">
       <div class="table-scroll"><table id="dbTable" class="js-sortable table compact">
         <thead>
           <tr>
@@ -208,6 +211,7 @@ include __DIR__ . '/includes/head.php';
       </table></div>
     </div>
   </div>
+</div>
 </div>
 <?php include __DIR__ . '/includes/foot.php'; ?>
 

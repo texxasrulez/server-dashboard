@@ -1,10 +1,32 @@
 {
     "users": [
         {
-            "username": "admin",
-            "password_hash": "$2y$10$/07ytCLNWmlNDcy0MKDdXuz7Vvq3EIZXE.4LVYSDtx2IbIc7Zshcy",
+            "username": "gene",
+            "password_hash": "$2y$10$mOokCYUlr1htSucxK05Zq.bxDlm/fO7a/j1.VRBvedI/5dhkilRTu",
             "role": "admin",
-            "created": "",
+            "created": "2025-08-11T19:01:35+00:00",
+            "profile": {
+                "first_name": "Gene",
+                "last_name": "Hawkins",
+                "email": "gene@genesworld.net",
+                "website": "https://www.genesworld.net/",
+                "avatar_url": "https://www.genesworld.net/web-admin/assets/images/gene.jpg",
+                "bio": "American by birth ... Texan by the Grace of [Insert your Higher Power here]. I think I nailed the bio. Veteran too!",
+                "location": "Texas",
+                "timezone": "America/Chicago",
+                "socials": {
+                    "twitter": "",
+                    "github": "https://github.com/texxasrulez",
+                    "mastodon": "",
+                    "linkedin": ""
+                }
+            }
+        },
+        {
+            "username": "test",
+            "password_hash": "$2y$10$9gyd5Nul4nAxf78AJ9/gBOWkL7ih.DTDA.FgDpTQ/e2QGhDHs4Moy",
+            "role": "user",
+            "created": "2025-08-11T20:03:53+00:00",
             "profile": {
                 "first_name": "",
                 "last_name": "",
@@ -21,6 +43,34 @@
                     "linkedin": ""
                 }
             }
+        },
+        {
+            "username": "benny",
+            "password_hash": "$2y$10$/Kxm7FmTq7D6kza/KVyanOS/SnF/N/wPf5vu.90scIUpAE6oSAfoG",
+            "role": "user",
+            "created": "2025-08-13T04:28:53+00:00",
+            "profile": {
+                "first_name": "Benny",
+                "last_name": "Patterson",
+                "email": "bennypat1958@gmail.com",
+                "website": "",
+                "avatar_url": "",
+                "bio": "",
+                "location": "",
+                "timezone": "",
+                "socials": {
+                    "twitter": "",
+                    "github": "",
+                    "mastodon": "",
+                    "linkedin": ""
+                }
+            }
+        },
+        {
+            "username": "stan",
+            "password_hash": "$2y$10$eOShsgsWb930MUJ9gww.gOQ2dCW./Yb6/eF8XLJULDt5wYO5kYXiC",
+            "role": "user",
+            "created": "2025-08-15T02:25:42+00:00"
         }
     ]
 }

@@ -2,7 +2,20 @@
 // includes/init.php — canonical bootstrap (no UI includes).
 // Safe to include multiple times.
 require_once __DIR__ . '/config.inc.php';
-if (session_status() !== PHP_SESSION_ACTIVE) session_start();
+if (PHP_SAPI !== 'cli' && session_status() !== PHP_SESSION_ACTIVE) {
+  if (!headers_sent()) {
+    $https = (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower((string)$_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https')
+      || (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
+    @session_set_cookie_params([
+      'lifetime' => 0,
+      'path' => '/',
+      'secure' => $https,
+      'httponly' => true,
+      'samesite' => 'Lax',
+    ]);
+  }
+  session_start();
+}
 
 if (!defined('BUILD')) { define('BUILD', date('Ymd.His')); }
 if (!function_exists('h')) {
@@ -97,5 +110,75 @@ if (!function_exists('theme_href')) {
       if (is_file($c['fs'])) return project_url($c['web']);
     }
     return project_url('/assets/css/theme.css');
+  }
+}
+
+if (!function_exists('cron_token_candidates')) {
+  function cron_token_candidates(): array {
+    $tokens = [];
+    if (defined('CRON_TOKEN')) {
+      $tokens[] = trim((string) CRON_TOKEN);
+    }
+    $env = getenv('DASH_CRON_TOKEN');
+    if ($env !== false && $env !== '') {
+      $tokens[] = trim($env);
+    }
+    if (function_exists('cfg_local')) {
+      $apiTokens = cfg_local('security.api_tokens', []);
+      if (is_array($apiTokens)) {
+        foreach ($apiTokens as $apiTok) {
+          if (is_string($apiTok) && $apiTok !== '') {
+            $tokens[] = trim($apiTok);
+          }
+        }
+      }
+    }
+    if (defined('PROJECT_ROOT')) {
+      $files = [
+        PROJECT_ROOT . '/data/cron_token.txt',
+        PROJECT_ROOT . '/state/cron_token.txt',
+      ];
+      foreach ($files as $file) {
+        if (is_file($file)) {
+          $txt = trim((string) @file_get_contents($file));
+          if ($txt !== '') $tokens[] = $txt;
+        }
+      }
+    }
+    $tokens = array_values(array_unique(array_filter($tokens, function($v){
+      return trim((string)$v) !== '';
+    })));
+    return $tokens;
+  }
+}
+
+if (!function_exists('cron_request_token')) {
+  function cron_request_token(): string {
+    $candidates = [
+      $_GET['token'] ?? null,
+      $_POST['token'] ?? null,
+      $_SERVER['HTTP_X_CRON_TOKEN'] ?? null,
+    ];
+    $auth = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+    if (stripos($auth, 'Bearer ') === 0) {
+      $candidates[] = trim(substr($auth, 7));
+    }
+    foreach ($candidates as $candidate) {
+      if (is_string($candidate) && $candidate !== '') {
+        return trim((string)$candidate);
+      }
+    }
+    return '';
+  }
+}
+
+if (!function_exists('cron_token_is_valid')) {
+  function cron_token_is_valid(string $token): bool {
+    $token = (string)$token;
+    if ($token === '') return false;
+    foreach (cron_token_candidates() as $expected) {
+      if ($expected !== '' && hash_equals($expected, $token)) return true;
+    }
+    return false;
   }
 }

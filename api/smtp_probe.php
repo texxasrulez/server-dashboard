@@ -1,6 +1,9 @@
 <?php
 // api/smtp_probe.php — connectivity/TLS/AUTH probe for SMTP
 declare(strict_types=1);
+require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_admin();
 header('Content-Type: application/json; charset=UTF-8');
 function resp($ok, $extra=[]) { echo json_encode(array_merge(['ok'=>$ok], $extra)); exit; }
 function read_reply($fp, $timeout=8){
@@ -21,12 +24,23 @@ function send_cmd($fp, $cmd){
   return read_reply($fp);
 }
 try {
-  $host = (string)($_GET['host'] ?? '');
-  $port = (int)($_GET['port'] ?? 0);
-  $secure = strtolower((string)($_GET['secure'] ?? ''));
-  $transport = strtolower((string)($_GET['transport'] ?? ''));
-  $user = (string)($_GET['user'] ?? '');
-  $pass = (string)($_GET['pass'] ?? '');
+  if (strtoupper((string)($_SERVER['REQUEST_METHOD'] ?? 'GET')) !== 'POST') {
+    http_response_code(405);
+    resp(false, ['error'=>'POST only']);
+  }
+  $body = json_decode((string)file_get_contents('php://input'), true);
+  if (!is_array($body)) $body = $_POST;
+  $host = (string)($body['host'] ?? '');
+  $port = (int)($body['port'] ?? 0);
+  $secure = strtolower((string)($body['secure'] ?? ''));
+  $transport = strtolower((string)($body['transport'] ?? ''));
+  $user = (string)($body['user'] ?? '');
+  $pass = (string)($body['pass'] ?? '');
+  $csrf = (string)($body['_csrf'] ?? $_POST['_csrf'] ?? ($_SERVER['HTTP_X_CSRF_TOKEN'] ?? ''));
+  if (!csrf_check($csrf)) {
+    http_response_code(403);
+    resp(false, ['error'=>'CSRF failed']);
+  }
   if (!$host) resp(false, ['error'=>'missing host']);
 
   if ($port<=0) $port = ($secure==='ssl' || $transport==='smtps') ? 465 : 25;

@@ -29,7 +29,6 @@ require_once __DIR__ . '/includes/head.php';
    title="Drag this to your bookmarks bar to quickly add the current page">Add to Browser</a>
         <button class="btn" id="openManage" type="button">Manage Bookmarks</button>
       </div>
-      <br />
     </div>
     <div class="right">
       <div class="controls">

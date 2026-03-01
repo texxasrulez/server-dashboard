@@ -7,7 +7,7 @@ Use this as your known-good reference for future drop-ins and upgrades.
 
 ## What this baseline includes
 
-- Modular **Config** UI (`assets/js/pages/config.*.js`) with tabbed sections (Site, Features, Mail, Integrations, Security, UI, Server Tests, Alerts, History, Logs, Email).
+- Single-file **Config** UI (`assets/js/pages/config.page.js`) with tabbed sections (Site, Features, Mail, Integrations, Security, UI, Server Tests, Alerts, History, Logs, Email).
 - **Email notifier** in header using `assets/js/header/email-indicator.loader.js` → loads the canonical `email-indicator.js`.
 - **Multiple account** indicator mode supported (per-account badges in header). Configuration is saved under `email.accounts` as a JSON string.
 - **Cron/History health** panel showing last run and next due times (uses the `cron_mark.php` endpoints).
@@ -28,11 +28,8 @@ web-admin/
 │     │  ├─ email-indicator.js
 │     │  └─ email-indicator.loader.js
 │     └─ pages/
-│        ├─ config.boot.js
-│        ├─ config.js
-│        ├─ config.site.js
-│        ├─ config.email.js
-│        └─ … (other config.*.js modules)
+│        ├─ config.page.js
+│        └─ … (other feature modules such as config.mail.js)
 ├─ api/
 │  ├─ email_status.php
 │  ├─ cron_mark.php
@@ -75,7 +72,7 @@ web-admin/
 
 ## Install / Deploy
 
-1. Copy the contents of the baseline zip into your `` root, keeping paths intact.
+1. Copy the contents of the baseline zip into your `web-admin/` root, keeping paths intact.
 2. Clear cache / hard refresh the browser after replacing assets.
 3. Open **Config → Email**, verify accounts are present and enabled, then **Save** once to ensure `email.accounts` is written canonically.
 
@@ -84,7 +81,7 @@ web-admin/
 ## Recovery playbook (UI seems blank)
 
 1. **Open Console** (F12) and check for the first red error and which JS file it points to.
-2. Verify `assets/js/pages/config.*.js` files are the baseline versions (dates/sizes match the baseline zip).
+2. Verify `assets/js/pages/config.page.js` is the baseline version (dates/sizes match the baseline zip).
 3. Ensure `config.php` injects the globals before scripts:
    - `__CONFIG_SCHEMA__`, `__CONFIG_DATA__`, `__CONFIG_CSRF__`
 4. Confirm the page is not serving a stale cached file (disable caching in DevTools → Network and reload).
@@ -97,7 +94,8 @@ If still stuck, temporarily load a minimal loader that logs any parse errors bef
 
 Remove any earlier experimental files to avoid double-init and conflicts:
 
-- `assets/js/pages/config.page.js` (only if it’s **not** this baseline’s modular version)
+- `assets/js/pages/config.js` (legacy pre-modular loader)
+- `assets/js/pages/config.site.js` (legacy hook for Site tab only)
 - `assets/js/pages/config.page.v19.js` (old loader test)
 - `assets/js/email-indicator.js` (root-level; keep the **header/** versions)
 - `api/email_token_info.php` (only used by future token-check feature)

@@ -12,12 +12,9 @@
 <header class="app-header">
   <div class="mobile-bar">
     <button id="mobileToggle" class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
-      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-    </button>
+      <span class="bar"></span>&#9776;</button>
     <a class="mobile-logo" href="<?= h(project_url('/index.php')) ?>"><img src="assets/images/mobile-header-logo.png" alt="Logo"></a>
   </div>
-
-  <button class="hamburger" id="navToggle" aria-label="Open menu" aria-controls="mobileDrawer" aria-expanded="false">☰</button>
   <div class="brand">
     <a href="<?= h(project_url('/index.php')) ?>">
       <div class="logo-container"><img id="brandLogo" src="<?= h(project_url('/assets/images/header-logo-icon.png')) ?>"><img class="header-image-domain" id="brandLogo" src="<?= h(project_url('/assets/images/header-logo-branding.png')) ?>" alt="<?= h($SITE_NAME) ?>"></div>
@@ -29,6 +26,7 @@
   $candidates_admin = [
     ['History', 'history.php'],
     ['Logs', 'logs.php'],
+    ['Cron Health', 'cron.php'],
     ['Services', 'services.php'],
     ['Databases', 'database.php'],
     ['Server Tests', 'server_tests.php'],
@@ -36,6 +34,7 @@
     ['Bookmarks', 'bookmarks.php'],
     ['Diagnostics', 'diag.php'],
     ['Config', 'config.php'],
+    ['Backups', 'backups.php'],
   ];
   $links_public = [
   ];

@@ -2,6 +2,7 @@
   "nav": {
     "dashboard": "Dashboard",
     "services": "Services",
+    "logs": "Logs",
     "alerts": "Alerts",
     "tests": "Tests",
     "settings": "Settings",
@@ -55,5 +56,14 @@
     "restart": "Restart",
     "start": "Start",
     "stop": "Stop"
+  },
+  "history": {
+    "title": "History",
+    "refresh": "Refresh",
+    "export_json": "Export JSON",
+    "download": "Download"
+  },
+  "logs": {
+    "title": "Logs"
   }
 }

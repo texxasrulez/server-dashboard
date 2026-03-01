@@ -1,0 +1,445 @@
+# Project: Installation, Administration & Usage (Draft)
+
+> Generated from a static scan of the uploaded zip. Review and confirm any assumptions before deployment.
+
+## 1) What this looks like
+Static file inventory (first ~120 entries):
+
+- README.md  (28893 bytes)
+- alerts_admin.php  (12959 bytes)
+- api/_guard.php  (3612 bytes)
+- api/_state_path.php  (1657 bytes)
+- api/alerts_bulk.php  (1878 bytes)
+- api/alerts_delete.php  (1199 bytes)
+- api/alerts_eval.php  (11806 bytes)
+- api/alerts_list.php  (1864 bytes)
+- api/alerts_run.php  (7657 bytes)
+- api/alerts_test.php  (2979 bytes)
+- api/alerts_upsert.php  (3924 bytes)
+- api/autoprobe_get.php  (542 bytes)
+- api/autoprobe_set.php  (709 bytes)
+- api/bm_categories_delete.php  (1825 bytes)
+- api/bm_categories_list.php  (786 bytes)
+- api/bm_categories_reorder.php  (1523 bytes)
+- api/bm_categories_upsert.php  (2019 bytes)
+- api/bookmarks_delete.php  (1277 bytes)
+- api/bookmarks_list.php  (531 bytes)
+- api/bookmarks_upsert.php  (2524 bytes)
+- api/client_log.php  (90 bytes)
+- api/config_backup.php  (5565 bytes)
+- api/config_export.php  (1500 bytes)
+- api/config_import.php  (2421 bytes)
+- api/cron_health.php  (4437 bytes)
+- api/cron_mark.php  (955 bytes)
+- api/debug_ping.php  (318 bytes)
+- api/email_oauth_callback.php  (4036 bytes)
+- api/email_oauth_start.php  (2582 bytes)
+- api/email_status.php  (7439 bytes)
+- api/email_token_info.php  (1446 bytes)
+- api/favicon_proxy.php  (1293 bytes)
+- api/health.php  (373 bytes)
+- api/history_diag.php  (660 bytes)
+- api/history_export.php  (3337 bytes)
+- api/history_rotate.php  (545 bytes)
+- api/index_refresh_get.php  (400 bytes)
+- api/index_refresh_set.php  (633 bytes)
+- api/lib/services_common.php  (2122 bytes)
+- api/logs_list.php  (1277 bytes)
+- api/logs_tail.php  (3103 bytes)
+- api/mail_test.php  (1465 bytes)
+- api/metrics.php  (4704 bytes)
+- api/metrics_json.php  (4262 bytes)
+- api/metrics_prom.php  (5892 bytes)
+- api/metrics_summary.php  (14417 bytes)
+- api/migrate_history_dir.php  (961 bytes)
+- api/probe_now.php  (1561 bytes)
+- api/security_get.php  (591 bytes)
+- api/security_set.php  (960 bytes)
+- api/security_settings_get.php  (44 bytes)
+- api/security_settings_set.php  (44 bytes)
+- api/server_test.php  (3494 bytes)
+- api/server_tests.php  (30055 bytes)
+- api/server_tests_history.php  (2680 bytes)
+- api/server_tests_history_where.php  (288 bytes)
+- api/service_delete.php  (765 bytes)
+- api/service_probe.php  (2438 bytes)
+- api/service_toggle.php  (912 bytes)
+- api/service_upsert.php  (2470 bytes)
+- api/services.php  (2268 bytes)
+- api/services_bulk_save.php  (1058 bytes)
+- api/services_enabled_ids.php  (879 bytes)
+- api/services_export.php  (1120 bytes)
+- api/services_import.php  (2287 bytes)
+- api/services_list.php  (1417 bytes)
+- api/services_probe_all.php  (2857 bytes)
+- api/services_status.php  (722 bytes)
+- api/smtp_probe.php  (4541 bytes)
+- api/smtp_test.php  (3004 bytes)
+- api/state_where.php  (681 bytes)
+- api/users_admin_health.php  (1893 bytes)
+- assets/build_css.php  (805 bytes)
+- assets/build_js.php  (1607 bytes)
+- assets/bundles.php  (681 bytes)
+- assets/css/app.css  (11796 bytes)
+- assets/css/autoprobe.css  (2041 bytes)
+- assets/css/base/00-reset.css  (236 bytes)
+- assets/css/base/10-tokens.css  (828 bytes)
+- assets/css/base/20-typography.css  (284 bytes)
+- assets/css/base/30-layout.css  (391 bytes)
+- assets/css/base/40-utilities.css  (391 bytes)
+- assets/css/components/chip.css  (3193 bytes)
+- assets/css/components/chips.css  (5705 bytes)
+- assets/css/components/drawer.css  (1042 bytes)
+- assets/css/components/modal.css  (1364 bytes)
+- assets/css/components/nav-active.css  (409 bytes)
+- assets/css/components/sys-badge.css  (1562 bytes)
+- assets/css/components/toast-pos.css  (3897 bytes)
+- assets/css/header/debug.css  (2129 bytes)
+- assets/css/header/email-indicator.css  (252 bytes)
+- assets/css/header/status.css  (2790 bytes)
+- assets/css/header/userbox.css  (1492 bytes)
+- assets/css/header_status_fix.css  (1917 bytes)
+- assets/css/index_disks.cards.css  (3483 bytes)
+- assets/css/index_helpers.css  (79 bytes)
+- assets/css/index_metrics.zoom.css  (1063 bytes)
+- assets/css/index_proc.gauges.css  (2967 bytes)
+- assets/css/index_proc.gauges.extras.css  (353 bytes)
+- assets/css/index_process.css  (1660 bytes)
+- assets/css/index_services.colors.css  (3304 bytes)
+- assets/css/index_services.css  (1820 bytes)
+- assets/css/notify.css  (3235 bytes)
+- assets/css/page_diag.css  (1822 bytes)
+- assets/css/pages/alerts_admin.css  (814 bytes)
+- assets/css/pages/bookmarks.css  (4823 bytes)
+- assets/css/pages/config.css  (518 bytes)
+- assets/css/pages/history.css  (1115 bytes)
+- assets/css/pages/index.css  (4955 bytes)
+- assets/css/pages/login.css  (3008 bytes)
+- assets/css/pages/logs.css  (1357 bytes)
+- assets/css/pages/server_tests.css  (2845 bytes)
+- assets/css/pages/services.css  (5351 bytes)
+... (296 more files)
+
+## 2) Security quick-scan
+- README.md: Email Address → `admin@example.com...`
+- README.md: Email Address → `ops@example.com...`
+- alerts_admin.php: Email Address → `ops@example.com...`
+- alerts_admin.php: Email Address → `you@domain.tld...`
+- assets/scripts/copy_log_once.sh: .env-style Assign → `ENV_FILE="/etc/log-watcher/log-watcher.env"...`
+- assets/scripts/copy_log_once.sh: .env-style Assign → `DEST_DIR="${DEST_DIR:-/var/log-export}"...`
+- assets/scripts/copy_log_once.sh: .env-style Assign → `OWNER="${OWNER:-root:root}"...`
+- assets/scripts/copy_log_once.sh: .env-style Assign → `MODE="${MODE:-0640}"...`
+- assets/scripts/copy_log_once.sh: .env-style Assign → `USER_NAME="${OWNER%%:*}"...`
+- assets/scripts/copy_log_once.sh: .env-style Assign → `GROUP_NAME="${OWNER##*:}"...`
+- assets/scripts/install.sh: .env-style Assign → `SERVICE_NAME="log-watcher"...`
+- assets/scripts/install.sh: .env-style Assign → `DEST_DIR="$(cd \"$(dirname \"${BASH_SOURCE[0]}\")/../..\" && pwd)/state/logs_mir...`
+- assets/scripts/install.sh: .env-style Assign → `OWNER="$(id -un):$(id -gn)"...`
+- assets/scripts/install.sh: .env-style Assign → `MODE="0640"...`
+- assets/scripts/install.sh: .env-style Assign → `DO_INITIAL_COPY=1...`
+- assets/scripts/install.sh: .env-style Assign → `ENABLE_NOW=1...`
+- assets/scripts/install.sh: .env-style Assign → `USER_NAME="${OWNER%%:*}"...`
+- assets/scripts/install.sh: .env-style Assign → `GROUP_NAME="${OWNER##*:}"...`
+- assets/scripts/install.sh: .env-style Assign → `ETC_DIR="/etc/log-watcher"...`
+- assets/scripts/install.sh: .env-style Assign → `ENV_FILE="${ETC_DIR}/${SERVICE_NAME}.env"...`
+- assets/scripts/install.sh: .env-style Assign → `BIN_COPY="/usr/local/bin/copy_log_once.sh"...`
+- assets/scripts/install.sh: .env-style Assign → `BIN_WATCH="/usr/local/bin/log_watcher.sh"...`
+- assets/scripts/install.sh: .env-style Assign → `UNIT_FILE="/etc/systemd/system/${SERVICE_NAME}.service"...`
+- assets/scripts/install.sh: .env-style Assign → `DEST_DIR="${DEST_DIR}"...`
+- assets/scripts/install.sh: .env-style Assign → `OWNER="${OWNER}"...`
+- assets/scripts/install.sh: .env-style Assign → `MODE="${MODE}"...`
+- assets/scripts/log_watcher.sh: .env-style Assign → `ENV_FILE="/etc/log-watcher/log-watcher.env"...`
+- assets/scripts/log_watcher.sh: .env-style Assign → `DEST_DIR="${DEST_DIR:-/var/log-export}"...`
+- assets/scripts/log_watcher.sh: .env-style Assign → `OWNER="${OWNER:-root:root}"...`
+- assets/scripts/log_watcher.sh: .env-style Assign → `MODE="${MODE:-0640}"...`
+- assets/scripts/log_watcher.sh: .env-style Assign → `USER_NAME="${OWNER%%:*}"...`
+- assets/scripts/log_watcher.sh: .env-style Assign → `GROUP_NAME="${OWNER##*:}"...`
+- assets/scripts/uninstall.sh: .env-style Assign → `SERVICE_NAME="log-watcher"...`
+- assets/scripts/uninstall.sh: .env-style Assign → `UNIT_FILE="/etc/systemd/system/${SERVICE_NAME}.service"...`
+- assets/scripts/uninstall.sh: .env-style Assign → `ENV_FILE="/etc/log-watcher/${SERVICE_NAME}.env"...`
+- assets/scripts/uninstall.sh: .env-style Assign → `FALLBACK_ENV="/etc/log-watcher/log-watcher.env"...`
+- assets/scripts/uninstall.sh: .env-style Assign → `BIN_COPY="/usr/local/bin/copy_log_once.sh"...`
+- assets/scripts/uninstall.sh: .env-style Assign → `BIN_WATCH="/usr/local/bin/log_watcher.sh"...`
+- assets/scripts/scripts/copy_log_once.sh: .env-style Assign → `ENV_FILE="/etc/log-watcher/log-watcher.env"...`
+- assets/scripts/scripts/copy_log_once.sh: .env-style Assign → `DEST_DIR="${DEST_DIR:-/var/log-export}"...`
+- assets/scripts/scripts/copy_log_once.sh: .env-style Assign → `OWNER="${OWNER:-root:root}"...`
+- assets/scripts/scripts/copy_log_once.sh: .env-style Assign → `MODE="${MODE:-0640}"...`
+- assets/scripts/scripts/copy_log_once.sh: .env-style Assign → `USER_NAME="${OWNER%%:*}"...`
+- assets/scripts/scripts/copy_log_once.sh: .env-style Assign → `GROUP_NAME="${OWNER##*:}"...`
+- config/defaults.php: Email Address → `admin@example.com...`
+- config/local.json: SMTP Host → `smtp.domain.com...`
+- config/local.json.sample: SMTP Host → `smtp.domain.com...`
+- data/alerts.json.sample: Email Address → `alerts@example.com...`
+- data/alerts.json.sample: Email Address → `ops@example.com...`
+- data/security_config.json: Email Address → `admin@domain.com...`
+- data/users.json.sample: Email Address → `admin@example.com...`
+- docs/README-Config-UI-Redesign.md: Email Address → `user@example.com...`
+- docs/USAGE_MAILER.md: Email Address → `you@example.com...`
+- docs/USAGE_MAILER.md: Cron Token-ish → `token=YOUR_CRON_TOKEN'...`
+- docs/USAGE_MAILER.md: URL with Token → `https://<host>/web-admin/api/mail_test.php?to=you@example.com&token=YOUR_CRON_TO...`
+- docs/config-system.md: .env-style Assign → `APP__INTEGRATIONS__MYSQL__HOST=10.0.0.12...`
+- docs/config-system.md: .env-style Assign → `APP__FEATURES__ENABLE_DIAGNOSTICS=false...`
+- docs/usage_readme.md: Email Address → `ops@example.com...`
+- docs/usage_readme.md: Cron Token-ish → `token=YOUR_LONG_RANDOM_TOKEN"...`
+- docs/usage_readme.md: Cron Token-ish → `token=YOUR_LONG_RANDOM_TOKEN"...`
+- docs/usage_readme.md: Cron Token-ish → `CRON_TOKEN=YOUR_LONG_RANDOM_TOKEN...`
+- docs/usage_readme.md: Cron Token-ish → `token=YOUR_LONG_RANDOM_TOKEN"...`
+- docs/usage_readme.md: URL with Token → `https://YOUR-DASHBOARD/api/alerts_eval.php?probe=1&token=YOUR_LONG_RANDOM_TOKEN...`
+- docs/usage_readme.md: URL with Token → `https://YOUR-DASHBOARD/api/alerts_eval.php?probe=1&dry=1&token=YOUR_LONG_RANDOM_...`
+- docs/usage_readme.md: URL with Token → `https://YOUR-DASHBOARD/api/alerts_eval.php?probe=1&token=YOUR_LONG_RANDOM_TOKEN...`
+- config/backups/security-20250831-003559.json: Email Address → `gene@genesworld.net...`
+- config/backups/security-20250831-003559.json: Email Address → `gene@genesworld.net...`
+- config/backups/security-20250831-003559.json: Email Address → `gene@genesworld.net...`
+
+**Notes**
+- Heuristic regexes can produce false positives/negatives. Manually review config files for secrets (API keys, OAuth client secrets, SMTP passwords, .env values).
+- Avoid committing `.env`, private keys, and live tokens into version control. Use environment variables or server-side, non-web-readable config files.
+
+## 3) Orphaned files (heuristic)
+- alerts_admin.php
+- api/_guard.php
+- api/_state_path.php
+- api/alerts_bulk.php
+- api/alerts_delete.php
+- api/alerts_eval.php
+- api/alerts_list.php
+- api/alerts_run.php
+- api/alerts_test.php
+- api/alerts_upsert.php
+- api/autoprobe_get.php
+- api/autoprobe_set.php
+- api/bm_categories_delete.php
+- api/bm_categories_list.php
+- api/bm_categories_reorder.php
+- api/bm_categories_upsert.php
+- api/bookmarks_delete.php
+- api/bookmarks_list.php
+- api/bookmarks_upsert.php
+- api/client_log.php
+- api/config_backup.php
+- api/config_export.php
+- api/config_import.php
+- api/cron_health.php
+- api/cron_mark.php
+- api/debug_ping.php
+- api/email_oauth_callback.php
+- api/email_oauth_start.php
+- api/email_status.php
+- api/email_token_info.php
+- api/favicon_proxy.php
+- api/health.php
+- api/history_diag.php
+- api/history_export.php
+- api/history_rotate.php
+- api/index_refresh_get.php
+- api/index_refresh_set.php
+- api/lib/services_common.php
+- api/logs_list.php
+- api/logs_tail.php
+- api/mail_test.php
+- api/metrics.php
+- api/metrics_json.php
+- api/metrics_prom.php
+- api/migrate_history_dir.php
+- api/probe_now.php
+- api/security_get.php
+- api/security_set.php
+- api/security_settings_get.php
+- api/security_settings_set.php
+- api/server_test.php
+- api/server_tests.php
+- api/server_tests_history.php
+- api/server_tests_history_where.php
+- api/service_delete.php
+- api/service_probe.php
+- api/service_toggle.php
+- api/service_upsert.php
+- api/services.php
+- api/services_bulk_save.php
+- api/services_enabled_ids.php
+- api/services_export.php
+- api/services_import.php
+- api/services_list.php
+- api/services_probe_all.php
+- api/services_status.php
+- api/smtp_probe.php
+- api/smtp_test.php
+- api/state_where.php
+- api/users_admin_health.php
+- assets/build_css.php
+- assets/build_js.php
+- assets/bundles.php
+- assets/css/app.css
+- assets/css/autoprobe.css
+- assets/css/base/00-reset.css
+- assets/css/base/10-tokens.css
+- assets/css/base/20-typography.css
+- assets/css/base/30-layout.css
+- assets/css/base/40-utilities.css
+- assets/css/components/chip.css
+- assets/css/components/chips.css
+- assets/css/components/modal.css
+- assets/css/components/sys-badge.css
+- assets/css/components/toast-pos.css
+- assets/css/header/debug.css
+- assets/css/header/email-indicator.css
+- assets/css/header/userbox.css
+- assets/css/header_status_fix.css
+- assets/css/index_helpers.css
+- assets/css/index_proc.gauges.extras.css
+- assets/css/index_process.css
+- assets/css/index_services.css
+- assets/css/notify.css
+- assets/css/page_diag.css
+- assets/css/pages/alerts_admin.css
+- assets/css/pages/bookmarks.css
+- assets/css/pages/config.css
+- assets/css/pages/history.css
+- assets/css/pages/index.css
+- assets/css/pages/login.css
+- assets/css/pages/logs.css
+- assets/css/pages/server_tests.css
+- assets/css/pages/services.css
+- assets/css/pages/users.css
+- assets/css/theme.css
+- assets/css/themes/amber.css
+- assets/css/themes/amber.mobile.css
+- assets/css/themes/autumn-dreams.css
+- assets/css/themes/autumn-dreams.mobile.css
+- assets/css/themes/azure.css
+- assets/css/themes/azure.mobile.css
+- assets/css/themes/black-dreams.css
+- assets/css/themes/black-dreams.mobile.css
+- assets/css/themes/blue-dreams.css
+
+> Heuristic definition: files not referenced by any other text file via href/src/action/import/require/include/url().
+> Entry points like `index.php` or `config.php` are exempted from orphan detection.
+
+## 4) Cron jobs — required & suggested
+- README.md: endpoints=api/history_export.php,api/probe_now.php,api/security_get.php,api/security_set.php; shebang=False
+- alerts_admin.php: endpoints=—; shebang=False
+- api/_guard.php: endpoints=api/_guard.php; shebang=False
+- api/_state_path.php: endpoints=api/_state_path.php; shebang=False
+- api/alerts_bulk.php: endpoints=—; shebang=False
+- api/alerts_delete.php: endpoints=—; shebang=False
+- api/alerts_eval.php: endpoints=—; shebang=False
+- api/alerts_list.php: endpoints=—; shebang=False
+- api/alerts_run.php: endpoints=api/alerts_run.php; shebang=False
+- api/alerts_test.php: endpoints=api/alerts_test.php; shebang=False
+- api/alerts_upsert.php: endpoints=—; shebang=False
+- api/autoprobe_get.php: endpoints=—; shebang=False
+- api/autoprobe_set.php: endpoints=—; shebang=False
+- api/bm_categories_delete.php: endpoints=—; shebang=False
+- api/bm_categories_list.php: endpoints=—; shebang=False
+- api/bm_categories_reorder.php: endpoints=—; shebang=False
+- api/bm_categories_upsert.php: endpoints=—; shebang=False
+- api/bookmarks_delete.php: endpoints=—; shebang=False
+- api/bookmarks_list.php: endpoints=—; shebang=False
+- api/bookmarks_upsert.php: endpoints=api/bookmarks_upsert.php; shebang=False
+- api/client_log.php: endpoints=—; shebang=False
+- api/config_backup.php: endpoints=api/config_backup.php; shebang=False
+- api/config_export.php: endpoints=api/config_export.php; shebang=False
+- api/config_import.php: endpoints=api/config_import.php; shebang=False
+- api/cron_health.php: endpoints=api/cron_health.php; shebang=False
+- api/cron_mark.php: endpoints=api/cron_mark.php; shebang=False
+- api/debug_ping.php: endpoints=—; shebang=False
+- api/email_oauth_callback.php: endpoints=api/email_oauth_callback.php; shebang=False
+- api/email_oauth_start.php: endpoints=api/email_oauth_start.php; shebang=False
+- api/email_status.php: endpoints=api/email_status.php; shebang=False
+- api/email_token_info.php: endpoints=api/email_token_info.php; shebang=False
+- api/favicon_proxy.php: endpoints=—; shebang=False
+- api/health.php: endpoints=api/health.php; shebang=False
+- api/history_diag.php: endpoints=—; shebang=False
+- api/history_export.php: endpoints=—; shebang=False
+- api/history_rotate.php: endpoints=—; shebang=False
+- api/index_refresh_get.php: endpoints=—; shebang=False
+- api/index_refresh_set.php: endpoints=—; shebang=False
+- api/logs_list.php: endpoints=api/logs_list.php; shebang=False
+- api/logs_tail.php: endpoints=api/logs_tail.php; shebang=False
+- api/mail_test.php: endpoints=—; shebang=False
+- api/metrics.php: endpoints=—; shebang=False
+- api/metrics_json.php: endpoints=api/metrics_json.php; shebang=False
+- api/metrics_prom.php: endpoints=api/metrics_prom.php; shebang=False
+- api/metrics_summary.php: endpoints=—; shebang=False
+- api/migrate_history_dir.php: endpoints=—; shebang=False
+- api/probe_now.php: endpoints=—; shebang=False
+- api/security_get.php: endpoints=—; shebang=False
+- api/security_set.php: endpoints=—; shebang=False
+- api/security_settings_get.php: endpoints=—; shebang=False
+- api/security_settings_set.php: endpoints=—; shebang=False
+- api/server_test.php: endpoints=api/server_test.php; shebang=False
+- api/server_tests.php: endpoints=api/server_tests.php; shebang=False
+- api/server_tests_history.php: endpoints=—; shebang=False
+- api/server_tests_history_where.php: endpoints=—; shebang=False
+- api/service_delete.php: endpoints=—; shebang=False
+- api/service_probe.php: endpoints=—; shebang=False
+- api/service_toggle.php: endpoints=—; shebang=False
+- api/service_upsert.php: endpoints=—; shebang=False
+- api/services.php: endpoints=—; shebang=False
+- api/services_bulk_save.php: endpoints=—; shebang=False
+- api/services_enabled_ids.php: endpoints=—; shebang=False
+- api/services_export.php: endpoints=—; shebang=False
+- api/services_import.php: endpoints=—; shebang=False
+- api/services_list.php: endpoints=—; shebang=False
+- api/services_probe_all.php: endpoints=—; shebang=False
+- api/services_status.php: endpoints=—; shebang=False
+- api/smtp_probe.php: endpoints=api/smtp_probe.php; shebang=False
+- api/smtp_test.php: endpoints=—; shebang=False
+- api/state_where.php: endpoints=—; shebang=False
+- api/users_admin_health.php: endpoints=api/users_admin_health.php; shebang=False
+- api/lib/services_common.php: endpoints=—; shebang=False
+- assets/js/header/email-indicator.toast.js: endpoints=api/email_status.php; shebang=False
+- assets/js/index/disks.render.js: endpoints=api/metrics_summary.php; shebang=False
+- assets/js/index/metrics.zoom.js: endpoints=api/metrics_summary.php; shebang=False
+- assets/js/pages/config.cron.js: endpoints=—; shebang=False
+- assets/js/pages/security.js: endpoints=api/security_get.php; shebang=False
+- assets/js/pages/server_tests.js: endpoints=—; shebang=False
+- bin/scan.php: endpoints=—; shebang=True
+- config/defaults.php: endpoints=—; shebang=False
+- config/local.json: endpoints=—; shebang=False
+- config/local.json.sample: endpoints=—; shebang=False
+- data/alerts.json.sample: endpoints=—; shebang=False
+- docs/FUTURE_PLANS.md: endpoints=api/email_token_info.php; shebang=False
+- docs/README-Config-UI-Redesign.md: endpoints=api/alerts_test.php,api/cron_mark.php,api/email_status.php,api/mail_test.php; shebang=False
+- docs/README_header_status.txt: endpoints=api/services_status.php; shebang=False
+- docs/README_metrics.txt: endpoints=api/metrics_summary.php; shebang=False
+- docs/USAGE_MAILER.md: endpoints=api/alerts_eval.php,api/mail_test.php; shebang=False
+- docs/usage_readme.md: endpoints=api/alerts_bulk.php,api/alerts_delete.php,api/alerts_eval.php,api/alerts_list.php,api/alerts_upsert.php,api/cron_mark.php,api/history_export.php,api/history_rotate.php,api/services_probe_all.php; shebang=False
+- includes/config.inc.php: endpoints=—; shebang=False
+
+**General guidance**
+- If the app exposes API endpoints that are meant to be polled (e.g. `api/*`), schedule them via cron using a secret token parameter. Example crontab entries:
+```
+# Run alerts check every 5 minutes
+*/5 * * * * curl -fsS "https://YOUR_HOST/path/api/alerts_scan.php?token=YOUR_TOKEN" >/dev/null 2>&1
+
+# Rotate/backup config daily at 03:17
+17 3 * * * php /var/www/html/path/scripts/backup.php >> /var/log/app_backup.log 2>&1
+```
+- Never expose cron tokens publicly; restrict endpoints by IP or token and enforce CSRF on non-cron POST routes.
+
+## 5) Installation
+- **Prereqs**: PHP ≥ 8.1 recommended, web server (nginx/apache), and `php-json`, `php-curl`, `php-mbstring` as applicable.
+- **Deploy**: Upload project contents to your web root (or a subdirectory), respecting folder structure.
+- **Permissions**: 
+  - Ensure cache/temp/backup directories (if present) are writable by PHP user.
+  - Deny direct web access to sensitive folders via `.htaccess` or web server rules.
+- **Configuration**:
+  - Review `.php`, `.json`, `.ini`, `.yml` files for site-specific settings (domains, emails, paths).
+  - If a `.env.example` is present, copy to `.env` and fill in values.
+- **HTTPS**: Serve over TLS. Set HSTS and secure cookies.
+
+## 6) Administration
+- Keep regular backups of config and content.
+- Use read-only credentials for external services when possible.
+- Rotate tokens & passwords during initial deployment.
+
+## 7) Usage
+- Primary entry points (index/config pages) should be accessible once deployed.
+- JS and CSS assets load relative to the install path; verify URLs if installed in a subdir.
+
+---
+
+## Next steps to finalize this document
+- Confirm the exact PHP entry points and any `api/*` endpoints intended for cron.
+- Provide environment-specific values (domain, tokens) you prefer.
+- I can then produce a finalized `INSTALL.md` + `ADMIN.md` with exact crontab lines and ship a sanitized zip.

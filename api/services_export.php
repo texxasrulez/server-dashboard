@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_admin();
 
 $format = strtolower($_GET['format'] ?? 'json');
 $baseDir = realpath(__DIR__ . '/..') ?: (__DIR__ . '/..');

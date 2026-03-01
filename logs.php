@@ -477,6 +477,7 @@ mirror_logs_dir($LOG_SRC, $LOG_DEST);
 /* ====================== HTML ====================== */
 include __DIR__.'/includes/head.php';
 ?>
+<div class="card">
   <div class="card">
     <div class="row" style="justify-content:space-between">
       <div style="font-weight:700">Logs</div>
@@ -488,7 +489,7 @@ include __DIR__.'/includes/head.php';
     <input id="logCi" type="checkbox"> <span class="muted">case-insensitive</span>
   </label>
   <input id="logRe" placeholder="regex …" style="min-width:160px">
-  <button class="btn" id="btnRefresh">Refresh</button>
+  <button class="btn" id="btnRefresh"><span data-i18n="alerts.refresh">Refresh</span></button>
   <button class="btn" id="btnAddLog">Add Log</button>
   <a class="btn" id="btnDownload" href="#" download>Download</a>
   <button class="btn" id="btnExportCsv">Export CSV</button>
@@ -511,7 +512,7 @@ include __DIR__.'/includes/head.php';
           <input type="hidden" id="logId">
           <input id="logLabel" placeholder="Label (e.g., Nginx Error)" required>
           <input id="logPath" placeholder="Path under /var/log (e.g., nginx/error.log)" required>
-          <button class="btn" id="logSave">Save</button>
+          <button class="btn" id="logSave"><span data-i18n="common.save">Save</span></button>
           <button class="btn" id="logTest" type="button">Test</button>
           <button class="btn" id="logCommon" type="button">Common</button>
           <span class="muted" id="logStatus" style="margin-left:.5rem"></span>
@@ -529,7 +530,7 @@ include __DIR__.'/includes/head.php';
         <div class="row" style="justify-content:space-between;align-items:center">
           <div style="font-weight:700">Mirror files</div>
           <div class="row">
-            <button class="btn" id="mirrorRefresh" type="button">Refresh</button>
+            <button class="btn" id="mirrorRefresh" type="button"><span data-i18n="alerts.refresh">Refresh</span></button>
           </div>
         </div>
         <div class="tablewrap" style="margin-top:.5rem;max-height:40vh;overflow:auto">
@@ -555,6 +556,7 @@ include __DIR__.'/includes/head.php';
       </div>
     </div>
     <div class="muted" id="histMeta">Showing 0 of 0 entries</div>
+    </div>
     <div class="tablewrap">
       <table id="histTable" class="js-sortable sortable">
         <thead>
@@ -570,6 +572,7 @@ include __DIR__.'/includes/head.php';
       </table>
     </div>
   </div>
+</div>
 
   <script defer src="assets/js/logs.js?v=<?php echo h(BUILD); ?>"></script>
 
@@ -636,11 +639,11 @@ include __DIR__.'/includes/head.php';
       (function(){ const td = document.createElement('td'); 
       if (r.ip && typeof r.ip === 'string' && r.ip.trim() !== '') { 
         const a = document.createElement('a'); 
-        a.href = 'https://www.whatismyip.com/ip/' + encodeURIComponent(r.ip.trim()); 
+        a.href = 'https://iplookup.flagfox.net/?ip=' + encodeURIComponent(r.ip.trim()); 
         a.target = '_blank'; 
         a.rel = 'noopener noreferrer'; 
         a.textContent = r.ip.trim(); 
-        a.title = 'Lookup ' + r.ip.trim() + ' on whatismyip.com'; 
+        a.title = 'Lookup ' + r.ip.trim() + ' iplookup.flagfox.net'; 
         td.appendChild(a); 
       } else { td.textContent = ''; } 
       tr.appendChild(td); })();

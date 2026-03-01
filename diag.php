@@ -63,10 +63,12 @@ $ok = is_array($j) && isset($j['memory']) && isset($j['disk']);
 
 include __DIR__ . '/includes/head.php';
 ?>
-<main class="container full diag">
-  <h1 class="h2">Diagnostics</h1>
-  <p class="muted">Build <strong><?= h(BUILD) ?></strong> &middot; User <strong><?= h($_SESSION['user']['username'] ?? 'guest') ?></strong> &middot; Theme <strong><?= h($THEME) ?></strong></p>
-
+<div class="card">
+ <div class="card">
+  <main class="container full diag">
+   <h1 class="h2">Diagnostics</h1>
+   <p class="muted">Build <strong><?= h(BUILD) ?></strong> &middot; User <strong><?= h($_SESSION['user']['username'] ?? 'guest') ?></strong> &middot; Theme <strong><?= h($THEME) ?></strong></p>
+</div>
   <div class="grid diag-grid">
     <section class="card">
       <div class="card-title">Metrics API</div>
@@ -112,6 +114,7 @@ include __DIR__ . '/includes/head.php';
   </div>
   <script defer src="assets/js/pages/diag.js"></script>
 </main>
+</div>
 <link rel="stylesheet" href="assets/css/page_diag.css" />
 <script defer src="assets/js/page_diag.js"></script>
 <?php include __DIR__ . '/includes/foot.php'; ?>

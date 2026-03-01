@@ -1,17 +1,15 @@
 <?php
 // api/bookmarks_upsert.php (category-aware)
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_admin();
 header('Content-Type: application/json');
-$admin_ok = false;
-if (function_exists('user_is_admin')) { $admin_ok = user_is_admin(); }
-elseif (function_exists('is_admin')) { $admin_ok = is_admin(); }
-elseif (!empty($_SESSION['user']) && (($_SESSION['user']['role'] ?? '') === 'admin')) { $admin_ok = true; }
-if (!$admin_ok) { http_response_code(403); echo json_encode(['error'=>'forbidden']); exit; }
 
 $raw = file_get_contents('php://input');
 $body = json_decode($raw, true);
 if (!is_array($body) || !count($body)) { $body = $_POST; }
 function v($k,$d=null){ global $body; return isset($body[$k]) ? $body[$k] : $d; }
+if (!csrf_check_request((string)($body['_csrf'] ?? $body['csrf'] ?? ''))) { http_response_code(403); echo json_encode(['error'=>'CSRF failed']); exit; }
 
 $id = v('id');
 $title = trim((string)v('title',''));

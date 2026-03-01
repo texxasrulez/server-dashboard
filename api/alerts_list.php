@@ -1,6 +1,8 @@
 <?php
 $__t0 = microtime(true);
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_admin();
 header('Content-Type: application/json');
 
 $dataDir  = __DIR__ . '/../data';
@@ -30,6 +32,9 @@ foreach ($items as &$it) {
   if (!isset($it['severity'])) { $it['severity'] = 'warn'; $changed = true; }
   if (!isset($it['notify'])) { $it['notify'] = ['email'=>'','webhook_url'=>'']; $changed = true; }
   if (!isset($it['enabled'])) { $it['enabled'] = true; $changed = true; }
+  if (!isset($it['times_triggered'])) { $it['times_triggered'] = 0; $changed = true; }
+  if (!isset($it['last_triggered'])) { $it['last_triggered'] = null; $changed = true; }
+  if (!array_key_exists('silenced_until', $it)) { $it['silenced_until'] = null; $changed = true; }
 }
 unset($it);
 if ($changed) file_put_contents($dataPath, json_encode(['items'=>$items], JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES), LOCK_EX);

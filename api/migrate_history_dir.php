@@ -4,6 +4,7 @@ require_once __DIR__ . '/../includes/auth.php';
 require_admin();
 require_once __DIR__ . '/_state_path.php';
 header('Content-Type: application/json; charset=utf-8');
+if (!csrf_check_request()) { http_response_code(403); echo json_encode(['ok'=>false,'error'=>'CSRF failed']); exit; }
 
 $legacy = dirname(__DIR__) . '/state/history';
 $targetDir = dirname(dashboard_state_path('history/.keep')) . '/history';

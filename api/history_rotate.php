@@ -4,6 +4,7 @@ require_once __DIR__ . '/../includes/auth.php';
 require_admin();
 require_once __DIR__ . '/_state_path.php';
 header('Content-Type: application/json');
+if (!csrf_check_request()) { http_response_code(403); echo json_encode(['error'=>'CSRF failed']); exit; }
 
 $files = [
   dashboard_state_path('services_status_history.jsonl'),

@@ -27,6 +27,11 @@ try {
   $raw = file_get_contents('php://input');
   $input = $raw ? json_decode($raw, true) : array();
   if (!is_array($input)) $input = array();
+  if (!csrf_check_request((string)($input['_csrf'] ?? $input['csrf'] ?? ''))) {
+    http_response_code(403);
+    echo json_encode(array('ok'=>false,'error'=>'CSRF failed'));
+    exit;
+  }
 
   // Resolve recipient 'to'
   $to = '';

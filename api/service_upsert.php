@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_admin();
 require_once __DIR__ . '/../includes/paths.php';
 require_once __DIR__ . '/../includes/logger.php';
 header('Content-Type: application/json');
@@ -10,6 +12,10 @@ if (!file_exists($dataPath)) write_json_atomic($dataPath, ['items'=>[]]);
 
 $payload = json_decode(file_get_contents('php://input'), true);
 if (!$payload) { http_response_code(400); echo json_encode(['error'=>'Invalid JSON']); exit; }
+if (!csrf_check_request((string)($payload['_csrf'] ?? $payload['csrf'] ?? ''))) {
+  http_response_code(403);
+  echo json_encode(['error'=>'CSRF failed']); exit;
+}
 
 $id      = $payload['id']      ?? null;
 $name    = trim($payload['name'] ?? '');

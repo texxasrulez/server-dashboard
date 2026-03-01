@@ -23,6 +23,24 @@ function csrf_token() {
 function csrf_check($token) {
   return isset($_SESSION['csrf']) && hash_equals($_SESSION['csrf'], $token ?? '');
 }
+function csrf_request_token($fallback = '') {
+  $tok = (string)$fallback;
+  if ($tok !== '') return $tok;
+  $candidates = [
+    $_POST['_csrf'] ?? null,
+    $_POST['csrf'] ?? null,
+    $_GET['_csrf'] ?? null,
+    $_GET['csrf'] ?? null,
+    $_SERVER['HTTP_X_CSRF_TOKEN'] ?? null,
+  ];
+  foreach ($candidates as $c) {
+    if (is_string($c) && $c !== '') return $c;
+  }
+  return '';
+}
+function csrf_check_request($fallback = '') {
+  return csrf_check(csrf_request_token($fallback));
+}
 
 function users_load() {
   $f = USERS_FILE;

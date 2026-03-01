@@ -123,6 +123,12 @@ return [
     'debounce_hours' => ['type'=>'int','label'=>'Suppress repeats for (hours)','min'=>0,'max'=>168],
     'daily_digest'   => ['type'=>'bool','label'=>'Send daily summary (if issues persist)'],
     'digest_hour'    => ['type'=>'string','label'=>'Digest send time (HH:MM)','hint'=>'24h time, e.g. 08:00'],
+    'mute_presets'   => ['type'=>'string','label'=>'Mute presets (minutes, comma-separated)','help'=>'Show quick-silence buttons with these durations. Default: 30,60,120'],
+    'service_defaults' => [
+      '_label' => 'Service defaults',
+      'latency_warn_ms' => ['type'=>'int','label'=>'Warn if latency > (ms)','min'=>0,'max'=>60000],
+      'latency_fail_ms' => ['type'=>'int','label'=>'Fail if latency > (ms)','min'=>0,'max'=>60000],
+    ],
   ],
 
   'cron' => [
@@ -151,6 +157,22 @@ return [
     'grep_max_lines' => ['type'=>'int','label'=>'Max lines returned','min'=>50,'max'=>10000],
   ],
 
+  'backups' => [
+    '_label' => 'Backups',
+    'fs_root' => ['type'=>'string','label'=>'Filesystem root path','placeholder'=>'/mnt/backupz','help'=>'Root directory that holds your backup folders.','required'=>true],
+    'fs_dirs' => ['type'=>'text','label'=>'Subdirectories','placeholder'=>"hestia\nmicro\nsnapshots",'help'=>'Comma or newline-separated list of directories under the root to monitor.'],
+    'exclude_dirs' => ['type'=>'text','label'=>'Exclude paths','placeholder'=>"/backup\n/mnt/backupz",'help'=>'Comma or newline-separated paths/patterns for backup scripts that honor BACKUP_EXCLUDES.'],
+    'suspend' => ['type'=>'bool','label'=>'Suspend backups','help'=>'When enabled, backup actions and generated scripts will skip running backups.'],
+    'disable_on_mount_fail' => ['type'=>'bool','label'=>'Disable backups if mount fails','help'=>'When enabled, backup actions and generated scripts stop if the backup mount is missing.'],
+    'debug' => ['type'=>'bool','label'=>'Debug backup scripts','help'=>'When enabled, backup scripts emit resolved BACKUP_ROOT and BACKUP_EXCLUDES for troubleshooting.'],
+    'log_dest' => ['type'=>'string','label'=>'Log mirror destination','placeholder'=>'/var/log-export','help'=>'Destination path used by the log watcher scripts.','required'=>true],
+    'log_owner' => ['type'=>'string','label'=>'Log files owner (user:group)','placeholder'=>'root:root','required'=>true],
+    'log_mode' => ['type'=>'string','label'=>'Log files mode','placeholder'=>'0640','required'=>true],
+    'log_service_name' => ['type'=>'string','label'=>'Service name','placeholder'=>'log-watcher','help'=>'Name for the systemd unit created by install.sh'],
+    'log_initial_copy' => ['type'=>'bool','label'=>'Run initial copy on install','default'=>true],
+    'log_enable_now' => ['type'=>'bool','label'=>'Enable + start service after install','default'=>true],
+  ],
+
   'email' => [
     '_label' => 'Email',
     'enabled' => ['type'=>'bool','label'=>'Enable Email polling'],
@@ -165,6 +187,7 @@ return [
 
     // OAuth fields here …
 
+  'notification_link'        => ['type'=>'string','label'=>'Notification link','placeholder'=>'https://mail.example.com','help'=>'If set, email notification icons link here. Leave blank to use provider defaults.'],
   'oauth_google_client_id'     => ['type'=>'string','label'=>'Google Client ID'],
   'oauth_google_client_secret' => ['type'=>'secret','label'=>'Google Client Secret'],
   'oauth_ms_client_id'         => ['type'=>'string','label'=>'Microsoft Client ID'],

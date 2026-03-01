@@ -5,8 +5,8 @@
 return [
   // Site & Branding
   'site' => [
-    'name' => 'Domain',
-    'base_url' => 'https://example.com',
+    'name' => 'GeneMail',
+    'base_url' => 'https://www.genesworld.net/web-admin/',
     'timezone' => 'UTC',
     'theme' => 'dark',
   ],
@@ -82,6 +82,11 @@ return [
 'debounce_hours' => 6,
 'daily_digest' => false,
 'digest_hour' => '08:00',
+  'mute_presets' => '30,60,120',
+  'service_defaults' => [
+    'latency_warn_ms' => 1500,
+    'latency_fail_ms' => 5000,
+  ],
 ],
 // History
 'history' => [
@@ -105,5 +110,21 @@ return [
   'tail_bytes' => 65536,
   'poll_ms' => 2000,
   'grep_max_lines' => 1000,
+],
+
+// Backups + log watcher helpers
+'backups' => [
+  'fs_root' => '/mnt/backupz',
+  'fs_dirs' => "hestia\nmicro\nsnapshots",
+  'exclude_dirs' => '',
+  'suspend' => false,
+  'disable_on_mount_fail' => false,
+  'debug' => false,
+  'log_dest' => '/var/log-export',
+  'log_owner' => 'root:root',
+  'log_mode' => '0640',
+  'log_service_name' => 'log-watcher',
+  'log_initial_copy' => true,
+  'log_enable_now' => true,
 ],
 ];

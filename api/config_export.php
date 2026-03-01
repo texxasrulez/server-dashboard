@@ -2,6 +2,9 @@
 // api/config_export.php
 // Exports config/local.json + data/security_config.json as a single JSON download.
 // Accepts CSRF via GET (_csrf) or POST (form/json).
+require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_admin();
 
 header('X-Robots-Tag: noindex');
 
@@ -10,17 +13,13 @@ $cfgFile = $root . '/config/local.json';
 $secFile = $root . '/data/security_config.json';
 $stateDir = $root . '/state';
 
-// --- CSRF (very lightweight; rely on existing session mechanism if present) ---
-session_start();
+// --- CSRF ---
 $csrf = $_GET['_csrf'] ?? $_POST['_csrf'] ?? '';
-if (isset($_SESSION['csrf_token']) && $_SESSION['csrf_token']) {
-  if (!$csrf || !hash_equals($_SESSION['csrf_token'], $csrf)) {
-    http_response_code(403);
-    header('Content-Type: application/json; charset=utf-8');
-    echo json_encode(['ok'=>false,'error'=>'CSRF failed']); exit;
-  }
+if (!csrf_check($csrf)) {
+  http_response_code(403);
+  header('Content-Type: application/json; charset=utf-8');
+  echo json_encode(['ok'=>false,'error'=>'CSRF failed']); exit;
 }
-// If no session token is set, allow (backward compat).
 
 // Compose payload
 $cfg = is_file($cfgFile) ? json_decode(@file_get_contents($cfgFile), true) : null;

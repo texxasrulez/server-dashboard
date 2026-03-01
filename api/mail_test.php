@@ -9,12 +9,8 @@ if (!empty($_SESSION['user']) && (($_SESSION['user']['role'] ?? '') === 'admin')
 elseif (function_exists('user_is_admin') && user_is_admin()) $ok = true;
 elseif (function_exists('is_admin') && is_admin()) $ok = true;
 
-$given = $_GET['token'] ?? $_POST['token'] ?? '';
-$expected = null;
-if (defined('CRON_TOKEN')) $expected = CRON_TOKEN;
-if (!$expected) $expected = getenv('DASH_CRON_TOKEN');
-if (!$expected) { $f = __DIR__ . '/../data/cron_token.txt'; if (file_exists($f)) $expected = trim(file_get_contents($f)); }
-if (!$ok && $expected && hash_equals($expected, $given)) $ok = true;
+$given = cron_request_token();
+if (!$ok && cron_token_is_valid($given)) $ok = true;
 
 if (!$ok) { http_response_code(403); echo json_encode(['error'=>'forbidden']); exit; }
 

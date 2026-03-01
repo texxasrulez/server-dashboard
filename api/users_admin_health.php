@@ -1,5 +1,8 @@
 <?php
 // api/users_admin_health.php — checks data/users.json for admin with empty password
+require_once dirname(__DIR__) . '/includes/init.php';
+require_once dirname(__DIR__) . '/includes/auth.php';
+require_admin();
 header('Content-Type: application/json; charset=UTF-8');
 
 $path = dirname(__DIR__) . '/data/users.json';

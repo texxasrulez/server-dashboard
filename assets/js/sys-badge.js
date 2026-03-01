@@ -8,11 +8,37 @@
     el.classList.add(kind);
     txt.textContent = label;
   }
-  function label(up, total){
-    if (!total) return ['warn','Status unknown'];
-    if (up===total) return ['ok', `All systems operational  ${up}/${total} up`];
-    if (up>0)       return ['warn', `Degraded  ${up}/${total} up`];
-    return ['danger', `Major outage  ${up}/${total} up`];
+  function label(up, total, cron){
+    let kind = 'warn';
+    let text = 'Status unknown';
+    if (total){
+      if (up === total){ kind = 'ok'; text = `All systems operational  ${up}/${total} up`; }
+      else if (up > 0){ kind = 'warn'; text = `Degraded  ${up}/${total} up`; }
+      else { kind = 'danger'; text = `Major outage  ${up}/${total} up`; }
+    }
+    const cronLevel = deriveCronLevel(cron);
+    if (cronLevel === 'fail'){
+      kind = 'danger';
+      text = `Cron failing · ${text}`;
+    } else if (cronLevel === 'warn' && kind === 'ok'){
+      kind = 'warn';
+      text = `Cron delayed · ${text}`;
+    }
+    return [kind, text];
+  }
+  function deriveCronLevel(cron){
+    if (!cron || cron.ok === false) return null;
+    let level = 'ok';
+    function apply(status){
+      if (!status) return;
+      const s = String(status).toLowerCase();
+      if (s === 'fail' || s === 'danger'){ level = 'fail'; }
+      else if (s === 'warn' && level !== 'fail'){ level = 'warn'; }
+    }
+    if (cron.alerts) apply(cron.alerts.status);
+    if (cron.history) apply(cron.history.status);
+    if (Array.isArray(cron.jobs)) cron.jobs.forEach(job => apply(job.status));
+    return level;
   }
   function norm(v){ return (v==null?'':String(v)).trim().toLowerCase(); }
   function idOf(x){ return norm(x.id || x.name || x.title); }
@@ -75,7 +101,12 @@
         }catch(__){ /* ignore */ }
       }
 
-      const [kind, msg] = label(up, total);
+      let cronInfo = null;
+      try{
+        cronInfo = await j('api/cron_health.php');
+      }catch(_){}
+
+      const [kind, msg] = label(up, total, cronInfo);
       paint(kind, msg);
       el.title = msg;
     }catch(e){

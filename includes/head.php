@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/i18n.php'; ?>
 <?php
 require_once __DIR__ . '/init.php';
 require_once __DIR__ . '/auth.php'; require_login(); if (!empty($REQUIRE_ADMIN)) require_admin();
@@ -18,11 +19,13 @@ try {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= h(DASH_LOCALE) ?>">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="csrf-token" content="<?= h(csrf_token()) ?>">
   <title><?= h(isset($PAGE_TITLE) && $PAGE_TITLE !== '' ? ($PAGE_TITLE . ' — ' . $SITE_NAME) : $SITE_NAME) ?></title>  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="<?= h(project_url('/assets/css/app.css')) ?>?v=<?= h(BUILD) ?>" />
   <link rel="stylesheet" href="<?= h(project_url('/assets/css/themes/core.css')) ?>?v=<?= h(BUILD) ?>" />
   <link rel="stylesheet" href="<?= h(project_url('/assets/css/index_services.colors.css')) ?>?v=<?= h(BUILD) ?>" />
@@ -43,6 +46,7 @@ try {
   <link rel="stylesheet" href="<?= h(project_url('/assets/css/components/sys-badge.css')) ?>?v=<?= h(BUILD) ?>">
   <script defer src="<?= h(project_url('/assets/js/sys-badge.js')) ?>"></script>
   <meta name="toast-position" content="<?= h(\App\Config::get('ui.toast_position', 'bottom-center')) ?>">
+  <script src="assets/js/i18n.js"></script>
 </head>
 <body class="theme-<?= h($THEME) ?>"
       data-admin="<?= !empty($_SESSION['user']) && (($_SESSION['user']['role'] ?? '') === 'admin') ? '1' : '0' ?>"

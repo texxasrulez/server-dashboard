@@ -41,6 +41,8 @@ if (!function_exists('__run_cmd')) {
 
 // metrics_summary.php — returns JSON summary of uptime, load, memory, disk, processes
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_login();
 
 header('Content-Type: application/json');
 

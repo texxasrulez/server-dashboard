@@ -114,10 +114,14 @@ $cfg = \App\Config::all();
 $alerts = $cfg['alerts'] ?? [];
 $enabled = !empty($alerts['enabled']);
 
-$token = $_GET['token'] ?? $_POST['token'] ?? '';
-$need = (string)($alerts['cron_token'] ?? '');
+$token = cron_request_token();
+$need = trim((string)($alerts['cron_token'] ?? ''));
 if (!$enabled) { echo json_encode(['ok'=>false,'error'=>'alerts disabled']); exit; }
-if (!$need || !hash_equals($need, (string)$token)) { http_response_code(401); echo json_encode(['ok'=>false,'error'=>'bad token']); exit; }
+if ($need !== '') {
+  if (!hash_equals($need, (string)$token)) { http_response_code(401); echo json_encode(['ok'=>false,'error'=>'bad token']); exit; }
+} else {
+  if (!cron_token_is_valid($token)) { http_response_code(401); echo json_encode(['ok'=>false,'error'=>'bad token']); exit; }
+}
 
 // Quiet hours: "HH:MM-HH:MM" (local time). If within range, skip send.
 $quiet = trim((string)($alerts['quiet_hours'] ?? ''));
@@ -179,7 +183,7 @@ if (!$__SUPPRESS && count($bad) > 0) {
   }
   // Email (best-effort)
 $em = trim((string)($alerts['email'] ?? ''));
-if ($em !== '') {
+  if ($em !== '') {
   $subj = '[ServerDiag] ' . count($bad) . ' issue(s) at ' . ( $_SERVER['HTTP_HOST'] ?? 'host' );
   $lines = [];
   foreach ($bad as $r) { $lines[] = sprintf('- %s: %s (%s)', $r['name'], $r['status'], $r['details'] ?? ''); }
@@ -190,9 +194,8 @@ if ($em !== '') {
 
   $res = \Mailer::send($em, $subj, $body, $opts);
   if (!empty($res['ok'])) { $sent = true; $targets[] = 'email'; }
-}
   }
-}
+  }
 
 
 if (!$__SUPPRESS && !empty($sent)) { _noise_debounce_mark($__KEY); }

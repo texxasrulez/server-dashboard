@@ -1,70 +1,48 @@
 {
-    "site": {
-        "name": "Sitename",
-        "base_url": "https://domain.com",
-        "timezone": "UTC",
-        "theme": "nord"
+  "db": {
+    "charset": "utf8mb4",
+    "collation": "utf8mb4_unicode_ci",
+    "database": "dashboard",
+    "driver": "mysql",
+    "host": "127.0.0.1",
+    "password": "CHANGE_ME",
+    "port": 3306,
+    "username": "dashboard_user"
+  },
+  "features": {
+    "bookmarks": true,
+    "monitoring": true,
+    "security": true
+  },
+  "integrations": {
+    "slack": {
+      "webhook_url": ""
     },
-    "integrations": {
-        "smtp": {
-            "username": "",
-            "password": ""
-        },
-        "mysql": {
-            "database": "database",
-            "username": "user",
-            "password": "password"
-        }
-    },
-    "server_tests": {
-        "rate_limit_ms": 3000,
-        "load_warn_per_core": "1",
-        "load_fail_per_core": "2",
-        "audit_log": true
-    },
-    "security": {
-        "admin_emails": [
-            ""
-        ],
-        "csrf_secret": "",
-        "api_rate_limit_ms": 600
-    },
-    "alerts": {
-        "enabled": true,
-        "cron_token": "",
-        "daily_digest": true
-    },
-    "ui": {
-        "toast_position": "bottom-right",
-        "items_per_page": 5
-    },
-    "cron": {
-        "jobs": "[]"
-    },
-    "mail": {
-        "mail_transport": "phpmail",
-        "mail_from": "",
-        "mail_replyto": "",
-        "sendmail_path": "/usr/sbin",
-        "smtp_host": "smtp.domain.com",
-        "smtp_port": 587,
-        "smtp_secure": "tls",
-        "smtp_user": "",
-        "smtp_pass": "",
-        "sec_email": []
-    },
-    "email": {
-        "enabled": true,
-        "indicator_mode": "multiple",
-        "new_email": "",
-        "new_password": "",
-        "oauth_google_client_id": "",
-        "oauth_google_client_secret": "",
-        "oauth_ms_client_id": "",
-        "oauth_ms_client_secret": "",
-        "oauth_ms_tenant": "",
-        "oauth_yahoo_client_id": "",
-        "oauth_yahoo_client_secret": "",
-        "accounts": "[]"
+    "smtp": {
+      "encryption": "",
+      "host": "localhost",
+      "password": "",
+      "port": 25,
+      "username": ""
     }
+  },
+  "security": {
+    "admin_email": "alerts@example.com",
+    "csp": {
+      "enabled": false,
+      "policy": ""
+    },
+    "csrf_protection": true,
+    "session_timeout_minutes": 60
+  },
+  "site": {
+    "logo_url": "",
+    "name": "My Dashboard",
+    "theme": "professional",
+    "title": "My Dashboard"
+  },
+  "ui": {
+    "toast_duration_ms": 3000,
+    "toast_position": "bottom-center"
+  }
 }

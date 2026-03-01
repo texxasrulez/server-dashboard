@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_login();
 header('Content-Type: application/json');
 $cfgPath = __DIR__ . '/../config/autoprobe.json';
 if (!file_exists($cfgPath)) {

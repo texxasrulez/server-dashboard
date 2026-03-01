@@ -5,8 +5,8 @@ This adds a single source of truth for **all** editable settings, with:
 - **config/local.json** — machine-specific overrides (auto-created)
 - **config/schema.php** — typed schema for validation + UI generation
 - **lib/Config.php** — loader, validation, env var overrides, atomic save + backups
-- **web-admin/config.php** + **assets/js/pages/config.js** — admin UI
-- **bin/config-cli.php** — headless get/set
+- **web-admin/config.php** + **assets/js/pages/config.page.js** — admin UI
+- **bin/config-cli.php** — headless get/set (`php bin/config-cli.php get site.name`)
 
 ## Usage
 
@@ -27,13 +27,26 @@ APP__FEATURES__ENABLE_DIAGNOSTICS=false
 
 ## Backups
 
-Every save writes `config/local.json` and also a timestamped copy to `config/backups/local-YYYYmmdd-HHMMSS.json`.
+Use the Config → Site → “Create backup” action (or `api/config_backup.php`) to snapshot `config/local.json` into `config/backups/config-YYYYmmdd-HHMMSS.json`. Retention + download/prune all operate on that directory.
 
 ## Security
 
 - CSRF protection on POST.
 - The UI never echoes secrets back in plaintext once saved (you can improve the UX with "reveal" toggles).
-- Limit access to `config.php` to admins only (reuse your existing auth gate).
+- Limit access to `web-admin/config.php` to admins only (reuse your existing auth gate).
+- Saves automatically sync `mail.*`, `alerts.cron_token`, and the Security tab into `data/security_config.json` so legacy `api/security_*` integrations stay updated.
+
+## CLI helper
+
+Use `bin/config-cli.php` for quick automation:
+
+```
+php bin/config-cli.php get site.name
+php bin/config-cli.php set mail.smtp_host smtp.example.com
+php bin/config-cli.php set-json mail.sec_email '["ops@example.com","oncall@example.com"]'
+php bin/config-cli.php unset mail.smtp_host
+php bin/config-cli.php dump
+```
 
 ## Position of Toasts
 

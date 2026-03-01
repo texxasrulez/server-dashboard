@@ -18,6 +18,9 @@ if (!is_array($body) || empty($body)) {
   // If still not an array, bail clearly
   if (!is_array($body)) $body = [];
 }
+if (!csrf_check_request((string)($body['_csrf'] ?? $body['csrf'] ?? ''))) {
+  http_response_code(403); echo json_encode(['error'=>'CSRF failed']); exit;
+}
 
 // Helper: nested getter by dotted path (e.g., "notify.email")
 function arr_get($arr, $path, $default=null){
@@ -92,10 +95,21 @@ $items = (isset($payload['items']) && is_array($payload['items'])) ? $payload['i
 if ($alert['id'] === '') {
   $alert['id'] = 'alert_' . bin2hex(random_bytes(6));
 }
+$metaKeys = ['last_triggered'=>null,'times_triggered'=>0,'consecutive_count'=>0,'silenced_until'=>null];
+foreach ($metaKeys as $metaKey=>$defaultVal) {
+  if (!array_key_exists($metaKey, $alert)) {
+    $alert[$metaKey] = $defaultVal;
+  }
+}
 
 $found = false;
 for ($i=0; $i<count($items); $i++){
   if (isset($items[$i]['id']) && $items[$i]['id'] === $alert['id']) {
+    foreach (array_keys($metaKeys) as $metaKey) {
+      if (isset($items[$i][$metaKey])) {
+        $alert[$metaKey] = $items[$i][$metaKey];
+      }
+    }
     $items[$i] = $alert; $found = true; break;
   }
 }

@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_login();
 header('Content-Type: application/json');
 
 function read_services_store() {

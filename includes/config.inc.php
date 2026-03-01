@@ -21,34 +21,108 @@ if (!function_exists('cfg_define')) {
   }
 }
 
+$__PROJECT_ROOT = realpath(__DIR__ . '/..') ?: (__DIR__ . '/..');
+$__cfg_local = [];
+$__cfg_local_path = $__PROJECT_ROOT . '/config/local.json';
+if (is_file($__cfg_local_path)) {
+  $raw = @file_get_contents($__cfg_local_path);
+  $json = @json_decode($raw, true);
+  if (is_array($json)) $__cfg_local = $json;
+}
+if (!function_exists('cfg_local')) {
+  function cfg_local(string $path, $default = null) {
+    global $__cfg_local;
+    if (!is_array($__cfg_local) || !$__cfg_local) return $default;
+    $node = $__cfg_local;
+    foreach (explode('.', $path) as $segment) {
+      if (!is_array($node) || !array_key_exists($segment, $node)) return $default;
+      $node = $node[$segment];
+    }
+    return $node === null ? $default : $node;
+  }
+}
+
 // Define Build Version
-if (!defined('BUILD')) define('BUILD', 'Server Dashboard-v0.0.1'); // or any string you want
+if (!defined('BUILD')) define('BUILD', 'Server Dashboard-v0.0.2'); // or any string you want
 
 /* ---------- Core / Security ---------- */
-cfg_define('CRON_TOKEN', (string) cfg_env('CRON_TOKEN', ''));
+$cronToken = (string) cfg_env('CRON_TOKEN', '');
+if ($cronToken === '') {
+  foreach (['alerts.cron_token','security.cron_token','cron.token','api.cron_token','history.token','site.cron_token'] as $path) {
+    $candidate = cfg_local($path, null);
+    if (is_string($candidate) && $candidate !== '') { $cronToken = (string)$candidate; break; }
+  }
+}
+if ($cronToken === '') {
+  foreach ([$__PROJECT_ROOT . '/data/cron_token.txt', $__PROJECT_ROOT . '/state/cron_token.txt'] as $tf) {
+    if (is_file($tf)) {
+      $candidate = trim((string)@file_get_contents($tf));
+      if ($candidate !== '') { $cronToken = $candidate; break; }
+    }
+  }
+}
+if ($cronToken === '') {
+  $cronToken = bin2hex(random_bytes(16));
+  $tokenFile = $__PROJECT_ROOT . '/data/cron_token.txt';
+  if (!is_dir(dirname($tokenFile))) { @mkdir(dirname($tokenFile), 0775, true); }
+  @file_put_contents($tokenFile, $cronToken . PHP_EOL);
+  @chmod($tokenFile, 0640);
+}
+cfg_define('CRON_TOKEN', $cronToken);
 
 /* ---------- Mailer ---------- */
-cfg_define('MAIL_TRANSPORT', strtolower((string) cfg_env('MAIL_TRANSPORT', 'phpmail')));
+$transport = cfg_env('MAIL_TRANSPORT', null);
+if ($transport === null || $transport === '') $transport = cfg_local('mail.mail_transport', 'phpmail');
+cfg_define('MAIL_TRANSPORT', strtolower((string)$transport));
 $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
 $from_fallback = 'Dashboard Alerts <alerts@' . preg_replace('/^www\./i', '', $host) . '>';
-cfg_define('MAIL_FROM',     (string) cfg_env('MAIL_FROM', $from_fallback));
-cfg_define('MAIL_REPLYTO',  (string) cfg_env('MAIL_REPLYTO', ''));
-cfg_define('SENDMAIL_PATH', (string) cfg_env('SENDMAIL_PATH', '/usr/sbin/sendmail'));
-cfg_define('SMTP_HOST',     (string) cfg_env('SMTP_HOST', ''));
-cfg_define('SMTP_PORT',     (int)    cfg_env('SMTP_PORT', 587));
-cfg_define('SMTP_SECURE',   strtolower((string) cfg_env('SMTP_SECURE', 'tls')));
-cfg_define('SMTP_USER',     (string) cfg_env('SMTP_USER', ''));
-cfg_define('SMTP_PASS',     (string) cfg_env('SMTP_PASS', ''));
-cfg_define('SMTP_TIMEOUT',  (int)    cfg_env('SMTP_TIMEOUT', 12));
+$mailFrom = cfg_env('MAIL_FROM', null);
+if ($mailFrom === null || $mailFrom === '') $mailFrom = cfg_local('mail.mail_from', $from_fallback);
+cfg_define('MAIL_FROM', (string)$mailFrom);
+$mailReply = cfg_env('MAIL_REPLYTO', null);
+if ($mailReply === null || $mailReply === '') $mailReply = cfg_local('mail.mail_replyto', '');
+cfg_define('MAIL_REPLYTO', (string)$mailReply);
+$sendmail = cfg_env('SENDMAIL_PATH', null);
+if ($sendmail === null || $sendmail === '') $sendmail = cfg_local('mail.sendmail_path', '/usr/sbin/sendmail');
+cfg_define('SENDMAIL_PATH', (string)$sendmail);
+$smtpHost = cfg_env('SMTP_HOST', null);
+if ($smtpHost === null) $smtpHost = cfg_local('mail.smtp_host', '');
+cfg_define('SMTP_HOST', (string)$smtpHost);
+$smtpPort = cfg_env('SMTP_PORT', null);
+if ($smtpPort === null || $smtpPort === '') $smtpPort = cfg_local('mail.smtp_port', 587);
+cfg_define('SMTP_PORT', (int)$smtpPort);
+$smtpSecure = cfg_env('SMTP_SECURE', null);
+if ($smtpSecure === null || $smtpSecure === '') $smtpSecure = cfg_local('mail.smtp_secure', 'tls');
+cfg_define('SMTP_SECURE', strtolower((string)$smtpSecure));
+$smtpUser = cfg_env('SMTP_USER', null);
+if ($smtpUser === null || $smtpUser === '') $smtpUser = cfg_local('mail.smtp_user', '');
+cfg_define('SMTP_USER', (string)$smtpUser);
+$smtpPass = cfg_env('SMTP_PASS', null);
+if ($smtpPass === null || $smtpPass === '') $smtpPass = cfg_local('mail.smtp_pass', '');
+cfg_define('SMTP_PASS', (string)$smtpPass);
+$smtpTimeout = cfg_env('SMTP_TIMEOUT', null);
+if ($smtpTimeout === null || $smtpTimeout === '') $smtpTimeout = cfg_local('mail.smtp_timeout', 12);
+cfg_define('SMTP_TIMEOUT', (int)$smtpTimeout);
 
 /* ---------- Alerts / History ---------- */
 cfg_define('ALLOW_HISTORY_EXPORT_WITH_TOKEN', (bool) (int) cfg_env('ALLOW_HISTORY_EXPORT_WITH_TOKEN', 1));
-cfg_define('ALERT_EMAILS', (string) cfg_env('ALERT_EMAILS', ''));
+$alertEmails = cfg_env('ALERT_EMAILS', null);
+if ($alertEmails === null || $alertEmails === '') {
+  $alertEmails = cfg_local('mail.sec_email', null);
+  if ($alertEmails === null || $alertEmails === '') $alertEmails = cfg_local('alerts.email', '');
+}
+if (is_array($alertEmails)) {
+  $alertEmails = implode(',', array_filter(array_map('trim', $alertEmails)));
+}
+cfg_define('ALERT_EMAILS', (string)$alertEmails);
 
 /* ---------- Theming / Client ---------- */
 $disk = cfg_env('DISK_METRICS_PATH', null);
 if ($disk !== null && $disk !== '') cfg_define('DISK_METRICS_PATH', $disk);
 $theme = cfg_env('THEME_DEFAULT', null);
+if ($theme === null || $theme === '') {
+  $theme = cfg_local('site.theme', null);
+}
 if ($theme !== null && $theme !== '') cfg_define('THEME_DEFAULT', $theme);
 $client = cfg_env('CLIENT_DEBUG_LOG', null);
 if ($client !== null && $client !== '') cfg_define('CLIENT_DEBUG_LOG', (int) $client);
@@ -107,6 +181,10 @@ $__auto_base = (function(){
   $dir = rtrim(dirname($script), '/');
   return $dir === '' ? '/' : $dir;
 })();
+if (!defined('BASE_URL')) {
+  $baseLocal = cfg_local('site.base_url', null);
+  if (is_string($baseLocal) && $baseLocal !== '') define('BASE_URL', rtrim($baseLocal, '/'));
+}
 if (!defined('BASE_URL')) define('BASE_URL', __cfg_ovr('BASE_URL', $__auto_base));
 if (!defined('STATE_DIR')) define('STATE_DIR', PROJECT_ROOT . '/state');
 if (!defined('DATA_DIR')) define('DATA_DIR', PROJECT_ROOT . '/data');

@@ -13,13 +13,11 @@
     }
   }
 
-  function findThemeLink(){
-    var links = $all('link[rel="stylesheet"]');
-    for (var i=0;i<links.length;i++){
-      var href = links[i].getAttribute('href') || '';
-      if (href.indexOf('/assets/css/themes/') !== -1) return links[i];
-    }
-    return null;
+  function findThemeLinks(){
+    return $all('link[rel="stylesheet"]').filter(function(link){
+      var href = link.getAttribute('href') || '';
+      return /\/assets\/css\/themes\//i.test(href);
+    });
   }
 
   function currentThemeFromBody(){
@@ -30,14 +28,18 @@
 
   function applyTheme(theme){
     if (!theme) return;
-    var link = findThemeLink();
+    var links = findThemeLinks();
     var old = currentThemeFromBody();
-    if (link){
+    links.forEach(function(link){
       var href = link.getAttribute('href') || '';
-      href = href.replace(/\/themes\/[^\/]+(\.mobile)?\.css/i, '/themes/'+theme+'.mobile.css');
-      var sep = href.indexOf('?') === -1 ? '?' : '&';
-      link.setAttribute('href', href + sep + 'ts=' + Date.now());
-    }
+      var parts = href.split('?');
+      var base = parts[0];
+      var suffix = parts[1] ? ('?' + parts[1]) : '';
+      base = base.replace(/(\/themes\/)([^\/]+?)(\.mobile)?\.css$/i, function(_, prefix, _name, mobile){
+        return prefix + theme + (mobile || '') + '.css';
+      });
+      link.setAttribute('href', base + '?ts=' + Date.now());
+    });
     if (old){ document.body.classList.remove('theme-'+old); }
     document.body.classList.add('theme-'+theme);
     if (window.toast && window.toast.notice){ window.toast.notice('Theme applied: '+theme); }

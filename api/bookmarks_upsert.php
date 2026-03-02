@@ -45,6 +45,7 @@ $item = [
   'url'=>$url,
   'tags'=>$tags,
   'host'=>$host,
+  'favicon'=>$host ? ('favicon_proxy.php?host=' . rawurlencode($host) . '&v=' . $now) : '',
   'category_id'=>$category_id,
   'created'=>$created,
   'updated'=>$now

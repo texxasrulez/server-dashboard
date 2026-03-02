@@ -85,7 +85,7 @@ $default = __DIR__ . '/../assets/img/default_favicon.png';
 
 function out_png($file){
   header('Content-Type: image/png');
-  header('Cache-Control: public, max-age=86400');
+  header('Cache-Control: public, max-age=300');
   readfile($file);
   exit;
 }

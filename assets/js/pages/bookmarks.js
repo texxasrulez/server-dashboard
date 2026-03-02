@@ -147,6 +147,14 @@ function __apiBase(){
 }
 function __join(a,b){ if(!a) return b; if(!b) return a; return (a.replace(/\/+$/,'') + '/' + String(b).replace(/^\/+/,'')); }
 function apiUrl(ep){ return __join(__apiBase(), ep); }
+function resolveFaviconUrl(path){
+  var p = String(path || '').trim();
+  if (!p) return '';
+  if (/^https?:\/\//i.test(p)) return p;
+  if (p[0] === '/') return p;
+  if (p.indexOf('api/') === 0) return __join(__projectBase(), p);
+  return apiUrl(p);
+}
 // --- end robust resolution ---
   function parseJsonResponse(r){
     return r.text().then(function(txt){
@@ -336,7 +344,9 @@ function apiUrl(ep){ return __join(__apiBase(), ep); }
   }
 
   function renderItem(it){
-    const fav = apiUrl('favicon_proxy.php') + '?host=' + encodeURIComponent(it.host||'');
+    const fav = (it.favicon && String(it.favicon).trim())
+      ? resolveFaviconUrl(it.favicon)
+      : (apiUrl('favicon_proxy.php') + '?host=' + encodeURIComponent(it.host||'') + '&v=' + encodeURIComponent(it.updated || ''));
     const tags = (it.tags||[]).join(', ');
     const upd = it.updated ? new Date(it.updated*1000).toLocaleString() : '-';
     const cat = it.category_id ? (CATS.find(c=>c.id===it.category_id)?.name || '') : '';

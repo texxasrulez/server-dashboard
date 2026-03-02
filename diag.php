@@ -15,6 +15,8 @@ $API_URL = (preg_match('~^https?://~i', $path)) ? $path : ($scheme . '://' . $ho
 
 // Multi-mode fetcher: curl -> fopen -> include
 function fetch_metrics($url, &$mode=''){
+  $lastBody = null;
+  $lastStatus = 0;
   // 1) curl
   if (function_exists('curl_init')){
     $mode='curl';
@@ -32,15 +34,25 @@ function fetch_metrics($url, &$mode=''){
     $hdrSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE) ?: 0;
     $body = substr($resp ?: '', $hdrSize);
     curl_close($ch);
-    if ($status) return [$body, $status];
+    if ($status >= 200 && $status < 300) return [$body, $status];
+    $lastBody = $body;
+    $lastStatus = $status;
   }
   // 2) fopen (allow_url_fopen)
   $mode='fopen';
   $ctx = stream_context_create(['http'=>['timeout'=>4,'ignore_errors'=>true,'header'=>"Accept: application/json\r\n"]]);
   $out = @file_get_contents($url, false, $ctx);
   $code = 0;
-  if (isset($http_response_header[0]) && preg_match('/\s(\d{3})\s/', $http_response_header[0], $m)) $code = (int)$m[1];
-  if ($code) return [$out, $code];
+  if (!empty($http_response_header) && is_array($http_response_header)) {
+    for ($i = count($http_response_header) - 1; $i >= 0; $i--) {
+      if (preg_match('/\s(\d{3})\s/', (string)$http_response_header[$i], $m)) { $code = (int)$m[1]; break; }
+    }
+  }
+  if ($code >= 200 && $code < 300) return [$out, $code];
+  if ($code) {
+    $lastBody = $out;
+    $lastStatus = $code;
+  }
   // 3) include fallback (no HTTP; capture output)
   $mode='include';
   $file = __DIR__ . '/api/metrics_summary.php';
@@ -53,7 +65,7 @@ function fetch_metrics($url, &$mode=''){
     header('Content-Type: text/html; charset=utf-8');
     return [$body, 200];
   }
-  return [null, 0];
+  return [$lastBody, $lastStatus];
 }
 
 $mode = '';
@@ -85,8 +97,8 @@ include __DIR__ . '/includes/head.php';
           <pre class="small raw-preview"><?= h(substr($out ?? '(no output)', 0, 400)) ?></pre>
         </details>
         <div class="btn-row mt-2"><a class="btn secondary" href="#" data-copy-raw="1">Copy raw JSON</a>
-		<a class="btn secondary" href="api/metrics_summary.php?trace=1&amp;debug=1" target="_blank" rel="noopener" data-modal="1">Open metrics_summary.php</a></div>
-		<p class="mt-2"><a class="btn secondary" href="tools/assets_audit.php" data-modal="1">Open Assets Audit</a></p>
+		<a class="btn secondary" href="<?= h(project_url('/api/metrics_summary.php?trace=1&debug=1')) ?>" target="_blank" rel="noopener" data-modal="1">Open metrics_summary.php</a></div>
+		<p class="mt-2"><a class="btn secondary" href="<?= h(project_url('/tools/assets_audit.php')) ?>" data-modal="1">Open Assets Audit</a></p>
       </div>
     </section>
 

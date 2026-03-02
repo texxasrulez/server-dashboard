@@ -480,3 +480,7 @@ Rotate large `*.jsonl` via `logrotate` or a cron script.
 ![Alt text](/assets/images/screenshots/history.png?raw=true "Server Dashboard History Screenshot")
 ![Alt text](/assets/images/screenshots/logs.png?raw=true "Server Dashboard Log Viewer Screenshot")
 ![Alt text](/assets/images/screenshots/services.png?raw=true "Server Dashboard Services Screenshot")
+![Alt text](/assets/images/screenshots/server-tests.png?raw=true "Server Dashboard Server Tests Screenshot")
+![Alt text](/assets/images/screenshots/alerts.png?raw=true "Server Dashboard Alerts Screenshot")
+![Alt text](/assets/images/screenshots/config.png?raw=true "Server Dashboard Config Page Screenshot")
+![Alt text](/assets/images/screenshots/backups.png?raw=true "Server Dashboard Backups Screenshot")

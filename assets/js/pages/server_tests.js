@@ -224,9 +224,16 @@ function ensureServicesAndRun(){
   function run(kind, extra){
     var url = apiBase() + 'server_tests.php';
     var payload = Object.assign({ action: kind || 'quick' }, (extra||{}));
+    var csrf = '';
+    try {
+      var m = document.querySelector('meta[name="csrf-token"]');
+      csrf = (m && m.content) ? String(m.content) : '';
+    } catch(_){}
+    var headers = {'Content-Type':'application/json'};
+    if (csrf) headers['X-CSRF-Token'] = csrf;
     return fetch(url, {
       method: 'POST',
-      headers: {'Content-Type':'application/json'},
+      headers: headers,
       body: JSON.stringify(payload)
     }).then(function(r){
       if (!r.ok) {

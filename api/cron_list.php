@@ -1,7 +1,24 @@
 <?php
 require __DIR__.'/_guard.php';
-guard_api(['key'=>'cron_list','require_token'=>false,'type'=>'json','require_admin'=>true]);
+guard_api(['key'=>'cron_list','require_token'=>false,'type'=>'json']);
+require_once __DIR__ . '/../includes/init.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_admin();
 header('Content-Type: application/json; charset=utf-8');
+
+function fn_enabled(string $name): bool {
+  $disabled = array_filter(array_map('trim', explode(',', (string)@ini_get('disable_functions'))));
+  return function_exists($name) && !in_array($name, $disabled, true);
+}
+
+if (!fn_enabled('exec')) {
+  http_response_code(501);
+  echo json_encode([
+    'ok'=>false,
+    'error'=>'exec unavailable on this PHP runtime',
+  ]);
+  exit;
+}
 
 $output = [];
 $code = 0;

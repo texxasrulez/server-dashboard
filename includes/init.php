@@ -41,6 +41,75 @@ if (!function_exists('asset_href')) {
   }
 }
 
+if (!function_exists('request_ip_in_cidr')) {
+  function request_ip_in_cidr(string $ip, string $cidr): bool {
+    $ip = trim($ip);
+    $cidr = trim($cidr);
+    if ($ip === '' || $cidr === '') return false;
+    if (strpos($cidr, '/') === false) return strcasecmp($ip, $cidr) === 0;
+    [$base, $mask] = explode('/', $cidr, 2);
+    $maskBits = (int)$mask;
+    $ipBin = @inet_pton($ip);
+    $baseBin = @inet_pton($base);
+    if ($ipBin === false || $baseBin === false) return false;
+    if (strlen($ipBin) !== strlen($baseBin)) return false;
+    $maxBits = strlen($ipBin) * 8;
+    if ($maskBits < 0) $maskBits = 0;
+    if ($maskBits > $maxBits) $maskBits = $maxBits;
+    $fullBytes = intdiv($maskBits, 8);
+    $remainBits = $maskBits % 8;
+    if ($fullBytes > 0 && substr($ipBin, 0, $fullBytes) !== substr($baseBin, 0, $fullBytes)) return false;
+    if ($remainBits === 0) return true;
+    $maskByte = (0xFF << (8 - $remainBits)) & 0xFF;
+    return ((ord($ipBin[$fullBytes]) & $maskByte) === (ord($baseBin[$fullBytes]) & $maskByte));
+  }
+}
+
+if (!function_exists('request_ip_in_any')) {
+  function request_ip_in_any(string $ip, array $ranges): bool {
+    foreach ($ranges as $range) {
+      if (!is_string($range)) continue;
+      if (request_ip_in_cidr($ip, trim($range))) return true;
+    }
+    return false;
+  }
+}
+
+if (!function_exists('request_trusted_proxies')) {
+  function request_trusted_proxies(): array {
+    $list = [];
+    if (function_exists('cfg_local')) {
+      $raw = cfg_local('security.trusted_proxies', []);
+      if (is_array($raw)) {
+        foreach ($raw as $entry) {
+          if (!is_string($entry)) continue;
+          $entry = trim($entry);
+          if ($entry !== '') $list[] = $entry;
+        }
+      }
+    }
+    return array_values(array_unique($list));
+  }
+}
+
+if (!function_exists('request_client_ip')) {
+  function request_client_ip(): string {
+    $remote = trim((string)($_SERVER['REMOTE_ADDR'] ?? ''));
+    $xff = trim((string)($_SERVER['HTTP_X_FORWARDED_FOR'] ?? ''));
+    if ($xff !== '' && $remote !== '') {
+      $trusted = request_trusted_proxies();
+      if ($trusted && request_ip_in_any($remote, $trusted)) {
+        $parts = array_map('trim', explode(',', $xff));
+        foreach ($parts as $part) {
+          if (filter_var($part, FILTER_VALIDATE_IP)) return $part;
+        }
+      }
+    }
+    if ($remote !== '' && filter_var($remote, FILTER_VALIDATE_IP)) return $remote;
+    return '0.0.0.0';
+  }
+}
+
 // === Themes: support BOTH legacy assets/css/themes/*.css and assets/css/themes/* ===
 if (!function_exists('theme_list')) {
   function theme_list(): array {

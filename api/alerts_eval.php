@@ -17,7 +17,7 @@ function _noise_cfg(){
 }
 function _noise_key_from_items($items){
   $arr = [];
-  foreach ($items as $r) { $arr.append([strtolower($r['name'] ?? ''), strtolower($r['status'] ?? '')]); }
+  foreach ($items as $r) { $arr[] = [strtolower($r['name'] ?? ''), strtolower($r['status'] ?? '')]; }
   return md5(json_encode($arr));
 }
 function _noise_debounce_should_suppress($key, $hours){
@@ -276,27 +276,3 @@ _noise_maybe_send_daily_digest();
 __mark_cron('alerts');
 if (isset($_GET['probe']) && $_GET['probe'] == '1') { __mark_cron('history'); }
 echo json_encode(['ok'=>true, 'now'=>$now, 'fired_count'=>count($fired), 'fired'=>$fired], JSON_UNESCAPED_SLASHES);
-
-// Add function to log alerts to alerts_events.jsonl
-function log_alert_to_file($alert_data) {
-  $file = dashboard_state_path('alerts_events.jsonl');
-  $fh = @fopen($file, 'ab');
-  if ($fh) {
-    $row = ['ts' => time(), 'alert' => $alert_data]; // Alert data with timestamp
-    @fwrite($fh, json_encode($row, JSON_UNESCAPED_SLASHES) . "\n");
-    @fclose($fh);
-  }
-}
-
-// Example usage where an alert event occurs (down status or critical latency)
-function trigger_alert($service_id, $status, $latency_ms) {
-  if ($status == 'down' || $latency_ms > 1000) { // Conditions for a critical alert
-    $alert_data = [
-      'service_id' => $service_id,
-      'status' => $status,
-      'latency_ms' => $latency_ms,
-      'message' => 'Service is down or latency is too high.'
-    ];
-    log_alert_to_file($alert_data);  // Log the alert to file
-  }
-}

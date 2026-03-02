@@ -189,8 +189,6 @@ $em = trim((string)($alerts['email'] ?? ''));
   foreach ($bad as $r) { $lines[] = sprintf('- %s: %s (%s)', $r['name'], $r['status'], $r['details'] ?? ''); }
   $body = "Time: " . date('c') . "\nScore: " . round($score*100,1) . "%\nMin severity: ".$min."\n\n" . implode("\n", $lines) . "\n";
   $opts = [];
-  if ($from !== '') $opts['from'] = $from;
-  if ($reply !== '') $opts['reply_to'] = $reply;
 
   $res = \Mailer::send($em, $subj, $body, $opts);
   if (!empty($res['ok'])) { $sent = true; $targets[] = 'email'; }

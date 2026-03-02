@@ -78,7 +78,11 @@ web-admin/
    chmod -R 750 web-admin/data web-admin/state
    ```
 3. **Ensure PHP extensions are present** (see Requirements).
-4. **Open** `https://your-host/web-admin/` and log in (if your deployment uses auth). If authentication is not yet set up, protect the directory at the web server level while you configure security.
+4. **Bootstrap first admin (CLI):**
+   ```bash
+   php web-admin/bin/bootstrap-admin.php
+   ```
+5. **Open** `https://your-host/web-admin/` and log in as `admin` with the printed password, then rotate it immediately in `Users`.
 
 ---
 
@@ -251,6 +255,9 @@ Located at the bottom of **Config → Alerts**:
 - Restrict access to `/web-admin/`:
   - Application auth, and/or
   - Web server Basic Auth / IP allowlist.
+- If behind a reverse proxy/CDN, set `security.trusted_proxies` so client IP controls are accurate.
+- Keep `security.allow_web_bootstrap_admin=false` in internet-exposed deployments.
+- Keep login throttling enabled via `security.login_rate_limit`.
 - Ensure `display_errors=Off` in production.
 - Set restrictive `open_basedir` where possible.
 - Apply security updates regularly (your Security tests will flag counts).

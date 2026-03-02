@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Static policy checks for API auth/CSRF guardrails.
+# Security checks for API/auth hardening.
+# Runs:
+#   1) static policy checks for API auth/CSRF guardrails
+#   2) runtime hardening regressions (trusted proxies, rate-limit, SSRF hooks)
 # Usage:
 #   bash bin/security-policy-check.sh
 
@@ -76,3 +79,6 @@ if [ "$fail" -ne 0 ]; then
 fi
 
 echo "Policy check passed."
+
+echo "Running hardening regression checks..."
+bash "$ROOT/bin/security-hardening-check.sh"

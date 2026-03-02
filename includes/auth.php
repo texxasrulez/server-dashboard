@@ -16,6 +16,154 @@ if (!function_exists('project_url')) {
 
 }
 
+if (!function_exists('auth_cfg')) {
+  function auth_cfg($path, $default = null) {
+    if (function_exists('cfg_local')) return cfg_local((string)$path, $default);
+    return $default;
+  }
+}
+
+if (!function_exists('auth_client_ip')) {
+  function auth_client_ip() {
+    if (function_exists('request_client_ip')) return (string)request_client_ip();
+    $ip = isset($_SERVER['REMOTE_ADDR']) ? (string)$_SERVER['REMOTE_ADDR'] : '';
+    return ($ip !== '') ? $ip : '0.0.0.0';
+  }
+}
+
+if (!function_exists('auth_rate_limit_config')) {
+  function auth_rate_limit_config() {
+    $cfg = auth_cfg('security.login_rate_limit', []);
+    if (!is_array($cfg)) $cfg = [];
+    return [
+      'enabled'        => array_key_exists('enabled', $cfg) ? (bool)$cfg['enabled'] : true,
+      'max_attempts'   => max(1, (int)($cfg['max_attempts'] ?? 5)),
+      'window_sec'     => max(30, (int)($cfg['window_sec'] ?? 900)),
+      'base_delay_sec' => max(1, (int)($cfg['base_delay_sec'] ?? 30)),
+      'max_delay_sec'  => max(5, (int)($cfg['max_delay_sec'] ?? 900)),
+    ];
+  }
+}
+
+if (!function_exists('auth_login_rate_file')) {
+  function auth_login_rate_file() {
+    $root = dirname(__DIR__);
+    $dir = $root . '/state/auth';
+    if (!is_dir($dir)) @mkdir($dir, 0775, true);
+    return $dir . '/login_rate.json';
+  }
+}
+
+if (!function_exists('auth_login_rate_load')) {
+  function auth_login_rate_load() {
+    $file = auth_login_rate_file();
+    if (!is_file($file)) return [];
+    $raw = @file_get_contents($file);
+    if (!is_string($raw) || trim($raw) === '') return [];
+    $data = @json_decode($raw, true);
+    return is_array($data) ? $data : [];
+  }
+}
+
+if (!function_exists('auth_login_rate_save')) {
+  function auth_login_rate_save($data) {
+    $file = auth_login_rate_file();
+    $tmp = $file . '.tmp';
+    @file_put_contents($tmp, json_encode($data, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES), LOCK_EX);
+    @chmod($tmp, 0640);
+    @rename($tmp, $file);
+  }
+}
+
+if (!function_exists('auth_login_rate_key')) {
+  function auth_login_rate_key($username, $ip) {
+    $u = strtolower(trim((string)$username));
+    $i = trim((string)$ip);
+    if ($u === '') $u = 'unknown';
+    if ($i === '') $i = '0.0.0.0';
+    return hash('sha256', $u . '|' . $i);
+  }
+}
+
+if (!function_exists('auth_set_last_login_error')) {
+  function auth_set_last_login_error($msg) {
+    $GLOBALS['AUTH_LOGIN_LAST_ERROR'] = (string)$msg;
+  }
+}
+
+if (!function_exists('auth_last_login_error')) {
+  function auth_last_login_error() {
+    return isset($GLOBALS['AUTH_LOGIN_LAST_ERROR']) ? (string)$GLOBALS['AUTH_LOGIN_LAST_ERROR'] : '';
+  }
+}
+
+if (!function_exists('auth_login_rate_prune')) {
+  function auth_login_rate_prune($all, $windowSec, $now) {
+    $out = [];
+    foreach ((array)$all as $k => $row) {
+      if (!is_array($row)) continue;
+      $last = isset($row['last']) ? (int)$row['last'] : 0;
+      $next = isset($row['next_allowed']) ? (int)$row['next_allowed'] : 0;
+      if ($last >= ($now - ($windowSec * 2)) || $next >= ($now - ($windowSec * 2))) {
+        $out[$k] = $row;
+      }
+    }
+    return $out;
+  }
+}
+
+if (!function_exists('auth_login_rate_block_seconds')) {
+  function auth_login_rate_block_seconds($username, $ip) {
+    $cfg = auth_rate_limit_config();
+    if (empty($cfg['enabled'])) return 0;
+    $all = auth_login_rate_load();
+    $key = auth_login_rate_key($username, $ip);
+    $row = isset($all[$key]) && is_array($all[$key]) ? $all[$key] : [];
+    $now = time();
+    $next = isset($row['next_allowed']) ? (int)$row['next_allowed'] : 0;
+    if ($next > $now) return ($next - $now);
+    return 0;
+  }
+}
+
+if (!function_exists('auth_login_rate_register_failure')) {
+  function auth_login_rate_register_failure($username, $ip) {
+    $cfg = auth_rate_limit_config();
+    if (empty($cfg['enabled'])) return;
+    $all = auth_login_rate_load();
+    $now = time();
+    $all = auth_login_rate_prune($all, $cfg['window_sec'], $now);
+    $key = auth_login_rate_key($username, $ip);
+    $row = isset($all[$key]) && is_array($all[$key]) ? $all[$key] : ['count'=>0,'first'=>$now,'last'=>$now,'next_allowed'=>0];
+    $first = isset($row['first']) ? (int)$row['first'] : $now;
+    if (($now - $first) > $cfg['window_sec']) {
+      $row = ['count'=>0,'first'=>$now,'last'=>$now,'next_allowed'=>0];
+    }
+    $row['count'] = ((int)($row['count'] ?? 0)) + 1;
+    $row['last'] = $now;
+    if ($row['count'] >= $cfg['max_attempts']) {
+      $overs = $row['count'] - $cfg['max_attempts'];
+      $delay = $cfg['base_delay_sec'] * (1 << min(6, $overs));
+      if ($delay > $cfg['max_delay_sec']) $delay = $cfg['max_delay_sec'];
+      $row['next_allowed'] = $now + $delay;
+    }
+    $all[$key] = $row;
+    auth_login_rate_save($all);
+  }
+}
+
+if (!function_exists('auth_login_rate_clear')) {
+  function auth_login_rate_clear($username, $ip) {
+    $cfg = auth_rate_limit_config();
+    if (empty($cfg['enabled'])) return;
+    $all = auth_login_rate_load();
+    $key = auth_login_rate_key($username, $ip);
+    if (isset($all[$key])) unset($all[$key]);
+    $all = auth_login_rate_prune($all, $cfg['window_sec'], time());
+    auth_login_rate_save($all);
+  }
+}
+
 function csrf_token() {
   if (empty($_SESSION['csrf'])) $_SESSION['csrf'] = bin2hex(random_bytes(32));
   return $_SESSION['csrf'];
@@ -64,24 +212,34 @@ function user_find($username) {
   return null;
 }
 
-function ensure_default_admin() {
+function ensure_default_admin($force = false) {
   $data = users_load();
-  if (!empty($data['users'])) return;
+  if (!empty($data['users'])) return null;
+  $allowWeb = (bool)auth_cfg('security.allow_web_bootstrap_admin', false);
+  if (!$force && PHP_SAPI !== 'cli' && !$allowWeb) return null;
   $defaultPass = bin2hex(random_bytes(4)); // 8 hex chars
   $hash = password_hash($defaultPass, PASSWORD_DEFAULT);
   $data['users'][] = ['username'=>'admin','password_hash'=>$hash,'role'=>'admin','created'=>date('c')];
   users_save($data);
-  $_SESSION['__first_admin_password'] = $defaultPass;
+  return $defaultPass;
 }
 
 function auth_login($username, $password) {
+  auth_set_last_login_error('');
+  $ip = auth_client_ip();
+  $wait = auth_login_rate_block_seconds($username, $ip);
+  if ($wait > 0) {
+    auth_set_last_login_error('Too many login attempts. Try again in ' . $wait . ' seconds.');
+    return false;
+  }
   $u = user_find($username);
-  if (!$u) return false;
-  if (!isset($u['password_hash'])) return false;
-  if (!password_verify((string)$password, $u['password_hash'])) return false;
+  if (!$u) { auth_login_rate_register_failure($username, $ip); return false; }
+  if (!isset($u['password_hash'])) { auth_login_rate_register_failure($username, $ip); return false; }
+  if (!password_verify((string)$password, $u['password_hash'])) { auth_login_rate_register_failure($username, $ip); return false; }
   // Success
   session_regenerate_id(true);
   $_SESSION['user'] = ['username'=>$u['username'], 'role'=>$u['role'] ?? 'user'];
+  auth_login_rate_clear($username, $ip);
   return true;
 }
 

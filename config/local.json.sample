@@ -28,6 +28,19 @@
   },
   "security": {
     "admin_email": "alerts@example.com",
+    "allow_web_bootstrap_admin": false,
+    "trusted_proxies": [],
+    "ip_allowlist": [],
+    "favicon_require_admin": true,
+    "favicon_allow_http": false,
+    "favicon_allowed_hosts": [],
+    "login_rate_limit": {
+      "enabled": true,
+      "max_attempts": 5,
+      "window_sec": 900,
+      "base_delay_sec": 30,
+      "max_delay_sec": 900
+    },
     "csp": {
       "enabled": false,
       "policy": ""

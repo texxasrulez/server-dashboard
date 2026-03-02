@@ -80,3 +80,10 @@ Optional env overrides:
 - `BACKUP_HISTORY_KEEP_DAYS`
 - `BACKUP_CONFIG_KEEP_COUNT`
 - `BACKUP_ROTATE_KEEP_DAYS`
+
+## 7) Internet-facing auth defaults
+
+- Bootstrap first admin with CLI: `php bin/bootstrap-admin.php`
+- Keep `security.allow_web_bootstrap_admin=false` except temporary/local setup windows.
+- Keep `security.login_rate_limit.enabled=true` (tune thresholds per environment).
+- If deployed behind reverse proxy/CDN, define `security.trusted_proxies` to trusted IP/CIDR ranges.

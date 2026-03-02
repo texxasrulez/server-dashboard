@@ -69,6 +69,21 @@ return [
     'api_tokens'        => ['type'=>'list','label'=>'API tokens (Bearer)','item'=>'string'],
     'api_rate_limit_ms' => ['type'=>'int','label'=>'API rate limit per endpoint (ms)','min'=>0,'max'=>60000],
     'ip_allowlist'      => ['type'=>'list','label'=>'IP allowlist for this app (optional)','item'=>'string'],
+    'trusted_proxies'   => ['type'=>'list','label'=>'Trusted reverse proxies (IP/CIDR)','item'=>'string'],
+    'allow_web_bootstrap_admin' => ['type'=>'bool','label'=>'Allow first admin bootstrap via login page'],
+    'favicon_allowed_hosts' => ['type'=>'list','label'=>'Favicon host allowlist (optional)','item'=>'string'],
+    'favicon_allow_http' => ['type'=>'bool','label'=>'Allow HTTP for favicon fetches'],
+    'favicon_require_admin' => ['type'=>'bool','label'=>'Require admin for favicon proxy'],
+    'favicon_timeout_sec' => ['type'=>'int','label'=>'Favicon fetch timeout (sec)','min'=>1,'max'=>10],
+    'favicon_max_bytes' => ['type'=>'int','label'=>'Favicon max bytes','min'=>4096,'max'=>1048576],
+    'login_rate_limit' => [
+      '_label' => 'Login rate limit',
+      'enabled' => ['type'=>'bool','label'=>'Enable login rate limiting'],
+      'max_attempts' => ['type'=>'int','label'=>'Attempts per window','min'=>1,'max'=>50],
+      'window_sec' => ['type'=>'int','label'=>'Window seconds','min'=>30,'max'=>86400],
+      'base_delay_sec' => ['type'=>'int','label'=>'Base delay seconds','min'=>1,'max'=>3600],
+      'max_delay_sec' => ['type'=>'int','label'=>'Max delay seconds','min'=>5,'max'=>86400],
+    ],
   ],
 
   'ui' => [

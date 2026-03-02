@@ -10,7 +10,9 @@ It has lots of features, too many to list. One day I will have a better README.m
 
 1. Drop the files into your project root.
 
-2. Login is `admin` and password is `password`. Change it immediately in My Profile (users.php)
+2. Bootstrap first admin from CLI:
+   - `php bin/bootstrap-admin.php`
+   - Sign in as `admin` with the printed password and rotate it immediately in `users.php`.
 
 3. Verify file permissions so PHP can create/replace:
    - There are several files that get written to. Ensure proper permissions are in place.
@@ -45,9 +47,17 @@ It has lots of features, too many to list. One day I will have a better README.m
 
 - **Backups tab:** configure filesystem roots and the log watcher from Config → Backups. The UI lists the folders the Backups dashboard monitors and generates ready-to-run helpers (install command + env file snippet) for `assets/scripts/install.sh` based on your saved paths/owner/service name.
 - **Ops scripts:**
-  - `bash bin/security-policy-check.sh` (auth/CSRF regression guard)
+  - `bash bin/security-policy-check.sh` (single security gate: static auth/CSRF checks + hardening regressions)
+  - `bash bin/security-hardening-check.sh` (runs only the hardening regression subset)
   - `bash bin/report-largest-files.sh --top 20` (storage growth visibility)
   - Web server deny rules: `docs/WEBSERVER_HARDENING.md`
+  - First admin bootstrap: `php bin/bootstrap-admin.php`
+
+- **Internet-facing hardening (recommended defaults):**
+  - Keep `security.allow_web_bootstrap_admin=false` (default).
+  - Set `security.trusted_proxies` if running behind reverse proxy/CDN.
+  - Keep `security.favicon_require_admin=true` (default) and set `security.favicon_allowed_hosts` if needed.
+  - Tune `security.login_rate_limit` for your environment.
 
 ---
 

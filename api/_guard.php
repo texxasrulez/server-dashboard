@@ -21,10 +21,47 @@ if (!function_exists('guard_read_cfg')) {
 }
 
 if (!function_exists('guard_client_ip')) {
+  function guard_ip_in_cidr($ip, $cidr){
+    $ip = trim((string)$ip);
+    $cidr = trim((string)$cidr);
+    if ($ip === '' || $cidr === '') return false;
+    if (strpos($cidr, '/') === false) return strcasecmp($ip, $cidr) === 0;
+    list($base, $mask) = explode('/', $cidr, 2);
+    $maskBits = (int)$mask;
+    $ipBin = @inet_pton($ip);
+    $baseBin = @inet_pton($base);
+    if ($ipBin === false || $baseBin === false) return false;
+    if (strlen($ipBin) !== strlen($baseBin)) return false;
+    $maxBits = strlen($ipBin) * 8;
+    if ($maskBits < 0) $maskBits = 0;
+    if ($maskBits > $maxBits) $maskBits = $maxBits;
+    $fullBytes = intdiv($maskBits, 8);
+    $remainBits = $maskBits % 8;
+    if ($fullBytes > 0 && substr($ipBin, 0, $fullBytes) !== substr($baseBin, 0, $fullBytes)) return false;
+    if ($remainBits === 0) return true;
+    $maskByte = (0xFF << (8 - $remainBits)) & 0xFF;
+    return ((ord($ipBin[$fullBytes]) & $maskByte) === (ord($baseBin[$fullBytes]) & $maskByte));
+  }
+  function guard_ip_in_any($ip, $list){
+    if (!is_array($list)) return false;
+    foreach ($list as $cidr) {
+      if (!is_string($cidr)) continue;
+      if (guard_ip_in_cidr($ip, $cidr)) return true;
+    }
+    return false;
+  }
   function guard_client_ip(){
-    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '';
-    if ($ip && strpos($ip, ',') !== false) { $ip = trim(explode(',', $ip)[0]); }
-    return $ip ?: '0.0.0.0';
+    $remote = trim((string)($_SERVER['REMOTE_ADDR'] ?? ''));
+    $xff = trim((string)($_SERVER['HTTP_X_FORWARDED_FOR'] ?? ''));
+    $trusted = guard_read_cfg('security.trusted_proxies', []);
+    if ($xff !== '' && $remote !== '' && guard_ip_in_any($remote, is_array($trusted) ? $trusted : [])) {
+      $parts = array_map('trim', explode(',', $xff));
+      foreach ($parts as $part) {
+        if (filter_var($part, FILTER_VALIDATE_IP)) return $part;
+      }
+    }
+    if ($remote !== '' && filter_var($remote, FILTER_VALIDATE_IP)) return $remote;
+    return '0.0.0.0';
   }
 }
 
@@ -36,7 +73,7 @@ if (!function_exists('guard_api')) {
     $allow = guard_read_cfg('security.ip_allowlist', []);
     if (is_array($allow) && count($allow)) {
       $ip = guard_client_ip();
-      if (!in_array($ip, $allow, true)) {
+      if (!guard_ip_in_any($ip, $allow)) {
         http_response_code(403);
         if ($ct!=='text/plain') header('Content-Type: application/json; charset=utf-8');
         echo ($ct==='text/plain') ? "forbidden\n" : json_encode(['ok'=>false,'error'=>'forbidden ip']);

@@ -13,7 +13,7 @@
 ## Tips
 - If the storage test fails, fix permissions on `data/` and `users.json` so the PHP user can write.
 - To replace the users database, upload a new `data/users.json` (make a backup first).
-- To bootstrap, the system can create a default admin on first run (see `includes/auth.php`).
+- To bootstrap the first admin, run `php bin/bootstrap-admin.php` from the project root.
 
 ## URLs
 - Users page: `/users.php`

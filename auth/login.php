@@ -6,11 +6,12 @@ $PAGE_TITLE = 'Sign in';
 $PAGE_CSS = 'assets/css/pages/login.css';
 $ASSETS_PREFIX = '../assets'; // from auth/ to assets/
 
-ensure_default_admin(); // default admin if empty
-$first_admin = $_SESSION['__first_admin_password'] ?? null;
-unset($_SESSION['__first_admin_password']);
+$first_admin = ensure_default_admin(false);
 
 $redirect = $_GET['redirect'] ?? 'index.php';
+$hasUsers = false;
+$__ul = users_load();
+if (is_array($__ul) && !empty($__ul['users']) && is_array($__ul['users'])) $hasUsers = count($__ul['users']) > 0;
 $err = null;
 
 function safe_redirect_target($rel){
@@ -39,7 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
       exit;
     } else {
-      $err = 'Incorrect username or password.';
+      $specificErr = function_exists('auth_last_login_error') ? trim((string)auth_last_login_error()) : '';
+      $err = ($specificErr !== '') ? $specificErr : 'Incorrect username or password.';
     }
   }
 }
@@ -56,6 +58,12 @@ require_once __DIR__ . '/../includes/head_public.php';
       <div>Username: <code>admin</code></div>
       <div>Temporary password: <code><?= h($first_admin) ?></code></div>
       <div class="muted">Sign in and change it under <em>Users</em> as soon as possible.</div>
+    </div>
+  <?php endif; ?>
+  <?php if (!$first_admin && !$hasUsers): ?>
+    <div class="note">
+      <div><strong>No users are configured.</strong></div>
+      <div class="muted">Run <code>php bin/bootstrap-admin.php</code> on the server to create the first admin account.</div>
     </div>
   <?php endif; ?>
   <form method="post" action="login.php?redirect=<?= h($redirect) ?>">

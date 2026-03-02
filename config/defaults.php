@@ -57,7 +57,7 @@ return [
   'audit_log' => false
 ],
   // Security
-  'security' => [
+'security' => [
     'admin_emails' => ['admin@example.com'],
     'csrf_secret'  => null, // if null, a random secret will be generated into local.json
     'allowed_origins' => ['*'],
@@ -66,6 +66,20 @@ return [
 'api_tokens' => [],
 'api_rate_limit_ms' => 300,
 'ip_allowlist' => [],
+'trusted_proxies' => [],
+'allow_web_bootstrap_admin' => false,
+'favicon_allowed_hosts' => [],
+'favicon_allow_http' => false,
+'favicon_require_admin' => true,
+'favicon_timeout_sec' => 4,
+'favicon_max_bytes' => 262144,
+'login_rate_limit' => [
+  'enabled' => true,
+  'max_attempts' => 5,
+  'window_sec' => 900,
+  'base_delay_sec' => 30,
+  'max_delay_sec' => 900,
+],
 ],
 // Alerts
 'alerts' => [

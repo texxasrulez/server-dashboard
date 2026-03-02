@@ -473,3 +473,9 @@ Rotate large `*.jsonl` via `logrotate` or a cron script.
 - Client debug logging guarded by `CLIENT_DEBUG_LOG`
 
 ---
+**Screenshots**
+-----------
+
+![Alt text](/assets/images/screenshots/main.png?raw=true "Server Dashboard Main Screenshot")
+![Alt text](/assets/images/screenshots/history.png?raw=true "Server Dashboard History Screenshot")
+![Alt text](/assets/images/screenshots/logs.png?raw=true "Server Dashboard Log Viewer Screenshot")

@@ -151,7 +151,10 @@ function resolveFaviconUrl(path){
   var p = String(path || '').trim();
   if (!p) return '';
   if (/^https?:\/\//i.test(p)) return p;
-  if (p[0] === '/') return p;
+  if (p[0] === '/') {
+    if (/^\/favicon_proxy\.php(?:\?|$)/i.test(p)) return apiUrl(p.replace(/^\/+/, ''));
+    return p;
+  }
   if (p.indexOf('api/') === 0) return __join(__projectBase(), p);
   return apiUrl(p);
 }

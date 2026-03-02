@@ -99,13 +99,15 @@ function out_ico($file){
 if ($host) {
   if (!preg_match('/^[a-z0-9][a-z0-9\.-]*$/i', $host)) out_png($default);
   if (!host_allowed($host, $allowedHosts)) out_png($default);
+  // Serve cached favicon first; this avoids DNS/private-IP guard false negatives
+  // for hosts that were already cached (including manually seeded cache files).
+  if (file_exists($cacheFile) && (time() - filemtime($cacheFile) < 86400)) {
+    out_ico($cacheFile);
+  }
   $ips = resolve_host_ips($host);
   if (!count($ips)) out_png($default);
   foreach ($ips as $ip) {
     if (is_private_or_reserved_ip($ip)) out_png($default);
-  }
-  if (file_exists($cacheFile) && (time() - filemtime($cacheFile) < 86400)) {
-    out_ico($cacheFile);
   }
   $srcs = ['https://'.$host.'/favicon.ico'];
   if ($allowHttp) $srcs[] = 'http://'.$host.'/favicon.ico';

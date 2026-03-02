@@ -166,9 +166,38 @@ $REQUIRE_ADMIN = true; include __DIR__.'/includes/head.php'; ?>
   const empty = document.getElementById('rulesEmpty');
   const table = document.getElementById('rulesTable');
   let rulesCache = [];
+  function csrfToken(){
+    const m = document.querySelector('meta[name="csrf-token"]');
+    return (m && m.content) ? String(m.content) : '';
+  }
+  function apiFetch(url, init){
+    const opts = init ? Object.assign({}, init) : {};
+    if (!opts.credentials) opts.credentials = 'same-origin';
+    const method = String(opts.method || 'GET').toUpperCase();
+    if (method !== 'GET' && method !== 'HEAD' && method !== 'OPTIONS'){
+      const token = csrfToken();
+      if (token){
+        const headers = new Headers(opts.headers || {});
+        if (!headers.has('X-CSRF-Token')) headers.set('X-CSRF-Token', token);
+        opts.headers = headers;
+        if (opts.body instanceof URLSearchParams && !opts.body.has('_csrf')){
+          opts.body.set('_csrf', token);
+        } else if ((headers.get('Content-Type') || '').indexOf('application/json') >= 0 && typeof opts.body === 'string'){
+          try {
+            const parsed = JSON.parse(opts.body);
+            if (parsed && typeof parsed === 'object' && !parsed._csrf && !parsed.csrf){
+              parsed._csrf = token;
+              opts.body = JSON.stringify(parsed);
+            }
+          } catch (_e) {}
+        }
+      }
+    }
+    return fetch(url, opts);
+  }
 
   // Populate services select
-  fetch(URLS.services, {credentials:'same-origin'})
+  apiFetch(URLS.services, {credentials:'same-origin'})
     .then(r => r.json()).then(data => {
       const items = (data && data.items) ? data.items : [];
       svcSel.innerHTML = '<option value="">Select service…</option>'
@@ -239,7 +268,7 @@ $REQUIRE_ADMIN = true; include __DIR__.'/includes/head.php'; ?>
   });
 
   function loadRules(){
-    fetch(URLS.list, {credentials:'same-origin'})
+    apiFetch(URLS.list, {credentials:'same-origin'})
       .then(r=>r.json()).then(data=>{
         const items = (data && data.items) ? data.items : [];
         rulesCache = items;
@@ -334,7 +363,7 @@ $REQUIRE_ADMIN = true; include __DIR__.'/includes/head.php'; ?>
     const p=getPayload();
     if (!p.name || !p.service_id){ return toastWarn('Name and Service are required.'); }
     if (btnSave.dataset.editId){ p.id = btnSave.dataset.editId; }
-    fetch(URLS.upsert, {
+    apiFetch(URLS.upsert, {
       method:'POST',
       credentials:'same-origin',
       headers:{'Content-Type':'application/json'},
@@ -399,7 +428,7 @@ $REQUIRE_ADMIN = true; include __DIR__.'/includes/head.php'; ?>
     if (action === 'silence'){
       payload.silence_minutes = Math.max(1, parseInt(opts.minutes,10) || 60);
     }
-    return fetch(URLS.bulk, {
+    return apiFetch(URLS.bulk, {
       method:'POST',
       credentials:'same-origin',
       headers:{'Content-Type':'application/json'},

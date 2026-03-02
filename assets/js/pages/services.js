@@ -1,20 +1,49 @@
 (function(){
   const $  = (s,c)=> (c||document).querySelector(s);
   const $$ = (s,c)=> Array.from((c||document).querySelectorAll(s));
+  const csrfToken = ()=> {
+    const m = document.querySelector('meta[name="csrf-token"]');
+    return (m && m.content) ? String(m.content) : '';
+  };
+  const apiFetch = (url, init)=> {
+    const opts = init ? Object.assign({}, init) : {};
+    if (!opts.credentials) opts.credentials = 'same-origin';
+    const method = String(opts.method || 'GET').toUpperCase();
+    if (method !== 'GET' && method !== 'HEAD' && method !== 'OPTIONS') {
+      const token = csrfToken();
+      if (token) {
+        const headers = new Headers(opts.headers || {});
+        if (!headers.has('X-CSRF-Token')) headers.set('X-CSRF-Token', token);
+        opts.headers = headers;
+        if (opts.body instanceof URLSearchParams && !opts.body.has('_csrf')) {
+          opts.body.set('_csrf', token);
+        } else if ((headers.get('Content-Type') || '').indexOf('application/json') >= 0 && typeof opts.body === 'string') {
+          try {
+            const parsed = JSON.parse(opts.body);
+            if (parsed && typeof parsed === 'object' && !parsed._csrf && !parsed.csrf) {
+              parsed._csrf = token;
+              opts.body = JSON.stringify(parsed);
+            }
+          } catch (_e) {}
+        }
+      }
+    }
+    return fetch(url, opts);
+  };
 
   const modal = $('#svcModal');
   const form  = $('#svcForm');
 
   const api = {
-    list:   ()=> fetch('api/services_list.php').then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
-    upsert: (item)=> fetch('api/service_upsert.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(item)}).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
-    del:    (id)=> fetch('api/service_delete.php',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({id})}).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
-    probe:  (item)=> fetch('api/service_probe.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(item)}).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
-    toggle: (id)=> fetch('api/service_toggle.php',{method:'POST',body:new URLSearchParams({id})}).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
-    importJson: (payload)=> fetch('api/services_import.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
-    importCsv:  (csvText)=> fetch('api/services_import.php?format=csv',{method:'POST',headers:{'Content-Type':'text/csv'},body:csvText}).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
-    probeAll: ()=> fetch('api/services_probe_all.php').then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
-    silenceRules: (ids, minutes)=> fetch('api/alerts_bulk.php',{
+    list:   ()=> apiFetch('api/services_list.php').then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
+    upsert: (item)=> apiFetch('api/service_upsert.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(item)}).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
+    del:    (id)=> apiFetch('api/service_delete.php',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({id})}).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
+    probe:  (item)=> apiFetch('api/service_probe.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(item)}).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
+    toggle: (id)=> apiFetch('api/service_toggle.php',{method:'POST',body:new URLSearchParams({id})}).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
+    importJson: (payload)=> apiFetch('api/services_import.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
+    importCsv:  (csvText)=> apiFetch('api/services_import.php?format=csv',{method:'POST',headers:{'Content-Type':'text/csv'},body:csvText}).then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
+    probeAll: ()=> apiFetch('api/services_probe_all.php').then(r=>{ if(!r.ok){ throw new Error('HTTP '+r.status); } return r.json(); }),
+    silenceRules: (ids, minutes)=> apiFetch('api/alerts_bulk.php',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({action:'silence', ids: ids, silence_minutes: minutes})

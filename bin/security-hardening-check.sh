@@ -10,6 +10,22 @@ cd "$ROOT"
 
 fail=0
 
+if command -v rg >/dev/null 2>&1; then
+  SEARCH_BIN="rg"
+else
+  SEARCH_BIN="grep"
+fi
+
+qsearch() {
+  local pattern="$1"
+  local file="$2"
+  if [ "$SEARCH_BIN" = "rg" ]; then
+    rg -q "$pattern" "$file"
+  else
+    grep -Eq "$pattern" "$file"
+  fi
+}
+
 pass() { echo "  [PASS] $1"; }
 fail_case() { echo "  [FAIL] $1"; fail=1; }
 
@@ -70,9 +86,9 @@ else
 fi
 
 # 4) favicon proxy must keep auth + SSRF guard hooks present
-if rg -q "require_login\(\)" api/favicon_proxy.php \
-  && rg -q "favicon_allowed_hosts" api/favicon_proxy.php \
-  && rg -q "is_private_or_reserved_ip" api/favicon_proxy.php; then
+if qsearch "require_login\(\)" api/favicon_proxy.php \
+  && qsearch "favicon_allowed_hosts" api/favicon_proxy.php \
+  && qsearch "is_private_or_reserved_ip" api/favicon_proxy.php; then
   pass "favicon proxy guard hooks"
 else
   fail_case "favicon proxy guard hooks"

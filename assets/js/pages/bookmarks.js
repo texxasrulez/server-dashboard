@@ -14,6 +14,35 @@
   function tErr(m, sticky){ try{ toast && toast.error && toast.error(m,{sticky:!!sticky}); }catch(e){} }
   function logI(ev, data){ try{ clientLog && clientLog.info && clientLog.info(ev, data||{});}catch(e){} }
   function logE(ev, data){ try{ clientLog && clientLog.error && clientLog.error(ev, data||{});}catch(e){} }
+  function csrfToken(){
+    var m = document.querySelector('meta[name="csrf-token"]');
+    return (m && m.content) ? String(m.content) : '';
+  }
+  function apiFetch(url, options){
+    var opts = options ? Object.assign({}, options) : {};
+    if (!opts.credentials) opts.credentials = 'same-origin';
+    var method = String(opts.method || 'GET').toUpperCase();
+    if (method !== 'GET' && method !== 'HEAD' && method !== 'OPTIONS') {
+      var token = csrfToken();
+      if (token) {
+        var headers = new Headers(opts.headers || {});
+        if (!headers.has('X-CSRF-Token')) headers.set('X-CSRF-Token', token);
+        opts.headers = headers;
+        if (opts.body instanceof URLSearchParams && !opts.body.has('_csrf')) {
+          opts.body.set('_csrf', token);
+        } else if ((headers.get('Content-Type') || '').indexOf('application/json') >= 0 && typeof opts.body === 'string') {
+          try {
+            var parsed = JSON.parse(opts.body);
+            if (parsed && typeof parsed === 'object' && !parsed._csrf && !parsed.csrf) {
+              parsed._csrf = token;
+              opts.body = JSON.stringify(parsed);
+            }
+          } catch (_e) {}
+        }
+      }
+    }
+    return fetch(url, opts);
+  }
 
   function wireCategoryForm(opts){
     var form = $(opts.formSel);
@@ -28,7 +57,7 @@
       if (!name){ tWarn('Category name required'); nameEl && nameEl.focus(); return; }
       var url = apiUrl('bm_categories_upsert.php');
       var body = new URLSearchParams(); if (id) body.set('id', id); body.set('name', name);
-      fetch(url, {method:'POST', body, credentials:'same-origin'})
+      apiFetch(url, {method:'POST', body})
         .then(parseJsonResponse)
         .then(function(){
           tOK('Category saved');
@@ -81,8 +110,8 @@
       (function step(){
         if (idx >= urls.length) return reject({message:'All endpoints failed', tried: tried, lastErr: lastErr});
         var url = urls[idx++]; tried.push(url);
-        fetch(url + (opt && opt.cacheBust ? ((url.indexOf('?')>=0?'&':'?')+'t='+Date.now()) : ''), {
-          credentials: 'same-origin', cache: 'no-store',
+        apiFetch(url + (opt && opt.cacheBust ? ((url.indexOf('?')>=0?'&':'?')+'t='+Date.now()) : ''), {
+          cache: 'no-store',
           method: (opt && opt.method) || 'GET',
           headers: (opt && opt.headers) || undefined,
           body: (opt && opt.body) || undefined
@@ -197,13 +226,13 @@ function apiUrl(ep){ return __join(__apiBase(), ep); }
     var so = $('#bmSort'); if (so) so.addEventListener('change', renderList);
     var cSave = $('#catSave'); if (cSave) cSave.addEventListener('click', function(ev){ ev.preventDefault(); catSave(); });
     var cCancel = $('#catCancel'); if (cCancel) cCancel.addEventListener('click', function(){ catReset(); });
-    var cDel = $('#catDelete'); if (cDel) cDel.addEventListener('click', function(ev){ ev.preventDefault(); if(!$('#catId').value) return; if(!confirm('Delete this category? Bookmarks will become Uncategorized.')) return; fetch(apiUrl('bm_categories_delete.php?id='+encodeURIComponent($('#catId').value)), {method:'POST', credentials:'same-origin'}).then(parseJsonResponse).then(()=>{ tOK('Category deleted'); loadCategories().then(renderList); }).catch(err=> tErr('Delete failed: '+(err&&err.message||err), true)); });
+    var cDel = $('#catDelete'); if (cDel) cDel.addEventListener('click', function(ev){ ev.preventDefault(); if(!$('#catId').value) return; if(!confirm('Delete this category? Bookmarks will become Uncategorized.')) return; apiFetch(apiUrl('bm_categories_delete.php?id='+encodeURIComponent($('#catId').value)), {method:'POST'}).then(parseJsonResponse).then(()=>{ tOK('Category deleted'); loadCategories().then(renderList); }).catch(err=> tErr('Delete failed: '+(err&&err.message||err), true)); });
     var cl = $('#catList'); if (cl) cl.addEventListener('click', onCatListClick);
   }
 
   // ---------- Categories ----------
   function loadCategories(){
-    return fetch(apiUrl('bm_categories_list.php')+'?t='+Date.now(), {credentials:'same-origin', cache:'no-store'})
+    return apiFetch(apiUrl('bm_categories_list.php')+'?t='+Date.now(), {cache:'no-store'})
       .then(parseJsonResponse).then(function(data){
         CATS = (data && data.items) ? data.items.slice().sort(catSort) : [];
         renderCategories();
@@ -249,7 +278,7 @@ function apiUrl(ep){ return __join(__apiBase(), ep); }
       $('#catName').focus();
     } else if (act==='cdel'){
       if (!confirm('Delete this category? Bookmarks will become Uncategorized.')) return;
-      fetch(apiUrl('bm_categories_delete.php?id='+encodeURIComponent(id)), {method:'POST', credentials:'same-origin'})
+      apiFetch(apiUrl('bm_categories_delete.php?id='+encodeURIComponent(id)), {method:'POST'})
         .then(parseJsonResponse).then(()=>{ tOK('Category deleted'); loadCategories().then(renderList); })
         .catch(err=> tErr('Delete failed: '+(err&&err.message||err), true));
     } else if (act==='cup' || act==='cdn'){
@@ -258,8 +287,8 @@ function apiUrl(ep){ return __join(__apiBase(), ep); }
       var x = CATS[idx]; CATS.splice(idx,1); CATS.splice(j,0,x);
       renderCategories();
       var ids = CATS.map(c=>c.id);
-      fetch(apiUrl('bm_categories_reorder.php'), {
-        method:'POST', credentials:'same-origin', headers:{'Content-Type':'application/json'},
+      apiFetch(apiUrl('bm_categories_reorder.php'), {
+        method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({ids: ids})
       }).then(parseJsonResponse).then(()=>{ tOK('Order saved'); fillCategorySelects(); renderList(); })
         .catch(err=> tErr('Reorder failed: '+(err&&err.message||err), true));
@@ -270,8 +299,8 @@ function apiUrl(ep){ return __join(__apiBase(), ep); }
     var id = $('#catId').value || null;
     var name = ($('#catName')&&$('#catName').value||'').trim();
     if (!name){ tWarn('Category name required'); return; }
-    fetch(apiUrl('bm_categories_upsert.php'), {
-      method:'POST', credentials:'same-origin', headers:{'Content-Type':'application/json'},
+    apiFetch(apiUrl('bm_categories_upsert.php'), {
+      method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({id:id, name:name})
     }).then(parseJsonResponse).then(()=>{ tOK(id?'Category updated':'Category added'); catReset(); loadCategories().then(renderList); })
       .catch(err=> tErr('Save failed: '+(err&&err.message||err), true));
@@ -279,7 +308,7 @@ function apiUrl(ep){ return __join(__apiBase(), ep); }
 
   // ---------- Bookmarks ----------
   function loadList(){
-    return fetch(apiUrl('bookmarks_list.php')+'?t='+Date.now(), {credentials:'same-origin', cache:'no-store'})
+    return apiFetch(apiUrl('bookmarks_list.php')+'?t='+Date.now(), {cache:'no-store'})
       .then(parseJsonResponse).then(function(data){
         BOOKS = (data && data.items) ? data.items : [];
         renderList();
@@ -339,7 +368,7 @@ function apiUrl(ep){ return __join(__apiBase(), ep); }
     }
     if (btn.dataset.act === 'delete' && id) {
       if (!confirm('Delete this bookmark?')) return;
-      fetch(apiUrl('bookmarks_delete.php?id='+encodeURIComponent(id)), {method:'POST', credentials:'same-origin'})
+      apiFetch(apiUrl('bookmarks_delete.php?id='+encodeURIComponent(id)), {method:'POST'})
         .then(parseJsonResponse).then(()=>{ tOK('Bookmark deleted'); loadList(); })
         .catch(err=> { tErr('Delete failed: '+(err && err.message || err), true); });
     }
@@ -364,8 +393,8 @@ function apiUrl(ep){ return __join(__apiBase(), ep); }
       category_id: ($('#bmCategory')&&$('#bmCategory').value) || null
     };
     if (!payload.url) { tWarn('URL is required'); return; }
-    fetch(apiUrl('bookmarks_upsert.php'), {
-      method:'POST', credentials:'same-origin',
+    apiFetch(apiUrl('bookmarks_upsert.php'), {
+      method:'POST',
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify(payload)
     }).then(parseJsonResponse).then(resp=>{

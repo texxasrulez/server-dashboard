@@ -3,6 +3,7 @@
 $PAGE_TITLE = 'Bookmarks';
 $PAGE_CSS = 'assets/css/pages/bookmarks.css';
 $PAGE_JS  = 'assets/js/pages/bookmarks.js';
+$REQUIRE_ADMIN = true;
 require_once __DIR__ . '/includes/head.php';
 ?>
 <main class="wrap" id="bookmarks-root" data-api-base="<?= h(project_url('/api/')) ?>">

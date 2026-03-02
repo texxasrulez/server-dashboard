@@ -13,6 +13,22 @@ cd "$ROOT"
 
 fail=0
 
+if command -v rg >/dev/null 2>&1; then
+  SEARCH_BIN="rg"
+else
+  SEARCH_BIN="grep"
+fi
+
+qsearch() {
+  local pattern="$1"
+  local file="$2"
+  if [ "$SEARCH_BIN" = "rg" ]; then
+    rg -q "$pattern" "$file"
+  else
+    grep -Eq "$pattern" "$file"
+  fi
+}
+
 is_exempt_file() {
   local f="$1"
   case "$f" in
@@ -27,28 +43,28 @@ is_exempt_file() {
 
 has_auth_guard() {
   local f="$1"
-  rg -q "require_admin\(|require_login\(|guard_api\(|cron_token_is_valid\(|cron_request_token\(|is_logged_in\(|user_is_admin\(|is_admin\(" "$f" \
-    || rg -q "require\s+__DIR__\s*\.\s*'/security_(get|set)\.php'" "$f"
+  qsearch "require_admin\(|require_login\(|guard_api\(|cron_token_is_valid\(|cron_request_token\(|is_logged_in\(|user_is_admin\(|is_admin\(" "$f" \
+    || qsearch "require\s+__DIR__\s*\.\s*'/security_(get|set)\.php'" "$f"
 }
 
 has_token_guard() {
   local f="$1"
-  rg -q "guard_api\(\[[^]]*require_token'\s*=>\s*true|guard_api\(\[[^]]*require_token\"\s*=>\s*true|cron_token_is_valid\(" "$f"
+  qsearch "guard_api\(\[[^]]*require_token'\s*=>\s*true|guard_api\(\[[^]]*require_token\"\s*=>\s*true|cron_token_is_valid\(" "$f"
 }
 
 is_mutating_endpoint() {
   local f="$1"
-  rg -q "file_put_contents\(|rename\(|unlink\(|copy\(|write_json_atomic\(|move_uploaded_file\(" "$f"
+  qsearch "file_put_contents\(|rename\(|unlink\(|copy\(|write_json_atomic\(|move_uploaded_file\(" "$f"
 }
 
 csrf_relevant_input_surface() {
   local f="$1"
-  rg -q "php://input|\$_POST|\$_REQUEST|REQUEST_METHOD[^\\n]*POST|\$_GET\[['\"](id|action|what|delete|remove|toggle|enabled|interval)" "$f"
+  qsearch "php://input|\$_POST|\$_REQUEST|REQUEST_METHOD[^\\n]*POST|\$_GET\[['\"](id|action|what|delete|remove|toggle|enabled|interval)" "$f"
 }
 
 has_csrf_check() {
   local f="$1"
-  rg -q "csrf_check_request\(|csrf_check\(" "$f"
+  qsearch "csrf_check_request\(|csrf_check\(" "$f"
 }
 
 echo "Security policy check:"

@@ -8,13 +8,20 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-DEFAULT_WEB_ROOT="/home/gene/web/genesworld.net/public_html/web-admin"
+if [ -f "/etc/server-dashboard/dashboard_env.sh" ]; then
+  # shellcheck disable=SC1091
+  source "/etc/server-dashboard/dashboard_env.sh"
+elif [ -f "$SCRIPT_DIR/lib/dashboard_env.sh" ]; then
+  # shellcheck disable=SC1091
+  source "$SCRIPT_DIR/lib/dashboard_env.sh"
+fi
+if declare -F dashboard_env_bootstrap >/dev/null 2>&1; then
+  dashboard_env_bootstrap "$SCRIPT_DIR"
+fi
 if [ -n "${WEB_ADMIN_ROOT:-}" ]; then
   WEB_ADMIN_ROOT="$WEB_ADMIN_ROOT"
 elif [ -f "$REPO_ROOT/config/local.json" ]; then
   WEB_ADMIN_ROOT="$REPO_ROOT"
-elif [ -d "$DEFAULT_WEB_ROOT" ]; then
-  WEB_ADMIN_ROOT="$DEFAULT_WEB_ROOT"
 else
   WEB_ADMIN_ROOT="$REPO_ROOT"
 fi

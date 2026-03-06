@@ -43,7 +43,7 @@ if (!function_exists('cfg_local')) {
 }
 
 // Define Build Version
-if (!defined('BUILD')) define('BUILD', 'Server Dashboard-v0.0.2'); // or any string you want
+if (!defined('BUILD')) define('BUILD', 'Server Dashboard-v0.0.3'); // or any string you want
 
 /* ---------- Core / Security ---------- */
 $cronToken = (string) cfg_env('CRON_TOKEN', '');

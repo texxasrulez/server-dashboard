@@ -3,17 +3,23 @@ set -euo pipefail
 
 # Adjust if your paths differ
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DEFAULT_WEB_ROOT="/home/gene/web/genesworld.net/public_html/web-admin"
-if [ -n "${WEB_ADMIN_ROOT:-}" ]; then
-  WEB_ADMIN_ROOT="$WEB_ADMIN_ROOT"
-elif [ -d "$DEFAULT_WEB_ROOT" ]; then
-  WEB_ADMIN_ROOT="$DEFAULT_WEB_ROOT"
-else
+if [ -f "/etc/server-dashboard/dashboard_env.sh" ]; then
+  # shellcheck disable=SC1091
+  source "/etc/server-dashboard/dashboard_env.sh"
+elif [ -f "$SCRIPT_DIR/lib/dashboard_env.sh" ]; then
+  # shellcheck disable=SC1091
+  source "$SCRIPT_DIR/lib/dashboard_env.sh"
+fi
+if declare -F dashboard_env_bootstrap >/dev/null 2>&1; then
+  dashboard_env_bootstrap "$SCRIPT_DIR"
+fi
+if [ -z "${WEB_ADMIN_ROOT:-}" ]; then
   WEB_ADMIN_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 fi
 STATE_DIR="${STATE_DIR:-$WEB_ADMIN_ROOT/state}"
 STATUS_FILE="$STATE_DIR/backup_status.json"
-BACKUP_ROOT="/mnt/backupz"
+BACKUP_ROOT="${BACKUP_ROOT:-/mnt/backupz}"
+HESTIA_DIR="${HESTIA_DIR:-/backup}"
 
 mkdir -p "$STATE_DIR" 2>/dev/null || true
 STATE_OWNER="${STATE_OWNER:-}"
@@ -21,7 +27,18 @@ if [ -z "$STATE_OWNER" ] && [ -f "$STATE_DIR/.owner" ]; then
   STATE_OWNER="$(tr -d " \r\n" < "$STATE_DIR/.owner" 2>/dev/null || true)"
 fi
 if [ -z "$STATE_OWNER" ]; then
-  STATE_OWNER="webuser:webuser"
+  STATE_OWNER="$(stat -c '%U:%G' "$STATE_DIR" 2>/dev/null || true)"
+fi
+
+# Concurrency guard to avoid overlapping writes to backup_status.json
+if command -v flock >/dev/null 2>&1; then
+  LOCK_FILE="${STATE_DIR}/backup_enrich_folders.lock"
+  if exec 9>"$LOCK_FILE"; then
+    if ! flock -n 9; then
+      echo "backup_enrich_folders: already running; exiting." >&2
+      exit 0
+    fi
+  fi
 fi
 
 EXCLUDES_RAW="${BACKUP_EXCLUDES:-}"
@@ -48,6 +65,20 @@ is_excluded() {
 if ! command -v jq >/dev/null 2>&1; then
   echo "ERROR: jq is required for backup_enrich_folders.sh" >&2
   exit 1
+fi
+
+CONFIG_FILE="${WEB_ADMIN_ROOT}/config/local.json"
+if [ -f "$CONFIG_FILE" ]; then
+  cfg_root="$(jq -r '.backups.fs_root // empty' "$CONFIG_FILE" 2>/dev/null || true)"
+  if [ -n "$cfg_root" ]; then
+    BACKUP_ROOT="$cfg_root"
+  fi
+  if [ -z "${HESTIA_DIR:-}" ] || [ "${HESTIA_DIR}" = "/backup" ]; then
+    cfg_hestia_dir="$(jq -r '.backups.hestia_source_dir // empty' "$CONFIG_FILE" 2>/dev/null || true)"
+    if [ -n "$cfg_hestia_dir" ]; then
+      HESTIA_DIR="$cfg_hestia_dir"
+    fi
+  fi
 fi
 
 log_action_json() {
@@ -126,8 +157,8 @@ total_gb=$(df -BG "$BACKUP_ROOT" 2>/dev/null | awk 'NR==2 {gsub("G","",$2); prin
 size_hestia=0
 size_micro=0
 size_snaps=0
-if ! is_excluded "$BACKUP_ROOT/hestia"; then
-  size_hestia=$(du -sBG "$BACKUP_ROOT/hestia" 2>/dev/null | awk '{gsub("G","",$1); print $1+0}')
+if ! is_excluded "$HESTIA_DIR"; then
+  size_hestia=$(du -sBG "$HESTIA_DIR" 2>/dev/null | awk '{gsub("G","",$1); print $1+0}')
 fi
 if ! is_excluded "$BACKUP_ROOT/micro"; then
   size_micro=$(du -sBG "$BACKUP_ROOT/micro" 2>/dev/null | awk '{gsub("G","",$1); print $1+0}')
@@ -141,11 +172,11 @@ fi
 : "${size_snaps:=0}"
 : "${total_gb:=0}"
 
-tmp="${STATUS_FILE}.tmp"
+tmp="$(mktemp "${STATUS_FILE}.tmp.XXXXXX")"
 
 jq \
   --argjson total_gb "$total_gb" \
-  --arg hestia_path "$BACKUP_ROOT/hestia" \
+  --arg hestia_path "$HESTIA_DIR" \
   --arg micro_path  "$BACKUP_ROOT/micro" \
   --arg snaps_path  "$BACKUP_ROOT/snapshots" \
   --argjson size_hestia "$size_hestia" \
@@ -161,3 +192,7 @@ jq \
   ' "$STATUS_FILE" > "$tmp"
 
 mv "$tmp" "$STATUS_FILE"
+if [ -e "$STATUS_FILE" ]; then
+  chown "$STATE_OWNER" "$STATUS_FILE" 2>/dev/null || true
+  chmod 644 "$STATUS_FILE" 2>/dev/null || true
+fi

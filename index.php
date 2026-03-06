@@ -9,7 +9,24 @@
   }
   $PAGE_CSS   = 'assets/css/pages/index.css';
   include __DIR__ . '/includes/head.php';
+
+  require_once __DIR__ . '/Adapters/AdapterFactory.php';
+  $platformAdapter = DashboardAdapterFactory::make();
+  $platformCaps = $platformAdapter->getCapabilities();
 ?>
+<div class="card">
+  <div class="row between">
+    <div class="section-title">Platform Capabilities</div>
+  </div>
+  <div class="row" style="gap:.4rem; flex-wrap:wrap; margin-top:.55rem;">
+    <span class="chip neutral">panel: <?= h((string)($platformCaps['panel'] ?? 'none')) ?></span>
+    <span class="chip neutral">web: <?= h((string)($platformCaps['web'] ?? 'none')) ?></span>
+    <span class="chip neutral">mta: <?= h((string)($platformCaps['mta'] ?? 'none')) ?></span>
+    <span class="chip neutral">db: <?= h((string)($platformCaps['db'] ?? 'none')) ?></span>
+    <span class="chip neutral">adapter: <?= h((string)($platformCaps['adapter'] ?? 'generic-linux')) ?></span>
+  </div>
+</div>
+
 <!-- System Metrics -->
 <div class="card">
   <div class="row between">

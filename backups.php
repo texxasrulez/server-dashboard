@@ -10,6 +10,13 @@ $csrf_token = csrf_token();
 $HAS_ANY_BACKUP_FS = false;
 $backup_root = (string) cfg_local('backups.fs_root', '/mnt/backupz');
 if ($backup_root === '') $backup_root = '/mnt/backupz';
+$hestia_source_dir = (string) cfg_local('backups.hestia_source_dir', '/backup');
+if ($hestia_source_dir === '') $hestia_source_dir = '/backup';
+$hestia_bind_source = (string) cfg_local('backups.hestia_bind_source', '');
+$hestia_bind_target = (string) cfg_local('backups.hestia_bind_target', $hestia_source_dir);
+if ($hestia_bind_target === '') $hestia_bind_target = $hestia_source_dir;
+$hestia_bind_options = (string) cfg_local('backups.hestia_bind_options', 'bind,nofail');
+if ($hestia_bind_options === '') $hestia_bind_options = 'bind,nofail';
 $dirs_raw = (string) cfg_local('backups.fs_dirs', "hestia\nmicro\nsnapshots");
 $backup_dirs = array_values(array_filter(array_map('trim', preg_split('/[\s,]+/', $dirs_raw) ?: [])));
 if (!$backup_dirs) $backup_dirs = ['hestia','micro','snapshots'];
@@ -20,6 +27,10 @@ $backup_orchestrator_defaults = [
     'micro_script'    => (string) cfg_local('backups.micro_script', '/usr/local/sbin/make-micro-backups.sh'),
     'hestia_cmd'      => (string) cfg_local('backups.hestia_cmd', '/usr/local/hestia/bin/v-backup-user'),
     'hestia_user'     => (string) cfg_local('backups.hestia_user', 'gene'),
+    'hestia_source_dir' => $hestia_source_dir,
+    'hestia_bind_source' => $hestia_bind_source,
+    'hestia_bind_target' => $hestia_bind_target,
+    'hestia_bind_options' => $hestia_bind_options,
     'exclude_dirs'    => (string) cfg_local('backups.exclude_dirs', ''),
     'backupctl'       => (string) cfg_local('backups.backupctl', '/usr/local/sbin/backupctl'),
     'pipeline_script' => (string) cfg_local('backups.pipeline_script', '/usr/local/bin/backup-nightly.sh'),
@@ -465,7 +476,7 @@ canvas {
     <div class="card-header">
       <div>
         <div class="card-title">Disk Utilization</div>
-        <div class="card-sub">/backup capacity &amp; health</div>
+        <div class="card-sub"><?= h($backup_root) ?> capacity &amp; health</div>
       </div>
       <span class="tag" id="disk-tag">Disk: --</span>
     </div>
@@ -481,7 +492,7 @@ canvas {
           </div>
           <div class="kpi kpi-size">
             <div class="kpi-label">Mount</div>
-            <div class="kpi-value" style="font-size:13px;">/backup</div>
+            <div class="kpi-value" style="font-size:13px;"><?= h($backup_root) ?></div>
           </div>
           <div class="kpi kpi-size">
             <div class="kpi-label">Status</div>
@@ -667,6 +678,9 @@ canvas {
     // Read CSRF token from meta tag once
     const CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]')
       ?.getAttribute('content') || '';
+    const DEFAULT_BACKUP_ROOT = <?= json_encode($backup_root, JSON_UNESCAPED_SLASHES) ?>;
+    const DEFAULT_HESTIA_SOURCE = <?= json_encode($hestia_source_dir, JSON_UNESCAPED_SLASHES) ?>;
+    const DEFAULT_MICRO_PATH = <?= json_encode(rtrim($backup_root, '/') . '/micro/LATEST_SNAPSHOT/', JSON_UNESCAPED_SLASHES) ?>;
     const orchestratorRoot = document.getElementById('backupOrchestrator');
 
     // FS-level "any backup?" flag from PHP (1 = some backups exist, 0 = none)
@@ -675,9 +689,21 @@ canvas {
 
     async function loadStatus() {
       try {
-        const res = await fetch('state/backup_status.json?_=' + Date.now());
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const data = await res.json();
+        const fetchStatusJson = async () => {
+          const res = await fetch('state/backup_status.json?_=' + Date.now());
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          const raw = await res.text();
+          if (!raw || !raw.trim()) throw new Error('Empty status JSON');
+          return JSON.parse(raw);
+        };
+
+        let data;
+        try {
+          data = await fetchStatusJson();
+        } catch (firstErr) {
+          await new Promise(resolve => setTimeout(resolve, 250));
+          data = await fetchStatusJson();
+        }
         renderStatus(data);
       } catch (e) {
         console.error('Failed to load backup_status.json:', e);
@@ -1022,7 +1048,7 @@ canvas {
       const microPath =
         (data.micro && data.micro.latest_path)
           ? data.micro.latest_path
-          : '/backup/micro/LATEST_SNAPSHOT/';
+          : DEFAULT_MICRO_PATH;
 
       const microPathNormalized = microPath.replace(/\/?$/, '/');
 
@@ -1770,26 +1796,31 @@ canvas {
 
 	<pre style="background: var(--card); border:1px solid var(--border); padding:12px; border-radius:8px; overflow-x:auto;">
 	# Restore only a website for a domain
-	sudo /usr/local/hestia/bin/v-restore-web gene genesworld.net gene.YYYYMMDD-HHMM.tar
+	sudo /usr/local/hestia/bin/v-restore-web USER example.com USER.YYYYMMDD-HHMM.tar
 
 	# Restore only a database from a backup
-	sudo /usr/local/hestia/bin/v-restore-database gene DB_NAME gene.YYYYMMDD-HHMM.tar
+	sudo /usr/local/hestia/bin/v-restore-database USER DB_NAME USER.YYYYMMDD-HHMM.tar
 
 	# Restore only mail
-	sudo /usr/local/hestia/bin/v-restore-mail gene gene.YYYYMMDD-HHMM.tar
+	sudo /usr/local/hestia/bin/v-restore-mail USER USER.YYYYMMDD-HHMM.tar
 	</pre>
 
       <h3 style="margin-top:22px; font-size:15px;">Backup File Locations</h3>
 
 	<pre style="background: var(--card); border:1px solid var(--border); padding:12px; border-radius:8px; overflow-x:auto;">
 	# All Hestia user backups live here:
-	 /backup   (bind-mounted → /backup/hestia)
+	 <?= h($hestia_source_dir) ?>   (configured Hestia backup path)
 
 	# Your snapshot system:
-	 /backup/snapshots
+	 <?= h(rtrim($backup_root, '/')) ?>/snapshots
 
 	# Micro backups:
-	 /backup/micro
+	 <?= h(rtrim($backup_root, '/')) ?>/micro
+<?php if (trim($hestia_bind_source) !== ''): ?>
+
+	# Optional bind mount example (fstab):
+	 <?= h($hestia_bind_source) ?> <?= h($hestia_bind_target) ?> none <?= h($hestia_bind_options) ?> 0 0
+<?php endif; ?>
 	</pre>
 
       <h3 style="margin-top:22px; font-size:15px;">Backup Tarball Contents</h3>

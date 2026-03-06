@@ -1,0 +1,183 @@
+(function(){
+  function $(sel, root){ return (root || document).querySelector(sel); }
+  function esc(v){ return String(v == null ? '' : v); }
+  function fmtRss(kb){
+    var n = Number(kb) || 0;
+    if (n <= 0) return '0 KB';
+    if (n >= 1024 * 1024) return (n / (1024 * 1024)).toFixed(2) + ' GB';
+    if (n >= 1024) return (n / 1024).toFixed(1) + ' MB';
+    return n.toFixed(0) + ' KB';
+  }
+  function fmtUptime(sec){
+    var s = Number(sec);
+    if (!isFinite(s) || s < 0) return '-';
+    var d = Math.floor(s / 86400);
+    var h = Math.floor((s % 86400) / 3600);
+    var m = Math.floor((s % 3600) / 60);
+    if (d > 0) return d + 'd ' + h + 'h ' + m + 'm';
+    return h + 'h ' + m + 'm';
+  }
+
+  var body = $('#procBody');
+  var meta = $('#procMeta');
+  var sortSel = $('#procSort');
+  var limitSel = $('#procLimit');
+  var filterInp = $('#procFilter');
+  var modal = $('#procDetails');
+  var modalClose = $('#procDetailsClose');
+  var detailGrid = $('#procDetailGrid');
+  var detailCmdline = $('#procDetailCmdline');
+
+  var refreshMs = 2000;
+  var timer = null;
+  var filterTimer = null;
+  var lastRows = [];
+
+  function queryParams(){
+    var q = new URLSearchParams();
+    q.set('sort', sortSel && sortSel.value ? sortSel.value : 'cpu');
+    q.set('limit', limitSel && limitSel.value ? limitSel.value : '50');
+    var f = filterInp ? filterInp.value.trim() : '';
+    if (f) q.set('filter', f);
+    return q.toString();
+  }
+
+  function renderMeta(payload){
+    if (!meta) return;
+    var load = payload && payload.loadavg ? payload.loadavg : null;
+    var loadTxt = load ? ('load: ' + Number(load.l1 || 0).toFixed(2) + ' ' + Number(load.l5 || 0).toFixed(2) + ' ' + Number(load.l15 || 0).toFixed(2)) : 'load: n/a';
+    var uptimeTxt = 'uptime: ' + fmtUptime(payload ? payload.uptime : null);
+    var host = esc(payload && payload.host ? payload.host : 'host');
+    meta.textContent = host + ' | ' + loadTxt + ' | ' + uptimeTxt + ' | updated ' + new Date().toLocaleTimeString();
+  }
+
+  function renderRows(rows){
+    if (!body) return;
+    lastRows = Array.isArray(rows) ? rows : [];
+    body.innerHTML = '';
+
+    if (!lastRows.length){
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td colspan="6" class="muted">No processes matched this filter.</td>';
+      body.appendChild(tr);
+      return;
+    }
+
+    lastRows.forEach(function(p){
+      var tr = document.createElement('tr');
+      tr.className = 'proc-row';
+      tr.dataset.pid = String(p.pid || '');
+      tr.title = p.cmdline || p.cmd || '';
+      tr.innerHTML = '' +
+        '<td>' + esc(p.pid) + '</td>' +
+        '<td>' + esc(p.user) + '</td>' +
+        '<td class="num">' + Number(p.cpu_pct || 0).toFixed(1) + '</td>' +
+        '<td class="num">' + esc(fmtRss(p.rss_kb)) + '</td>' +
+        '<td>' + esc(p.state || '?') + '</td>' +
+        '<td class="cmd-cell">' + esc(p.cmd || '') + '</td>';
+      body.appendChild(tr);
+    });
+  }
+
+  function showError(msg){
+    if (meta) meta.textContent = msg;
+    if (!body) return;
+    body.innerHTML = '<tr><td colspan="6" class="muted">' + esc(msg) + '</td></tr>';
+  }
+
+  function fetchProcesses(){
+    var url = 'api/processes.php?' + queryParams() + '&_=' + Date.now();
+    return fetch(url, {credentials:'same-origin', cache:'no-store'})
+      .then(function(r){
+        return r.text().then(function(t){
+          var j = null;
+          try { j = JSON.parse(t); } catch (_e) {}
+          if (!r.ok) {
+            var err = (j && j.error) ? j.error : ('HTTP ' + r.status);
+            throw new Error(err);
+          }
+          if (!j || j.ok !== true) throw new Error((j && j.error) ? j.error : 'Invalid API response');
+          return j;
+        });
+      });
+  }
+
+  function refresh(){
+    if (document.hidden) return;
+    fetchProcesses()
+      .then(function(payload){
+        renderMeta(payload || {});
+        renderRows((payload && payload.processes) || []);
+      })
+      .catch(function(err){
+        showError('Processes API error: ' + (err && err.message ? err.message : err));
+      });
+  }
+
+  function schedule(){
+    if (timer) clearInterval(timer);
+    timer = setInterval(refresh, refreshMs);
+  }
+
+  function queueRefresh(){
+    if (filterTimer) clearTimeout(filterTimer);
+    filterTimer = setTimeout(refresh, 250);
+  }
+
+  function detailRow(label, value){
+    return '<div class="k">' + esc(label) + '</div><div class="v">' + esc(value) + '</div>';
+  }
+
+  function openDetails(pid){
+    var rec = null;
+    for (var i = 0; i < lastRows.length; i++) {
+      if (String(lastRows[i].pid) === String(pid)) {
+        rec = lastRows[i];
+        break;
+      }
+    }
+    if (!rec || !modal) return;
+
+    if (detailGrid) {
+      detailGrid.innerHTML = '' +
+        detailRow('PID', rec.pid || '') +
+        detailRow('PPID', rec.ppid || '') +
+        detailRow('User', rec.user || '') +
+        detailRow('State', rec.state || '') +
+        detailRow('CPU%', Number(rec.cpu_pct || 0).toFixed(1)) +
+        detailRow('RSS', fmtRss(rec.rss_kb)) +
+        detailRow('Threads', rec.threads || 0);
+    }
+    if (detailCmdline) {
+      detailCmdline.textContent = rec.cmdline || rec.cmd || '';
+    }
+
+    modal.hidden = false;
+  }
+
+  if (sortSel) sortSel.addEventListener('change', refresh);
+  if (limitSel) limitSel.addEventListener('change', refresh);
+  if (filterInp) filterInp.addEventListener('input', queueRefresh);
+  if (body) {
+    body.addEventListener('click', function(ev){
+      var tr = ev.target && ev.target.closest ? ev.target.closest('tr.proc-row') : null;
+      if (!tr) return;
+      openDetails(tr.dataset.pid || '');
+    });
+  }
+  if (modalClose) modalClose.addEventListener('click', function(){ if (modal) modal.hidden = true; });
+  if (modal) {
+    modal.addEventListener('click', function(ev){
+      if (ev.target === modal) modal.hidden = true;
+    });
+  }
+
+  document.addEventListener('visibilitychange', function(){
+    if (!document.hidden) refresh();
+  });
+
+  document.addEventListener('DOMContentLoaded', function(){
+    refresh();
+    schedule();
+  });
+})();

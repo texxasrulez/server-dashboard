@@ -8,12 +8,17 @@ umask 027
 
 # Dashboard state (backup_actions.json / backup_status.json)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DEFAULT_WEB_ROOT="/home/gene/web/genesworld.net/public_html/web-admin"
-if [ -n "${WEB_ADMIN_ROOT:-}" ]; then
-  WEB_ADMIN_ROOT="$WEB_ADMIN_ROOT"
-elif [ -d "$DEFAULT_WEB_ROOT" ]; then
-  WEB_ADMIN_ROOT="$DEFAULT_WEB_ROOT"
-else
+if [ -f "/etc/server-dashboard/dashboard_env.sh" ]; then
+  # shellcheck disable=SC1091
+  source "/etc/server-dashboard/dashboard_env.sh"
+elif [ -f "$SCRIPT_DIR/lib/dashboard_env.sh" ]; then
+  # shellcheck disable=SC1091
+  source "$SCRIPT_DIR/lib/dashboard_env.sh"
+fi
+if declare -F dashboard_env_bootstrap >/dev/null 2>&1; then
+  dashboard_env_bootstrap "$SCRIPT_DIR"
+fi
+if [ -z "${WEB_ADMIN_ROOT:-}" ]; then
   WEB_ADMIN_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 fi
 STATE_DIR="${STATE_DIR:-$WEB_ADMIN_ROOT/state}"
@@ -25,7 +30,7 @@ if [ -z "$STATE_OWNER" ] && [ -f "$STATE_DIR/.owner" ]; then
   STATE_OWNER="$(tr -d " \r\n" < "$STATE_DIR/.owner" 2>/dev/null || true)"
 fi
 if [ -z "$STATE_OWNER" ]; then
-  STATE_OWNER="webuser:webuser"
+  STATE_OWNER="$(stat -c '%U:%G' "$STATE_DIR" 2>/dev/null || true)"
 fi
 
 log_action_json() {
@@ -79,8 +84,10 @@ PY
 
 refresh_backup_status() {
   local script="${SCRIPT_DIR}/backup_health_check.sh"
-  if [ -x "$script" ] && [ "$script" != "$0" ]; then
-    "$script" >/dev/null 2>&1 || true
+  if [ -f "$script" ] && [ "$script" != "$0" ]; then
+    local refresh_log="${STATE_DIR}/logs/backup-health-refresh.log"
+    mkdir -p "$(dirname "$refresh_log")" 2>/dev/null || true
+    /bin/bash "$script" >>"$refresh_log" 2>&1 || true
   fi
 }
 
@@ -135,17 +142,34 @@ if command -v flock >/dev/null 2>&1; then
 fi
 
 # ------------ CONFIG ----------------------------------------------------
-BACKUP_ROOT="/mnt/backupz"
+BACKUP_ROOT="${BACKUP_ROOT:-/mnt/backupz}"
+HESTIA_DIR="${HESTIA_DIR:-/backup}"
 
 # Snapshot target
 SNAP_DIR="$BACKUP_ROOT/snapshots"
 SNAP_PATH="$SNAP_DIR/daily.0"
 
 # Backup sources (adjust if your layout differs)
-HESTIA_DIR="$BACKUP_ROOT/hestia"
 MICRO_DIR="$BACKUP_ROOT/micro"
 
-EMAIL_TO="gene@genesworld.net"
+CONFIG_FILE="${WEB_ADMIN_ROOT}/config/local.json"
+if command -v jq >/dev/null 2>&1 && [ -f "$CONFIG_FILE" ]; then
+  cfg_root="$(jq -r '.backups.fs_root // empty' "$CONFIG_FILE" 2>/dev/null || true)"
+  if [ -n "$cfg_root" ]; then
+    BACKUP_ROOT="$cfg_root"
+    SNAP_DIR="$BACKUP_ROOT/snapshots"
+    SNAP_PATH="$SNAP_DIR/daily.0"
+    MICRO_DIR="$BACKUP_ROOT/micro"
+  fi
+  if [ -z "${HESTIA_DIR:-}" ] || [ "${HESTIA_DIR}" = "/backup" ]; then
+    cfg_hestia_dir="$(jq -r '.backups.hestia_source_dir // empty' "$CONFIG_FILE" 2>/dev/null || true)"
+    if [ -n "$cfg_hestia_dir" ]; then
+      HESTIA_DIR="$cfg_hestia_dir"
+    fi
+  fi
+fi
+
+EMAIL_TO="${BACKUP_ALERT_EMAIL:-${REPORT_EMAIL_TO:-}}"
 HOSTNAME="$(hostname -f 2>/dev/null || hostname || echo 'localhost')"
 
 STATE_DIR="/var/lib/backup-health"
@@ -361,6 +385,10 @@ log "STATUS=$STATUS $(printf '%s; ' "${ISSUES[@]}")"
 # If sendmail is missing, don't blow up the script; just log and exit
 if [ ! -x "$SENDMAIL" ]; then
   log "WARN: sendmail binary $SENDMAIL not found or not executable; skipping email alert."
+  exit 0
+fi
+if [ -z "$EMAIL_TO" ]; then
+  log "WARN: BACKUP_ALERT_EMAIL/REPORT_EMAIL_TO not set; skipping email alert."
   exit 0
 fi
 

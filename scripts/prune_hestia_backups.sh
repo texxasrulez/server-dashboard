@@ -11,12 +11,17 @@ set -euo pipefail
 
 # Dashboard state (backup_actions.json / backup_status.json)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DEFAULT_WEB_ROOT="/home/gene/web/genesworld.net/public_html/web-admin"
-if [ -n "${WEB_ADMIN_ROOT:-}" ]; then
-  WEB_ADMIN_ROOT="$WEB_ADMIN_ROOT"
-elif [ -d "$DEFAULT_WEB_ROOT" ]; then
-  WEB_ADMIN_ROOT="$DEFAULT_WEB_ROOT"
-else
+if [ -f "/etc/server-dashboard/dashboard_env.sh" ]; then
+  # shellcheck disable=SC1091
+  source "/etc/server-dashboard/dashboard_env.sh"
+elif [ -f "$SCRIPT_DIR/lib/dashboard_env.sh" ]; then
+  # shellcheck disable=SC1091
+  source "$SCRIPT_DIR/lib/dashboard_env.sh"
+fi
+if declare -F dashboard_env_bootstrap >/dev/null 2>&1; then
+  dashboard_env_bootstrap "$SCRIPT_DIR"
+fi
+if [ -z "${WEB_ADMIN_ROOT:-}" ]; then
   WEB_ADMIN_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 fi
 STATE_DIR="${STATE_DIR:-$WEB_ADMIN_ROOT/state}"
@@ -28,7 +33,7 @@ if [ -z "$STATE_OWNER" ] && [ -f "$STATE_DIR/.owner" ]; then
   STATE_OWNER="$(tr -d " \r\n" < "$STATE_DIR/.owner" 2>/dev/null || true)"
 fi
 if [ -z "$STATE_OWNER" ]; then
-  STATE_OWNER="webuser:webuser"
+  STATE_OWNER="$(stat -c '%U:%G' "$STATE_DIR" 2>/dev/null || true)"
 fi
 
 log_action_json() {
@@ -82,8 +87,10 @@ PY
 
 refresh_backup_status() {
   local script="${SCRIPT_DIR}/backup_health_check.sh"
-  if [ -x "$script" ] && [ "$script" != "$0" ]; then
-    "$script" >/dev/null 2>&1 || true
+  if [ -f "$script" ] && [ "$script" != "$0" ]; then
+    local refresh_log="${STATE_DIR}/logs/backup-health-refresh.log"
+    mkdir -p "$(dirname "$refresh_log")" 2>/dev/null || true
+    /bin/bash "$script" >>"$refresh_log" 2>&1 || true
   fi
 }
 
@@ -104,11 +111,20 @@ finish_action() {
 }
 trap finish_action EXIT
 
-HESTIA_DIR="/backup/hestia"   # bind-mounted /backup
+HESTIA_DIR="${HESTIA_DIR:-/backup}"
 KEEP_COUNT=14                      # total tarballs to keep
-DISK_MOUNT="/backup"
+DISK_MOUNT="${DISK_MOUNT:-$HESTIA_DIR}"
 CRIT_USAGE=95                      # start emergency deletion above this %
 TARGET_USAGE=90                    # try to get back under this %
+
+CONFIG_FILE="${WEB_ADMIN_ROOT}/config/local.json"
+if command -v jq >/dev/null 2>&1 && [ -f "$CONFIG_FILE" ]; then
+    cfg_hestia_dir="$(jq -r '.backups.hestia_source_dir // empty' "$CONFIG_FILE" 2>/dev/null || true)"
+    if [ -n "$cfg_hestia_dir" ]; then
+        HESTIA_DIR="$cfg_hestia_dir"
+        DISK_MOUNT="$cfg_hestia_dir"
+    fi
+fi
 
 EXCLUDES_RAW="${BACKUP_EXCLUDES:-}"
 EXCLUDES=()

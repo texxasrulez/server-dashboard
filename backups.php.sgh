@@ -1317,16 +1317,16 @@ sudo /usr/local/hestia/bin/v-restore-user gene gene.YYYYMMDD-HHMM.tar
 
       <h3 style="margin-top:22px; font-size:15px;">Selective Restore (Web / DB / Mail)</h3>
 
-<pre style="background: var(--card); border:1px solid var(--border); padding:12px; border-radius:8px; overflow-x:auto;">
-# Restore only a website for a domain
-sudo /usr/local/hestia/bin/v-restore-web gene genesworld.net gene.YYYYMMDD-HHMM.tar
+	<pre style="background: var(--card); border:1px solid var(--border); padding:12px; border-radius:8px; overflow-x:auto;">
+	# Restore only a website for a domain
+	sudo /usr/local/hestia/bin/v-restore-web USER example.com USER.YYYYMMDD-HHMM.tar
 
-# Restore only a database from a backup
-sudo /usr/local/hestia/bin/v-restore-database gene DB_NAME gene.YYYYMMDD-HHMM.tar
+	# Restore only a database from a backup
+	sudo /usr/local/hestia/bin/v-restore-database USER DB_NAME USER.YYYYMMDD-HHMM.tar
 
-# Restore only mail
-sudo /usr/local/hestia/bin/v-restore-mail gene gene.YYYYMMDD-HHMM.tar
-</pre>
+	# Restore only mail
+	sudo /usr/local/hestia/bin/v-restore-mail USER USER.YYYYMMDD-HHMM.tar
+	</pre>
 
       <h3 style="margin-top:22px; font-size:15px;">Backup File Locations</h3>
 

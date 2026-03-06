@@ -1,0 +1,89 @@
+.proc-controls{
+  display:flex;
+  align-items:flex-end;
+  gap:.65rem;
+  flex-wrap:wrap;
+}
+.proc-controls label{
+  display:flex;
+  flex-direction:column;
+  font-size:.82rem;
+  color:var(--muted);
+  gap:.22rem;
+}
+.proc-controls input,
+.proc-controls select{
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:color-mix(in srgb,var(--card) 92%, transparent);
+  color:var(--text);
+  padding:.4rem .55rem;
+  min-width:110px;
+}
+.proc-controls input{ min-width:220px; }
+
+.proc-table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+}
+.proc-table th,
+.proc-table td{
+  padding:.55rem .6rem;
+  border-bottom:1px solid var(--border);
+  text-align:left;
+}
+.proc-table th{
+  font-size:.79rem;
+  color:var(--muted);
+  letter-spacing:.02em;
+}
+.proc-table .num{
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+}
+.proc-row{
+  cursor:pointer;
+}
+.proc-row:hover{
+  background:color-mix(in srgb,var(--card) 88%, transparent);
+}
+.cmd-cell{
+  max-width:420px;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
+}
+
+.proc-modal{
+  width:min(780px, 96vw);
+}
+.proc-detail-grid{
+  display:grid;
+  grid-template-columns:120px 1fr;
+  gap:.35rem .65rem;
+}
+.proc-detail-grid .k{
+  color:var(--muted);
+  font-size:.82rem;
+}
+.proc-detail-grid .v{
+  font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size:.87rem;
+}
+.proc-cmdline{
+  margin:0;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:color-mix(in srgb,var(--card) 92%, transparent);
+  padding:.6rem;
+  max-height:240px;
+  overflow:auto;
+  white-space:pre-wrap;
+  word-break:break-word;
+}
+
+@media (max-width: 800px){
+  .proc-controls input{ min-width:160px; }
+  .cmd-cell{ max-width:220px; }
+}

@@ -27,6 +27,7 @@
     ['History', 'history.php'],
     ['Logs', 'logs.php'],
     ['Cron Health', 'cron.php'],
+    ['Processes', 'processes.php'],
     ['Services', 'services.php'],
     ['Databases', 'database.php'],
     ['Server Tests', 'server_tests.php'],

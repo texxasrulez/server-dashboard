@@ -10,12 +10,17 @@ umask 027
 
 # Dashboard state (backup_actions.json / backup_status.json)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DEFAULT_WEB_ROOT="/home/gene/web/genesworld.net/public_html/web-admin"
-if [ -n "${WEB_ADMIN_ROOT:-}" ]; then
-  WEB_ADMIN_ROOT="$WEB_ADMIN_ROOT"
-elif [ -d "$DEFAULT_WEB_ROOT" ]; then
-  WEB_ADMIN_ROOT="$DEFAULT_WEB_ROOT"
-else
+if [ -f "/etc/server-dashboard/dashboard_env.sh" ]; then
+  # shellcheck disable=SC1091
+  source "/etc/server-dashboard/dashboard_env.sh"
+elif [ -f "$SCRIPT_DIR/lib/dashboard_env.sh" ]; then
+  # shellcheck disable=SC1091
+  source "$SCRIPT_DIR/lib/dashboard_env.sh"
+fi
+if declare -F dashboard_env_bootstrap >/dev/null 2>&1; then
+  dashboard_env_bootstrap "$SCRIPT_DIR"
+fi
+if [ -z "${WEB_ADMIN_ROOT:-}" ]; then
   WEB_ADMIN_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 fi
 STATE_DIR="${STATE_DIR:-$WEB_ADMIN_ROOT/state}"
@@ -27,7 +32,7 @@ if [ -z "$STATE_OWNER" ] && [ -f "$STATE_DIR/.owner" ]; then
   STATE_OWNER="$(tr -d " \r\n" < "$STATE_DIR/.owner" 2>/dev/null || true)"
 fi
 if [ -z "$STATE_OWNER" ]; then
-  STATE_OWNER="webuser:webuser"
+  STATE_OWNER="$(stat -c '%U:%G' "$STATE_DIR" 2>/dev/null || true)"
 fi
 
 log_action_json() {
@@ -81,8 +86,10 @@ PY
 
 refresh_backup_status() {
   local script="${SCRIPT_DIR}/backup_health_check.sh"
-  if [ -x "$script" ] && [ "$script" != "$0" ]; then
-    "$script" >/dev/null 2>&1 || true
+  if [ -f "$script" ] && [ "$script" != "$0" ]; then
+    local refresh_log="${STATE_DIR}/logs/backup-health-refresh.log"
+    mkdir -p "$(dirname "$refresh_log")" 2>/dev/null || true
+    /bin/bash "$script" >>"$refresh_log" 2>&1 || true
   fi
 }
 
@@ -104,17 +111,11 @@ finish_action() {
 trap finish_action EXIT
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DEFAULT_WEB_ROOT="/home/gene/web/genesworld.net/public_html/web-admin"
-if [ -n "${WEB_ADMIN_ROOT:-}" ]; then
-  WEB_ADMIN_ROOT="$WEB_ADMIN_ROOT"
-elif [ -d "$DEFAULT_WEB_ROOT" ]; then
-  WEB_ADMIN_ROOT="$DEFAULT_WEB_ROOT"
-else
+if [ -z "${WEB_ADMIN_ROOT:-}" ]; then
   WEB_ADMIN_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 fi
 
 CONFIG_FILE="${WEB_ADMIN_ROOT}/config/local.json"
-BACKUP_DEBUG="${BACKUP_DEBUG:-}"
 if [ -z "${BACKUP_ROOT:-}" ] && command -v jq >/dev/null 2>&1 && [ -f "$CONFIG_FILE" ]; then
   cfg_root="$(jq -r '.backups.fs_root // empty' "$CONFIG_FILE" 2>/dev/null || true)"
   if [ -n "$cfg_root" ]; then
@@ -127,9 +128,6 @@ if [ -z "${BACKUP_EXCLUDES:-}" ] && command -v jq >/dev/null 2>&1 && [ -f "$CONF
     BACKUP_EXCLUDES="$cfg_excludes"
     export BACKUP_EXCLUDES
   fi
-fi
-if [ -z "$BACKUP_DEBUG" ] && command -v jq >/dev/null 2>&1 && [ -f "$CONFIG_FILE" ]; then
-  BACKUP_DEBUG="$(jq -r '.backups.debug // empty' "$CONFIG_FILE" 2>/dev/null || true)"
 fi
 
 EXCLUDES_RAW="${BACKUP_EXCLUDES:-}"
@@ -147,11 +145,6 @@ NOW_HUMAN=$(date "+%Y-%m-%d %H:%M:%S")
 
 # Make sure log dir exists (in case it doesn't yet)
 mkdir -p "$(dirname "$LOG_FILE")"
-
-if [[ "$BACKUP_DEBUG" == "1" || "$BACKUP_DEBUG" == "true" ]]; then
-  echo "[DEBUG] BACKUP_ROOT=${BACKUP_ROOT}" >> "$LOG_FILE"
-  echo "[DEBUG] BACKUP_EXCLUDES=${BACKUP_EXCLUDES:-}" >> "$LOG_FILE"
-fi
 
 # Rotate daily snapshots
 rm -rf "$BACKUP/daily.2"
@@ -187,7 +180,9 @@ rsync -aHAX --delete \
 # Mark completion so health checks can use a reliable timestamp
 touch "$BACKUP/daily.0/.snapshot_complete" 2>/dev/null || true
 
-chown -R gene:gene "$BACKUP"
+if [ -n "${BACKUP_CHOWN:-}" ]; then
+  chown -R "$BACKUP_CHOWN" "$BACKUP" 2>/dev/null || true
+fi
 
 # Append a simple summary line to the same log PHP tails/rotates
 {

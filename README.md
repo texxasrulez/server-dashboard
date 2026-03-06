@@ -30,6 +30,16 @@ It has lots of features, too many to list. One day I will have a better README.m
    - `DASH_CRON_TOKEN` (if you don’t want to set `CRON_TOKEN` in code)
    - `BACKUP_HISTORY_KEEP_DAYS`, `BACKUP_CONFIG_KEEP_COUNT`, `BACKUP_ROTATE_KEEP_DAYS` (optional backup-prune overrides)
 
+5. Generate script environment defaults (recommended):
+   - `php bin/install-scripts.php`
+   - Or one-step system install (requires root): `php bin/install-scripts.php --install-system`
+   - This writes `state/generated/dashboard-scripts.env` from your current dashboard config.
+   - For cron/systemd jobs, either:
+     - set `DASHBOARD_SCRIPTS_ENV=/path/to/dashboard-scripts.env`, or
+     - copy helper/env files to `/etc/server-dashboard/`:
+       - `scripts/lib/dashboard_env.sh` -> `/etc/server-dashboard/dashboard_env.sh`
+       - `state/generated/dashboard-scripts.env` -> `/etc/server-dashboard/scripts.env`
+
 ---
 
 ## Configuration
@@ -52,6 +62,11 @@ It has lots of features, too many to list. One day I will have a better README.m
 - **API compatibility:** `api/security_get.php` / `api/security_set.php` now proxy through the same Config engine. They remain available for headless integrations but no longer require the standalone `security.php` page.
 
 - **Backups tab:** configure filesystem roots and the log watcher from Config → Backups. The UI lists the folders the Backups dashboard monitors and generates ready-to-run helpers (install command + env file snippet) for `assets/scripts/install.sh` based on your saved paths/owner/service name.
+- **Script portability:** root scripts under `scripts/` now resolve dashboard paths/email defaults from:
+  1) `DASHBOARD_SCRIPTS_ENV` (if set),
+  2) `/etc/server-dashboard/dashboard_env.sh` + `/etc/server-dashboard/scripts.env`,
+  3) local `scripts/lib/dashboard_env.sh`,
+  4) repository-relative fallback.
 - **Ops scripts:**
   - `bash bin/security-policy-check.sh` (single security gate: static auth/CSRF checks + hardening regressions)
   - `bash bin/security-hardening-check.sh` (runs only the hardening regression subset)
@@ -69,6 +84,12 @@ It has lots of features, too many to list. One day I will have a better README.m
 
 ## Pages
 
+### `processes.php` (read-only)
+- Shows live process data from `/proc` with a web table (PID, USER, CPU%, RSS, STATE, CMD).
+- Uses `api/processes.php` and auto-refreshes every 2 seconds (pauses while tab is hidden).
+- Includes sort/limit/filter controls and a read-only details modal (full escaped cmdline + metadata).
+- No process control actions are exposed in this iteration (no kill/renice).
+
 ### `history.php`
 - Toolbar: Range select (1h/24h/7d/30d), `Probe now`, `Refresh`, `Export JSON`
 - Loads from `api/history_export.php?type=probes&limit=1000&start=0`, filters client-side by range
@@ -80,6 +101,11 @@ It has lots of features, too many to list. One day I will have a better README.m
 ---
 
 ## APIs
+
+- `api/processes.php` — read-only process snapshot API (auth required)
+  - Query params (validated + allowlisted): `sort=cpu|mem|pid|user|cmd`, `limit=10..200`, `filter`, `user`
+  - Returns: `ts`, `host`, `loadavg`, `uptime`, `processes[]`
+  - Security/perf: `/proc`-based collection, no user shell args, short server-side cache (APCu if available, file fallback)
 
 - `api/security_get.php` — returns current settings (admin session OR token)
   - Accepts `alert_emails` or aliases: `email`, `emails`, `alerts_emails`, `alert_email`
@@ -236,6 +262,16 @@ includes/config.inc.php
 - `THEME_DEFAULT` — default theme slug
 - `CLIENT_DEBUG_LOG` — enable JS console debug
 - `BUILD` — cache‑busting tag
+- `processes.default_limit` — default API/page limit (10..200)
+- `processes.cache_ttl_sec` — process sample cache TTL (1..10, default 2)
+- `capabilities.panel|web|mta|db` — optional capability hints (`auto` by default)
+
+### Capability adapters
+- New scaffolding under `Adapters/` introduces capability-driven behavior:
+  - `GenericLinuxAdapter`
+  - `HestiaAdapter`
+- Factory detection uses config hints first, then safe filesystem checks and strict allowlisted `systemctl is-active` probes.
+- Existing pages now render capability chips using the adapter interface (minimal integration, no large refactor).
 
 ---
 
@@ -254,6 +290,15 @@ includes/config.inc.php
 ---
 
 ## 6) Known Quirks (tracking)
+
+## 7) Quick Manual Verification Plan
+1. Open `processes.php`, verify table loads and updates every ~2 seconds.
+2. Call `api/processes.php?sort=cpu&limit=25` and verify JSON fields `ts/host/loadavg/uptime/processes`.
+3. Verify CPU% changes over successive refreshes for active processes.
+4. Verify sort/limit/filter behavior (`cpu`, `mem`, `pid`, `user`, `cmd`).
+5. Verify API input clamping (`limit=1` -> 10, `limit=9999` -> 200, unknown sort -> `cpu` fallback).
+6. Verify graceful failure by testing on a host/environment without `/proc` (expect JSON error response).
+7. Refresh page repeatedly and confirm server load does not spike (cache active).
 
 
 ---

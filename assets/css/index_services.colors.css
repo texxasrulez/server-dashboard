@@ -107,14 +107,14 @@
   transition:all .18s ease;
 }
 .svc-state-icon.neutral{ opacity:.7; }
-.svc-state-icon.neutral::after{ content:'–'; color: var(--neutral); }
+.svc-state-icon.neutral::after{ content:'-'; color: var(--neutral); }
 
 .svc-state-icon.up{
   border-color: rgba(38,208,124,.45);
   box-shadow: inset 0 0 0 2px rgba(38,208,124,.10);
   color: var(--up);
 }
-.svc-state-icon.up::after{ content:'✓'; }
+.svc-state-icon.up::after{ content:'✔'; }
 
 .svc-state-icon.warn{
   border-color: rgba(241,196,15,.45);
@@ -128,7 +128,7 @@
   box-shadow: inset 0 0 0 2px rgba(231,76,60,.10);
   color: var(--down);
 }
-.svc-state-icon.down::after{ content:'✕'; }
+.svc-state-icon.down::after{ content:'x'; }
 
 
 /* Hidden must always win, even if .is-open is present momentarily */

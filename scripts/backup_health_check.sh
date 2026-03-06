@@ -78,14 +78,20 @@ fi
 # Paths
 # --------------------------------------------------------------------
 BACKUP_ROOT="${BACKUP_ROOT:-/mnt/backupz}"
+HESTIA_DIR="${HESTIA_DIR:-/backup}"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DEFAULT_WEB_ROOT="/home/gene/web/genesworld.net/public_html/web-admin"
-if [ -n "${WEB_ADMIN_ROOT:-}" ]; then
-  WEB_ADMIN_ROOT="$WEB_ADMIN_ROOT"
-elif [ -d "$DEFAULT_WEB_ROOT" ]; then
-  WEB_ADMIN_ROOT="$DEFAULT_WEB_ROOT"
-else
+if [ -f "/etc/server-dashboard/dashboard_env.sh" ]; then
+  # shellcheck disable=SC1091
+  source "/etc/server-dashboard/dashboard_env.sh"
+elif [ -f "$SCRIPT_DIR/lib/dashboard_env.sh" ]; then
+  # shellcheck disable=SC1091
+  source "$SCRIPT_DIR/lib/dashboard_env.sh"
+fi
+if declare -F dashboard_env_bootstrap >/dev/null 2>&1; then
+  dashboard_env_bootstrap "$SCRIPT_DIR"
+fi
+if [ -z "${WEB_ADMIN_ROOT:-}" ]; then
   WEB_ADMIN_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 fi
 STATE_DIR="${STATE_DIR:-$WEB_ADMIN_ROOT/state}"
@@ -101,6 +107,12 @@ if [ -f "$CONFIG_FILE" ]; then
   if [ -n "$cfg_root" ]; then
     BACKUP_ROOT="$cfg_root"
   fi
+  if [ -z "${HESTIA_DIR:-}" ] || [ "${HESTIA_DIR}" = "/backup" ]; then
+    cfg_hestia_dir="$(jq -r '.backups.hestia_source_dir // empty' "$CONFIG_FILE" 2>/dev/null || true)"
+    if [ -n "$cfg_hestia_dir" ]; then
+      HESTIA_DIR="$cfg_hestia_dir"
+    fi
+  fi
   if [ -z "${BACKUP_EXCLUDES:-}" ]; then
     cfg_excludes="$(jq -r '.backups.exclude_dirs // empty' "$CONFIG_FILE" 2>/dev/null || true)"
     if [ -n "$cfg_excludes" ]; then
@@ -114,7 +126,6 @@ if [ -f "$CONFIG_FILE" ]; then
 fi
 
 SNAP_DIR="${BACKUP_ROOT}/snapshots"
-HESTIA_DIR="${BACKUP_ROOT}/hestia"
 MICRO_DIR="${BACKUP_ROOT}/micro"
 if [[ "$BACKUP_DEBUG" == "1" || "$BACKUP_DEBUG" == "true" ]]; then
   echo "[DEBUG] BACKUP_ROOT=${BACKUP_ROOT}"
@@ -125,8 +136,17 @@ if [ -z "$STATE_OWNER" ] && [ -f "$STATE_DIR/.owner" ]; then
   STATE_OWNER="$(tr -d " \r\n" < "$STATE_DIR/.owner" 2>/dev/null || true)"
 fi
 if [ -z "$STATE_OWNER" ]; then
-  STATE_OWNER="webuser:webuser"
+  STATE_OWNER="$(stat -c '%U:%G' "$STATE_DIR" 2>/dev/null || true)"
 fi
+
+# --------------------------------------------------------------------
+# Helpers
+# --------------------------------------------------------------------
+warnings=()
+errors=()
+
+add_warn() { warnings+=("$1"); }
+add_err()  { errors+=("$1"); }
 
 log_action_json() {
   local action="$1"
@@ -213,15 +233,6 @@ if is_excluded "$MICRO_DIR"; then
   SKIP_MICRO=true
 fi
 
-# --------------------------------------------------------------------
-# Helpers
-# --------------------------------------------------------------------
-warnings=()
-errors=()
-
-add_warn() { warnings+=("$1"); }
-add_err()  { errors+=("$1"); }
-
 now_epoch="$(date +%s)"
 
 lowprio_cmd() {
@@ -297,15 +308,25 @@ if [[ "$size_updated_ts" =~ ^[0-9]+$ ]] && [ "$size_updated_ts" -gt 0 ]; then
   fi
 fi
 
+# Self-heal stale zero cache: if all cached buckets are zero, refresh now.
+if [ "$size_refresh_needed" = false ]; then
+  s="${cached_snap_size_gb:-}"
+  h="${cached_hestia_size_gb:-}"
+  m="${cached_micro_size_gb:-}"
+  if [[ "$s" =~ ^[0-9]+$ ]] && [[ "$h" =~ ^[0-9]+$ ]] && [[ "$m" =~ ^[0-9]+$ ]]; then
+    if [ "$s" -eq 0 ] && [ "$h" -eq 0 ] && [ "$m" -eq 0 ]; then
+      size_refresh_needed=true
+    fi
+  fi
+fi
+
 # --------------------------------------------------------------------
-# Auto-mount detection for /backup
+# Backup root readiness
 # --------------------------------------------------------------------
 backup_mount_ok=true
-
-# We consider it "mounted" only if findmnt shows a dedicated mount for BACKUP_ROOT.
-if ! findmnt -rn "$BACKUP_ROOT" >/dev/null 2>&1; then
+if [ ! -d "$BACKUP_ROOT" ]; then
   backup_mount_ok=false
-  add_err "Backup root ${BACKUP_ROOT} does not appear as a dedicated mount (findmnt)."
+  add_err "Backup root ${BACKUP_ROOT} does not exist."
 fi
 
 # JSON wants a literal true/false, not "true"/"false" strings.
@@ -521,7 +542,7 @@ age_check "Snapshot daily.0" "$snap_age_days"
 age_check "Hestia latest" "$hestia_age_days"
 age_check "Micro latest" "$micro_age_days"
 
-# If the backup disk is not a dedicated mount, that's always critical.
+# Mount/path health check result is always critical when false.
 if [ "$backup_mount_ok" = false ]; then
   status="CRIT"
 fi

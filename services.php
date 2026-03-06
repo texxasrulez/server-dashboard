@@ -6,7 +6,23 @@ require_admin();
   $PAGE_TITLE = 'Services';
   $PAGE_CSS   = 'assets/css/pages/services.css';
   $REQUIRE_ADMIN = true; include __DIR__.'/includes/head.php'; ?>
+<?php
+require_once __DIR__ . '/Adapters/AdapterFactory.php';
+$platformAdapter = DashboardAdapterFactory::make();
+$platformCaps = $platformAdapter->getCapabilities();
+$platformStatus = $platformAdapter->getServiceStatus();
+?>
 <div class="card">
+<div class="row between" style="gap:.5rem; flex-wrap:wrap; margin-bottom:.5rem;">
+  <div class="section-title">Environment</div>
+  <div class="row gap" style="flex-wrap:wrap;">
+    <span class="chip neutral">panel: <?= h((string)($platformCaps['panel'] ?? 'none')) ?></span>
+    <span class="chip neutral">web: <?= h((string)($platformCaps['web'] ?? 'none')) ?></span>
+    <span class="chip neutral">mta: <?= h((string)($platformCaps['mta'] ?? 'none')) ?></span>
+    <span class="chip neutral">db: <?= h((string)($platformCaps['db'] ?? 'none')) ?></span>
+    <span class="chip neutral">nginx: <?= h(($platformStatus['nginx'] === true) ? 'active' : (($platformStatus['nginx'] === false) ? 'inactive' : 'unknown')) ?></span>
+  </div>
+</div>
 <div class="card">
 <div class="row between">
   <div class="section-title">Services</div>

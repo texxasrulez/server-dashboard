@@ -17,8 +17,8 @@
 input#svcSearch{border:1px solid var(--border);border-radius:10px;background:color-mix(in srgb,var(--card) 92%, transparent);padding:.45rem .6rem;min-width:220px}
 
 /* Actions column uses the same nav tabs styles */
-.actions-tabs{display:flex;justify-content:flex-end}
-.actions-tabs .tabs{gap:.35rem}
+td.actions-tabs{vertical-align:middle}
+td.actions-tabs .tabs{display:flex;justify-content:flex-end;align-items:center;gap:.35rem}
 
 /* Modal */
 .modal[hidden]{display:none}
@@ -55,6 +55,9 @@ input#svcSearch{border:1px solid var(--border);border-radius:10px;background:col
 .table thead th.actions-col{ width:220px; }
 td.actions-tabs{ white-space:nowrap; min-width:220px; }
 td.actions-tabs .tabs{ display:flex; flex-wrap:nowrap; gap:.35rem; justify-content:flex-end; }
+
+/* Keep row/cell heights visually consistent across all columns */
+#servicesTable tbody td{ vertical-align:middle; }
 
 /* Also render modal buttons as header-style pills */
 .modal-card .tabs{display:flex;flex-wrap:wrap;gap:.5rem}

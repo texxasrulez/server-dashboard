@@ -3,6 +3,7 @@
 URL: `/diag.php` (admin only)
 
 Shows:
+
 - Build, user, theme
 - Server-resolved metrics URL
 - Whether `api/metrics_summary.php` exists

@@ -38,7 +38,7 @@
   <div class="userbox">
     <button  class="userbtn" id="userbtn" aria-haspopup="menu" aria-expanded="false" autocomplete="off">
       <span class="avatar"></span>
-      <span class="name">Gene Hawkins</span>
+      <span class="name">Admin User</span>
       <span class="role muted">(admin)</span>
     </button>
     <div id="usermenu" class="usermenu" hidden>

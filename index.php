@@ -1,18 +1,25 @@
 <?php
-  // Pull site name for brand alt from central config if available
-  if (!isset($SITE_NAME)) {
+// Pull site name for brand alt from central config if available
+if (!isset($SITE_NAME)) {
     try {
-      $cfgLib = __DIR__ . '/../lib/Config.php';
-      if (is_file($cfgLib)) { require_once $cfgLib; \App\Config::init(dirname(__DIR__)); $SITE_NAME = \App\Config::get('site.name', 'Server Dashboard'); }
-      else { $SITE_NAME = 'Server Dashboard'; }
-    } catch (Throwable $e) { $SITE_NAME = 'Server Dashboard'; }
-  }
-  $PAGE_CSS   = 'assets/css/pages/index.css';
-  include __DIR__ . '/includes/head.php';
+        $cfgLib = __DIR__ . '/../lib/Config.php';
+        if (is_file($cfgLib)) {
+            require_once $cfgLib;
+            \App\Config::init(dirname(__DIR__));
+            $SITE_NAME = \App\Config::get('site.name', 'Server Dashboard');
+        } else {
+            $SITE_NAME = 'Server Dashboard';
+        }
+    } catch (Throwable $e) {
+        $SITE_NAME = 'Server Dashboard';
+    }
+}
+$PAGE_CSS   = 'assets/css/pages/index.css';
+include __DIR__ . '/includes/head.php';
 
-  require_once __DIR__ . '/Adapters/AdapterFactory.php';
-  $platformAdapter = DashboardAdapterFactory::make();
-  $platformCaps = $platformAdapter->getCapabilities();
+require_once __DIR__ . '/Adapters/AdapterFactory.php';
+$platformAdapter = DashboardAdapterFactory::make();
+$platformCaps = $platformAdapter->getCapabilities();
 ?>
 <div class="card">
   <div class="row between">

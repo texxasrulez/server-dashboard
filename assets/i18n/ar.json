@@ -1,94 +1,314 @@
 {
-    "app": {
-        "title": "\u0644\u0648\u062d\u0629 \u062a\u062d\u0643\u0645 \u0627\u0644\u062e\u0627\u062f\u0645"
+  "app": {
+    "title": "لوحة تحكم الخادم"
+  },
+  "nav": {
+    "history": "التاريخ",
+    "logs": "السجلات",
+    "dashboard": "لوحة التحكم",
+    "services": "الخدمات",
+    "alerts": "تنبيهات",
+    "tests": "الاختبارات",
+    "settings": "الإعدادات",
+    "about": "نبذة عن"
+  },
+  "history": {
+    "title": "التاريخ",
+    "trends": "الاتجاهات",
+    "range": "النطاق",
+    "baseline": "خط الأساس",
+    "probe_now": "التحقيق الآن",
+    "refresh": "تحديث",
+    "export_json": "تصدير JSON",
+    "export_alerts_json": "تصدير تنبيهات التصدير JSON",
+    "reset_history": "إعادة تعيين التاريخ",
+    "recent_alert_events": "أحداث التنبيهات الأخيرة",
+    "export_preview": "معاينة التصدير",
+    "close": "إغلاق",
+    "copy": "نسخ",
+    "download": "تنزيل"
+  },
+  "logs": {
+    "title": "السجلات",
+    "manage": "إدارة السجلات",
+    "add": "إضافة",
+    "delete": "حذف",
+    "refresh": "تحديث",
+    "search": "بحث",
+    "filter": "التصفية",
+    "lines": "الخطوط",
+    "open": "مفتوح",
+    "close": "إغلاق",
+    "download": "تنزيل",
+    "copy": "نسخ"
+  },
+  "common": {
+    "save": "الحفظ",
+    "cancel": "إلغاء",
+    "edit": "تحرير",
+    "delete": "حذف",
+    "update": "تحديث",
+    "create": "إنشاء",
+    "enable": "التمكين",
+    "disable": "تعطيل",
+    "yes": "نعم",
+    "no": "لا يوجد",
+    "on": "على",
+    "off": "إيقاف التشغيل",
+    "confirm": "تأكيد",
+    "search": "بحث",
+    "filter": "التصفية",
+    "actions": "الإجراءات"
+  },
+  "alerts": {
+    "title": "تنبيهات",
+    "recent_events": "أحداث التنبيهات الأخيرة",
+    "history": "سجل التنبيهات",
+    "export_json": "تصدير تنبيهات التصدير JSON",
+    "no_alerts": "لا توجد تنبيهات",
+    "level": "المستوى",
+    "message": "الرسالة",
+    "service": "الخدمة",
+    "time": "الوقت",
+    "probe_now": "التحقيق الآن",
+    "refresh": "تحديث",
+    "silence": "الصمت",
+    "unsilence": "السكون",
+    "ack": "الإقرار",
+    "unack": "عدم المعرفة"
+  },
+  "tests": {
+    "title": "اختبارات الخادم",
+    "run_all": "تشغيل الكل",
+    "status": "الحالة",
+    "last_run": "الجولة الأخيرة",
+    "duration": "المدة"
+  },
+  "services": {
+    "title": "الخدمات",
+    "status": "الحالة",
+    "restart": "إعادة التشغيل",
+    "start": "ابدأ",
+    "stop": "توقف"
+  },
+  "config": {
+    "sections": {
+      "site": "موقع",
+      "features": "سمات",
+      "capabilities": "القدرات",
+      "processes": "العمليات",
+      "mail": "بريد",
+      "integrations": "التكامل",
+      "security": "حماية",
+      "ui": "واجهة المستخدم",
+      "server_tests": "اختبارات الخادم",
+      "alerts": "التنبيهات",
+      "cron": "كرون",
+      "history": "تاريخ",
+      "logs": "سجلات",
+      "backups": "النسخ الاحتياطية",
+      "email": "بريد إلكتروني"
     },
-    "nav": {
-        "history": "\u0627\u0644\u062a\u0627\u0631\u064a\u062e",
-        "logs": "\u0627\u0644\u0633\u062c\u0644\u0627\u062a",
-        "dashboard": "\u0644\u0648\u062d\u0629 \u0627\u0644\u062a\u062d\u0643\u0645",
-        "services": "\u0627\u0644\u062e\u062f\u0645\u0627\u062a",
-        "alerts": "\u062a\u0646\u0628\u064a\u0647\u0627\u062a",
-        "tests": "\u0627\u0644\u0627\u062e\u062a\u0628\u0627\u0631\u0627\u062a",
-        "settings": "\u0627\u0644\u0625\u0639\u062f\u0627\u062f\u0627\u062a",
-        "about": "\u0646\u0628\u0630\u0629 \u0639\u0646"
+    "fields": {
+      "backups": {
+        "require_dedicated_mount": {
+          "label": "تتطلب جبل مخصص",
+          "help": "مفتاح التوافق القديم. عند التمكين، تتطلب البرامج النصية للنسخ الاحتياطي وجود أداة النسخ الاحتياطي."
+        },
+        "disable_on_mount_fail": {
+          "label": "قم بتعطيل النسخ الاحتياطية في حالة فشل التثبيت",
+          "help": "عند التمكين، تتوقف إجراءات النسخ الاحتياطي والبرامج النصية التي تم إنشاؤها إذا كان تحميل النسخة الاحتياطية مفقودًا."
+        }
+      },
+      "alerts": {
+        "min_severity": {
+          "label": "الحد الأدنى من الخطورة للتنبيه"
+        },
+        "email": {
+          "label": "رسائل البريد الإلكتروني التنبيهية القديمة"
+        }
+      }
     },
-    "history": {
-        "title": "\u0627\u0644\u062a\u0627\u0631\u064a\u062e",
-        "trends": "\u0627\u0644\u0627\u062a\u062c\u0627\u0647\u0627\u062a",
-        "range": "\u0627\u0644\u0646\u0637\u0627\u0642",
-        "baseline": "\u062e\u0637 \u0627\u0644\u0623\u0633\u0627\u0633",
-        "probe_now": "\u0627\u0644\u062a\u062d\u0642\u064a\u0642 \u0627\u0644\u0622\u0646",
-        "refresh": "\u062a\u062d\u062f\u064a\u062b",
-        "export_json": "\u062a\u0635\u062f\u064a\u0631 JSON",
-        "export_alerts_json": "\u062a\u0635\u062f\u064a\u0631 \u062a\u0646\u0628\u064a\u0647\u0627\u062a \u0627\u0644\u062a\u0635\u062f\u064a\u0631 JSON",
-        "reset_history": "\u0625\u0639\u0627\u062f\u0629 \u062a\u0639\u064a\u064a\u0646 \u0627\u0644\u062a\u0627\u0631\u064a\u062e",
-        "recent_alert_events": "\u0623\u062d\u062f\u0627\u062b \u0627\u0644\u062a\u0646\u0628\u064a\u0647\u0627\u062a \u0627\u0644\u0623\u062e\u064a\u0631\u0629",
-        "export_preview": "\u0645\u0639\u0627\u064a\u0646\u0629 \u0627\u0644\u062a\u0635\u062f\u064a\u0631",
-        "close": "\u0625\u063a\u0644\u0627\u0642",
-        "copy": "\u0646\u0633\u062e",
-        "download": "\u062a\u0646\u0632\u064a\u0644"
-    },
-    "logs": {
-        "title": "\u0627\u0644\u0633\u062c\u0644\u0627\u062a",
-        "manage": "\u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u0633\u062c\u0644\u0627\u062a",
-        "add": "\u0625\u0636\u0627\u0641\u0629",
-        "delete": "\u062d\u0630\u0641",
-        "refresh": "\u062a\u062d\u062f\u064a\u062b",
-        "search": "\u0628\u062d\u062b",
-        "filter": "\u0627\u0644\u062a\u0635\u0641\u064a\u0629",
-        "lines": "\u0627\u0644\u062e\u0637\u0648\u0637",
-        "open": "\u0645\u0641\u062a\u0648\u062d",
-        "close": "\u0625\u063a\u0644\u0627\u0642",
-        "download": "\u062a\u0646\u0632\u064a\u0644",
-        "copy": "\u0646\u0633\u062e"
-    },
-    "common": {
-        "save": "\u0627\u0644\u062d\u0641\u0638",
-        "cancel": "\u0625\u0644\u063a\u0627\u0621",
-        "edit": "\u062a\u062d\u0631\u064a\u0631",
-        "delete": "\u062d\u0630\u0641",
-        "update": "\u062a\u062d\u062f\u064a\u062b",
-        "create": "\u0625\u0646\u0634\u0627\u0621",
-        "enable": "\u0627\u0644\u062a\u0645\u0643\u064a\u0646",
-        "disable": "\u062a\u0639\u0637\u064a\u0644",
-        "yes": "\u0646\u0639\u0645",
-        "no": "\u0644\u0627 \u064a\u0648\u062c\u062f",
-        "on": "\u0639\u0644\u0649",
-        "off": "\u0625\u064a\u0642\u0627\u0641 \u0627\u0644\u062a\u0634\u063a\u064a\u0644",
-        "confirm": "\u062a\u0623\u0643\u064a\u062f",
-        "search": "\u0628\u062d\u062b",
-        "filter": "\u0627\u0644\u062a\u0635\u0641\u064a\u0629",
-        "actions": "\u0627\u0644\u0625\u062c\u0631\u0627\u0621\u0627\u062a"
-    },
-    "alerts": {
-        "title": "\u062a\u0646\u0628\u064a\u0647\u0627\u062a",
-        "recent_events": "\u0623\u062d\u062f\u0627\u062b \u0627\u0644\u062a\u0646\u0628\u064a\u0647\u0627\u062a \u0627\u0644\u0623\u062e\u064a\u0631\u0629",
-        "history": "\u0633\u062c\u0644 \u0627\u0644\u062a\u0646\u0628\u064a\u0647\u0627\u062a",
-        "export_json": "\u062a\u0635\u062f\u064a\u0631 \u062a\u0646\u0628\u064a\u0647\u0627\u062a \u0627\u0644\u062a\u0635\u062f\u064a\u0631 JSON",
-        "no_alerts": "\u0644\u0627 \u062a\u0648\u062c\u062f \u062a\u0646\u0628\u064a\u0647\u0627\u062a",
-        "level": "\u0627\u0644\u0645\u0633\u062a\u0648\u0649",
-        "message": "\u0627\u0644\u0631\u0633\u0627\u0644\u0629",
-        "service": "\u0627\u0644\u062e\u062f\u0645\u0629",
-        "time": "\u0627\u0644\u0648\u0642\u062a",
-        "probe_now": "\u0627\u0644\u062a\u062d\u0642\u064a\u0642 \u0627\u0644\u0622\u0646",
-        "refresh": "\u062a\u062d\u062f\u064a\u062b",
-        "silence": "\u0627\u0644\u0635\u0645\u062a",
-        "unsilence": "\u0627\u0644\u0633\u0643\u0648\u0646",
-        "ack": "\u0627\u0644\u0625\u0642\u0631\u0627\u0631",
-        "unack": "\u0639\u062f\u0645 \u0627\u0644\u0645\u0639\u0631\u0641\u0629"
-    },
-    "tests": {
-        "title": "\u0627\u062e\u062a\u0628\u0627\u0631\u0627\u062a \u0627\u0644\u062e\u0627\u062f\u0645",
-        "run_all": "\u062a\u0634\u063a\u064a\u0644 \u0627\u0644\u0643\u0644",
-        "status": "\u0627\u0644\u062d\u0627\u0644\u0629",
-        "last_run": "\u0627\u0644\u062c\u0648\u0644\u0629 \u0627\u0644\u0623\u062e\u064a\u0631\u0629",
-        "duration": "\u0627\u0644\u0645\u062f\u0629"
-    },
-    "services": {
-        "title": "\u0627\u0644\u062e\u062f\u0645\u0627\u062a",
-        "status": "\u0627\u0644\u062d\u0627\u0644\u0629",
-        "restart": "\u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u062a\u0634\u063a\u064a\u0644",
-        "start": "\u0627\u0628\u062f\u0623",
-        "stop": "\u062a\u0648\u0642\u0641"
+    "ui": {
+      "unknown": "مجهول",
+      "unknown_paren": "(مجهول)",
+      "site_backup": {
+        "title": "النسخ الاحتياطي والاستعادة",
+        "export_config": "تكوين التصدير",
+        "import_config": "استيراد التكوين",
+        "choose_file_first": "اختر ملف النسخ الاحتياطي أولاً",
+        "imported_reloading": "مستورد. جارٍ إعادة التحميل...",
+        "import_failed": "فشل الاستيراد",
+        "import_failed_prefix": "فشل الاستيراد:",
+        "retention_title": "النسخ الاحتياطية - الاحتفاظ",
+        "keep_last": "احتفظ بالأخير",
+        "files": "ملفات",
+        "loading_stats": "(جاري تحميل الإحصائيات...)",
+        "last_backup_loading": "النسخة الاحتياطية الأخيرة: (جارٍ التحميل...)",
+        "last_backup_none": "النسخة الاحتياطية الأخيرة: لا يوجد حتى الآن",
+        "last_backup_prefix": "النسخ الاحتياطي الأخير:",
+        "last_backup_unknown": "النسخ الاحتياطي الأخير: غير معروف",
+        "prune_now": "تقليم الآن",
+        "pruned_kept_deleted": "مقصوص - محفوظ",
+        "deleted_prefix": "تم حذفه",
+        "prune_failed": "فشل التقليم",
+        "prune_failed_prefix": "فشل التقليم:",
+        "create_backup_now": "قم بإنشاء نسخة احتياطية الآن",
+        "backup_saved_prefix": "تم حفظ النسخة الاحتياطية:",
+        "backup_failed": "فشل النسخ الاحتياطي",
+        "backup_failed_prefix": "فشل النسخ الاحتياطي:",
+        "download_latest_backup": "قم بتنزيل أحدث نسخة احتياطية",
+        "no_backups_found": "لم يتم العثور على نسخ احتياطية",
+        "download_failed_prefix": "فشل التنزيل:",
+        "redact_secrets": "Redact secrets"
+      }
     }
+  },
+  "backups": {
+    "common": {
+      "status": "حالة:",
+      "timestamp": "الطابع الزمني:",
+      "none_dash": "-",
+      "free": "حر",
+      "used": "مستخدم",
+      "copy": "ينسخ",
+      "warnings": "تحذيرات",
+      "errors": "أخطاء",
+      "loading": "تحميل..."
+    },
+    "status": {
+      "error_loading_json": "حدث خطأ أثناء تحميل JSON.DLL",
+      "ok": "نعم",
+      "unmounted": "غير مثبت",
+      "critical": "شديد الأهمية",
+      "high": "عالي",
+      "elevated": "مرتفعة",
+      "healthy": "صحيح",
+      "unknown": "مجهول",
+      "unknown_cap": "مجهول"
+    },
+    "disk": {
+      "unmounted": "القرص غير مثبت",
+      "tag": "القرص:",
+      "sizes_updated": "تم تحديث المقاسات:",
+      "title": "استخدام القرص",
+      "usage": "الاستخدام",
+      "mount": "جبل"
+    },
+    "page": {
+      "freshness_prefix": "نضارة:",
+      "title": "مركز التحكم في النسخ الاحتياطي",
+      "subtitle_prefix": "الحالة الحية مدفوعة",
+      "subtitle_suffix": "على قرص النسخ الاحتياطي الخاص بك."
+    },
+    "ages": {
+      "no_snapshots_on_disk": "لم يتم العثور على لقطات على القرص",
+      "one_snapshot_present": "1 لقطة موجودة",
+      "snapshots_present_suffix": "لقطات موجودة",
+      "no_panel_backups_on_disk": "لم يتم العثور على نسخ احتياطية للوحة على القرص",
+      "one_panel_backup_present": "1 لوحة احتياطية موجودة",
+      "panel_backups_present_suffix": "النسخ الاحتياطية للوحة موجودة",
+      "no_micro_backups_on_disk": "لم يتم العثور على نسخ احتياطية صغيرة على القرص",
+      "one_micro_backup_present": "1 نسخة احتياطية صغيرة موجودة",
+      "micro_backups_present_suffix": "النسخ الاحتياطية الصغيرة موجودة",
+      "snapshot_daily0_chart": "لقطة (يوميًا.0)",
+      "hestia_latest_chart": "هيستيا الأحدث",
+      "micro_latest_chart": "أحدث مايكرو",
+      "age_days": "العمر (أيام)",
+      "title": "العصور الاحتياطية",
+      "subtitle": "مدى حداثة أحدث النسخ الاحتياطية الخاصة بك",
+      "snapshot_daily0": "لقطة يومية.0",
+      "latest_hestia": "أحدث هيستيا",
+      "latest_micro": "أحدث مايكرو"
+    },
+    "errors": {
+      "no_backups_detected": "لم يتم اكتشاف نسخ احتياطية للقطات أو Hestia أو المجموعات الصغيرة."
+    },
+    "restore": {
+      "hestia_placeholder_tar": "جين.YYYYMMDD-HHMM.tar",
+      "using_latest_backup_prefix": "باستخدام أحدث نسخة احتياطية تم الإبلاغ عنها في JSON:",
+      "adjust_backup_tar": "اضبط BACKUP_TAR على ملف حقيقي من \\\"v-list-backups USER\\\" قبل التشغيل.",
+      "micro_restore_prefix": "استعادة القاعدة من أحدث لقطة صغيرة:",
+      "micro_restore_suffix": "(مراجعة المسارات والاستثناءات قبل التشغيل).",
+      "set_correct_snapshot_path": "قم بتعيين مسار اللقطة الصحيح قبل استخدام هذا الأمر.",
+      "confirm_body_1": "سيؤدي هذا إلى بدء مهمة استعادة Hestia على الخادم باستخدام نسخة احتياطية.",
+      "confirm_body_2": "قد تتم الكتابة فوق الخدمات والبيانات الخاصة بهذا المستخدم.",
+      "confirm_body_3": "هل أنت متأكد تماما؟"
+    },
+    "actions": {
+      "starting_prefix": "البدء",
+      "failed_to_start_prefix": "فشل في البدء",
+      "started_prefix": "بدأت",
+      "started_suffix": ". قد يستغرق هذا بعض الوقت؛ سيتم تحديث الحالة عند الفحص الصحي التالي.",
+      "error_talking_endpoint": "حدث خطأ أثناء التحدث إلى Backups_action.php",
+      "run_os_snapshot": "قم بتشغيل لقطة نظام التشغيل",
+      "run_micro_backup": "تشغيل النسخ الاحتياطي الجزئي",
+      "run_hestia_backup_user": "تشغيل نسخة هيستيا الاحتياطية (الجين)",
+      "run_all_backups": "تشغيل كافة النسخ الاحتياطية",
+      "run_health_check": "قم بتشغيل التحقق من الصحة",
+      "log_maintenance": "صيانة السجل",
+      "clear_backup_logs": "مسح سجلات الصحة الاحتياطية",
+      "clear_prune_logs": "مسح سجلات التقليم",
+      "clear_integrity_log": "مسح سجل التكامل"
+    },
+    "cron": {
+      "no_entries": "لم يتم اكتشاف إدخالات crontab.",
+      "env": "البيئة",
+      "schedule": "جدول",
+      "entries_for_prefix": "إدخالات Crontab لـ",
+      "current_user": "المستخدم الحالي",
+      "unable_to_read": "غير قادر على قراءة crontab.",
+      "failed_to_read": "فشل في قراءة crontab."
+    },
+    "warnings_errors": {
+      "title": "التحذيرات والأخطاء",
+      "subtitle": "ملخص من الفحص الصحي"
+    },
+    "raw_snapshot": {
+      "title": "لقطة خام",
+      "subtitle": "القيم الأساسية مباشرة من حالة JSON الأخيرة"
+    },
+    "recent_actions": {
+      "title": "الإجراءات الأخيرة",
+      "subtitle": "تاريخ الإجراءات من لوحة المعلومات هذه",
+      "none": "لم يتم تسجيل أي إجراءات حتى الآن."
+    },
+    "orch": {
+      "title": "معالج تنسيق النسخ الاحتياطي",
+      "subtitle": "قم بتخصيص المسارات مرة واحدة، ثم انسخ وحدات script/cron/systemd التي تم إنشاؤها.",
+      "backup_root": "الجذر الاحتياطي",
+      "include_health": "تضمين فحص الصحة",
+      "include_integrity": "تضمين التحقق من النزاهة",
+      "include_prune": "تشمل مرحلة التقليم",
+      "suspend": "تعليق النسخ الاحتياطية",
+      "disable_on_mount_fail": "قم بتعطيل النسخ الاحتياطية في حالة فشل التثبيت",
+      "nightly_script": "السيناريو ليلا",
+      "copy_script": "نسخ البرنامج النصي",
+      "cron_entry": "دخول كرون",
+      "copy_cron_line": "نسخ خط كرون",
+      "systemd_service": "خدمة النظام",
+      "copy_unit": "وحدة النسخ",
+      "systemd_timer": "توقيت النظام",
+      "copy_timer": "نسخ الموقت"
+    },
+    "quick_restore": {
+      "title": "مساعدو الاستعادة السريعة",
+      "subtitle": "أوامر CLI المعبأة مسبقًا لحالات الطوارئ (التشغيل اليدوي أو زر DANGER)",
+      "hestia_latest_title": "استعادة أحدث نسخة احتياطية لمستخدم Hestia",
+      "micro_latest_title": "الاستعادة من أحدث لقطة صغيرة (CLI فقط)",
+      "copy_command": "أمر النسخ",
+      "run_restore_danger": "تشغيل الاستعادة (الأحدث، خطر)"
+    },
+    "cli": {
+      "title": "هيستيا النسخ الاحتياطي واستعادة CLI",
+      "subtitle": "ورقة مرجعية سريعة - جاهزة للنسخ واللصق",
+      "create_backups": "إنشاء نسخ احتياطية",
+      "list_delete_backups": "قائمة وحذف النسخ الاحتياطية",
+      "full_restore_user": "استعادة كاملة (المستخدم)",
+      "selective_restore": "استعادة انتقائية (الويب / قاعدة البيانات / البريد)",
+      "backup_file_locations": "مواقع ملفات النسخ الاحتياطي",
+      "backup_tarball_contents": "محتويات Tarball النسخ الاحتياطي",
+      "backupctl_help": "مساعدة النسخ الاحتياطي"
+    }
+  }
 }

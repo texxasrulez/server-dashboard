@@ -1,94 +1,314 @@
 {
-    "app": {
-        "title": "Sunucu G\u00f6sterge Tablosu"
+  "app": {
+    "title": "Sunucu Gösterge Tablosu"
+  },
+  "nav": {
+    "history": "Tarih",
+    "logs": "Günlükler",
+    "dashboard": "Gösterge Tablosu",
+    "services": "Hizmetler",
+    "alerts": "Uyarılar",
+    "tests": "Testler",
+    "settings": "Ayarlar",
+    "about": "Hakkında"
+  },
+  "history": {
+    "title": "Tarih",
+    "trends": "Trendler",
+    "range": "Menzil",
+    "baseline": "Başlangıç Noktası",
+    "probe_now": "Şimdi araştırın",
+    "refresh": "Yenile",
+    "export_json": "JSON'u Dışa Aktar",
+    "export_alerts_json": "Uyarıları Dışa Aktar JSON",
+    "reset_history": "Geçmişi sıfırla",
+    "recent_alert_events": "Son uyarı olayları",
+    "export_preview": "Dışa aktarma önizlemesi",
+    "close": "Kapat",
+    "copy": "Anlaşıldı",
+    "download": "İndir"
+  },
+  "logs": {
+    "title": "Günlükler",
+    "manage": "Günlükleri Yönet",
+    "add": "Ekle",
+    "delete": "Silme",
+    "refresh": "Yenile",
+    "search": "Arama",
+    "filter": "Filtre",
+    "lines": "Çizgiler",
+    "open": "Açık",
+    "close": "Kapat",
+    "download": "İndir",
+    "copy": "Anlaşıldı"
+  },
+  "common": {
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "edit": "Düzenle",
+    "delete": "Silme",
+    "update": "Güncelleme",
+    "create": "Oluştur",
+    "enable": "Etkinleştir",
+    "disable": "Devre dışı bırak",
+    "yes": "Evet",
+    "no": "Hayır",
+    "on": "Açık",
+    "off": "Kapalı",
+    "confirm": "Onaylayın",
+    "search": "Arama",
+    "filter": "Filtre",
+    "actions": "Eylemler"
+  },
+  "alerts": {
+    "title": "Uyarılar",
+    "recent_events": "Son uyarı olayları",
+    "history": "Uyarı geçmişi",
+    "export_json": "Uyarıları Dışa Aktar JSON",
+    "no_alerts": "Uyarı yok",
+    "level": "Seviye",
+    "message": "Mesaj",
+    "service": "Hizmet",
+    "time": "Zaman",
+    "probe_now": "Şimdi araştırın",
+    "refresh": "Yenile",
+    "silence": "Sessizlik",
+    "unsilence": "Sessizlik",
+    "ack": "Onaylamak",
+    "unack": "Bilgisizlik"
+  },
+  "tests": {
+    "title": "Sunucu Testleri",
+    "run_all": "Hepsini çalıştır",
+    "status": "Durum",
+    "last_run": "Son koşu",
+    "duration": "Süre"
+  },
+  "services": {
+    "title": "Hizmetler",
+    "status": "Durum",
+    "restart": "Yeniden Başlat",
+    "start": "Başlangıç",
+    "stop": "Dur"
+  },
+  "config": {
+    "sections": {
+      "site": "Site",
+      "features": "Features",
+      "capabilities": "Capabilities",
+      "processes": "Processes",
+      "mail": "Mail",
+      "integrations": "Integrations",
+      "security": "Security",
+      "ui": "UI",
+      "server_tests": "Server Tests",
+      "alerts": "Alerts",
+      "cron": "Cron",
+      "history": "History",
+      "logs": "Logs",
+      "backups": "Yedeklemeler",
+      "email": "Email"
     },
-    "nav": {
-        "history": "Tarih",
-        "logs": "G\u00fcnl\u00fckler",
-        "dashboard": "G\u00f6sterge Tablosu",
-        "services": "Hizmetler",
-        "alerts": "Uyar\u0131lar",
-        "tests": "Testler",
-        "settings": "Ayarlar",
-        "about": "Hakk\u0131nda"
+    "fields": {
+      "backups": {
+        "require_dedicated_mount": {
+          "label": "Özel montaj gerektir",
+          "help": "Eski uyumluluk anahtarı. Etkinleştirildiğinde, yedekleme komut dosyaları, yedekleme bağlantısının mevcut olmasını gerektirir."
+        },
+        "disable_on_mount_fail": {
+          "label": "Bağlama başarısız olursa yedeklemeleri devre dışı bırakın",
+          "help": "Etkinleştirildiğinde, yedekleme bağlantısı eksikse yedekleme eylemleri ve oluşturulan komut dosyaları durdurulur."
+        }
+      },
+      "alerts": {
+        "min_severity": {
+          "label": "Uyarı için minimum önem derecesi"
+        },
+        "email": {
+          "label": "Legacy alert email(s)"
+        }
+      }
     },
-    "history": {
-        "title": "Tarih",
-        "trends": "Trendler",
-        "range": "Menzil",
-        "baseline": "Ba\u015flang\u0131\u00e7 Noktas\u0131",
-        "probe_now": "\u015eimdi ara\u015ft\u0131r\u0131n",
-        "refresh": "Yenile",
-        "export_json": "JSON'u D\u0131\u015fa Aktar",
-        "export_alerts_json": "Uyar\u0131lar\u0131 D\u0131\u015fa Aktar JSON",
-        "reset_history": "Ge\u00e7mi\u015fi s\u0131f\u0131rla",
-        "recent_alert_events": "Son uyar\u0131 olaylar\u0131",
-        "export_preview": "D\u0131\u015fa aktarma \u00f6nizlemesi",
-        "close": "Kapat",
-        "copy": "Anla\u015f\u0131ld\u0131",
-        "download": "\u0130ndir"
-    },
-    "logs": {
-        "title": "G\u00fcnl\u00fckler",
-        "manage": "G\u00fcnl\u00fckleri Y\u00f6net",
-        "add": "Ekle",
-        "delete": "Silme",
-        "refresh": "Yenile",
-        "search": "Arama",
-        "filter": "Filtre",
-        "lines": "\u00c7izgiler",
-        "open": "A\u00e7\u0131k",
-        "close": "Kapat",
-        "download": "\u0130ndir",
-        "copy": "Anla\u015f\u0131ld\u0131"
-    },
-    "common": {
-        "save": "Kaydet",
-        "cancel": "\u0130ptal",
-        "edit": "D\u00fczenle",
-        "delete": "Silme",
-        "update": "G\u00fcncelleme",
-        "create": "Olu\u015ftur",
-        "enable": "Etkinle\u015ftir",
-        "disable": "Devre d\u0131\u015f\u0131 b\u0131rak",
-        "yes": "Evet",
-        "no": "Hay\u0131r",
-        "on": "A\u00e7\u0131k",
-        "off": "Kapal\u0131",
-        "confirm": "Onaylay\u0131n",
-        "search": "Arama",
-        "filter": "Filtre",
-        "actions": "Eylemler"
-    },
-    "alerts": {
-        "title": "Uyar\u0131lar",
-        "recent_events": "Son uyar\u0131 olaylar\u0131",
-        "history": "Uyar\u0131 ge\u00e7mi\u015fi",
-        "export_json": "Uyar\u0131lar\u0131 D\u0131\u015fa Aktar JSON",
-        "no_alerts": "Uyar\u0131 yok",
-        "level": "Seviye",
-        "message": "Mesaj",
-        "service": "Hizmet",
-        "time": "Zaman",
-        "probe_now": "\u015eimdi ara\u015ft\u0131r\u0131n",
-        "refresh": "Yenile",
-        "silence": "Sessizlik",
-        "unsilence": "Sessizlik",
-        "ack": "Onaylamak",
-        "unack": "Bilgisizlik"
-    },
-    "tests": {
-        "title": "Sunucu Testleri",
-        "run_all": "Hepsini \u00e7al\u0131\u015ft\u0131r",
-        "status": "Durum",
-        "last_run": "Son ko\u015fu",
-        "duration": "S\u00fcre"
-    },
-    "services": {
-        "title": "Hizmetler",
-        "status": "Durum",
-        "restart": "Yeniden Ba\u015flat",
-        "start": "Ba\u015flang\u0131\u00e7",
-        "stop": "Dur"
+    "ui": {
+      "unknown": "bilinmiyor",
+      "unknown_paren": "(bilinmiyor)",
+      "site_backup": {
+        "title": "Yedekleme ve Geri Yükleme",
+        "export_config": "Yapılandırmayı Dışa Aktar",
+        "import_config": "Yapılandırmayı İçe Aktar",
+        "choose_file_first": "Önce bir yedekleme dosyası seçin",
+        "imported_reloading": "İthal. Yeniden yükleniyor...",
+        "import_failed": "İçe aktarma başarısız oldu",
+        "import_failed_prefix": "İçe aktarma başarısız oldu:",
+        "retention_title": "Yedeklemeler - Saklama",
+        "keep_last": "Sonuncuyu koru",
+        "files": "dosyalar",
+        "loading_stats": "(istatistikler yükleniyor...)",
+        "last_backup_loading": "Son yedekleme: (yükleniyor...)",
+        "last_backup_none": "Son yedekleme: henüz yok",
+        "last_backup_prefix": "Son yedekleme:",
+        "last_backup_unknown": "Son yedekleme: bilinmiyor",
+        "prune_now": "Şimdi buda",
+        "pruned_kept_deleted": "Budanmış - muhafaza edilmiş",
+        "deleted_prefix": "silindi",
+        "prune_failed": "Budama başarısız oldu",
+        "prune_failed_prefix": "Prune başarısız oldu:",
+        "create_backup_now": "Şimdi yedekleme oluştur",
+        "backup_saved_prefix": "Yedekleme kaydedildi:",
+        "backup_failed": "Yedekleme başarısız oldu",
+        "backup_failed_prefix": "Yedekleme başarısız oldu:",
+        "download_latest_backup": "En son yedeklemeyi indirin",
+        "no_backups_found": "Yedek bulunamadı",
+        "download_failed_prefix": "İndirme başarısız oldu:",
+        "redact_secrets": "Redact secrets"
+      }
     }
+  },
+  "backups": {
+    "common": {
+      "status": "Durum:",
+      "timestamp": "Zaman damgası:",
+      "none_dash": "-",
+      "free": "Özgür",
+      "used": "Kullanılmış",
+      "copy": "Kopyala",
+      "warnings": "Uyarılar",
+      "errors": "Hatalar",
+      "loading": "Yükleniyor..."
+    },
+    "status": {
+      "error_loading_json": "JSON YÜKLENİRken HATA",
+      "ok": "TAMAM",
+      "unmounted": "MONTAJSIZ",
+      "critical": "KRİTİK",
+      "high": "YÜKSEK",
+      "elevated": "YÜKSELTİLDİ",
+      "healthy": "SAĞLIKLI",
+      "unknown": "BİLİNMİYOR",
+      "unknown_cap": "Bilinmiyor"
+    },
+    "disk": {
+      "unmounted": "Disk TAKILMADI",
+      "tag": "Disk:",
+      "sizes_updated": "Boyutlar güncellendi:",
+      "title": "Disk Kullanımı",
+      "usage": "Kullanım",
+      "mount": "Montaj"
+    },
+    "page": {
+      "freshness_prefix": "Tazelik:",
+      "title": "Yedekleme Kontrol Merkezi",
+      "subtitle_prefix": "Canlı durum tarafından yönlendirilen",
+      "subtitle_suffix": "yedekleme diskinizde."
+    },
+    "ages": {
+      "no_snapshots_on_disk": "Diskte anlık görüntü bulunamadı",
+      "one_snapshot_present": "1 anlık görüntü mevcut",
+      "snapshots_present_suffix": "anlık görüntüler mevcut",
+      "no_panel_backups_on_disk": "Diskte panel yedeği bulunamadı",
+      "one_panel_backup_present": "1 panel yedeği mevcut",
+      "panel_backups_present_suffix": "panel yedeklemeleri mevcut",
+      "no_micro_backups_on_disk": "Diskte mikro yedekleme bulunamadı",
+      "one_micro_backup_present": "1 mikro yedekleme mevcut",
+      "micro_backups_present_suffix": "mikro yedeklemeler mevcut",
+      "snapshot_daily0_chart": "Anlık görüntü (günlük.0)",
+      "hestia_latest_chart": "Hestia'nın son hali",
+      "micro_latest_chart": "Mikro en son",
+      "age_days": "Yaş (gün)",
+      "title": "Yedekleme Çağları",
+      "subtitle": "En son yedeklemelerinizin ne kadar yeni olduğu",
+      "snapshot_daily0": "Günlük anlık görüntü.0",
+      "latest_hestia": "En son Hestia",
+      "latest_micro": "En Son Mikro"
+    },
+    "errors": {
+      "no_backups_detected": "Anlık görüntüler, Hestia veya mikro kümeler için yedekleme algılanmadı."
+    },
+    "restore": {
+      "hestia_placeholder_tar": "USER.YYYYMMDD-HHMM.tar",
+      "using_latest_backup_prefix": "JSON'da bildirilen en son yedeklemeyi kullanma:",
+      "adjust_backup_tar": "Çalıştırmadan önce BACKUP_TAR'ı \\\"v-list-backups USER\\\"den gerçek bir dosyaya ayarlayın.",
+      "micro_restore_prefix": "En son mikro anlık görüntüden tabanı geri yükleyin:",
+      "micro_restore_suffix": "(çalıştırmadan önce yolları ve hariç tutmaları inceleyin).",
+      "set_correct_snapshot_path": "Bu komutu kullanmadan önce doğru anlık görüntü yolunu ayarlayın.",
+      "confirm_body_1": "Bu, backupctl'yi kullanarak sunucuda bir Hestia geri yükleme işi başlatacaktır.",
+      "confirm_body_2": "Söz konusu kullanıcıya ait hizmetlerin ve verilerin üzerine yazılabilir.",
+      "confirm_body_3": "Kesinlikle emin misin?"
+    },
+    "actions": {
+      "starting_prefix": "Başlangıç",
+      "failed_to_start_prefix": "Başlatılamadı",
+      "started_prefix": "Başlatıldı",
+      "started_suffix": ". Bu biraz zaman alabilir; durum bir sonraki sağlık kontrolünde güncellenecektir.",
+      "error_talking_endpoint": "backups_action.php ile konuşurken hata oluştu",
+      "run_os_snapshot": "İşletim Sistemi Anlık Görüntüsünü Çalıştır",
+      "run_micro_backup": "Mikro Yedeklemeyi Çalıştır",
+      "run_hestia_backup_user": "Hestia Backup'ı çalıştırın (gen)",
+      "run_all_backups": "TÜM Yedeklemeleri Çalıştır",
+      "run_health_check": "Durum Denetimini Çalıştır",
+      "log_maintenance": "Günlük bakımı",
+      "clear_backup_logs": "Yedekleme durumu günlüklerini temizle",
+      "clear_prune_logs": "Budama günlüklerini temizle",
+      "clear_integrity_log": "Bütünlük günlüğünü temizle"
+    },
+    "cron": {
+      "no_entries": "Hiçbir crontab girişi algılanmadı.",
+      "env": "Zarf",
+      "schedule": "Takvim",
+      "entries_for_prefix": "Crontab girişleri",
+      "current_user": "mevcut kullanıcı",
+      "unable_to_read": "Crontab okunamıyor.",
+      "failed_to_read": "Crontab okunamadı."
+    },
+    "warnings_errors": {
+      "title": "Uyarılar ve Hatalar",
+      "subtitle": "Sağlık kontrolünden özet"
+    },
+    "raw_snapshot": {
+      "title": "Ham Anlık Görüntü",
+      "subtitle": "Doğrudan son JSON durumundan alınan anahtar değerler"
+    },
+    "recent_actions": {
+      "title": "Son Eylemler",
+      "subtitle": "Bu kontrol panelindeki işlemlerin geçmişi",
+      "none": "Henüz hiçbir işlem kaydedilmedi."
+    },
+    "orch": {
+      "title": "Yedekleme Düzenleme Sihirbazı",
+      "subtitle": "Yolları bir kez özelleştirin, ardından oluşturulan komut dosyası/cron/systemd birimlerini kopyalayın.",
+      "backup_root": "Yedek kök",
+      "include_health": "Sağlık kontrolünü dahil et",
+      "include_integrity": "Bütünlük kontrolünü dahil et",
+      "include_prune": "Kuru erik aşamasını dahil et",
+      "suspend": "Yedeklemeleri askıya al",
+      "disable_on_mount_fail": "Bağlama başarısız olursa yedeklemeleri devre dışı bırakın",
+      "nightly_script": "Gece senaryosu",
+      "copy_script": "Komut dosyasını kopyala",
+      "cron_entry": "Cron girişi",
+      "copy_cron_line": "Cron satırını kopyala",
+      "systemd_service": "Sistem hizmeti",
+      "copy_unit": "Kopyalama ünitesi",
+      "systemd_timer": "Sistem zamanlayıcısı",
+      "copy_timer": "Zamanlayıcıyı kopyala"
+    },
+    "quick_restore": {
+      "title": "Hızlı Geri Yükleme Yardımcıları",
+      "subtitle": "Acil durumlar için önceden doldurulmuş CLI komutları (manuel çalıştırma veya TEHLİKE düğmesi)",
+      "hestia_latest_title": "En son Hestia kullanıcı yedeğini geri yükleyin",
+      "micro_latest_title": "En son mikro anlık görüntüden geri yükleme (yalnızca CLI)",
+      "copy_command": "Komutu kopyala",
+      "run_restore_danger": "Geri yüklemeyi çalıştırın (en son, TEHLİKE)"
+    },
+    "cli": {
+      "title": "Hestia Yedekleme ve Geri Yükleme CLI'si",
+      "subtitle": "Hızlı referans sayfası - kopyalayıp yapıştırmaya hazır",
+      "create_backups": "Yedeklemeler Oluşturun",
+      "list_delete_backups": "Yedeklemeleri Listeleme ve Silme",
+      "full_restore_user": "Tam Geri Yükleme (Kullanıcı)",
+      "selective_restore": "Seçmeli Geri Yükleme (Web / DB / Posta)",
+      "backup_file_locations": "Dosya Konumlarını Yedekle",
+      "backup_tarball_contents": "Tarball İçeriklerini Yedekle",
+      "backupctl_help": "yedeklemectl yardımı"
+    }
+  }
 }

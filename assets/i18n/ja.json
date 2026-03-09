@@ -1,94 +1,314 @@
 {
-    "app": {
-        "title": "\u30b5\u30fc\u30d0\u30fc\u30fb\u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9"
+  "app": {
+    "title": "サーバー・ダッシュボード"
+  },
+  "nav": {
+    "history": "歴史",
+    "logs": "過去ログ",
+    "dashboard": "ダッシュボード",
+    "services": "サービス",
+    "alerts": "アラート",
+    "tests": "テスト",
+    "settings": "設定",
+    "about": "について"
+  },
+  "history": {
+    "title": "歴史",
+    "trends": "トレンド",
+    "range": "レンジ",
+    "baseline": "ベースライン",
+    "probe_now": "プローブ",
+    "refresh": "リフレッシュ",
+    "export_json": "JSONエクスポート",
+    "export_alerts_json": "アラートJSONエクスポート",
+    "reset_history": "履歴をリセット",
+    "recent_alert_events": "最近の警告イベント",
+    "export_preview": "輸出プレビュー",
+    "close": "閉じる",
+    "copy": "コピー",
+    "download": "ダウンロード"
+  },
+  "logs": {
+    "title": "過去ログ",
+    "manage": "ログの管理",
+    "add": "追加",
+    "delete": "削除",
+    "refresh": "リフレッシュ",
+    "search": "検索",
+    "filter": "フィルター",
+    "lines": "ライン",
+    "open": "オープン",
+    "close": "閉じる",
+    "download": "ダウンロード",
+    "copy": "コピー"
+  },
+  "common": {
+    "save": "セーブ",
+    "cancel": "キャンセル",
+    "edit": "編集",
+    "delete": "削除",
+    "update": "更新",
+    "create": "作成",
+    "enable": "有効にする",
+    "disable": "無効",
+    "yes": "はい",
+    "no": "いいえ",
+    "on": "オン",
+    "off": "オフ",
+    "confirm": "確認",
+    "search": "検索",
+    "filter": "フィルター",
+    "actions": "行動"
+  },
+  "alerts": {
+    "title": "アラート",
+    "recent_events": "最近の警告イベント",
+    "history": "アラート履歴",
+    "export_json": "アラートJSONエクスポート",
+    "no_alerts": "アラートなし",
+    "level": "レベル",
+    "message": "メッセージ",
+    "service": "サービス",
+    "time": "時間",
+    "probe_now": "プローブ",
+    "refresh": "リフレッシュ",
+    "silence": "沈黙",
+    "unsilence": "沈黙",
+    "ack": "認める",
+    "unack": "認識不足"
+  },
+  "tests": {
+    "title": "サーバーテスト",
+    "run_all": "すべてを実行する",
+    "status": "ステータス",
+    "last_run": "ラストラン",
+    "duration": "期間"
+  },
+  "services": {
+    "title": "サービス",
+    "status": "ステータス",
+    "restart": "リスタート",
+    "start": "スタート",
+    "stop": "ストップ"
+  },
+  "config": {
+    "sections": {
+      "site": "Site",
+      "features": "Features",
+      "capabilities": "Capabilities",
+      "processes": "Processes",
+      "mail": "Mail",
+      "integrations": "Integrations",
+      "security": "Security",
+      "ui": "UI",
+      "server_tests": "Server Tests",
+      "alerts": "Alerts",
+      "cron": "Cron",
+      "history": "History",
+      "logs": "Logs",
+      "backups": "バックアップ",
+      "email": "Email"
     },
-    "nav": {
-        "history": "\u6b74\u53f2",
-        "logs": "\u904e\u53bb\u30ed\u30b0",
-        "dashboard": "\u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9",
-        "services": "\u30b5\u30fc\u30d3\u30b9",
-        "alerts": "\u30a2\u30e9\u30fc\u30c8",
-        "tests": "\u30c6\u30b9\u30c8",
-        "settings": "\u8a2d\u5b9a",
-        "about": "\u306b\u3064\u3044\u3066"
+    "fields": {
+      "backups": {
+        "require_dedicated_mount": {
+          "label": "専用マウントが必要",
+          "help": "従来の互換性キー。有効にすると、バックアップ スクリプトにはバックアップ マウントが存在する必要があります。"
+        },
+        "disable_on_mount_fail": {
+          "label": "マウントが失敗した場合はバックアップを無効にする",
+          "help": "有効にすると、バックアップ マウントが見つからない場合、バックアップ アクションと生成されたスクリプトが停止します。"
+        }
+      },
+      "alerts": {
+        "min_severity": {
+          "label": "アラートの最小重大度"
+        },
+        "email": {
+          "label": "Legacy alert email(s)"
+        }
+      }
     },
-    "history": {
-        "title": "\u6b74\u53f2",
-        "trends": "\u30c8\u30ec\u30f3\u30c9",
-        "range": "\u30ec\u30f3\u30b8",
-        "baseline": "\u30d9\u30fc\u30b9\u30e9\u30a4\u30f3",
-        "probe_now": "\u30d7\u30ed\u30fc\u30d6",
-        "refresh": "\u30ea\u30d5\u30ec\u30c3\u30b7\u30e5",
-        "export_json": "JSON\u30a8\u30af\u30b9\u30dd\u30fc\u30c8",
-        "export_alerts_json": "\u30a2\u30e9\u30fc\u30c8JSON\u30a8\u30af\u30b9\u30dd\u30fc\u30c8",
-        "reset_history": "\u5c65\u6b74\u3092\u30ea\u30bb\u30c3\u30c8",
-        "recent_alert_events": "\u6700\u8fd1\u306e\u8b66\u544a\u30a4\u30d9\u30f3\u30c8",
-        "export_preview": "\u8f38\u51fa\u30d7\u30ec\u30d3\u30e5\u30fc",
-        "close": "\u9589\u3058\u308b",
-        "copy": "\u30b3\u30d4\u30fc",
-        "download": "\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9"
-    },
-    "logs": {
-        "title": "\u904e\u53bb\u30ed\u30b0",
-        "manage": "\u30ed\u30b0\u306e\u7ba1\u7406",
-        "add": "\u8ffd\u52a0",
-        "delete": "\u524a\u9664",
-        "refresh": "\u30ea\u30d5\u30ec\u30c3\u30b7\u30e5",
-        "search": "\u691c\u7d22",
-        "filter": "\u30d5\u30a3\u30eb\u30bf\u30fc",
-        "lines": "\u30e9\u30a4\u30f3",
-        "open": "\u30aa\u30fc\u30d7\u30f3",
-        "close": "\u9589\u3058\u308b",
-        "download": "\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9",
-        "copy": "\u30b3\u30d4\u30fc"
-    },
-    "common": {
-        "save": "\u30bb\u30fc\u30d6",
-        "cancel": "\u30ad\u30e3\u30f3\u30bb\u30eb",
-        "edit": "\u7de8\u96c6",
-        "delete": "\u524a\u9664",
-        "update": "\u66f4\u65b0",
-        "create": "\u4f5c\u6210",
-        "enable": "\u6709\u52b9\u306b\u3059\u308b",
-        "disable": "\u7121\u52b9",
-        "yes": "\u306f\u3044",
-        "no": "\u3044\u3044\u3048",
-        "on": "\u30aa\u30f3",
-        "off": "\u30aa\u30d5",
-        "confirm": "\u78ba\u8a8d",
-        "search": "\u691c\u7d22",
-        "filter": "\u30d5\u30a3\u30eb\u30bf\u30fc",
-        "actions": "\u884c\u52d5"
-    },
-    "alerts": {
-        "title": "\u30a2\u30e9\u30fc\u30c8",
-        "recent_events": "\u6700\u8fd1\u306e\u8b66\u544a\u30a4\u30d9\u30f3\u30c8",
-        "history": "\u30a2\u30e9\u30fc\u30c8\u5c65\u6b74",
-        "export_json": "\u30a2\u30e9\u30fc\u30c8JSON\u30a8\u30af\u30b9\u30dd\u30fc\u30c8",
-        "no_alerts": "\u30a2\u30e9\u30fc\u30c8\u306a\u3057",
-        "level": "\u30ec\u30d9\u30eb",
-        "message": "\u30e1\u30c3\u30bb\u30fc\u30b8",
-        "service": "\u30b5\u30fc\u30d3\u30b9",
-        "time": "\u6642\u9593",
-        "probe_now": "\u30d7\u30ed\u30fc\u30d6",
-        "refresh": "\u30ea\u30d5\u30ec\u30c3\u30b7\u30e5",
-        "silence": "\u6c88\u9ed9",
-        "unsilence": "\u6c88\u9ed9",
-        "ack": "\u8a8d\u3081\u308b",
-        "unack": "\u8a8d\u8b58\u4e0d\u8db3"
-    },
-    "tests": {
-        "title": "\u30b5\u30fc\u30d0\u30fc\u30c6\u30b9\u30c8",
-        "run_all": "\u3059\u3079\u3066\u3092\u5b9f\u884c\u3059\u308b",
-        "status": "\u30b9\u30c6\u30fc\u30bf\u30b9",
-        "last_run": "\u30e9\u30b9\u30c8\u30e9\u30f3",
-        "duration": "\u671f\u9593"
-    },
-    "services": {
-        "title": "\u30b5\u30fc\u30d3\u30b9",
-        "status": "\u30b9\u30c6\u30fc\u30bf\u30b9",
-        "restart": "\u30ea\u30b9\u30bf\u30fc\u30c8",
-        "start": "\u30b9\u30bf\u30fc\u30c8",
-        "stop": "\u30b9\u30c8\u30c3\u30d7"
+    "ui": {
+      "unknown": "未知",
+      "unknown_paren": "（未知）",
+      "site_backup": {
+        "title": "バックアップと復元",
+        "export_config": "設定のエクスポート",
+        "import_config": "構成のインポート",
+        "choose_file_first": "最初にバックアップ ファイルを選択してください",
+        "imported_reloading": "輸入済み。再読み込み中...",
+        "import_failed": "インポートに失敗しました",
+        "import_failed_prefix": "インポートに失敗しました:",
+        "retention_title": "バックアップ - 保存",
+        "keep_last": "最後に残す",
+        "files": "ファイル",
+        "loading_stats": "(統計を読み込んでいます...)",
+        "last_backup_loading": "最後のバックアップ: (読み込み中...)",
+        "last_backup_none": "最後のバックアップ: まだありません",
+        "last_backup_prefix": "最後のバックアップ:",
+        "last_backup_unknown": "最終バックアップ: 不明",
+        "prune_now": "今すぐ剪定する",
+        "pruned_kept_deleted": "剪定済み - 保管済み",
+        "deleted_prefix": "削除されました",
+        "prune_failed": "プルーンに失敗しました",
+        "prune_failed_prefix": "プルーンに失敗しました:",
+        "create_backup_now": "今すぐバックアップを作成する",
+        "backup_saved_prefix": "バックアップが保存されました:",
+        "backup_failed": "バックアップに失敗しました",
+        "backup_failed_prefix": "バックアップに失敗しました:",
+        "download_latest_backup": "最新のバックアップをダウンロードする",
+        "no_backups_found": "バックアップが見つかりませんでした",
+        "download_failed_prefix": "ダウンロードに失敗しました:",
+        "redact_secrets": "Redact secrets"
+      }
     }
+  },
+  "backups": {
+    "common": {
+      "status": "状態：",
+      "timestamp": "タイムスタンプ:",
+      "none_dash": "-",
+      "free": "無料",
+      "used": "使用済み",
+      "copy": "コピー",
+      "warnings": "警告",
+      "errors": "エラー",
+      "loading": "読み込み中..."
+    },
+    "status": {
+      "error_loading_json": "JSON の読み込みエラー",
+      "ok": "わかりました",
+      "unmounted": "マウントされていない",
+      "critical": "致命的",
+      "high": "高い",
+      "elevated": "高められた",
+      "healthy": "健康",
+      "unknown": "未知",
+      "unknown_cap": "未知"
+    },
+    "disk": {
+      "unmounted": "ディスクがマウントされていません",
+      "tag": "ディスク：",
+      "sizes_updated": "更新されたサイズ:",
+      "title": "ディスク使用率",
+      "usage": "使用法",
+      "mount": "マウント"
+    },
+    "page": {
+      "freshness_prefix": "鮮度：",
+      "title": "バックアップ コントロール センター",
+      "subtitle_prefix": "ライブステータスの原動力は",
+      "subtitle_suffix": "バックアップディスク上にあります。"
+    },
+    "ages": {
+      "no_snapshots_on_disk": "ディスク上にスナップショットが見つかりません",
+      "one_snapshot_present": "スナップショットが 1 つ存在します",
+      "snapshots_present_suffix": "スナップショットが存在する",
+      "no_panel_backups_on_disk": "ディスク上にパネルのバックアップが見つかりません",
+      "one_panel_backup_present": "バックアップパネル1枚プレゼント",
+      "panel_backups_present_suffix": "パネルのバックアップが存在する",
+      "no_micro_backups_on_disk": "ディスク上にマイクロバックアップが見つかりません",
+      "one_micro_backup_present": "マイクロバックアップ1個プレゼント",
+      "micro_backups_present_suffix": "マイクロバックアップが存在する",
+      "snapshot_daily0_chart": "スナップショット (毎日.0)",
+      "hestia_latest_chart": "ヘスティア最新作",
+      "micro_latest_chart": "マイクロ最新",
+      "age_days": "年齢（日数）",
+      "title": "バックアップ期間",
+      "subtitle": "最新のバックアップの鮮度",
+      "snapshot_daily0": "毎日のスナップショット.0",
+      "latest_hestia": "最新のヘスティア",
+      "latest_micro": "最新マイクロ"
+    },
+    "errors": {
+      "no_backups_detected": "スナップショット、Hestia、またはマイクロ セットのバックアップは検出されませんでした。"
+    },
+    "restore": {
+      "hestia_placeholder_tar": "遺伝子.YYYYMMDD-HHMM.tar",
+      "using_latest_backup_prefix": "JSON で報告された最新のバックアップを使用する:",
+      "adjust_backup_tar": "実行する前に、BACKUP_TAR を「v-list-backupsgene」から実際のファイルに調整します。",
+      "micro_restore_prefix": "最新のマイクロスナップショットからベースを復元します。",
+      "micro_restore_suffix": "(実行前にパスと除外を確認してください)。",
+      "set_correct_snapshot_path": "このコマンドを使用する前に、正しいスナップショット パスを設定してください。",
+      "confirm_body_1": "これにより、backupctl を使用してサーバー上で Hestia 復元ジョブが開始されます。",
+      "confirm_body_2": "そのユーザーのサービスとデータは上書きされる可能性があります。",
+      "confirm_body_3": "絶対に間違いありませんか？"
+    },
+    "actions": {
+      "starting_prefix": "起動",
+      "failed_to_start_prefix": "開始に失敗しました",
+      "started_prefix": "開始しました",
+      "started_suffix": "。これには時間がかかる場合があります。ステータスは次回のヘルスチェック時に更新されます。",
+      "error_talking_endpoint": "backups_action.php との通信中にエラーが発生しました",
+      "run_os_snapshot": "OSスナップショットを実行",
+      "run_micro_backup": "マイクロバックアップを実行する",
+      "run_hestia_backup_user": "Hestia バックアップを実行する (遺伝子)",
+      "run_all_backups": "すべてのバックアップを実行",
+      "run_health_check": "ヘルスチェックを実行する",
+      "log_maintenance": "ログのメンテナンス",
+      "clear_backup_logs": "バックアップの健全性ログをクリアする",
+      "clear_prune_logs": "プルーン ログをクリアする",
+      "clear_integrity_log": "整合性ログをクリアする"
+    },
+    "cron": {
+      "no_entries": "crontab エントリが検出されませんでした。",
+      "env": "環境",
+      "schedule": "スケジュール",
+      "entries_for_prefix": "Crontab エントリ",
+      "current_user": "現在のユーザー",
+      "unable_to_read": "crontabを読み取れません。",
+      "failed_to_read": "crontabの読み込みに失敗しました。"
+    },
+    "warnings_errors": {
+      "title": "警告とエラー",
+      "subtitle": "健康診断のまとめ"
+    },
+    "raw_snapshot": {
+      "title": "生のスナップショット",
+      "subtitle": "最後の JSON ステータスから直接キー値を取得"
+    },
+    "recent_actions": {
+      "title": "最近のアクション",
+      "subtitle": "このダッシュボードからのアクションの履歴",
+      "none": "まだアクションは記録されていません。"
+    },
+    "orch": {
+      "title": "バックアップ オーケストレーション ウィザード",
+      "subtitle": "パスを一度カスタマイズしてから、生成された script/cron/systemd ユニットをコピーします。",
+      "backup_root": "バックアップルート",
+      "include_health": "健康診断も含めて",
+      "include_integrity": "整合性チェックを含める",
+      "include_prune": "プルーン段階を含む",
+      "suspend": "バックアップを一時停止する",
+      "disable_on_mount_fail": "マウントが失敗した場合はバックアップを無効にする",
+      "nightly_script": "毎晩のスクリプト",
+      "copy_script": "スクリプトのコピー",
+      "cron_entry": "cron エントリ",
+      "copy_cron_line": "cron行をコピーする",
+      "systemd_service": "Systemdサービス",
+      "copy_unit": "コピーユニット",
+      "systemd_timer": "システムタイマー",
+      "copy_timer": "コピータイマー"
+    },
+    "quick_restore": {
+      "title": "クイック復元ヘルパー",
+      "subtitle": "緊急用の事前入力された CLI コマンド (手動実行または DANGER ボタン)",
+      "hestia_latest_title": "最新の Hestia ユーザー バックアップを復元する",
+      "micro_latest_title": "最新のマイクロ スナップショットからの復元 (CLI のみ)",
+      "copy_command": "コピーコマンド",
+      "run_restore_danger": "復元の実行 (最新、危険)"
+    },
+    "cli": {
+      "title": "Hestia のバックアップと復元 CLI",
+      "subtitle": "クイックリファレンスシート - コピー＆ペーストが可能",
+      "create_backups": "バックアップの作成",
+      "list_delete_backups": "バックアップの一覧表示と削除",
+      "full_restore_user": "完全復元 (ユーザー)",
+      "selective_restore": "選択的復元 (Web / DB / メール)",
+      "backup_file_locations": "バックアップファイルの場所",
+      "backup_tarball_contents": "Tarball コンテンツのバックアップ",
+      "backupctl_help": "バックアップctlのヘルプ"
+    }
+  }
 }

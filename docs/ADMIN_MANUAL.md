@@ -13,13 +13,13 @@ The dashboard is a PHP/JavaScript application designed for a self‑hosted LAMP 
 - Backup orchestration and restore helpers.
 - Multi‑tenant configuration with CSRF protection and per‑page admin gating.
 
-Most functionality lives in `web-admin/`; persistent data is written to `data/` and `state/`. The app expects PHP 8+, MySQL (for your apps, not for the dashboard), and the ability to run shell utilities for cron/backups.
+Most functionality lives in `server-dashboard/`; persistent data is written to `data/` and `state/`. The app expects PHP 8+, MySQL (for your apps, not for the dashboard), and the ability to run shell utilities for cron/backups.
 
 ---
 
 ## 2. Prerequisites & Installation
 
-1. **Clone/Unpack** the repository into `/home/<user>/web/<domain>/public_html/web-admin` (or equivalent).
+1. **Clone/Unpack** the repository into `/home/<user>/web/<domain>/public_html/server-dashboard` (or equivalent).
 2. Ensure the following directories are writable by the web user:
    - `data/` — configuration exports, backup files, cron tokens.
    - `state/` — runtime JSON streams (`backup_status.json`, services status, alerts).
@@ -111,7 +111,7 @@ php bin/config-cli.php dump > backup-config.json
 Use this endpoint for remote hosts or long‑running jobs to signal completion:
 
 ```
-GET https://<host>/web-admin/api/cron_heartbeat.php?id=JOB_ID&token=<CRON_TOKEN>
+GET https://<host>/server-dashboard/api/cron_heartbeat.php?id=JOB_ID&token=<CRON_TOKEN>
 ```
 
 Optional query parameters:
@@ -180,13 +180,13 @@ Every page respects the global CSRF token and uses `assets/js/app.js` for toasts
 
 ## 10. Troubleshooting & Tips
 
-| Symptom | Resolution |
-| --- | --- |
-| `403` from cron `curl` | Confirm the `token=` parameter matches the Cron Health token and that IP allow lists allow the request. |
-| History cards empty | Run `api/alerts_eval.php?probe=1&token=...` manually and check `state/services_status_history.jsonl` for corruption. |
-| Backups status stuck | Verify `backup_health_check.sh` writes to `state/backup_status.json`. Use `backups_action.php?action=health_check` if scripted. |
-| Cron list error | Web user lacks permission to run `crontab -l`. Either run the dashboard under the same user who owns the crontab or wrap the endpoint with `sudo crontab -l -u <user>`. |
-| Large log files | Tune `logs.tail_bytes` in Config and leverage log pruning via the Backups page. |
+| Symptom                | Resolution                                                                                                                                                              |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `403` from cron `curl` | Confirm the `token=` parameter matches the Cron Health token and that IP allow lists allow the request.                                                                 |
+| History cards empty    | Run `api/alerts_eval.php?probe=1&token=...` manually and check `state/services_status_history.jsonl` for corruption.                                                    |
+| Backups status stuck   | Verify `backup_health_check.sh` writes to `state/backup_status.json`. Use `backups_action.php?action=health_check` if scripted.                                         |
+| Cron list error        | Web user lacks permission to run `crontab -l`. Either run the dashboard under the same user who owns the crontab or wrap the endpoint with `sudo crontab -l -u <user>`. |
+| Large log files        | Tune `logs.tail_bytes` in Config and leverage log pruning via the Backups page.                                                                                         |
 
 ---
 
@@ -201,18 +201,18 @@ Every page respects the global CSRF token and uses `assets/js/app.js` for toasts
 
 ## 12. Appendix — Useful Paths & Files
 
-| File/Dir | Purpose |
-| --- | --- |
-| `config/local.json` | Primary persisted configuration edited via UI. |
-| `data/security_config.json` | Legacy compat file for mail + cron tokens. |
-| `data/cron_token.txt` | Auto‑generated cron token (share with remote crons). |
-| `state/backup_status.json` | Backup health JSON consumed by Backups page. |
-| `state/backup_actions.json` | Rolling log of actions triggered from UI. |
-| `state/services_status.json` / `.jsonl` | Probe results for services. |
-| `state/heartbeats/*.txt` | Cron job heartbeat timestamps. |
-| `backups_action.php` | API endpoint invoked by UI buttons; call directly (`action=`) for automation. |
-| `api/cron_heartbeat.php` | Heartbeat ingest endpoint. |
-| `api/cron_mark.php` | Alert/history cron marker. |
-| `api/services_list.php` | Service definitions with metadata. |
+| File/Dir                                | Purpose                                                                       |
+| --------------------------------------- | ----------------------------------------------------------------------------- |
+| `config/local.json`                     | Primary persisted configuration edited via UI.                                |
+| `data/security_config.json`             | Legacy compat file for mail + cron tokens.                                    |
+| `data/cron_token.txt`                   | Auto‑generated cron token (share with remote crons).                          |
+| `state/backup_status.json`              | Backup health JSON consumed by Backups page.                                  |
+| `state/backup_actions.json`             | Rolling log of actions triggered from UI.                                     |
+| `state/services_status.json` / `.jsonl` | Probe results for services.                                                   |
+| `state/heartbeats/*.txt`                | Cron job heartbeat timestamps.                                                |
+| `backups_action.php`                    | API endpoint invoked by UI buttons; call directly (`action=`) for automation. |
+| `api/cron_heartbeat.php`                | Heartbeat ingest endpoint.                                                    |
+| `api/cron_mark.php`                     | Alert/history cron marker.                                                    |
+| `api/services_list.php`                 | Service definitions with metadata.                                            |
 
 Keep this manual updated as features evolve so future administrators have a single source of truth.

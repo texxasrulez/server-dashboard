@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/../includes/init.php';
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../lib/Config.php';
@@ -7,19 +8,22 @@ header('Content-Type: application/json');
 
 \App\Config::init(dirname(__DIR__));
 $mail    = \App\Config::get('mail', []);
-$security= \App\Config::get('security', []);
+$security = \App\Config::get('security', []);
 $alerts  = \App\Config::get('alerts', []);
 
-function stringify_emails($value) {
-  if (is_array($value)) {
-    $clean = [];
-    foreach ($value as $item) {
-      $s = trim((string)$item);
-      if ($s !== '') $clean[] = $s;
+function stringify_emails($value)
+{
+    if (is_array($value)) {
+        $clean = [];
+        foreach ($value as $item) {
+            $s = trim((string)$item);
+            if ($s !== '') {
+                $clean[] = $s;
+            }
+        }
+        return implode(', ', $clean);
     }
-    return implode(', ', $clean);
-  }
-  return is_string($value) ? trim($value) : '';
+    return is_string($value) ? trim($value) : '';
 }
 
 $alertEmails = stringify_emails($mail['sec_email'] ?? $alerts['email'] ?? '');
@@ -39,7 +43,7 @@ $settings = [
   'cron_token'     => $alerts['cron_token'] ?? '',
   'admin_emails'   => $security['admin_emails'] ?? [],
   'csrf_secret'    => $security['csrf_secret'] ?? '',
-  'allowed_origins'=> $security['allowed_origins'] ?? [],
+  'allowed_origins' => $security['allowed_origins'] ?? [],
   'ip_allowlist'   => $security['ip_allowlist'] ?? [],
 ];
 

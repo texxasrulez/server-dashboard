@@ -16,13 +16,13 @@ location ~ ^/(config|data|state)(/|$) {
 ## Apache (vhost)
 
 ```apache
-<Directory "/path/to/web-admin/config">
+<Directory "/path/to/server-dashboard/config">
     Require all denied
 </Directory>
-<Directory "/path/to/web-admin/data">
+<Directory "/path/to/server-dashboard/data">
     Require all denied
 </Directory>
-<Directory "/path/to/web-admin/state">
+<Directory "/path/to/server-dashboard/state">
     Require all denied
 </Directory>
 ```

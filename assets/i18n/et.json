@@ -1,94 +1,314 @@
 {
-    "app": {
-        "title": "Serveri armatuurlaud"
+  "app": {
+    "title": "Serveri armatuurlaud"
+  },
+  "nav": {
+    "history": "Ajalugu",
+    "logs": "Logid",
+    "dashboard": "Armatuurlaud",
+    "services": "Teenused",
+    "alerts": "Hoiatused",
+    "tests": "Testid",
+    "settings": "Seaded",
+    "about": "kohta"
+  },
+  "history": {
+    "title": "Ajalugu",
+    "trends": "Trendid",
+    "range": "Range",
+    "baseline": "Põhitasemel",
+    "probe_now": "Sonda nüüd",
+    "refresh": "Värskenda",
+    "export_json": "Ekspordi JSON",
+    "export_alerts_json": "Ekspordi hoiatusteadete JSON",
+    "reset_history": "Ajaloo lähtestamine",
+    "recent_alert_events": "Hiljutised hoiatussündmused",
+    "export_preview": "Ekspordi eelvaade",
+    "close": "Sulge",
+    "copy": "Koopia",
+    "download": "Lae alla"
+  },
+  "logs": {
+    "title": "Logid",
+    "manage": "Logide haldamine",
+    "add": "Lisa",
+    "delete": "Kustuta",
+    "refresh": "Värskenda",
+    "search": "Otsi",
+    "filter": "Filter",
+    "lines": "Rida",
+    "open": "Avatud",
+    "close": "Sulge",
+    "download": "Lae alla",
+    "copy": "Koopia"
+  },
+  "common": {
+    "save": "Salvesta",
+    "cancel": "Tühista",
+    "edit": "Muuda",
+    "delete": "Kustuta",
+    "update": "Ajakohastamine",
+    "create": "Loo",
+    "enable": "Lubage",
+    "disable": "Lülita välja",
+    "yes": "Jah",
+    "no": "Ei",
+    "on": "Veebilehel",
+    "off": "Väljaspool",
+    "confirm": "Kinnitage",
+    "search": "Otsi",
+    "filter": "Filter",
+    "actions": "Meetmed"
+  },
+  "alerts": {
+    "title": "Hoiatused",
+    "recent_events": "Hiljutised hoiatussündmused",
+    "history": "Häirete ajalugu",
+    "export_json": "Ekspordi hoiatusteadete JSON",
+    "no_alerts": "Hoiatused puuduvad",
+    "level": "Tasand",
+    "message": "Sõnum",
+    "service": "Teenus",
+    "time": "Aeg",
+    "probe_now": "Sonda nüüd",
+    "refresh": "Värskenda",
+    "silence": "Vaikus",
+    "unsilence": "Vaikimatus",
+    "ack": "Kinnita",
+    "unack": "Mitteteadmised"
+  },
+  "tests": {
+    "title": "Serveri testid",
+    "run_all": "Käivita kõik",
+    "status": "Staatus",
+    "last_run": "Viimane sõit",
+    "duration": "Kestus"
+  },
+  "services": {
+    "title": "Teenused",
+    "status": "Staatus",
+    "restart": "Restart",
+    "start": "Start",
+    "stop": "Stop"
+  },
+  "config": {
+    "sections": {
+      "site": "Site",
+      "features": "Features",
+      "capabilities": "Capabilities",
+      "processes": "Processes",
+      "mail": "Mail",
+      "integrations": "Integrations",
+      "security": "Security",
+      "ui": "UI",
+      "server_tests": "Server Tests",
+      "alerts": "Alerts",
+      "cron": "Cron",
+      "history": "History",
+      "logs": "Logs",
+      "backups": "Varukoopiad",
+      "email": "Email"
     },
-    "nav": {
-        "history": "Ajalugu",
-        "logs": "Logid",
-        "dashboard": "Armatuurlaud",
-        "services": "Teenused",
-        "alerts": "Hoiatused",
-        "tests": "Testid",
-        "settings": "Seaded",
-        "about": "kohta"
+    "fields": {
+      "backups": {
+        "require_dedicated_mount": {
+          "label": "Nõua spetsiaalset kinnitust",
+          "help": "Pärand ühilduvusvõti. Kui see on lubatud, nõuavad varukoopiaskriptid varukinnituse olemasolu."
+        },
+        "disable_on_mount_fail": {
+          "label": "Kui ühendamine ebaõnnestub, keelake varukoopiad",
+          "help": "Kui see on lubatud, peatuvad varundustoimingud ja loodud skriptid, kui varukinnitus puudub."
+        }
+      },
+      "alerts": {
+        "min_severity": {
+          "label": "Hoiatuse minimaalne raskusaste"
+        },
+        "email": {
+          "label": "Legacy alert email(s)"
+        }
+      }
     },
-    "history": {
-        "title": "Ajalugu",
-        "trends": "Trendid",
-        "range": "Range",
-        "baseline": "P\u00f5hitasemel",
-        "probe_now": "Sonda n\u00fc\u00fcd",
-        "refresh": "V\u00e4rskenda",
-        "export_json": "Ekspordi JSON",
-        "export_alerts_json": "Ekspordi hoiatusteadete JSON",
-        "reset_history": "Ajaloo l\u00e4htestamine",
-        "recent_alert_events": "Hiljutised hoiatuss\u00fcndmused",
-        "export_preview": "Ekspordi eelvaade",
-        "close": "Sulge",
-        "copy": "Koopia",
-        "download": "Lae alla"
-    },
-    "logs": {
-        "title": "Logid",
-        "manage": "Logide haldamine",
-        "add": "Lisa",
-        "delete": "Kustuta",
-        "refresh": "V\u00e4rskenda",
-        "search": "Otsi",
-        "filter": "Filter",
-        "lines": "Rida",
-        "open": "Avatud",
-        "close": "Sulge",
-        "download": "Lae alla",
-        "copy": "Koopia"
-    },
-    "common": {
-        "save": "Salvesta",
-        "cancel": "T\u00fchista",
-        "edit": "Muuda",
-        "delete": "Kustuta",
-        "update": "Ajakohastamine",
-        "create": "Loo",
-        "enable": "Lubage",
-        "disable": "L\u00fclita v\u00e4lja",
-        "yes": "Jah",
-        "no": "Ei",
-        "on": "Veebilehel",
-        "off": "V\u00e4ljaspool",
-        "confirm": "Kinnitage",
-        "search": "Otsi",
-        "filter": "Filter",
-        "actions": "Meetmed"
-    },
-    "alerts": {
-        "title": "Hoiatused",
-        "recent_events": "Hiljutised hoiatuss\u00fcndmused",
-        "history": "H\u00e4irete ajalugu",
-        "export_json": "Ekspordi hoiatusteadete JSON",
-        "no_alerts": "Hoiatused puuduvad",
-        "level": "Tasand",
-        "message": "S\u00f5num",
-        "service": "Teenus",
-        "time": "Aeg",
-        "probe_now": "Sonda n\u00fc\u00fcd",
-        "refresh": "V\u00e4rskenda",
-        "silence": "Vaikus",
-        "unsilence": "Vaikimatus",
-        "ack": "Kinnita",
-        "unack": "Mitteteadmised"
-    },
-    "tests": {
-        "title": "Serveri testid",
-        "run_all": "K\u00e4ivita k\u00f5ik",
-        "status": "Staatus",
-        "last_run": "Viimane s\u00f5it",
-        "duration": "Kestus"
-    },
-    "services": {
-        "title": "Teenused",
-        "status": "Staatus",
-        "restart": "Restart",
-        "start": "Start",
-        "stop": "Stop"
+    "ui": {
+      "unknown": "teadmata",
+      "unknown_paren": "(teadmata)",
+      "site_backup": {
+        "title": "Varundamine ja taastamine",
+        "export_config": "Ekspordi konfiguratsioon",
+        "import_config": "Impordi konfiguratsioon",
+        "choose_file_first": "Valige esmalt varukoopiafail",
+        "imported_reloading": "Imporditud. Uuesti laadimine...",
+        "import_failed": "Import ebaõnnestus",
+        "import_failed_prefix": "Import ebaõnnestus:",
+        "retention_title": "Varukoopiad – säilitamine",
+        "keep_last": "Jää viimaseks",
+        "files": "failid",
+        "loading_stats": "(statistika laadimine...)",
+        "last_backup_loading": "Viimane varukoopia: (laadimine...)",
+        "last_backup_none": "Viimane varukoopia: veel pole",
+        "last_backup_prefix": "Viimane varukoopia:",
+        "last_backup_unknown": "Viimane varukoopia: teadmata",
+        "prune_now": "Lõika kohe",
+        "pruned_kept_deleted": "Kärbitud – hoitud",
+        "deleted_prefix": "kustutatud",
+        "prune_failed": "Ploom ebaõnnestus",
+        "prune_failed_prefix": "Ploom ebaõnnestus:",
+        "create_backup_now": "Looge varukoopia kohe",
+        "backup_saved_prefix": "Varukoopia salvestatud:",
+        "backup_failed": "Varundamine ebaõnnestus",
+        "backup_failed_prefix": "Varundamine ebaõnnestus:",
+        "download_latest_backup": "Laadige alla uusim varukoopia",
+        "no_backups_found": "Varukoopiaid ei leitud",
+        "download_failed_prefix": "Allalaadimine ebaõnnestus:",
+        "redact_secrets": "Redact secrets"
+      }
     }
+  },
+  "backups": {
+    "common": {
+      "status": "Olek:",
+      "timestamp": "Ajatempel:",
+      "none_dash": "-",
+      "free": "Tasuta",
+      "used": "Kasutatud",
+      "copy": "Kopeeri",
+      "warnings": "Hoiatused",
+      "errors": "Vead",
+      "loading": "Laadimine..."
+    },
+    "status": {
+      "error_loading_json": "VIGA JSON-i laadimisel",
+      "ok": "OK",
+      "unmounted": "PAIGALDAMATA",
+      "critical": "KRIITILINE",
+      "high": "KÕRGE",
+      "elevated": "TÕRGENDATUD",
+      "healthy": "TERVISLIK",
+      "unknown": "TUNDMATU",
+      "unknown_cap": "Tundmatu"
+    },
+    "disk": {
+      "unmounted": "Ketas PAIGALDAMATA",
+      "tag": "Ketas:",
+      "sizes_updated": "Uuendatud suurused:",
+      "title": "Ketta kasutamine",
+      "usage": "Kasutamine",
+      "mount": "Mount"
+    },
+    "page": {
+      "freshness_prefix": "Värskus:",
+      "title": "Varundamise juhtimiskeskus",
+      "subtitle_prefix": "Reaalajas olek juhib",
+      "subtitle_suffix": "teie varukettal."
+    },
+    "ages": {
+      "no_snapshots_on_disk": "Kettalt ei leitud hetktõmmiseid",
+      "one_snapshot_present": "1 hetktõmmis olemas",
+      "snapshots_present_suffix": "hetktõmmised olemas",
+      "no_panel_backups_on_disk": "Paneeli varukoopiaid kettalt ei leitud",
+      "one_panel_backup_present": "Olemas 1 paneeli varukoopia",
+      "panel_backups_present_suffix": "paneeli varukoopiad olemas",
+      "no_micro_backups_on_disk": "Kettalt ei leitud mikrovarukoopiaid",
+      "one_micro_backup_present": "Olemas 1 mikrovaru",
+      "micro_backups_present_suffix": "mikrovarukoopiad olemas",
+      "snapshot_daily0_chart": "Hetktõmmis (igapäevane.0)",
+      "hestia_latest_chart": "Hestia viimane",
+      "micro_latest_chart": "Mikro uusim",
+      "age_days": "Vanus (päevades)",
+      "title": "Varukoopia vanused",
+      "subtitle": "Kui värsked on teie viimased varukoopiad",
+      "snapshot_daily0": "Snapshot iga päev.0",
+      "latest_hestia": "Uusim Hestia",
+      "latest_micro": "Uusim Micro"
+    },
+    "errors": {
+      "no_backups_detected": "Piltide, Hestia või mikrokomplektide varukoopiaid ei tuvastatud."
+    },
+    "restore": {
+      "hestia_placeholder_tar": "geen.YYYYMMDD-HHMM.tar",
+      "using_latest_backup_prefix": "Kasutades viimast JSON-is teatatud varukoopiat:",
+      "adjust_backup_tar": "Enne käivitamist kohandage BACKUP_TAR \\\"v-list-backups USER\\\" pärisfailiks.",
+      "micro_restore_prefix": "Alus taastamine viimasest mikropildist:",
+      "micro_restore_suffix": "(enne käivitamist vaadake teed ja välistused üle).",
+      "set_correct_snapshot_path": "Enne selle käsu kasutamist määrake õige hetktõmmise tee.",
+      "confirm_body_1": "See käivitab serveris Hestia taastetöö, kasutades backupctl-i.",
+      "confirm_body_2": "Selle kasutaja teenused ja andmed võidakse üle kirjutada.",
+      "confirm_body_3": "Oled sa täiesti kindel?"
+    },
+    "actions": {
+      "starting_prefix": "Käivitamine",
+      "failed_to_start_prefix": "Alustamine nurjus",
+      "started_prefix": "Alustatud",
+      "started_suffix": ". See võib veidi aega võtta; olekut värskendatakse järgmisel tervisekontrollil.",
+      "error_talking_endpoint": "Viga saidiga backups_action.php rääkides",
+      "run_os_snapshot": "Käivitage OS Snapshot",
+      "run_micro_backup": "Käivitage Micro Backup",
+      "run_hestia_backup_user": "Käivitage Hestia Backup (geen)",
+      "run_all_backups": "Käivitage KÕIK varukoopiad",
+      "run_health_check": "Käivitage tervisekontroll",
+      "log_maintenance": "Palkide hooldus",
+      "clear_backup_logs": "Tühjendage varunduse terviselogid",
+      "clear_prune_logs": "Puhastage ploomipalgid",
+      "clear_integrity_log": "Tühjenda terviklikkuse logi"
+    },
+    "cron": {
+      "no_entries": "Crontabi kirjeid ei tuvastatud.",
+      "env": "Env",
+      "schedule": "Ajakava",
+      "entries_for_prefix": "Crontabi kirjed jaoks",
+      "current_user": "praegune kasutaja",
+      "unable_to_read": "Crontabi ei saa lugeda.",
+      "failed_to_read": "Crontabi lugemine ebaõnnestus."
+    },
+    "warnings_errors": {
+      "title": "Hoiatused ja vead",
+      "subtitle": "Kokkuvõte tervisekontrollist"
+    },
+    "raw_snapshot": {
+      "title": "Toores hetktõmmis",
+      "subtitle": "Võtmeväärtused otse viimasest JSON-i olekust"
+    },
+    "recent_actions": {
+      "title": "Viimased toimingud",
+      "subtitle": "Selle armatuurlaua toimingute ajalugu",
+      "none": "Toiminguid pole veel salvestatud."
+    },
+    "orch": {
+      "title": "Varukoopia orkestreerimise viisard",
+      "subtitle": "Kohandage teid üks kord, seejärel kopeerige loodud skripti/cron/systemd üksused.",
+      "backup_root": "Varukoopia juur",
+      "include_health": "Kaasa tervisekontroll",
+      "include_integrity": "Kaasa terviklikkuse kontroll",
+      "include_prune": "Kaasa ploomi etapp",
+      "suspend": "Peatage varukoopiad",
+      "disable_on_mount_fail": "Kui ühendamine ebaõnnestub, keelake varukoopiad",
+      "nightly_script": "Öine stsenaarium",
+      "copy_script": "Kopeeri skript",
+      "cron_entry": "Croni sissekanne",
+      "copy_cron_line": "Kopeeri cron rida",
+      "systemd_service": "Süsteemne teenus",
+      "copy_unit": "Kopeeri üksus",
+      "systemd_timer": "Süsteemne taimer",
+      "copy_timer": "Kopeeri taimer"
+    },
+    "quick_restore": {
+      "title": "Kiire taastamise abilised",
+      "subtitle": "Eeltäidetud CLI käsud hädaolukordadeks (käsitsi käitamine või nupp OHT)",
+      "hestia_latest_title": "Taastage uusim Hestia kasutaja varukoopia",
+      "micro_latest_title": "Taasta viimasest mikrohetkest (ainult CLI)",
+      "copy_command": "Kopeeri käsk",
+      "run_restore_danger": "Käivita taastamine (viimane, OHT)"
+    },
+    "cli": {
+      "title": "Hestia varundamise ja taastamise CLI",
+      "subtitle": "Kiirviiteleht – kopeerimis- ja kleepimisvalmis",
+      "create_backups": "Loo varukoopiaid",
+      "list_delete_backups": "Varukoopiate loend ja kustutamine",
+      "full_restore_user": "Täielik taastamine (kasutaja)",
+      "selective_restore": "Valikuline taastamine (veeb / DB / post)",
+      "backup_file_locations": "Failide asukohtade varundamine",
+      "backup_tarball_contents": "Varunda Tarballi sisu",
+      "backupctl_help": "backupctl abi"
+    }
+  }
 }

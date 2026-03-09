@@ -1,94 +1,314 @@
 {
-    "app": {
-        "title": "Tabloul de bord al serverului"
+  "app": {
+    "title": "Tabloul de bord al serverului"
+  },
+  "nav": {
+    "history": "Istoric",
+    "logs": "Jurnale",
+    "dashboard": "Tablou de bord",
+    "services": "Servicii",
+    "alerts": "Alerte",
+    "tests": "Teste",
+    "settings": "Setări",
+    "about": "Despre"
+  },
+  "history": {
+    "title": "Istoric",
+    "trends": "Tendințe",
+    "range": "Gama",
+    "baseline": "Linia de bază",
+    "probe_now": "Sondați acum",
+    "refresh": "Reîmprospătare",
+    "export_json": "Exportați JSON",
+    "export_alerts_json": "Export alerte JSON",
+    "reset_history": "Resetați istoricul",
+    "recent_alert_events": "Evenimente recente de alertă",
+    "export_preview": "Previzualizare export",
+    "close": "Închidere",
+    "copy": "Copiați",
+    "download": "Descărcare"
+  },
+  "logs": {
+    "title": "Jurnale",
+    "manage": "Gestionați jurnalele",
+    "add": "Adaugă",
+    "delete": "Ștergeți",
+    "refresh": "Reîmprospătare",
+    "search": "Căutare",
+    "filter": "Filtru",
+    "lines": "Linii",
+    "open": "Deschis",
+    "close": "Închidere",
+    "download": "Descărcare",
+    "copy": "Copiați"
+  },
+  "common": {
+    "save": "Salvați",
+    "cancel": "Anulează",
+    "edit": "Editare",
+    "delete": "Ștergeți",
+    "update": "Actualizare",
+    "create": "Creați",
+    "enable": "Activare",
+    "disable": "Dezactivare",
+    "yes": "Da",
+    "no": "Nu",
+    "on": "Pe",
+    "off": "Oprit",
+    "confirm": "Confirmați",
+    "search": "Căutare",
+    "filter": "Filtru",
+    "actions": "Acțiuni"
+  },
+  "alerts": {
+    "title": "Alerte",
+    "recent_events": "Evenimente recente de alertă",
+    "history": "Istoricul alertelor",
+    "export_json": "Export alerte JSON",
+    "no_alerts": "Nicio alertă",
+    "level": "Nivel",
+    "message": "Mesaj",
+    "service": "Service",
+    "time": "Timp",
+    "probe_now": "Sondați acum",
+    "refresh": "Reîmprospătare",
+    "silence": "Tăcere",
+    "unsilence": "Nesilință",
+    "ack": "Recunoașteți",
+    "unack": "Necunoaștere"
+  },
+  "tests": {
+    "title": "Teste server",
+    "run_all": "Rulați toate",
+    "status": "Statut",
+    "last_run": "Ultima rulare",
+    "duration": "Durată"
+  },
+  "services": {
+    "title": "Servicii",
+    "status": "Statut",
+    "restart": "Repornire",
+    "start": "Start",
+    "stop": "Oprire"
+  },
+  "config": {
+    "sections": {
+      "site": "Site",
+      "features": "Features",
+      "capabilities": "Capabilities",
+      "processes": "Processes",
+      "mail": "Mail",
+      "integrations": "Integrations",
+      "security": "Security",
+      "ui": "UI",
+      "server_tests": "Server Tests",
+      "alerts": "Alerts",
+      "cron": "Cron",
+      "history": "History",
+      "logs": "Logs",
+      "backups": "Backup-uri",
+      "email": "Email"
     },
-    "nav": {
-        "history": "Istoric",
-        "logs": "Jurnale",
-        "dashboard": "Tablou de bord",
-        "services": "Servicii",
-        "alerts": "Alerte",
-        "tests": "Teste",
-        "settings": "Set\u0103ri",
-        "about": "Despre"
+    "fields": {
+      "backups": {
+        "require_dedicated_mount": {
+          "label": "Necesită montură dedicată",
+          "help": "Cheie de compatibilitate moștenită. Când sunt activate, scripturile de rezervă necesită ca suportul de rezervă să fie prezent."
+        },
+        "disable_on_mount_fail": {
+          "label": "Dezactivați backup-urile dacă montarea eșuează",
+          "help": "Când sunt activate, acțiunile de backup și scripturile generate se opresc dacă suportul de rezervă lipsește."
+        }
+      },
+      "alerts": {
+        "min_severity": {
+          "label": "Severitate minimă pentru alerta"
+        },
+        "email": {
+          "label": "Legacy alert email(s)"
+        }
+      }
     },
-    "history": {
-        "title": "Istoric",
-        "trends": "Tendin\u021be",
-        "range": "Gama",
-        "baseline": "Linia de baz\u0103",
-        "probe_now": "Sonda\u021bi acum",
-        "refresh": "Re\u00eemprosp\u0103tare",
-        "export_json": "Export JSON",
-        "export_alerts_json": "Export alerte JSON",
-        "reset_history": "Reseta\u021bi istoricul",
-        "recent_alert_events": "Evenimente recente de alert\u0103",
-        "export_preview": "Previzualizare export",
-        "close": "\u00cenchidere",
-        "copy": "Copia\u021bi",
-        "download": "Desc\u0103rcare"
-    },
-    "logs": {
-        "title": "Jurnale",
-        "manage": "Gestiona\u021bi jurnalele",
-        "add": "Adaug\u0103",
-        "delete": "\u0218terge\u021bi",
-        "refresh": "Re\u00eemprosp\u0103tare",
-        "search": "C\u0103utare",
-        "filter": "Filtru",
-        "lines": "Linii",
-        "open": "Deschis",
-        "close": "\u00cenchidere",
-        "download": "Desc\u0103rcare",
-        "copy": "Copia\u021bi"
-    },
-    "common": {
-        "save": "Salva\u021bi",
-        "cancel": "Anuleaz\u0103",
-        "edit": "Editare",
-        "delete": "\u0218terge\u021bi",
-        "update": "Actualizare",
-        "create": "Crea\u021bi",
-        "enable": "Activare",
-        "disable": "Dezactivare",
-        "yes": "Da",
-        "no": "Nu",
-        "on": "Pe",
-        "off": "Oprit",
-        "confirm": "Confirma\u021bi",
-        "search": "C\u0103utare",
-        "filter": "Filtru",
-        "actions": "Ac\u021biuni"
-    },
-    "alerts": {
-        "title": "Alerte",
-        "recent_events": "Evenimente recente de alert\u0103",
-        "history": "Istoricul alertelor",
-        "export_json": "Export alerte JSON",
-        "no_alerts": "Nicio alert\u0103",
-        "level": "Nivel",
-        "message": "Mesaj",
-        "service": "Service",
-        "time": "Timp",
-        "probe_now": "Sonda\u021bi acum",
-        "refresh": "Re\u00eemprosp\u0103tare",
-        "silence": "T\u0103cere",
-        "unsilence": "Nesilin\u021b\u0103",
-        "ack": "Recunoa\u0219te\u021bi",
-        "unack": "Necunoa\u0219tere"
-    },
-    "tests": {
-        "title": "Teste server",
-        "run_all": "Rula\u021bi toate",
-        "status": "Statut",
-        "last_run": "Ultima rulare",
-        "duration": "Durat\u0103"
-    },
-    "services": {
-        "title": "Servicii",
-        "status": "Statut",
-        "restart": "Repornire",
-        "start": "Start",
-        "stop": "Oprire"
+    "ui": {
+      "unknown": "necunoscut",
+      "unknown_paren": "(necunoscut)",
+      "site_backup": {
+        "title": "Backup și restaurare",
+        "export_config": "Export config",
+        "import_config": "Import configurație",
+        "choose_file_first": "Alegeți mai întâi un fișier de rezervă",
+        "imported_reloading": "Importat. Se reîncarcă...",
+        "import_failed": "Importul nu a reușit",
+        "import_failed_prefix": "Import eșuat:",
+        "retention_title": "Backups - Reținere",
+        "keep_last": "Rămâneți ultimul",
+        "files": "fişiere",
+        "loading_stats": "(se încarcă statistici...)",
+        "last_backup_loading": "Ultima copie de rezervă: (se încarcă...)",
+        "last_backup_none": "Ultima copie de rezervă: încă niciuna",
+        "last_backup_prefix": "Ultima copie de rezervă:",
+        "last_backup_unknown": "Ultima copie de rezervă: necunoscut",
+        "prune_now": "Tunde acum",
+        "pruned_kept_deleted": "Tuns - păstrat",
+        "deleted_prefix": "șters",
+        "prune_failed": "Prune a eșuat",
+        "prune_failed_prefix": "Prune nu a reușit:",
+        "create_backup_now": "Creați o copie de rezervă acum",
+        "backup_saved_prefix": "Backup salvat:",
+        "backup_failed": "Copierea de rezervă a eșuat",
+        "backup_failed_prefix": "Backup eșuat:",
+        "download_latest_backup": "Descărcați cea mai recentă copie de rezervă",
+        "no_backups_found": "Nu s-au găsit copii de rezervă",
+        "download_failed_prefix": "Descărcarea a eșuat:",
+        "redact_secrets": "Redact secrets"
+      }
     }
+  },
+  "backups": {
+    "common": {
+      "status": "Stare:",
+      "timestamp": "Marcaj temporal:",
+      "none_dash": "-",
+      "free": "Gratuit",
+      "used": "Folosit",
+      "copy": "Copie",
+      "warnings": "Avertismente",
+      "errors": "Erori",
+      "loading": "Încărcare..."
+    },
+    "status": {
+      "error_loading_json": "EROARE LA ÎNCĂRCARE JSON",
+      "ok": "Bine",
+      "unmounted": "NEMONTAT",
+      "critical": "CRITIC",
+      "high": "RIDICAT",
+      "elevated": "ELEVATĂ",
+      "healthy": "SĂNĂTOS",
+      "unknown": "NECUNOSCUT",
+      "unknown_cap": "Necunoscut"
+    },
+    "disk": {
+      "unmounted": "Disc NEMONTAT",
+      "tag": "Disc:",
+      "sizes_updated": "Dimensiuni actualizate:",
+      "title": "Utilizarea discului",
+      "usage": "Utilizare",
+      "mount": "Munte"
+    },
+    "page": {
+      "freshness_prefix": "Prospeţime:",
+      "title": "Centru de control de rezervă",
+      "subtitle_prefix": "Starea live condusă de",
+      "subtitle_suffix": "pe discul dvs. de rezervă."
+    },
+    "ages": {
+      "no_snapshots_on_disk": "Nu s-au găsit instantanee pe disc",
+      "one_snapshot_present": "1 instantaneu prezent",
+      "snapshots_present_suffix": "instantanee prezente",
+      "no_panel_backups_on_disk": "Nu s-au găsit copii de rezervă ale panoului pe disc",
+      "one_panel_backup_present": "1 backup pentru panou prezent",
+      "panel_backups_present_suffix": "copii de rezervă ale panoului prezente",
+      "no_micro_backups_on_disk": "Nu s-au găsit micro copii de rezervă pe disc",
+      "one_micro_backup_present": "1 micro backup prezent",
+      "micro_backups_present_suffix": "micro backup-uri prezente",
+      "snapshot_daily0_chart": "Instantaneu (zilnic.0)",
+      "hestia_latest_chart": "Hestia cel mai recent",
+      "micro_latest_chart": "Cel mai recent micro",
+      "age_days": "Varsta (zile)",
+      "title": "Backup Ages",
+      "subtitle": "Cât de proaspete sunt cele mai recente copii de rezervă",
+      "snapshot_daily0": "Instantaneu zilnic.0",
+      "latest_hestia": "Ultima Hestia",
+      "latest_micro": "Cel mai recent Micro"
+    },
+    "errors": {
+      "no_backups_detected": "Nu au fost detectate copii de rezervă pentru instantanee, Hestia sau microseturi."
+    },
+    "restore": {
+      "hestia_placeholder_tar": "genă.AAAAMMDD-HHMM.tar",
+      "using_latest_backup_prefix": "Folosind cea mai recentă copie de rezervă raportată în JSON:",
+      "adjust_backup_tar": "Ajustați BACKUP_TAR la un fișier real din \\\"gena v-list-backups\\\" înainte de a rula.",
+      "micro_restore_prefix": "Restaurați baza de la cel mai recent micro instantaneu:",
+      "micro_restore_suffix": "(examinați căile și excluderile înainte de a rula).",
+      "set_correct_snapshot_path": "Setați calea corectă a instantaneului înainte de a utiliza această comandă.",
+      "confirm_body_1": "Aceasta va începe o lucrare de restaurare Hestia pe server folosind backupctl.",
+      "confirm_body_2": "Serviciile și datele pentru acel utilizator pot fi suprascrise.",
+      "confirm_body_3": "Ești absolut sigur?"
+    },
+    "actions": {
+      "starting_prefix": "Pornire",
+      "failed_to_start_prefix": "Pornirea eșuată",
+      "started_prefix": "A început",
+      "started_suffix": ". Acest lucru poate dura ceva timp; starea se va actualiza la următoarea verificare de sănătate.",
+      "error_talking_endpoint": "Eroare la vorbirea cu backups_action.php",
+      "run_os_snapshot": "Rulați OS Snapshot",
+      "run_micro_backup": "Rulați Micro Backup",
+      "run_hestia_backup_user": "Rulați Hestia Backup (genă)",
+      "run_all_backups": "Rulați TOATE copiile de rezervă",
+      "run_health_check": "Executați verificarea stării de sănătate",
+      "log_maintenance": "Întreținerea jurnalului",
+      "clear_backup_logs": "Ștergeți jurnalele de sănătate de rezervă",
+      "clear_prune_logs": "Curățați buștenii de prune",
+      "clear_integrity_log": "Ștergeți jurnalul de integritate"
+    },
+    "cron": {
+      "no_entries": "Nu au fost detectate intrări crontab.",
+      "env": "Env",
+      "schedule": "Programa",
+      "entries_for_prefix": "Intrări Crontab pentru",
+      "current_user": "utilizator actual",
+      "unable_to_read": "Nu se poate citi crontab.",
+      "failed_to_read": "Nu s-a putut citi crontab."
+    },
+    "warnings_errors": {
+      "title": "Avertismente și erori",
+      "subtitle": "Rezumat de la controlul de sănătate"
+    },
+    "raw_snapshot": {
+      "title": "Instantaneu brut",
+      "subtitle": "Valori cheie direct din ultima stare JSON"
+    },
+    "recent_actions": {
+      "title": "Acțiuni recente",
+      "subtitle": "Istoricul acțiunilor din acest tablou de bord",
+      "none": "Nu au fost înregistrate acțiuni încă."
+    },
+    "orch": {
+      "title": "Expert pentru orchestrare de rezervă",
+      "subtitle": "Personalizați căile o dată, apoi copiați unitățile script/cron/systemd generate.",
+      "backup_root": "Rădăcină de rezervă",
+      "include_health": "Includeți verificarea sănătății",
+      "include_integrity": "Includeți verificarea integrității",
+      "include_prune": "Includeți etapa de prune",
+      "suspend": "Suspendați copiile de rezervă",
+      "disable_on_mount_fail": "Dezactivați backup-urile dacă montarea eșuează",
+      "nightly_script": "Scenariul de noapte",
+      "copy_script": "Copiați scriptul",
+      "cron_entry": "Intrarea Cron",
+      "copy_cron_line": "Copiați linia cron",
+      "systemd_service": "Serviciu Systemd",
+      "copy_unit": "Unitatea de copiere",
+      "systemd_timer": "Temporizator de sistem",
+      "copy_timer": "Cronometru pentru copiere"
+    },
+    "quick_restore": {
+      "title": "Ajutor de restaurare rapidă",
+      "subtitle": "Comenzi CLI precompletate pentru situații de urgență (funcționare manuală sau buton PERICOL)",
+      "hestia_latest_title": "Restaurați cea mai recentă copie de rezervă a utilizatorului Hestia",
+      "micro_latest_title": "Restaurare de la cel mai recent micro instantaneu (numai CLI)",
+      "copy_command": "Comanda de copiere",
+      "run_restore_danger": "Rulați restaurarea (cel mai recent, PERICOL)"
+    },
+    "cli": {
+      "title": "Hestia Backup & Restore CLI",
+      "subtitle": "Foaie de referință rapidă - gata pentru copiere și lipire",
+      "create_backups": "Creați copii de rezervă",
+      "list_delete_backups": "Listați și ștergeți copiile de rezervă",
+      "full_restore_user": "Restaurare completă (utilizator)",
+      "selective_restore": "Restaurare selectivă (Web / DB / Mail)",
+      "backup_file_locations": "Locațiile fișierelor de rezervă",
+      "backup_tarball_contents": "Backup conținut tarball",
+      "backupctl_help": "ajutor backupctl"
+    }
+  }
 }

@@ -1,94 +1,314 @@
 {
-    "app": {
-        "title": "Pulpit nawigacyjny serwera"
+  "app": {
+    "title": "Pulpit nawigacyjny serwera"
+  },
+  "nav": {
+    "history": "Historia",
+    "logs": "Dzienniki",
+    "dashboard": "Pulpit nawigacyjny",
+    "services": "Usługi",
+    "alerts": "Alerty",
+    "tests": "Testy",
+    "settings": "Ustawienia",
+    "about": "O"
+  },
+  "history": {
+    "title": "Historia",
+    "trends": "Trendy",
+    "range": "Zasięg",
+    "baseline": "Linia bazowa",
+    "probe_now": "Sonda teraz",
+    "refresh": "Odświeżanie",
+    "export_json": "Eksport JSON",
+    "export_alerts_json": "Eksport alertów JSON",
+    "reset_history": "Resetowanie historii",
+    "recent_alert_events": "Ostatnie zdarzenia alarmowe",
+    "export_preview": "Podgląd eksportu",
+    "close": "Zamknij",
+    "copy": "Kopia",
+    "download": "Pobierz"
+  },
+  "logs": {
+    "title": "Dzienniki",
+    "manage": "Zarządzanie dziennikami",
+    "add": "Dodaj",
+    "delete": "Usuń",
+    "refresh": "Odświeżanie",
+    "search": "Wyszukiwanie",
+    "filter": "Filtr",
+    "lines": "Linie",
+    "open": "Otwarty",
+    "close": "Zamknij",
+    "download": "Pobierz",
+    "copy": "Kopia"
+  },
+  "common": {
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "edit": "Edytuj",
+    "delete": "Usuń",
+    "update": "Aktualizacja",
+    "create": "Utwórz",
+    "enable": "Włącz",
+    "disable": "Wyłącz",
+    "yes": "Tak",
+    "no": "Nie",
+    "on": "Na",
+    "off": "Wył.",
+    "confirm": "Potwierdzenie",
+    "search": "Wyszukiwanie",
+    "filter": "Filtr",
+    "actions": "Działania"
+  },
+  "alerts": {
+    "title": "Alerty",
+    "recent_events": "Ostatnie zdarzenia alarmowe",
+    "history": "Historia alertów",
+    "export_json": "Eksport alertów JSON",
+    "no_alerts": "Brak alertów",
+    "level": "Poziom",
+    "message": "Wiadomość",
+    "service": "Usługa",
+    "time": "Czas",
+    "probe_now": "Sonda teraz",
+    "refresh": "Odświeżanie",
+    "silence": "Cisza",
+    "unsilence": "Cisza",
+    "ack": "Potwierdzenie",
+    "unack": "Niewiedza"
+  },
+  "tests": {
+    "title": "Testy serwera",
+    "run_all": "Uruchom wszystko",
+    "status": "Status",
+    "last_run": "Ostatni bieg",
+    "duration": "Czas trwania"
+  },
+  "services": {
+    "title": "Usługi",
+    "status": "Status",
+    "restart": "Restart",
+    "start": "Start",
+    "stop": "Stop"
+  },
+  "config": {
+    "sections": {
+      "site": "Site",
+      "features": "Features",
+      "capabilities": "Capabilities",
+      "processes": "Processes",
+      "mail": "Mail",
+      "integrations": "Integrations",
+      "security": "Security",
+      "ui": "UI",
+      "server_tests": "Server Tests",
+      "alerts": "Alerts",
+      "cron": "Cron",
+      "history": "History",
+      "logs": "Logs",
+      "backups": "Kopie zapasowe",
+      "email": "Email"
     },
-    "nav": {
-        "history": "Historia",
-        "logs": "Dzienniki",
-        "dashboard": "Pulpit nawigacyjny",
-        "services": "Us\u0142ugi",
-        "alerts": "Alerty",
-        "tests": "Testy",
-        "settings": "Ustawienia",
-        "about": "O"
+    "fields": {
+      "backups": {
+        "require_dedicated_mount": {
+          "label": "Wymagaj dedykowanego uchwytu",
+          "help": "Starszy klucz zgodności. Gdy ta opcja jest włączona, skrypty kopii zapasowych wymagają obecności instalacji kopii zapasowej."
+        },
+        "disable_on_mount_fail": {
+          "label": "Wyłącz kopie zapasowe, jeśli montaż się nie powiedzie",
+          "help": "Gdy ta opcja jest włączona, akcje tworzenia kopii zapasowych i wygenerowane skrypty zatrzymują się, jeśli brakuje montowania kopii zapasowej."
+        }
+      },
+      "alerts": {
+        "min_severity": {
+          "label": "Minimalna ważność alertu"
+        },
+        "email": {
+          "label": "Legacy alert email(s)"
+        }
+      }
     },
-    "history": {
-        "title": "Historia",
-        "trends": "Trendy",
-        "range": "Zasi\u0119g",
-        "baseline": "Linia bazowa",
-        "probe_now": "Sonda teraz",
-        "refresh": "Od\u015bwie\u017canie",
-        "export_json": "Eksport JSON",
-        "export_alerts_json": "Eksport alert\u00f3w JSON",
-        "reset_history": "Resetowanie historii",
-        "recent_alert_events": "Ostatnie zdarzenia alarmowe",
-        "export_preview": "Podgl\u0105d eksportu",
-        "close": "Zamknij",
-        "copy": "Kopia",
-        "download": "Pobierz"
-    },
-    "logs": {
-        "title": "Dzienniki",
-        "manage": "Zarz\u0105dzanie dziennikami",
-        "add": "Dodaj",
-        "delete": "Usu\u0144",
-        "refresh": "Od\u015bwie\u017canie",
-        "search": "Wyszukiwanie",
-        "filter": "Filtr",
-        "lines": "Linie",
-        "open": "Otwarty",
-        "close": "Zamknij",
-        "download": "Pobierz",
-        "copy": "Kopia"
-    },
-    "common": {
-        "save": "Zapisz",
-        "cancel": "Anuluj",
-        "edit": "Edytuj",
-        "delete": "Usu\u0144",
-        "update": "Aktualizacja",
-        "create": "Utw\u00f3rz",
-        "enable": "W\u0142\u0105cz",
-        "disable": "Wy\u0142\u0105cz",
-        "yes": "Tak",
-        "no": "Nie",
-        "on": "Na",
-        "off": "Wy\u0142.",
-        "confirm": "Potwierdzenie",
-        "search": "Wyszukiwanie",
-        "filter": "Filtr",
-        "actions": "Dzia\u0142ania"
-    },
-    "alerts": {
-        "title": "Alerty",
-        "recent_events": "Ostatnie zdarzenia alarmowe",
-        "history": "Historia alert\u00f3w",
-        "export_json": "Eksport alert\u00f3w JSON",
-        "no_alerts": "Brak alert\u00f3w",
-        "level": "Poziom",
-        "message": "Wiadomo\u015b\u0107",
-        "service": "Us\u0142uga",
-        "time": "Czas",
-        "probe_now": "Sonda teraz",
-        "refresh": "Od\u015bwie\u017canie",
-        "silence": "Cisza",
-        "unsilence": "Cisza",
-        "ack": "Potwierdzenie",
-        "unack": "Niewiedza"
-    },
-    "tests": {
-        "title": "Testy serwera",
-        "run_all": "Uruchom wszystko",
-        "status": "Status",
-        "last_run": "Ostatni bieg",
-        "duration": "Czas trwania"
-    },
-    "services": {
-        "title": "Us\u0142ugi",
-        "status": "Status",
-        "restart": "Restart",
-        "start": "Start",
-        "stop": "Stop"
+    "ui": {
+      "unknown": "nieznany",
+      "unknown_paren": "(nieznany)",
+      "site_backup": {
+        "title": "Kopia zapasowa i przywracanie",
+        "export_config": "Eksportuj konfigurację",
+        "import_config": "Importuj konfigurację",
+        "choose_file_first": "Najpierw wybierz plik kopii zapasowej",
+        "imported_reloading": "Importowany. Ponowne ładowanie...",
+        "import_failed": "Import nie powiódł się",
+        "import_failed_prefix": "Import nie powiódł się:",
+        "retention_title": "Kopie zapasowe — przechowywanie",
+        "keep_last": "Zachowaj ostatni",
+        "files": "akta",
+        "loading_stats": "(ładowanie statystyk...)",
+        "last_backup_loading": "Ostatnia kopia zapasowa: (ładowanie...)",
+        "last_backup_none": "Ostatnia kopia zapasowa: jeszcze żadna",
+        "last_backup_prefix": "Ostatnia kopia zapasowa:",
+        "last_backup_unknown": "Ostatnia kopia zapasowa: nieznana",
+        "prune_now": "Przytnij teraz",
+        "pruned_kept_deleted": "Przycięty - zachowany",
+        "deleted_prefix": "usunięte",
+        "prune_failed": "Przycinanie nie powiodło się",
+        "prune_failed_prefix": "Przycinanie nie powiodło się:",
+        "create_backup_now": "Utwórz kopię zapasową teraz",
+        "backup_saved_prefix": "Zapisano kopię zapasową:",
+        "backup_failed": "Tworzenie kopii zapasowej nie powiodło się",
+        "backup_failed_prefix": "Tworzenie kopii zapasowej nie powiodło się:",
+        "download_latest_backup": "Pobierz najnowszą kopię zapasową",
+        "no_backups_found": "Nie znaleziono kopii zapasowych",
+        "download_failed_prefix": "Pobieranie nie powiodło się:",
+        "redact_secrets": "Redact secrets"
+      }
     }
+  },
+  "backups": {
+    "common": {
+      "status": "Status:",
+      "timestamp": "Znacznik czasu:",
+      "none_dash": "-",
+      "free": "Bezpłatny",
+      "used": "Używany",
+      "copy": "Kopia",
+      "warnings": "Ostrzeżenia",
+      "errors": "Błędy",
+      "loading": "Załadunek..."
+    },
+    "status": {
+      "error_loading_json": "BŁĄD ŁADOWANIA JSON",
+      "ok": "OK",
+      "unmounted": "NIEOPRAWNY",
+      "critical": "KRYTYCZNY",
+      "high": "WYSOKI",
+      "elevated": "PODNIESIONY",
+      "healthy": "ZDROWY",
+      "unknown": "NIEZNANY",
+      "unknown_cap": "Nieznany"
+    },
+    "disk": {
+      "unmounted": "Dysk NIEMONTOWANY",
+      "tag": "Dysk:",
+      "sizes_updated": "Zaktualizowano rozmiary:",
+      "title": "Wykorzystanie dysku",
+      "usage": "Stosowanie",
+      "mount": "Uchwyt"
+    },
+    "page": {
+      "freshness_prefix": "Świeżość:",
+      "title": "Centrum kontroli kopii zapasowych",
+      "subtitle_prefix": "Stan na żywo sterowany przez",
+      "subtitle_suffix": "na dysku kopii zapasowej."
+    },
+    "ages": {
+      "no_snapshots_on_disk": "Nie znaleziono zrzutów ekranu na dysku",
+      "one_snapshot_present": "Dostępna jest 1 migawka",
+      "snapshots_present_suffix": "obecne migawki",
+      "no_panel_backups_on_disk": "Na dysku nie znaleziono kopii zapasowych panelu",
+      "one_panel_backup_present": "Dostępny jest 1 zapasowy panel",
+      "panel_backups_present_suffix": "obecne kopie zapasowe panelu",
+      "no_micro_backups_on_disk": "Na dysku nie znaleziono mikrokopii zapasowych",
+      "one_micro_backup_present": "Dostępna jest 1 mikro kopia zapasowa",
+      "micro_backups_present_suffix": "obecne mikro kopie zapasowe",
+      "snapshot_daily0_chart": "Migawka (codziennie.0)",
+      "hestia_latest_chart": "Najnowsza wersja Hestii",
+      "micro_latest_chart": "Najnowsze mikro",
+      "age_days": "Wiek (dni)",
+      "title": "Wiek kopii zapasowych",
+      "subtitle": "Jak świeże są Twoje najnowsze kopie zapasowe",
+      "snapshot_daily0": "Migawka codziennie.0",
+      "latest_hestia": "Najnowsza Hestia",
+      "latest_micro": "Najnowsze mikro"
+    },
+    "errors": {
+      "no_backups_detected": "Nie wykryto kopii zapasowych migawek, Hestii ani mikrozestawów."
+    },
+    "restore": {
+      "hestia_placeholder_tar": "gen.RRRRMMDD-HHMM.tar",
+      "using_latest_backup_prefix": "Korzystanie z najnowszej kopii zapasowej zgłoszonej w formacie JSON:",
+      "adjust_backup_tar": "Przed uruchomieniem dostosuj BACKUP_TAR do prawdziwego pliku z ``v-list-backups gen'').",
+      "micro_restore_prefix": "Przywróć bazę z najnowszej mikro migawki:",
+      "micro_restore_suffix": "(przejrzyj ścieżki i wykluczenia przed uruchomieniem).",
+      "set_correct_snapshot_path": "Przed użyciem tego polecenia ustaw poprawną ścieżkę migawki.",
+      "confirm_body_1": "Spowoduje to rozpoczęcie zadania przywracania Hestii na serwerze przy użyciu kopii zapasowejctl.",
+      "confirm_body_2": "Usługi i dane tego użytkownika mogą zostać nadpisane.",
+      "confirm_body_3": "Czy jesteś tego całkowicie pewien?"
+    },
+    "actions": {
+      "starting_prefix": "Startowy",
+      "failed_to_start_prefix": "NIE udało się uruchomić",
+      "started_prefix": "Rozpoczęło się",
+      "started_suffix": ". Może to chwilę potrwać; status zostanie zaktualizowany podczas następnej kontroli stanu.",
+      "error_talking_endpoint": "Błąd podczas rozmowy z kopiami zapasowymi_action.php",
+      "run_os_snapshot": "Uruchom migawkę systemu operacyjnego",
+      "run_micro_backup": "Uruchom mikro kopię zapasową",
+      "run_hestia_backup_user": "Uruchom kopię zapasową Hestii (gen)",
+      "run_all_backups": "Uruchom WSZYSTKIE kopie zapasowe",
+      "run_health_check": "Uruchom kontrolę stanu",
+      "log_maintenance": "Konserwacja dziennika",
+      "clear_backup_logs": "Wyczyść dzienniki stanu kopii zapasowych",
+      "clear_prune_logs": "Wyczyść kłody przycinania",
+      "clear_integrity_log": "Wyczyść dziennik integralności"
+    },
+    "cron": {
+      "no_entries": "Nie wykryto wpisów crontab.",
+      "env": "Kop",
+      "schedule": "Harmonogram",
+      "entries_for_prefix": "Wpisy Crontab dla",
+      "current_user": "bieżący użytkownik",
+      "unable_to_read": "Nie można odczytać pliku crontab.",
+      "failed_to_read": "Nie udało się odczytać pliku crontab."
+    },
+    "warnings_errors": {
+      "title": "Ostrzeżenia i błędy",
+      "subtitle": "Podsumowanie kontroli stanu zdrowia"
+    },
+    "raw_snapshot": {
+      "title": "Surowe zdjęcie",
+      "subtitle": "Wartości kluczy bezpośrednio z ostatniego stanu JSON"
+    },
+    "recent_actions": {
+      "title": "Ostatnie działania",
+      "subtitle": "Historia działań z tego dashboardu",
+      "none": "Nie zarejestrowano jeszcze żadnych działań."
+    },
+    "orch": {
+      "title": "Kreator orkiestracji kopii zapasowych",
+      "subtitle": "Dostosuj ścieżki raz, a następnie skopiuj wygenerowane jednostki skryptu/cron/systemd.",
+      "backup_root": "Korzeń zapasowy",
+      "include_health": "Uwzględnij kontrolę stanu zdrowia",
+      "include_integrity": "Uwzględnij kontrolę integralności",
+      "include_prune": "Uwzględnij etap przycinania",
+      "suspend": "Zawieś kopie zapasowe",
+      "disable_on_mount_fail": "Wyłącz kopie zapasowe, jeśli montaż się nie powiedzie",
+      "nightly_script": "Scenariusz nocny",
+      "copy_script": "Skopiuj skrypt",
+      "cron_entry": "Wpis Crona",
+      "copy_cron_line": "Skopiuj linię cron",
+      "systemd_service": "Usługa systemowa",
+      "copy_unit": "Skopiuj jednostkę",
+      "systemd_timer": "Zegar systemowy",
+      "copy_timer": "Kopiuj timer"
+    },
+    "quick_restore": {
+      "title": "Pomocnicy szybkiego przywracania",
+      "subtitle": "Wstępnie wypełnione polecenia CLI na wypadek sytuacji awaryjnych (uruchamianie ręczne lub przycisk NIEBEZPIECZEŃSTWO)",
+      "hestia_latest_title": "Przywróć najnowszą kopię zapasową użytkownika Hestii",
+      "micro_latest_title": "Przywróć z najnowszej mikro migawki (tylko CLI)",
+      "copy_command": "Kopiuj polecenie",
+      "run_restore_danger": "Uruchom przywracanie (najnowsze, NIEBEZPIECZEŃSTWO)"
+    },
+    "cli": {
+      "title": "Hestia Backup & Restore CLI",
+      "subtitle": "Skrócona instrukcja obsługi – gotowa do kopiowania i wklejania",
+      "create_backups": "Twórz kopie zapasowe",
+      "list_delete_backups": "Wyświetlaj i usuwaj kopie zapasowe",
+      "full_restore_user": "Pełne przywracanie (użytkownik)",
+      "selective_restore": "Przywracanie selektywne (sieć / baza danych / poczta)",
+      "backup_file_locations": "Lokalizacje plików kopii zapasowych",
+      "backup_tarball_contents": "Kopia zapasowa zawartości tarballa",
+      "backupctl_help": "pomoc w kopii zapasowej"
+    }
+  }
 }

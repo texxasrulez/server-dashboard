@@ -5,6 +5,7 @@
 **Purpose:** Non-destructive portability check for common server prerequisites.
 
 ## What it checks
+
 - PHP version ≥ 7.4 (works on 8.x)
 - Sessions usable
 - JSON extension present
@@ -14,13 +15,15 @@
 - Optional: `mbstring` availability
 
 ## How to run
+
 1. Deploy the project normally.
 2. Visit `/tools/selftest.php` in a browser.
 3. Expect a table of checks showing ✅ for OK and ⚠️ if attention is needed.
 
 ## Fixes for common failures
+
 - **`state/` not writable**  
-  Linux (Apache/Nginx):  
+  Linux (Apache/Nginx):
   ```bash
   chown -R www-data:www-data state
   chmod -R u+rwX,g+rwX state
@@ -34,8 +37,10 @@
   Confirm site base URL and web root mapping are correct; app does not rely on `DOCUMENT_ROOT`.
 
 ## Safety
+
 - Read-only except for checking writability of `state/` (no file creation or deletion).
 - No network calls required.
 
 ## Theme/layout
+
 - Uses base styles (`/assets/css/core.css`). No special width or alignment requirements.

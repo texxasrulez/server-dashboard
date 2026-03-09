@@ -340,7 +340,19 @@ fi
 # --------------------------------------------------------------------
 snap_age_days=null
 snap_latest_path=""
+snap_entries_count=null
 if [ "$SKIP_SNAP" = false ]; then
+  if [ -d "$SNAP_DIR" ]; then
+    snap_entries_count="$(
+      { find "$SNAP_DIR" -mindepth 1 -maxdepth 1 \
+          ! -name 'lost+found' \
+          -printf '.' 2>/dev/null || true; } \
+        | wc -c | awk '{print $1}'
+    )"
+    snap_entries_count="${snap_entries_count:-0}"
+  else
+    snap_entries_count=0
+  fi
   snap_marker="$SNAP_DIR/daily.0/.snapshot_complete"
   snap_latest_path="$({ find "$SNAP_DIR" -mindepth 1 -maxdepth 1 -type d \
     ! -name 'lost+found' -printf '%T@ %p\n' 2>/dev/null || true; } \
@@ -395,9 +407,15 @@ fi
 hestia_age_days=null
 hestia_latest_file=""
 hestia_latest_name=""
+hestia_entries_count=null
 
 if [ "$SKIP_HESTIA" = false ]; then
   if [ -d "$HESTIA_DIR" ]; then
+    hestia_entries_count="$(
+      { find "$HESTIA_DIR" -type f -name '*.tar*' -printf '.' 2>/dev/null || true; } \
+        | wc -c | awk '{print $1}'
+    )"
+    hestia_entries_count="${hestia_entries_count:-0}"
     hestia_latest_file="$(
       { find "$HESTIA_DIR" -type f -name '*.tar*' -printf '%T@ %p\n' 2>/dev/null || true; } \
         | sort -n | tail -n1 | cut -d' ' -f2-
@@ -416,6 +434,7 @@ if [ "$SKIP_HESTIA" = false ]; then
       add_warn "No Hestia backups found in ${HESTIA_DIR}."
     fi
   else
+    hestia_entries_count=0
     add_warn "Hestia backup directory ${HESTIA_DIR} does not exist."
   fi
 fi
@@ -582,6 +601,8 @@ jq -n \
   --argjson hestia_age "${hestia_age_days}" \
   --argjson micro_age "${micro_age_days}" \
   --arg micro_latest "${micro_latest_path:-}" \
+  --argjson snap_count "${snap_entries_count}" \
+  --argjson hestia_count "${hestia_entries_count}" \
   --argjson micro_count "$micro_entries_count" \
   --arg hestia_latest_name "${hestia_latest_name:-}" \
   --argjson mount_ok "$backup_mount_ok_json" \
@@ -607,11 +628,13 @@ jq -n \
     ]
   },
   "snapshots": {
-    "daily0_age_days": $snap_age
+    "daily0_age_days": $snap_age,
+    "entries_count": $snap_count
   },
   "hestia": {
     "latest_age_days": $hestia_age,
-    "latest_backup_name": $hestia_latest_name
+    "latest_backup_name": $hestia_latest_name,
+    "entries_count": $hestia_count
   },
   "micro": {
     "latest_age_days": $micro_age,

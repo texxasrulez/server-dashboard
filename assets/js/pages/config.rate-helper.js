@@ -1,1 +1,7 @@
-(function(){ window.__CONFIG_SAVE_HELPER__ = window.__CONFIG_SAVE_HELPER__ || function(){ console.warn('helper missing'); };})();
+(function () {
+  window.__CONFIG_SAVE_HELPER__ =
+    window.__CONFIG_SAVE_HELPER__ ||
+    function () {
+      console.warn("helper missing");
+    };
+})();

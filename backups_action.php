@@ -1,4 +1,5 @@
 <?php
+
 // backups_action.php
 // JSON API for dashboard backup buttons
 
@@ -23,9 +24,13 @@ set_exception_handler(function (Throwable $e): void {
 
 register_shutdown_function(function (): void {
     $err = error_get_last();
-    if (!$err) return;
+    if (!$err) {
+        return;
+    }
     $fatal = [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR];
-    if (!in_array($err['type'] ?? 0, $fatal, true)) return;
+    if (!in_array($err['type'] ?? 0, $fatal, true)) {
+        return;
+    }
     if (!headers_sent()) {
         http_response_code(500);
         header('Content-Type: application/json');
@@ -37,26 +42,34 @@ register_shutdown_function(function (): void {
     ]);
 });
 
-function json_ok(array $extra = []) {
+function json_ok(array $extra = [])
+{
     echo json_encode(array_merge(['ok' => true], $extra));
     exit;
 }
 
-function json_error(string $msg, int $code = 400) {
+function json_error(string $msg, int $code = 400)
+{
     http_response_code($code);
     echo json_encode(['ok' => false, 'error' => $msg]);
     exit;
 }
 
-function fn_enabled(string $name): bool {
-    if (!function_exists($name)) return false;
+function fn_enabled(string $name): bool
+{
+    if (!function_exists($name)) {
+        return false;
+    }
     $disabled = (string)@ini_get('disable_functions');
-    if ($disabled === '') return true;
+    if ($disabled === '') {
+        return true;
+    }
     $list = array_map('trim', explode(',', $disabled));
     return !in_array($name, $list, true);
 }
 
-function run_shell_capture(string $cmd): ?string {
+function run_shell_capture(string $cmd): ?string
+{
     if (fn_enabled('exec')) {
         $output = [];
         @exec($cmd, $output);
@@ -67,7 +80,9 @@ function run_shell_capture(string $cmd): ?string {
 
     if (fn_enabled('shell_exec')) {
         $out = @shell_exec($cmd);
-        if (is_string($out) && trim($out) !== '') return trim($out);
+        if (is_string($out) && trim($out) !== '') {
+            return trim($out);
+        }
     }
 
     if (fn_enabled('popen')) {
@@ -75,7 +90,9 @@ function run_shell_capture(string $cmd): ?string {
         if (is_resource($h)) {
             $out = stream_get_contents($h);
             @pclose($h);
-            if (is_string($out) && trim($out) !== '') return trim($out);
+            if (is_string($out) && trim($out) !== '') {
+                return trim($out);
+            }
         }
     }
 
@@ -84,24 +101,54 @@ function run_shell_capture(string $cmd): ?string {
         $proc = @proc_open($cmd, $des, $pipes);
         if (is_resource($proc)) {
             $out = isset($pipes[1]) ? stream_get_contents($pipes[1]) : '';
-            if (isset($pipes[1]) && is_resource($pipes[1])) @fclose($pipes[1]);
-            if (isset($pipes[2]) && is_resource($pipes[2])) @fclose($pipes[2]);
+            if (isset($pipes[1]) && is_resource($pipes[1])) {
+                @fclose($pipes[1]);
+            }
+            if (isset($pipes[2]) && is_resource($pipes[2])) {
+                @fclose($pipes[2]);
+            }
             @proc_close($proc);
-            if (is_string($out) && trim($out) !== '') return trim($out);
+            if (is_string($out) && trim($out) !== '') {
+                return trim($out);
+            }
         }
     }
 
     return null;
 }
 
-function resolve_executable_path(array $candidates): ?string {
+function resolve_executable_path(array $candidates): ?string
+{
     foreach ($candidates as $path) {
-        if (!is_string($path)) continue;
+        if (!is_string($path)) {
+            continue;
+        }
         $path = trim($path);
-        if ($path === '') continue;
-        if (is_file($path) && is_readable($path)) return $path;
+        if ($path === '') {
+            continue;
+        }
+        if (is_file($path) && is_readable($path)) {
+            return $path;
+        }
     }
     return null;
+}
+
+function backup_script_candidates(string $legacyKey, string $scriptFile, array $fallback = []): array
+{
+    $candidates = [];
+    $base = trim((string) cfg_local('backups.script_path', ''));
+    if ($base !== '') {
+        $candidates[] = rtrim($base, '/') . '/' . $scriptFile;
+    }
+    $legacy = trim((string) cfg_local($legacyKey, ''));
+    if ($legacy !== '') {
+        $candidates[] = $legacy;
+    }
+    foreach ($fallback as $path) {
+        $candidates[] = $path;
+    }
+    return $candidates;
 }
 
 // Method guard
@@ -117,7 +164,7 @@ if (!csrf_check($csrf_token)) {
 
 /**
  * Run a command in background and return PID / log path.
- * Logfile is expected to be in a path writeable by the PHP user (gene).
+ * Logfile is expected to be in a path writeable by the PHP user (user).
  */
 function run_background(string $cmd, string $logfile): array
 {
@@ -217,8 +264,8 @@ $exclude_env = $exclude_list ? ('BACKUP_EXCLUDES=' . escapeshellarg(implode(' ',
 $exclude_env_sudo = $exclude_list ? ('env BACKUP_EXCLUDES=' . escapeshellarg(implode(' ', $exclude_list)) . ' ') : '';
 
 $suspend = (bool) cfg_local('backups.suspend', false);
-$disable_on_mount_fail = (bool) cfg_local('backups.disable_on_mount_fail', false);
-$backup_actions = ['os_snapshot','micro_backup','hestia_gene','all_backups'];
+$disable_on_mount_fail = (bool) cfg_local('backups.disable_on_mount_fail', cfg_local('backups.require_dedicated_mount', false));
+$backup_actions = ['os_snapshot','micro_backup','hestia_user','all_backups'];
 if ($suspend && in_array($action, $backup_actions, true)) {
     log_action($action, [
         'ok'      => false,
@@ -243,7 +290,9 @@ if ($disable_on_mount_fail && in_array($action, $backup_actions, true)) {
     }
 
     $backup_root = (string) cfg_local('backups.fs_root', '/mnt/backupz');
-    if ($backup_root === '') $backup_root = '/mnt/backupz';
+    if ($backup_root === '') {
+        $backup_root = '/mnt/backupz';
+    }
 
     if ($mountOk === null && function_exists('shell_exec')) {
         $cmd = 'findmnt -rn ' . escapeshellarg($backup_root) . ' >/dev/null 2>&1; echo $?';
@@ -274,12 +323,18 @@ switch ($action) {
     // ------------------------------------------------------------------
 
     case 'os_snapshot': {
-        $script = resolve_executable_path([
-            (string) cfg_local('backups.snap_script', ''),
+        $script = resolve_executable_path(backup_script_candidates(
+            'backups.snap_script',
+            'make-snapshots.sh',
+            [
             '/usr/local/sbin/make-snapshots.sh',
+            '/usr/local/sbin/make-snapshot.sh',
             __DIR__ . '/scripts/make-snapshots.sh',
-        ]);
-        if ($script === null) json_error('Snapshot script not found.', 500);
+            ]
+        ));
+        if ($script === null) {
+            json_error('Snapshot script not found.', 500);
+        }
 
         $cmd = $exclude_env . '/bin/bash ' . escapeshellarg($script);
 
@@ -301,12 +356,17 @@ switch ($action) {
     } break;
 
     case 'micro_backup': {
-        $script = resolve_executable_path([
-            (string) cfg_local('backups.micro_script', ''),
+        $script = resolve_executable_path(backup_script_candidates(
+            'backups.micro_script',
+            'make-micro-backups.sh',
+            [
             '/usr/local/sbin/make-micro-backups.sh',
             __DIR__ . '/scripts/make-micro-backups.sh',
-        ]);
-        if ($script === null) json_error('Micro backup script not found.', 500);
+            ]
+        ));
+        if ($script === null) {
+            json_error('Micro backup script not found.', 500);
+        }
 
         $cmd = $exclude_env . '/bin/bash ' . escapeshellarg($script);
 
@@ -326,21 +386,25 @@ switch ($action) {
         ]);
     } break;
 
-    case 'hestia_gene': {
+    case 'hestia_user': {
         $bin = resolve_executable_path([
             (string) cfg_local('backups.hestia_cmd', ''),
             '/usr/local/hestia/bin/v-backup-user',
         ]);
-        if ($bin === null) json_error('Hestia backup command not found.', 500);
-        $hUser = (string) cfg_local('backups.hestia_user', 'gene');
-        if ($hUser === '') $hUser = 'gene';
+        if ($bin === null) {
+            json_error('Hestia backup command not found.', 500);
+        }
+        $hUser = (string) cfg_local('backups.hestia_user', 'user');
+        if ($hUser === '') {
+            $hUser = 'user';
+        }
 
         // Run via sudo so the actual backup runs as root.
         $cmd = 'sudo -n ' . $exclude_env_sudo . escapeshellarg($bin) . ' ' . escapeshellarg($hUser);
 
-        $job = run_background($cmd, __DIR__ . '/state/logs/hestia-backup-gene.log');
+        $job = run_background($cmd, __DIR__ . '/state/logs/hestia-backup-user.log');
 
-        log_action('hestia_gene', [
+        log_action('hestia_user', [
             'job'     => $job,
             'ok'      => true,
             'message' => 'Started Hestia backup (' . $hUser . ')',
@@ -355,26 +419,39 @@ switch ($action) {
     } break;
 
     case 'all_backups': {
-        $snap = resolve_executable_path([
-            (string) cfg_local('backups.snap_script', ''),
+        $snap = resolve_executable_path(backup_script_candidates(
+            'backups.snap_script',
+            'make-snapshots.sh',
+            [
             '/usr/local/sbin/make-snapshots.sh',
+            '/usr/local/sbin/make-snapshot.sh',
             __DIR__ . '/scripts/make-snapshots.sh',
-        ]);
-        $micro = resolve_executable_path([
-            (string) cfg_local('backups.micro_script', ''),
+            ]
+        ));
+        $micro = resolve_executable_path(backup_script_candidates(
+            'backups.micro_script',
+            'make-micro-backups.sh',
+            [
             '/usr/local/sbin/make-micro-backups.sh',
             __DIR__ . '/scripts/make-micro-backups.sh',
-        ]);
+            ]
+        ));
         $hestia_bin = resolve_executable_path([
             (string) cfg_local('backups.hestia_cmd', ''),
             '/usr/local/hestia/bin/v-backup-user',
         ]);
-        $hUser = (string) cfg_local('backups.hestia_user', 'gene');
-        if ($hUser === '') $hUser = 'gene';
+        $hUser = (string) cfg_local('backups.hestia_user', 'user');
+        if ($hUser === '') {
+            $hUser = 'user';
+        }
         if ($snap === null || $micro === null) {
             $missing = [];
-            if ($snap === null) $missing[] = 'snap';
-            if ($micro === null) $missing[] = 'micro';
+            if ($snap === null) {
+                $missing[] = 'snap';
+            }
+            if ($micro === null) {
+                $missing[] = 'micro';
+            }
             json_error('Required backup component missing: ' . implode(',', $missing), 500);
         }
 
@@ -416,11 +493,14 @@ switch ($action) {
     } break;
 
     case 'health_check': {
-        $candidates = [
-            (string) cfg_local('backups.health_script', ''),
+        $candidates = backup_script_candidates(
+            'backups.health_script',
+            'backup_health_check.sh',
+            [
             '/usr/local/sbin/backup_health_check.sh',
             __DIR__ . '/scripts/backup_health_check.sh',
-        ];
+            ]
+        );
         $script = null;
         foreach ($candidates as $candidate) {
             if (file_exists($candidate)) {
@@ -454,12 +534,12 @@ switch ($action) {
         ]);
     } break;
 
-    // ------------------------------------------------------------------
-    // LOG MAINTENANCE
-    // ------------------------------------------------------------------
-    // NOTE: these still target /var/log/* and will hit permission issues
-    // from PHP unless we wire them via sudo as well. We can revisit that
-    // once the core backup buttons are behaving.
+        // ------------------------------------------------------------------
+        // LOG MAINTENANCE
+        // ------------------------------------------------------------------
+        // NOTE: these still target /var/log/* and will hit permission issues
+        // from PHP unless we wire them via sudo as well. We can revisit that
+        // once the core backup buttons are behaving.
 
     case 'clear_backup_logs': {
         $patterns = [
@@ -538,9 +618,9 @@ switch ($action) {
         ]);
     } break;
 
-    // ------------------------------------------------------------------
-    // FALLBACK
-    // ------------------------------------------------------------------
+        // ------------------------------------------------------------------
+        // FALLBACK
+        // ------------------------------------------------------------------
 
     default:
         json_error('Unknown action', 400);

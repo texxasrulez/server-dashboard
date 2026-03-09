@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/_state_path.php';
 require_once __DIR__ . '/../includes/auth.php';
 require_admin();
@@ -11,7 +12,7 @@ $paths = [
   'cron_last_alert.txt' => dashboard_state_path('cron_last_alert.txt')
 ];
 $out = [];
-foreach ($paths as $k=>$p) {
-  $out[$k] = ['path'=>$p, 'exists'=>is_file($p), 'size'=>is_file($p)?filesize($p):0];
+foreach ($paths as $k => $p) {
+    $out[$k] = ['path' => $p, 'exists' => is_file($p), 'size' => is_file($p) ? filesize($p) : 0];
 }
 echo json_encode($out, JSON_UNESCAPED_SLASHES);

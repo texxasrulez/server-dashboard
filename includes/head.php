@@ -1,20 +1,26 @@
 <?php require_once __DIR__ . '/i18n.php'; ?>
 <?php
 require_once __DIR__ . '/init.php';
-require_once __DIR__ . '/auth.php'; require_login(); if (!empty($REQUIRE_ADMIN)) require_admin();
+require_once __DIR__ . '/auth.php';
+require_login();
+if (!empty($REQUIRE_ADMIN)) {
+    require_admin();
+}
 
 // Site name + theme from central config if available
 try {
-  $cfgLib = dirname(__DIR__) . '/lib/Config.php';
-  if (is_file($cfgLib)) {
-    require_once $cfgLib;
-    \App\Config::init(dirname(__DIR__));
-    $SITE_NAME = \App\Config::get('site.name', 'Server Dashboard');
-    $THEME = \App\Config::get('site.theme', $THEME ?? (defined('THEME_DEFAULT')? THEME_DEFAULT : 'default'));
-  } else {
+    $cfgLib = dirname(__DIR__) . '/lib/Config.php';
+    if (is_file($cfgLib)) {
+        require_once $cfgLib;
+        \App\Config::init(dirname(__DIR__));
+        $SITE_NAME = \App\Config::get('site.name', 'Server Dashboard');
+        $THEME = \App\Config::get('site.theme', $THEME ?? (defined('THEME_DEFAULT') ? THEME_DEFAULT : 'default'));
+    } else {
+        $SITE_NAME = 'Server Dashboard';
+    }
+} catch (Throwable $e) {
     $SITE_NAME = 'Server Dashboard';
-  }
-} catch (Throwable $e) { $SITE_NAME = 'Server Dashboard'; }
+}
 
 ?>
 

@@ -3,7 +3,11 @@ require_once __DIR__ . '/includes/init.php';
 require_once __DIR__ . '/includes/auth.php';
 require_login();
 header('Content-Type: text/html; charset=utf-8');
-if (!user_is_admin()) { http_response_code(403); echo "Admin only."; exit; }
+if (!user_is_admin()) {
+    http_response_code(403);
+    echo "Admin only.";
+    exit;
+}
 
 $PAGE = 'Diagnostics';
 
@@ -14,58 +18,66 @@ $host = $_SERVER['HTTP_HOST'] ?? ($_SERVER['SERVER_NAME'] ?? 'localhost');
 $API_URL = (preg_match('~^https?://~i', $path)) ? $path : ($scheme . '://' . $host . $path);
 
 // Multi-mode fetcher: curl -> fopen -> include
-function fetch_metrics($url, &$mode=''){
-  $lastBody = null;
-  $lastStatus = 0;
-  // 1) curl
-  if (function_exists('curl_init')){
-    $mode='curl';
-    $ch = curl_init($url);
-    curl_setopt_array($ch, [
-      CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_FOLLOWLOCATION => true,
-      CURLOPT_CONNECTTIMEOUT => 3,
-      CURLOPT_TIMEOUT => 5,
-      CURLOPT_HEADER => true,
-      CURLOPT_HTTPHEADER => ['Accept: application/json']
-    ]);
-    $resp = curl_exec($ch);
-    $status = curl_getinfo($ch, CURLINFO_HTTP_CODE) ?: 0;
-    $hdrSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE) ?: 0;
-    $body = substr($resp ?: '', $hdrSize);
-    curl_close($ch);
-    if ($status >= 200 && $status < 300) return [$body, $status];
-    $lastBody = $body;
-    $lastStatus = $status;
-  }
-  // 2) fopen (allow_url_fopen)
-  $mode='fopen';
-  $ctx = stream_context_create(['http'=>['timeout'=>4,'ignore_errors'=>true,'header'=>"Accept: application/json\r\n"]]);
-  $out = @file_get_contents($url, false, $ctx);
-  $code = 0;
-  if (!empty($http_response_header) && is_array($http_response_header)) {
-    for ($i = count($http_response_header) - 1; $i >= 0; $i--) {
-      if (preg_match('/\s(\d{3})\s/', (string)$http_response_header[$i], $m)) { $code = (int)$m[1]; break; }
+function fetch_metrics($url, &$mode = '')
+{
+    $lastBody = null;
+    $lastStatus = 0;
+    // 1) curl
+    if (function_exists('curl_init')) {
+        $mode = 'curl';
+        $ch = curl_init($url);
+        curl_setopt_array($ch, [
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_CONNECTTIMEOUT => 3,
+          CURLOPT_TIMEOUT => 5,
+          CURLOPT_HEADER => true,
+          CURLOPT_HTTPHEADER => ['Accept: application/json']
+        ]);
+        $resp = curl_exec($ch);
+        $status = curl_getinfo($ch, CURLINFO_HTTP_CODE) ?: 0;
+        $hdrSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE) ?: 0;
+        $body = substr($resp ?: '', $hdrSize);
+        curl_close($ch);
+        if ($status >= 200 && $status < 300) {
+            return [$body, $status];
+        }
+        $lastBody = $body;
+        $lastStatus = $status;
     }
-  }
-  if ($code >= 200 && $code < 300) return [$out, $code];
-  if ($code) {
-    $lastBody = $out;
-    $lastStatus = $code;
-  }
-  // 3) include fallback (no HTTP; capture output)
-  $mode='include';
-  $file = __DIR__ . '/api/metrics_summary.php';
-  if (is_file($file)){
-    // prevent JSON header from leaking
-    ob_start();
-    include $file;
-    $body = ob_get_clean();
-    // Reset to HTML
-    header('Content-Type: text/html; charset=utf-8');
-    return [$body, 200];
-  }
-  return [$lastBody, $lastStatus];
+    // 2) fopen (allow_url_fopen)
+    $mode = 'fopen';
+    $ctx = stream_context_create(['http' => ['timeout' => 4,'ignore_errors' => true,'header' => "Accept: application/json\r\n"]]);
+    $out = @file_get_contents($url, false, $ctx);
+    $code = 0;
+    if (!empty($http_response_header) && is_array($http_response_header)) {
+        for ($i = count($http_response_header) - 1; $i >= 0; $i--) {
+            if (preg_match('/\s(\d{3})\s/', (string)$http_response_header[$i], $m)) {
+                $code = (int)$m[1];
+                break;
+            }
+        }
+    }
+    if ($code >= 200 && $code < 300) {
+        return [$out, $code];
+    }
+    if ($code) {
+        $lastBody = $out;
+        $lastStatus = $code;
+    }
+    // 3) include fallback (no HTTP; capture output)
+    $mode = 'include';
+    $file = __DIR__ . '/api/metrics_summary.php';
+    if (is_file($file)) {
+        // prevent JSON header from leaking
+        ob_start();
+        include $file;
+        $body = ob_get_clean();
+        // Reset to HTML
+        header('Content-Type: text/html; charset=utf-8');
+        return [$body, 200];
+    }
+    return [$lastBody, $lastStatus];
 }
 
 $mode = '';
@@ -107,14 +119,14 @@ include __DIR__ . '/includes/head.php';
       <div class="card-body">
         <?php
           $u_path = defined('USERS_FILE') ? USERS_FILE : (__DIR__ . '/data/users.json');
-          $u_real = @realpath($u_path) ?: $u_path;
-          $u_exists = file_exists($u_path);
-          $u_dir = dirname($u_path);
-          $u_dir_w = is_writable($u_dir);
-          $u_file_w = $u_exists ? is_writable($u_path) : $u_dir_w;
-          $u_size = $u_exists ? filesize($u_path) : 0;
-          $u_mtime = $u_exists ? date('Y-m-d H:i:s', filemtime($u_path)) : '—';
-        ?>
+$u_real = @realpath($u_path) ?: $u_path;
+$u_exists = file_exists($u_path);
+$u_dir = dirname($u_path);
+$u_dir_w = is_writable($u_dir);
+$u_file_w = $u_exists ? is_writable($u_path) : $u_dir_w;
+$u_size = $u_exists ? filesize($u_path) : 0;
+$u_mtime = $u_exists ? date('Y-m-d H:i:s', filemtime($u_path)) : '—';
+?>
         <table class="kv small">
           <tr><th>Path</th><td><code><?= h($u_real) ?></code></td></tr>
           <tr><th>Directory writable</th><td><strong><?= $u_dir_w ? 'yes' : 'no' ?></strong></td></tr>

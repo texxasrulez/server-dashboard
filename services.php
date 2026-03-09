@@ -3,9 +3,10 @@ require_once __DIR__ . '/includes/init.php';
 require_once __DIR__ . '/includes/auth.php';
 require_admin();
 
-  $PAGE_TITLE = 'Services';
-  $PAGE_CSS   = 'assets/css/pages/services.css';
-  $REQUIRE_ADMIN = true; include __DIR__.'/includes/head.php'; ?>
+$PAGE_TITLE = 'Services';
+$PAGE_CSS   = 'assets/css/pages/services.css';
+$REQUIRE_ADMIN = true;
+include __DIR__.'/includes/head.php'; ?>
 <?php
 require_once __DIR__ . '/Adapters/AdapterFactory.php';
 $platformAdapter = DashboardAdapterFactory::make();

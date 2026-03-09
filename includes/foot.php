@@ -2,7 +2,7 @@
 <?php
   // Safer footer label (shows actual role if present)
   $footer_user = $_SESSION['user']['username'] ?? 'guest';
-  $footer_role = $_SESSION['user']['role']     ?? 'user';
+$footer_role = $_SESSION['user']['role']     ?? 'user';
 ?>
 <footer class="footer muted">
   Logged in as<strong>: <?= h($footer_user) ?></strong> (<?= h($footer_role) ?>) <strong>&#9679;</strong> <?= h(BUILD) ?> <strong>&#9679;</strong> Theme<strong>: <?= h($THEME) ?></strong>
@@ -39,17 +39,17 @@
   //   $PAGE_CSS = 'assets/css/pages/users.css';
   //   $PAGE_JS  = 'assets/js/pages/users.profile.js';
   if (!empty($PAGE_CSS)) {
-    foreach ((array)$PAGE_CSS as $css) {
-      $href = project_url('/' . ltrim($css, '/'));
-      echo '<link rel="stylesheet" href="' . h($href) . '?v=' . h(BUILD) . '" />' . PHP_EOL;
-    }
+      foreach ((array)$PAGE_CSS as $css) {
+          $href = project_url('/' . ltrim($css, '/'));
+          echo '<link rel="stylesheet" href="' . h($href) . '?v=' . h(BUILD) . '" />' . PHP_EOL;
+      }
   }
-  if (!empty($PAGE_JS)) {
+if (!empty($PAGE_JS)) {
     foreach ((array)$PAGE_JS as $js) {
-      $src = project_url('/' . ltrim($js, '/'));
-      echo '<script defer src="' . h($src) . '?v=' . h(BUILD) . '"></script>' . PHP_EOL;
+        $src = project_url('/' . ltrim($js, '/'));
+        echo '<script defer src="' . h($src) . '?v=' . h(BUILD) . '"></script>' . PHP_EOL;
     }
-  }
+}
 ?>
 
 <!-- toast dynamic loader (footer, drop-anywhere) -->

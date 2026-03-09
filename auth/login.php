@@ -11,39 +11,48 @@ $first_admin = ensure_default_admin(false);
 $redirect = $_GET['redirect'] ?? 'index.php';
 $hasUsers = false;
 $__ul = users_load();
-if (is_array($__ul) && !empty($__ul['users']) && is_array($__ul['users'])) $hasUsers = count($__ul['users']) > 0;
+if (is_array($__ul) && !empty($__ul['users']) && is_array($__ul['users'])) {
+    $hasUsers = count($__ul['users']) > 0;
+}
 $err = null;
 
-function safe_redirect_target($rel){
-  // Allow in-project absolute (starts with '/') or relative like 'index.php'
-  $rel = (string)$rel;
-  if ($rel === '') return 'index.php';
-  // Block external or traversal
-  if (stripos($rel, '://') !== false) return 'index.php';
-  if (strpos($rel, '..') !== false) return 'index.php';
-  return $rel; // keep leading '/' if present
+function safe_redirect_target($rel)
+{
+    // Allow in-project absolute (starts with '/') or relative like 'index.php'
+    $rel = (string)$rel;
+    if ($rel === '') {
+        return 'index.php';
+    }
+    // Block external or traversal
+    if (stripos($rel, '://') !== false) {
+        return 'index.php';
+    }
+    if (strpos($rel, '..') !== false) {
+        return 'index.php';
+    }
+    return $rel; // keep leading '/' if present
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if (!csrf_check($_POST['csrf'] ?? '')) {
-    $err = 'Invalid session. Please try again.';
-  } else {
-    $u = trim($_POST['username'] ?? '');
-    $p = (string)($_POST['password'] ?? '');
-    if ($u === '' || $p === '') {
-      $err = 'Please enter both username and password.';
-    } else if (auth_login($u, $p)) {
-      $t = safe_redirect_target($redirect);
-      if (isset($t[0]) && $t[0] === '/') {
-        header('Location: ' . $t); // absolute in-site path
-      } else {
-        header('Location: ../' . $t); // relative to project root
-      }
-      exit;
+    if (!csrf_check($_POST['csrf'] ?? '')) {
+        $err = 'Invalid session. Please try again.';
     } else {
-      $specificErr = function_exists('auth_last_login_error') ? trim((string)auth_last_login_error()) : '';
-      $err = ($specificErr !== '') ? $specificErr : 'Incorrect username or password.';
+        $u = trim($_POST['username'] ?? '');
+        $p = (string)($_POST['password'] ?? '');
+        if ($u === '' || $p === '') {
+            $err = 'Please enter both username and password.';
+        } elseif (auth_login($u, $p)) {
+            $t = safe_redirect_target($redirect);
+            if (isset($t[0]) && $t[0] === '/') {
+                header('Location: ' . $t); // absolute in-site path
+            } else {
+                header('Location: ../' . $t); // relative to project root
+            }
+            exit;
+        } else {
+            $specificErr = function_exists('auth_last_login_error') ? trim((string)auth_last_login_error()) : '';
+            $err = ($specificErr !== '') ? $specificErr : 'Incorrect username or password.';
+        }
     }
-  }
 }
 
 // After variables are ready, render the head

@@ -1,94 +1,314 @@
 {
-    "app": {
-        "title": "Ovl\u00e1dac\u00ed panel servera"
+  "app": {
+    "title": "Ovládací panel servera"
+  },
+  "nav": {
+    "history": "História",
+    "logs": "Protokoly",
+    "dashboard": "Prístrojová doska",
+    "services": "Služby",
+    "alerts": "Upozornenia",
+    "tests": "Testy",
+    "settings": "Nastavenia",
+    "about": "O stránke"
+  },
+  "history": {
+    "title": "História",
+    "trends": "Trendy",
+    "range": "Rozsah",
+    "baseline": "Základné údaje",
+    "probe_now": "Sonda teraz",
+    "refresh": "Obnoviť",
+    "export_json": "Exportovať JSON",
+    "export_alerts_json": "Exportovať upozornenia JSON",
+    "reset_history": "Obnovenie histórie",
+    "recent_alert_events": "Nedávne výstražné udalosti",
+    "export_preview": "Náhľad exportu",
+    "close": "Zatvoriť",
+    "copy": "Kopírovať",
+    "download": "Stiahnite si"
+  },
+  "logs": {
+    "title": "Protokoly",
+    "manage": "Správa protokolov",
+    "add": "Pridať",
+    "delete": "Odstrániť",
+    "refresh": "Obnoviť",
+    "search": "Vyhľadávanie",
+    "filter": "Filter",
+    "lines": "Riadky",
+    "open": "Otvorte stránku",
+    "close": "Zatvoriť",
+    "download": "Stiahnite si",
+    "copy": "Kopírovať"
+  },
+  "common": {
+    "save": "Uložiť",
+    "cancel": "Zrušiť",
+    "edit": "Upraviť",
+    "delete": "Odstrániť",
+    "update": "Aktualizácia",
+    "create": "Vytvoriť stránku",
+    "enable": "Povolenie stránky",
+    "disable": "Zakázať",
+    "yes": "Áno",
+    "no": "Nie",
+    "on": "Na stránke",
+    "off": "Vypnuté",
+    "confirm": "Potvrďte",
+    "search": "Vyhľadávanie",
+    "filter": "Filter",
+    "actions": "Činnosti"
+  },
+  "alerts": {
+    "title": "Upozornenia",
+    "recent_events": "Nedávne výstražné udalosti",
+    "history": "História upozornení",
+    "export_json": "Exportovať upozornenia JSON",
+    "no_alerts": "Žiadne upozornenia",
+    "level": "Úroveň",
+    "message": "Správa",
+    "service": "Služba",
+    "time": "Čas",
+    "probe_now": "Sonda teraz",
+    "refresh": "Obnoviť",
+    "silence": "Ticho",
+    "unsilence": "Unsilence",
+    "ack": "Potvrdiť",
+    "unack": "Nepoznanie"
+  },
+  "tests": {
+    "title": "Testy servera",
+    "run_all": "Spustiť všetky",
+    "status": "Stav",
+    "last_run": "Posledný beh",
+    "duration": "Trvanie"
+  },
+  "services": {
+    "title": "Služby",
+    "status": "Stav",
+    "restart": "Reštartovanie stránky",
+    "start": "Štart",
+    "stop": "Zastavte"
+  },
+  "config": {
+    "sections": {
+      "site": "Site",
+      "features": "Features",
+      "capabilities": "Capabilities",
+      "processes": "Processes",
+      "mail": "Mail",
+      "integrations": "Integrations",
+      "security": "Security",
+      "ui": "UI",
+      "server_tests": "Server Tests",
+      "alerts": "Alerts",
+      "cron": "Cron",
+      "history": "History",
+      "logs": "Logs",
+      "backups": "Zálohy",
+      "email": "Email"
     },
-    "nav": {
-        "history": "Hist\u00f3ria",
-        "logs": "Protokoly",
-        "dashboard": "Pr\u00edstrojov\u00e1 doska",
-        "services": "Slu\u017eby",
-        "alerts": "Upozornenia",
-        "tests": "Testy",
-        "settings": "Nastavenia",
-        "about": "O str\u00e1nke"
+    "fields": {
+      "backups": {
+        "require_dedicated_mount": {
+          "label": "Vyžadovať špeciálny držiak",
+          "help": "Starší kľúč kompatibility. Keď je táto možnosť povolená, skripty zálohovania vyžadujú prítomnosť pripojenia zálohy."
+        },
+        "disable_on_mount_fail": {
+          "label": "Ak pripojenie zlyhá, zakážte zálohy",
+          "help": "Ak je táto možnosť povolená, akcie zálohovania a generované skripty sa zastavia, ak chýba záloha."
+        }
+      },
+      "alerts": {
+        "min_severity": {
+          "label": "Minimálna závažnosť varovania"
+        },
+        "email": {
+          "label": "Legacy alert email(s)"
+        }
+      }
     },
-    "history": {
-        "title": "Hist\u00f3ria",
-        "trends": "Trendy",
-        "range": "Rozsah",
-        "baseline": "Z\u00e1kladn\u00e9 \u00fadaje",
-        "probe_now": "Sonda teraz",
-        "refresh": "Obnovi\u0165",
-        "export_json": "Exportova\u0165 JSON",
-        "export_alerts_json": "Exportova\u0165 upozornenia JSON",
-        "reset_history": "Obnovenie hist\u00f3rie",
-        "recent_alert_events": "Ned\u00e1vne v\u00fdstra\u017en\u00e9 udalosti",
-        "export_preview": "N\u00e1h\u013ead exportu",
-        "close": "Zatvori\u0165",
-        "copy": "Kop\u00edrova\u0165",
-        "download": "Stiahnite si"
-    },
-    "logs": {
-        "title": "Protokoly",
-        "manage": "Spr\u00e1va protokolov",
-        "add": "Prida\u0165",
-        "delete": "Odstr\u00e1ni\u0165",
-        "refresh": "Obnovi\u0165",
-        "search": "Vyh\u013ead\u00e1vanie",
-        "filter": "Filter",
-        "lines": "Riadky",
-        "open": "Otvorte str\u00e1nku",
-        "close": "Zatvori\u0165",
-        "download": "Stiahnite si",
-        "copy": "Kop\u00edrova\u0165"
-    },
-    "common": {
-        "save": "Ulo\u017ei\u0165",
-        "cancel": "Zru\u0161i\u0165",
-        "edit": "Upravi\u0165",
-        "delete": "Odstr\u00e1ni\u0165",
-        "update": "Aktualiz\u00e1cia",
-        "create": "Vytvori\u0165 str\u00e1nku",
-        "enable": "Povolenie str\u00e1nky",
-        "disable": "Zak\u00e1za\u0165",
-        "yes": "\u00c1no",
-        "no": "Nie",
-        "on": "Na str\u00e1nke",
-        "off": "Vypnut\u00e9",
-        "confirm": "Potvr\u010fte",
-        "search": "Vyh\u013ead\u00e1vanie",
-        "filter": "Filter",
-        "actions": "\u010cinnosti"
-    },
-    "alerts": {
-        "title": "Upozornenia",
-        "recent_events": "Ned\u00e1vne v\u00fdstra\u017en\u00e9 udalosti",
-        "history": "Hist\u00f3ria upozornen\u00ed",
-        "export_json": "Exportova\u0165 upozornenia JSON",
-        "no_alerts": "\u017diadne upozornenia",
-        "level": "\u00darove\u0148",
-        "message": "Spr\u00e1va",
-        "service": "Slu\u017eba",
-        "time": "\u010cas",
-        "probe_now": "Sonda teraz",
-        "refresh": "Obnovi\u0165",
-        "silence": "Ticho",
-        "unsilence": "Unsilence",
-        "ack": "Potvrdi\u0165",
-        "unack": "Nepoznanie"
-    },
-    "tests": {
-        "title": "Testy servera",
-        "run_all": "Spusti\u0165 v\u0161etky",
-        "status": "Stav",
-        "last_run": "Posledn\u00fd beh",
-        "duration": "Trvanie"
-    },
-    "services": {
-        "title": "Slu\u017eby",
-        "status": "Stav",
-        "restart": "Re\u0161tartovanie str\u00e1nky",
-        "start": "\u0160tart",
-        "stop": "Zastavte"
+    "ui": {
+      "unknown": "neznámy",
+      "unknown_paren": "(neznáme)",
+      "site_backup": {
+        "title": "Zálohovanie a obnovenie",
+        "export_config": "Exportovať konfiguráciu",
+        "import_config": "Importovať konfiguráciu",
+        "choose_file_first": "Najprv vyberte záložný súbor",
+        "imported_reloading": "Importované. Opätovné načítavanie...",
+        "import_failed": "Import zlyhal",
+        "import_failed_prefix": "Import zlyhal:",
+        "retention_title": "Zálohy – uchovávanie",
+        "keep_last": "Zostaňte na poslednom mieste",
+        "files": "súbory",
+        "loading_stats": "(načítava sa štatistiky...)",
+        "last_backup_loading": "Posledná záloha: (načítava sa...)",
+        "last_backup_none": "Posledná záloha: zatiaľ žiadna",
+        "last_backup_prefix": "Posledná záloha:",
+        "last_backup_unknown": "Posledná záloha: neznáma",
+        "prune_now": "Teraz orezajte",
+        "pruned_kept_deleted": "Orezané - zachované",
+        "deleted_prefix": "vymazané",
+        "prune_failed": "Prune zlyhalo",
+        "prune_failed_prefix": "Prune zlyhalo:",
+        "create_backup_now": "Vytvorte zálohu teraz",
+        "backup_saved_prefix": "Záloha bola uložená:",
+        "backup_failed": "Zálohovanie zlyhalo",
+        "backup_failed_prefix": "Zálohovanie zlyhalo:",
+        "download_latest_backup": "Stiahnite si najnovšiu zálohu",
+        "no_backups_found": "Nenašli sa žiadne zálohy",
+        "download_failed_prefix": "Sťahovanie zlyhalo:",
+        "redact_secrets": "Redact secrets"
+      }
     }
+  },
+  "backups": {
+    "common": {
+      "status": "Stav:",
+      "timestamp": "Časová pečiatka:",
+      "none_dash": "-",
+      "free": "Zadarmo",
+      "used": "Použité",
+      "copy": "Kopírovať",
+      "warnings": "Varovania",
+      "errors": "Chyby",
+      "loading": "Načítava sa..."
+    },
+    "status": {
+      "error_loading_json": "CHYBA NAČÍTANIE JSON",
+      "ok": "OK",
+      "unmounted": "NEMONTOVANÉ",
+      "critical": "KRITICKÝ",
+      "high": "VYSOKÝ",
+      "elevated": "ZVÝŠENÝ",
+      "healthy": "ZDRAVÝ",
+      "unknown": "NEZNÁMY",
+      "unknown_cap": "Neznámy"
+    },
+    "disk": {
+      "unmounted": "Disk ODMONTOVANÝ",
+      "tag": "Disk:",
+      "sizes_updated": "Aktualizované veľkosti:",
+      "title": "Využitie disku",
+      "usage": "Použitie",
+      "mount": "Mount"
+    },
+    "page": {
+      "freshness_prefix": "Čerstvosť:",
+      "title": "Zálohovacie riadiace centrum",
+      "subtitle_prefix": "Živý stav riadený",
+      "subtitle_suffix": "na zálohovací disk."
+    },
+    "ages": {
+      "no_snapshots_on_disk": "Na disku sa nenašli žiadne snímky",
+      "one_snapshot_present": "Je prítomný 1 snímok",
+      "snapshots_present_suffix": "prítomné snímky",
+      "no_panel_backups_on_disk": "Na disku sa nenašli žiadne zálohy panelov",
+      "one_panel_backup_present": "Prítomná 1 záloha panela",
+      "panel_backups_present_suffix": "existujú zálohy panelov",
+      "no_micro_backups_on_disk": "Na disku sa nenašli žiadne mikrozálohy",
+      "one_micro_backup_present": "Prítomná 1 mikro záloha",
+      "micro_backups_present_suffix": "prítomné mikrozálohy",
+      "snapshot_daily0_chart": "Snímka (denne 0)",
+      "hestia_latest_chart": "Najnovšie Hestia",
+      "micro_latest_chart": "Najnovšie Micro",
+      "age_days": "Vek (dni)",
+      "title": "Vek zálohovania",
+      "subtitle": "Ako čerstvé sú vaše posledné zálohy",
+      "snapshot_daily0": "Snímka denne.0",
+      "latest_hestia": "Najnovšie Hestia",
+      "latest_micro": "Najnovšie Micro"
+    },
+    "errors": {
+      "no_backups_detected": "Neboli zistené žiadne zálohy pre snímky, Hestia alebo mikro sady."
+    },
+    "restore": {
+      "hestia_placeholder_tar": "gén.RRRRMMDD-HHMM.tar",
+      "using_latest_backup_prefix": "Použitie najnovšej zálohy nahlásenej v JSON:",
+      "adjust_backup_tar": "Pred spustením upravte BACKUP_TAR na skutočný súbor z \\\"v-list-backups USER\\\".",
+      "micro_restore_prefix": "Obnovte základňu z najnovšej mikrosnímky:",
+      "micro_restore_suffix": "(pred spustením skontrolujte cesty a vylúčenia).",
+      "set_correct_snapshot_path": "Pred použitím tohto príkazu nastavte správnu cestu k snímke.",
+      "confirm_body_1": "Týmto sa spustí úloha obnovenia Hestia na serveri pomocou backupctl.",
+      "confirm_body_2": "Služby a údaje pre daného používateľa môžu byť prepísané.",
+      "confirm_body_3": "si si úplne istý?"
+    },
+    "actions": {
+      "starting_prefix": "Spustenie",
+      "failed_to_start_prefix": "Zlyhalo spustenie",
+      "started_prefix": "Začaté",
+      "started_suffix": ". Môže to chvíľu trvať; stav sa aktualizuje pri ďalšej zdravotnej kontrole.",
+      "error_talking_endpoint": "Chyba pri komunikácii so backups_action.php",
+      "run_os_snapshot": "Spustite snímku OS",
+      "run_micro_backup": "Spustite Micro Backup",
+      "run_hestia_backup_user": "Spustite zálohu Hestia (gén)",
+      "run_all_backups": "Spustite VŠETKY zálohy",
+      "run_health_check": "Spustite kontrolu stavu",
+      "log_maintenance": "Údržba denníka",
+      "clear_backup_logs": "Vymazať denníky stavu zálohovania",
+      "clear_prune_logs": "Vyčistite polená sliviek",
+      "clear_integrity_log": "Vymazať protokol integrity"
+    },
+    "cron": {
+      "no_entries": "Nezistili sa žiadne položky crontab.",
+      "env": "Env",
+      "schedule": "Rozvrh",
+      "entries_for_prefix": "Záznamy Crontab pre",
+      "current_user": "aktuálny používateľ",
+      "unable_to_read": "Nedá sa prečítať crontab.",
+      "failed_to_read": "Nepodarilo sa prečítať crontab."
+    },
+    "warnings_errors": {
+      "title": "Varovania a chyby",
+      "subtitle": "Súhrn z kontroly zdravotného stavu"
+    },
+    "raw_snapshot": {
+      "title": "Surová snímka",
+      "subtitle": "Kľúčové hodnoty priamo z posledného stavu JSON"
+    },
+    "recent_actions": {
+      "title": "Nedávne akcie",
+      "subtitle": "História akcií z tohto informačného panela",
+      "none": "Zatiaľ neboli zaznamenané žiadne akcie."
+    },
+    "orch": {
+      "title": "Sprievodca zálohovaním orchestra",
+      "subtitle": "Prispôsobte cesty raz a potom skopírujte vygenerované jednotky skriptu/cron/systemd.",
+      "backup_root": "Koreň zálohy",
+      "include_health": "Zahrňte kontrolu zdravotného stavu",
+      "include_integrity": "Zahrňte kontrolu integrity",
+      "include_prune": "Zahrňte štádium sliviek",
+      "suspend": "Pozastaviť zálohovanie",
+      "disable_on_mount_fail": "Ak pripojenie zlyhá, zakážte zálohy",
+      "nightly_script": "Nočný scenár",
+      "copy_script": "Kopírovať skript",
+      "cron_entry": "Cron záznam",
+      "copy_cron_line": "Skopírujte cron riadok",
+      "systemd_service": "Služba Systemd",
+      "copy_unit": "Kopírovať jednotku",
+      "systemd_timer": "Systemd časovač",
+      "copy_timer": "Kopírovať časovač"
+    },
+    "quick_restore": {
+      "title": "Pomocníci rýchleho obnovenia",
+      "subtitle": "Vopred vyplnené príkazy CLI pre núdzové situácie (ručné spustenie alebo tlačidlo DANGER)",
+      "hestia_latest_title": "Obnovte najnovšiu zálohu používateľa Hestia",
+      "micro_latest_title": "Obnoviť z najnovšej mikrosnímky (iba CLI)",
+      "copy_command": "Kopírovať príkaz",
+      "run_restore_danger": "Spustiť obnovenie (najnovšie, NEBEZPEČENSTVO)"
+    },
+    "cli": {
+      "title": "Hestia Backup & Restore CLI",
+      "subtitle": "Rýchly referenčný list - pripravené na kopírovanie a prilepenie",
+      "create_backups": "Vytvárajte zálohy",
+      "list_delete_backups": "Zoznam a vymazanie záloh",
+      "full_restore_user": "Úplné obnovenie (používateľ)",
+      "selective_restore": "Selektívne obnovenie (Web / DB / Mail)",
+      "backup_file_locations": "Umiestnenia záložných súborov",
+      "backup_tarball_contents": "Zálohujte obsah Tarballu",
+      "backupctl_help": "pomoc pre backupctl"
+    }
+  }
 }

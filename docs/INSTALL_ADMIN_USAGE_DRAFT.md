@@ -3,124 +3,126 @@
 > Generated from a static scan of the uploaded zip. Review and confirm any assumptions before deployment.
 
 ## 1) What this looks like
+
 Static file inventory (first ~120 entries):
 
-- README.md  (28893 bytes)
-- alerts_admin.php  (12959 bytes)
-- api/_guard.php  (3612 bytes)
-- api/_state_path.php  (1657 bytes)
-- api/alerts_bulk.php  (1878 bytes)
-- api/alerts_delete.php  (1199 bytes)
-- api/alerts_eval.php  (11806 bytes)
-- api/alerts_list.php  (1864 bytes)
-- api/alerts_run.php  (7657 bytes)
-- api/alerts_test.php  (2979 bytes)
-- api/alerts_upsert.php  (3924 bytes)
-- api/autoprobe_get.php  (542 bytes)
-- api/autoprobe_set.php  (709 bytes)
-- api/bm_categories_delete.php  (1825 bytes)
-- api/bm_categories_list.php  (786 bytes)
-- api/bm_categories_reorder.php  (1523 bytes)
-- api/bm_categories_upsert.php  (2019 bytes)
-- api/bookmarks_delete.php  (1277 bytes)
-- api/bookmarks_list.php  (531 bytes)
-- api/bookmarks_upsert.php  (2524 bytes)
-- api/client_log.php  (90 bytes)
-- api/config_backup.php  (5565 bytes)
-- api/config_export.php  (1500 bytes)
-- api/config_import.php  (2421 bytes)
-- api/cron_health.php  (4437 bytes)
-- api/cron_mark.php  (955 bytes)
-- api/debug_ping.php  (318 bytes)
-- api/email_oauth_callback.php  (4036 bytes)
-- api/email_oauth_start.php  (2582 bytes)
-- api/email_status.php  (7439 bytes)
-- api/email_token_info.php  (1446 bytes)
-- api/favicon_proxy.php  (1293 bytes)
-- api/health.php  (373 bytes)
-- api/history_diag.php  (660 bytes)
-- api/history_export.php  (3337 bytes)
-- api/history_rotate.php  (545 bytes)
-- api/index_refresh_get.php  (400 bytes)
-- api/index_refresh_set.php  (633 bytes)
-- api/lib/services_common.php  (2122 bytes)
-- api/logs_list.php  (1277 bytes)
-- api/logs_tail.php  (3103 bytes)
-- api/mail_test.php  (1465 bytes)
-- api/metrics.php  (4704 bytes)
-- api/metrics_json.php  (4262 bytes)
-- api/metrics_prom.php  (5892 bytes)
-- api/metrics_summary.php  (14417 bytes)
-- api/migrate_history_dir.php  (961 bytes)
-- api/probe_now.php  (1561 bytes)
-- api/security_get.php  (591 bytes)
-- api/security_set.php  (960 bytes)
-- api/security_settings_get.php  (44 bytes)
-- api/security_settings_set.php  (44 bytes)
-- api/server_test.php  (3494 bytes)
-- api/server_tests.php  (30055 bytes)
-- api/server_tests_history.php  (2680 bytes)
-- api/server_tests_history_where.php  (288 bytes)
-- api/service_delete.php  (765 bytes)
-- api/service_probe.php  (2438 bytes)
-- api/service_toggle.php  (912 bytes)
-- api/service_upsert.php  (2470 bytes)
-- api/services.php  (2268 bytes)
-- api/services_bulk_save.php  (1058 bytes)
-- api/services_enabled_ids.php  (879 bytes)
-- api/services_export.php  (1120 bytes)
-- api/services_import.php  (2287 bytes)
-- api/services_list.php  (1417 bytes)
-- api/services_probe_all.php  (2857 bytes)
-- api/services_status.php  (722 bytes)
-- api/smtp_probe.php  (4541 bytes)
-- api/smtp_test.php  (3004 bytes)
-- api/state_where.php  (681 bytes)
-- api/users_admin_health.php  (1893 bytes)
-- assets/build_css.php  (805 bytes)
-- assets/build_js.php  (1607 bytes)
-- assets/bundles.php  (681 bytes)
-- assets/css/app.css  (11796 bytes)
-- assets/css/autoprobe.css  (2041 bytes)
-- assets/css/base/00-reset.css  (236 bytes)
-- assets/css/base/10-tokens.css  (828 bytes)
-- assets/css/base/20-typography.css  (284 bytes)
-- assets/css/base/30-layout.css  (391 bytes)
-- assets/css/base/40-utilities.css  (391 bytes)
-- assets/css/components/chip.css  (3193 bytes)
-- assets/css/components/chips.css  (5705 bytes)
-- assets/css/components/drawer.css  (1042 bytes)
-- assets/css/components/modal.css  (1364 bytes)
-- assets/css/components/nav-active.css  (409 bytes)
-- assets/css/components/sys-badge.css  (1562 bytes)
-- assets/css/components/toast-pos.css  (3897 bytes)
-- assets/css/header/debug.css  (2129 bytes)
-- assets/css/header/email-indicator.css  (252 bytes)
-- assets/css/header/status.css  (2790 bytes)
-- assets/css/header/userbox.css  (1492 bytes)
-- assets/css/header_status_fix.css  (1917 bytes)
-- assets/css/index_disks.cards.css  (3483 bytes)
-- assets/css/index_helpers.css  (79 bytes)
-- assets/css/index_metrics.zoom.css  (1063 bytes)
-- assets/css/index_proc.gauges.css  (2967 bytes)
-- assets/css/index_proc.gauges.extras.css  (353 bytes)
-- assets/css/index_process.css  (1660 bytes)
-- assets/css/index_services.colors.css  (3304 bytes)
-- assets/css/index_services.css  (1820 bytes)
-- assets/css/notify.css  (3235 bytes)
-- assets/css/page_diag.css  (1822 bytes)
-- assets/css/pages/alerts_admin.css  (814 bytes)
-- assets/css/pages/bookmarks.css  (4823 bytes)
-- assets/css/pages/config.css  (518 bytes)
-- assets/css/pages/history.css  (1115 bytes)
-- assets/css/pages/index.css  (4955 bytes)
-- assets/css/pages/login.css  (3008 bytes)
-- assets/css/pages/logs.css  (1357 bytes)
-- assets/css/pages/server_tests.css  (2845 bytes)
-- assets/css/pages/services.css  (5351 bytes)
-... (296 more files)
+- README.md (28893 bytes)
+- alerts_admin.php (12959 bytes)
+- api/\_guard.php (3612 bytes)
+- api/\_state_path.php (1657 bytes)
+- api/alerts_bulk.php (1878 bytes)
+- api/alerts_delete.php (1199 bytes)
+- api/alerts_eval.php (11806 bytes)
+- api/alerts_list.php (1864 bytes)
+- api/alerts_run.php (7657 bytes)
+- api/alerts_test.php (2979 bytes)
+- api/alerts_upsert.php (3924 bytes)
+- api/autoprobe_get.php (542 bytes)
+- api/autoprobe_set.php (709 bytes)
+- api/bm_categories_delete.php (1825 bytes)
+- api/bm_categories_list.php (786 bytes)
+- api/bm_categories_reorder.php (1523 bytes)
+- api/bm_categories_upsert.php (2019 bytes)
+- api/bookmarks_delete.php (1277 bytes)
+- api/bookmarks_list.php (531 bytes)
+- api/bookmarks_upsert.php (2524 bytes)
+- api/client_log.php (90 bytes)
+- api/config_backup.php (5565 bytes)
+- api/config_export.php (1500 bytes)
+- api/config_import.php (2421 bytes)
+- api/cron_health.php (4437 bytes)
+- api/cron_mark.php (955 bytes)
+- api/debug_ping.php (318 bytes)
+- api/email_oauth_callback.php (4036 bytes)
+- api/email_oauth_start.php (2582 bytes)
+- api/email_status.php (7439 bytes)
+- api/email_token_info.php (1446 bytes)
+- api/favicon_proxy.php (1293 bytes)
+- api/health.php (373 bytes)
+- api/history_diag.php (660 bytes)
+- api/history_export.php (3337 bytes)
+- api/history_rotate.php (545 bytes)
+- api/index_refresh_get.php (400 bytes)
+- api/index_refresh_set.php (633 bytes)
+- api/lib/services_common.php (2122 bytes)
+- api/logs_list.php (1277 bytes)
+- api/logs_tail.php (3103 bytes)
+- api/mail_test.php (1465 bytes)
+- api/metrics.php (4704 bytes)
+- api/metrics_json.php (4262 bytes)
+- api/metrics_prom.php (5892 bytes)
+- api/metrics_summary.php (14417 bytes)
+- api/migrate_history_dir.php (961 bytes)
+- api/probe_now.php (1561 bytes)
+- api/security_get.php (591 bytes)
+- api/security_set.php (960 bytes)
+- api/security_settings_get.php (44 bytes)
+- api/security_settings_set.php (44 bytes)
+- api/server_test.php (3494 bytes)
+- api/server_tests.php (30055 bytes)
+- api/server_tests_history.php (2680 bytes)
+- api/server_tests_history_where.php (288 bytes)
+- api/service_delete.php (765 bytes)
+- api/service_probe.php (2438 bytes)
+- api/service_toggle.php (912 bytes)
+- api/service_upsert.php (2470 bytes)
+- api/services.php (2268 bytes)
+- api/services_bulk_save.php (1058 bytes)
+- api/services_enabled_ids.php (879 bytes)
+- api/services_export.php (1120 bytes)
+- api/services_import.php (2287 bytes)
+- api/services_list.php (1417 bytes)
+- api/services_probe_all.php (2857 bytes)
+- api/services_status.php (722 bytes)
+- api/smtp_probe.php (4541 bytes)
+- api/smtp_test.php (3004 bytes)
+- api/state_where.php (681 bytes)
+- api/users_admin_health.php (1893 bytes)
+- assets/build_css.php (805 bytes)
+- assets/build_js.php (1607 bytes)
+- assets/bundles.php (681 bytes)
+- assets/css/app.css (11796 bytes)
+- assets/css/autoprobe.css (2041 bytes)
+- assets/css/base/00-reset.css (236 bytes)
+- assets/css/base/10-tokens.css (828 bytes)
+- assets/css/base/20-typography.css (284 bytes)
+- assets/css/base/30-layout.css (391 bytes)
+- assets/css/base/40-utilities.css (391 bytes)
+- assets/css/components/chip.css (3193 bytes)
+- assets/css/components/chips.css (5705 bytes)
+- assets/css/components/drawer.css (1042 bytes)
+- assets/css/components/modal.css (1364 bytes)
+- assets/css/components/nav-active.css (409 bytes)
+- assets/css/components/sys-badge.css (1562 bytes)
+- assets/css/components/toast-pos.css (3897 bytes)
+- assets/css/header/debug.css (2129 bytes)
+- assets/css/header/email-indicator.css (252 bytes)
+- assets/css/header/status.css (2790 bytes)
+- assets/css/header/userbox.css (1492 bytes)
+- assets/css/header_status_fix.css (1917 bytes)
+- assets/css/index_disks.cards.css (3483 bytes)
+- assets/css/index_helpers.css (79 bytes)
+- assets/css/index_metrics.zoom.css (1063 bytes)
+- assets/css/index_proc.gauges.css (2967 bytes)
+- assets/css/index_proc.gauges.extras.css (353 bytes)
+- assets/css/index_process.css (1660 bytes)
+- assets/css/index_services.colors.css (3304 bytes)
+- assets/css/index_services.css (1820 bytes)
+- assets/css/notify.css (3235 bytes)
+- assets/css/page_diag.css (1822 bytes)
+- assets/css/pages/alerts_admin.css (814 bytes)
+- assets/css/pages/bookmarks.css (4823 bytes)
+- assets/css/pages/config.css (518 bytes)
+- assets/css/pages/history.css (1115 bytes)
+- assets/css/pages/index.css (4955 bytes)
+- assets/css/pages/login.css (3008 bytes)
+- assets/css/pages/logs.css (1357 bytes)
+- assets/css/pages/server_tests.css (2845 bytes)
+- assets/css/pages/services.css (5351 bytes)
+  ... (296 more files)
 
 ## 2) Security quick-scan
+
 - README.md: Email Address → `admin@example.com...`
 - README.md: Email Address → `ops@example.com...`
 - alerts_admin.php: Email Address → `ops@example.com...`
@@ -175,7 +177,7 @@ Static file inventory (first ~120 entries):
 - docs/README-Config-UI-Redesign.md: Email Address → `user@example.com...`
 - docs/USAGE_MAILER.md: Email Address → `you@example.com...`
 - docs/USAGE_MAILER.md: Cron Token-ish → `token=YOUR_CRON_TOKEN'...`
-- docs/USAGE_MAILER.md: URL with Token → `https://<host>/web-admin/api/mail_test.php?to=you@example.com&token=YOUR_CRON_TO...`
+- docs/USAGE_MAILER.md: URL with Token → `https://<host>/server-dashboard/api/mail_test.php?to=you@example.com&token=YOUR_CRON_TO...`
 - docs/config-system.md: .env-style Assign → `APP__INTEGRATIONS__MYSQL__HOST=10.0.0.12...`
 - docs/config-system.md: .env-style Assign → `APP__FEATURES__ENABLE_DIAGNOSTICS=false...`
 - docs/usage_readme.md: Email Address → `ops@example.com...`
@@ -184,20 +186,22 @@ Static file inventory (first ~120 entries):
 - docs/usage_readme.md: Cron Token-ish → `CRON_TOKEN=YOUR_LONG_RANDOM_TOKEN...`
 - docs/usage_readme.md: Cron Token-ish → `token=YOUR_LONG_RANDOM_TOKEN"...`
 - docs/usage_readme.md: URL with Token → `https://YOUR-DASHBOARD/api/alerts_eval.php?probe=1&token=YOUR_LONG_RANDOM_TOKEN...`
-- docs/usage_readme.md: URL with Token → `https://YOUR-DASHBOARD/api/alerts_eval.php?probe=1&dry=1&token=YOUR_LONG_RANDOM_...`
+- docs/usage*readme.md: URL with Token → `https://YOUR-DASHBOARD/api/alerts_eval.php?probe=1&dry=1&token=YOUR_LONG_RANDOM*...`
 - docs/usage_readme.md: URL with Token → `https://YOUR-DASHBOARD/api/alerts_eval.php?probe=1&token=YOUR_LONG_RANDOM_TOKEN...`
-- config/backups/security-20250831-003559.json: Email Address → `gene@genesworld.net...`
-- config/backups/security-20250831-003559.json: Email Address → `gene@genesworld.net...`
-- config/backups/security-20250831-003559.json: Email Address → `gene@genesworld.net...`
+- config/backups/security-20250831-003559.json: Email Address → `admin@domain.com...`
+- config/backups/security-20250831-003559.json: Email Address → `admin@domain.com...`
+- config/backups/security-20250831-003559.json: Email Address → `admin@domain.com...`
 
 **Notes**
+
 - Heuristic regexes can produce false positives/negatives. Manually review config files for secrets (API keys, OAuth client secrets, SMTP passwords, .env values).
 - Avoid committing `.env`, private keys, and live tokens into version control. Use environment variables or server-side, non-web-readable config files.
 
 ## 3) Orphaned files (heuristic)
+
 - alerts_admin.php
-- api/_guard.php
-- api/_state_path.php
+- api/\_guard.php
+- api/\_state_path.php
 - api/alerts_bulk.php
 - api/alerts_delete.php
 - api/alerts_eval.php
@@ -315,10 +319,11 @@ Static file inventory (first ~120 entries):
 > Entry points like `index.php` or `config.php` are exempted from orphan detection.
 
 ## 4) Cron jobs — required & suggested
+
 - README.md: endpoints=api/history_export.php,api/probe_now.php,api/security_get.php,api/security_set.php; shebang=False
 - alerts_admin.php: endpoints=—; shebang=False
-- api/_guard.php: endpoints=api/_guard.php; shebang=False
-- api/_state_path.php: endpoints=api/_state_path.php; shebang=False
+- api/\_guard.php: endpoints=api/\_guard.php; shebang=False
+- api/\_state_path.php: endpoints=api/\_state_path.php; shebang=False
 - api/alerts_bulk.php: endpoints=—; shebang=False
 - api/alerts_delete.php: endpoints=—; shebang=False
 - api/alerts_eval.php: endpoints=—; shebang=False
@@ -407,7 +412,9 @@ Static file inventory (first ~120 entries):
 - includes/config.inc.php: endpoints=—; shebang=False
 
 **General guidance**
+
 - If the app exposes API endpoints that are meant to be polled (e.g. `api/*`), schedule them via cron using a secret token parameter. Example crontab entries:
+
 ```
 # Run alerts check every 5 minutes
 */5 * * * * curl -fsS "https://YOUR_HOST/path/api/alerts_scan.php?token=YOUR_TOKEN" >/dev/null 2>&1
@@ -415,12 +422,14 @@ Static file inventory (first ~120 entries):
 # Rotate/backup config daily at 03:17
 17 3 * * * php /var/www/html/path/scripts/backup.php >> /var/log/app_backup.log 2>&1
 ```
+
 - Never expose cron tokens publicly; restrict endpoints by IP or token and enforce CSRF on non-cron POST routes.
 
 ## 5) Installation
+
 - **Prereqs**: PHP ≥ 8.1 recommended, web server (nginx/apache), and `php-json`, `php-curl`, `php-mbstring` as applicable.
 - **Deploy**: Upload project contents to your web root (or a subdirectory), respecting folder structure.
-- **Permissions**: 
+- **Permissions**:
   - Ensure cache/temp/backup directories (if present) are writable by PHP user.
   - Deny direct web access to sensitive folders via `.htaccess` or web server rules.
 - **Configuration**:
@@ -429,17 +438,20 @@ Static file inventory (first ~120 entries):
 - **HTTPS**: Serve over TLS. Set HSTS and secure cookies.
 
 ## 6) Administration
+
 - Keep regular backups of config and content.
 - Use read-only credentials for external services when possible.
 - Rotate tokens & passwords during initial deployment.
 
 ## 7) Usage
+
 - Primary entry points (index/config pages) should be accessible once deployed.
 - JS and CSS assets load relative to the install path; verify URLs if installed in a subdir.
 
 ---
 
 ## Next steps to finalize this document
+
 - Confirm the exact PHP entry points and any `api/*` endpoints intended for cron.
 - Provide environment-specific values (domain, tokens) you prefer.
 - I can then produce a finalized `INSTALL.md` + `ADMIN.md` with exact crontab lines and ship a sanitized zip.

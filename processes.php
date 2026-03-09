@@ -59,17 +59,42 @@ include __DIR__ . '/includes/head.php';
 </div>
 
 <div id="procDetails" class="modal" hidden>
-  <div class="modal-card proc-modal">
+  <div class="modal-dialog proc-modal" role="dialog" aria-modal="true" aria-label="Process details">
     <div class="modal-head">
-      <div class="title">Process Details</div>
-      <button type="button" class="btn" id="procDetailsClose">Close</button>
+      <div class="modal-title">Process Details</div>
+      <button type="button" class="modal-close" id="procDetailsClose" aria-label="Close">×</button>
     </div>
-    <div class="proc-detail-grid" id="procDetailGrid"></div>
-    <div style="margin-top:.6rem">
-      <div class="muted small">Command line</div>
-      <pre id="procDetailCmdline" class="proc-cmdline"></pre>
+    <div class="modal-body">
+      <div class="proc-detail-grid" id="procDetailGrid"></div>
+      <div style="margin-top:.6rem">
+        <div class="muted small">Command line</div>
+        <pre id="procDetailCmdline" class="proc-cmdline"></pre>
+      </div>
     </div>
   </div>
 </div>
+
+<style id="proc-modal-fix">
+  /* Keep this in-page so it applies even if page CSS is cached */
+  #procDetails.modal {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 1rem !important;
+  }
+  #procDetails.modal[hidden] {
+    display: none !important;
+  }
+  #procDetails .modal-dialog.proc-modal {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    width: min(780px, 96vw) !important;
+    max-height: min(88vh, 900px) !important;
+    overflow: auto !important;
+    border-radius: 16px !important;
+  }
+</style>
 
 <?php include __DIR__ . '/includes/foot.php'; ?>

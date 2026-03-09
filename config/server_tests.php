@@ -1,4 +1,5 @@
 <?php
+
 // Thresholds for server_tests; tweak per environment.
 // Return an associative array.
 return [

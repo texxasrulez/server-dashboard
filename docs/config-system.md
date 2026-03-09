@@ -1,11 +1,12 @@
 # Central Configuration System
 
 This adds a single source of truth for **all** editable settings, with:
+
 - **config/defaults.php** — version-controlled defaults
 - **config/local.json** — machine-specific overrides (auto-created)
 - **config/schema.php** — typed schema for validation + UI generation
 - **lib/Config.php** — loader, validation, env var overrides, atomic save + backups
-- **web-admin/config.php** + **assets/js/pages/config.page.js** — admin UI
+- **server-dashboard/config.php** + **assets/js/pages/config.page.js** — admin UI
 - **bin/config-cli.php** — headless get/set (`php bin/config-cli.php get site.name`)
 
 ## Usage
@@ -33,7 +34,7 @@ Use the Config → Site → “Create backup” action (or `api/config_backup.ph
 
 - CSRF protection on POST.
 - The UI never echoes secrets back in plaintext once saved (you can improve the UX with "reveal" toggles).
-- Limit access to `web-admin/config.php` to admins only (reuse your existing auth gate).
+- Limit access to `server-dashboard/config.php` to admins only (reuse your existing auth gate).
 - Saves automatically sync `mail.*`, `alerts.cron_token`, and the Security tab into `data/security_config.json` so legacy `api/security_*` integrations stay updated.
 
 ## CLI helper

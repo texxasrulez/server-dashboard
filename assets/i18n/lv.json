@@ -1,94 +1,314 @@
 {
-    "app": {
-        "title": "Servera vad\u012bbas panelis"
+  "app": {
+    "title": "Servera vadības panelis"
+  },
+  "nav": {
+    "history": "Vēsture",
+    "logs": "Žurnāli",
+    "dashboard": "Vadības panelis",
+    "services": "Pakalpojumi",
+    "alerts": "Brīdinājumi",
+    "tests": "Testi",
+    "settings": "Iestatījumi",
+    "about": "Par"
+  },
+  "history": {
+    "title": "Vēsture",
+    "trends": "Tendences",
+    "range": "Diapazons",
+    "baseline": "Pamatlīnija",
+    "probe_now": "Zondē tagad",
+    "refresh": "Atjaunināt",
+    "export_json": "Eksportēt JSON",
+    "export_alerts_json": "Eksportēt brīdinājumus JSON",
+    "reset_history": "Atiestatīt vēsturi",
+    "recent_alert_events": "Nesenie brīdinājuma notikumi",
+    "export_preview": "Eksporta priekšskatījums",
+    "close": "Aizvērt",
+    "copy": "Kopēt",
+    "download": "Lejupielādēt"
+  },
+  "logs": {
+    "title": "Žurnāli",
+    "manage": "Pārvaldīt žurnālus",
+    "add": "Pievienot",
+    "delete": "Dzēst",
+    "refresh": "Atjaunināt",
+    "search": "Meklēšana",
+    "filter": "Filtrs",
+    "lines": "Līnijas",
+    "open": "Atvērt",
+    "close": "Aizvērt",
+    "download": "Lejupielādēt",
+    "copy": "Kopēt"
+  },
+  "common": {
+    "save": "Saglabāt",
+    "cancel": "Atcelt",
+    "edit": "Rediģēt",
+    "delete": "Dzēst",
+    "update": "Atjaunināt",
+    "create": "Izveidot",
+    "enable": "Ieslēgt",
+    "disable": "Atslēgt",
+    "yes": "Jā",
+    "no": "Nē",
+    "on": "Uz",
+    "off": "Izslēgts",
+    "confirm": "Apstipriniet",
+    "search": "Meklēšana",
+    "filter": "Filtrs",
+    "actions": "Darbības"
+  },
+  "alerts": {
+    "title": "Brīdinājumi",
+    "recent_events": "Nesenie brīdinājuma notikumi",
+    "history": "Brīdinājumu vēsture",
+    "export_json": "Eksportēt brīdinājumus JSON",
+    "no_alerts": "Nav brīdinājumu",
+    "level": "Līmenis",
+    "message": "Ziņa",
+    "service": "Pakalpojums",
+    "time": "Laiks",
+    "probe_now": "Zondē tagad",
+    "refresh": "Atjaunināt",
+    "silence": "Klusums",
+    "unsilence": "Unsilence",
+    "ack": "Atzīt",
+    "unack": "Neapzināšanās"
+  },
+  "tests": {
+    "title": "Servera testi",
+    "run_all": "Palaist visus",
+    "status": "Statuss",
+    "last_run": "Pēdējais brauciens",
+    "duration": "Ilgums"
+  },
+  "services": {
+    "title": "Pakalpojumi",
+    "status": "Statuss",
+    "restart": "Restartējiet",
+    "start": "Sākt",
+    "stop": "Pārtraukt"
+  },
+  "config": {
+    "sections": {
+      "site": "Site",
+      "features": "Features",
+      "capabilities": "Capabilities",
+      "processes": "Processes",
+      "mail": "Mail",
+      "integrations": "Integrations",
+      "security": "Security",
+      "ui": "UI",
+      "server_tests": "Server Tests",
+      "alerts": "Alerts",
+      "cron": "Cron",
+      "history": "History",
+      "logs": "Logs",
+      "backups": "Dublējumkopijas",
+      "email": "Email"
     },
-    "nav": {
-        "history": "V\u0113sture",
-        "logs": "\u017durn\u0101li",
-        "dashboard": "Vad\u012bbas panelis",
-        "services": "Pakalpojumi",
-        "alerts": "Br\u012bdin\u0101jumi",
-        "tests": "Testi",
-        "settings": "Iestat\u012bjumi",
-        "about": "Par"
+    "fields": {
+      "backups": {
+        "require_dedicated_mount": {
+          "label": "Nepieciešams īpašs stiprinājums",
+          "help": "Mantotā saderības atslēga. Kad tas ir iespējots, dublējuma skriptiem ir nepieciešams rezerves stiprinājums."
+        },
+        "disable_on_mount_fail": {
+          "label": "Atspējojiet dublēšanu, ja montāža neizdodas",
+          "help": "Ja tas ir iespējots, dublēšanas darbības un ģenerētie skripti tiek apturēti, ja trūkst rezerves stiprinājuma."
+        }
+      },
+      "alerts": {
+        "min_severity": {
+          "label": "Minimālais brīdinājuma smagums"
+        },
+        "email": {
+          "label": "Legacy alert email(s)"
+        }
+      }
     },
-    "history": {
-        "title": "V\u0113sture",
-        "trends": "Tendences",
-        "range": "Diapazons",
-        "baseline": "Pamatl\u012bnija",
-        "probe_now": "Zond\u0113 tagad",
-        "refresh": "Atjaunin\u0101t",
-        "export_json": "Eksport\u0113t JSON",
-        "export_alerts_json": "Eksport\u0113t br\u012bdin\u0101jumus JSON",
-        "reset_history": "Atiestat\u012bt v\u0113sturi",
-        "recent_alert_events": "Nesenie br\u012bdin\u0101juma notikumi",
-        "export_preview": "Eksporta priek\u0161skat\u012bjums",
-        "close": "Aizv\u0113rt",
-        "copy": "Kop\u0113t",
-        "download": "Lejupiel\u0101d\u0113t"
-    },
-    "logs": {
-        "title": "\u017durn\u0101li",
-        "manage": "P\u0101rvald\u012bt \u017eurn\u0101lus",
-        "add": "Pievienot",
-        "delete": "Dz\u0113st",
-        "refresh": "Atjaunin\u0101t",
-        "search": "Mekl\u0113\u0161ana",
-        "filter": "Filtrs",
-        "lines": "L\u012bnijas",
-        "open": "Atv\u0113rt",
-        "close": "Aizv\u0113rt",
-        "download": "Lejupiel\u0101d\u0113t",
-        "copy": "Kop\u0113t"
-    },
-    "common": {
-        "save": "Saglab\u0101t",
-        "cancel": "Atcelt",
-        "edit": "Redi\u0123\u0113t",
-        "delete": "Dz\u0113st",
-        "update": "Atjaunin\u0101t",
-        "create": "Izveidot",
-        "enable": "Iesl\u0113gt",
-        "disable": "Atsl\u0113gt",
-        "yes": "J\u0101",
-        "no": "N\u0113",
-        "on": "Uz",
-        "off": "Izsl\u0113gts",
-        "confirm": "Apstipriniet",
-        "search": "Mekl\u0113\u0161ana",
-        "filter": "Filtrs",
-        "actions": "Darb\u012bbas"
-    },
-    "alerts": {
-        "title": "Br\u012bdin\u0101jumi",
-        "recent_events": "Nesenie br\u012bdin\u0101juma notikumi",
-        "history": "Br\u012bdin\u0101jumu v\u0113sture",
-        "export_json": "Eksport\u0113t br\u012bdin\u0101jumus JSON",
-        "no_alerts": "Nav br\u012bdin\u0101jumu",
-        "level": "L\u012bmenis",
-        "message": "Zi\u0146a",
-        "service": "Pakalpojums",
-        "time": "Laiks",
-        "probe_now": "Zond\u0113 tagad",
-        "refresh": "Atjaunin\u0101t",
-        "silence": "Klusums",
-        "unsilence": "Unsilence",
-        "ack": "Atz\u012bt",
-        "unack": "Neapzin\u0101\u0161an\u0101s"
-    },
-    "tests": {
-        "title": "Servera testi",
-        "run_all": "Palaist visus",
-        "status": "Statuss",
-        "last_run": "P\u0113d\u0113jais brauciens",
-        "duration": "Ilgums"
-    },
-    "services": {
-        "title": "Pakalpojumi",
-        "status": "Statuss",
-        "restart": "Restart\u0113jiet",
-        "start": "S\u0101kt",
-        "stop": "P\u0101rtraukt"
+    "ui": {
+      "unknown": "nezināms",
+      "unknown_paren": "(nezināms)",
+      "site_backup": {
+        "title": "Dublēšana un atjaunošana",
+        "export_config": "Eksportēt konfigurāciju",
+        "import_config": "Importēt konfigurāciju",
+        "choose_file_first": "Vispirms izvēlieties dublējuma failu",
+        "imported_reloading": "Importēts. Notiek atkārtota ielāde...",
+        "import_failed": "Importēšana neizdevās",
+        "import_failed_prefix": "Importēšana neizdevās:",
+        "retention_title": "Dublējumkopijas — saglabāšana",
+        "keep_last": "Paturiet pēdējo",
+        "files": "failus",
+        "loading_stats": "(ielādē statistiku...)",
+        "last_backup_loading": "Pēdējā dublēšana: (notiek ielāde...)",
+        "last_backup_none": "Pēdējā dublēšana: vēl nav",
+        "last_backup_prefix": "Pēdējā dublēšana:",
+        "last_backup_unknown": "Pēdējā dublēšana: nav zināms",
+        "prune_now": "Apgriezt tagad",
+        "pruned_kept_deleted": "Apcirpta - turēta",
+        "deleted_prefix": "dzēsts",
+        "prune_failed": "Plūme neizdevās",
+        "prune_failed_prefix": "Žāvētas plūmes neizdevās:",
+        "create_backup_now": "Izveidojiet dublējumu tūlīt",
+        "backup_saved_prefix": "Dublējums saglabāts:",
+        "backup_failed": "Dublēšana neizdevās",
+        "backup_failed_prefix": "Dublēšana neizdevās:",
+        "download_latest_backup": "Lejupielādējiet jaunāko dublējumu",
+        "no_backups_found": "Dublējumkopijas nav atrastas",
+        "download_failed_prefix": "Lejupielāde neizdevās:",
+        "redact_secrets": "Redact secrets"
+      }
     }
+  },
+  "backups": {
+    "common": {
+      "status": "Statuss:",
+      "timestamp": "Laikspiedols:",
+      "none_dash": "-",
+      "free": "Bezmaksas",
+      "used": "Lietots",
+      "copy": "Kopēt",
+      "warnings": "Brīdinājumi",
+      "errors": "Kļūdas",
+      "loading": "Notiek ielāde..."
+    },
+    "status": {
+      "error_loading_json": "KĻŪDA, IELĀDĒJOT JSON",
+      "ok": "Labi",
+      "unmounted": "NEMONTĒTS",
+      "critical": "KRITISKI",
+      "high": "AUGSTS",
+      "elevated": "PAAUGTS",
+      "healthy": "VESELĪGI",
+      "unknown": "NEZINĀMS",
+      "unknown_cap": "Nezināms"
+    },
+    "disk": {
+      "unmounted": "Disks NEPIEMĒROTS",
+      "tag": "Disks:",
+      "sizes_updated": "Izmēri atjaunināti:",
+      "title": "Diska izmantošana",
+      "usage": "Lietošana",
+      "mount": "Mount"
+    },
+    "page": {
+      "freshness_prefix": "Svaigums:",
+      "title": "Rezerves kontroles centrs",
+      "subtitle_prefix": "Tiešraides statusu nosaka",
+      "subtitle_suffix": "jūsu rezerves diskā."
+    },
+    "ages": {
+      "no_snapshots_on_disk": "Diskā nav atrasts neviens momentuzņēmums",
+      "one_snapshot_present": "Klāt 1 momentuzņēmums",
+      "snapshots_present_suffix": "klāt momentuzņēmumi",
+      "no_panel_backups_on_disk": "Diskā nav atrasts neviens paneļa dublējums",
+      "one_panel_backup_present": "Ir 1 paneļa rezerves kopija",
+      "panel_backups_present_suffix": "ir paneļa dublējumkopijas",
+      "no_micro_backups_on_disk": "Diskā nav atrasts neviens mikro dublējums",
+      "one_micro_backup_present": "Klāt 1 mikro dublējums",
+      "micro_backups_present_suffix": "ir mikro dublējumkopijas",
+      "snapshot_daily0_chart": "Momentuzņēmums (katru dienu.0)",
+      "hestia_latest_chart": "Hestia jaunākā",
+      "micro_latest_chart": "Mikro jaunākais",
+      "age_days": "Vecums (dienas)",
+      "title": "Rezerves vecums",
+      "subtitle": "Cik svaigi ir jūsu jaunākie dublējumkopijas",
+      "snapshot_daily0": "Momentuzņēmums katru dienu.0",
+      "latest_hestia": "Jaunākā Hestia",
+      "latest_micro": "Jaunākais Micro"
+    },
+    "errors": {
+      "no_backups_detected": "Momentuzņēmumiem, Hestia vai mikrokomplektiem nav atrasts neviens dublējums."
+    },
+    "restore": {
+      "hestia_placeholder_tar": "gēns.GGGGMMDD-HHMM.darva",
+      "using_latest_backup_prefix": "Izmantojot jaunāko dublējumu, par kuru ziņots JSON:",
+      "adjust_backup_tar": "Pirms palaišanas pielāgojiet BACKUP_TAR reālam failam no \\\"v-list-backups USER\\\".",
+      "micro_restore_prefix": "Atjaunot bāzi no jaunākā mikro momentuzņēmuma:",
+      "micro_restore_suffix": "(pirms palaišanas pārskatiet ceļus un izņēmumus).",
+      "set_correct_snapshot_path": "Pirms šīs komandas izmantošanas iestatiet pareizo momentuzņēmuma ceļu.",
+      "confirm_body_1": "Tas sāks Hestia atjaunošanas darbu serverī, izmantojot backupctl.",
+      "confirm_body_2": "Šī lietotāja pakalpojumi un dati var tikt pārrakstīti.",
+      "confirm_body_3": "Vai esat pilnīgi pārliecināts?"
+    },
+    "actions": {
+      "starting_prefix": "Sākas",
+      "failed_to_start_prefix": "NEizdevās sākt",
+      "started_prefix": "Sākts",
+      "started_suffix": ". Tas var aizņemt kādu laiku; statuss tiks atjaunināts nākamajā veselības pārbaudē.",
+      "error_talking_endpoint": "Kļūda, runājot ar backups_action.php",
+      "run_os_snapshot": "Palaidiet OS momentuzņēmumu",
+      "run_micro_backup": "Palaidiet Micro Backup",
+      "run_hestia_backup_user": "Palaist Hestia dublējumu (gēns)",
+      "run_all_backups": "Palaist VISAS dublējumkopijas",
+      "run_health_check": "Palaidiet veselības pārbaudi",
+      "log_maintenance": "Baļķu apkope",
+      "clear_backup_logs": "Notīrīt dublējuma veselības žurnālus",
+      "clear_prune_logs": "Notīriet plūmju baļķus",
+      "clear_integrity_log": "Notīrīt integritātes žurnālu"
+    },
+    "cron": {
+      "no_entries": "Nav atrasts neviens crontab ieraksts.",
+      "env": "Env",
+      "schedule": "Grafiks",
+      "entries_for_prefix": "Crontab ieraksti par",
+      "current_user": "pašreizējais lietotājs",
+      "unable_to_read": "Nevar nolasīt crontab.",
+      "failed_to_read": "Neizdevās nolasīt crontab."
+    },
+    "warnings_errors": {
+      "title": "Brīdinājumi un kļūdas",
+      "subtitle": "Kopsavilkums no veselības pārbaudes"
+    },
+    "raw_snapshot": {
+      "title": "Neapstrādāts momentuzņēmums",
+      "subtitle": "Galvenās vērtības tieši no pēdējā JSON statusa"
+    },
+    "recent_actions": {
+      "title": "Pēdējās darbības",
+      "subtitle": "Darbību vēsture no šī informācijas paneļa",
+      "none": "Vēl nav reģistrēta neviena darbība."
+    },
+    "orch": {
+      "title": "Rezerves orķestrēšanas vednis",
+      "subtitle": "Vienreiz pielāgojiet ceļus, pēc tam kopējiet ģenerētās skripta/cron/systemd vienības.",
+      "backup_root": "Rezerves sakne",
+      "include_health": "Iekļaut veselības pārbaudi",
+      "include_integrity": "Iekļaujiet integritātes pārbaudi",
+      "include_prune": "Iekļaut plūmju stadiju",
+      "suspend": "Apturēt dublējumus",
+      "disable_on_mount_fail": "Atspējojiet dublēšanu, ja montāža neizdodas",
+      "nightly_script": "Nakts scenārijs",
+      "copy_script": "Kopēt skriptu",
+      "cron_entry": "Cron ieraksts",
+      "copy_cron_line": "Kopēt cron līniju",
+      "systemd_service": "Sistēmiskais pakalpojums",
+      "copy_unit": "Kopēšanas vienība",
+      "systemd_timer": "Sistēmiskais taimeris",
+      "copy_timer": "Kopēšanas taimeris"
+    },
+    "quick_restore": {
+      "title": "Ātrās atjaunošanas palīgi",
+      "subtitle": "Iepriekš aizpildītas CLI komandas ārkārtas situācijām (manuāla palaišana vai poga DANGER)",
+      "hestia_latest_title": "Atjaunojiet jaunāko Hestia lietotāja dublējumu",
+      "micro_latest_title": "Atjaunot no jaunākā mikro momentuzņēmuma (tikai CLI)",
+      "copy_command": "Kopēšanas komanda",
+      "run_restore_danger": "Palaist atjaunošanu (jaunākais, BĪSTAMI)"
+    },
+    "cli": {
+      "title": "Hestia dublēšanas un atjaunošanas CLI",
+      "subtitle": "Ātrās uzziņas lapa — gatavs kopēšanai un ielīmēšanai",
+      "create_backups": "Izveidojiet dublējumus",
+      "list_delete_backups": "Dublējumu saraksts un dzēšana",
+      "full_restore_user": "Pilnīga atjaunošana (lietotājs)",
+      "selective_restore": "Selektīvā atjaunošana (tīmeklis/DB/pasts)",
+      "backup_file_locations": "Dublējuma failu atrašanās vietas",
+      "backup_tarball_contents": "Rezerves Tarball saturs",
+      "backupctl_help": "backupctl palīdzība"
+    }
+  }
 }

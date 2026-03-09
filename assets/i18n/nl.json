@@ -1,94 +1,314 @@
 {
-    "app": {
-        "title": "Server Dashboard"
+  "app": {
+    "title": "Server Dashboard"
+  },
+  "nav": {
+    "history": "Geschiedenis",
+    "logs": "Logboeken",
+    "dashboard": "Dashboard",
+    "services": "Diensten",
+    "alerts": "Waarschuwingen",
+    "tests": "Tests",
+    "settings": "Instellingen",
+    "about": "Over"
+  },
+  "history": {
+    "title": "Geschiedenis",
+    "trends": "Trends",
+    "range": "Bereik",
+    "baseline": "Basislijn",
+    "probe_now": "Nu sonderen",
+    "refresh": "Vernieuw",
+    "export_json": "JSON exporteren",
+    "export_alerts_json": "JSON-waarschuwingen exporteren",
+    "reset_history": "Geschiedenis resetten",
+    "recent_alert_events": "Recente waarschuwingsgebeurtenissen",
+    "export_preview": "Voorbeeld exporteren",
+    "close": "Sluit",
+    "copy": "Kopie",
+    "download": "Downloaden"
+  },
+  "logs": {
+    "title": "Logboeken",
+    "manage": "Logboeken beheren",
+    "add": "Voeg  toe",
+    "delete": "Verwijder",
+    "refresh": "Vernieuw",
+    "search": "Zoek op",
+    "filter": "Filter",
+    "lines": "Lijnen",
+    "open": "Open",
+    "close": "Sluit",
+    "download": "Downloaden",
+    "copy": "Kopie"
+  },
+  "common": {
+    "save": "Sla",
+    "cancel": "Annuleren",
+    "edit": "Bewerk",
+    "delete": "Verwijder",
+    "update": "Update",
+    "create": "Maak",
+    "enable": "inschakelen",
+    "disable": "uitschakelen",
+    "yes": "Ja",
+    "no": "Geen",
+    "on": "Op",
+    "off": "Uit",
+    "confirm": "Bevestig",
+    "search": "Zoek op",
+    "filter": "Filter",
+    "actions": "Acties"
+  },
+  "alerts": {
+    "title": "Waarschuwingen",
+    "recent_events": "Recente waarschuwingsgebeurtenissen",
+    "history": "Waarschuwingsgeschiedenis",
+    "export_json": "JSON-waarschuwingen exporteren",
+    "no_alerts": "Geen waarschuwingen",
+    "level": "Niveau",
+    "message": "Bericht",
+    "service": "Service",
+    "time": "Tijd",
+    "probe_now": "Nu sonderen",
+    "refresh": "Vernieuw",
+    "silence": "Stilte",
+    "unsilence": "Stilte",
+    "ack": "erkennen",
+    "unack": "Niet-erkennen"
+  },
+  "tests": {
+    "title": "Servertests",
+    "run_all": "Alles uitvoeren",
+    "status": "Status",
+    "last_run": "Laatste run",
+    "duration": "Duur"
+  },
+  "services": {
+    "title": "Diensten",
+    "status": "Status",
+    "restart": "Herstart",
+    "start": "Start",
+    "stop": "Stop"
+  },
+  "config": {
+    "sections": {
+      "site": "Site",
+      "features": "Features",
+      "capabilities": "Capabilities",
+      "processes": "Processes",
+      "mail": "Mail",
+      "integrations": "Integrations",
+      "security": "Security",
+      "ui": "UI",
+      "server_tests": "Server Tests",
+      "alerts": "Alerts",
+      "cron": "Cron",
+      "history": "History",
+      "logs": "Logs",
+      "backups": "Back-ups",
+      "email": "Email"
     },
-    "nav": {
-        "history": "Geschiedenis",
-        "logs": "Logboeken",
-        "dashboard": "Dashboard",
-        "services": "Diensten",
-        "alerts": "Waarschuwingen",
-        "tests": "Tests",
-        "settings": "Instellingen",
-        "about": "Over"
+    "fields": {
+      "backups": {
+        "require_dedicated_mount": {
+          "label": "Vereist een speciale houder",
+          "help": "Verouderde compatibiliteitssleutel. Indien ingeschakeld, vereisen back-upscripts dat de back-upkoppeling aanwezig is."
+        },
+        "disable_on_mount_fail": {
+          "label": "Schakel back-ups uit als het koppelen mislukt",
+          "help": "Indien ingeschakeld, stoppen back-upacties en gegenereerde scripts als de back-upkoppeling ontbreekt."
+        }
+      },
+      "alerts": {
+        "min_severity": {
+          "label": "Minimale ernst om te waarschuwen"
+        },
+        "email": {
+          "label": "Legacy alert email(s)"
+        }
+      }
     },
-    "history": {
-        "title": "Geschiedenis",
-        "trends": "Trends",
-        "range": "Bereik",
-        "baseline": "Basislijn",
-        "probe_now": "Nu sonderen",
-        "refresh": "Vernieuw",
-        "export_json": "JSON exporteren",
-        "export_alerts_json": "JSON-waarschuwingen exporteren",
-        "reset_history": "Geschiedenis resetten",
-        "recent_alert_events": "Recente waarschuwingsgebeurtenissen",
-        "export_preview": "Voorbeeld exporteren",
-        "close": "Sluit",
-        "copy": "Kopie",
-        "download": "Downloaden"
-    },
-    "logs": {
-        "title": "Logboeken",
-        "manage": "Logboeken beheren",
-        "add": "Voeg  toe",
-        "delete": "Verwijder",
-        "refresh": "Vernieuw",
-        "search": "Zoek op",
-        "filter": "Filter",
-        "lines": "Lijnen",
-        "open": "Open",
-        "close": "Sluit",
-        "download": "Downloaden",
-        "copy": "Kopie"
-    },
-    "common": {
-        "save": "Sla",
-        "cancel": "Annuleren",
-        "edit": "Bewerk",
-        "delete": "Verwijder",
-        "update": "Update",
-        "create": "Maak",
-        "enable": "inschakelen",
-        "disable": "uitschakelen",
-        "yes": "Ja",
-        "no": "Geen",
-        "on": "Op",
-        "off": "Uit",
-        "confirm": "Bevestig",
-        "search": "Zoek op",
-        "filter": "Filter",
-        "actions": "Acties"
-    },
-    "alerts": {
-        "title": "Waarschuwingen",
-        "recent_events": "Recente waarschuwingsgebeurtenissen",
-        "history": "Waarschuwingsgeschiedenis",
-        "export_json": "JSON-waarschuwingen exporteren",
-        "no_alerts": "Geen waarschuwingen",
-        "level": "Niveau",
-        "message": "Bericht",
-        "service": "Service",
-        "time": "Tijd",
-        "probe_now": "Nu sonderen",
-        "refresh": "Vernieuw",
-        "silence": "Stilte",
-        "unsilence": "Stilte",
-        "ack": "erkennen",
-        "unack": "Niet-erkennen"
-    },
-    "tests": {
-        "title": "Servertests",
-        "run_all": "Alles uitvoeren",
-        "status": "Status",
-        "last_run": "Laatste run",
-        "duration": "Duur"
-    },
-    "services": {
-        "title": "Diensten",
-        "status": "Status",
-        "restart": "Herstart",
-        "start": "Start",
-        "stop": "Stop"
+    "ui": {
+      "unknown": "onbekend",
+      "unknown_paren": "(onbekend)",
+      "site_backup": {
+        "title": "Back-up en herstel",
+        "export_config": "Configuratie exporteren",
+        "import_config": "Configuratie importeren",
+        "choose_file_first": "Kies eerst een back-upbestand",
+        "imported_reloading": "Geïmporteerd. Herladen...",
+        "import_failed": "Importeren is mislukt",
+        "import_failed_prefix": "Importeren mislukt:",
+        "retention_title": "Back-ups - Bewaring",
+        "keep_last": "Blijf als laatste",
+        "files": "bestanden",
+        "loading_stats": "(statistieken laden...)",
+        "last_backup_loading": "Laatste back-up: (laden...)",
+        "last_backup_none": "Laatste back-up: nog geen",
+        "last_backup_prefix": "Laatste back-up:",
+        "last_backup_unknown": "Laatste back-up: onbekend",
+        "prune_now": "Snoei nu",
+        "pruned_kept_deleted": "Gesnoeid - bewaard",
+        "deleted_prefix": "verwijderd",
+        "prune_failed": "Snoeien is mislukt",
+        "prune_failed_prefix": "Snoeien mislukt:",
+        "create_backup_now": "Maak nu een back-up",
+        "backup_saved_prefix": "Back-up opgeslagen:",
+        "backup_failed": "Back-up mislukt",
+        "backup_failed_prefix": "Back-up mislukt:",
+        "download_latest_backup": "Download de nieuwste back-up",
+        "no_backups_found": "Geen back-ups gevonden",
+        "download_failed_prefix": "Downloaden mislukt:",
+        "redact_secrets": "Redact secrets"
+      }
     }
+  },
+  "backups": {
+    "common": {
+      "status": "Status:",
+      "timestamp": "Tijdstempel:",
+      "none_dash": "-",
+      "free": "Vrij",
+      "used": "Gebruikt",
+      "copy": "Kopiëren",
+      "warnings": "Waarschuwingen",
+      "errors": "Fouten",
+      "loading": "Laden..."
+    },
+    "status": {
+      "error_loading_json": "FOUT BIJ HET LADEN VAN JSON",
+      "ok": "OK",
+      "unmounted": "ONGEMONTEERD",
+      "critical": "KRITIEK",
+      "high": "HOOG",
+      "elevated": "VERHOOGD",
+      "healthy": "GEZOND",
+      "unknown": "ONBEKEND",
+      "unknown_cap": "Onbekend"
+    },
+    "disk": {
+      "unmounted": "Schijf NIET GEMONTEERD",
+      "tag": "Schijf:",
+      "sizes_updated": "Maten bijgewerkt:",
+      "title": "Schijfgebruik",
+      "usage": "Gebruik",
+      "mount": "Monteren"
+    },
+    "page": {
+      "freshness_prefix": "Versheid:",
+      "title": "Back-upcontrolecentrum",
+      "subtitle_prefix": "Livestatus gedreven door",
+      "subtitle_suffix": "op uw back-upschijf."
+    },
+    "ages": {
+      "no_snapshots_on_disk": "Geen momentopnamen gevonden op schijf",
+      "one_snapshot_present": "1 momentopname aanwezig",
+      "snapshots_present_suffix": "momentopnames aanwezig",
+      "no_panel_backups_on_disk": "Geen paneelback-ups gevonden op schijf",
+      "one_panel_backup_present": "1 paneelback-up aanwezig",
+      "panel_backups_present_suffix": "paneelback-ups aanwezig",
+      "no_micro_backups_on_disk": "Geen micro-back-ups gevonden op schijf",
+      "one_micro_backup_present": "1 micro backup aanwezig",
+      "micro_backups_present_suffix": "micro-back-ups aanwezig",
+      "snapshot_daily0_chart": "Momentopname (dagelijks.0)",
+      "hestia_latest_chart": "Hestia laatste",
+      "micro_latest_chart": "Micro nieuwste",
+      "age_days": "Leeftijd (dagen)",
+      "title": "Back-upleeftijden",
+      "subtitle": "Hoe vers uw nieuwste back-ups zijn",
+      "snapshot_daily0": "Momentopname dagelijks.0",
+      "latest_hestia": "Nieuwste Hestia",
+      "latest_micro": "Nieuwste Micro"
+    },
+    "errors": {
+      "no_backups_detected": "Er zijn geen back-ups gedetecteerd voor snapshots, Hestia of microsets."
+    },
+    "restore": {
+      "hestia_placeholder_tar": "USER.JJJJMMDD-UUMM.tar",
+      "using_latest_backup_prefix": "Met behulp van de nieuwste back-up gerapporteerd in JSON:",
+      "adjust_backup_tar": "Pas BACKUP_TAR aan naar een echt bestand uit \\\"v-list-backups USER\\\" voordat u het uitvoert.",
+      "micro_restore_prefix": "Basis herstellen vanaf de laatste micro-snapshot:",
+      "micro_restore_suffix": "(bekijk paden en uitsluitingen voordat u deze uitvoert).",
+      "set_correct_snapshot_path": "Stel het juiste snapshotpad in voordat u deze opdracht gebruikt.",
+      "confirm_body_1": "Hierdoor wordt een Hestia-hersteltaak op de server gestart met behulp van backupctl.",
+      "confirm_body_2": "Services en gegevens voor die gebruiker kunnen worden overschreven.",
+      "confirm_body_3": "Weet je het absoluut zeker?"
+    },
+    "actions": {
+      "starting_prefix": "Beginnen",
+      "failed_to_start_prefix": "Kan niet starten",
+      "started_prefix": "Gestart",
+      "started_suffix": ". Dit kan even duren; de status wordt bijgewerkt bij de volgende gezondheidscontrole.",
+      "error_talking_endpoint": "Fout bij praten met backups_action.php",
+      "run_os_snapshot": "Voer OS-momentopname uit",
+      "run_micro_backup": "Voer Micro-back-up uit",
+      "run_hestia_backup_user": "Voer Hestia Backup uit (gen)",
+      "run_all_backups": "Voer ALLE back-ups uit",
+      "run_health_check": "Voer een statuscheck uit",
+      "log_maintenance": "Onderhoud van logboeken",
+      "clear_backup_logs": "Wis back-upstatuslogboeken",
+      "clear_prune_logs": "Snoeilogboeken opruimen",
+      "clear_integrity_log": "Integriteitslogboek wissen"
+    },
+    "cron": {
+      "no_entries": "Geen crontab-items gedetecteerd.",
+      "env": "Omgeving",
+      "schedule": "Schema",
+      "entries_for_prefix": "Crontab-vermeldingen voor",
+      "current_user": "huidige gebruiker",
+      "unable_to_read": "Kan crontab niet lezen.",
+      "failed_to_read": "Kan crontab niet lezen."
+    },
+    "warnings_errors": {
+      "title": "Waarschuwingen en fouten",
+      "subtitle": "Samenvatting van de gezondheidscheck"
+    },
+    "raw_snapshot": {
+      "title": "Ruwe momentopname",
+      "subtitle": "Sleutelwaarden rechtstreeks uit de laatste JSON-status"
+    },
+    "recent_actions": {
+      "title": "Recente acties",
+      "subtitle": "Geschiedenis van acties van dit dashboard",
+      "none": "Er zijn nog geen acties geregistreerd."
+    },
+    "orch": {
+      "title": "Wizard Back-uporkestratie",
+      "subtitle": "Pas de paden één keer aan en kopieer vervolgens de gegenereerde script/cron/systemd-eenheden.",
+      "backup_root": "Back-up root",
+      "include_health": "Inclusief gezondheidscheck",
+      "include_integrity": "Inclusief integriteitscontrole",
+      "include_prune": "Inclusief snoeifase",
+      "suspend": "Back-ups opschorten",
+      "disable_on_mount_fail": "Schakel back-ups uit als het koppelen mislukt",
+      "nightly_script": "Nachtelijk script",
+      "copy_script": "Script kopiëren",
+      "cron_entry": "Cron-invoer",
+      "copy_cron_line": "Kopieer de cron-regel",
+      "systemd_service": "Systematische service",
+      "copy_unit": "Kopieer eenheid",
+      "systemd_timer": "Systeemtimer",
+      "copy_timer": "Kopieertimer"
+    },
+    "quick_restore": {
+      "title": "Helpers voor snel herstel",
+      "subtitle": "Vooraf ingevulde CLI-opdrachten voor noodgevallen (handmatige uitvoering of knop GEVAAR)",
+      "hestia_latest_title": "Herstel de nieuwste Hestia-gebruikersback-up",
+      "micro_latest_title": "Herstellen vanaf de nieuwste micro-snapshot (alleen CLI)",
+      "copy_command": "Kopieer opdracht",
+      "run_restore_danger": "Herstel uitvoeren (nieuwste, GEVAAR)"
+    },
+    "cli": {
+      "title": "Hestia Back-up en herstel CLI",
+      "subtitle": "Snel referentieblad - gereed voor kopiëren en plakken",
+      "create_backups": "Back-ups maken",
+      "list_delete_backups": "Back-ups weergeven en verwijderen",
+      "full_restore_user": "Volledig herstel (gebruiker)",
+      "selective_restore": "Selectief herstel (web / database / e-mail)",
+      "backup_file_locations": "Back-upbestandslocaties",
+      "backup_tarball_contents": "Maak een back-up van de Tarball-inhoud",
+      "backupctl_help": "backupctl hulp"
+    }
+  }
 }

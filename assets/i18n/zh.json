@@ -1,94 +1,314 @@
 {
-    "app": {
-        "title": "\u670d\u52a1\u5668\u4eea\u8868\u677f"
+  "app": {
+    "title": "服务器仪表板"
+  },
+  "nav": {
+    "history": "历史",
+    "logs": "日志",
+    "dashboard": "仪表板",
+    "services": "服务",
+    "alerts": "警报",
+    "tests": "测试",
+    "settings": "设置",
+    "about": "关于"
+  },
+  "history": {
+    "title": "历史",
+    "trends": "发展趋势",
+    "range": "范围",
+    "baseline": "基线",
+    "probe_now": "立即探测",
+    "refresh": "刷新",
+    "export_json": "导出 JSON",
+    "export_alerts_json": "导出警报 JSON",
+    "reset_history": "重置历史记录",
+    "recent_alert_events": "最近的警报事件",
+    "export_preview": "导出预览",
+    "close": "关闭",
+    "copy": "复制",
+    "download": "下载"
+  },
+  "logs": {
+    "title": "日志",
+    "manage": "管理日志",
+    "add": "添加",
+    "delete": "删除",
+    "refresh": "刷新",
+    "search": "搜索",
+    "filter": "过滤器",
+    "lines": "线路",
+    "open": "开放",
+    "close": "关闭",
+    "download": "下载",
+    "copy": "复制"
+  },
+  "common": {
+    "save": "节省",
+    "cancel": "取消",
+    "edit": "编辑",
+    "delete": "删除",
+    "update": "更新",
+    "create": "创建",
+    "enable": "启用",
+    "disable": "禁用",
+    "yes": "是",
+    "no": "没有",
+    "on": "关于",
+    "off": "关闭",
+    "confirm": "确认",
+    "search": "搜索",
+    "filter": "过滤器",
+    "actions": "行动"
+  },
+  "alerts": {
+    "title": "警报",
+    "recent_events": "最近的警报事件",
+    "history": "警报历史",
+    "export_json": "导出警报 JSON",
+    "no_alerts": "无警报",
+    "level": "级别",
+    "message": "留言",
+    "service": "服务",
+    "time": "时间",
+    "probe_now": "立即探测",
+    "refresh": "刷新",
+    "silence": "沉默",
+    "unsilence": "无声",
+    "ack": "确认",
+    "unack": "不承认"
+  },
+  "tests": {
+    "title": "服务器测试",
+    "run_all": "运行所有",
+    "status": "现状",
+    "last_run": "最后一次运行",
+    "duration": "持续时间"
+  },
+  "services": {
+    "title": "服务",
+    "status": "现状",
+    "restart": "重新启动",
+    "start": "开始",
+    "stop": "停止"
+  },
+  "config": {
+    "sections": {
+      "site": "Site",
+      "features": "Features",
+      "capabilities": "Capabilities",
+      "processes": "Processes",
+      "mail": "Mail",
+      "integrations": "Integrations",
+      "security": "Security",
+      "ui": "UI",
+      "server_tests": "Server Tests",
+      "alerts": "Alerts",
+      "cron": "Cron",
+      "history": "History",
+      "logs": "Logs",
+      "backups": "备份",
+      "email": "Email"
     },
-    "nav": {
-        "history": "\u5386\u53f2",
-        "logs": "\u65e5\u5fd7",
-        "dashboard": "\u4eea\u8868\u677f",
-        "services": "\u670d\u52a1",
-        "alerts": "\u8b66\u62a5",
-        "tests": "\u6d4b\u8bd5",
-        "settings": "\u8bbe\u7f6e",
-        "about": "\u5173\u4e8e"
+    "fields": {
+      "backups": {
+        "require_dedicated_mount": {
+          "label": "需要专用安装座",
+          "help": "旧版兼容性密钥。启用后，备份脚本需要存在备份安装。"
+        },
+        "disable_on_mount_fail": {
+          "label": "如果安装失败则禁用备份",
+          "help": "启用后，如果备份安装丢失，备份操作和生成的脚本将停止。"
+        }
+      },
+      "alerts": {
+        "min_severity": {
+          "label": "警报的最低严重程度"
+        },
+        "email": {
+          "label": "Legacy alert email(s)"
+        }
+      }
     },
-    "history": {
-        "title": "\u5386\u53f2",
-        "trends": "\u53d1\u5c55\u8d8b\u52bf",
-        "range": "\u8303\u56f4",
-        "baseline": "\u57fa\u7ebf",
-        "probe_now": "\u7acb\u5373\u63a2\u6d4b",
-        "refresh": "\u5237\u65b0",
-        "export_json": "\u5bfc\u51fa JSON",
-        "export_alerts_json": "\u5bfc\u51fa\u8b66\u62a5 JSON",
-        "reset_history": "\u91cd\u7f6e\u5386\u53f2\u8bb0\u5f55",
-        "recent_alert_events": "\u6700\u8fd1\u7684\u8b66\u62a5\u4e8b\u4ef6",
-        "export_preview": "\u5bfc\u51fa\u9884\u89c8",
-        "close": "\u5173\u95ed",
-        "copy": "\u590d\u5236",
-        "download": "\u4e0b\u8f7d"
-    },
-    "logs": {
-        "title": "\u65e5\u5fd7",
-        "manage": "\u7ba1\u7406\u65e5\u5fd7",
-        "add": "\u6dfb\u52a0",
-        "delete": "\u5220\u9664",
-        "refresh": "\u5237\u65b0",
-        "search": "\u641c\u7d22",
-        "filter": "\u8fc7\u6ee4\u5668",
-        "lines": "\u7ebf\u8def",
-        "open": "\u5f00\u653e",
-        "close": "\u5173\u95ed",
-        "download": "\u4e0b\u8f7d",
-        "copy": "\u590d\u5236"
-    },
-    "common": {
-        "save": "\u8282\u7701",
-        "cancel": "\u53d6\u6d88",
-        "edit": "\u7f16\u8f91",
-        "delete": "\u5220\u9664",
-        "update": "\u66f4\u65b0",
-        "create": "\u521b\u5efa",
-        "enable": "\u542f\u7528",
-        "disable": "\u7981\u7528",
-        "yes": "\u662f",
-        "no": "\u6ca1\u6709",
-        "on": "\u5173\u4e8e",
-        "off": "\u5173\u95ed",
-        "confirm": "\u786e\u8ba4",
-        "search": "\u641c\u7d22",
-        "filter": "\u8fc7\u6ee4\u5668",
-        "actions": "\u884c\u52a8"
-    },
-    "alerts": {
-        "title": "\u8b66\u62a5",
-        "recent_events": "\u6700\u8fd1\u7684\u8b66\u62a5\u4e8b\u4ef6",
-        "history": "\u8b66\u62a5\u5386\u53f2",
-        "export_json": "\u5bfc\u51fa\u8b66\u62a5 JSON",
-        "no_alerts": "\u65e0\u8b66\u62a5",
-        "level": "\u7ea7\u522b",
-        "message": "\u7559\u8a00",
-        "service": "\u670d\u52a1",
-        "time": "\u65f6\u95f4",
-        "probe_now": "\u7acb\u5373\u63a2\u6d4b",
-        "refresh": "\u5237\u65b0",
-        "silence": "\u6c89\u9ed8",
-        "unsilence": "\u65e0\u58f0",
-        "ack": "\u786e\u8ba4",
-        "unack": "\u4e0d\u627f\u8ba4"
-    },
-    "tests": {
-        "title": "\u670d\u52a1\u5668\u6d4b\u8bd5",
-        "run_all": "\u8fd0\u884c\u6240\u6709",
-        "status": "\u73b0\u72b6",
-        "last_run": "\u6700\u540e\u4e00\u6b21\u8fd0\u884c",
-        "duration": "\u6301\u7eed\u65f6\u95f4"
-    },
-    "services": {
-        "title": "\u670d\u52a1",
-        "status": "\u73b0\u72b6",
-        "restart": "\u91cd\u65b0\u542f\u52a8",
-        "start": "\u5f00\u59cb",
-        "stop": "\u505c\u6b62"
+    "ui": {
+      "unknown": "未知",
+      "unknown_paren": "（未知）",
+      "site_backup": {
+        "title": "备份与恢复",
+        "export_config": "导出配置",
+        "import_config": "导入配置",
+        "choose_file_first": "首先选择一个备份文件",
+        "imported_reloading": "进口的。正在重新加载...",
+        "import_failed": "导入失败",
+        "import_failed_prefix": "导入失败：",
+        "retention_title": "备份 - 保留",
+        "keep_last": "保持最后",
+        "files": "文件",
+        "loading_stats": "（正在加载统计数据...）",
+        "last_backup_loading": "最后一次备份：（加载中...）",
+        "last_backup_none": "上次备份：还没有",
+        "last_backup_prefix": "最后备份：",
+        "last_backup_unknown": "上次备份：未知",
+        "prune_now": "立即修剪",
+        "pruned_kept_deleted": "修剪保留",
+        "deleted_prefix": "已删除",
+        "prune_failed": "修剪失败",
+        "prune_failed_prefix": "修剪失败：",
+        "create_backup_now": "立即创建备份",
+        "backup_saved_prefix": "备份已保存：",
+        "backup_failed": "备份失败",
+        "backup_failed_prefix": "备份失败：",
+        "download_latest_backup": "下载最新备份",
+        "no_backups_found": "未找到备份",
+        "download_failed_prefix": "下载失败：",
+        "redact_secrets": "Redact secrets"
+      }
     }
+  },
+  "backups": {
+    "common": {
+      "status": "地位：",
+      "timestamp": "时间戳：",
+      "none_dash": "-",
+      "free": "自由的",
+      "used": "用过的",
+      "copy": "复制",
+      "warnings": "警告",
+      "errors": "错误",
+      "loading": "加载中..."
+    },
+    "status": {
+      "error_loading_json": "加载 JSON 时出错",
+      "ok": "好的",
+      "unmounted": "未安装",
+      "critical": "批判的",
+      "high": "高的",
+      "elevated": "高架",
+      "healthy": "健康",
+      "unknown": "未知",
+      "unknown_cap": "未知"
+    },
+    "disk": {
+      "unmounted": "磁盘已卸载",
+      "tag": "磁盘：",
+      "sizes_updated": "尺寸更新：",
+      "title": "磁盘利用率",
+      "usage": "用法",
+      "mount": "山"
+    },
+    "page": {
+      "freshness_prefix": "新鲜：",
+      "title": "备份控制中心",
+      "subtitle_prefix": "实时状态驱动",
+      "subtitle_suffix": "在您的备份磁盘上。"
+    },
+    "ages": {
+      "no_snapshots_on_disk": "磁盘上未找到快照",
+      "one_snapshot_present": "存在 1 个快照",
+      "snapshots_present_suffix": "存在快照",
+      "no_panel_backups_on_disk": "磁盘上未找到面板备份",
+      "one_panel_backup_present": "存在 1 个面板备份",
+      "panel_backups_present_suffix": "存在面板备份",
+      "no_micro_backups_on_disk": "磁盘上未找到微备份",
+      "one_micro_backup_present": "存在 1 个微备份",
+      "micro_backups_present_suffix": "存在微备份",
+      "snapshot_daily0_chart": "快照（每日.0）",
+      "hestia_latest_chart": "赫斯提亚最新",
+      "micro_latest_chart": "微最新",
+      "age_days": "年龄（天）",
+      "title": "备份时代",
+      "subtitle": "您最新的备份有多新鲜",
+      "snapshot_daily0": "每日快照.0",
+      "latest_hestia": "最新赫斯提亚",
+      "latest_micro": "最新微"
+    },
+    "errors": {
+      "no_backups_detected": "未检测到快照、Hestia 或微集的备份。"
+    },
+    "restore": {
+      "hestia_placeholder_tar": "基因.YYYYMMDD-HHMM.tar",
+      "using_latest_backup_prefix": "使用 JSON 中报告的最新备份：",
+      "adjust_backup_tar": "在运行之前将 BACKUP_TAR 调整为“v-list-backupsgene”中的真实文件。",
+      "micro_restore_prefix": "从最新的微快照恢复基础：",
+      "micro_restore_suffix": "（运行前检查路径和排除项）。",
+      "set_correct_snapshot_path": "使用此命令之前请设置正确的快照路径。",
+      "confirm_body_1": "这将使用 backupctl 在服务器上启动 Hestia 恢复作业。",
+      "confirm_body_2": "该用户的服务和数据可能会被覆盖。",
+      "confirm_body_3": "你绝对确定吗？"
+    },
+    "actions": {
+      "starting_prefix": "开始",
+      "failed_to_start_prefix": "启动失败",
+      "started_prefix": "开始",
+      "started_suffix": "。这可能需要一段时间；状态将在下次健康检查时更新。",
+      "error_talking_endpoint": "与 backups_action.php 对话时出错",
+      "run_os_snapshot": "运行操作系统快照",
+      "run_micro_backup": "运行微备份",
+      "run_hestia_backup_user": "运行 Hestia 备份（基因）",
+      "run_all_backups": "运行所有备份",
+      "run_health_check": "运行健康检查",
+      "log_maintenance": "日志维护",
+      "clear_backup_logs": "清除备份运行状况日志",
+      "clear_prune_logs": "清除修剪日志",
+      "clear_integrity_log": "清除完整性日志"
+    },
+    "cron": {
+      "no_entries": "未检测到 crontab 条目。",
+      "env": "环境",
+      "schedule": "日程",
+      "entries_for_prefix": "crontab 条目",
+      "current_user": "当前用户",
+      "unable_to_read": "无法读取 crontab。",
+      "failed_to_read": "无法读取 crontab。"
+    },
+    "warnings_errors": {
+      "title": "警告和错误",
+      "subtitle": "健康检查摘要"
+    },
+    "raw_snapshot": {
+      "title": "原始快照",
+      "subtitle": "直接来自最后一个 JSON 状态的键值"
+    },
+    "recent_actions": {
+      "title": "最近的行动",
+      "subtitle": "此仪表板的操作历史记录",
+      "none": "尚未记录任何操作。"
+    },
+    "orch": {
+      "title": "备份编排向导",
+      "subtitle": "自定义路径一次，然后复制生成的 script/cron/systemd 单元。",
+      "backup_root": "备份根目录",
+      "include_health": "包括健康检查",
+      "include_integrity": "包括完整性检查",
+      "include_prune": "包括修剪阶段",
+      "suspend": "暂停备份",
+      "disable_on_mount_fail": "如果安装失败则禁用备份",
+      "nightly_script": "每晚脚本",
+      "copy_script": "复制脚本",
+      "cron_entry": "定时任务入口",
+      "copy_cron_line": "复制 cron 行",
+      "systemd_service": "系统服务",
+      "copy_unit": "复印单位",
+      "systemd_timer": "系统定时器",
+      "copy_timer": "复印定时器"
+    },
+    "quick_restore": {
+      "title": "快速恢复助手",
+      "subtitle": "用于紧急情况的预填充 CLI 命令（手动运行或危险按钮）",
+      "hestia_latest_title": "恢复最新的 Hestia 用户备份",
+      "micro_latest_title": "从最新的微快照恢复（仅限 CLI）",
+      "copy_command": "复制命令",
+      "run_restore_danger": "运行恢复（最新，危险）"
+    },
+    "cli": {
+      "title": "Hestia 备份和恢复 CLI",
+      "subtitle": "快速参考表 - 复制和粘贴就绪",
+      "create_backups": "创建备份",
+      "list_delete_backups": "列出和删除备份",
+      "full_restore_user": "完全恢复（用户）",
+      "selective_restore": "选择性恢复（Web/数据库/邮件）",
+      "backup_file_locations": "备份文件位置",
+      "backup_tarball_contents": "备份压缩包内容",
+      "backupctl_help": "备份ctl帮助"
+    }
+  }
 }

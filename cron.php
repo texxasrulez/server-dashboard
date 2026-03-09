@@ -6,29 +6,38 @@ require_admin();
 require_once __DIR__ . '/lib/Config.php';
 \App\Config::init(__DIR__);
 
-function cron_token_lookup(): string {
-  $paths = [
-    'alerts.cron_token',
-    'security.cron_token',
-    'site.cron_token',
-    'cron.token',
-    'api.cron_token',
-    'history.token',
-  ];
-  foreach ($paths as $path) {
-    $val = (string)\App\Config::get($path, '');
-    if ($val !== '') return $val;
-  }
-  if (defined('CRON_TOKEN')) return (string) CRON_TOKEN;
-  foreach (cron_token_candidates() as $cand) {
-    if ($cand !== '') return $cand;
-  }
-  return '';
+function cron_token_lookup(): string
+{
+    $paths = [
+      'alerts.cron_token',
+      'security.cron_token',
+      'site.cron_token',
+      'cron.token',
+      'api.cron_token',
+      'history.token',
+    ];
+    foreach ($paths as $path) {
+        $val = (string)\App\Config::get($path, '');
+        if ($val !== '') {
+            return $val;
+        }
+    }
+    if (defined('CRON_TOKEN')) {
+        return (string) CRON_TOKEN;
+    }
+    foreach (cron_token_candidates() as $cand) {
+        if ($cand !== '') {
+            return $cand;
+        }
+    }
+    return '';
 }
 
 $cronToken = cron_token_lookup();
 $baseUrl = rtrim((string)\App\Config::get('site.base_url', project_url('/')), '/');
-if ($baseUrl === '') { $baseUrl = project_url('/'); }
+if ($baseUrl === '') {
+    $baseUrl = project_url('/');
+}
 $alertUrl = $baseUrl . '/api/cron_mark.php?what=alerts';
 $historyUrl = $baseUrl . '/api/cron_mark.php?what=history';
 $heartbeatApi = $baseUrl . '/api/cron_heartbeat.php';
@@ -129,8 +138,8 @@ include __DIR__ . '/includes/head.php';
     <div class="token-block">
       <label class="muted">Active cron token</label>
       <div class="token-row">
-        <input type="<?= $cronToken ? 'password' : 'text' ?>" value="<?= h($cronToken ?: 'Not set') ?>" readonly id="cronTokenField" />
-        <button class="btn secondary" id="cronTokenToggle" <?= $cronToken ? '' : 'disabled' ?>><?= $cronToken ? 'Show' : 'No token' ?></button>
+        <input type="text" value="<?= h($cronToken ?: 'Not set') ?>" readonly id="cronTokenField" />
+        <button class="btn secondary" id="cronTokenToggle" disabled><?= $cronToken ? 'Visible' : 'No token' ?></button>
         <button class="btn secondary" id="cronTokenCopy" <?= $cronToken ? '' : 'disabled' ?>>Copy token</button>
       </div>
     </div>

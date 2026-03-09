@@ -1,13 +1,20 @@
 <?php require_once __DIR__ . '/init.php'; ?>
 <?php
-  // Pull site name for brand alt from central config if available
-  if (!isset($SITE_NAME)) {
+// Pull site name for brand alt from central config if available
+if (!isset($SITE_NAME)) {
     try {
-      $cfgLib = __DIR__ . '/../lib/Config.php';
-      if (is_file($cfgLib)) { require_once $cfgLib; \App\Config::init(dirname(__DIR__)); $SITE_NAME = \App\Config::get('site.name', 'Server Dashboard'); }
-      else { $SITE_NAME = 'Server Dashboard'; }
-    } catch (Throwable $e) { $SITE_NAME = 'Server Dashboard'; }
-  }
+        $cfgLib = __DIR__ . '/../lib/Config.php';
+        if (is_file($cfgLib)) {
+            require_once $cfgLib;
+            \App\Config::init(dirname(__DIR__));
+            $SITE_NAME = \App\Config::get('site.name', 'Server Dashboard');
+        } else {
+            $SITE_NAME = 'Server Dashboard';
+        }
+    } catch (Throwable $e) {
+        $SITE_NAME = 'Server Dashboard';
+    }
+}
 ?>
 <header class="app-header">
   <div class="mobile-bar">
@@ -17,46 +24,46 @@
   </div>
   <div class="brand">
     <a href="<?= h(project_url('/index.php')) ?>">
-      <div class="logo-container"><img id="brandLogo" src="<?= h(project_url('/assets/images/header-logo-icon.png')) ?>"><img class="header-image-domain" id="brandLogo" src="<?= h(project_url('/assets/images/header-logo-branding.png')) ?>" alt="<?= h($SITE_NAME) ?>"></div>
+      <div class="logo-container"><img class="header-image-icon" id="brandLogoIcon" src="<?= h(project_url('/assets/images/header-logo-icon.png')) ?>" alt="<?= h($SITE_NAME) ?> icon"><img class="header-image-domain" id="brandLogo" src="<?= h(project_url('/assets/images/header-logo-branding.png')) ?>" alt="<?= h($SITE_NAME) ?>"></div>
     </a>
   </div>
 
   <?php
   $isAdmin = user_is_admin();
-  $candidates_admin = [
-    ['History', 'history.php'],
-    ['Logs', 'logs.php'],
-    ['Cron Health', 'cron.php'],
-    ['Processes', 'processes.php'],
-    ['Services', 'services.php'],
-    ['Databases', 'database.php'],
-    ['Server Tests', 'server_tests.php'],
-    ['Alerts', file_exists(__DIR__.'/../alerts_admin.php') ? 'alerts_admin.php' : (file_exists(__DIR__.'/../alerts.php') ? 'alerts.php' : null)],
-    ['Bookmarks', 'bookmarks.php'],
-    ['Diagnostics', 'diag.php'],
-    ['Config', 'config.php'],
-    ['Backups', 'backups.php'],
-  ];
-  $links_public = [
-  ];
-  ?>
+$candidates_admin = [
+  ['History', 'history.php'],
+  ['Logs', 'logs.php'],
+  ['Cron Health', 'cron.php'],
+  ['Processes', 'processes.php'],
+  ['Services', 'services.php'],
+  ['Databases', 'database.php'],
+  ['Server Tests', 'server_tests.php'],
+  ['Alerts', file_exists(__DIR__.'/../alerts_admin.php') ? 'alerts_admin.php' : (file_exists(__DIR__.'/../alerts.php') ? 'alerts.php' : null)],
+  ['Bookmarks', 'bookmarks.php'],
+  ['Diagnostics', 'diag.php'],
+  ['Config', 'config.php'],
+  ['Backups', 'backups.php'],
+];
+$links_public = [
+];
+?>
   <nav id="site-nav" class="tabs">
   <?php
-    foreach ($links_public as $L){
+  foreach ($links_public as $L) {
       [$label, $href] = $L;
-      if ($href && file_exists(__DIR__ . '/../' . $href)){
-        echo '<a href="'.h($href).'">'.h($label).'</a>';
-      }
-    }
-    if ($isAdmin){
-      foreach ($candidates_admin as $L){
-        [$label, $href] = $L;
-        if ($href && file_exists(__DIR__ . '/../' . $href)){
+      if ($href && file_exists(__DIR__ . '/../' . $href)) {
           echo '<a href="'.h($href).'">'.h($label).'</a>';
-        }
       }
+  }
+if ($isAdmin) {
+    foreach ($candidates_admin as $L) {
+        [$label, $href] = $L;
+        if ($href && file_exists(__DIR__ . '/../' . $href)) {
+            echo '<a href="'.h($href).'">'.h($label).'</a>';
+        }
     }
-  ?>
+}
+?>
   </nav>
   
   <a href="services.php" id="sys-badge" class="sys-badge" role="status" title="Service status">

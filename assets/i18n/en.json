@@ -65,5 +65,225 @@
   },
   "logs": {
     "title": "Logs"
+  },
+  "config": {
+    "sections": {
+      "site": "Site",
+      "features": "Features",
+      "capabilities": "Capabilities",
+      "processes": "Processes",
+      "mail": "Mail",
+      "integrations": "Integrations",
+      "security": "Security",
+      "ui": "UI",
+      "server_tests": "Server Tests",
+      "alerts": "Alerts",
+      "cron": "Cron",
+      "history": "History",
+      "logs": "Logs",
+      "backups": "Backups",
+      "email": "Email"
+    },
+    "fields": {
+      "backups": {
+        "require_dedicated_mount": {
+          "label": "Require dedicated mount",
+          "help": "Legacy compatibility key. When enabled, backup scripts require the backup mount to be present."
+        },
+        "disable_on_mount_fail": {
+          "label": "Disable backups if mount fails",
+          "help": "When enabled, backup actions and generated scripts stop if the backup mount is missing."
+        }
+      },
+      "alerts": {
+        "min_severity": {
+          "label": "Minimum severity to alert"
+        },
+        "email": {
+          "label": "Legacy alert email(s)"
+        }
+      }
+    },
+    "ui": {
+      "unknown": "unknown",
+      "unknown_paren": "(unknown)",
+      "site_backup": {
+        "title": "Backup & Restore",
+        "export_config": "Export Config",
+        "import_config": "Import Config",
+        "choose_file_first": "Choose a backup file first",
+        "imported_reloading": "Imported. Reloading...",
+        "import_failed": "Import failed",
+        "import_failed_prefix": "Import failed: ",
+        "retention_title": "Backups - Retention",
+        "keep_last": "Keep last",
+        "files": "files",
+        "loading_stats": "(loading stats...)",
+        "last_backup_loading": "Last backup: (loading...)",
+        "last_backup_none": "Last backup: none yet",
+        "last_backup_prefix": "Last backup: ",
+        "last_backup_unknown": "Last backup: unknown",
+        "prune_now": "Prune now",
+        "pruned_kept_deleted": "Pruned - kept ",
+        "deleted_prefix": "deleted ",
+        "prune_failed": "Prune failed",
+        "prune_failed_prefix": "Prune failed: ",
+        "create_backup_now": "Create backup now",
+        "backup_saved_prefix": "Backup saved: ",
+        "backup_failed": "Backup failed",
+        "backup_failed_prefix": "Backup failed: ",
+        "download_latest_backup": "Download latest backup",
+        "no_backups_found": "No backups found",
+        "download_failed_prefix": "Download failed: ",
+        "redact_secrets": "Redact secrets"
+      }
+    }
+  },
+  "backups": {
+    "common": {
+      "status": "Status:",
+      "timestamp": "Timestamp:",
+      "none_dash": "-",
+      "free": "Free",
+      "used": "Used",
+      "copy": "Copy",
+      "warnings": "Warnings",
+      "errors": "Errors",
+      "loading": "Loading..."
+    },
+    "status": {
+      "error_loading_json": "ERROR LOADING JSON",
+      "ok": "OK",
+      "unmounted": "UNMOUNTED",
+      "critical": "CRITICAL",
+      "high": "HIGH",
+      "elevated": "ELEVATED",
+      "healthy": "HEALTHY",
+      "unknown": "UNKNOWN",
+      "unknown_cap": "Unknown"
+    },
+    "disk": {
+      "unmounted": "Disk UNMOUNTED",
+      "tag": "Disk:",
+      "sizes_updated": "Sizes updated:",
+      "title": "Disk Utilization",
+      "usage": "Usage",
+      "mount": "Mount"
+    },
+    "page": {
+      "freshness_prefix": "Freshness:",
+      "title": "Backup Control Center",
+      "subtitle_prefix": "Live status driven by",
+      "subtitle_suffix": "on your backup disk."
+    },
+    "ages": {
+      "no_snapshots_on_disk": "No snapshots found on disk",
+      "one_snapshot_present": "1 snapshot present",
+      "snapshots_present_suffix": "snapshots present",
+      "no_panel_backups_on_disk": "No panel backups found on disk",
+      "one_panel_backup_present": "1 panel backup present",
+      "panel_backups_present_suffix": "panel backups present",
+      "no_micro_backups_on_disk": "No micro backups found on disk",
+      "one_micro_backup_present": "1 micro backup present",
+      "micro_backups_present_suffix": "micro backups present",
+      "snapshot_daily0_chart": "Snapshot (daily.0)",
+      "hestia_latest_chart": "Hestia latest",
+      "micro_latest_chart": "Micro latest",
+      "age_days": "Age (days)",
+      "title": "Backup Ages",
+      "subtitle": "How fresh your latest backups are",
+      "snapshot_daily0": "Snapshot daily.0",
+      "latest_hestia": "Latest Hestia",
+      "latest_micro": "Latest Micro"
+    },
+    "errors": {
+      "no_backups_detected": "No backups detected for snapshots, Hestia, or micro sets."
+    },
+    "restore": {
+      "hestia_placeholder_tar": "USER.YYYYMMDD-HHMM.tar",
+      "using_latest_backup_prefix": "Using latest backup reported in JSON: ",
+      "adjust_backup_tar": "Adjust BACKUP_TAR to a real file from \\\"v-list-backups USER\\\" before running.",
+      "micro_restore_prefix": "Restore base from latest micro snapshot: ",
+      "micro_restore_suffix": " (review paths and exclusions before running).",
+      "set_correct_snapshot_path": "Set the correct snapshot path before using this command.",
+      "confirm_body_1": "This will start a Hestia restore job on the server using backupctl.",
+      "confirm_body_2": "Services and data for that user may be overwritten.",
+      "confirm_body_3": "Are you absolutely sure?"
+    },
+    "actions": {
+      "starting_prefix": "Starting ",
+      "failed_to_start_prefix": "FAILED to start ",
+      "started_prefix": "Started ",
+      "started_suffix": ". This may take a while; status will update on next health check.",
+      "error_talking_endpoint": "Error talking to backups_action.php",
+      "run_os_snapshot": "Run OS Snapshot",
+      "run_micro_backup": "Run Micro Backup",
+      "run_hestia_backup_user": "Run Hestia Backup (user)",
+      "run_all_backups": "Run ALL Backups",
+      "run_health_check": "Run Health Check",
+      "log_maintenance": "Log maintenance",
+      "clear_backup_logs": "Clear backup-health logs",
+      "clear_prune_logs": "Clear prune logs",
+      "clear_integrity_log": "Clear integrity log"
+    },
+    "cron": {
+      "no_entries": "No crontab entries detected.",
+      "env": "Env",
+      "schedule": "Schedule",
+      "entries_for_prefix": "Crontab entries for ",
+      "current_user": "current user",
+      "unable_to_read": "Unable to read crontab.",
+      "failed_to_read": "Failed to read crontab."
+    },
+    "warnings_errors": {
+      "title": "Warnings & Errors",
+      "subtitle": "Summary from the health check"
+    },
+    "raw_snapshot": {
+      "title": "Raw Snapshot",
+      "subtitle": "Key values directly from the last JSON status"
+    },
+    "recent_actions": {
+      "title": "Recent Actions",
+      "subtitle": "History of actions from this dashboard",
+      "none": "No actions recorded yet."
+    },
+    "orch": {
+      "title": "Backup Orchestration Wizard",
+      "subtitle": "Customize paths once, then copy the generated script/cron/systemd units.",
+      "backup_root": "Backup root",
+      "include_health": "Include health check",
+      "include_integrity": "Include integrity check",
+      "include_prune": "Include prune stage",
+      "suspend": "Suspend backups",
+      "disable_on_mount_fail": "Disable backups if mount fails",
+      "nightly_script": "Nightly script",
+      "copy_script": "Copy script",
+      "cron_entry": "Cron entry",
+      "copy_cron_line": "Copy cron line",
+      "systemd_service": "Systemd service",
+      "copy_unit": "Copy unit",
+      "systemd_timer": "Systemd timer",
+      "copy_timer": "Copy timer"
+    },
+    "quick_restore": {
+      "title": "Quick Restore Helpers",
+      "subtitle": "Pre-filled CLI commands for emergencies (manual run or DANGER button)",
+      "hestia_latest_title": "Restore latest Hestia user backup",
+      "micro_latest_title": "Restore from latest micro snapshot (CLI only)",
+      "copy_command": "Copy command",
+      "run_restore_danger": "Run restore (latest, DANGER)"
+    },
+    "cli": {
+      "title": "Hestia Backup & Restore CLI",
+      "subtitle": "Quick reference sheet - copy & paste ready",
+      "create_backups": "Create Backups",
+      "list_delete_backups": "List & Delete Backups",
+      "full_restore_user": "Full Restore (User)",
+      "selective_restore": "Selective Restore (Web / DB / Mail)",
+      "backup_file_locations": "Backup File Locations",
+      "backup_tarball_contents": "Backup Tarball Contents",
+      "backupctl_help": "backupctl help"
+    }
   }
 }

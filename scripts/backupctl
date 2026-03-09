@@ -8,22 +8,12 @@ set -euo pipefail
 PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export PATH
 umask 027
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BACKUP_SCRIPT_PATH="${BACKUP_SCRIPT_PATH:-$SCRIPT_DIR}"
 
 # --- CONFIG --------------------------------------------------------------
 
 DEFAULT_USER="${BACKUP_DEFAULT_USER:-$(id -un 2>/dev/null || echo admin)}"
-
-SNAP_SCRIPT="${SNAP_SCRIPT:-/usr/local/sbin/make-snapshots.sh}"
-MICRO_SCRIPT="${MICRO_SCRIPT:-/usr/local/sbin/make-micro-backups.sh}"
-
-# Health / integrity
-HEALTH_SCRIPT="${HEALTH_SCRIPT:-/usr/local/sbin/backup_health_check.sh}"
-INTEGRITY_SCRIPT="${INTEGRITY_SCRIPT:-/usr/local/sbin/backup_integrity_watch.sh}"
-
-# Prune scripts
-PRUNE_SNAP_SCRIPT="${PRUNE_SNAP_SCRIPT:-/usr/local/sbin/prune_snapshots.sh}"
-PRUNE_MICRO_SCRIPT="${PRUNE_MICRO_SCRIPT:-/usr/local/sbin/prune-micro-backups.sh}"
-PRUNE_HESTIA_SCRIPT="${PRUNE_HESTIA_SCRIPT:-/usr/local/sbin/prune_hestia_backups.sh}"
 
 # Hestia binaries
 HESTIA_BIN_DIR="/usr/local/hestia/bin"
@@ -105,6 +95,35 @@ error() {
   exit 1
 }
 
+resolve_exec_path() {
+  local preferred="$1"
+  shift || true
+  local candidates=("$@")
+
+  if [[ -n "${preferred:-}" && -x "$preferred" ]]; then
+    echo "$preferred"
+    return 0
+  fi
+  if [[ -n "${preferred:-}" && ! -x "$preferred" ]]; then
+    echo "backupctl: warning: preferred path not executable: $preferred" >&2
+  fi
+
+  local p
+  for p in "${candidates[@]}"; do
+    [[ -n "$p" ]] || continue
+    if [[ -x "$p" ]]; then
+      echo "$p"
+      return 0
+    fi
+  done
+
+  if [[ -n "${preferred:-}" ]]; then
+    echo "$preferred"
+    return 0
+  fi
+  echo ""
+}
+
 ensure_rootish() {
   if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
     echo "backupctl: warning: not running as root; some commands may fail" >&2
@@ -115,6 +134,47 @@ ensure_executable() {
   local path="$1"
   [[ -x "$path" ]] || error "required executable not found or not executable: $path"
 }
+
+SNAP_SCRIPT="$(resolve_exec_path "${SNAP_SCRIPT:-}" \
+  "${BACKUP_SCRIPT_PATH}/make-snapshots.sh" \
+  "${SCRIPT_DIR}/make-snapshots.sh" \
+  "/usr/local/sbin/make-snapshots.sh" \
+  "/usr/local/sbin/make-snapshot.sh" \
+  "/usr/local/bin/make-snapshots.sh")"
+MICRO_SCRIPT="$(resolve_exec_path "${MICRO_SCRIPT:-}" \
+  "${BACKUP_SCRIPT_PATH}/make-micro-backups.sh" \
+  "${SCRIPT_DIR}/make-micro-backups.sh" \
+  "/usr/local/sbin/make-micro-backups.sh" \
+  "/usr/local/bin/make-micro-backups.sh")"
+
+# Health / integrity
+HEALTH_SCRIPT="$(resolve_exec_path "${HEALTH_SCRIPT:-}" \
+  "${BACKUP_SCRIPT_PATH}/backup_health_check.sh" \
+  "${SCRIPT_DIR}/backup_health_check.sh" \
+  "/usr/local/sbin/backup_health_check.sh" \
+  "/usr/local/bin/backup_health_check.sh")"
+INTEGRITY_SCRIPT="$(resolve_exec_path "${INTEGRITY_SCRIPT:-}" \
+  "${BACKUP_SCRIPT_PATH}/backup_integrity_watch.sh" \
+  "${SCRIPT_DIR}/backup_integrity_watch.sh" \
+  "/usr/local/sbin/backup_integrity_watch.sh" \
+  "/usr/local/bin/backup_integrity_watch.sh")"
+
+# Prune scripts
+PRUNE_SNAP_SCRIPT="$(resolve_exec_path "${PRUNE_SNAP_SCRIPT:-}" \
+  "${BACKUP_SCRIPT_PATH}/prune_snapshots.sh" \
+  "${SCRIPT_DIR}/prune_snapshots.sh" \
+  "/usr/local/sbin/prune_snapshots.sh" \
+  "/usr/local/bin/prune_snapshots.sh")"
+PRUNE_MICRO_SCRIPT="$(resolve_exec_path "${PRUNE_MICRO_SCRIPT:-}" \
+  "${BACKUP_SCRIPT_PATH}/prune-micro-backups.sh" \
+  "${SCRIPT_DIR}/prune-micro-backups.sh" \
+  "/usr/local/sbin/prune-micro-backups.sh" \
+  "/usr/local/bin/prune-micro-backups.sh")"
+PRUNE_HESTIA_SCRIPT="$(resolve_exec_path "${PRUNE_HESTIA_SCRIPT:-}" \
+  "${BACKUP_SCRIPT_PATH}/prune_hestia_backups.sh" \
+  "${SCRIPT_DIR}/prune_hestia_backups.sh" \
+  "/usr/local/sbin/prune_hestia_backups.sh" \
+  "/usr/local/bin/prune_hestia_backups.sh")"
 
 # --- ARG PARSING ---------------------------------------------------------
 

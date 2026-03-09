@@ -5,8 +5,9 @@ require_once __DIR__ . '/../includes/init.php';
 
 $checks = [];
 
-function add_check(&$arr, $name, $ok, $details=''){
-  $arr[] = ['name'=>$name, 'ok'=>$ok, 'details'=>$details];
+function add_check(&$arr, $name, $ok, $details = '')
+{
+    $arr[] = ['name' => $name, 'ok' => $ok, 'details' => $details];
 }
 
 add_check($checks, 'PHP version >= 7.4', version_compare(PHP_VERSION, '7.4.0', '>='), 'Current: ' . PHP_VERSION);
@@ -24,7 +25,7 @@ add_check($checks, 'Writable state/ directory', $state_ok, $state ?: 'not found'
 
 // URLs build correctly
 $u = project_url('/api/metrics_summary.php');
-add_check($checks, 'project_url()', is_string($u) && $u !== '' , $u);
+add_check($checks, 'project_url()', is_string($u) && $u !== '', $u);
 
 // cURL/fopen availability (not required, just nice)
 $curl_ok = function_exists('curl_init');

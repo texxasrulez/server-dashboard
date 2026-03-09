@@ -5,6 +5,7 @@
 ---
 
 ## Table of Contents
+
 - [1. Requirements](#1-requirements)
 - [2. Files & Folders](#2-files--folders)
 - [3. Installation](#3-installation)
@@ -52,7 +53,7 @@
 ## 2. Files & Folders
 
 ```
-web-admin/
+server-dashboard/
   api/                      # JSON endpoints (e.g., server_tests.php, alerts_*.php)
   assets/                   # JS/CSS
   config.php                # Configuration UI
@@ -70,33 +71,34 @@ web-admin/
 
 ## 3. Installation
 
-1. **Upload** the `web-admin/` directory to your web root (or subdirectory).
+1. **Upload** the `server-dashboard/` directory to your web root (or subdirectory).
 2. **Create writable directories:**
    ```bash
-   mkdir -p web-admin/data web-admin/state/history
-   chown -R www-data:www-data web-admin/data web-admin/state
-   chmod -R 750 web-admin/data web-admin/state
+   mkdir -p server-dashboard/data server-dashboard/state/history
+   chown -R www-data:www-data server-dashboard/data server-dashboard/state
+   chmod -R 750 server-dashboard/data server-dashboard/state
    ```
 3. **Ensure PHP extensions are present** (see Requirements).
 4. **Bootstrap first admin (CLI):**
    ```bash
-   php web-admin/bin/bootstrap-admin.php
+   php server-dashboard/bin/bootstrap-admin.php
    ```
-5. **Open** `https://your-host/web-admin/` and log in as `admin` with the printed password, then rotate it immediately in `Users`.
+5. **Open** `https://your-host/server-dashboard/` and log in as `admin` with the printed password, then rotate it immediately in `Users`.
 
 ---
 
 ## 4. Web Server Setup
 
 ### Nginx (example)
+
 ```nginx
-location /web-admin/ {
-  alias /var/www/your-site/web-admin/;
+location /server-dashboard/ {
+  alias /var/www/your-site/server-dashboard/;
   index index.php;
-  try_files $uri $uri/ /web-admin/index.php?$query_string;
+  try_files $uri $uri/ /server-dashboard/index.php?$query_string;
 }
 
-location ~ ^/web-admin/.*\.php$ {
+location ~ ^/server-dashboard/.*\.php$ {
   include fastcgi_params;
   fastcgi_param SCRIPT_FILENAME $request_filename;
   fastcgi_pass unix:/run/php/php-fpm.sock;
@@ -104,9 +106,10 @@ location ~ ^/web-admin/.*\.php$ {
 ```
 
 ### Apache (example)
+
 ```apache
-Alias /web-admin /var/www/your-site/web-admin
-<Directory "/var/www/your-site/web-admin">
+Alias /server-dashboard /var/www/your-site/server-dashboard
+<Directory "/var/www/your-site/server-dashboard">
     AllowOverride All
     Require all granted
 </Directory>
@@ -114,7 +117,7 @@ Alias /web-admin /var/www/your-site/web-admin
 # If using FPM, proxy PHP to php-fpm; otherwise enable mod_php.
 ```
 
-> Protect with HTTPS. Consider Basic Auth or IP allowlists on `/web-admin/` if you do not already have app auth enabled.
+> Protect with HTTPS. Consider Basic Auth or IP allowlists on `/server-dashboard/` if you do not already have app auth enabled.
 
 ---
 
@@ -134,22 +137,26 @@ Alias /web-admin /var/www/your-site/web-admin
 ## 6. Configuration (UI)
 
 ### 6.1 UI
+
 - **Toast position:** Choose where in the viewport toast notifications appear. The setting is applied on save; a reload is now automatic after saving.
 - Additional UI options may include theme and other display preferences.
 
 ### 6.2 Alerts
-- **Email (optional):** Recipient of alert emails.  
-- **Webhook URL (optional):** If you use a chat/webhook integration.  
+
+- **Email (optional):** Recipient of alert emails.
+- **Webhook URL (optional):** If you use a chat/webhook integration.
 - **Cron token (optional):** If you protect a cron-triggered endpoint with a token (see Alerts section).
 
 **Test sending:** A **Send test email** button appears at the bottom of the Alerts section. It sends to **Alerts → Email** using **From / Reply-To** from the **Security** page.
 
 ### 6.3 History
+
 - **Enable history logging:** On by default. Each test run appends to `state/history/YYYY-MM.jsonl`.
 - **Retention (days):** Controls pruning policy (by month files).
 - **Max samples to return:** Upper bound for API responses, used by the History UI.
 
 ### 6.4 Server Tests
+
 - **Service targets (host:port[|label]):** List of endpoints to probe by TCP connect.
   - Examples:
     - `127.0.0.1:80|Nginx`
@@ -160,6 +167,7 @@ Alias /web-admin /var/www/your-site/web-admin
 > If the Services list is empty, the Services tab will prompt once and cache targets in `localStorage`.
 
 ### 6.5 Security Page (Mailer & Headers)
+
 - **From / Reply-To:** Governs the sender for **Alerts** emails. This prevents the host’s default sender being used.
 - Other HTTP-header/security options live here (HSTS, X-Frame-Options, etc., depending on your build).
 
@@ -169,36 +177,43 @@ Alias /web-admin /var/www/your-site/web-admin
 
 Buttons along the top run different suites; results render as a table with **chips**:
 
-- **Good** (green), **Medium** (amber), **Bad** (red).  
+- **Good** (green), **Medium** (amber), **Bad** (red).
 - Long details **wrap** and remain inside the viewport.
 - “**Copy fix**” button appears inline on non-Good rows.
 
 ### 7.1 Quick Scan
+
 Light, fast checks: OS basics, high-value issues.
 
 ### 7.2 Security
+
 Common web/PHP hardening checks:
+
 - TLS certificate days to expiry
 - `display_errors`, `expose_php`, cookie flags
 - Available security updates
 - (Additional checks depending on distro & tooling)
 
 ### 7.3 Filesystem
+
 - Disk free %
 - Inodes free %
 - Mount flags or writable paths (depending on environment)
 
 ### 7.4 Performance
+
 - Load average (1m)
 - Process basics
 - Memory snapshot (where available)
 
 ### 7.5 Services
+
 - Probes each `host:port` with a TCP connect using your configured timeout.
 - Chips report `connected in N ms` or `error in N ms`.
 - Invalid lines get a Medium chip (`invalid target`) without breaking the run.
 
 ### 7.6 History View
+
 - **Charts:** Overall score, Disk Free %, Security Updates, Load (1m).
 - **Range selectors:** `7d`, `30d`, `90d`, `All`.
 - **Export:** Download JSON or CSV of the plotted series.
@@ -214,23 +229,27 @@ Alerts summarize non-Good findings and notify via email (and optional webhook).
 - **Recipient** is **Config → Alerts → Email**.
 
 ### 8.1 Test Email Button
+
 Located at the bottom of **Config → Alerts**:
+
 - Sends a simple test using the configured recipient and Security sender fields.
 - Requires admin + CSRF (it will show an error if you’re not authorized).
 
 ### 8.2 Scheduling Alerts
 
 **Option A — HTTP (if you prefer):**
-- Protect `web-admin/api/alerts_run.php` behind Basic Auth/IP allowlist (or use a `cron_token` if your build supports it).
+
+- Protect `server-dashboard/api/alerts_run.php` behind Basic Auth/IP allowlist (or use a `cron_token` if your build supports it).
 - Cron example (runs every hour):
   ```cron
-  5 * * * * curl -fsS https://your-host/web-admin/api/alerts_run.php >/dev/null
+  5 * * * * curl -fsS https://your-host/server-dashboard/api/alerts_run.php >/dev/null
   ```
 
 **Option B — PHP CLI:**
+
 - If your PHP CLI environment is compatible with your web runtime:
   ```cron
-  5 * * * * php /var/www/your-site/web-admin/api/alerts_run.php >/dev/null 2>&1
+  5 * * * * php /var/www/your-site/server-dashboard/api/alerts_run.php >/dev/null 2>&1
   ```
   > If the script expects web context (e.g., headers), prefer HTTP with auth.
 
@@ -239,9 +258,9 @@ Located at the bottom of **Config → Alerts**:
 ## 9. Backups & Upgrades
 
 - **Backup before upgrades:**
-  - `web-admin/` (code)
-  - `web-admin/data/` (persistent config like `security_config.json`)
-  - `web-admin/state/` (history)
+  - `server-dashboard/` (code)
+  - `server-dashboard/data/` (persistent config like `security_config.json`)
+  - `server-dashboard/state/` (history)
 - **Upgrade:**
   - Replace changed files only (as you’ve been doing).
   - Keep permissions on `data/` and `state/`.
@@ -252,7 +271,7 @@ Located at the bottom of **Config → Alerts**:
 ## 10. Security Hardening
 
 - Serve over **HTTPS**; set HSTS on your main site.
-- Restrict access to `/web-admin/`:
+- Restrict access to `/server-dashboard/`:
   - Application auth, and/or
   - Web server Basic Auth / IP allowlist.
 - If behind a reverse proxy/CDN, set `security.trusted_proxies` so client IP controls are accurate.
@@ -267,28 +286,33 @@ Located at the bottom of **Config → Alerts**:
 
 ## 11. Troubleshooting
 
-**Blank page (UI)**  
+**Blank page (UI)**
+
 - Open DevTools → Console. A JS error will blank the SPA; the first error line tells you the exact file/line.
 - Hard refresh (Ctrl/Cmd+F5) to invalidate cached JS.
 - If you edited `assets/js/...`, ensure braces are balanced and there are no stray characters.
 
-**500 errors (PHP)**  
+**500 errors (PHP)**
+
 - Check your PHP error log. Typical issues:
   - Missing extension
   - File permission/ownership on `data/` or `state/`
   - `open_basedir` restrictions — ensure project paths are allowed
 
-**Email not sending**  
+**Email not sending**
+
 - Verify **Security → From/Reply-To** and **Config → Alerts → Email**.
 - Use **Send test email**; read the toast error for reason (e.g., mailer not configured).
 - Check server MTA (postfix/exim) or SMTP relay credentials if you use one.
 
-**Services tab empty / wrong**  
+**Services tab empty / wrong**
+
 - Confirm **Config → Server Tests → Service targets** saved.
 - Format: `host:port|label` (label optional).
 - If left empty, first click will prompt and cache to browser local storage.
 
-**History not recording**  
+**History not recording**
+
 - Ensure **History → Enable** is on and `state/history` is writable.
 - If your server clock is incorrect, charts may look odd; fix NTP.
 
@@ -324,4 +348,4 @@ A: Each row is weighted: Good≈1.0, Medium≈0.6, Bad≈0.2. The score is a cla
 
 ---
 
-*End of document.*
+_End of document._

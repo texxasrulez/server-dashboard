@@ -1,2 +1,6 @@
-.svc-disabled{ display:none !important; }
-[hidden]{ display:none !important; }
+.svc-disabled {
+  display: none !important;
+}
+[hidden] {
+  display: none !important;
+}

@@ -9,30 +9,49 @@ $csrf_token = csrf_token();
 // FS-level backup presence check under configured root/subdirs
 $HAS_ANY_BACKUP_FS = false;
 $backup_root = (string) cfg_local('backups.fs_root', '/mnt/backupz');
-if ($backup_root === '') $backup_root = '/mnt/backupz';
+if ($backup_root === '') {
+    $backup_root = '/mnt/backupz';
+}
 $hestia_source_dir = (string) cfg_local('backups.hestia_source_dir', '/backup');
-if ($hestia_source_dir === '') $hestia_source_dir = '/backup';
+if ($hestia_source_dir === '') {
+    $hestia_source_dir = '/backup';
+}
 $hestia_bind_source = (string) cfg_local('backups.hestia_bind_source', '');
 $hestia_bind_target = (string) cfg_local('backups.hestia_bind_target', $hestia_source_dir);
-if ($hestia_bind_target === '') $hestia_bind_target = $hestia_source_dir;
+if ($hestia_bind_target === '') {
+    $hestia_bind_target = $hestia_source_dir;
+}
 $hestia_bind_options = (string) cfg_local('backups.hestia_bind_options', 'bind,nofail');
-if ($hestia_bind_options === '') $hestia_bind_options = 'bind,nofail';
+if ($hestia_bind_options === '') {
+    $hestia_bind_options = 'bind,nofail';
+}
+$hestia_user = (string) cfg_local('backups.hestia_user', 'user');
+if ($hestia_user === '') {
+    $hestia_user = 'user';
+}
+$backup_script_path = (string) cfg_local('backups.script_path', __DIR__ . '/scripts');
+if ($backup_script_path === '') {
+    $backup_script_path = __DIR__ . '/scripts';
+}
 $dirs_raw = (string) cfg_local('backups.fs_dirs', "hestia\nmicro\nsnapshots");
 $backup_dirs = array_values(array_filter(array_map('trim', preg_split('/[\s,]+/', $dirs_raw) ?: [])));
-if (!$backup_dirs) $backup_dirs = ['hestia','micro','snapshots'];
+if (!$backup_dirs) {
+    $backup_dirs = ['hestia','micro','snapshots'];
+}
 
 $backup_orchestrator_defaults = [
     'backup_root'     => $backup_root,
-    'snap_script'     => (string) cfg_local('backups.snap_script', '/usr/local/sbin/make-snapshots.sh'),
-    'micro_script'    => (string) cfg_local('backups.micro_script', '/usr/local/sbin/make-micro-backups.sh'),
+    'script_path'     => $backup_script_path,
+    'snap_script'     => (string) cfg_local('backups.snap_script', rtrim($backup_script_path, '/') . '/make-snapshots.sh'),
+    'micro_script'    => (string) cfg_local('backups.micro_script', rtrim($backup_script_path, '/') . '/make-micro-backups.sh'),
     'hestia_cmd'      => (string) cfg_local('backups.hestia_cmd', '/usr/local/hestia/bin/v-backup-user'),
-    'hestia_user'     => (string) cfg_local('backups.hestia_user', 'gene'),
+    'hestia_user'     => $hestia_user,
     'hestia_source_dir' => $hestia_source_dir,
     'hestia_bind_source' => $hestia_bind_source,
     'hestia_bind_target' => $hestia_bind_target,
     'hestia_bind_options' => $hestia_bind_options,
     'exclude_dirs'    => (string) cfg_local('backups.exclude_dirs', ''),
-    'backupctl'       => (string) cfg_local('backups.backupctl', '/usr/local/sbin/backupctl'),
+    'backupctl'       => (string) cfg_local('backups.backupctl', rtrim($backup_script_path, '/') . '/backupctl'),
     'pipeline_script' => (string) cfg_local('backups.pipeline_script', '/usr/local/bin/backup-nightly.sh'),
     'log_file'        => (string) cfg_local('backups.log_file', '/var/log/backup-nightly.log'),
     'cron_time'       => (string) cfg_local('backups.cron_time', '02:00'),
@@ -42,7 +61,7 @@ $backup_orchestrator_defaults = [
     'include_integrity' => cfg_local('backups.include_integrity', true),
     'include_prune'      => cfg_local('backups.include_prune', true),
     'suspend'            => cfg_local('backups.suspend', false),
-    'disable_on_mount_fail' => cfg_local('backups.disable_on_mount_fail', false),
+    'disable_on_mount_fail' => cfg_local('backups.disable_on_mount_fail', cfg_local('backups.require_dedicated_mount', false)),
 ];
 $backup_orchestrator_json = json_encode($backup_orchestrator_defaults, JSON_UNESCAPED_SLASHES);
 
@@ -59,6 +78,68 @@ foreach ($backup_dirs as $sub) {
             // If we can't iterate, treat as no backups in that dir and move on
         }
     }
+}
+
+$initial_status = 'UNKNOWN';
+$initial_status_class = 'status-crit';
+$initial_disk_usage = '--%';
+$initial_disk_status = 'Unknown';
+try {
+    $status_file = __DIR__ . '/state/backup_status.json';
+    if (is_readable($status_file)) {
+        $raw = @file_get_contents($status_file);
+        $j = is_string($raw) ? json_decode($raw, true) : null;
+        if (is_array($j)) {
+            $raw_status = strtoupper(trim((string)($j['status'] ?? '')));
+            $mount_ok = !array_key_exists('backup_mount_ok', $j) || ($j['backup_mount_ok'] !== false);
+            $warnings = (isset($j['warnings']) && is_array($j['warnings'])) ? $j['warnings'] : [];
+            $errors = (isset($j['errors']) && is_array($j['errors'])) ? $j['errors'] : [];
+            $usage = null;
+            if (isset($j['disk']) && is_array($j['disk']) && isset($j['disk']['usage_percent']) && is_numeric($j['disk']['usage_percent'])) {
+                $usage = (int)$j['disk']['usage_percent'];
+            }
+            if ($usage !== null) {
+                $initial_disk_usage = $usage . '%';
+            }
+
+            if (in_array($raw_status, ['OK','HEALTHY','PASS'], true)) {
+                $initial_status = 'OK';
+            } elseif (in_array($raw_status, ['WARN','WARNING','DEGRADED'], true)) {
+                $initial_status = 'WARN';
+            } elseif (in_array($raw_status, ['CRIT','CRITICAL','FAIL','ERROR'], true)) {
+                $initial_status = 'CRIT';
+            } else {
+                if ($mount_ok === false || count($errors) > 0 || ($usage !== null && $usage >= 95)) {
+                    $initial_status = 'CRIT';
+                } elseif (count($warnings) > 0 || ($usage !== null && $usage >= 80)) {
+                    $initial_status = 'WARN';
+                } else {
+                    $initial_status = 'OK';
+                }
+            }
+
+            if ($mount_ok === false) {
+                $initial_disk_status = 'UNMOUNTED';
+            } elseif ($usage !== null) {
+                if ($usage >= 95) {
+                    $initial_disk_status = 'CRITICAL';
+                } elseif ($usage >= 90) {
+                    $initial_disk_status = 'HIGH';
+                } elseif ($usage >= 80) {
+                    $initial_disk_status = 'ELEVATED';
+                } else {
+                    $initial_disk_status = 'HEALTHY';
+                }
+            }
+        }
+    }
+} catch (Throwable $e) {
+    // Keep UNKNOWN fallback.
+}
+if ($initial_status === 'OK') {
+    $initial_status_class = 'status-ok';
+} elseif ($initial_status === 'WARN') {
+    $initial_status_class = 'status-warn';
 }
 
 $PAGE_TITLE = 'Backups';
@@ -424,6 +505,22 @@ canvas {
   white-space:pre-wrap;
   word-break:break-all;
 }
+
+.collapsible-toggle{
+  border:1px solid var(--border-soft);
+  background:color-mix(in srgb,var(--card, #171a21) 92%, transparent);
+  color:var(--fg);
+  border-radius:8px;
+  min-width:32px;
+  height:28px;
+  padding:0 8px;
+  cursor:pointer;
+  font-size:13px;
+  line-height:1;
+}
+.collapsible-card.is-collapsed .collapsible-body{
+  display:none;
+}
 </style>
 
 <div class="backup-root">
@@ -432,38 +529,38 @@ canvas {
       <header>
         <div class="flex-space">
           <div>
-            <h1>Backup Control Center</h1>
+            <h1 data-i18n="backups.page.title">Backup Control Center</h1>
             <div class="subtitle">
-              Live status driven by <code>backup_status.json</code> on your backup disk.
+              <span data-i18n="backups.page.subtitle_prefix">Live status driven by</span> <code>backup_status.json</code> <span data-i18n="backups.page.subtitle_suffix">on your backup disk.</span>
             </div>
             <div class="subtitle" id="freshness-summary">
-              Freshness: --
+              <span data-i18n="backups.page.freshness_prefix">Freshness:</span> --
             </div>
 
             <!-- Backup action buttons -->
             <div class="backup-actions">
-              <button class="btn-backup" data-action="os_snapshot">Run OS Snapshot</button>
-              <button class="btn-backup" data-action="micro_backup">Run Micro Backup</button>
-              <button class="btn-backup" data-action="hestia_gene">Run Hestia Backup (gene)</button>
-              <button class="btn-backup" data-action="all_backups">Run ALL Backups</button>
-              <button class="btn-backup" data-action="health_check">Run Health Check</button>
+              <button class="btn-backup" data-action="os_snapshot" data-i18n="backups.actions.run_os_snapshot">Run OS Snapshot</button>
+              <button class="btn-backup" data-action="micro_backup" data-i18n="backups.actions.run_micro_backup">Run Micro Backup</button>
+              <button class="btn-backup" data-action="hestia_user" data-i18n="backups.actions.run_hestia_backup_user">Run Hestia Backup (user)</button>
+              <button class="btn-backup" data-action="all_backups" data-i18n="backups.actions.run_all_backups">Run ALL Backups</button>
+              <button class="btn-backup" data-action="health_check" data-i18n="backups.actions.run_health_check">Run Health Check</button>
             </div>
 
             <!-- Log maintenance buttons -->
             <div style="margin-top:8px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em;">
-              Log maintenance
+              <span data-i18n="backups.actions.log_maintenance">Log maintenance</span>
             </div>
             <div class="backup-actions">
-              <button class="btn-backup" data-action="clear_backup_logs">Clear backup-health logs</button>
-              <button class="btn-backup" data-action="clear_prune_logs">Clear prune logs</button>
-              <button class="btn-backup" data-action="clear_integrity_log">Clear integrity log</button>
+              <button class="btn-backup" data-action="clear_backup_logs" data-i18n="backups.actions.clear_backup_logs">Clear backup-health logs</button>
+              <button class="btn-backup" data-action="clear_prune_logs" data-i18n="backups.actions.clear_prune_logs">Clear prune logs</button>
+              <button class="btn-backup" data-action="clear_integrity_log" data-i18n="backups.actions.clear_integrity_log">Clear integrity log</button>
             </div>
 
             <div id="backup-action-status" class="backup-status-msg"></div>
           </div>
           <div class="flex" style="gap: 12px;">
-            <div class="timestamp" id="timestamp">Timestamp: --</div>
-            <div id="status-pill" class="status-pill status-crit">Status: UNKNOWN</div>
+            <div class="timestamp" id="timestamp"><span data-i18n="backups.common.timestamp">Timestamp:</span> --</div>
+            <div id="status-pill" class="status-pill <?= h($initial_status_class) ?>"><span data-i18n="backups.common.status">Status:</span> <span><?= h($initial_status) ?></span></div>
           </div>
         </div>
       </header>
@@ -475,10 +572,10 @@ canvas {
   <div class="card" style="flex:0 0 39%; min-width:260px;">
     <div class="card-header">
       <div>
-        <div class="card-title">Disk Utilization</div>
+        <div class="card-title" data-i18n="backups.disk.title">Disk Utilization</div>
         <div class="card-sub"><?= h($backup_root) ?> capacity &amp; health</div>
       </div>
-      <span class="tag" id="disk-tag">Disk: --</span>
+      <span class="tag" id="disk-tag"><span data-i18n="backups.disk.tag">Disk:</span> --</span>
     </div>
     <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
       <div style="flex:0 0 200px;">
@@ -487,22 +584,22 @@ canvas {
       <div style="flex:1 1 0;">
         <div class="kpi-row">
           <div class="kpi kpi-size">
-            <div class="kpi-label">Usage</div>
-            <div class="kpi-value" id="disk-usage">--%</div>
+            <div class="kpi-label" data-i18n="backups.disk.usage">Usage</div>
+            <div class="kpi-value" id="disk-usage"><?= h($initial_disk_usage) ?></div>
           </div>
           <div class="kpi kpi-size">
-            <div class="kpi-label">Mount</div>
+            <div class="kpi-label" data-i18n="backups.disk.mount">Mount</div>
             <div class="kpi-value" style="font-size:13px;"><?= h($backup_root) ?></div>
           </div>
           <div class="kpi kpi-size">
-            <div class="kpi-label">Status</div>
-            <div class="kpi-value" id="disk-status-label">Unknown</div>
+            <div class="kpi-label" data-i18n="backups.common.status">Status</div>
+            <div class="kpi-value" id="disk-status-label"><?= h($initial_disk_status) ?></div>
           </div>
         </div>
         <div style="margin-top:6px;">
           <pre id="disk-df" style="margin:0; font-size:10px; max-height:70px; overflow:auto;"></pre>
         </div>
-        <div class="kpi-sub" id="disk-sizes-updated">Sizes updated: --</div>
+        <div class="kpi-sub" id="disk-sizes-updated"><span data-i18n="backups.disk.sizes_updated">Sizes updated:</span> --</div>
         <div id="disk-legend" class="disk-legend"></div>
       </div>
     </div>
@@ -511,8 +608,8 @@ canvas {
   <div class="card" style="flex:0 0 60%; min-width:200px%;">
     <div class="card-header">
       <div>
-        <div class="card-title">Backup Ages</div>
-        <div class="card-sub">How fresh your latest backups are</div>
+        <div class="card-title" data-i18n="backups.ages.title">Backup Ages</div>
+        <div class="card-sub" data-i18n="backups.ages.subtitle">How fresh your latest backups are</div>
       </div>
     </div>
     <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
@@ -520,15 +617,17 @@ canvas {
       <div style="flex:0 0 200px; max-width:400px;">
         <div class="kpi-row" style="grid-template-columns:1fr; gap:6px;">
           <div class="kpi kpi-ages">
-            <div class="kpi-label">Snapshot daily.0</div>
+            <div class="kpi-label" data-i18n="backups.ages.snapshot_daily0">Snapshot daily.0</div>
             <div class="kpi-value" id="age-snap">-- d</div>
+            <div class="kpi-sub" id="snap-count"></div>
           </div>
           <div class="kpi kpi-ages">
-            <div class="kpi-label">Latest Hestia</div>
+            <div class="kpi-label" data-i18n="backups.ages.latest_hestia">Latest Hestia</div>
             <div class="kpi-value" id="age-hestia">-- d</div>
+            <div class="kpi-sub" id="hestia-count"></div>
           </div>
           <div class="kpi kpi-ages">
-            <div class="kpi-label">Latest Micro</div>
+            <div class="kpi-label" data-i18n="backups.ages.latest_micro">Latest Micro</div>
             <div class="kpi-value" id="age-micro">-- d</div>
             <div class="kpi-sub" id="micro-count"></div>
           </div>
@@ -549,19 +648,19 @@ canvas {
   <div class="card" style="flex:0 0 39%; min-width:280px;">
     <div class="card-header">
       <div>
-        <div class="card-title">Warnings &amp; Errors</div>
-        <div class="card-sub">Summary from the health check</div>
+        <div class="card-title" data-i18n="backups.warnings_errors.title">Warnings &amp; Errors</div>
+        <div class="card-sub" data-i18n="backups.warnings_errors.subtitle">Summary from the health check</div>
       </div>
     </div>
 
     <div style="display:flex; flex-direction:column; gap:10px;">
       <div>
-        <h3 style="font-size:13px; color:var(--accent-warn); margin-bottom:4px;">Warnings</h3>
+        <h3 style="font-size:13px; color:var(--accent-warn); margin-bottom:4px;" data-i18n="backups.common.warnings">Warnings</h3>
         <div class="list-block" id="warn-list">-</div>
       </div>
 
       <div>
-        <h3 style="font-size:13px; color:var(--accent-crit); margin-bottom:4px;">Errors</h3>
+        <h3 style="font-size:13px; color:var(--accent-crit); margin-bottom:4px;" data-i18n="backups.common.errors">Errors</h3>
         <div class="list-block" id="err-list">-</div>
       </div>
     </div>
@@ -571,8 +670,8 @@ canvas {
   <div class="card" style="flex:0 0 60%; min-width:320px;">
     <div class="card-header">
       <div>
-        <div class="card-title">Raw Snapshot</div>
-        <div class="card-sub">Key values directly from the last JSON status</div>
+        <div class="card-title" data-i18n="backups.raw_snapshot.title">Raw Snapshot</div>
+        <div class="card-sub" data-i18n="backups.raw_snapshot.subtitle">Key values directly from the last JSON status</div>
       </div>
     </div>
 
@@ -585,37 +684,36 @@ canvas {
   <div class="card" style="margin-top:16px; margin-bottom:40px;">
     <div class="card-header">
       <div>
-        <div class="card-title">Recent Actions</div>
-        <div class="card-sub">History of actions from this dashboard</div>
+        <div class="card-title" data-i18n="backups.recent_actions.title">Recent Actions</div>
+        <div class="card-sub" data-i18n="backups.recent_actions.subtitle">History of actions from this dashboard</div>
       </div>
     </div>
     <div id="recent-actions-container" class="list-block" style="max-height:180px;">
       <div id="recent-actions-empty" style="font-size:12px; color:var(--text-muted);">
-        No actions recorded yet.
+        <span data-i18n="backups.recent_actions.none">No actions recorded yet.</span>
       </div>
       <ul id="recent-actions-list" style="display:none;"></ul>
     </div>
   </div>
 
-  <div class="card" id="backupOrchestrator" data-config='<?= h($backup_orchestrator_json) ?>' style="margin-bottom:18px;">
+  <div class="card collapsible-card" id="backupOrchestrator" data-config='<?= h($backup_orchestrator_json) ?>' data-collapse-key="backup-orchestrator" style="margin-bottom:18px;">
     <div class="card-header">
       <div>
-        <div class="card-title">Backup Orchestration Wizard</div>
-        <div class="card-sub">Customize paths once, then copy the generated script/cron/systemd units.</div>
+        <div class="card-title" data-i18n="backups.orch.title">Backup Orchestration Wizard</div>
+        <div class="card-sub" data-i18n="backups.orch.subtitle">Customize paths once, then copy the generated script/cron/systemd units.</div>
       </div>
+      <button type="button" class="collapsible-toggle" data-collapse-toggle aria-expanded="true" title="Collapse/Expand">▾</button>
     </div>
+    <div class="collapsible-body">
     <div class="orch-grid">
-      <label>Backup root
+      <label><span data-i18n="backups.orch.backup_root">Backup root</span>
         <input type="text" data-orch="backup_root">
       </label>
       <label>Exclude paths
         <textarea data-orch="exclude_dirs" rows="3" placeholder="/backup&#10;/mnt/backupz"></textarea>
       </label>
-      <label>Snapshot script
-        <input type="text" data-orch="snap_script">
-      </label>
-      <label>Micro backup script
-        <input type="text" data-orch="micro_script">
+      <label>Backup Script path
+        <input type="text" data-orch="script_path">
       </label>
       <label>Hestia backup command
         <input type="text" data-orch="hestia_cmd">
@@ -643,33 +741,34 @@ canvas {
       </label>
     </div>
     <div class="orch-flags">
-      <label><input type="checkbox" data-orch-flag="include_health" checked> Include health check</label>
-      <label><input type="checkbox" data-orch-flag="include_integrity" checked> Include integrity check</label>
-      <label><input type="checkbox" data-orch-flag="include_prune" checked> Include prune stage</label>
-      <label><input type="checkbox" data-orch-flag="suspend"> Suspend backups</label>
-      <label><input type="checkbox" data-orch-flag="disable_on_mount_fail"> Disable backups if mount fails</label>
+      <label><input type="checkbox" data-orch-flag="include_health" checked> <span data-i18n="backups.orch.include_health">Include health check</span></label>
+      <label><input type="checkbox" data-orch-flag="include_integrity" checked> <span data-i18n="backups.orch.include_integrity">Include integrity check</span></label>
+      <label><input type="checkbox" data-orch-flag="include_prune" checked> <span data-i18n="backups.orch.include_prune">Include prune stage</span></label>
+      <label><input type="checkbox" data-orch-flag="suspend"> <span data-i18n="backups.orch.suspend">Suspend backups</span></label>
+      <label><input type="checkbox" data-orch-flag="disable_on_mount_fail"> <span data-i18n="backups.orch.disable_on_mount_fail">Disable backups if mount fails</span></label>
     </div>
     <div class="orch-output">
       <div class="orch-block">
-        <div class="card-title">Nightly script</div>
+        <div class="card-title" data-i18n="backups.orch.nightly_script">Nightly script</div>
         <pre id="orchScript">Loading…</pre>
-        <button class="btn-backup" type="button" onclick="copyRestoreCmd('orchScript');">Copy script</button>
+        <button class="btn-backup" type="button" onclick="copyRestoreCmd('orchScript');" data-i18n="backups.orch.copy_script">Copy script</button>
       </div>
       <div class="orch-block">
-        <div class="card-title">Cron entry</div>
+        <div class="card-title" data-i18n="backups.orch.cron_entry">Cron entry</div>
         <pre id="orchCron">Loading…</pre>
-        <button class="btn-backup" type="button" onclick="copyRestoreCmd('orchCron');">Copy cron line</button>
+        <button class="btn-backup" type="button" onclick="copyRestoreCmd('orchCron');" data-i18n="backups.orch.copy_cron_line">Copy cron line</button>
       </div>
       <div class="orch-block">
-        <div class="card-title">Systemd service</div>
+        <div class="card-title" data-i18n="backups.orch.systemd_service">Systemd service</div>
         <pre id="orchService">Loading…</pre>
-        <button class="btn-backup" type="button" onclick="copyRestoreCmd('orchService');">Copy unit</button>
+        <button class="btn-backup" type="button" onclick="copyRestoreCmd('orchService');" data-i18n="backups.orch.copy_unit">Copy unit</button>
       </div>
       <div class="orch-block">
-        <div class="card-title">Systemd timer</div>
+        <div class="card-title" data-i18n="backups.orch.systemd_timer">Systemd timer</div>
         <pre id="orchTimer">Loading…</pre>
-        <button class="btn-backup" type="button" onclick="copyRestoreCmd('orchTimer');">Copy timer</button>
+        <button class="btn-backup" type="button" onclick="copyRestoreCmd('orchTimer');" data-i18n="backups.orch.copy_timer">Copy timer</button>
       </div>
+    </div>
     </div>
   </div>
 
@@ -680,8 +779,15 @@ canvas {
       ?.getAttribute('content') || '';
     const DEFAULT_BACKUP_ROOT = <?= json_encode($backup_root, JSON_UNESCAPED_SLASHES) ?>;
     const DEFAULT_HESTIA_SOURCE = <?= json_encode($hestia_source_dir, JSON_UNESCAPED_SLASHES) ?>;
+    const DEFAULT_HESTIA_USER = <?= json_encode($hestia_user, JSON_UNESCAPED_SLASHES) ?>;
     const DEFAULT_MICRO_PATH = <?= json_encode(rtrim($backup_root, '/') . '/micro/LATEST_SNAPSHOT/', JSON_UNESCAPED_SLASHES) ?>;
     const orchestratorRoot = document.getElementById('backupOrchestrator');
+    const T = (key, fallback) => {
+      try {
+        if (window.I18N && typeof window.I18N.t === 'function') return window.I18N.t(key, fallback);
+      } catch(_) {}
+      return fallback != null ? fallback : key;
+    };
 
     // FS-level "any backup?" flag from PHP (1 = some backups exist, 0 = none)
     const HAS_BACKUP_FS = (document.querySelector('meta[name="backup-any-fs"]')
@@ -709,7 +815,7 @@ canvas {
         console.error('Failed to load backup_status.json:', e);
         const pill = document.getElementById('status-pill');
         pill.className = 'status-pill status-crit';
-        pill.textContent = 'Status: ERROR LOADING JSON';
+        pill.textContent = T('backups.common.status', 'Status:') + ' ' + T('backups.status.error_loading_json', 'ERROR LOADING JSON');
       }
     }
 
@@ -811,10 +917,27 @@ canvas {
       else if (level === 'crit') el.classList.add('kpi-crit');
     }
 
+    function normalizeOverallStatus(rawStatus, mountOk, warnings, errors, diskUsage) {
+      const s = String(rawStatus || '').trim().toUpperCase();
+      if (s === 'OK' || s === 'HEALTHY' || s === 'PASS') return 'OK';
+      if (s === 'WARN' || s === 'WARNING' || s === 'DEGRADED') return 'WARN';
+      if (s === 'CRIT' || s === 'CRITICAL' || s === 'FAIL' || s === 'ERROR') return 'CRIT';
+
+      // Derive status if source omitted/legacy field is missing.
+      if (mountOk === false) return 'CRIT';
+      if (Array.isArray(errors) && errors.length > 0) return 'CRIT';
+      if (Array.isArray(warnings) && warnings.length > 0) return 'WARN';
+      if (Number.isFinite(diskUsage)) {
+        if (diskUsage >= 95) return 'CRIT';
+        if (diskUsage >= 80) return 'WARN';
+      }
+      return 'OK';
+    }
+
     function renderStatus(data) {
       // Timestamp
       document.getElementById('timestamp').textContent =
-        'Timestamp: ' + (data.timestamp || '--');
+        T('backups.common.timestamp', 'Timestamp:') + ' ' + (data.timestamp || '--');
 
       // Mount health from JSON (default true if missing)
       const mountOk = (data.backup_mount_ok !== false);
@@ -833,35 +956,35 @@ canvas {
       const diskStatusLabel = document.getElementById('disk-status-label');
       diskTag.className = 'tag';
 
-      let diskStatusText = 'OK';
+      let diskStatusText = T('backups.status.ok', 'OK');
       let diskLevel = 'ok';
 
       if (!mountOk) {
         // Disk not mounted: override everything
         diskTag.classList.add('badge-disk-crit');
-        diskTag.textContent = 'Disk UNMOUNTED';
-        diskStatusText = 'UNMOUNTED  ·  💀';
+        diskTag.textContent = T('backups.disk.unmounted', 'Disk UNMOUNTED');
+        diskStatusText = T('backups.status.unmounted', 'UNMOUNTED') + '  ·  💀';
         diskLevel = 'crit';
       } else {
         if (usage >= 95) {
           diskTag.classList.add('badge-disk-crit');
-          diskStatusText = 'CRITICAL  ·  😡';
+          diskStatusText = T('backups.status.critical', 'CRITICAL') + '  ·  😡';
           diskLevel = 'crit';
         } else if (usage >= 90) {
           diskTag.classList.add('badge-disk-warn');
-          diskStatusText = 'HIGH  ·  😤';
+          diskStatusText = T('backups.status.high', 'HIGH') + '  ·  😤';
           diskLevel = 'warn';
         } else if (usage >= 80) {
           diskTag.classList.add('badge-disk-warn');
-          diskStatusText = 'ELEVATED  ·  😩';
+          diskStatusText = T('backups.status.elevated', 'ELEVATED') + '  ·  😩';
           diskLevel = 'warn';
         } else {
           diskTag.classList.add('badge-disk-ok');
-          diskStatusText = 'HEALTHY  ·  😎';
+          diskStatusText = T('backups.status.healthy', 'HEALTHY') + '  ·  😎';
           diskLevel = 'ok';
         }
 
-        diskTag.textContent = 'Disk ' + usage + '%';
+        diskTag.textContent = T('backups.disk.tag', 'Disk:') + ' ' + usage + '%';
       }
 
       diskStatusLabel.textContent = diskStatusText;
@@ -879,9 +1002,9 @@ canvas {
             const ageMin = Math.max(0, Math.floor((Date.now() / 1000 - sizeUpdatedTs) / 60));
             ageText = ' (' + ageMin + 'm ago)';
           }
-          sizeUpdatedEl.textContent = 'Sizes updated: ' + sizeUpdatedIso + ageText;
+          sizeUpdatedEl.textContent = T('backups.disk.sizes_updated', 'Sizes updated:') + ' ' + sizeUpdatedIso + ageText;
         } else {
-          sizeUpdatedEl.textContent = 'Sizes updated: --';
+          sizeUpdatedEl.textContent = T('backups.disk.sizes_updated', 'Sizes updated:') + ' --';
         }
       }
 
@@ -905,21 +1028,47 @@ canvas {
         parts.push('snap '   + (snapAge   !== null && snapAge   !== undefined ? snapAge   + 'd' : '--'));
         parts.push('hestia ' + (hestiaAge !== null && hestiaAge !== undefined ? hestiaAge + 'd' : '--'));
         parts.push('micro '  + (microAge  !== null && microAge  !== undefined ? microAge  + 'd' : '--'));
-        freshnessEl.textContent = 'Freshness: ' + parts.join(' · ');
+        freshnessEl.textContent = T('backups.page.freshness_prefix', 'Freshness:') + ' ' + parts.join(' · ');
       }
 
-      // Micro backup count (if JSON exposes it)
+      // Backup counts (if JSON exposes them)
+      const snapCount = data.snapshots?.entries_count ?? null;
+      const hestiaCount = data.hestia?.entries_count ?? null;
       const microCount = data.micro?.entries_count ?? null;
+      const snapCountEl = document.getElementById('snap-count');
+      const hestiaCountEl = document.getElementById('hestia-count');
       const microCountEl = document.getElementById('micro-count');
+      if (snapCountEl) {
+        if (snapCount === null || snapCount === undefined) {
+          snapCountEl.textContent = '';
+        } else if (snapCount === 0) {
+          snapCountEl.textContent = T('backups.ages.no_snapshots_on_disk', 'No snapshots found on disk');
+        } else if (snapCount === 1) {
+          snapCountEl.textContent = T('backups.ages.one_snapshot_present', '1 snapshot present');
+        } else {
+          snapCountEl.textContent = snapCount + ' ' + T('backups.ages.snapshots_present_suffix', 'snapshots present');
+        }
+      }
+      if (hestiaCountEl) {
+        if (hestiaCount === null || hestiaCount === undefined) {
+          hestiaCountEl.textContent = '';
+        } else if (hestiaCount === 0) {
+          hestiaCountEl.textContent = T('backups.ages.no_panel_backups_on_disk', 'No panel backups found on disk');
+        } else if (hestiaCount === 1) {
+          hestiaCountEl.textContent = T('backups.ages.one_panel_backup_present', '1 panel backup present');
+        } else {
+          hestiaCountEl.textContent = hestiaCount + ' ' + T('backups.ages.panel_backups_present_suffix', 'panel backups present');
+        }
+      }
       if (microCountEl) {
         if (microCount === null || microCount === undefined) {
           microCountEl.textContent = '';
         } else if (microCount === 0) {
-          microCountEl.textContent = 'No micro backups found on disk';
+          microCountEl.textContent = T('backups.ages.no_micro_backups_on_disk', 'No micro backups found on disk');
         } else if (microCount === 1) {
-          microCountEl.textContent = '1 micro backup present';
+          microCountEl.textContent = T('backups.ages.one_micro_backup_present', '1 micro backup present');
         } else {
-          microCountEl.textContent = microCount + ' micro backups present';
+          microCountEl.textContent = microCount + ' ' + T('backups.ages.micro_backups_present_suffix', 'micro backups present');
         }
       }
 
@@ -936,13 +1085,13 @@ canvas {
       // Combined view: JSON OR filesystem
       const hasAnyBackupEffective = hasAnyBackupJSON || HAS_BACKUP_FS;
 
-      // Start with backend's idea of status
-      let overallStatus = data.status || 'UNKNOWN';
+      // Start with backend status, but normalize/derive for legacy or partial payloads.
+      let overallStatus = normalizeOverallStatus(data.status, mountOk, warnings, errors, usage);
 
       // If NOTHING on disk and JSON has no backup ages, force CRITICAL
       if (!hasAnyBackupEffective) {
         overallStatus = 'CRIT';
-        errors.push('No backups detected for snapshots, Hestia, or micro sets.');
+        errors.push(T('backups.errors.no_backups_detected', 'No backups detected for snapshots, Hestia, or micro sets.'));
       }
 
       // If mount is bad, always CRIT regardless of other conditions
@@ -972,14 +1121,14 @@ canvas {
       } else {
         pill.classList.add('status-crit');
       }
-      pill.textContent = 'Status: ' + overallStatus;
+      pill.textContent = T('backups.common.status', 'Status:') + ' ' + overallStatus;
 
       // Warnings
       const warnContainer = document.getElementById('warn-list');
       warnContainer.innerHTML = '';
 
       if (!warnings.length) {
-        warnContainer.textContent = '-';
+        warnContainer.textContent = T('backups.common.none_dash', '-');
       } else {
         // Backend sometimes gives word-by-word arrays; merge them
         const mergedWarn = warnings.join(' ').replace(/\s+/g, ' ').trim();
@@ -1001,7 +1150,7 @@ canvas {
       errContainer.innerHTML = '';
 
       if (!errors.length) {
-        errContainer.textContent = '-';
+        errContainer.textContent = T('backups.common.none_dash', '-');
       } else {
         // Merge word-split arrays into a readable message
         const mergedErr = errors.join(' ').replace(/\s+/g, ' ').trim();
@@ -1025,10 +1174,10 @@ canvas {
       const hestiaLatestName =
         (data.hestia && data.hestia.latest_backup_name)
           ? data.hestia.latest_backup_name
-          : 'gene.YYYYMMDD-HHMM.tar';
+          : (DEFAULT_HESTIA_USER + '.YYYYMMDD-HHMM.tar');
 
       const restoreHestiaCmd =
-        'sudo /usr/local/hestia/bin/v-restore-user gene ' + hestiaLatestName;
+        'sudo /usr/local/hestia/bin/v-restore-user ' + DEFAULT_HESTIA_USER + ' ' + hestiaLatestName;
 
       const restoreHestiaPre = document.getElementById('restore-hestia-cmd');
       const restoreHestiaNote = document.getElementById('restore-hestia-note');
@@ -1038,10 +1187,10 @@ canvas {
       if (restoreHestiaNote) {
         if (data.hestia && data.hestia.latest_backup_name) {
           restoreHestiaNote.textContent =
-            'Using latest backup reported in JSON: ' + hestiaLatestName;
+            T('backups.restore.using_latest_backup_prefix', 'Using latest backup reported in JSON: ') + hestiaLatestName;
         } else {
           restoreHestiaNote.textContent =
-            'Adjust BACKUP_TAR to a real file from "v-list-backups gene" before running.';
+            T('backups.restore.adjust_backup_tar', 'Adjust BACKUP_TAR to a real file from \"v-list-backups USER\" before running.');
         }
       }
 
@@ -1063,11 +1212,11 @@ canvas {
       if (restoreMicroNote) {
         if (data.micro && data.micro.latest_path) {
           restoreMicroNote.textContent =
-            'Restore base from latest micro snapshot: ' + data.micro.latest_path +
-            ' (review paths and exclusions before running).';
+            T('backups.restore.micro_restore_prefix', 'Restore base from latest micro snapshot: ') + data.micro.latest_path +
+            T('backups.restore.micro_restore_suffix', ' (review paths and exclusions before running).');
         } else {
           restoreMicroNote.textContent =
-            'Set the correct snapshot path before using this command.';
+            T('backups.restore.set_correct_snapshot_path', 'Set the correct snapshot path before using this command.');
         }
       }
 
@@ -1134,7 +1283,7 @@ canvas {
 
         const freeGb = Math.max(0, diskTotalGb - usedSumGb);
         if (freeGb > 0.01) {
-          diskLabels.push('Free');
+          diskLabels.push(T('backups.common.free', 'Free'));
           diskData.push(freeGb);
           diskColors.push('rgba(106,168,79,0.7)');
         }
@@ -1192,7 +1341,7 @@ canvas {
 
             const labelEl = document.createElement('span');
             labelEl.className = 'disk-legend-label';
-            labelEl.textContent = 'Free';
+            labelEl.textContent = T('backups.common.free', 'Free');
 
             left.appendChild(colorBox);
             left.appendChild(labelEl);
@@ -1211,7 +1360,7 @@ canvas {
         // Fallback: old Used/Free donut, no legend
         const used = diskUsage;
         const free = Math.max(0, 100 - used);
-        diskLabels = ['Used', 'Free'];
+        diskLabels = [T('backups.common.used', 'Used'), T('backups.common.free', 'Free')];
         diskData   = [used, free];
         diskColors = ['#42a5f5', '#4caf50'];
 
@@ -1268,9 +1417,9 @@ canvas {
       ageChart = new Chart(ageCtx, {
         type: 'bar',
         data: {
-          labels: ['Snapshot (daily.0)', 'Hestia latest', 'Micro latest'],
+          labels: [T('backups.ages.snapshot_daily0_chart', 'Snapshot (daily.0)'), T('backups.ages.hestia_latest_chart', 'Hestia latest'), T('backups.ages.micro_latest_chart', 'Micro latest')],
           datasets: [{
-            label: 'Age (days)',
+            label: T('backups.ages.age_days', 'Age (days)'),
             data: [
               snapAge   != null ? snapAge   : 0,
               hestiaAge != null ? hestiaAge : 0,
@@ -1341,7 +1490,7 @@ canvas {
 
     async function triggerBackup(action, label, extraBody = '') {
       setButtonsDisabled(true);
-      setActionStatus('Starting ' + label + '…', 'info');
+      setActionStatus(T('backups.actions.starting_prefix', 'Starting ') + label + '…', 'info');
 
       try {
         let body = 'action=' + encodeURIComponent(action);
@@ -1362,13 +1511,13 @@ canvas {
 
         if (!res.ok || !data.ok) {
           setActionStatus(
-            'FAILED to start ' + label + ': ' + (data.error || ('HTTP ' + res.status)),
+            T('backups.actions.failed_to_start_prefix', 'FAILED to start ') + label + ': ' + (data.error || ('HTTP ' + res.status)),
             'error'
           );
         } else {
           const jobInfo = data.job_id ? (' (job ' + data.job_id + ')') : '';
           setActionStatus(
-            'Started ' + label + jobInfo + '. This may take a while; status will update on next health check.',
+            T('backups.actions.started_prefix', 'Started ') + label + jobInfo + T('backups.actions.started_suffix', '. This may take a while; status will update on next health check.'),
             'ok'
           );
           // Give the job a few seconds then refresh status + actions once
@@ -1379,7 +1528,7 @@ canvas {
         }
       } catch (e) {
         console.error(e);
-        setActionStatus('Error talking to backups_action.php', 'error');
+        setActionStatus(T('backups.actions.error_talking_endpoint', 'Error talking to backups_action.php'), 'error');
       } finally {
         setButtonsDisabled(false);
       }
@@ -1409,8 +1558,8 @@ canvas {
     function confirmRestore(action, label) {
       const msg =
         label +
-        '\n\nThis will start a Hestia restore job on the server using backupctl.' +
-        '\nServices and data for that user may be overwritten.\n\nAre you absolutely sure?';
+        '\n\n' + T('backups.restore.confirm_body_1', 'This will start a Hestia restore job on the server using backupctl.') +
+        '\n' + T('backups.restore.confirm_body_2', 'Services and data for that user may be overwritten.') + '\n\n' + T('backups.restore.confirm_body_3', 'Are you absolutely sure?');
       const sure = window.confirm(msg);
       if (!sure) return;
       triggerBackup(action, label);
@@ -1424,7 +1573,7 @@ canvas {
     function renderCrontab(entries){
       if (!crontabList) return;
       if (!entries || !entries.length){
-        crontabList.innerHTML = '<div class="muted small" style="padding:.75rem;">No crontab entries detected.</div>';
+        crontabList.innerHTML = '<div class="muted small" style="padding:.75rem;">' + T('backups.cron.no_entries', 'No crontab entries detected.') + '</div>';
         return;
       }
       crontabList.innerHTML = '';
@@ -1439,7 +1588,7 @@ canvas {
           div.appendChild(text);
         } else if (entry.type === 'env'){
           const label = document.createElement('div');
-          label.innerHTML = '<strong>Env</strong>';
+          label.innerHTML = '<strong>' + T('backups.cron.env', 'Env') + '</strong>';
           const code = document.createElement('div');
           code.className = 'cron-command';
           code.textContent = entry.raw || '';
@@ -1447,7 +1596,7 @@ canvas {
           div.appendChild(code);
         } else {
           const schedule = document.createElement('div');
-          schedule.innerHTML = '<span class="muted">Schedule</span><strong style="margin-left:6px;">'+(entry.schedule || '')+'</strong>';
+          schedule.innerHTML = '<span class="muted">' + T('backups.cron.schedule', 'Schedule') + '</span><strong style="margin-left:6px;">'+(entry.schedule || '')+'</strong>';
           const cmd = document.createElement('div');
           cmd.className = 'cron-command';
           cmd.textContent = entry.command || entry.raw || '';
@@ -1458,7 +1607,7 @@ canvas {
           copyBtn.className = 'btn-backup';
           copyBtn.style.padding = '4px 10px';
           copyBtn.setAttribute('data-copy-cronline', String(idx));
-          copyBtn.textContent = 'Copy';
+          copyBtn.textContent = T('backups.common.copy', 'Copy');
           actions.appendChild(copyBtn);
           div.appendChild(schedule);
           div.appendChild(cmd);
@@ -1476,16 +1625,16 @@ canvas {
         .then(data => {
           if (data && data.ok){
             renderCrontab(data.items || []);
-            if (crontabNote) crontabNote.textContent = 'Crontab entries for ' + (data.user || 'current user') + '.';
+            if (crontabNote) crontabNote.textContent = T('backups.cron.entries_for_prefix', 'Crontab entries for ') + (data.user || T('backups.cron.current_user', 'current user')) + '.';
           } else {
-            const msg = data && data.error ? data.error : 'Unable to read crontab.';
+            const msg = data && data.error ? data.error : T('backups.cron.unable_to_read', 'Unable to read crontab.');
             crontabList.innerHTML = '<div class="muted small" style="padding:.75rem;">'+msg+'</div>';
             if (crontabNote) crontabNote.textContent = msg;
           }
         })
         .catch(err => {
           crontabList.innerHTML = '<div class="muted small" style="padding:.75rem;">'+(err.message||err)+'</div>';
-          if (crontabNote) crontabNote.textContent = 'Failed to read crontab.';
+          if (crontabNote) crontabNote.textContent = T('backups.cron.failed_to_read', 'Failed to read crontab.');
         })
         .finally(() => {
           if (crontabRefresh) crontabRefresh.disabled = false;
@@ -1499,6 +1648,7 @@ canvas {
       catch (_) { defaults = {}; }
       const state = Object.assign({
         backup_root: '',
+        script_path: '',
         snap_script: '',
         micro_script: '',
         hestia_cmd: '',
@@ -1516,6 +1666,14 @@ canvas {
         suspend: false,
         disable_on_mount_fail: false,
       }, defaults || {});
+
+      function resolveScriptPath(fileName, legacyValue){
+        const explicit = (legacyValue || '').trim();
+        if (explicit) return explicit;
+        const base = (state.script_path || '').trim();
+        if (!base) return '';
+        return base.replace(/\/+$/, '') + '/' + fileName;
+      }
 
       orchestratorRoot.querySelectorAll('[data-orch]').forEach(input => {
         const key = input.getAttribute('data-orch');
@@ -1556,6 +1714,9 @@ canvas {
       function buildScript(){
         const logFile = state.log_file || '/var/log/backup-nightly.log';
         const esc = (val) => (val || '').replace(/"/g, '\\"');
+        const snapScript = resolveScriptPath('make-snapshots.sh', state.snap_script);
+        const microScript = resolveScriptPath('make-micro-backups.sh', state.micro_script);
+        const baseScriptPath = (state.script_path || '').trim();
         const excludeList = (state.exclude_dirs || '')
           .split(/[\n,]+/)
           .map(item => item.trim())
@@ -1572,6 +1733,10 @@ canvas {
         ];
         if (excludeList.length) {
           lines.push('export BACKUP_EXCLUDES="'+esc(excludeList.join(' '))+'"');
+          lines.push('');
+        }
+        if (baseScriptPath) {
+          lines.push('export BACKUP_SCRIPT_PATH="'+esc(baseScriptPath)+'"');
           lines.push('');
         }
         if ((state.backup_root || '').trim()){
@@ -1607,8 +1772,8 @@ canvas {
           lines.push(cmd);
           lines.push('');
         }
-        addStep('Snapshots', state.snap_script);
-        addStep('Micro backups', state.micro_script);
+        addStep('Snapshots', snapScript);
+        addStep('Micro backups', microScript);
         if ((state.hestia_cmd || '').trim() && (state.hestia_user || '').trim()){
           addStep('Hestia backup (' + state.hestia_user + ')', state.hestia_cmd + ' ' + state.hestia_user);
         }
@@ -1680,6 +1845,28 @@ canvas {
       render();
     }
 
+    function initCollapsibleCards(){
+      const cards = document.querySelectorAll('.collapsible-card[data-collapse-key]');
+      cards.forEach(card => {
+        const key = card.getAttribute('data-collapse-key');
+        const btn = card.querySelector('[data-collapse-toggle]');
+        if (!key || !btn) return;
+        const storageKey = 'backups.card.' + key + '.collapsed';
+        const setState = (collapsed) => {
+          card.classList.toggle('is-collapsed', !!collapsed);
+          btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+          btn.textContent = collapsed ? '▸' : '▾';
+        };
+        const saved = localStorage.getItem(storageKey);
+        setState(saved === '1');
+        btn.addEventListener('click', () => {
+          const collapsed = !card.classList.contains('is-collapsed');
+          setState(collapsed);
+          localStorage.setItem(storageKey, collapsed ? '1' : '0');
+        });
+      });
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.btn-backup').forEach(btn => {
         const action = btn.getAttribute('data-action');
@@ -1694,77 +1881,81 @@ canvas {
         });
       }
       initBackupOrchestrator();
+      initCollapsibleCards();
       loadCrontab();
     });
 
   </script>
 
   <!-- Quick Restore Helpers (read-only helpers + optional DANGER button) -->
-  <div class="card" style="margin-bottom:24px;">
+  <div class="card collapsible-card" data-collapse-key="quick-restore" style="margin-bottom:24px;">
     <div class="card-header">
       <div>
-        <div class="card-title">Quick Restore Helpers</div>
-        <div class="card-sub">Pre-filled CLI commands for emergencies (manual run or DANGER button)</div>
+        <div class="card-title" data-i18n="backups.quick_restore.title">Quick Restore Helpers</div>
+        <div class="card-sub" data-i18n="backups.quick_restore.subtitle">Pre-filled CLI commands for emergencies (manual run or DANGER button)</div>
       </div>
+      <button type="button" class="collapsible-toggle" data-collapse-toggle aria-expanded="true" title="Collapse/Expand">▾</button>
     </div>
-
+    <div class="collapsible-body">
     <div style="padding:10px 4px; font-size:13px; line-height:1.55; color:var(--fg); display:flex; flex-wrap:wrap; gap:16px;">
       <div style="flex:1 1 260px; min-width:260px;">
-        <h3 style="margin-top:0; font-size:14px;">Restore latest Hestia user backup</h3>
+        <h3 style="margin-top:0; font-size:14px;" data-i18n="backups.quick_restore.hestia_latest_title">Restore latest Hestia user backup</h3>
         <pre id="restore-hestia-cmd"
              style="background: var(--card); border:1px solid var(--border); padding:10px; border-radius:8px; overflow-x:auto; font-size:12px;">
-	Loading…
+	<span data-i18n="backups.common.loading">Loading...</span>
         </pre>
         <div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-top:6px;">
           <button type="button"
                   class="btn-backup"
                   style="padding:4px 10px; font-size:11px;"
                   onclick="copyRestoreCmd('restore-hestia-cmd');">
-            Copy command
+            <span data-i18n="backups.quick_restore.copy_command">Copy command</span>
           </button>
           <button type="button"
                   class="btn-backup"
                   style="padding:4px 10px; font-size:11px; border-color:#f44336; background:rgba(244,67,54,0.12);"
-                  onclick="confirmRestore('restore_hestia_latest','Restore Hestia user (gene) from latest backup');">
-            Run restore (latest, DANGER)
+                  onclick="confirmRestore('restore_hestia_latest','Restore Hestia user (<?= h($hestia_user) ?>) from latest backup');">
+            <span data-i18n="backups.quick_restore.run_restore_danger">Run restore (latest, DANGER)</span>
           </button>
           <div class="kpi-sub" id="restore-hestia-note" style="flex:1 1 100%; margin-top:4px;"></div>
         </div>
       </div>
 
       <div style="flex:1 1 260px; min-width:260px;">
-        <h3 style="margin-top:0; font-size:14px;">Restore from latest micro snapshot (CLI only)</h3>
+        <h3 style="margin-top:0; font-size:14px;" data-i18n="backups.quick_restore.micro_latest_title">Restore from latest micro snapshot (CLI only)</h3>
         <pre id="restore-micro-cmd"
              style="background: var(--card); border:1px solid var(--border); padding:10px; border-radius:8px; overflow-x:auto; font-size:12px;">
-	Loading…
+	<span data-i18n="backups.common.loading">Loading...</span>
         </pre>
         <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
           <button type="button"
                   class="btn-backup"
                   style="padding:4px 10px; font-size:11px;"
                   onclick="copyRestoreCmd('restore-micro-cmd');">
-            Copy command
+            <span data-i18n="backups.quick_restore.copy_command">Copy command</span>
           </button>
           <div class="kpi-sub" id="restore-micro-note"></div>
         </div>
       </div>
     </div>
+    </div>
   </div>
 
-  <div class="card" style="margin-bottom:40px;">
+  <div class="card collapsible-card" data-collapse-key="cli-reference" style="margin-bottom:40px;">
     <div class="card-header">
       <div>
-        <div class="card-title">Hestia Backup & Restore CLI</div>
-        <div class="card-sub">Quick reference sheet — copy & paste ready</div>
+        <div class="card-title" data-i18n="backups.cli.title">Hestia Backup & Restore CLI</div>
+        <div class="card-sub" data-i18n="backups.cli.subtitle">Quick reference sheet - copy & paste ready</div>
       </div>
+      <button type="button" class="collapsible-toggle" data-collapse-toggle aria-expanded="true" title="Collapse/Expand">▾</button>
     </div>
-
+    <div class="collapsible-body">
     <div style="padding:10px 4px; font-size:13px; line-height:1.55; color:var(--fg);">
-      <h3 style="margin-top:0; font-size:15px;">Create Backups</h3>
+      <h3 style="margin-top:0; font-size:15px;" data-i18n="backups.cli.create_backups">Create Backups</h3>
 
 	<pre style="background: var(--card); border:1px solid var(--border); padding:12px; border-radius:8px; overflow-x:auto;">
 	# Backup a specific user (recommended for you)
-	sudo /usr/local/hestia/bin/v-backup-user gene
+	sudo /usr/local/hestia/bin/v-backup-user <?= h($hestia_user) ?>
 
 	# Backup admin account
 	sudo /usr/local/hestia/bin/v-backup-user admin
@@ -1775,24 +1966,24 @@ canvas {
 	done
 	</pre>
 
-      <h3 style="margin-top:22px; font-size:15px;">List & Delete Backups</h3>
+      <h3 style="margin-top:22px; font-size:15px;" data-i18n="backups.cli.list_delete_backups">List & Delete Backups</h3>
 
 	<pre style="background: var(--card); border:1px solid var(--border); padding:12px; border-radius:8px; overflow-x:auto;">
-	# List backups for "gene"
-	sudo /usr/local/hestia/bin/v-list-backups gene
+	# List backups for "<?= h($hestia_user) ?>"
+	sudo /usr/local/hestia/bin/v-list-backups <?= h($hestia_user) ?>
 
 	# Delete a specific backup
-	sudo /usr/local/hestia/bin/v-delete-backup gene gene.YYYYMMDD-HHMM.tar
+	sudo /usr/local/hestia/bin/v-delete-backup <?= h($hestia_user) ?> USER.YYYYMMDD-HHMM.tar
 	</pre>
 
-      <h3 style="margin-top:22px; font-size:15px;">Full Restore (User)</h3>
+      <h3 style="margin-top:22px; font-size:15px;" data-i18n="backups.cli.full_restore_user">Full Restore (User)</h3>
 
 	<pre style="background: var(--card); border:1px solid var(--border); padding:12px; border-radius:8px; overflow-x:auto;">
 	# Restore an entire user (web, db, mail, configs)
-	sudo /usr/local/hestia/bin/v-restore-user gene gene.YYYYMMDD-HHMM.tar
+	sudo /usr/local/hestia/bin/v-restore-user <?= h($hestia_user) ?> USER.YYYYMMDD-HHMM.tar
 	</pre>
 
-      <h3 style="margin-top:22px; font-size:15px;">Selective Restore (Web / DB / Mail)</h3>
+      <h3 style="margin-top:22px; font-size:15px;" data-i18n="backups.cli.selective_restore">Selective Restore (Web / DB / Mail)</h3>
 
 	<pre style="background: var(--card); border:1px solid var(--border); padding:12px; border-radius:8px; overflow-x:auto;">
 	# Restore only a website for a domain
@@ -1805,7 +1996,7 @@ canvas {
 	sudo /usr/local/hestia/bin/v-restore-mail USER USER.YYYYMMDD-HHMM.tar
 	</pre>
 
-      <h3 style="margin-top:22px; font-size:15px;">Backup File Locations</h3>
+      <h3 style="margin-top:22px; font-size:15px;" data-i18n="backups.cli.backup_file_locations">Backup File Locations</h3>
 
 	<pre style="background: var(--card); border:1px solid var(--border); padding:12px; border-radius:8px; overflow-x:auto;">
 	# All Hestia user backups live here:
@@ -1823,7 +2014,7 @@ canvas {
 <?php endif; ?>
 	</pre>
 
-      <h3 style="margin-top:22px; font-size:15px;">Backup Tarball Contents</h3>
+      <h3 style="margin-top:22px; font-size:15px;" data-i18n="backups.cli.backup_tarball_contents">Backup Tarball Contents</h3>
 
 	<pre style="background: var(--card); border:1px solid var(--border); padding:12px; border-radius:8px; overflow-x:auto;">
 	domains/
@@ -1837,7 +2028,7 @@ canvas {
 	user.conf
 	</pre>
 
-		  <h3 style="margin-top:22px; font-size:15px;">backupctl help</h3>
+		  <h3 style="margin-top:22px; font-size:15px;" data-i18n="backups.cli.backupctl_help">backupctl help</h3>
 
 	<pre style="background: var(--card); border:1px solid var(--border); padding:12px; border-radius:8px; overflow-x:auto;">
 	backupctl - unified backup helper
@@ -1851,15 +2042,15 @@ canvas {
 
 	  backupctl all [USER]
 		  Run snapshots + micro + Hestia backup for USER
-		  Default USER: gene
+		  Default USER: <?= h($hestia_user) ?>
 
 	  backupctl h-backup [USER]
 		  Hestia: v-backup-user USER
-		  Default USER: gene
+		  Default USER: <?= h($hestia_user) ?>
 
 	  backupctl h-list [USER]
 		  Hestia: v-list-backups USER
-		  Default USER: gene
+		  Default USER: <?= h($hestia_user) ?>
 
 	  backupctl h-delete USER BACKUP_TAR
 		  Hestia: v-delete-backup USER BACKUP_TAR
@@ -1890,7 +2081,7 @@ canvas {
 
 	  backupctl nightly
 		  Opinionated nightly pipeline:
-			snap -> micro -> h-backup gene -> health -> integrity -> prune
+			snap -> micro -> h-backup <?= h($hestia_user) ?> -> health -> integrity -> prune
 
 	  backupctl help
 		  Show this help text
@@ -1901,6 +2092,7 @@ canvas {
 
 	</pre>
 
+    </div>
     </div>
   </div>
 </div>

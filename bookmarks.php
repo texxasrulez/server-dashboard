@@ -15,14 +15,14 @@ require_once __DIR__ . '/includes/head.php';
         <?php
   $scheme = !empty($_SERVER['HTTP_X_FORWARDED_PROTO']) ? $_SERVER['HTTP_X_FORWARDED_PROTO']
            : (((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http'));
-  $host   = $_SERVER['HTTP_HOST'] ?? 'localhost';
-  $target = $scheme . '://' . $host . project_url('/bookmarks.php');
-  $bm_js  = "(function(){"
-          . "var u=encodeURIComponent(location.href);"
-          . "var t=encodeURIComponent(document.title);"
-          . "var tg=prompt('Tags (comma,separated):','');"
-          . "window.open('".$target."#add?u='+u+'&t='+t+'&tags='+encodeURIComponent(tg),'_blank','noopener');"
-          . "})();";
+$host   = $_SERVER['HTTP_HOST'] ?? 'localhost';
+$target = $scheme . '://' . $host . project_url('/bookmarks.php');
+$bm_js  = "(function(){"
+        . "var u=encodeURIComponent(location.href);"
+        . "var t=encodeURIComponent(document.title);"
+        . "var tg=prompt('Tags (comma,separated):','');"
+        . "window.open('".$target."#add?u='+u+'&t='+t+'&tags='+encodeURIComponent(tg),'_blank','noopener');"
+        . "})();";
 ?>
 <a class="btn ghost"
    id="bookmarklet"

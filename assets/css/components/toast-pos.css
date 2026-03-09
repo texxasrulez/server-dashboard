@@ -3,7 +3,9 @@
             toastpos-bottom-left | toastpos-bottom-center | toastpos-bottom-right
    Targets cover common containers used across the app. */
 
-:root { --toast-gap: 14px; }
+:root {
+  --toast-gap: 14px;
+}
 
 /* reset transform side-effects when switching */
 body[class*="toastpos-"] #toast-root,

@@ -7,38 +7,45 @@ require_once __DIR__ . '/../lib/Config.php';
 \App\Config::init(dirname(__DIR__));
 require_login();
 
-function base_url_from_request(): string {
+function base_url_from_request(): string
+{
     $https = (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
           || (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
     $scheme = $https ? 'https' : 'http';
     $host   = $_SERVER['HTTP_HOST'] ?? 'localhost';
     return $scheme . '://' . $host;
 }
-function absolute_callback(): string {
+function absolute_callback(): string
+{
     $base = base_url_from_request();
-    $dir  = rtrim(str_replace('\\','/', dirname($_SERVER['SCRIPT_NAME'] ?? 'api/email_oauth_callback.php')), '/');
+    $dir  = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? 'api/email_oauth_callback.php')), '/');
     return $base . $dir . '/email_oauth_callback.php';
 }
-function b64url_decode(string $s): string {
+function b64url_decode(string $s): string
+{
     $p = strtr($s, '-_', '+/');
     $p .= str_repeat('=', (4 - strlen($p) % 4) % 4);
     return base64_decode($p) ?: '';
 }
-function html($s){ return htmlspecialchars($s, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8'); }
+function html($s)
+{
+    return htmlspecialchars($s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
 
 $err   = $_GET['error'] ?? '';
 $code  = $_GET['code']  ?? '';
 $state = $_GET['state'] ?? '';
 
 if ($err) {
-  http_response_code(400);
-  echo "<h1>OAuth Error</h1><pre>" . html($err) . "</pre>";
-  exit;
+    http_response_code(400);
+    echo "<h1>OAuth Error</h1><pre>" . html($err) . "</pre>";
+    exit;
 }
 
 if (!$code) {
-  http_response_code(400);
-  echo "<h1>Missing code</h1>"; exit;
+    http_response_code(400);
+    echo "<h1>Missing code</h1>";
+    exit;
 }
 
 $stateData = json_decode(b64url_decode($state), true) ?: [];
@@ -49,20 +56,25 @@ $nonce     = $stateData['n'] ?? '';
 $expectedNonce = $_SESSION['oauth_state_nonce'] ?? '';
 unset($_SESSION['oauth_state_nonce']);
 if (!is_string($nonce) || $nonce === '' || !is_string($expectedNonce) || $expectedNonce === '' || !hash_equals($expectedNonce, $nonce)) {
-  http_response_code(400);
-  echo "<h1>Invalid OAuth state</h1>";
-  exit;
+    http_response_code(400);
+    echo "<h1>Invalid OAuth state</h1>";
+    exit;
 }
 
 if ($provider !== 'google') {
-  http_response_code(400);
-  echo "<h1>Unsupported provider</h1>"; exit;
+    http_response_code(400);
+    echo "<h1>Unsupported provider</h1>";
+    exit;
 }
 
 // Exchange code
 $client_id     = \App\Config::get('email.oauth_google_client_id');
 $client_secret = \App\Config::get('email.oauth_google_client_secret');
-if (!$client_id || !$client_secret) { http_response_code(500); echo "Missing Google OAuth client in Config › Email."; exit; }
+if (!$client_id || !$client_secret) {
+    http_response_code(500);
+    echo "Missing Google OAuth client in Config › Email.";
+    exit;
+}
 
 $redirect_uri  = absolute_callback();
 
@@ -83,33 +95,35 @@ curl_setopt_array($ch, [
   CURLOPT_TIMEOUT => 15,
 ]);
 $res = curl_exec($ch);
-$http= curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$http = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 $err = curl_error($ch);
 curl_close($ch);
 
 if ($res === false || $http >= 400) {
-  http_response_code(500);
-  echo "<h1>Token exchange failed</h1><pre>" . html($err ?: $res) . "</pre>";
-  exit;
+    http_response_code(500);
+    echo "<h1>Token exchange failed</h1><pre>" . html($err ?: $res) . "</pre>";
+    exit;
 }
 
 $tok = json_decode($res, true);
 if (!is_array($tok) || empty($tok['access_token'])) {
-  http_response_code(500);
-  echo "<h1>Bad token payload</h1><pre>" . html($res) . "</pre>";
-  exit;
+    http_response_code(500);
+    echo "<h1>Bad token payload</h1><pre>" . html($res) . "</pre>";
+    exit;
 }
 
 // Persist tokens per-address (simple file store)
 $storeDir = dirname(__DIR__) . '/data/oauth';
-if (!is_dir($storeDir)) @mkdir($storeDir, 0775, true);
-$fname = $storeDir . '/google-' . preg_replace('~[^a-z0-9_.@-]+~i','_', $address ?: 'unknown') . '.json';
+if (!is_dir($storeDir)) {
+    @mkdir($storeDir, 0775, true);
+}
+$fname = $storeDir . '/google-' . preg_replace('~[^a-z0-9_.@-]+~i', '_', $address ?: 'unknown') . '.json';
 file_put_contents($fname, json_encode([
   'provider' => 'google',
   'address'  => $address,
   'obtained' => gmdate('c'),
   'token'    => $tok,
-], JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));
+], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
 ?><!doctype html>
 <meta charset="utf-8">
@@ -123,6 +137,6 @@ file_put_contents($fname, json_encode([
 </style>
 <div class="card">
   <h2 class="ok">✅ Google account connected</h2>
-  <p>Tokens were saved for <strong><?=html($address?:'(no address)')?></strong>.</p>
+  <p>Tokens were saved for <strong><?=html($address ?: '(no address)')?></strong>.</p>
   <p class="muted">You can close this tab and return to the dashboard.</p>
 </div>

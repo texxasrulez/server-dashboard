@@ -8,7 +8,6 @@
 
 Here is a Server Dashboard to have an overall view of server health and status in just a few pages to check.
 It has lots of features, too many to list. One day I will have a better README.md
- 
 
 ---
 
@@ -63,10 +62,10 @@ It has lots of features, too many to list. One day I will have a better README.m
 
 - **Backups tab:** configure filesystem roots and the log watcher from Config → Backups. The UI lists the folders the Backups dashboard monitors and generates ready-to-run helpers (install command + env file snippet) for `assets/scripts/install.sh` based on your saved paths/owner/service name.
 - **Script portability:** root scripts under `scripts/` now resolve dashboard paths/email defaults from:
-  1) `DASHBOARD_SCRIPTS_ENV` (if set),
-  2) `/etc/server-dashboard/dashboard_env.sh` + `/etc/server-dashboard/scripts.env`,
-  3) local `scripts/lib/dashboard_env.sh`,
-  4) repository-relative fallback.
+  1. `DASHBOARD_SCRIPTS_ENV` (if set),
+  2. `/etc/server-dashboard/dashboard_env.sh` + `/etc/server-dashboard/scripts.env`,
+  3. local `scripts/lib/dashboard_env.sh`,
+  4. repository-relative fallback.
 - **Ops scripts:**
   - `bash bin/security-policy-check.sh` (single security gate: static auth/CSRF checks + hardening regressions)
   - `bash bin/security-hardening-check.sh` (runs only the hardening regression subset)
@@ -85,12 +84,14 @@ It has lots of features, too many to list. One day I will have a better README.m
 ## Pages
 
 ### `processes.php` (read-only)
+
 - Shows live process data from `/proc` with a web table (PID, USER, CPU%, RSS, STATE, CMD).
 - Uses `api/processes.php` and auto-refreshes every 2 seconds (pauses while tab is hidden).
 - Includes sort/limit/filter controls and a read-only details modal (full escaped cmdline + metadata).
 - No process control actions are exposed in this iteration (no kill/renice).
 
 ### `history.php`
+
 - Toolbar: Range select (1h/24h/7d/30d), `Probe now`, `Refresh`, `Export JSON`
 - Loads from `api/history_export.php?type=probes&limit=1000&start=0`, filters client-side by range
 - Sparklines render via `<canvas>` with theme-friendly colors
@@ -113,6 +114,7 @@ It has lots of features, too many to list. One day I will have a better README.m
   - Auth: admin session OR token (`X-CRON-TOKEN`, `Authorization: Bearer`, or `?token=`)
 
 All three support the common token resolution chain:
+
 1. `CRON_TOKEN` constant (from config)
 2. `DASH_CRON_TOKEN` environment
 3. `state/cron_token.txt` file
@@ -122,6 +124,7 @@ All three support the common token resolution chain:
 ## 1) Quick Orientation
 
 **Structure:**
+
 ```
 /
   api/                    # JSON endpoints (admin session or token)
@@ -148,6 +151,7 @@ All three support the common token resolution chain:
 ---
 
 ### A. Alerts (rules) admin
+
 - **Rule model**: `service_id`, `service_name`, `metric` (status|latency_ms|http_code|packet_loss_pct), `op` (`> >= == <= < !=`), `threshold`, `consecutive`, `cooldown_min`, `notify.email`, `notify.webhook_url`, `enabled`.
 - **Consecutive & cooldown** support to reduce noise.
 - **Notify targets**: email + webhook (JSON POST of event).
@@ -155,6 +159,7 @@ All three support the common token resolution chain:
 - **Form toasts & validation** in the Larry style.
 
 **Files/State:**
+
 ```
 data/alerts.json               # rules
 state/alerts_events.jsonl      # fired events history
@@ -162,6 +167,7 @@ api/alerts_eval.php            # evaluator (admin session OR token)
 ```
 
 ### B. Security (mailer settings)
+
 - **GET/POST APIs** to **load/save** mailer settings without page reloads:
   - `api/security_get.php` – returns current (sanitized) config view
 - **Transports**: `phpmail` (default), `sendmail` (path configurable), `smtp` (host/port/secure/user/pass/timeout).
@@ -170,13 +176,16 @@ api/alerts_eval.php            # evaluator (admin session OR token)
 - **Mailer smoke test** available: `api/mail_test.php?to=you@domain` (403 unless admin or header token).
 
 **Files/State:**
+
 ```
 includes/config.inc.php        # one bootstrap source of truth
 api/security_get.php
 api/security_set.php
 api/mail_test.php
 ```
+
 ### C. Bookmarks
+
 - Bookmarks page & API; store and fetch bookmark entries; basic UI wired.
 - The **Categories** feature (add/edit/delete/sort) is planned; see Roadmap.
 
@@ -203,12 +212,15 @@ api/mail_test.php
 ## 3) API Cheatsheet
 
 All endpoints default to **admin session required**. For headless jobs use header:
+
 ```
 X-CRON-TOKEN: <your CRON_TOKEN>
 ```
+
 or a `token=` query where supported (see below).
 
 ### Probes & Alerts
+
 - **Trigger evaluator (optionally probe first)**
   - `GET api/alerts_eval.php?probe=1&dry=0&token=CRON_TOKEN`
     - `probe=1` best effort probe refresh before evaluation
@@ -219,6 +231,7 @@ or a `token=` query where supported (see below).
   - Controlled by `ALLOW_HISTORY_EXPORT_WITH_TOKEN` (defaults to **1**).
 
 ### Security (Mailer)
+
 - **Get settings**
   - `GET api/security_get.php`
 - **Save settings**
@@ -241,6 +254,7 @@ or a `token=` query where supported (see below).
   - `GET api/mail_test.php?to=you@domain`
 
 ### Bookmarks (current)
+
 - `GET api/bookmarks_get.php` → list
 - `POST api/bookmarks_set.php` → upsert/delete
   - _Categories/sorting coming soon; see Roadmap._
@@ -250,11 +264,13 @@ or a `token=` query where supported (see below).
 ## 4) Configuration
 
 Single source of truth:
+
 ```
 includes/config.inc.php
 ```
 
 **Notables:**
+
 - `CRON_TOKEN` — shared secret for non‑session API access (also accepted via `X-CRON-TOKEN`).
 - `MAIL_TRANSPORT` / `MAIL_FROM` / `MAIL_REPLYTO` / `SENDMAIL_PATH` / `SMTP_*`
 - `ALLOW_HISTORY_EXPORT_WITH_TOKEN` (1/0)
@@ -267,6 +283,7 @@ includes/config.inc.php
 - `capabilities.panel|web|mta|db` — optional capability hints (`auto` by default)
 
 ### Capability adapters
+
 - New scaffolding under `Adapters/` introduces capability-driven behavior:
   - `GenericLinuxAdapter`
   - `HestiaAdapter`
@@ -278,11 +295,13 @@ includes/config.inc.php
 ## 5) Cron Examples
 
 **Evaluate alerts every 5 minutes:**
+
 ```
 */5 * * * * curl -fsS 'https://YOUR_HOSTapi/alerts_eval.php?probe=1&dry=0&token=YOUR_CRON_TOKEN' >/dev/null
 ```
 
 **Export a nightly snapshot:**
+
 ```
 0 2 * * * curl -fsS 'https://YOUR_HOSTapi/history_export.php?type=probes&limit=50000&start=0&token=YOUR_CRON_TOKEN' -o /var/backups/probes_$(date +\%F).json
 ```
@@ -292,6 +311,7 @@ includes/config.inc.php
 ## 6) Known Quirks (tracking)
 
 ## 7) Quick Manual Verification Plan
+
 1. Open `processes.php`, verify table loads and updates every ~2 seconds.
 2. Call `api/processes.php?sort=cpu&limit=25` and verify JSON fields `ts/host/loadavg/uptime/processes`.
 3. Verify CPU% changes over successive refreshes for active processes.
@@ -299,7 +319,6 @@ includes/config.inc.php
 5. Verify API input clamping (`limit=1` -> 10, `limit=9999` -> 200, unknown sort -> `cpu` fallback).
 6. Verify graceful failure by testing on a host/environment without `/proc` (expect JSON error response).
 7. Refresh page repeatedly and confirm server load does not spike (cache active).
-
 
 ---
 
@@ -316,7 +335,7 @@ includes/config.inc.php
 3. **Process Manager**
    - `processes.php` page: ps/ss snapshots, restart hooks (pluggable), editable config for whitelisted daemons, health statuses, and alert hooks.
 4. **Alerts**
-   - Rule templates (e.g., “HTTP >= 400 for 3x in 5m”). 
+   - Rule templates (e.g., “HTTP >= 400 for 3x in 5m”).
    - Escalation chains and quiet hours.
    - Per‑rule enable/disable toggles on History card headers.
 5. **Security**
@@ -324,7 +343,7 @@ includes/config.inc.php
    - SMTP STARTTLS test & TLS version display.
 6. **Exports & Reporting**
    - Bulk ZIP export (alerts, probes, logs).
-   - SLA/uptime monthly report generator (HTML/CSV). 
+   - SLA/uptime monthly report generator (HTML/CSV).
 7. **Hardening & QA**
    - Minimal PHPUnit suite for core helpers.
    - Smoke tests for API endpoints; CI job for lint + basic HTTP probes.
@@ -336,11 +355,11 @@ includes/config.inc.php
 Single-source configuration in **`includes/config.inc.php`**. Reading order:
 
 1. **Environment variables** (with optional `DASH_` prefix). Example: `DASH_CRON_TOKEN`.
-3. Sensible defaults (defined once).
+2. Sensible defaults (defined once).
 
 Important keys:
 
-- `CRON_TOKEN` — shared secret for headless calls.  
+- `CRON_TOKEN` — shared secret for headless calls.
 - `MAIL_TRANSPORT` — `phpmail` | `sendmail` | `smtp`
 - `MAIL_FROM`, `MAIL_REPLYTO`
 - `SENDMAIL_PATH`
@@ -350,7 +369,6 @@ Important keys:
 - `THEME_DEFAULT` — default theme slug
 - `CLIENT_DEBUG_LOG` — `1` enables client console logging
 - `BUILD` — version string for cache busting (from env, `state/build.txt`, or timestamp)
-
 
 ---
 
@@ -365,6 +383,7 @@ Important keys:
 ## 5) Pages & Features
 
 ### 5.1 History (`history.php`)
+
 Sparkline grid of service probes with interactive tools.
 
 - **Range selector**: `1h / 24h / 7d / 30d`
@@ -380,6 +399,7 @@ Sparkline grid of service probes with interactive tools.
 - **Exports**: full **Export JSON** (modal preview/copy/download) and **per-card CSV**
 
 Files:
+
 ```
 assets/js/pages/history.js
 assets/css/pages/history.css
@@ -390,6 +410,7 @@ data/services_status_history.jsonl# long history (JSONL)
 ```
 
 ### 5.2 Alerts Admin (`alerts_admin.php`)
+
 Rule builder with cool-down and consecutive failure logic.
 
 - **Rule fields**: name, service, metric (`status|latency_ms|http_code|packet_loss_pct`), operator (`> >= == <= < !=`), threshold, consecutive, cooldown minutes, severity, notify targets
@@ -399,6 +420,7 @@ Rule builder with cool-down and consecutive failure logic.
 - **Larry toasts** for success/fail
 
 Files:
+
 ```
 data/alerts.json                  # rules
 state/alerts_events.jsonl         # fired events
@@ -406,14 +428,17 @@ api/alerts_eval.php               # evaluator
 ```
 
 ### 5.4 Services (`services.php`)
+
 - Themed action buttons (`.btn`, `.btn.secondary`, `.btn.warning`, `.btn.danger` for Delete)
 - Consistent UI chips and cards
 
 ### 5.5 Bookmarks (`bookmarks.php`)
+
 - First pass CRUD and listing
 - **Roadmap**: categories with sorting, collapsible sections, favicon caching
 
 ### 5.6 Logs / Audit / Diagnostics / Config
+
 - Logs styled with unified buttons
 - Audit trail entries to `state/audit.log.jsonl`
 
@@ -424,10 +449,13 @@ api/alerts_eval.php               # evaluator
 All endpoints require admin session; headless calls can use the token header.
 
 ### 6.1 Probes & Alerts
+
 - **Evaluate (optionally probe first)**
+
   ```
   GET api/alerts_eval.php?probe=1&dry=0&token=CRON_TOKEN
   ```
+
   - `probe=1` tries to refresh probe data
   - `dry=0` persists counters & history (`history.js` forces this on “Probe now”)
 
@@ -438,11 +466,13 @@ All endpoints require admin session; headless calls can use the token header.
   ```
 
 ### 6.2 Mailer (Security)
+
 - **Get settings**
   ```
   GET api/security_get.php
   ```
 - **Save settings**
+
   ```http
   POST api/security_set.php
   Content-Type: application/json
@@ -460,12 +490,14 @@ All endpoints require admin session; headless calls can use the token header.
     "smtp_timeout":12
   }}
   ```
+
 - **Test mail**
   ```
   GET api/mail_test.php?to=you@domain
   ```
 
 ### 6.3 Bookmarks
+
 ```
 GET  api/bookmarks_get.php
 POST api/bookmarks_set.php
@@ -476,33 +508,41 @@ POST api/bookmarks_set.php
 ## 7) Cron Examples
 
 **Evaluate alerts every 5 minutes:**
+
 ```
 */5 * * * * curl -fsS 'https://YOUR_HOSTapi/alerts_eval.php?probe=1&dry=0&token=YOUR_CRON_TOKEN' >/dev/null
 ```
 
 **Nightly export of probe history:**
+
 ```
 0 2 * * * curl -fsS 'https://YOUR_HOSTapi/history_export.php?type=probes&limit=50000&start=0&token=YOUR_CRON_TOKEN' -o /var/backups/probes_$(date +\%F).json
 ```
+
 **Preload security form:**
+
 ```
 curl -fsS 'https://HOSTapi/security_get.php'   -H 'X-CRON-TOKEN: YOUR_CRON_TOKEN' | jq .
 ```
 
 **Save mailer (phpmail):**
+
 ```
 curl -fsS 'https://HOSTapi/security_set.php'   -H 'Content-Type: application/json'   -H 'X-CRON-TOKEN: YOUR_CRON_TOKEN'   --data '{"mail_transport":"phpmail","mail_from":"Domain Alerts <alerts@host>","mail_replyto":"ops@host"}' | jq .
 ```
 
 **Run a probe + evaluate:**
+
 ```
 curl -fsS 'https://HOSTapi/alerts_eval.php?probe=1&dry=0&token=YOUR_CRON_TOKEN' | jq .
 ```
 
 **Export latest probes:**
+
 ```
 curl -fsS 'https://HOSTapi/history_export.php?type=probes&limit=1000&start=0&token=YOUR_CRON_TOKEN' | jq .
 ```
+
 ---
 
 ## 8) Data & State Files
@@ -525,8 +565,7 @@ Rotate large `*.jsonl` via `logrotate` or a cron script.
 
 ---
 
-**Screenshots**
------------
+## **Screenshots**
 
 ![Alt text](/assets/images/screenshots/main.png?raw=true "Server Dashboard Main Screenshot")
 

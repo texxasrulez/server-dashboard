@@ -1,94 +1,314 @@
 {
-    "app": {
-        "title": "\u041f\u0430\u043d\u0435\u043b\u044c \u043a\u0435\u0440\u0443\u0432\u0430\u043d\u043d\u044f \u0441\u0435\u0440\u0432\u0435\u0440\u043e\u043c"
+  "app": {
+    "title": "Панель керування сервером"
+  },
+  "nav": {
+    "history": "Історія",
+    "logs": "Журнали",
+    "dashboard": "Приладова панель",
+    "services": "Послуги",
+    "alerts": "Сповіщення",
+    "tests": "Тести",
+    "settings": "Налаштування",
+    "about": "Про"
+  },
+  "history": {
+    "title": "Історія",
+    "trends": "Тенденції",
+    "range": "Діапазон",
+    "baseline": "Базовий рівень",
+    "probe_now": "Зондуй зараз.",
+    "refresh": "Оновити",
+    "export_json": "Експорт JSON",
+    "export_alerts_json": "Експорт сповіщень JSON",
+    "reset_history": "Історія скидання",
+    "recent_alert_events": "Нещодавні тривожні події",
+    "export_preview": "Попередній перегляд експорту",
+    "close": "Закрити",
+    "copy": "Зрозумів.",
+    "download": "Завантажити"
+  },
+  "logs": {
+    "title": "Журнали",
+    "manage": "Керування журналами",
+    "add": "Додати",
+    "delete": "Видалити",
+    "refresh": "Оновити",
+    "search": "Пошук",
+    "filter": "Фільтр",
+    "lines": "Лінії",
+    "open": "Відчинено",
+    "close": "Закрити",
+    "download": "Завантажити",
+    "copy": "Зрозумів."
+  },
+  "common": {
+    "save": "Зберегти",
+    "cancel": "Скасувати",
+    "edit": "Редагувати",
+    "delete": "Видалити",
+    "update": "Оновлення",
+    "create": "Створити",
+    "enable": "Увімкнути",
+    "disable": "Вимкнути",
+    "yes": "Так.",
+    "no": "Ні.",
+    "on": "На",
+    "off": "Вимкнено",
+    "confirm": "Підтвердити",
+    "search": "Пошук",
+    "filter": "Фільтр",
+    "actions": "Дії"
+  },
+  "alerts": {
+    "title": "Сповіщення",
+    "recent_events": "Нещодавні тривожні події",
+    "history": "Історія тривог",
+    "export_json": "Експорт сповіщень JSON",
+    "no_alerts": "Ніяких попереджень",
+    "level": "Рівень",
+    "message": "Повідомлення",
+    "service": "Сервіс",
+    "time": "Час",
+    "probe_now": "Зондуй зараз.",
+    "refresh": "Оновити",
+    "silence": "Тиша.",
+    "unsilence": "Безмовність",
+    "ack": "Підтвердити",
+    "unack": "Невизнання"
+  },
+  "tests": {
+    "title": "Тести сервера",
+    "run_all": "Запустити все",
+    "status": "Статус",
+    "last_run": "Останній заїзд.",
+    "duration": "Тривалість"
+  },
+  "services": {
+    "title": "Послуги",
+    "status": "Статус",
+    "restart": "Перезавантажити",
+    "start": "Старт",
+    "stop": "Стоп!"
+  },
+  "config": {
+    "sections": {
+      "site": "Site",
+      "features": "Features",
+      "capabilities": "Capabilities",
+      "processes": "Processes",
+      "mail": "Mail",
+      "integrations": "Integrations",
+      "security": "Security",
+      "ui": "UI",
+      "server_tests": "Server Tests",
+      "alerts": "Alerts",
+      "cron": "Cron",
+      "history": "History",
+      "logs": "Logs",
+      "backups": "Резервні копії",
+      "email": "Email"
     },
-    "nav": {
-        "history": "\u0406\u0441\u0442\u043e\u0440\u0456\u044f",
-        "logs": "\u0416\u0443\u0440\u043d\u0430\u043b\u0438",
-        "dashboard": "\u041f\u0440\u0438\u043b\u0430\u0434\u043e\u0432\u0430 \u043f\u0430\u043d\u0435\u043b\u044c",
-        "services": "\u041f\u043e\u0441\u043b\u0443\u0433\u0438",
-        "alerts": "\u0421\u043f\u043e\u0432\u0456\u0449\u0435\u043d\u043d\u044f",
-        "tests": "\u0422\u0435\u0441\u0442\u0438",
-        "settings": "\u041d\u0430\u043b\u0430\u0448\u0442\u0443\u0432\u0430\u043d\u043d\u044f",
-        "about": "\u041f\u0440\u043e"
+    "fields": {
+      "backups": {
+        "require_dedicated_mount": {
+          "label": "Потрібне спеціальне кріплення",
+          "help": "Застарілий ключ сумісності. Якщо ввімкнено, сценарії резервного копіювання вимагають наявності резервного монтування."
+        },
+        "disable_on_mount_fail": {
+          "label": "Вимкніть резервне копіювання, якщо підключення не вдається",
+          "help": "Якщо ввімкнено, дії резервного копіювання та згенеровані сценарії припиняються, якщо резервне монтування відсутнє."
+        }
+      },
+      "alerts": {
+        "min_severity": {
+          "label": "Мінімальний рівень серйозності для попередження"
+        },
+        "email": {
+          "label": "Legacy alert email(s)"
+        }
+      }
     },
-    "history": {
-        "title": "\u0406\u0441\u0442\u043e\u0440\u0456\u044f",
-        "trends": "\u0422\u0435\u043d\u0434\u0435\u043d\u0446\u0456\u0457",
-        "range": "\u0414\u0456\u0430\u043f\u0430\u0437\u043e\u043d",
-        "baseline": "\u0411\u0430\u0437\u043e\u0432\u0438\u0439 \u0440\u0456\u0432\u0435\u043d\u044c",
-        "probe_now": "\u0417\u043e\u043d\u0434\u0443\u0439 \u0437\u0430\u0440\u0430\u0437.",
-        "refresh": "\u041e\u043d\u043e\u0432\u0438\u0442\u0438",
-        "export_json": "\u0415\u043a\u0441\u043f\u043e\u0440\u0442 JSON",
-        "export_alerts_json": "\u0415\u043a\u0441\u043f\u043e\u0440\u0442 \u0441\u043f\u043e\u0432\u0456\u0449\u0435\u043d\u044c JSON",
-        "reset_history": "\u0406\u0441\u0442\u043e\u0440\u0456\u044f \u0441\u043a\u0438\u0434\u0430\u043d\u043d\u044f",
-        "recent_alert_events": "\u041d\u0435\u0449\u043e\u0434\u0430\u0432\u043d\u0456 \u0442\u0440\u0438\u0432\u043e\u0436\u043d\u0456 \u043f\u043e\u0434\u0456\u0457",
-        "export_preview": "\u041f\u043e\u043f\u0435\u0440\u0435\u0434\u043d\u0456\u0439 \u043f\u0435\u0440\u0435\u0433\u043b\u044f\u0434 \u0435\u043a\u0441\u043f\u043e\u0440\u0442\u0443",
-        "close": "\u0417\u0430\u043a\u0440\u0438\u0442\u0438",
-        "copy": "\u0417\u0440\u043e\u0437\u0443\u043c\u0456\u0432.",
-        "download": "\u0417\u0430\u0432\u0430\u043d\u0442\u0430\u0436\u0438\u0442\u0438"
-    },
-    "logs": {
-        "title": "\u0416\u0443\u0440\u043d\u0430\u043b\u0438",
-        "manage": "\u041a\u0435\u0440\u0443\u0432\u0430\u043d\u043d\u044f \u0436\u0443\u0440\u043d\u0430\u043b\u0430\u043c\u0438",
-        "add": "\u0414\u043e\u0434\u0430\u0442\u0438",
-        "delete": "\u0412\u0438\u0434\u0430\u043b\u0438\u0442\u0438",
-        "refresh": "\u041e\u043d\u043e\u0432\u0438\u0442\u0438",
-        "search": "\u041f\u043e\u0448\u0443\u043a",
-        "filter": "\u0424\u0456\u043b\u044c\u0442\u0440",
-        "lines": "\u041b\u0456\u043d\u0456\u0457",
-        "open": "\u0412\u0456\u0434\u0447\u0438\u043d\u0435\u043d\u043e",
-        "close": "\u0417\u0430\u043a\u0440\u0438\u0442\u0438",
-        "download": "\u0417\u0430\u0432\u0430\u043d\u0442\u0430\u0436\u0438\u0442\u0438",
-        "copy": "\u0417\u0440\u043e\u0437\u0443\u043c\u0456\u0432."
-    },
-    "common": {
-        "save": "\u0417\u0431\u0435\u0440\u0435\u0433\u0442\u0438",
-        "cancel": "\u0421\u043a\u0430\u0441\u0443\u0432\u0430\u0442\u0438",
-        "edit": "\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u0442\u0438",
-        "delete": "\u0412\u0438\u0434\u0430\u043b\u0438\u0442\u0438",
-        "update": "\u041e\u043d\u043e\u0432\u043b\u0435\u043d\u043d\u044f",
-        "create": "\u0421\u0442\u0432\u043e\u0440\u0438\u0442\u0438",
-        "enable": "\u0423\u0432\u0456\u043c\u043a\u043d\u0443\u0442\u0438",
-        "disable": "\u0412\u0438\u043c\u043a\u043d\u0443\u0442\u0438",
-        "yes": "\u0422\u0430\u043a.",
-        "no": "\u041d\u0456.",
-        "on": "\u041d\u0430",
-        "off": "\u0412\u0438\u043c\u043a\u043d\u0435\u043d\u043e",
-        "confirm": "\u041f\u0456\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u0438",
-        "search": "\u041f\u043e\u0448\u0443\u043a",
-        "filter": "\u0424\u0456\u043b\u044c\u0442\u0440",
-        "actions": "\u0414\u0456\u0457"
-    },
-    "alerts": {
-        "title": "\u0421\u043f\u043e\u0432\u0456\u0449\u0435\u043d\u043d\u044f",
-        "recent_events": "\u041d\u0435\u0449\u043e\u0434\u0430\u0432\u043d\u0456 \u0442\u0440\u0438\u0432\u043e\u0436\u043d\u0456 \u043f\u043e\u0434\u0456\u0457",
-        "history": "\u0406\u0441\u0442\u043e\u0440\u0456\u044f \u0442\u0440\u0438\u0432\u043e\u0433",
-        "export_json": "\u0415\u043a\u0441\u043f\u043e\u0440\u0442 \u0441\u043f\u043e\u0432\u0456\u0449\u0435\u043d\u044c JSON",
-        "no_alerts": "\u041d\u0456\u044f\u043a\u0438\u0445 \u043f\u043e\u043f\u0435\u0440\u0435\u0434\u0436\u0435\u043d\u044c",
-        "level": "\u0420\u0456\u0432\u0435\u043d\u044c",
-        "message": "\u041f\u043e\u0432\u0456\u0434\u043e\u043c\u043b\u0435\u043d\u043d\u044f",
-        "service": "\u0421\u0435\u0440\u0432\u0456\u0441",
-        "time": "\u0427\u0430\u0441",
-        "probe_now": "\u0417\u043e\u043d\u0434\u0443\u0439 \u0437\u0430\u0440\u0430\u0437.",
-        "refresh": "\u041e\u043d\u043e\u0432\u0438\u0442\u0438",
-        "silence": "\u0422\u0438\u0448\u0430.",
-        "unsilence": "\u0411\u0435\u0437\u043c\u043e\u0432\u043d\u0456\u0441\u0442\u044c",
-        "ack": "\u041f\u0456\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u0438",
-        "unack": "\u041d\u0435\u0432\u0438\u0437\u043d\u0430\u043d\u043d\u044f"
-    },
-    "tests": {
-        "title": "\u0422\u0435\u0441\u0442\u0438 \u0441\u0435\u0440\u0432\u0435\u0440\u0430",
-        "run_all": "\u0417\u0430\u043f\u0443\u0441\u0442\u0438\u0442\u0438 \u0432\u0441\u0435",
-        "status": "\u0421\u0442\u0430\u0442\u0443\u0441",
-        "last_run": "\u041e\u0441\u0442\u0430\u043d\u043d\u0456\u0439 \u0437\u0430\u0457\u0437\u0434.",
-        "duration": "\u0422\u0440\u0438\u0432\u0430\u043b\u0456\u0441\u0442\u044c"
-    },
-    "services": {
-        "title": "\u041f\u043e\u0441\u043b\u0443\u0433\u0438",
-        "status": "\u0421\u0442\u0430\u0442\u0443\u0441",
-        "restart": "\u041f\u0435\u0440\u0435\u0437\u0430\u0432\u0430\u043d\u0442\u0430\u0436\u0438\u0442\u0438",
-        "start": "\u0421\u0442\u0430\u0440\u0442",
-        "stop": "\u0421\u0442\u043e\u043f!"
+    "ui": {
+      "unknown": "невідомий",
+      "unknown_paren": "(невідомо)",
+      "site_backup": {
+        "title": "Резервне копіювання та відновлення",
+        "export_config": "Експорт конфігурації",
+        "import_config": "Імпорт конфігурації",
+        "choose_file_first": "Спочатку виберіть файл резервної копії",
+        "imported_reloading": "Імпортні. Перезавантаження...",
+        "import_failed": "Помилка імпорту",
+        "import_failed_prefix": "Помилка імпорту:",
+        "retention_title": "Резервне копіювання - збереження",
+        "keep_last": "Тримайте останнім",
+        "files": "файли",
+        "loading_stats": "(завантаження статистики...)",
+        "last_backup_loading": "Остання резервна копія: (завантаження...)",
+        "last_backup_none": "Остання резервна копія: ще немає",
+        "last_backup_prefix": "Остання резервна копія:",
+        "last_backup_unknown": "Остання резервна копія: невідомо",
+        "prune_now": "Обріжте зараз",
+        "pruned_kept_deleted": "Обрізали - зберегли",
+        "deleted_prefix": "видалено",
+        "prune_failed": "Обрізати не вдалося",
+        "prune_failed_prefix": "Не вдалося видалити:",
+        "create_backup_now": "Створіть резервну копію зараз",
+        "backup_saved_prefix": "Резервну копію збережено:",
+        "backup_failed": "Помилка резервного копіювання",
+        "backup_failed_prefix": "Помилка резервного копіювання:",
+        "download_latest_backup": "Завантажте останню резервну копію",
+        "no_backups_found": "Резервні копії не знайдено",
+        "download_failed_prefix": "Помилка завантаження:",
+        "redact_secrets": "Redact secrets"
+      }
     }
+  },
+  "backups": {
+    "common": {
+      "status": "Статус:",
+      "timestamp": "Мітка часу:",
+      "none_dash": "-",
+      "free": "безкоштовно",
+      "used": "б/в",
+      "copy": "Копія",
+      "warnings": "Попередження",
+      "errors": "Помилки",
+      "loading": "Завантаження..."
+    },
+    "status": {
+      "error_loading_json": "ПОМИЛКА ЗАВАНТАЖЕННЯ JSON",
+      "ok": "добре",
+      "unmounted": "НЕМОНТАЖЕНИЙ",
+      "critical": "КРИТИЧНО",
+      "high": "ВИСОКА",
+      "elevated": "ПІДНЯТИЙ",
+      "healthy": "ЗДОРОВИЙ",
+      "unknown": "НЕВІДОМО",
+      "unknown_cap": "Невідомий"
+    },
+    "disk": {
+      "unmounted": "Диск НЕ МОНТУВАНИЙ",
+      "tag": "диск:",
+      "sizes_updated": "Оновлені розміри:",
+      "title": "Використання диска",
+      "usage": "Використання",
+      "mount": "кріплення"
+    },
+    "page": {
+      "freshness_prefix": "Свіжість:",
+      "title": "Центр керування резервним копіюванням",
+      "subtitle_prefix": "Живий статус керується",
+      "subtitle_suffix": "на вашому резервному диску."
+    },
+    "ages": {
+      "no_snapshots_on_disk": "На диску не знайдено знімків",
+      "one_snapshot_present": "Є 1 знімок",
+      "snapshots_present_suffix": "наявні знімки",
+      "no_panel_backups_on_disk": "На диску не знайдено резервних копій панелей",
+      "one_panel_backup_present": "Присутня 1 резервна панель",
+      "panel_backups_present_suffix": "присутні резервні копії панелей",
+      "no_micro_backups_on_disk": "На диску не знайдено мікрорезервних копій",
+      "one_micro_backup_present": "Присутня 1 мікрорезервна копія",
+      "micro_backups_present_suffix": "присутні мікрорезервні копії",
+      "snapshot_daily0_chart": "Знімок (щодня.0)",
+      "hestia_latest_chart": "Гестія остання",
+      "micro_latest_chart": "Мікро останні",
+      "age_days": "Вік (днів)",
+      "title": "Вік резервного копіювання",
+      "subtitle": "Наскільки свіжі ваші останні резервні копії",
+      "snapshot_daily0": "Знімок щоденно.0",
+      "latest_hestia": "Остання Гестія",
+      "latest_micro": "Остання версія Micro"
+    },
+    "errors": {
+      "no_backups_detected": "Не виявлено резервних копій для знімків, Hestia або мікронаборів."
+    },
+    "restore": {
+      "hestia_placeholder_tar": "ген.РРРРММДД-ГЧММ.tar",
+      "using_latest_backup_prefix": "Використання останньої резервної копії в JSON:",
+      "adjust_backup_tar": "Налаштуйте BACKUP_TAR на справжній файл із \\\"v-list-backups gen\\\" перед запуском.",
+      "micro_restore_prefix": "Відновити базу з останнього мікрознімка:",
+      "micro_restore_suffix": "(перегляньте шляхи та виключення перед запуском).",
+      "set_correct_snapshot_path": "Перед використанням цієї команди встановіть правильний шлях до знімка.",
+      "confirm_body_1": "Це запустить завдання відновлення Hestia на сервері за допомогою backupctl.",
+      "confirm_body_2": "Служби та дані для цього користувача можуть бути перезаписані.",
+      "confirm_body_3": "Ви абсолютно впевнені?"
+    },
+    "actions": {
+      "starting_prefix": "Запуск",
+      "failed_to_start_prefix": "НЕ вдалося запустити",
+      "started_prefix": "розпочато",
+      "started_suffix": ". Це може зайняти деякий час; статус буде оновлено під час наступної перевірки стану.",
+      "error_talking_endpoint": "Помилка підключення до backups_action.php",
+      "run_os_snapshot": "Запустіть знімок ОС",
+      "run_micro_backup": "Запустіть Micro Backup",
+      "run_hestia_backup_user": "Запустіть Hestia Backup (ген)",
+      "run_all_backups": "Запустіть ВСІ резервні копії",
+      "run_health_check": "Запустіть перевірку працездатності",
+      "log_maintenance": "Ведення журналу",
+      "clear_backup_logs": "Очистити журнали справності резервного копіювання",
+      "clear_prune_logs": "Очистити колоди обрізки",
+      "clear_integrity_log": "Очистити журнал цілісності"
+    },
+    "cron": {
+      "no_entries": "Записів crontab не виявлено.",
+      "env": "Env",
+      "schedule": "розклад",
+      "entries_for_prefix": "Записи Crontab для",
+      "current_user": "поточний користувач",
+      "unable_to_read": "Неможливо прочитати crontab.",
+      "failed_to_read": "Не вдалося прочитати crontab."
+    },
+    "warnings_errors": {
+      "title": "Попередження та помилки",
+      "subtitle": "Підсумок з перевірки стану здоров'я"
+    },
+    "raw_snapshot": {
+      "title": "Необроблений знімок",
+      "subtitle": "Ключові значення безпосередньо з останнього статусу JSON"
+    },
+    "recent_actions": {
+      "title": "Останні дії",
+      "subtitle": "Історія дій з цієї інформаційної панелі",
+      "none": "Дій ще не зафіксовано."
+    },
+    "orch": {
+      "title": "Майстер оркестровки резервного копіювання",
+      "subtitle": "Налаштуйте шляхи один раз, а потім скопіюйте згенеровані блоки script/cron/systemd.",
+      "backup_root": "Корінь резервної копії",
+      "include_health": "Включіть перевірку стану здоров'я",
+      "include_integrity": "Включити перевірку цілісності",
+      "include_prune": "Включіть етап чорносливу",
+      "suspend": "Призупинити резервне копіювання",
+      "disable_on_mount_fail": "Вимкніть резервне копіювання, якщо підключення не вдається",
+      "nightly_script": "Нічний сценарій",
+      "copy_script": "Копіювати сценарій",
+      "cron_entry": "Запис Cron",
+      "copy_cron_line": "Скопіюйте рядок cron",
+      "systemd_service": "Служба Systemd",
+      "copy_unit": "Копіювальний блок",
+      "systemd_timer": "Таймер Systemd",
+      "copy_timer": "Таймер копіювання"
+    },
+    "quick_restore": {
+      "title": "Помічники швидкого відновлення",
+      "subtitle": "Попередньо заповнені команди CLI для надзвичайних ситуацій (ручний запуск або кнопка НЕБЕЗПЕКА)",
+      "hestia_latest_title": "Відновити останню резервну копію користувача Hestia",
+      "micro_latest_title": "Відновлення з останнього мікрознімка (лише CLI)",
+      "copy_command": "Копіювати команду",
+      "run_restore_danger": "Запустити відновлення (останнє, НЕБЕЗПЕЧНО)"
+    },
+    "cli": {
+      "title": "Hestia Backup & Restore CLI",
+      "subtitle": "Аркуш швидкого довідника – скопіюйте та вставте",
+      "create_backups": "Створення резервних копій",
+      "list_delete_backups": "Список і видалення резервних копій",
+      "full_restore_user": "Повне відновлення (користувач)",
+      "selective_restore": "Вибіркове відновлення (Веб/БД/Пошта)",
+      "backup_file_locations": "Розташування файлів резервних копій",
+      "backup_tarball_contents": "Резервне копіювання вмісту архіву",
+      "backupctl_help": "backupctl довідка"
+    }
+  }
 }

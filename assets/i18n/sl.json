@@ -1,94 +1,314 @@
 {
-    "app": {
-        "title": "Nadzorna plo\u0161\u010da stre\u017enika"
+  "app": {
+    "title": "Nadzorna plošča strežnika"
+  },
+  "nav": {
+    "history": "Zgodovina",
+    "logs": "Dnevniki",
+    "dashboard": "Nadzorna plošča",
+    "services": "Storitve",
+    "alerts": "Opozorila",
+    "tests": "Testi",
+    "settings": "Nastavitve",
+    "about": "O"
+  },
+  "history": {
+    "title": "Zgodovina",
+    "trends": "Trendi",
+    "range": "Razpon",
+    "baseline": "Osnovni",
+    "probe_now": "Sondirajte zdaj",
+    "refresh": "Osvežitev",
+    "export_json": "Izvoz JSON",
+    "export_alerts_json": "Izvoz opozoril JSON",
+    "reset_history": "Ponastavitev zgodovine",
+    "recent_alert_events": "Nedavni opozorilni dogodki",
+    "export_preview": "Predogled izvoza",
+    "close": "Zapri",
+    "copy": "Kopiraj",
+    "download": "Prenesi"
+  },
+  "logs": {
+    "title": "Dnevniki",
+    "manage": "Upravljanje dnevnikov",
+    "add": "Dodaj",
+    "delete": "Izbriši",
+    "refresh": "Osvežitev",
+    "search": "Iskanje",
+    "filter": "Filter",
+    "lines": "Vrstice",
+    "open": "Odpri",
+    "close": "Zapri",
+    "download": "Prenesi",
+    "copy": "Kopiraj"
+  },
+  "common": {
+    "save": "Shrani",
+    "cancel": "Prekliči",
+    "edit": "Uredi",
+    "delete": "Izbriši",
+    "update": "Posodobitev",
+    "create": "Ustvarite spletno stran",
+    "enable": "Omogočite",
+    "disable": "Onemogočite",
+    "yes": "Da",
+    "no": "Ne",
+    "on": "Na spletni strani",
+    "off": "Izklopljeno",
+    "confirm": "Potrdite",
+    "search": "Iskanje",
+    "filter": "Filter",
+    "actions": "Ukrepi"
+  },
+  "alerts": {
+    "title": "Opozorila",
+    "recent_events": "Nedavni opozorilni dogodki",
+    "history": "Zgodovina opozoril",
+    "export_json": "Izvoz opozoril JSON",
+    "no_alerts": "Brez opozoril",
+    "level": "Raven",
+    "message": "Sporočilo",
+    "service": "Storitev",
+    "time": "Čas",
+    "probe_now": "Sondirajte zdaj",
+    "refresh": "Osvežitev",
+    "silence": "Tišina",
+    "unsilence": "Unsilence",
+    "ack": "Potrditev",
+    "unack": "Nepoznavanje"
+  },
+  "tests": {
+    "title": "Preizkusi strežnika",
+    "run_all": "Izpeljite vse",
+    "status": "Status",
+    "last_run": "Zadnja vožnja",
+    "duration": "Trajanje"
+  },
+  "services": {
+    "title": "Storitve",
+    "status": "Status",
+    "restart": "Ponovni zagon",
+    "start": "Začetek",
+    "stop": "Ustavite"
+  },
+  "config": {
+    "sections": {
+      "site": "Site",
+      "features": "Features",
+      "capabilities": "Capabilities",
+      "processes": "Processes",
+      "mail": "Mail",
+      "integrations": "Integrations",
+      "security": "Security",
+      "ui": "UI",
+      "server_tests": "Server Tests",
+      "alerts": "Alerts",
+      "cron": "Cron",
+      "history": "History",
+      "logs": "Logs",
+      "backups": "Varnostne kopije",
+      "email": "Email"
     },
-    "nav": {
-        "history": "Zgodovina",
-        "logs": "Dnevniki",
-        "dashboard": "Nadzorna plo\u0161\u010da",
-        "services": "Storitve",
-        "alerts": "Opozorila",
-        "tests": "Testi",
-        "settings": "Nastavitve",
-        "about": "O"
+    "fields": {
+      "backups": {
+        "require_dedicated_mount": {
+          "label": "Potreben namenski nosilec",
+          "help": "Ključ za združljivost s starimi različicami. Ko je omogočeno, skripti za varnostno kopiranje zahtevajo, da je prisoten nastavek za varnostno kopijo."
+        },
+        "disable_on_mount_fail": {
+          "label": "Onemogoči varnostno kopiranje, če namestitev ne uspe",
+          "help": "Ko je omogočeno, se dejanja varnostnega kopiranja in ustvarjeni skripti ustavijo, če manjka priklop varnostne kopije."
+        }
+      },
+      "alerts": {
+        "min_severity": {
+          "label": "Najmanjša resnost za opozorilo"
+        },
+        "email": {
+          "label": "Legacy alert email(s)"
+        }
+      }
     },
-    "history": {
-        "title": "Zgodovina",
-        "trends": "Trendi",
-        "range": "Razpon",
-        "baseline": "Osnovni",
-        "probe_now": "Sondirajte zdaj",
-        "refresh": "Osve\u017eitev",
-        "export_json": "Izvoz JSON",
-        "export_alerts_json": "Izvoz opozoril JSON",
-        "reset_history": "Ponastavitev zgodovine",
-        "recent_alert_events": "Nedavni opozorilni dogodki",
-        "export_preview": "Predogled izvoza",
-        "close": "Zapri",
-        "copy": "Kopiraj",
-        "download": "Prenesi"
-    },
-    "logs": {
-        "title": "Dnevniki",
-        "manage": "Upravljanje dnevnikov",
-        "add": "Dodaj",
-        "delete": "Izbri\u0161i",
-        "refresh": "Osve\u017eitev",
-        "search": "Iskanje",
-        "filter": "Filter",
-        "lines": "Vrstice",
-        "open": "Odpri",
-        "close": "Zapri",
-        "download": "Prenesi",
-        "copy": "Kopiraj"
-    },
-    "common": {
-        "save": "Shrani",
-        "cancel": "Prekli\u010di",
-        "edit": "Uredi",
-        "delete": "Izbri\u0161i",
-        "update": "Posodobitev",
-        "create": "Ustvarite spletno stran",
-        "enable": "Omogo\u010dite",
-        "disable": "Onemogo\u010dite",
-        "yes": "Da",
-        "no": "Ne",
-        "on": "Na spletni strani",
-        "off": "Izklopljeno",
-        "confirm": "Potrdite",
-        "search": "Iskanje",
-        "filter": "Filter",
-        "actions": "Ukrepi"
-    },
-    "alerts": {
-        "title": "Opozorila",
-        "recent_events": "Nedavni opozorilni dogodki",
-        "history": "Zgodovina opozoril",
-        "export_json": "Izvoz opozoril JSON",
-        "no_alerts": "Brez opozoril",
-        "level": "Raven",
-        "message": "Sporo\u010dilo",
-        "service": "Storitev",
-        "time": "\u010cas",
-        "probe_now": "Sondirajte zdaj",
-        "refresh": "Osve\u017eitev",
-        "silence": "Ti\u0161ina",
-        "unsilence": "Unsilence",
-        "ack": "Potrditev",
-        "unack": "Nepoznavanje"
-    },
-    "tests": {
-        "title": "Preizkusi stre\u017enika",
-        "run_all": "Izpeljite vse",
-        "status": "Status",
-        "last_run": "Zadnja vo\u017enja",
-        "duration": "Trajanje"
-    },
-    "services": {
-        "title": "Storitve",
-        "status": "Status",
-        "restart": "Ponovni zagon",
-        "start": "Za\u010detek",
-        "stop": "Ustavite"
+    "ui": {
+      "unknown": "neznano",
+      "unknown_paren": "(neznano)",
+      "site_backup": {
+        "title": "Varnostno kopiranje in obnovitev",
+        "export_config": "Izvozi konfiguracijo",
+        "import_config": "Uvozi konfiguracijo",
+        "choose_file_first": "Najprej izberite varnostno kopijo",
+        "imported_reloading": "Uvoženo. Ponovno nalaganje ...",
+        "import_failed": "Uvoz ni uspel",
+        "import_failed_prefix": "Uvoz ni uspel:",
+        "retention_title": "Varnostne kopije - hramba",
+        "keep_last": "Drži zadnje",
+        "files": "datoteke",
+        "loading_stats": "(nalaganje statistike ...)",
+        "last_backup_loading": "Zadnja varnostna kopija: (nalaganje ...)",
+        "last_backup_none": "Zadnja varnostna kopija: še nobena",
+        "last_backup_prefix": "Zadnja varnostna kopija:",
+        "last_backup_unknown": "Zadnja varnostna kopija: neznano",
+        "prune_now": "Obrežite zdaj",
+        "pruned_kept_deleted": "Obrezano - ohranjeno",
+        "deleted_prefix": "izbrisano",
+        "prune_failed": "Obrezovanje ni uspelo",
+        "prune_failed_prefix": "Obrezovanje ni uspelo:",
+        "create_backup_now": "Ustvari varnostno kopijo zdaj",
+        "backup_saved_prefix": "Varnostna kopija shranjena:",
+        "backup_failed": "Varnostno kopiranje ni uspelo",
+        "backup_failed_prefix": "Varnostno kopiranje ni uspelo:",
+        "download_latest_backup": "Prenesite najnovejšo varnostno kopijo",
+        "no_backups_found": "Ni varnostnih kopij",
+        "download_failed_prefix": "Prenos ni uspel:",
+        "redact_secrets": "Redact secrets"
+      }
     }
+  },
+  "backups": {
+    "common": {
+      "status": "status:",
+      "timestamp": "Časovni žig:",
+      "none_dash": "-",
+      "free": "Brezplačno",
+      "used": "Rabljeno",
+      "copy": "Kopiraj",
+      "warnings": "Opozorila",
+      "errors": "Napake",
+      "loading": "Nalaganje..."
+    },
+    "status": {
+      "error_loading_json": "NAPAKA PRI NALAGANJU JSON",
+      "ok": "OK",
+      "unmounted": "NENAMEŠČEN",
+      "critical": "KRITIČNO",
+      "high": "VISOKA",
+      "elevated": "POVZVIŠAN",
+      "healthy": "ZDRAVO",
+      "unknown": "NEZNANO",
+      "unknown_cap": "Neznano"
+    },
+    "disk": {
+      "unmounted": "Disk ODMONTIRAN",
+      "tag": "Disk:",
+      "sizes_updated": "Posodobljene velikosti:",
+      "title": "Uporaba diska",
+      "usage": "Uporaba",
+      "mount": "Mount"
+    },
+    "page": {
+      "freshness_prefix": "Svežina:",
+      "title": "Nadzorni center za varnostno kopiranje",
+      "subtitle_prefix": "Stanje v živo, ki ga poganja",
+      "subtitle_suffix": "na vašem varnostnem disku."
+    },
+    "ages": {
+      "no_snapshots_on_disk": "Na disku ni posnetkov",
+      "one_snapshot_present": "Prisoten je 1 posnetek",
+      "snapshots_present_suffix": "prisotni posnetki",
+      "no_panel_backups_on_disk": "Na disku ni varnostnih kopij plošč",
+      "one_panel_backup_present": "Prisotna je 1 rezervna plošča",
+      "panel_backups_present_suffix": "prisotne varnostne kopije plošče",
+      "no_micro_backups_on_disk": "Na disku ni mikro varnostnih kopij",
+      "one_micro_backup_present": "Prisotna je 1 mikro varnostna kopija",
+      "micro_backups_present_suffix": "prisotne mikro varnostne kopije",
+      "snapshot_daily0_chart": "Posnetek (dnevno.0)",
+      "hestia_latest_chart": "Hestia najnovejša",
+      "micro_latest_chart": "Mikro najnovejši",
+      "age_days": "Starost (dnevi)",
+      "title": "Rezervna starost",
+      "subtitle": "Kako sveže so vaše najnovejše varnostne kopije",
+      "snapshot_daily0": "Posnetek dnevno.0",
+      "latest_hestia": "Najnovejša Hestia",
+      "latest_micro": "Najnovejši Micro"
+    },
+    "errors": {
+      "no_backups_detected": "Ni zaznanih varnostnih kopij za posnetke, Hestio ali mikro nize."
+    },
+    "restore": {
+      "hestia_placeholder_tar": "gen.LLLLMMDD-HHMM.tar",
+      "using_latest_backup_prefix": "Uporaba najnovejše varnostne kopije, prijavljene v JSON:",
+      "adjust_backup_tar": "Prilagodite BACKUP_TAR na pravo datoteko iz \\\"v-list-backups gen\\\" pred zagonom.",
+      "micro_restore_prefix": "Obnovi osnovo iz najnovejšega mikro posnetka:",
+      "micro_restore_suffix": "(pred zagonom preglejte poti in izključitve).",
+      "set_correct_snapshot_path": "Pred uporabo tega ukaza nastavite pravilno pot posnetka.",
+      "confirm_body_1": "To bo zagnalo obnovitveno opravilo Hestia na strežniku z uporabo backupctl.",
+      "confirm_body_2": "Storitve in podatki za tega uporabnika so lahko prepisani.",
+      "confirm_body_3": "Ste popolnoma prepričani?"
+    },
+    "actions": {
+      "starting_prefix": "Začetek",
+      "failed_to_start_prefix": "Zagon NI uspel",
+      "started_prefix": "Začelo",
+      "started_suffix": ". To lahko traja nekaj časa; status bo posodobljen ob naslednjem zdravstvenem pregledu.",
+      "error_talking_endpoint": "Napaka pri pogovoru z backups_action.php",
+      "run_os_snapshot": "Zaženite OS Snapshot",
+      "run_micro_backup": "Zaženite Micro Backup",
+      "run_hestia_backup_user": "Zaženi Hestia Backup (user)",
+      "run_all_backups": "Zaženite VSE varnostne kopije",
+      "run_health_check": "Zaženite pregled stanja",
+      "log_maintenance": "Vzdrževanje dnevnika",
+      "clear_backup_logs": "Počisti dnevnike varnostnega kopiranja",
+      "clear_prune_logs": "Počistite dnevnike obrezovanja",
+      "clear_integrity_log": "Počisti dnevnik integritete"
+    },
+    "cron": {
+      "no_entries": "Ni zaznanih vnosov v crontab.",
+      "env": "Env",
+      "schedule": "Urnik",
+      "entries_for_prefix": "Vnosi v Crontab za",
+      "current_user": "trenutni uporabnik",
+      "unable_to_read": "Ni mogoče prebrati crontaba.",
+      "failed_to_read": "Branje crontaba ni uspelo."
+    },
+    "warnings_errors": {
+      "title": "Opozorila in napake",
+      "subtitle": "Povzetek zdravstvenega pregleda"
+    },
+    "raw_snapshot": {
+      "title": "Neobdelani posnetek",
+      "subtitle": "Ključne vrednosti neposredno iz zadnjega stanja JSON"
+    },
+    "recent_actions": {
+      "title": "Nedavna dejanja",
+      "subtitle": "Zgodovina dejanj s te nadzorne plošče",
+      "none": "Ni zabeleženih dejanj."
+    },
+    "orch": {
+      "title": "Varnostni čarovnik za orkestracijo",
+      "subtitle": "Enkrat prilagodite poti, nato kopirajte ustvarjene enote skript/cron/systemd.",
+      "backup_root": "Varnostni koren",
+      "include_health": "Vključite zdravstveni pregled",
+      "include_integrity": "Vključi preverjanje celovitosti",
+      "include_prune": "Vključite stopnjo obrezovanja",
+      "suspend": "Začasno zaustavi varnostno kopiranje",
+      "disable_on_mount_fail": "Onemogoči varnostno kopiranje, če namestitev ne uspe",
+      "nightly_script": "Nočni scenarij",
+      "copy_script": "Kopiraj skript",
+      "cron_entry": "Vnos v Cron",
+      "copy_cron_line": "Kopiraj cron vrstico",
+      "systemd_service": "Storitev Systemd",
+      "copy_unit": "Kopirna enota",
+      "systemd_timer": "Časovnik Systemd",
+      "copy_timer": "Kopiraj časovnik"
+    },
+    "quick_restore": {
+      "title": "Pomočniki za hitro obnovitev",
+      "subtitle": "Vnaprej izpolnjeni ukazi CLI za nujne primere (ročni zagon ali gumb DANGER)",
+      "hestia_latest_title": "Obnovi najnovejšo uporabniško varnostno kopijo Hestia",
+      "micro_latest_title": "Obnovi iz najnovejšega mikro posnetka (samo CLI)",
+      "copy_command": "Kopiraj ukaz",
+      "run_restore_danger": "Zaženi obnovitev (najnovejše, NEVARNOST)"
+    },
+    "cli": {
+      "title": "Hestia Backup & Restore CLI",
+      "subtitle": "Hitri referenčni list – pripravljen za kopiranje in lepljenje",
+      "create_backups": "Ustvarite varnostne kopije",
+      "list_delete_backups": "Seznam in brisanje varnostnih kopij",
+      "full_restore_user": "Popolna obnovitev (uporabnik)",
+      "selective_restore": "Selektivna obnovitev (splet/DB/Pošta)",
+      "backup_file_locations": "Lokacije varnostnih kopij datotek",
+      "backup_tarball_contents": "Varnostna kopija vsebine Tarball",
+      "backupctl_help": "backupctl pomoč"
+    }
+  }
 }

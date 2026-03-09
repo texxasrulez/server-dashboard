@@ -5,77 +5,102 @@ declare(strict_types=1);
 $root = dirname(__DIR__);
 require_once $root . '/includes/init.php';
 
-function arg_value(array $argv, string $name, ?string $default = null): ?string {
-  $prefix = '--' . $name . '=';
-  foreach ($argv as $arg) {
-    if (strpos($arg, $prefix) === 0) return substr($arg, strlen($prefix));
-  }
-  return $default;
-}
-
-function arg_flag(array $argv, string $name): bool {
-  return in_array('--' . $name, $argv, true);
-}
-
-function cfgv(string $path, $default = null) {
-  return function_exists('cfg_local') ? cfg_local($path, $default) : $default;
-}
-
-function first_email(): string {
-  $candidates = [];
-  $sec = cfgv('mail.sec_email', []);
-  if (is_array($sec) && !empty($sec[0])) $candidates[] = (string)$sec[0];
-  $admins = cfgv('security.admin_emails', []);
-  if (is_array($admins) && !empty($admins[0])) $candidates[] = (string)$admins[0];
-  $alert = cfgv('alerts.email', '');
-  if (is_string($alert) && trim($alert) !== '') $candidates[] = trim($alert);
-
-  foreach ($candidates as $mail) {
-    $mail = trim($mail);
-    if ($mail !== '' && filter_var($mail, FILTER_VALIDATE_EMAIL)) return $mail;
-  }
-  return '';
-}
-
-function normalize_excludes($raw): string {
-  if (is_array($raw)) {
-    $parts = [];
-    foreach ($raw as $v) {
-      if (!is_string($v)) continue;
-      $v = trim($v);
-      if ($v !== '') $parts[] = $v;
+function arg_value(array $argv, string $name, ?string $default = null): ?string
+{
+    $prefix = '--' . $name . '=';
+    foreach ($argv as $arg) {
+        if (strpos($arg, $prefix) === 0) {
+            return substr($arg, strlen($prefix));
+        }
     }
-    return implode(',', $parts);
-  }
-
-  if (!is_string($raw)) return '';
-  $parts = preg_split('/[\r\n,]+/', $raw) ?: [];
-  $out = [];
-  foreach ($parts as $p) {
-    $p = trim($p);
-    if ($p !== '') $out[] = $p;
-  }
-  return implode(',', $out);
+    return $default;
 }
 
-function sh_quote(string $v): string {
-  return "'" . str_replace("'", "'\"'\"'", $v) . "'";
+function arg_flag(array $argv, string $name): bool
+{
+    return in_array('--' . $name, $argv, true);
 }
 
-function write_file_atomic(string $path, string $body, int $mode = 0640): void {
-  $dir = dirname($path);
-  if (!is_dir($dir) && !@mkdir($dir, 0775, true) && !is_dir($dir)) {
-    throw new RuntimeException("Failed to create directory: {$dir}");
-  }
-  $tmp = $path . '.tmp';
-  if (@file_put_contents($tmp, $body, LOCK_EX) === false) {
-    throw new RuntimeException("Failed to write: {$tmp}");
-  }
-  @chmod($tmp, $mode);
-  if (!@rename($tmp, $path)) {
-    @unlink($tmp);
-    throw new RuntimeException("Failed to move into place: {$path}");
-  }
+function cfgv(string $path, $default = null)
+{
+    return function_exists('cfg_local') ? cfg_local($path, $default) : $default;
+}
+
+function first_email(): string
+{
+    $candidates = [];
+    $sec = cfgv('mail.sec_email', []);
+    if (is_array($sec) && !empty($sec[0])) {
+        $candidates[] = (string)$sec[0];
+    }
+    $admins = cfgv('security.admin_emails', []);
+    if (is_array($admins) && !empty($admins[0])) {
+        $candidates[] = (string)$admins[0];
+    }
+    $alert = cfgv('alerts.email', '');
+    if (is_string($alert) && trim($alert) !== '') {
+        $candidates[] = trim($alert);
+    }
+
+    foreach ($candidates as $mail) {
+        $mail = trim($mail);
+        if ($mail !== '' && filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            return $mail;
+        }
+    }
+    return '';
+}
+
+function normalize_excludes($raw): string
+{
+    if (is_array($raw)) {
+        $parts = [];
+        foreach ($raw as $v) {
+            if (!is_string($v)) {
+                continue;
+            }
+            $v = trim($v);
+            if ($v !== '') {
+                $parts[] = $v;
+            }
+        }
+        return implode(',', $parts);
+    }
+
+    if (!is_string($raw)) {
+        return '';
+    }
+    $parts = preg_split('/[\r\n,]+/', $raw) ?: [];
+    $out = [];
+    foreach ($parts as $p) {
+        $p = trim($p);
+        if ($p !== '') {
+            $out[] = $p;
+        }
+    }
+    return implode(',', $out);
+}
+
+function sh_quote(string $v): string
+{
+    return "'" . str_replace("'", "'\"'\"'", $v) . "'";
+}
+
+function write_file_atomic(string $path, string $body, int $mode = 0640): void
+{
+    $dir = dirname($path);
+    if (!is_dir($dir) && !@mkdir($dir, 0775, true) && !is_dir($dir)) {
+        throw new RuntimeException("Failed to create directory: {$dir}");
+    }
+    $tmp = $path . '.tmp';
+    if (@file_put_contents($tmp, $body, LOCK_EX) === false) {
+        throw new RuntimeException("Failed to write: {$tmp}");
+    }
+    @chmod($tmp, $mode);
+    if (!@rename($tmp, $path)) {
+        @unlink($tmp);
+        throw new RuntimeException("Failed to move into place: {$path}");
+    }
 }
 
 $defaultOut = $root . '/state/generated/dashboard-scripts.env';
@@ -99,16 +124,18 @@ $email = first_email();
 
 $owner = '';
 if (is_dir($stateDir)) {
-  $u = @fileowner($stateDir);
-  $g = @filegroup($stateDir);
-  $userName = is_int($u) && function_exists('posix_getpwuid') ? (@posix_getpwuid($u)['name'] ?? '') : '';
-  $groupName = is_int($g) && function_exists('posix_getgrgid') ? (@posix_getgrgid($g)['name'] ?? '') : '';
-  if ($userName !== '' && $groupName !== '') $owner = $userName . ':' . $groupName;
+    $u = @fileowner($stateDir);
+    $g = @filegroup($stateDir);
+    $userName = is_int($u) && function_exists('posix_getpwuid') ? (@posix_getpwuid($u)['name'] ?? '') : '';
+    $groupName = is_int($g) && function_exists('posix_getgrgid') ? (@posix_getgrgid($g)['name'] ?? '') : '';
+    if ($userName !== '' && $groupName !== '') {
+        $owner = $userName . ':' . $groupName;
+    }
 }
 
 $microSource = (string)cfgv('backups.micro_source_dir', '');
 if ($microSource === '') {
-  $microSource = dirname(dirname($webRoot));
+    $microSource = dirname(dirname($webRoot));
 }
 
 $lines = [
@@ -124,58 +151,58 @@ $lines = [
   'MICRO_WEB_SOURCE=' . sh_quote($microSource),
 ];
 if ($owner !== '') {
-  $lines[] = 'STATE_OWNER=' . sh_quote($owner);
-  $lines[] = 'BACKUP_CHOWN=' . sh_quote($owner);
+    $lines[] = 'STATE_OWNER=' . sh_quote($owner);
+    $lines[] = 'BACKUP_CHOWN=' . sh_quote($owner);
 }
 if ($email !== '') {
-  $lines[] = 'REPORT_EMAIL_TO=' . sh_quote($email);
-  $lines[] = 'AUDIT_EMAIL=' . sh_quote($email);
-  $lines[] = 'BACKUP_ALERT_EMAIL=' . sh_quote($email);
+    $lines[] = 'REPORT_EMAIL_TO=' . sh_quote($email);
+    $lines[] = 'AUDIT_EMAIL=' . sh_quote($email);
+    $lines[] = 'BACKUP_ALERT_EMAIL=' . sh_quote($email);
 }
 
 $body = implode(PHP_EOL, $lines) . PHP_EOL;
 
 if ($printOnly) {
-  echo $body;
-  exit(0);
+    echo $body;
+    exit(0);
 }
 
 try {
-  write_file_atomic($out, $body, 0640);
+    write_file_atomic($out, $body, 0640);
 } catch (Throwable $e) {
-  fwrite(STDERR, $e->getMessage() . "\n");
-  exit(1);
+    fwrite(STDERR, $e->getMessage() . "\n");
+    exit(1);
 }
 
 echo "Wrote {$out}\n";
 
 if ($installSystem) {
-  $helperSrc = $root . '/scripts/lib/dashboard_env.sh';
-  $helperDst = rtrim((string)$systemDir, '/') . '/dashboard_env.sh';
-  $envDst = rtrim((string)$systemDir, '/') . '/scripts.env';
+    $helperSrc = $root . '/scripts/lib/dashboard_env.sh';
+    $helperDst = rtrim((string)$systemDir, '/') . '/dashboard_env.sh';
+    $envDst = rtrim((string)$systemDir, '/') . '/scripts.env';
 
-  if (!is_file($helperSrc)) {
-    fwrite(STDERR, "Missing helper source: {$helperSrc}\n");
-    exit(1);
-  }
-
-  try {
-    $helperBody = (string)@file_get_contents($helperSrc);
-    if ($helperBody === '') {
-      throw new RuntimeException("Failed to read helper source: {$helperSrc}");
+    if (!is_file($helperSrc)) {
+        fwrite(STDERR, "Missing helper source: {$helperSrc}\n");
+        exit(1);
     }
-    write_file_atomic($helperDst, $helperBody, 0644);
-    write_file_atomic($envDst, $body, 0640);
-  } catch (Throwable $e) {
-    fwrite(STDERR, $e->getMessage() . "\n");
-    fwrite(STDERR, "Tip: rerun with sudo or choose --system-dir under a writable path.\n");
-    exit(1);
-  }
 
-  echo "Installed system helper: {$helperDst}\n";
-  echo "Installed system env: {$envDst}\n";
-  echo "Cron/systemd can now source {$helperDst} automatically.\n";
-  exit(0);
+    try {
+        $helperBody = (string)@file_get_contents($helperSrc);
+        if ($helperBody === '') {
+            throw new RuntimeException("Failed to read helper source: {$helperSrc}");
+        }
+        write_file_atomic($helperDst, $helperBody, 0644);
+        write_file_atomic($envDst, $body, 0640);
+    } catch (Throwable $e) {
+        fwrite(STDERR, $e->getMessage() . "\n");
+        fwrite(STDERR, "Tip: rerun with sudo or choose --system-dir under a writable path.\n");
+        exit(1);
+    }
+
+    echo "Installed system helper: {$helperDst}\n";
+    echo "Installed system env: {$envDst}\n";
+    echo "Cron/systemd can now source {$helperDst} automatically.\n";
+    exit(0);
 }
 
 echo "Next: set DASHBOARD_SCRIPTS_ENV={$out} in cron/systemd or copy to {$systemDir}/scripts.env\n";

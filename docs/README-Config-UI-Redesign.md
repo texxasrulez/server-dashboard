@@ -1,6 +1,6 @@
 # Web Admin Dashboard — Baseline 2025-09-01
 
-This README documents the **current, working baseline** of the admin dashboard (as provided in *Current Working.zip*).  
+This README documents the **current, working baseline** of the admin dashboard (as provided in _Current Working.zip_).  
 Use this as your known-good reference for future drop-ins and upgrades.
 
 ---
@@ -21,7 +21,7 @@ Use this as your known-good reference for future drop-ins and upgrades.
 ## Directory layout (relevant)
 
 ```
-web-admin/
+server-dashboard/
 ├─ assets/
 │  └─ js/
 │     ├─ header/
@@ -46,6 +46,7 @@ web-admin/
 ## Key behaviors & assumptions
 
 ### Config data model
+
 - Settings persist to `data/local.json` keyed by top-level sections (`site`, `security`, `email`, `alerts`, etc.).
 - **Email accounts** persist under `email.accounts` as a **JSON stringified array** of objects, e.g.
   ```json
@@ -54,17 +55,20 @@ web-admin/
   This format is consumed by `api/email_status.php` and the header notifier.
 
 ### Email notifier
-- Header badge is mounted by `assets/js/header/email-indicator.loader.js`.  
+
+- Header badge is mounted by `assets/js/header/email-indicator.loader.js`.
 - Unread counts are fetched from `api/email_status.php` which reads `email.accounts` and stored OAuth tokens/IMAP creds.
 - For Google accounts, OAuth tokens must exist under `data/oauth/` in the format used by your existing backend.
 
 ### Cron / History
+
 - Health UI is derived from the data in `local.json` and the `cron_mark.php` endpoints:
   - Alerts mark: `api/cron_mark.php?what=alerts&token=…`
   - History mark: `api/cron_mark.php?what=history&token=…`
 - Run those via crontab. The UI interprets the last mark and expected interval to show OK/FAIL.
 
 ### Mail testing
+
 - The **Send Test** control hits `api/mail_test.php` first, then falls back to `api/alerts_test.php`.
 - Transports supported by your backend: `phpmail`, `smtp`, `sendmail` (requires `popen()` enabled).
 
@@ -72,7 +76,7 @@ web-admin/
 
 ## Install / Deploy
 
-1. Copy the contents of the baseline zip into your `web-admin/` root, keeping paths intact.
+1. Copy the contents of the baseline zip into your `server-dashboard/` root, keeping paths intact.
 2. Clear cache / hard refresh the browser after replacing assets.
 3. Open **Config → Email**, verify accounts are present and enabled, then **Save** once to ensure `email.accounts` is written canonically.
 

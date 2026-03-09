@@ -1,94 +1,314 @@
 {
-    "app": {
-        "title": "\uc11c\ubc84 \ub300\uc2dc\ubcf4\ub4dc"
+  "app": {
+    "title": "서버 대시보드"
+  },
+  "nav": {
+    "history": "역사",
+    "logs": "로그",
+    "dashboard": "대시보드",
+    "services": "서비스",
+    "alerts": "알림",
+    "tests": "테스트",
+    "settings": "설정",
+    "about": "정보"
+  },
+  "history": {
+    "title": "역사",
+    "trends": "트렌드",
+    "range": "범위",
+    "baseline": "기준선",
+    "probe_now": "지금 프로브",
+    "refresh": "새로 고침",
+    "export_json": "JSON 내보내기",
+    "export_alerts_json": "알림 JSON 내보내기",
+    "reset_history": "기록 초기화",
+    "recent_alert_events": "최근 알림 이벤트",
+    "export_preview": "내보내기 미리 보기",
+    "close": "닫기",
+    "copy": "복사",
+    "download": "다운로드"
+  },
+  "logs": {
+    "title": "로그",
+    "manage": "로그 관리",
+    "add": "추가",
+    "delete": "삭제",
+    "refresh": "새로 고침",
+    "search": "검색",
+    "filter": "필터",
+    "lines": "라인",
+    "open": "열기",
+    "close": "닫기",
+    "download": "다운로드",
+    "copy": "복사"
+  },
+  "common": {
+    "save": "저장",
+    "cancel": "취소",
+    "edit": "편집",
+    "delete": "삭제",
+    "update": "업데이트",
+    "create": "만들기",
+    "enable": "사용",
+    "disable": "비활성화",
+    "yes": "예",
+    "no": "아니요",
+    "on": "켜짐",
+    "off": "꺼짐",
+    "confirm": "확인",
+    "search": "검색",
+    "filter": "필터",
+    "actions": "작업"
+  },
+  "alerts": {
+    "title": "알림",
+    "recent_events": "최근 알림 이벤트",
+    "history": "알림 기록",
+    "export_json": "알림 JSON 내보내기",
+    "no_alerts": "알림 없음",
+    "level": "레벨",
+    "message": "메시지",
+    "service": "서비스",
+    "time": "시간",
+    "probe_now": "지금 프로브",
+    "refresh": "새로 고침",
+    "silence": "침묵",
+    "unsilence": "침묵",
+    "ack": "인정",
+    "unack": "승인 취소"
+  },
+  "tests": {
+    "title": "서버 테스트",
+    "run_all": "모두 실행",
+    "status": "상태",
+    "last_run": "마지막 실행",
+    "duration": "기간"
+  },
+  "services": {
+    "title": "서비스",
+    "status": "상태",
+    "restart": "다시 시작",
+    "start": "시작",
+    "stop": "중지"
+  },
+  "config": {
+    "sections": {
+      "site": "Site",
+      "features": "Features",
+      "capabilities": "Capabilities",
+      "processes": "Processes",
+      "mail": "Mail",
+      "integrations": "Integrations",
+      "security": "Security",
+      "ui": "UI",
+      "server_tests": "Server Tests",
+      "alerts": "Alerts",
+      "cron": "Cron",
+      "history": "History",
+      "logs": "Logs",
+      "backups": "백업",
+      "email": "Email"
     },
-    "nav": {
-        "history": "\uc5ed\uc0ac",
-        "logs": "\ub85c\uadf8",
-        "dashboard": "\ub300\uc2dc\ubcf4\ub4dc",
-        "services": "\uc11c\ube44\uc2a4",
-        "alerts": "\uc54c\ub9bc",
-        "tests": "\ud14c\uc2a4\ud2b8",
-        "settings": "\uc124\uc815",
-        "about": "\uc815\ubcf4"
+    "fields": {
+      "backups": {
+        "require_dedicated_mount": {
+          "label": "전용 마운트 필요",
+          "help": "레거시 호환성 키. 활성화되면 백업 스크립트를 사용하려면 백업 마운트가 있어야 합니다."
+        },
+        "disable_on_mount_fail": {
+          "label": "마운트 실패 시 백업 비활성화",
+          "help": "활성화되면 백업 마운트가 누락되면 백업 작업 및 생성된 스크립트가 중지됩니다."
+        }
+      },
+      "alerts": {
+        "min_severity": {
+          "label": "경고할 최소 심각도"
+        },
+        "email": {
+          "label": "Legacy alert email(s)"
+        }
+      }
     },
-    "history": {
-        "title": "\uc5ed\uc0ac",
-        "trends": "\ud2b8\ub80c\ub4dc",
-        "range": "\ubc94\uc704",
-        "baseline": "\uae30\uc900\uc120",
-        "probe_now": "\uc9c0\uae08 \ud504\ub85c\ube0c",
-        "refresh": "\uc0c8\ub85c \uace0\uce68",
-        "export_json": "JSON \ub0b4\ubcf4\ub0b4\uae30",
-        "export_alerts_json": "\uc54c\ub9bc JSON \ub0b4\ubcf4\ub0b4\uae30",
-        "reset_history": "\uae30\ub85d \ucd08\uae30\ud654",
-        "recent_alert_events": "\ucd5c\uadfc \uc54c\ub9bc \uc774\ubca4\ud2b8",
-        "export_preview": "\ub0b4\ubcf4\ub0b4\uae30 \ubbf8\ub9ac \ubcf4\uae30",
-        "close": "\ub2eb\uae30",
-        "copy": "\ubcf5\uc0ac",
-        "download": "\ub2e4\uc6b4\ub85c\ub4dc"
-    },
-    "logs": {
-        "title": "\ub85c\uadf8",
-        "manage": "\ub85c\uadf8 \uad00\ub9ac",
-        "add": "\ucd94\uac00",
-        "delete": "\uc0ad\uc81c",
-        "refresh": "\uc0c8\ub85c \uace0\uce68",
-        "search": "\uac80\uc0c9",
-        "filter": "\ud544\ud130",
-        "lines": "\ub77c\uc778",
-        "open": "\uc5f4\uae30",
-        "close": "\ub2eb\uae30",
-        "download": "\ub2e4\uc6b4\ub85c\ub4dc",
-        "copy": "\ubcf5\uc0ac"
-    },
-    "common": {
-        "save": "\uc800\uc7a5",
-        "cancel": "\ucde8\uc18c",
-        "edit": "\ud3b8\uc9d1",
-        "delete": "\uc0ad\uc81c",
-        "update": "\uc5c5\ub370\uc774\ud2b8",
-        "create": "\ub9cc\ub4e4\uae30",
-        "enable": "\uc0ac\uc6a9",
-        "disable": "\ube44\ud65c\uc131\ud654",
-        "yes": "\uc608",
-        "no": "\uc544\ub2c8\uc694",
-        "on": "\ucf1c\uc9d0",
-        "off": "\uaebc\uc9d0",
-        "confirm": "\ud655\uc778",
-        "search": "\uac80\uc0c9",
-        "filter": "\ud544\ud130",
-        "actions": "\uc791\uc5c5"
-    },
-    "alerts": {
-        "title": "\uc54c\ub9bc",
-        "recent_events": "\ucd5c\uadfc \uc54c\ub9bc \uc774\ubca4\ud2b8",
-        "history": "\uc54c\ub9bc \uae30\ub85d",
-        "export_json": "\uc54c\ub9bc JSON \ub0b4\ubcf4\ub0b4\uae30",
-        "no_alerts": "\uc54c\ub9bc \uc5c6\uc74c",
-        "level": "\ub808\ubca8",
-        "message": "\uba54\uc2dc\uc9c0",
-        "service": "\uc11c\ube44\uc2a4",
-        "time": "\uc2dc\uac04",
-        "probe_now": "\uc9c0\uae08 \ud504\ub85c\ube0c",
-        "refresh": "\uc0c8\ub85c \uace0\uce68",
-        "silence": "\uce68\ubb35",
-        "unsilence": "\uce68\ubb35",
-        "ack": "\uc778\uc815",
-        "unack": "\uc2b9\uc778 \ucde8\uc18c"
-    },
-    "tests": {
-        "title": "\uc11c\ubc84 \ud14c\uc2a4\ud2b8",
-        "run_all": "\ubaa8\ub450 \uc2e4\ud589",
-        "status": "\uc0c1\ud0dc",
-        "last_run": "\ub9c8\uc9c0\ub9c9 \uc2e4\ud589",
-        "duration": "\uae30\uac04"
-    },
-    "services": {
-        "title": "\uc11c\ube44\uc2a4",
-        "status": "\uc0c1\ud0dc",
-        "restart": "\ub2e4\uc2dc \uc2dc\uc791",
-        "start": "\uc2dc\uc791",
-        "stop": "\uc911\uc9c0"
+    "ui": {
+      "unknown": "알려지지 않은",
+      "unknown_paren": "(알려지지 않은)",
+      "site_backup": {
+        "title": "백업 및 복원",
+        "export_config": "구성 내보내기",
+        "import_config": "구성 가져오기",
+        "choose_file_first": "먼저 백업 파일을 선택하세요",
+        "imported_reloading": "수입. 새로고침 중...",
+        "import_failed": "가져오기 실패",
+        "import_failed_prefix": "가져오기 실패:",
+        "retention_title": "백업 - 보존",
+        "keep_last": "마지막에 보관",
+        "files": "파일",
+        "loading_stats": "(통계 로드 중...)",
+        "last_backup_loading": "마지막 백업: (로드 중...)",
+        "last_backup_none": "마지막 백업: 아직 없음",
+        "last_backup_prefix": "마지막 백업:",
+        "last_backup_unknown": "마지막 백업: 알 수 없음",
+        "prune_now": "지금 가지치기",
+        "pruned_kept_deleted": "가지치기 - 보관",
+        "deleted_prefix": "삭제됨",
+        "prune_failed": "정리 실패",
+        "prune_failed_prefix": "정리 실패:",
+        "create_backup_now": "지금 백업 만들기",
+        "backup_saved_prefix": "백업 저장됨:",
+        "backup_failed": "백업 실패",
+        "backup_failed_prefix": "백업 실패:",
+        "download_latest_backup": "최신 백업 다운로드",
+        "no_backups_found": "백업을 찾을 수 없습니다.",
+        "download_failed_prefix": "다운로드 실패:",
+        "redact_secrets": "Redact secrets"
+      }
     }
+  },
+  "backups": {
+    "common": {
+      "status": "상태:",
+      "timestamp": "타임스탬프:",
+      "none_dash": "-",
+      "free": "무료",
+      "used": "사용된",
+      "copy": "복사",
+      "warnings": "경고",
+      "errors": "오류",
+      "loading": "로드 중..."
+    },
+    "status": {
+      "error_loading_json": "JSON을 로드하는 중 오류가 발생했습니다.",
+      "ok": "좋아요",
+      "unmounted": "말 타지 않은",
+      "critical": "비판적인",
+      "high": "높은",
+      "elevated": "높은",
+      "healthy": "건강한",
+      "unknown": "알려지지 않은",
+      "unknown_cap": "알려지지 않은"
+    },
+    "disk": {
+      "unmounted": "디스크가 마운트 해제됨",
+      "tag": "디스크:",
+      "sizes_updated": "업데이트된 크기:",
+      "title": "디스크 활용도",
+      "usage": "용법",
+      "mount": "산"
+    },
+    "page": {
+      "freshness_prefix": "선도:",
+      "title": "백업 제어 센터",
+      "subtitle_prefix": "실시간 상태",
+      "subtitle_suffix": "백업 디스크에."
+    },
+    "ages": {
+      "no_snapshots_on_disk": "디스크에서 스냅샷을 찾을 수 없습니다.",
+      "one_snapshot_present": "스냅샷 1개 있음",
+      "snapshots_present_suffix": "스냅샷 존재",
+      "no_panel_backups_on_disk": "디스크에서 패널 백업을 찾을 수 없습니다.",
+      "one_panel_backup_present": "1개의 패널 백업 있음",
+      "panel_backups_present_suffix": "패널 백업 존재",
+      "no_micro_backups_on_disk": "디스크에서 마이크로 백업을 찾을 수 없습니다.",
+      "one_micro_backup_present": "마이크로 백업 현재 1개",
+      "micro_backups_present_suffix": "마이크로 백업 존재",
+      "snapshot_daily0_chart": "스냅샷(일일.0)",
+      "hestia_latest_chart": "헤스티아 최신",
+      "micro_latest_chart": "마이크로 최신",
+      "age_days": "연령(일)",
+      "title": "백업 기간",
+      "subtitle": "최신 백업이 얼마나 최신 상태인지",
+      "snapshot_daily0": "매일 스냅샷.0",
+      "latest_hestia": "최신 헤스티아",
+      "latest_micro": "최신 마이크로"
+    },
+    "errors": {
+      "no_backups_detected": "스냅샷, Hestia 또는 마이크로 세트에 대한 백업이 감지되지 않았습니다."
+    },
+    "restore": {
+      "hestia_placeholder_tar": "유전자.YYYYMMDD-HHMM.tar",
+      "using_latest_backup_prefix": "JSON으로 보고된 최신 백업 사용:",
+      "adjust_backup_tar": "실행하기 전에 BACKUP_TAR을 \\\"v-list-backups USER\\\"의 실제 파일로 조정하세요.",
+      "micro_restore_prefix": "최신 마이크로 스냅샷에서 기본 복원:",
+      "micro_restore_suffix": "(실행하기 전에 경로 및 제외를 검토하세요).",
+      "set_correct_snapshot_path": "이 명령을 사용하기 전에 올바른 스냅샷 경로를 설정하십시오.",
+      "confirm_body_1": "그러면 backupctl을 사용하여 서버에서 Hestia 복원 작업이 시작됩니다.",
+      "confirm_body_2": "해당 사용자의 서비스와 데이터를 덮어쓸 수 있습니다.",
+      "confirm_body_3": "정말 확신하시나요?"
+    },
+    "actions": {
+      "starting_prefix": "시작",
+      "failed_to_start_prefix": "시작하지 못했습니다.",
+      "started_prefix": "시작됨",
+      "started_suffix": ". 시간이 좀 걸릴 수 있습니다. 상태는 다음 상태 확인 시 업데이트됩니다.",
+      "error_talking_endpoint": "backups_action.php와 통신 중 오류가 발생했습니다.",
+      "run_os_snapshot": "OS 스냅샷 실행",
+      "run_micro_backup": "마이크로 백업 실행",
+      "run_hestia_backup_user": "헤스티아 백업(user) 실행",
+      "run_all_backups": "모든 백업 실행",
+      "run_health_check": "상태 확인 실행",
+      "log_maintenance": "로그 유지 관리",
+      "clear_backup_logs": "백업 상태 로그 지우기",
+      "clear_prune_logs": "정리 로그 지우기",
+      "clear_integrity_log": "무결성 로그 지우기"
+    },
+    "cron": {
+      "no_entries": "crontab 항목이 감지되지 않았습니다.",
+      "env": "환경",
+      "schedule": "일정",
+      "entries_for_prefix": "다음에 대한 Crontab 항목",
+      "current_user": "현재 사용자",
+      "unable_to_read": "크론탭을 읽을 수 없습니다.",
+      "failed_to_read": "crontab을 읽지 못했습니다."
+    },
+    "warnings_errors": {
+      "title": "경고 및 오류",
+      "subtitle": "상태 점검 요약"
+    },
+    "raw_snapshot": {
+      "title": "원시 스냅샷",
+      "subtitle": "마지막 JSON 상태에서 직접 가져온 키 값"
+    },
+    "recent_actions": {
+      "title": "최근 활동",
+      "subtitle": "이 대시보드의 작업 기록",
+      "none": "아직 기록된 작업이 없습니다."
+    },
+    "orch": {
+      "title": "백업 조정 마법사",
+      "subtitle": "경로를 한 번 사용자 정의한 다음 생성된 스크립트/cron/systemd 단위를 복사합니다.",
+      "backup_root": "백업 루트",
+      "include_health": "상태 확인 포함",
+      "include_integrity": "무결성 검사 포함",
+      "include_prune": "가지치기 단계 포함",
+      "suspend": "백업 일시 중지",
+      "disable_on_mount_fail": "마운트 실패 시 백업 비활성화",
+      "nightly_script": "야간 스크립트",
+      "copy_script": "스크립트 복사",
+      "cron_entry": "크론 항목",
+      "copy_cron_line": "크론 라인 복사",
+      "systemd_service": "체계화된 서비스",
+      "copy_unit": "복사 장치",
+      "systemd_timer": "시스템 타이머",
+      "copy_timer": "복사 타이머"
+    },
+    "quick_restore": {
+      "title": "빠른 복원 도우미",
+      "subtitle": "긴급 상황에 대한 사전 입력된 CLI 명령(수동 실행 또는 DANGER 버튼)",
+      "hestia_latest_title": "최신 Hestia 사용자 백업 복원",
+      "micro_latest_title": "최신 마이크로 스냅샷에서 복원(CLI에만 해당)",
+      "copy_command": "복사 명령",
+      "run_restore_danger": "복원 실행(최신, 위험)"
+    },
+    "cli": {
+      "title": "헤스티아 백업 및 복원 CLI",
+      "subtitle": "빠른 참조 시트 - 복사 및 붙여넣기 준비됨",
+      "create_backups": "백업 생성",
+      "list_delete_backups": "백업 나열 및 삭제",
+      "full_restore_user": "전체 복원(사용자)",
+      "selective_restore": "선택적 복원(웹/DB/메일)",
+      "backup_file_locations": "백업 파일 위치",
+      "backup_tarball_contents": "백업 타르볼 콘텐츠",
+      "backupctl_help": "backupctl 도움말"
+    }
+  }
 }

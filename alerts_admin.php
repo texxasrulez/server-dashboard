@@ -15,7 +15,8 @@ $alertsUi = [
 
 $PAGE_TITLE = 'Alerts';
 $PAGE_CSS   = 'assets/css/pages/alerts_admin.css';
-$REQUIRE_ADMIN = true; include __DIR__.'/includes/head.php'; ?>
+$REQUIRE_ADMIN = true;
+include __DIR__.'/includes/head.php'; ?>
 
 <div class="card">
  <div class="card">

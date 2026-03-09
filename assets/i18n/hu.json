@@ -1,94 +1,314 @@
 {
-    "app": {
-        "title": "Kiszolg\u00e1l\u00f3 m\u0171szerfal"
+  "app": {
+    "title": "Kiszolgáló műszerfal"
+  },
+  "nav": {
+    "history": "Történelem",
+    "logs": "Naplók",
+    "dashboard": "Műszerfal",
+    "services": "Szolgáltatások",
+    "alerts": "Riasztások",
+    "tests": "Vizsgálatok",
+    "settings": "Beállítások",
+    "about": "A  oldalról"
+  },
+  "history": {
+    "title": "Történelem",
+    "trends": "Trendek",
+    "range": "Tartomány",
+    "baseline": "Alapvonal",
+    "probe_now": "Szonda most",
+    "refresh": "Frissítés",
+    "export_json": "JSON exportálása",
+    "export_alerts_json": "Riasztások exportálása JSON",
+    "reset_history": "Előzmények visszaállítása",
+    "recent_alert_events": "Legutóbbi riasztási események",
+    "export_preview": "Export előnézet",
+    "close": "Zárja be a",
+    "copy": "Másolás",
+    "download": "Letöltés"
+  },
+  "logs": {
+    "title": "Naplók",
+    "manage": "Naplók kezelése",
+    "add": "Add",
+    "delete": "Törölje a  címet.",
+    "refresh": "Frissítés",
+    "search": "Keresés",
+    "filter": "Szűrő",
+    "lines": "Vonalak",
+    "open": "Nyissa meg a  címet.",
+    "close": "Zárja be a",
+    "download": "Letöltés",
+    "copy": "Másolás"
+  },
+  "common": {
+    "save": "Mentés",
+    "cancel": "Törölje",
+    "edit": "Szerkesztés",
+    "delete": "Törölje a  címet.",
+    "update": "Frissítés",
+    "create": "Hozzon létre",
+    "enable": "Engedélyezze a",
+    "disable": "A  letiltása",
+    "yes": "Igen",
+    "no": "Nem",
+    "on": "A  oldalon.",
+    "off": "Off",
+    "confirm": "Megerősítés",
+    "search": "Keresés",
+    "filter": "Szűrő",
+    "actions": "Tevékenységek"
+  },
+  "alerts": {
+    "title": "Riasztások",
+    "recent_events": "Legutóbbi riasztási események",
+    "history": "Riasztási előzmények",
+    "export_json": "Riasztások exportálása JSON",
+    "no_alerts": "Nincsenek riasztások",
+    "level": "Szint",
+    "message": "Üzenet",
+    "service": "Szolgáltatás",
+    "time": "Idő",
+    "probe_now": "Szonda most",
+    "refresh": "Frissítés",
+    "silence": "Csend",
+    "unsilence": "Elhallgathatatlan",
+    "ack": "Visszaigazolás",
+    "unack": "Vissza nem ismerés"
+  },
+  "tests": {
+    "title": "Szerver tesztek",
+    "run_all": "Futtassa az összes",
+    "status": "Állapot",
+    "last_run": "Utolsó futás",
+    "duration": "Időtartam"
+  },
+  "services": {
+    "title": "Szolgáltatások",
+    "status": "Állapot",
+    "restart": "Újraindítás",
+    "start": "Indítsa el a  oldalt.",
+    "stop": "Stop"
+  },
+  "config": {
+    "sections": {
+      "site": "Site",
+      "features": "Features",
+      "capabilities": "Capabilities",
+      "processes": "Processes",
+      "mail": "Mail",
+      "integrations": "Integrations",
+      "security": "Security",
+      "ui": "UI",
+      "server_tests": "Server Tests",
+      "alerts": "Alerts",
+      "cron": "Cron",
+      "history": "History",
+      "logs": "Logs",
+      "backups": "Biztonsági mentések",
+      "email": "Email"
     },
-    "nav": {
-        "history": "T\u00f6rt\u00e9nelem",
-        "logs": "Napl\u00f3k",
-        "dashboard": "M\u0171szerfal",
-        "services": "Szolg\u00e1ltat\u00e1sok",
-        "alerts": "Riaszt\u00e1sok",
-        "tests": "Vizsg\u00e1latok",
-        "settings": "Be\u00e1ll\u00edt\u00e1sok",
-        "about": "A  oldalr\u00f3l"
+    "fields": {
+      "backups": {
+        "require_dedicated_mount": {
+          "label": "Dedikált rögzítést igényel",
+          "help": "Korábbi kompatibilitási kulcs. Ha engedélyezve van, a biztonsági mentési szkriptekhez szükség van a biztonsági mentési rögzítésre."
+        },
+        "disable_on_mount_fail": {
+          "label": "Ha a csatlakoztatás sikertelen, tiltsa le a biztonsági mentéseket",
+          "help": "Ha engedélyezve van, a biztonsági mentési műveletek és a generált szkriptek leállnak, ha hiányzik a biztonsági mentés."
+        }
+      },
+      "alerts": {
+        "min_severity": {
+          "label": "A riasztás minimális súlyossága"
+        },
+        "email": {
+          "label": "Legacy alert email(s)"
+        }
+      }
     },
-    "history": {
-        "title": "T\u00f6rt\u00e9nelem",
-        "trends": "Trendek",
-        "range": "Tartom\u00e1ny",
-        "baseline": "Alapvonal",
-        "probe_now": "Szonda most",
-        "refresh": "Friss\u00edt\u00e9s",
-        "export_json": "JSON export\u00e1l\u00e1sa",
-        "export_alerts_json": "Riaszt\u00e1sok export\u00e1l\u00e1sa JSON",
-        "reset_history": "El\u0151zm\u00e9nyek vissza\u00e1ll\u00edt\u00e1sa",
-        "recent_alert_events": "Legut\u00f3bbi riaszt\u00e1si esem\u00e9nyek",
-        "export_preview": "Export el\u0151n\u00e9zet",
-        "close": "Z\u00e1rja be a",
-        "copy": "M\u00e1sol\u00e1s",
-        "download": "Let\u00f6lt\u00e9s"
-    },
-    "logs": {
-        "title": "Napl\u00f3k",
-        "manage": "Napl\u00f3k kezel\u00e9se",
-        "add": "Add",
-        "delete": "T\u00f6r\u00f6lje a  c\u00edmet.",
-        "refresh": "Friss\u00edt\u00e9s",
-        "search": "Keres\u00e9s",
-        "filter": "Sz\u0171r\u0151",
-        "lines": "Vonalak",
-        "open": "Nyissa meg a  c\u00edmet.",
-        "close": "Z\u00e1rja be a",
-        "download": "Let\u00f6lt\u00e9s",
-        "copy": "M\u00e1sol\u00e1s"
-    },
-    "common": {
-        "save": "Ment\u00e9s",
-        "cancel": "T\u00f6r\u00f6lje",
-        "edit": "Szerkeszt\u00e9s",
-        "delete": "T\u00f6r\u00f6lje a  c\u00edmet.",
-        "update": "Friss\u00edt\u00e9s",
-        "create": "Hozzon l\u00e9tre",
-        "enable": "Enged\u00e9lyezze a",
-        "disable": "A  letilt\u00e1sa",
-        "yes": "Igen",
-        "no": "Nem",
-        "on": "A  oldalon.",
-        "off": "Off",
-        "confirm": "Meger\u0151s\u00edt\u00e9s",
-        "search": "Keres\u00e9s",
-        "filter": "Sz\u0171r\u0151",
-        "actions": "Tev\u00e9kenys\u00e9gek"
-    },
-    "alerts": {
-        "title": "Riaszt\u00e1sok",
-        "recent_events": "Legut\u00f3bbi riaszt\u00e1si esem\u00e9nyek",
-        "history": "Riaszt\u00e1si el\u0151zm\u00e9nyek",
-        "export_json": "Riaszt\u00e1sok export\u00e1l\u00e1sa JSON",
-        "no_alerts": "Nincsenek riaszt\u00e1sok",
-        "level": "Szint",
-        "message": "\u00dczenet",
-        "service": "Szolg\u00e1ltat\u00e1s",
-        "time": "Id\u0151",
-        "probe_now": "Szonda most",
-        "refresh": "Friss\u00edt\u00e9s",
-        "silence": "Csend",
-        "unsilence": "Elhallgathatatlan",
-        "ack": "Visszaigazol\u00e1s",
-        "unack": "Vissza nem ismer\u00e9s"
-    },
-    "tests": {
-        "title": "Szerver tesztek",
-        "run_all": "Futtassa az \u00f6sszes",
-        "status": "\u00c1llapot",
-        "last_run": "Utols\u00f3 fut\u00e1s",
-        "duration": "Id\u0151tartam"
-    },
-    "services": {
-        "title": "Szolg\u00e1ltat\u00e1sok",
-        "status": "\u00c1llapot",
-        "restart": "\u00dajraind\u00edt\u00e1s",
-        "start": "Ind\u00edtsa el a  oldalt.",
-        "stop": "Stop"
+    "ui": {
+      "unknown": "ismeretlen",
+      "unknown_paren": "(ismeretlen)",
+      "site_backup": {
+        "title": "Biztonsági mentés és visszaállítás",
+        "export_config": "Konfiguráció exportálása",
+        "import_config": "Konfiguráció importálása",
+        "choose_file_first": "Először válasszon biztonsági másolatot",
+        "imported_reloading": "Importált. Újratöltés...",
+        "import_failed": "Az importálás sikertelen",
+        "import_failed_prefix": "Sikertelen importálás:",
+        "retention_title": "Biztonsági másolatok – megőrzés",
+        "keep_last": "Maradjon az utolsó",
+        "files": "fájlokat",
+        "loading_stats": "(statisztika betöltése...)",
+        "last_backup_loading": "Utolsó biztonsági mentés: (betöltés...)",
+        "last_backup_none": "Utolsó biztonsági mentés: még nincs",
+        "last_backup_prefix": "Utolsó biztonsági mentés:",
+        "last_backup_unknown": "Utolsó biztonsági mentés: ismeretlen",
+        "prune_now": "Metsd meg most",
+        "pruned_kept_deleted": "Metszett – tartott",
+        "deleted_prefix": "törölve",
+        "prune_failed": "Aszalt szilva nem sikerült",
+        "prune_failed_prefix": "Sikertelen szilva:",
+        "create_backup_now": "Készítsen biztonsági másolatot most",
+        "backup_saved_prefix": "Biztonsági másolat mentve:",
+        "backup_failed": "A biztonsági mentés nem sikerült",
+        "backup_failed_prefix": "A biztonsági mentés nem sikerült:",
+        "download_latest_backup": "Töltse le a legújabb biztonsági másolatot",
+        "no_backups_found": "Nem található biztonsági másolat",
+        "download_failed_prefix": "Sikertelen letöltés:",
+        "redact_secrets": "Redact secrets"
+      }
     }
+  },
+  "backups": {
+    "common": {
+      "status": "Állapot:",
+      "timestamp": "Időbélyeg:",
+      "none_dash": "-",
+      "free": "Ingyenes",
+      "used": "Használt",
+      "copy": "Másolat",
+      "warnings": "Figyelmeztetések",
+      "errors": "Hibák",
+      "loading": "Terhelés..."
+    },
+    "status": {
+      "error_loading_json": "HIBA JSON BETÖLTÉSÉVEL",
+      "ok": "RENDBEN",
+      "unmounted": "SZERELETLEN",
+      "critical": "KRITIKAI",
+      "high": "MAGAS",
+      "elevated": "EMELTETT",
+      "healthy": "EGÉSZSÉGES",
+      "unknown": "ISMERETLEN",
+      "unknown_cap": "Ismeretlen"
+    },
+    "disk": {
+      "unmounted": "Lemez BEcsatolva",
+      "tag": "Korong:",
+      "sizes_updated": "Méretek frissítve:",
+      "title": "Lemezhasználat",
+      "usage": "Használat",
+      "mount": "Hegy"
+    },
+    "page": {
+      "freshness_prefix": "Frissesség:",
+      "title": "Backup Control Center",
+      "subtitle_prefix": "Élő állapot vezérli",
+      "subtitle_suffix": "a biztonsági mentési lemezén."
+    },
+    "ages": {
+      "no_snapshots_on_disk": "Nem találhatók pillanatképek a lemezen",
+      "one_snapshot_present": "1 pillanatfelvétel van jelen",
+      "snapshots_present_suffix": "pillanatfelvételek jelen vannak",
+      "no_panel_backups_on_disk": "Nem található panel biztonsági másolat a lemezen",
+      "one_panel_backup_present": "1 panel tartalék van",
+      "panel_backups_present_suffix": "panel biztonsági mentések jelen vannak",
+      "no_micro_backups_on_disk": "Nem található mikromentés a lemezen",
+      "one_micro_backup_present": "1 mikro tartalék van jelen",
+      "micro_backups_present_suffix": "mikro biztonsági mentések jelen vannak",
+      "snapshot_daily0_chart": "Pillanatkép (napi.0)",
+      "hestia_latest_chart": "Hestia legújabb",
+      "micro_latest_chart": "Mikro legújabb",
+      "age_days": "Életkor (nap)",
+      "title": "Biztonsági korok",
+      "subtitle": "Mennyire frissek a legújabb biztonsági másolatok",
+      "snapshot_daily0": "Napi pillanatfelvétel.0",
+      "latest_hestia": "A legújabb Hestia",
+      "latest_micro": "Legújabb Micro"
+    },
+    "errors": {
+      "no_backups_detected": "Nem észleltünk biztonsági másolatot a pillanatképekről, a Hestiáról vagy a mikrokészletekről."
+    },
+    "restore": {
+      "hestia_placeholder_tar": "gén.ÉÉÉÉHHNN-ÓÓPP.tar",
+      "using_latest_backup_prefix": "A JSON-ban jelentett legújabb biztonsági másolat használata:",
+      "adjust_backup_tar": "Futás előtt állítsa be a BACKUP_TAR-t valódi fájlra a \\\"v-list-backups USER\\\" fájlból.",
+      "micro_restore_prefix": "Az alap visszaállítása a legújabb mikropillanatfelvételről:",
+      "micro_restore_suffix": "(futtatás előtt tekintse át az útvonalakat és a kizárásokat).",
+      "set_correct_snapshot_path": "A parancs használata előtt állítsa be a pillanatkép helyes elérési útját.",
+      "confirm_body_1": "Ez elindít egy Hestia visszaállítási feladatot a kiszolgálón a backupctl használatával.",
+      "confirm_body_2": "Az adott felhasználó szolgáltatásai és adatai felülírhatók.",
+      "confirm_body_3": "Teljesen biztos vagy benne?"
+    },
+    "actions": {
+      "starting_prefix": "Indulás",
+      "failed_to_start_prefix": "AZ indítás SIKERTELEN",
+      "started_prefix": "Elindult",
+      "started_suffix": ". Ez eltarthat egy ideig; állapota a következő állapotfelméréskor frissül.",
+      "error_talking_endpoint": "Hiba a backups_action.php fájllal való beszélgetés során",
+      "run_os_snapshot": "Futtassa az OS Snapshot alkalmazást",
+      "run_micro_backup": "Futtassa a Micro Backup programot",
+      "run_hestia_backup_user": "Futtassa a Hestia biztonsági másolatot (gén)",
+      "run_all_backups": "Futtassa az ÖSSZES biztonsági másolatot",
+      "run_health_check": "Futtassa az állapotfelmérést",
+      "log_maintenance": "Rönk karbantartás",
+      "clear_backup_logs": "Törölje a biztonsági mentési állapotnaplókat",
+      "clear_prune_logs": "Tisztítsa meg a szilva rönköket",
+      "clear_integrity_log": "Az integritásnapló törlése"
+    },
+    "cron": {
+      "no_entries": "Nem észleltek crontab bejegyzéseket.",
+      "env": "Env",
+      "schedule": "Menetrend",
+      "entries_for_prefix": "Crontab bejegyzések ehhez",
+      "current_user": "jelenlegi felhasználó",
+      "unable_to_read": "A crontab nem olvasható.",
+      "failed_to_read": "A crontab beolvasása nem sikerült."
+    },
+    "warnings_errors": {
+      "title": "Figyelmeztetések és hibák",
+      "subtitle": "Összefoglaló az állapotfelmérésről"
+    },
+    "raw_snapshot": {
+      "title": "Nyers pillanatfelvétel",
+      "subtitle": "Kulcsértékek közvetlenül az utolsó JSON-állapotból"
+    },
+    "recent_actions": {
+      "title": "Legutóbbi műveletek",
+      "subtitle": "Műveletek előzményei erről az irányítópultról",
+      "none": "Még nincsenek rögzített műveletek."
+    },
+    "orch": {
+      "title": "Biztonsági mentés hangszerelési varázsló",
+      "subtitle": "Egyszer szabja testre az elérési utat, majd másolja a generált script/cron/systemd egységeket.",
+      "backup_root": "Biztonsági másolat gyökér",
+      "include_health": "Tartalmazza az egészségügyi ellenőrzést",
+      "include_integrity": "Tartalmazza az integritás ellenőrzését",
+      "include_prune": "Tartalmazza a szilva szakaszt",
+      "suspend": "A biztonsági mentések felfüggesztése",
+      "disable_on_mount_fail": "Ha a csatlakoztatás sikertelen, tiltsa le a biztonsági mentéseket",
+      "nightly_script": "Éjszakai forgatókönyv",
+      "copy_script": "Szkript másolása",
+      "cron_entry": "Cron bejegyzés",
+      "copy_cron_line": "cron vonal másolása",
+      "systemd_service": "Rendszeres szolgáltatás",
+      "copy_unit": "Másoló egység",
+      "systemd_timer": "Rendszeres időzítő",
+      "copy_timer": "Időzítő másolása"
+    },
+    "quick_restore": {
+      "title": "Gyors-visszaállítási segítők",
+      "subtitle": "Előre kitöltött CLI-parancsok vészhelyzetekhez (kézi futás vagy VESZÉLY gomb)",
+      "hestia_latest_title": "Állítsa vissza a legújabb Hestia felhasználói biztonsági másolatot",
+      "micro_latest_title": "Visszaállítás a legújabb mikropillanatképből (csak CLI)",
+      "copy_command": "Másolás parancs",
+      "run_restore_danger": "Futtassa a visszaállítást (legújabb, VESZÉLY)"
+    },
+    "cli": {
+      "title": "Hestia biztonsági mentés és visszaállítás CLI",
+      "subtitle": "Gyors referencialap – kész a másolás és beillesztés",
+      "create_backups": "Biztonsági másolatok létrehozása",
+      "list_delete_backups": "Biztonsági másolatok listázása és törlése",
+      "full_restore_user": "Teljes visszaállítás (felhasználó)",
+      "selective_restore": "Szelektív visszaállítás (Web / DB / Mail)",
+      "backup_file_locations": "Fájlhelyek biztonsági mentése",
+      "backup_tarball_contents": "Tartalom mentése",
+      "backupctl_help": "backupctl segítség"
+    }
+  }
 }

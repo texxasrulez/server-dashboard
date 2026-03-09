@@ -1,0 +1,29 @@
+{
+  "name": "server-dashboard",
+  "version": "1.0.0",
+  "description": "Server Dashboard formatting/tooling configuration",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/texxasrulez/server-dashboard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/texxasrulez/server-dashboard/issues"
+  },
+  "homepage": "https://github.com/texxasrulez/server-dashboard#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "format": "npm run format:web && npm run format:php",
+    "format:check": "npm run format:check:web && npm run format:check:php",
+    "format:web": "prettier --write \"**/*.{css,js,mjs,cjs,json,md,html,yml,yaml}\" --ignore-unknown",
+    "format:check:web": "prettier --check \"**/*.{css,js,mjs,cjs,json,md,html,yml,yaml}\" --ignore-unknown",
+    "format:php": "prettier --write \"**/*.php\" --plugin=@prettier/plugin-php",
+    "format:check:php": "prettier --check \"**/*.php\" --plugin=@prettier/plugin-php"
+  },
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.24.0",
+    "prettier": "^3.8.1"
+  }
+}

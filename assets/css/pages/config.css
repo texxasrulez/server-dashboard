@@ -1,7 +1,7 @@
 /* Config page spacing polish */
 #configPane label {
   display: inline-block;
-  margin-right: 10px;     /* space between label text and input */
+  margin-right: 10px; /* space between label text and input */
 }
 
 /* Also handle adjacent-sibling patterns for generated markup */

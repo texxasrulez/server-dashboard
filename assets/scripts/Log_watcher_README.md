@@ -5,6 +5,7 @@ This package installs a **watcher** that continuously copies **only** files with
 Empty files are **skipped**. Existing copies are only overwritten when the source is newer.
 
 It provides:
+
 - `install.sh` — installs binaries, environment, and a systemd service
 - `uninstall.sh` — cleanly removes everything
 - `/usr/local/bin/copy_log_once.sh` — one-shot copier
@@ -28,6 +29,7 @@ sudo bash ./install.sh --dest /var/log-export --owner htmluser:htmlgroup --mode 
 If `--dest` is omitted, the default is `/var/log-export`. If `--owner` is omitted, default is `root:root`. If `--mode` is omitted, default is `0640`.
 
 The installer will:
+
 1. Create the destination directory (if needed).
 2. Write `/etc/log-watcher/log-watcher.env` with your settings.
 3. Install the scripts to `/usr/local/bin/`.
@@ -75,11 +77,13 @@ If you passed `--service-name NAME`, replace `log-watcher` with your chosen name
 ## Manual run (advanced)
 
 One-shot copy using current env:
+
 ```bash
 sudo /usr/local/bin/copy_log_once.sh
 ```
 
 Run watcher in foreground (debug):
+
 ```bash
 sudo /usr/local/bin/log_watcher.sh
 ```

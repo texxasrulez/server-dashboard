@@ -1,4 +1,3 @@
-
 # Log Mirroring & Viewer
 
 - Mirrors `.log`, `.log.N`, and `.log.gz` from `/var/log` into `state/logs_mirror` on page load.
@@ -8,4 +7,5 @@
 - Mirror operations are recorded in `state/mirror_activity.log`.
 
 ## Category colors
+
 Security, Warning, Database, Network, Performance, Info → styled via `.badge.<category>` in `assets/css/pages/logs.css`.

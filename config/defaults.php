@@ -1,12 +1,13 @@
 <?php
+
 // config/defaults.php
 // Authoritative default settings for the entire app.
 // Keep this file in VCS. Do not edit in production; use config/local.json for overrides.
 return [
   // Site & Branding
   'site' => [
-    'name' => 'GeneMail',
-    'base_url' => 'https://www.genesworld.net/web-admin/',
+    'name' => 'Server Dashboard',
+    'base_url' => 'https://example.com/',
     'timezone' => 'UTC',
     'theme' => 'dark',
   ],
@@ -15,6 +16,18 @@ return [
     'enable_server_tests' => true,
     'enable_bookmarks'    => true,
     'enable_diagnostics'  => true,
+  ],
+  // Optional capability hints (leave as "auto" for detection)
+  'capabilities' => [
+    'panel' => 'auto',
+    'web' => 'auto',
+    'mta' => 'auto',
+    'db' => 'auto',
+  ],
+  // Processes page/API defaults
+  'processes' => [
+    'default_limit' => 50,
+    'cache_ttl_sec' => 2,
   ],
   // Integrations
   'integrations' => [
@@ -59,9 +72,9 @@ return [
   // Security
 'security' => [
     'admin_emails' => ['admin@example.com'],
-    'csrf_secret'  => null, // if null, a random secret will be generated into local.json
+    'csrf_secret'  => null, // if null, a random secret will be userrated into local.json
     'allowed_origins' => ['*'],
-  
+
 // Hardening defaults
 'api_tokens' => [],
 'api_rate_limit_ms' => 300,
@@ -129,9 +142,33 @@ return [
 // Backups + log watcher helpers
 'backups' => [
   'fs_root' => '/mnt/backupz',
+  'script_path' => dirname(__DIR__) . '/scripts',
+  'snap_script' => dirname(__DIR__) . '/scripts/make-snapshots.sh',
+  'micro_script' => dirname(__DIR__) . '/scripts/make-micro-backups.sh',
+  'health_script' => dirname(__DIR__) . '/scripts/backup_health_check.sh',
+  'integrity_script' => dirname(__DIR__) . '/scripts/backup_integrity_watch.sh',
+  'prune_snap_script' => dirname(__DIR__) . '/scripts/prune_snapshots.sh',
+  'prune_micro_script' => dirname(__DIR__) . '/scripts/prune-micro-backups.sh',
+  'prune_hestia_script' => dirname(__DIR__) . '/scripts/prune_hestia_backups.sh',
+  'backupctl' => dirname(__DIR__) . '/scripts/backupctl',
+  'hestia_cmd' => '/usr/local/hestia/bin/v-backup-user',
+  'hestia_user' => 'user',
+  'pipeline_script' => '/usr/local/bin/backup-nightly.sh',
+  'log_file' => '/var/log/backup-nightly.log',
+  'cron_time' => '02:00',
+  'service_name' => 'backup-nightly',
+  'system_user' => 'root',
+  'include_health' => true,
+  'include_integrity' => true,
+  'include_prune' => true,
+  'hestia_source_dir' => '/backup',
+  'hestia_bind_source' => '',
+  'hestia_bind_target' => '/backup',
+  'hestia_bind_options' => 'bind,nofail',
   'fs_dirs' => "hestia\nmicro\nsnapshots",
   'exclude_dirs' => '',
   'suspend' => false,
+  'require_dedicated_mount' => false, // legacy alias for disable_on_mount_fail
   'disable_on_mount_fail' => false,
   'debug' => false,
   'log_dest' => '/var/log-export',

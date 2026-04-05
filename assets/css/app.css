@@ -467,15 +467,72 @@ legend {
 
 /* High-contrast mode */
 .theme-contrast {
-  --border: rgba(255, 255, 255, 0.28);
-  --card-border: rgba(255, 255, 255, 0.34);
-  --btn-border: rgba(255, 255, 255, 0.34);
-  --chip-border: rgba(255, 255, 255, 0.34);
-  --menu-border: rgba(255, 255, 255, 0.34);
+  color-scheme: dark;
+  --bg: #000;
+  --bg-0: #000;
+  --bg-1: #000;
+  --bg-2: #0a0a0a;
+  --card: #000;
+  --card-bg: #000;
+  --header-bg: #000;
+  --fg: #fff;
+  --fg-1: #fff;
+  --fg-2: #f5f5f5;
+  --muted: #f0f0f0;
+  --link: #7fd1ff;
+  --accent: #ffd400;
+  --accent-2: #00e5ff;
+  --btn: #000;
+  --btn-bg: #000;
+  --btn-bg-hover: #1a1a1a;
+  --btn-fg: #fff;
+  --btn-border: #fff;
+  --btn-secondary-bg: #000;
+  --chip-bg: #000;
+  --chip-fg: #fff;
+  --chip-border: #fff;
+  --border: #fff;
+  --border-strong: #fff;
+  --border-1: #fff;
+  --border-2: #fff;
+  --card-border: #fff;
+  --menu-border: #fff;
+  --modal-bg: #000;
+  --modal-fg: #fff;
+  --modal-border: #fff;
+  --warning: #ffd400;
+  --warning-fg: #000;
+  --warn: #ffd400;
+  --ok: #00ff66;
+  --error: #ff4d4d;
 }
 .theme-contrast :focus-visible {
-  outline: 3px solid #b0d0ff;
+  outline: 3px solid #ffd400;
   outline-offset: 2px;
+}
+.theme-contrast a,
+.theme-contrast .linklike {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.theme-contrast .btn.secondary {
+  background: #000;
+  color: #fff;
+  border-color: #fff;
+}
+.theme-contrast input,
+.theme-contrast select,
+.theme-contrast textarea {
+  background: #000;
+  color: #fff;
+  border-color: #fff;
+}
+.theme-contrast .table thead th {
+  background: #000 !important;
+}
+.theme-contrast .muted {
+  opacity: 1;
+  color: var(--fg);
 }
 
 /* === Spacing tokens (theme-aware) === */

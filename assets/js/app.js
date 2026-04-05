@@ -26,10 +26,21 @@ window.APP_READY = true;
 
 (function () {
   try {
+    function applyHighContrastMode(enabled) {
+      var on = !!enabled;
+      if (document.documentElement) {
+        document.documentElement.classList.toggle("theme-contrast", on);
+      }
+      if (document.body) {
+        document.body.classList.toggle("theme-contrast", on);
+      }
+    }
+
     var cfg = window.__CONFIG_DATA__ || {};
     var hc = false;
     if (cfg && cfg.ui && typeof cfg.ui.high_contrast !== "undefined")
       hc = !!cfg.ui.high_contrast;
-    if (hc) document.documentElement.classList.add("theme-contrast");
+    applyHighContrastMode(hc);
+    window.__setHighContrastMode = applyHighContrastMode;
   } catch (e) {}
 })();

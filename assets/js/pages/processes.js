@@ -21,6 +21,42 @@
     if (d > 0) return d + "d " + h + "h " + m + "m";
     return h + "h " + m + "m";
   }
+  function cpuValue(proc) {
+    if (!proc || typeof proc !== "object") return 0;
+    var raw =
+      proc.cpu_pct ??
+      proc.cpu ??
+      proc.cpu_percent ??
+      proc.cpuPercentage ??
+      proc.pcpu ??
+      0;
+    if (typeof raw === "string") {
+      raw = raw.replace("%", "").trim();
+    }
+    var n = Number(raw);
+    if (!isFinite(n)) return 0;
+    return n;
+  }
+  function fmtCpu(proc) {
+    return cpuValue(proc).toFixed(2) + "%";
+  }
+  function fmtState(state) {
+    var s = String(state == null ? "" : state).trim();
+    var code = s ? s.charAt(0).toUpperCase() : "?";
+    var map = {
+      R: "Running",
+      S: "Sleeping",
+      D: "Uninterruptible Sleep",
+      T: "Stopped",
+      t: "Tracing Stop",
+      Z: "Zombie",
+      X: "Dead",
+      I: "Idle",
+      W: "Paging",
+      P: "Parked",
+    };
+    return map[code] || s || "Unknown";
+  }
 
   var body = $("#procBody");
   var meta = $("#procMeta");
@@ -96,14 +132,14 @@
         "<td>" +
         esc(p.user) +
         "</td>" +
-        '<td class="num">' +
-        Number(p.cpu_pct || 0).toFixed(1) +
+        '<td class="num cpu-cell">' +
+        fmtCpu(p) +
         "</td>" +
         '<td class="num">' +
         esc(fmtRss(p.rss_kb)) +
         "</td>" +
         "<td>" +
-        esc(p.state || "?") +
+        esc(fmtState(p.state)) +
         "</td>" +
         '<td class="cmd-cell">' +
         esc(p.cmd || "") +
@@ -215,8 +251,8 @@
         detailRow("PID", rec.pid || "") +
         detailRow("PPID", rec.ppid || "") +
         detailRow("User", rec.user || "") +
-        detailRow("State", rec.state || "") +
-        detailRow("CPU%", Number(rec.cpu_pct || 0).toFixed(1)) +
+        detailRow("State", fmtState(rec.state)) +
+        detailRow("CPU%", fmtCpu(rec)) +
         detailRow("RSS", fmtRss(rec.rss_kb)) +
         detailRow("Threads", rec.threads || 0);
     }

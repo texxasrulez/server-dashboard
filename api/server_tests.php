@@ -6,6 +6,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 require_once __DIR__ . '/../includes/init.php';
 require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/logger.php';
 require_login();
 require_once __DIR__ . '/../lib/Config.php';
 \App\Config::init(dirname(__DIR__));
@@ -382,10 +383,11 @@ $audit = (bool)\App\Config::get('server_tests.audit_log', true);
 if ($audit) {
     $state = realpath(__DIR__.'/../state') ?: (__DIR__.'/../state');
     @mkdir($state, 0775, true);
-    $ip = $_SERVER['REMOTE_ADDR'] ?? '';
-    $user = $_SESSION['user']['name'] ?? ($_SESSION['user']['email'] ?? 'unknown');
-    $line = json_encode(['t' => date('c'),'ip' => $ip,'user' => $user,'action' => $__action]);
-    @file_put_contents($state.'/diag_audit.log', $line.PHP_EOL, FILE_APPEND);
+    dashboard_log_append($state.'/diag_audit.log', 'server_tests', 'diagnostic action', [
+        'action' => $__action,
+        'user' => $_SESSION['user']['username'] ?? ($_SESSION['user']['name'] ?? ($_SESSION['user']['email'] ?? 'unknown')),
+        'ip' => request_client_ip(),
+    ]);
 }
 
 use App\Config;

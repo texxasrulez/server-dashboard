@@ -10,6 +10,7 @@ $REQUIRE_ADMIN = true;   // head.php will enforce require_admin() for us
 
 // Central config engine
 require_once __DIR__ . '/lib/Config.php';
+require_once __DIR__ . '/lib/Speedtest.php';
 \App\Config::init(__DIR__);
 $cfg = \App\Config::all();
 
@@ -32,6 +33,7 @@ if ((isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET') ===
         exit;
     }
     try {
+        \App\Speedtest::validatePatch($payload['settings'] ?? []);
         $saved = \App\Config::setMany($payload['settings'] ?? []);
 
         // Auto-create data/cron_token.txt for cron/probe endpoints if a token is present

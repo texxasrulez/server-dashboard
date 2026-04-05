@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__.'/includes/init.php';
 require_once __DIR__.'/includes/auth.php';
+require_once __DIR__.'/includes/logger.php';
 require_login();
 
 $PAGE_TITLE = 'Logs';
@@ -31,8 +32,10 @@ function mirror_activity_log($status, $action, $name, $note = '')
     $state = __DIR__ . '/state';
     @mkdir($state, 0775, true);
     $logf = $state . '/mirror_activity.log';
-    $line = date('Y-m-d H:i:s') . "\t" . $status . "\t" . $action . "\t" . $name . (strlen($note) ? "\t".$note : '') . "\n";
-    @file_put_contents($logf, $line, FILE_APPEND | LOCK_EX);
+    dashboard_log_append($logf, 'logs_mirror', $action . ' ' . $name, [
+        'status' => (string)$status,
+        'note' => (string)$note,
+    ]);
     @chmod($logf, 0664);
 }
 
@@ -231,6 +234,34 @@ function parse_log_line($line)
     $ip = '';
     $ts = 0;
     $lvl = '';
+
+    if (preg_match('/^Time=("[^"\\\\]*(?:\\\\.[^"\\\\]*)*"|\S+)\s+Category=("[^"\\\\]*(?:\\\\.[^"\\\\]*)*"|\S+)\s+Message=("[^"\\\\]*(?:\\\\.[^"\\\\]*)*"|\S+)(?:\s+User=("[^"\\\\]*(?:\\\\.[^"\\\\]*)*"|\S+))?(?:\s+IP=("[^"\\\\]*(?:\\\\.[^"\\\\]*)*"|\S+))?(?:\s+Context=(\{.*\}|\[.*\]))?(?:\s+PID=\d+)?$/', $ln, $m)) {
+        $decode = function ($raw) {
+            $raw = trim((string)$raw);
+            if ($raw === '') {
+                return '';
+            }
+            $decoded = json_decode($raw, true);
+            if (is_string($decoded) || is_numeric($decoded)) {
+                return (string)$decoded;
+            }
+            return trim($raw, "\"'");
+        };
+        $time = $decode($m[1] ?? '');
+        $cat = $decode($m[2] ?? 'info');
+        $msg = $decode($m[3] ?? '');
+        $user = $decode($m[4] ?? '');
+        $ip = $decode($m[5] ?? '');
+        if ($time !== '') {
+            try {
+                $dt = new DateTime($time);
+                $ts = $dt->getTimestamp();
+                $time = _fmt_utc_from_ts($ts);
+            } catch (Exception $e) {
+            }
+        }
+        return array('time' => $time, 'ts' => $ts, 'category' => $cat !== '' ? strtolower($cat) : 'info', 'message' => $msg, 'user' => $user, 'ip' => $ip);
+    }
 
     // Apache/Nginx access (CLF/combined): host ident authuser [date] "req" status bytes
     if (preg_match('/^(\S+)\s+\S+\s+(\S+)\s+\[([^\]]+)\]\s+"([^"]*)"\s+(\d{3})\s+(\S+)/', $ln, $m)) {

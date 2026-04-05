@@ -105,6 +105,7 @@ return [
     '_label' => 'UI',
     'toast_position' => ['type' => 'enum','label' => 'Toast Position','values' => ['bottom-center','bottom-right','bottom-left','top-right','top-left','top-center','center']],
     'items_per_page' => ['type' => 'int','label' => 'Items/Page','min' => 5,'max' => 500],
+    'header_navigation_mode' => ['type' => 'enum','label' => 'Header navigation','values' => ['buttons','dropdown'],'value_labels' => ['buttons' => 'Header buttons','dropdown' => 'Dropdown menu']],
     'high_contrast' => ['type' => 'bool','label' => 'High contrast mode'],
   ],
 
@@ -178,6 +179,27 @@ return [
 
     // History expectations
     'append_interval_min' => ['type' => 'int','label' => 'Expected history append every (min)','min' => 1,'max' => 1440],
+  ],
+
+  'speedtest' => [
+    '_label' => 'Speedtest Settings',
+    'enabled' => ['type' => 'bool','label' => 'Enable scheduled speedtests','help' => 'Scheduled speedtests run on the dashboard host, not in the browser.'],
+    'interval_minutes' => ['type' => 'int','label' => 'Interval (minutes)','min' => 1,'max' => 10080,'help' => 'Set any interval from 1 minute up to 7 days. Speedtests consume bandwidth and can skew graphs if run too frequently.'],
+    'timeout_seconds' => ['type' => 'int','label' => 'Timeout (seconds)','min' => 5,'max' => 300],
+    'preferred_backend' => ['type' => 'enum','label' => 'Preferred backend','values' => ['auto','ookla','librespeed'],'value_labels' => ['auto' => 'Auto-detect','ookla' => 'Ookla speedtest','librespeed' => 'librespeed-cli']],
+    'preferred_server_ookla' => ['type' => 'string','label' => 'Preferred server ID for Speedtest','max' => 200,'help' => 'Optional. Use a numeric server ID for Ookla speedtest or speedtest-cli.'],
+    'preferred_server_librespeed' => ['type' => 'string','label' => 'Preferred server host for Librespeed','max' => 200,'help' => 'Optional. Use a safe host or server identifier for librespeed-cli.'],
+    'retention_days' => ['type' => 'int','label' => 'Retention days','min' => 1,'max' => 3650],
+    'max_history_entries' => ['type' => 'int','label' => 'Max history entries','min' => 10,'max' => 50000],
+    'log_failed_tests' => ['type' => 'bool','label' => 'Log failed tests'],
+    'randomize_schedule_window' => ['type' => 'bool','label' => 'Randomize schedule window','help' => 'When enabled, the actual next run is delayed by up to the randomize window in addition to the base interval.'],
+    'randomize_window_minutes' => ['type' => 'int','label' => 'Randomize window minutes','min' => 0,'max' => 240,'help' => 'Extra delay added on top of the base interval when randomization is enabled.'],
+    'quiet_hours' => [
+      '_label' => 'Quiet hours',
+      'enabled' => ['type' => 'bool','label' => 'Enable quiet hours'],
+      'start_hour' => ['type' => 'int','label' => 'Start hour','min' => 0,'max' => 23],
+      'end_hour' => ['type' => 'int','label' => 'End hour','min' => 0,'max' => 23],
+    ],
   ],
 
   // Log Viewer

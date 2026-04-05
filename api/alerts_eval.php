@@ -4,6 +4,7 @@ require_once __DIR__ . '/../includes/init.php';
 require_once __DIR__ . '/_state_path.php';
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/mailer.php';
+require_once __DIR__ . '/../includes/logger.php';
 
 function _noise_cfg()
 {
@@ -140,7 +141,10 @@ function _noise_maybe_send_daily_digest()
     if (!empty($res['ok'])) {
         @file_put_contents($lastFile, (string)time());
     } else {
-        @file_put_contents($stateDir.'/mail_failures.log', '['.date('c').'] digest '.($res['error'] ?? 'fail')."\n", FILE_APPEND);
+        dashboard_log_append($stateDir.'/mail_failures.log', 'alerts_mail', 'daily digest send failed', [
+            'error' => (string)($res['error'] ?? 'fail'),
+            'recipient' => (string)$email,
+        ]);
     }
 }
 header('Content-Type: application/json');
@@ -325,7 +329,13 @@ foreach ($rules as &$r) {
                     $res = ['ok' => false,'error' => 'suppressed'];
                 }
                 if (!$res['ok']) {
-                    @file_put_contents($stateDir.'/mail_failures.log', '['.date('c').'] '.$email.' '.$sub.' :: '.($res['error'] ?? 'fail')."\n", FILE_APPEND);
+                    dashboard_log_append($stateDir.'/mail_failures.log', 'alerts_mail', 'alert delivery failed', [
+                        'recipient' => (string)$email,
+                        'subject' => (string)$sub,
+                        'error' => (string)($res['error'] ?? 'fail'),
+                        'rule' => (string)($r['name'] ?? ''),
+                        'service' => (string)(($r['service_name'] ?? '') ?: $sid),
+                    ]);
                 }
             }
             if (!$__SUPPRESS) {

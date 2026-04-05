@@ -30,6 +30,18 @@ if (!isset($SITE_NAME)) {
 
   <?php
   $isAdmin = user_is_admin();
+  $currentPage = basename((string)($_SERVER['SCRIPT_NAME'] ?? 'index.php'));
+  $headerNavMode = 'buttons';
+  try {
+      if (class_exists('\App\Config')) {
+          $headerNavMode = (string)\App\Config::get('ui.header_navigation_mode', 'buttons');
+      }
+  } catch (Throwable $e) {
+      $headerNavMode = 'buttons';
+  }
+  if (!in_array($headerNavMode, ['buttons', 'dropdown'], true)) {
+      $headerNavMode = 'buttons';
+  }
 $candidates_admin = [
   ['History', 'history.php'],
   ['Logs', 'logs.php'],
@@ -39,6 +51,7 @@ $candidates_admin = [
   ['Databases', 'database.php'],
   ['Server Tests', 'server_tests.php'],
   ['Alerts', file_exists(__DIR__.'/../alerts_admin.php') ? 'alerts_admin.php' : (file_exists(__DIR__.'/../alerts.php') ? 'alerts.php' : null)],
+  ['Speedtest', 'speedtest.php'],
   ['Bookmarks', 'bookmarks.php'],
   ['Diagnostics', 'diag.php'],
   ['Config', 'config.php'],
@@ -46,23 +59,39 @@ $candidates_admin = [
 ];
 $links_public = [
 ];
-?>
-  <nav id="site-nav" class="tabs">
-  <?php
-  foreach ($links_public as $L) {
-      [$label, $href] = $L;
-      if ($href && file_exists(__DIR__ . '/../' . $href)) {
-          echo '<a href="'.h($href).'">'.h($label).'</a>';
-      }
-  }
+$navLinks = [];
+foreach ($links_public as $L) {
+    [$label, $href] = $L;
+    if ($href && file_exists(__DIR__ . '/../' . $href)) {
+        $navLinks[] = [$label, $href];
+    }
+}
 if ($isAdmin) {
     foreach ($candidates_admin as $L) {
         [$label, $href] = $L;
         if ($href && file_exists(__DIR__ . '/../' . $href)) {
-            echo '<a href="'.h($href).'">'.h($label).'</a>';
+            $navLinks[] = [$label, $href];
         }
     }
 }
+?>
+  <nav id="site-nav" class="tabs nav-mode-<?= h($headerNavMode) ?>">
+  <?php
+  foreach ($navLinks as $L) {
+      [$label, $href] = $L;
+      echo '<a href="'.h($href).'">'.h($label).'</a>';
+  }
+  if ($headerNavMode === 'dropdown' && $navLinks) {
+      echo '<label class="header-nav-select-wrap" for="headerNavSelect">';
+      echo '<span class="sr-only">Header navigation</span>';
+      echo '<select id="headerNavSelect" class="header-nav-select" aria-label="Header navigation">';
+      foreach ($navLinks as $L) {
+          [$label, $href] = $L;
+          echo '<option value="' . h(project_url('/' . ltrim($href, '/'))) . '"' . ($currentPage === basename($href) ? ' selected' : '') . '>' . h($label) . '</option>';
+      }
+      echo '</select>';
+      echo '</label>';
+    }
 ?>
   </nav>
   
@@ -94,6 +123,46 @@ if ($isAdmin) {
 #mobileDrawer .panel{background:var(--card,#111);color:var(--fg,#e6eef2);padding:1rem;max-width:85vw;width:260px;height:100%;overflow:auto;position:relative;z-index:2;}
 #mobileDrawer .panel a{display:block;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.08);text-decoration:none;color:inherit;}
 #mobileDrawer .backdrop{position:fixed;inset:0;z-index:1;}
+.sr-only{position:absolute !important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.app-header #site-nav.nav-mode-dropdown > a{display:none;}
+.app-header #site-nav .header-nav-select-wrap{display:none;}
+.app-header #site-nav.nav-mode-dropdown .header-nav-select-wrap{display:block;}
+.app-header .header-nav-select-wrap{position:relative;}
+.app-header .header-nav-select{
+  min-width:200px;
+  max-width:320px;
+  border:1px solid var(--border, rgba(255,255,255,.14));
+  border-radius:999px;
+  padding:.55rem 2.25rem .55rem .9rem;
+  background:var(--card, rgba(20,24,32,.96));
+  color:var(--fg, #e6eef2);
+  box-shadow:0 0 0 1px rgba(255,255,255,.04) inset;
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  cursor:pointer;
+}
+.app-header .header-nav-select:focus{
+  outline:none;
+  box-shadow:0 0 0 2px rgba(255,255,255,.14);
+}
+.app-header .header-nav-select-wrap::after{
+  content:"";
+  position:absolute;
+  right:.95rem;
+  top:50%;
+  width:.55rem;
+  height:.55rem;
+  border-right:2px solid currentColor;
+  border-bottom:2px solid currentColor;
+  transform:translateY(-70%) rotate(45deg);
+  pointer-events:none;
+  opacity:.7;
+}
+.app-header .header-nav-select option{
+  background:var(--card, rgba(20,24,32,.96));
+  color:var(--fg, #e6eef2);
+}
 .app-header .mobile-bar{display:none;}
 @media (max-width:720px){
   .app-header .mobile-bar{display:flex !important;align-items:center;gap:.5rem;}
@@ -104,6 +173,12 @@ if ($isAdmin) {
 (function(){
   var drawer = document.getElementById('mobileDrawer');
   var toggle = document.getElementById('mobileToggle') || document.getElementById('navToggle');
+  var navSelect = document.getElementById('headerNavSelect');
+  if (navSelect) {
+    navSelect.addEventListener('change', function(){
+      if (navSelect.value) window.location.href = navSelect.value;
+    });
+  }
   if (!drawer) {
     var aside = document.createElement('aside');
     aside.id = 'mobileDrawer';

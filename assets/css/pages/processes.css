@@ -26,11 +26,13 @@
 
 .proc-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: separate;
   border-spacing: 0;
 }
 .proc-table th,
 .proc-table td {
+  width: calc(100% / 6);
   padding: 0.55rem 0.6rem;
   border-bottom: 1px solid var(--border);
   text-align: left;
@@ -41,8 +43,15 @@
   letter-spacing: 0.02em;
 }
 .proc-table .num {
-  text-align: right;
+  text-align: left;
   font-variant-numeric: tabular-nums;
+  color: var(--fg);
+}
+.proc-table td.cpu-cell {
+  color: var(--fg) !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: var(--fg);
+  font-weight: 700;
 }
 .proc-row {
   cursor: pointer;
@@ -51,7 +60,6 @@
   background: color-mix(in srgb, var(--card) 88%, transparent);
 }
 .cmd-cell {
-  max-width: 420px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;

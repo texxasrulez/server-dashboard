@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/logger.php';
+
 /**
  * includes/mailer.php — compatibility-first mailer (PHP 5.3+ safe)
  * Transports: phpmail, sendmail, smtp
@@ -74,7 +76,7 @@ if (!function_exists('mailer_log')) {
         if (!is_array($data)) {
             return;
         }
-        $line = '[Mailer] ' . json_encode($data);
+        $line = rtrim(dashboard_log_line('mailer', 'mailer event', $data));
         error_log($line);
     }
 }

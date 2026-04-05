@@ -62,6 +62,18 @@
     return url + sep + "_csrf=" + encodeURIComponent(token);
   }
 
+  function escapeHtml(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;",
+      }[c];
+    });
+  }
+
   var schema = window.__CONFIG_SCHEMA__ || {};
   var data = window.__CONFIG_DATA__ || {};
   var CSRF = window.__CONFIG_CSRF__ || "";
@@ -295,6 +307,16 @@
     var secSchema = schema[name] || {};
     var secData =
       data[name] && typeof data[name] === "object" ? data[name] : {};
+    if (
+      String(name || "").toLowerCase() === "speedtest" &&
+      secData &&
+      typeof secData === "object" &&
+      Object.prototype.hasOwnProperty.call(secData, "preferred_server") &&
+      !Object.prototype.hasOwnProperty.call(secSchema, "preferred_server")
+    ) {
+      secData = Object.assign({}, secData);
+      delete secData.preferred_server;
+    }
     renderObject(
       name,
       secSchema,
@@ -304,6 +326,7 @@
       inline,
     );
     builtinEnhancers(name, paneEl);
+    wireUiLivePreview(name, paneEl);
   }
 
   function renderObject(prefix, objSchema, objData, container, legend, inline) {
@@ -417,6 +440,29 @@
     return out;
   }
 
+  function applyHighContrast(enabled) {
+    try {
+      if (typeof window.__setHighContrastMode === "function") {
+        window.__setHighContrastMode(!!enabled);
+        return;
+      }
+      document.documentElement.classList.toggle("theme-contrast", !!enabled);
+      if (document.body)
+        document.body.classList.toggle("theme-contrast", !!enabled);
+    } catch (_) {}
+  }
+
+  function wireUiLivePreview(section, pane) {
+    if (String(section || "").toLowerCase() !== "ui" || !pane) return;
+    var highContrast = pane.querySelector('[name="ui.high_contrast"]');
+    if (!highContrast || highContrast.dataset.liveBound === "1") return;
+    highContrast.dataset.liveBound = "1";
+    applyHighContrast(!!highContrast.checked);
+    highContrast.addEventListener("change", function () {
+      applyHighContrast(!!highContrast.checked);
+    });
+  }
+
   function wireButtons() {
     var save = $("#btnSave");
     var reset = $("#btnReset");
@@ -447,6 +493,29 @@
                   payload.settings[top],
                 );
               });
+              if (
+                payload.settings.speedtest &&
+                (Object.prototype.hasOwnProperty.call(
+                  payload.settings.speedtest,
+                  "preferred_server_ookla",
+                ) ||
+                  Object.prototype.hasOwnProperty.call(
+                    payload.settings.speedtest,
+                    "preferred_server_librespeed",
+                  ))
+              ) {
+                data.speedtest = Object.assign({}, data.speedtest || {});
+                delete data.speedtest.preferred_server;
+              }
+              if (
+                payload.settings.ui &&
+                Object.prototype.hasOwnProperty.call(
+                  payload.settings.ui,
+                  "high_contrast",
+                )
+              ) {
+                applyHighContrast(payload.settings.ui.high_contrast);
+              }
               // trigger notifier reloads
               if (payload.settings.email || payload.settings.mail) {
                 try {
@@ -532,6 +601,189 @@
           wrap.appendChild(note);
           input.dataset.hinted = "1";
         });
+      } catch (_) {}
+    }
+    if (String(section || "").toLowerCase() === "speedtest" && pane) {
+      try {
+        if (!pane.querySelector('[data-block="speedtest-help"]')) {
+          var helpBlock = el("div", "block");
+          helpBlock.dataset.block = "speedtest-help";
+          helpBlock.innerHTML =
+            '<h3>Speedtest Settings</h3>' +
+            '<div class="muted">Speedtests consume bandwidth, can skew graphs if run too often, and always run on the dashboard host instead of the client browser.</div>';
+          pane.appendChild(helpBlock);
+        }
+        if (!pane.querySelector('[data-block="speedtest-status"]')) {
+          var statusBlock = el("div", "block");
+          statusBlock.dataset.block = "speedtest-status";
+          statusBlock.innerHTML =
+            '<h3>Runtime status</h3>' +
+            '<div class="row gap-s wrap">' +
+            '  <button type="button" class="btn secondary" id="speedtestRunNow">Run Test Now</button>' +
+            '  <button type="button" class="btn" id="speedtestRefreshStatus">Refresh status</button>' +
+            "</div>" +
+            '<div id="speedtestStatusBox" class="muted" style="margin-top:.75rem">Loading speedtest status...</div>';
+          pane.appendChild(statusBlock);
+
+          function fmtTs(ts) {
+            if (!ts) return "—";
+            try {
+              return new Date(ts * 1000).toLocaleString();
+            } catch (_) {
+              return String(ts);
+            }
+          }
+
+          function renderBackendList(statuses) {
+            return ["ookla", "librespeed"]
+              .map(function (key) {
+                var item = statuses && statuses[key] ? statuses[key] : {};
+                return (
+                  '<div><span class="status-dot ' +
+                  (item.available ? "status-ok" : "status-fail") +
+                  '"></span><strong>' +
+                  escapeHtml(item.label || key) +
+                  "</strong>: " +
+                  escapeHtml(item.available ? "available" : "missing") +
+                  (item.version ? " · " + escapeHtml(item.version) : "") +
+                  "</div>"
+                );
+              })
+              .join("");
+          }
+
+          function effectiveCadence(settings) {
+            var interval = Number(settings && settings.interval_minutes);
+            var randomized = !!(settings && settings.randomize_schedule_window);
+            var windowMinutes = Number(settings && settings.randomize_window_minutes);
+            if (!isFinite(interval) || interval <= 0) {
+              return "—";
+            }
+            if (!randomized || !isFinite(windowMinutes) || windowMinutes <= 0) {
+              return String(interval) + " minute" + (interval === 1 ? "" : "s");
+            }
+            return (
+              String(interval) +
+              "-" +
+              String(interval + Math.max(0, windowMinutes)) +
+              " minutes (" +
+              String(interval) +
+              " base + up to " +
+              String(Math.max(0, windowMinutes)) +
+              " random)"
+            );
+          }
+
+          function loadSpeedtestStatus() {
+            var box = document.getElementById("speedtestStatusBox");
+            if (!box) return;
+            box.textContent = "Loading speedtest status...";
+            fetch(withCsrf("api/speedtest_status.php"), {
+              credentials: "same-origin",
+            })
+              .then(function (r) {
+                return r.json().catch(function () {
+                  return null;
+                });
+              })
+              .then(function (json) {
+                if (!json || !json.ok) {
+                  throw new Error((json && json.error) || "Status request failed");
+                }
+                box.innerHTML =
+                  "<div><strong>Configured cadence:</strong> " +
+                  escapeHtml(effectiveCadence(json.settings || {})) +
+                  "</div>" +
+                  "<div><strong>Last successful test:</strong> " +
+                  escapeHtml(fmtTs(json.meta && json.meta.last_success_at)) +
+                  "</div>" +
+                  "<div><strong>Last attempted test:</strong> " +
+                  escapeHtml(fmtTs(json.meta && json.meta.last_attempted_at)) +
+                  "</div>" +
+                  "<div><strong>Next scheduled run:</strong> " +
+                  escapeHtml(fmtTs(json.next_due_at)) +
+                  "</div>" +
+                  "<div><strong>Last backend:</strong> " +
+                  escapeHtml((json.meta && json.meta.last_backend) || "—") +
+                  (json.meta && json.meta.last_backend_version
+                    ? " · " + escapeHtml(json.meta.last_backend_version)
+                    : "") +
+                  "</div>" +
+                  "<div><strong>Last error:</strong> " +
+                  escapeHtml((json.meta && json.meta.last_error) || "—") +
+                  "</div>" +
+                  '<div style="margin-top:.5rem"><strong>Detected CLI backend status</strong></div>' +
+                  renderBackendList(json.detected_backend_status || {});
+              })
+              .catch(function (err) {
+                box.textContent = err.message || "Failed to load speedtest status.";
+              });
+          }
+
+          function signalSpeedtestRefresh() {
+            try {
+              window.localStorage.setItem("speedtest-refresh-at", String(Date.now()));
+            } catch (_) {}
+          }
+
+          var refreshBtn = document.getElementById("speedtestRefreshStatus");
+          if (refreshBtn) {
+            refreshBtn.addEventListener("click", loadSpeedtestStatus);
+          }
+
+          var runBtn = document.getElementById("speedtestRunNow");
+          if (runBtn) {
+            runBtn.addEventListener("click", function () {
+              runBtn.disabled = true;
+              fetch("api/speedtest_run.php", {
+                method: "POST",
+                credentials: "same-origin",
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+                  "X-CSRF-Token": CSRF || "",
+                },
+                body: "_csrf=" + encodeURIComponent(CSRF || ""),
+              })
+                .then(function (r) {
+                  return r.json().catch(function () {
+                    return null;
+                  });
+                })
+                .then(function (json) {
+                  if (!json || !json.ok) {
+                    throw new Error((json && json.error) || "Speedtest run failed");
+                  }
+                  window.toast &&
+                    window.toast.success &&
+                    window.toast.success((json && json.queued) ? "Speedtest run started." : "Speedtest run completed.");
+                  signalSpeedtestRefresh();
+                  loadSpeedtestStatus();
+                  if (json && json.queued) {
+                    window.setTimeout(function () {
+                      signalSpeedtestRefresh();
+                      loadSpeedtestStatus();
+                    }, 2000);
+                    window.setTimeout(function () {
+                      signalSpeedtestRefresh();
+                      loadSpeedtestStatus();
+                    }, 7000);
+                  }
+                })
+                .catch(function (err) {
+                  window.toast &&
+                    window.toast.error &&
+                    window.toast.error(err.message || "Speedtest run failed");
+                })
+                .then(function () {
+                  runBtn.disabled = false;
+                }, function () {
+                  runBtn.disabled = false;
+                });
+            });
+          }
+
+          loadSpeedtestStatus();
+        }
       } catch (_) {}
     }
     // --- Site: Backup & Restore + Retention (in-core, unified) ---

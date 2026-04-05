@@ -124,11 +124,31 @@ return [
 // History default expectations
 'append_interval_min' => 5,
 ],
+// Speedtest
+'speedtest' => [
+  'enabled' => false,
+  'interval_minutes' => 240,
+  'timeout_seconds' => 90,
+  'preferred_backend' => 'auto',
+  'preferred_server_ookla' => '',
+  'preferred_server_librespeed' => '',
+  'retention_days' => 90,
+  'max_history_entries' => 2000,
+  'log_failed_tests' => true,
+  'randomize_schedule_window' => true,
+  'randomize_window_minutes' => 10,
+  'quiet_hours' => [
+    'enabled' => false,
+    'start_hour' => 0,
+    'end_hour' => 6,
+  ],
+],
   // UI Defaults
   'ui' => [
         'high_contrast' => false,
     'toast_position' => 'bottom-center',
     'items_per_page' => 25,
+    'header_navigation_mode' => 'buttons',
   ],
 
 // Logs

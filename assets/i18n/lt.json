@@ -1,314 +1,493 @@
 {
-  "app": {
-    "title": "Serverio prietaisų skydelis"
-  },
-  "nav": {
-    "history": "Istorija",
-    "logs": "Žurnalai",
-    "dashboard": "Prietaisų skydelis",
-    "services": "Paslaugos",
-    "alerts": "Įspėjimai",
-    "tests": "Testai",
-    "settings": "Nustatymai",
-    "about": "Apie"
-  },
-  "history": {
-    "title": "Istorija",
-    "trends": "Tendencijos",
-    "range": "Diapazonas",
-    "baseline": "Bazinis",
-    "probe_now": "Zondas dabar",
-    "refresh": "Atnaujinti",
-    "export_json": "Eksportuoti JSON",
-    "export_alerts_json": "Eksportuoti perspėjimus JSON",
-    "reset_history": "Istorijos atstatymas",
-    "recent_alert_events": "Naujausi įspėjimo įvykiai",
-    "export_preview": "Eksporto peržiūra",
-    "close": "Uždaryti",
-    "copy": "Kopijuoti",
-    "download": "Atsisiųsti"
-  },
-  "logs": {
-    "title": "Žurnalai",
-    "manage": "Tvarkyti žurnalus",
-    "add": "Pridėti",
-    "delete": "Ištrinti",
-    "refresh": "Atnaujinti",
-    "search": "Paieška",
-    "filter": "Filtras",
-    "lines": "Eilutės",
-    "open": "Atviras",
-    "close": "Uždaryti",
-    "download": "Atsisiųsti",
-    "copy": "Kopijuoti"
-  },
-  "common": {
-    "save": "Išsaugoti",
-    "cancel": "Atšaukti",
-    "edit": "Redaguoti",
-    "delete": "Ištrinti",
-    "update": "Atnaujinti",
-    "create": "Sukurti",
-    "enable": "Įjungti",
-    "disable": "Išjungti",
-    "yes": "Taip",
-    "no": "Ne",
-    "on": "Svetainėje",
-    "off": "Išjungta",
-    "confirm": "Patvirtinkite",
-    "search": "Paieška",
-    "filter": "Filtras",
-    "actions": "Veiksmai"
-  },
-  "alerts": {
-    "title": "Įspėjimai",
-    "recent_events": "Naujausi įspėjamieji įvykiai",
-    "history": "Įspėjimo istorija",
-    "export_json": "Eksportuoti perspėjimus JSON",
-    "no_alerts": "Jokių įspėjimų",
-    "level": "Lygis",
-    "message": "Žinutė",
-    "service": "Paslauga",
-    "time": "Laikas",
-    "probe_now": "Zondas dabar",
-    "refresh": "Atnaujinti",
-    "silence": "Tyla",
-    "unsilence": "Unsilence",
-    "ack": "Pripažinti",
-    "unack": "Nepripažinimas"
-  },
-  "tests": {
-    "title": "Serverio bandymai",
-    "run_all": "Paleisti visus",
-    "status": "Statusas",
-    "last_run": "Paskutinis paleidimas",
-    "duration": "Trukmė"
-  },
-  "services": {
-    "title": "Paslaugos",
-    "status": "Statusas",
-    "restart": "Iš naujo paleiskite",
-    "start": "Pradžia",
-    "stop": "Sustabdyti"
-  },
-  "config": {
-    "sections": {
-      "site": "Site",
-      "features": "Features",
-      "capabilities": "Capabilities",
-      "processes": "Processes",
-      "mail": "Mail",
-      "integrations": "Integrations",
-      "security": "Security",
-      "ui": "UI",
-      "server_tests": "Server Tests",
-      "alerts": "Alerts",
-      "cron": "Cron",
-      "history": "History",
-      "logs": "Logs",
-      "backups": "Atsarginės kopijos",
-      "email": "Email"
+    "app": {
+        "title": "Serverio prietais\u0173 skydelis"
     },
-    "fields": {
-      "backups": {
-        "require_dedicated_mount": {
-          "label": "Reikalingas specialus laikiklis",
-          "help": "Senas suderinamumo raktas. Kai įjungta, atsarginiams scenarijams reikia, kad būtų atsarginis laikiklis."
-        },
-        "disable_on_mount_fail": {
-          "label": "Išjungti atsargines kopijas, jei nepavyksta prijungti",
-          "help": "Kai įjungta, atsarginės kopijos veiksmai ir sukurti scenarijai sustabdomi, jei trūksta atsarginio laikiklio."
-        }
-      },
-      "alerts": {
-        "min_severity": {
-          "label": "Minimalus įspėjimo sunkumas"
-        },
-        "email": {
-          "label": "Legacy alert email(s)"
-        }
-      }
+    "nav": {
+        "history": "Istorija",
+        "logs": "\u017durnalai",
+        "dashboard": "Prietais\u0173 skydelis",
+        "services": "Paslaugos",
+        "alerts": "\u012esp\u0117jimai",
+        "tests": "Testai",
+        "settings": "Nustatymai",
+        "about": "Apie"
     },
-    "ui": {
-      "unknown": "nežinomas",
-      "unknown_paren": "(nežinoma)",
-      "site_backup": {
-        "title": "Atsarginė kopija ir atkūrimas",
-        "export_config": "Eksportuoti konfigūraciją",
-        "import_config": "Importuoti konfigūraciją",
-        "choose_file_first": "Pirmiausia pasirinkite atsarginės kopijos failą",
-        "imported_reloading": "Importuota. Įkeliama iš naujo...",
-        "import_failed": "Importuoti nepavyko",
-        "import_failed_prefix": "Importuoti nepavyko:",
-        "retention_title": "Atsarginės kopijos – saugojimas",
-        "keep_last": "Laikykitės paskutinių",
-        "files": "failus",
-        "loading_stats": "(įkeliama statistika...)",
-        "last_backup_loading": "Paskutinė atsarginė kopija: (įkeliama...)",
-        "last_backup_none": "Paskutinė atsarginė kopija: dar nėra",
-        "last_backup_prefix": "Paskutinė atsarginė kopija:",
-        "last_backup_unknown": "Paskutinė atsarginė kopija: nežinoma",
-        "prune_now": "Genėkite dabar",
-        "pruned_kept_deleted": "Genėti – laikomi",
-        "deleted_prefix": "ištrintas",
-        "prune_failed": "Slyvų nepavyko",
-        "prune_failed_prefix": "Slyva nepavyko:",
-        "create_backup_now": "Sukurkite atsarginę kopiją dabar",
-        "backup_saved_prefix": "Atsarginė kopija išsaugota:",
-        "backup_failed": "Nepavyko sukurti atsarginės kopijos",
-        "backup_failed_prefix": "Nepavyko sukurti atsarginės kopijos:",
-        "download_latest_backup": "Atsisiųskite naujausią atsarginę kopiją",
-        "no_backups_found": "Atsarginių kopijų nerasta",
-        "download_failed_prefix": "Atsisiuntimas nepavyko:",
-        "redact_secrets": "Redact secrets"
-      }
-    }
-  },
-  "backups": {
+    "history": {
+        "title": "Istorija",
+        "trends": "Tendencijos",
+        "range": "Diapazonas",
+        "baseline": "Bazinis",
+        "probe_now": "Zondas dabar",
+        "refresh": "Atnaujinti",
+        "export_json": "Eksportuoti JSON",
+        "export_alerts_json": "Eksportuoti persp\u0117jimus JSON",
+        "reset_history": "Istorijos atstatymas",
+        "recent_alert_events": "Naujausi \u012fsp\u0117jimo \u012fvykiai",
+        "export_preview": "Eksporto per\u017ei\u016bra",
+        "close": "U\u017edaryti",
+        "copy": "Kopijuoti",
+        "download": "Atsisi\u0173sti"
+    },
+    "logs": {
+        "title": "\u017durnalai",
+        "manage": "Tvarkyti \u017eurnalus",
+        "add": "Prid\u0117ti",
+        "delete": "I\u0161trinti",
+        "refresh": "Atnaujinti",
+        "search": "Paie\u0161ka",
+        "filter": "Filtras",
+        "lines": "Eilut\u0117s",
+        "open": "Atviras",
+        "close": "U\u017edaryti",
+        "download": "Atsisi\u0173sti",
+        "copy": "Kopijuoti"
+    },
     "common": {
-      "status": "Būsena:",
-      "timestamp": "Laiko žyma:",
-      "none_dash": "-",
-      "free": "Nemokama",
-      "used": "Naudota",
-      "copy": "Kopijuoti",
-      "warnings": "Įspėjimai",
-      "errors": "Klaidos",
-      "loading": "Įkeliama..."
+        "save": "I\u0161saugoti",
+        "cancel": "At\u0161aukti",
+        "edit": "Redaguoti",
+        "delete": "I\u0161trinti",
+        "update": "Atnaujinti",
+        "create": "Sukurti",
+        "enable": "\u012ejungti",
+        "disable": "I\u0161jungti",
+        "yes": "Taip",
+        "no": "Ne",
+        "on": "Svetain\u0117je",
+        "off": "I\u0161jungta",
+        "confirm": "Patvirtinkite",
+        "search": "Paie\u0161ka",
+        "filter": "Filtras",
+        "actions": "Veiksmai",
+        "close": "U\u017edaryti",
+        "none": "n\u0117ra",
+        "none_dash": "-"
     },
-    "status": {
-      "error_loading_json": "ĮKLAUSANT JSON KLAIDA",
-      "ok": "Gerai",
-      "unmounted": "NESUmontuotas",
-      "critical": "KRITIŠKAS",
-      "high": "AUKŠTAS",
-      "elevated": "PAKELTAS",
-      "healthy": "SVEIKA",
-      "unknown": "NEŽINOMA",
-      "unknown_cap": "Nežinoma"
+    "alerts": {
+        "title": "\u012esp\u0117jimai",
+        "recent_events": "Naujausi \u012fsp\u0117jamieji \u012fvykiai",
+        "history": "\u012esp\u0117jimo istorija",
+        "export_json": "Eksportuoti persp\u0117jimus JSON",
+        "no_alerts": "Joki\u0173 \u012fsp\u0117jim\u0173",
+        "level": "Lygis",
+        "message": "\u017dinut\u0117",
+        "service": "Paslauga",
+        "time": "Laikas",
+        "probe_now": "Zondas dabar",
+        "refresh": "Atnaujinti",
+        "silence": "Tyla",
+        "unsilence": "Unsilence",
+        "ack": "Pripa\u017einti",
+        "unack": "Nepripa\u017einimas"
     },
-    "disk": {
-      "unmounted": "Diskas NESUJUNGTAS",
-      "tag": "Diskas:",
-      "sizes_updated": "Atnaujinti dydžiai:",
-      "title": "Disko naudojimas",
-      "usage": "Naudojimas",
-      "mount": "Montuoti"
+    "tests": {
+        "title": "Serverio bandymai",
+        "run_all": "Paleisti visus",
+        "status": "Statusas",
+        "last_run": "Paskutinis paleidimas",
+        "duration": "Trukm\u0117"
     },
-    "page": {
-      "freshness_prefix": "Šviežumas:",
-      "title": "Atsarginės kopijos valdymo centras",
-      "subtitle_prefix": "Tiesioginė būsena, kurią lemia",
-      "subtitle_suffix": "atsarginiame diske."
+    "services": {
+        "title": "Paslaugos",
+        "status": "Statusas",
+        "restart": "I\u0161 naujo paleiskite",
+        "start": "Prad\u017eia",
+        "stop": "Sustabdyti"
     },
-    "ages": {
-      "no_snapshots_on_disk": "Diske nerasta momentinių nuotraukų",
-      "one_snapshot_present": "Pateikiama 1 momentinė nuotrauka",
-      "snapshots_present_suffix": "esamų momentinių nuotraukų",
-      "no_panel_backups_on_disk": "Diske nerasta skydelio atsarginių kopijų",
-      "one_panel_backup_present": "Yra 1 skydelio atsarginė kopija",
-      "panel_backups_present_suffix": "yra skydelio atsarginės kopijos",
-      "no_micro_backups_on_disk": "Nerasta jokių mikro atsarginių kopijų diske",
-      "one_micro_backup_present": "Yra 1 mikro atsarginė kopija",
-      "micro_backups_present_suffix": "yra mikro atsarginės kopijos",
-      "snapshot_daily0_chart": "Momentinė nuotrauka (kasdien.0)",
-      "hestia_latest_chart": "Hestia naujausia",
-      "micro_latest_chart": "Naujausias mikro",
-      "age_days": "Amžius (dienomis)",
-      "title": "Atsarginės kopijos",
-      "subtitle": "Kokios šviežios jūsų naujausios atsarginės kopijos",
-      "snapshot_daily0": "Momentinė nuotrauka kasdien.0",
-      "latest_hestia": "Naujausia Hestia",
-      "latest_micro": "Naujausias Micro"
+    "config": {
+        "sections": {
+            "site": "Site",
+            "features": "Features",
+            "capabilities": "Capabilities",
+            "processes": "Processes",
+            "mail": "Mail",
+            "integrations": "Integrations",
+            "security": "Security",
+            "ui": "UI",
+            "server_tests": "Server Tests",
+            "alerts": "Alerts",
+            "cron": "Cron",
+            "history": "History",
+            "logs": "Logs",
+            "backups": "Atsargin\u0117s kopijos",
+            "email": "Email"
+        },
+        "fields": {
+            "backups": {
+                "require_dedicated_mount": {
+                    "label": "Reikalingas specialus laikiklis",
+                    "help": "Senas suderinamumo raktas. Kai \u012fjungta, atsarginiams scenarijams reikia, kad b\u016bt\u0173 atsarginis laikiklis."
+                },
+                "disable_on_mount_fail": {
+                    "label": "I\u0161jungti atsargines kopijas, jei nepavyksta prijungti",
+                    "help": "Kai \u012fjungta, atsargin\u0117s kopijos veiksmai ir sukurti scenarijai sustabdomi, jei tr\u016bksta atsarginio laikiklio."
+                }
+            },
+            "alerts": {
+                "min_severity": {
+                    "label": "Minimalus \u012fsp\u0117jimo sunkumas"
+                },
+                "email": {
+                    "label": "Legacy alert email(s)"
+                }
+            }
+        },
+        "ui": {
+            "unknown": "ne\u017einomas",
+            "unknown_paren": "(ne\u017einoma)",
+            "site_backup": {
+                "title": "Atsargin\u0117 kopija ir atk\u016brimas",
+                "export_config": "Eksportuoti konfig\u016bracij\u0105",
+                "import_config": "Importuoti konfig\u016bracij\u0105",
+                "choose_file_first": "Pirmiausia pasirinkite atsargin\u0117s kopijos fail\u0105",
+                "imported_reloading": "Importuota. \u012ekeliama i\u0161 naujo...",
+                "import_failed": "Importuoti nepavyko",
+                "import_failed_prefix": "Importuoti nepavyko:",
+                "retention_title": "Atsargin\u0117s kopijos \u2013 saugojimas",
+                "keep_last": "Laikykit\u0117s paskutini\u0173",
+                "files": "failus",
+                "loading_stats": "(\u012fkeliama statistika...)",
+                "last_backup_loading": "Paskutin\u0117 atsargin\u0117 kopija: (\u012fkeliama...)",
+                "last_backup_none": "Paskutin\u0117 atsargin\u0117 kopija: dar n\u0117ra",
+                "last_backup_prefix": "Paskutin\u0117 atsargin\u0117 kopija:",
+                "last_backup_unknown": "Paskutin\u0117 atsargin\u0117 kopija: ne\u017einoma",
+                "prune_now": "Gen\u0117kite dabar",
+                "pruned_kept_deleted": "Gen\u0117ti \u2013 laikomi",
+                "deleted_prefix": "i\u0161trintas",
+                "prune_failed": "Slyv\u0173 nepavyko",
+                "prune_failed_prefix": "Slyva nepavyko:",
+                "create_backup_now": "Sukurkite atsargin\u0119 kopij\u0105 dabar",
+                "backup_saved_prefix": "Atsargin\u0117 kopija i\u0161saugota:",
+                "backup_failed": "Nepavyko sukurti atsargin\u0117s kopijos",
+                "backup_failed_prefix": "Nepavyko sukurti atsargin\u0117s kopijos:",
+                "download_latest_backup": "Atsisi\u0173skite naujausi\u0105 atsargin\u0119 kopij\u0105",
+                "no_backups_found": "Atsargini\u0173 kopij\u0173 nerasta",
+                "download_failed_prefix": "Atsisiuntimas nepavyko:",
+                "redact_secrets": "Redact secrets"
+            }
+        }
     },
-    "errors": {
-      "no_backups_detected": "Neaptikta jokių momentinių nuotraukų, „Hestia“ ar mikro rinkinių atsarginių kopijų."
+    "backups": {
+        "common": {
+            "status": "B\u016bsena:",
+            "timestamp": "Laiko \u017eyma:",
+            "none_dash": "-",
+            "free": "Nemokama",
+            "used": "Naudota",
+            "copy": "Kopijuoti",
+            "warnings": "\u012esp\u0117jimai",
+            "errors": "Klaidos",
+            "loading": "\u012ekeliama..."
+        },
+        "status": {
+            "error_loading_json": "\u012eKLAUSANT JSON KLAIDA",
+            "ok": "Gerai",
+            "unmounted": "NESUmontuotas",
+            "critical": "KRITI\u0160KAS",
+            "high": "AUK\u0160TAS",
+            "elevated": "PAKELTAS",
+            "healthy": "SVEIKA",
+            "unknown": "NE\u017dINOMA",
+            "unknown_cap": "Ne\u017einoma"
+        },
+        "disk": {
+            "unmounted": "Diskas NESUJUNGTAS",
+            "tag": "Diskas:",
+            "sizes_updated": "Atnaujinti dyd\u017eiai:",
+            "title": "Disko naudojimas",
+            "usage": "Naudojimas",
+            "mount": "Montuoti"
+        },
+        "page": {
+            "freshness_prefix": "\u0160vie\u017eumas:",
+            "title": "Atsargin\u0117s kopijos valdymo centras",
+            "subtitle_prefix": "Tiesiogin\u0117 b\u016bsena, kuri\u0105 lemia",
+            "subtitle_suffix": "atsarginiame diske."
+        },
+        "ages": {
+            "no_snapshots_on_disk": "Diske nerasta momentini\u0173 nuotrauk\u0173",
+            "one_snapshot_present": "Pateikiama 1 momentin\u0117 nuotrauka",
+            "snapshots_present_suffix": "esam\u0173 momentini\u0173 nuotrauk\u0173",
+            "no_panel_backups_on_disk": "Diske nerasta skydelio atsargini\u0173 kopij\u0173",
+            "one_panel_backup_present": "Yra 1 skydelio atsargin\u0117 kopija",
+            "panel_backups_present_suffix": "yra skydelio atsargin\u0117s kopijos",
+            "no_micro_backups_on_disk": "Nerasta joki\u0173 mikro atsargini\u0173 kopij\u0173 diske",
+            "one_micro_backup_present": "Yra 1 mikro atsargin\u0117 kopija",
+            "micro_backups_present_suffix": "yra mikro atsargin\u0117s kopijos",
+            "snapshot_daily0_chart": "Momentin\u0117 nuotrauka (kasdien.0)",
+            "hestia_latest_chart": "Hestia naujausia",
+            "micro_latest_chart": "Naujausias mikro",
+            "age_days": "Am\u017eius (dienomis)",
+            "title": "Atsargin\u0117s kopijos",
+            "subtitle": "Kokios \u0161vie\u017eios j\u016bs\u0173 naujausios atsargin\u0117s kopijos",
+            "snapshot_daily0": "Momentin\u0117 nuotrauka kasdien.0",
+            "latest_hestia": "Naujausia Hestia",
+            "latest_micro": "Naujausias Micro"
+        },
+        "errors": {
+            "no_backups_detected": "Neaptikta joki\u0173 momentini\u0173 nuotrauk\u0173, \u201eHestia\u201c ar mikro rinkini\u0173 atsargini\u0173 kopij\u0173."
+        },
+        "restore": {
+            "hestia_placeholder_tar": "genas.YYYYMMDD-HHMM.der",
+            "using_latest_backup_prefix": "Naudojant naujausi\u0105 atsargin\u0119 kopij\u0105, apie kuri\u0105 prane\u0161ta JSON:",
+            "adjust_backup_tar": "Prie\u0161 paleisdami sureguliuokite BACKUP_TAR \u012f tikr\u0105 fail\u0105 i\u0161 \\\"v-list-backups USER\\\".",
+            "micro_restore_prefix": "Atkurti baz\u0119 i\u0161 naujausios mikro momentin\u0117s nuotraukos:",
+            "micro_restore_suffix": "(prie\u0161 paleisdami per\u017ei\u016br\u0117kite kelius ir i\u0161skyrimus).",
+            "set_correct_snapshot_path": "Prie\u0161 naudodami \u0161i\u0105 komand\u0105, nustatykite teising\u0105 momentin\u0117s nuotraukos keli\u0105.",
+            "confirm_body_1": "Bus paleista Hestia atk\u016brimo u\u017eduotis serveryje naudojant backupctl.",
+            "confirm_body_2": "To vartotojo paslaugos ir duomenys gali b\u016bti perra\u0161yti.",
+            "confirm_body_3": "Ar esi visi\u0161kai tikras?"
+        },
+        "actions": {
+            "starting_prefix": "Pradedama",
+            "failed_to_start_prefix": "Nepavyko prad\u0117ti",
+            "started_prefix": "Prasid\u0117jo",
+            "started_suffix": ". Tai gali \u0161iek tiek u\u017etrukti; b\u016bsena bus atnaujinta kit\u0105 kart\u0105 patikrinus sveikat\u0105.",
+            "error_talking_endpoint": "Klaida kalbant su backups_action.php",
+            "run_os_snapshot": "Paleiskite OS momentin\u012f vaizd\u0105",
+            "run_micro_backup": "Paleiskite \u201eMicro Backup\u201c.",
+            "run_hestia_backup_user": "Paleisti Hestia atsargin\u0119 kopij\u0105 (genas)",
+            "run_all_backups": "Paleiskite VISAS atsargines kopijas",
+            "run_health_check": "Atlikite sveikatos patikrinim\u0105",
+            "log_maintenance": "R\u0105sto prie\u017ei\u016bra",
+            "clear_backup_logs": "I\u0161valykite atsargin\u0117s kopijos sveikatos \u017eurnalus",
+            "clear_prune_logs": "I\u0161valykite slyv\u0173 r\u0105stus",
+            "clear_integrity_log": "I\u0161valyti vientisumo \u017eurnal\u0105"
+        },
+        "cron": {
+            "no_entries": "Crontab \u012fra\u0161\u0173 neaptikta.",
+            "env": "Env",
+            "schedule": "Tvarkara\u0161tis",
+            "entries_for_prefix": "Crontab \u012fra\u0161ai, skirti",
+            "current_user": "dabartinis vartotojas",
+            "unable_to_read": "Nepavyko perskaityti crontab.",
+            "failed_to_read": "Nepavyko perskaityti crontab."
+        },
+        "warnings_errors": {
+            "title": "\u012esp\u0117jimai ir klaidos",
+            "subtitle": "Santrauka i\u0161 sveikatos patikrinimo"
+        },
+        "raw_snapshot": {
+            "title": "Neapdorotas momentinis vaizdas",
+            "subtitle": "Pagrindin\u0117s reik\u0161m\u0117s tiesiogiai i\u0161 paskutin\u0117s JSON b\u016bsenos"
+        },
+        "recent_actions": {
+            "title": "Naujausi veiksmai",
+            "subtitle": "Veiksm\u0173 i\u0161 \u0161ios informacijos suvestin\u0117s istorija",
+            "none": "Veiksm\u0173 dar neu\u017efiksuota."
+        },
+        "orch": {
+            "title": "Atsargin\u0117s kopijos orkestravimo vedlys",
+            "subtitle": "Vien\u0105 kart\u0105 tinkinkite kelius, tada nukopijuokite sugeneruotus scenarijus / cron / systemd vienetus.",
+            "backup_root": "Atsargin\u0117 \u0161aknis",
+            "include_health": "\u012etraukti sveikatos patikrinim\u0105",
+            "include_integrity": "\u012etraukite vientisumo patikrinim\u0105",
+            "include_prune": "\u012etraukti slyv\u0173 stadij\u0105",
+            "suspend": "Sustabdyti atsargines kopijas",
+            "disable_on_mount_fail": "I\u0161jungti atsargines kopijas, jei nepavyksta prijungti",
+            "nightly_script": "Naktinis scenarijus",
+            "copy_script": "Nukopijuokite scenarij\u0173",
+            "cron_entry": "Cron \u012fra\u0161as",
+            "copy_cron_line": "Nukopijuokite cron eilut\u0119",
+            "systemd_service": "Sisteminis aptarnavimas",
+            "copy_unit": "Kopijavimo vienetas",
+            "systemd_timer": "Sisteminis laikmatis",
+            "copy_timer": "Kopijavimo laikmatis"
+        },
+        "quick_restore": {
+            "title": "Greito atk\u016brimo pagalbininkai",
+            "subtitle": "I\u0161 anksto u\u017epildytos CLI komandos avarin\u0117ms situacijoms (rankinis paleidimas arba mygtukas PAVOJUS)",
+            "hestia_latest_title": "Atkurkite naujausi\u0105 \u201eHestia\u201c naudotojo atsargin\u0119 kopij\u0105",
+            "micro_latest_title": "Atkurti i\u0161 naujausios mikro momentin\u0117s nuotraukos (tik CLI)",
+            "copy_command": "Kopijuoti komand\u0105",
+            "run_restore_danger": "Paleisti atk\u016brim\u0105 (naujausia, PAVOJUS)"
+        },
+        "cli": {
+            "title": "\u201eHestia\u201c atsargini\u0173 kopij\u0173 k\u016brimo ir atk\u016brimo CLI",
+            "subtitle": "Greitos nuorodos lapas \u2013 paruo\u0161tas kopijavimas ir \u012fklijavimas",
+            "create_backups": "Sukurti atsargines kopijas",
+            "list_delete_backups": "Atsargini\u0173 kopij\u0173 s\u0105ra\u0161as ir i\u0161trynimas",
+            "full_restore_user": "Visi\u0161kas atk\u016brimas (vartotojas)",
+            "selective_restore": "Pasirinktinis atk\u016brimas (\u017einiatinklis / DB / pa\u0161tas)",
+            "backup_file_locations": "Atsargin\u0117s fail\u0173 vietos",
+            "backup_tarball_contents": "\u201eTarball\u201c turinio atsargin\u0117 kopija",
+            "backupctl_help": "backupctl pagalba"
+        }
     },
-    "restore": {
-      "hestia_placeholder_tar": "genas.YYYYMMDD-HHMM.der",
-      "using_latest_backup_prefix": "Naudojant naujausią atsarginę kopiją, apie kurią pranešta JSON:",
-      "adjust_backup_tar": "Prieš paleisdami sureguliuokite BACKUP_TAR į tikrą failą iš \\\"v-list-backups USER\\\".",
-      "micro_restore_prefix": "Atkurti bazę iš naujausios mikro momentinės nuotraukos:",
-      "micro_restore_suffix": "(prieš paleisdami peržiūrėkite kelius ir išskyrimus).",
-      "set_correct_snapshot_path": "Prieš naudodami šią komandą, nustatykite teisingą momentinės nuotraukos kelią.",
-      "confirm_body_1": "Bus paleista Hestia atkūrimo užduotis serveryje naudojant backupctl.",
-      "confirm_body_2": "To vartotojo paslaugos ir duomenys gali būti perrašyti.",
-      "confirm_body_3": "Ar esi visiškai tikras?"
+    "footer": {
+        "logged_in_as": "Prisijungta kaip",
+        "theme": "Tema"
     },
-    "actions": {
-      "starting_prefix": "Pradedama",
-      "failed_to_start_prefix": "Nepavyko pradėti",
-      "started_prefix": "Prasidėjo",
-      "started_suffix": ". Tai gali šiek tiek užtrukti; būsena bus atnaujinta kitą kartą patikrinus sveikatą.",
-      "error_talking_endpoint": "Klaida kalbant su backups_action.php",
-      "run_os_snapshot": "Paleiskite OS momentinį vaizdą",
-      "run_micro_backup": "Paleiskite „Micro Backup“.",
-      "run_hestia_backup_user": "Paleisti Hestia atsarginę kopiją (genas)",
-      "run_all_backups": "Paleiskite VISAS atsargines kopijas",
-      "run_health_check": "Atlikite sveikatos patikrinimą",
-      "log_maintenance": "Rąsto priežiūra",
-      "clear_backup_logs": "Išvalykite atsarginės kopijos sveikatos žurnalus",
-      "clear_prune_logs": "Išvalykite slyvų rąstus",
-      "clear_integrity_log": "Išvalyti vientisumo žurnalą"
+    "i18n": {
+        "language_picker": {
+            "title": "Kalba",
+            "saving": "I\u0161saugoma...",
+            "saved": "I\u0161saugota",
+            "save_failed": "Nepavyko i\u0161saugoti"
+        }
     },
-    "cron": {
-      "no_entries": "Crontab įrašų neaptikta.",
-      "env": "Env",
-      "schedule": "Tvarkaraštis",
-      "entries_for_prefix": "Crontab įrašai, skirti",
-      "current_user": "dabartinis vartotojas",
-      "unable_to_read": "Nepavyko perskaityti crontab.",
-      "failed_to_read": "Nepavyko perskaityti crontab."
+    "services_page": {
+        "environment": "Aplinka",
+        "filter_placeholder": "Filtruoti paslaugas...",
+        "add_service": "Prid\u0117ti paslaug\u0105",
+        "edit_service": "Redaguoti paslaug\u0105",
+        "import": "Importuoti",
+        "export_csv": "Eksportuoti CSV",
+        "auto_probe": "Automatinis tikrinimas",
+        "every": "Kas",
+        "seconds_short": "s",
+        "columns": {
+            "name": "Pavadinimas",
+            "category": "Kategorija",
+            "host": "Serveris",
+            "port": "Prievadas",
+            "probe": "Patikra",
+            "timeout": "Laukimo laikas",
+            "path": "Kelias",
+            "enabled": "\u012ejungta"
+        },
+        "form": {
+            "name": "Pavadinimas",
+            "category": "Kategorija",
+            "host": "Serveris",
+            "port": "Prievadas",
+            "probe": "Patikra",
+            "timeout": "Laukimo laikas (ms)",
+            "path": "Kelias (HTTP)",
+            "enabled": "\u012ejungta"
+        },
+        "test_on_save": "Tikrinti i\u0161saugant",
+        "caps": {
+            "panel": "skydelis",
+            "web": "\u017einiatinklio svetain\u0117",
+            "mta": "mta",
+            "db": "db",
+            "nginx": "nginx"
+        },
+        "states": {
+            "active": "aktyvus",
+            "inactive": "neaktyvus"
+        },
+        "path_not_used": "(nenaudojamas)",
+        "status": {
+            "up": "UP",
+            "warn": "\u012eSP\u0116JIMAS",
+            "down": "DOWN",
+            "unknown": "NE\u017dINOMAS"
+        },
+        "relative_time": {
+            "just_now": "tik dabar",
+            "minutes_ago": "{count}m ago",
+            "hours_ago": "prie\u0161 {count}h",
+            "days_ago": "prie\u0161 {count}d"
+        },
+        "units": {
+            "ms": "ms"
+        },
+        "actions": {
+            "test": "Testas"
+        },
+        "uptime": "Veikimo trukm\u0117 {proc.}%",
+        "alert_last_seen": "\u012esp\u0117jimas {laikas}",
+        "alerts_muted_until": "Nutildytas {laikas}",
+        "mute_alerts": "I\u0161jungti \u012fsp\u0117jimus",
+        "confirm_delete": "I\u0161trinti \u0161i\u0105 paslaug\u0105?",
+        "probe_kicked": "Zondas i\u0161mu\u0161tas",
+        "no_alert_rules": "N\u0117ra \u012fsp\u0117jimo taisykli\u0173, kurias b\u016bt\u0173 galima nutildyti.",
+        "prompt_mute_minutes": "Kiek minu\u010di\u0173 nutildyti susijusius \u012fsp\u0117jimus?",
+        "alerts_muted_for": "\u012esp\u0117jimai nutildyti {mins}m.",
+        "mute_failed": "Nepavyko i\u0161jungti garso: {prane\u0161imas}",
+        "invalid_json": "Netinkamas JSON",
+        "import_failed": "Importuoti nepavyko",
+        "validation": {
+            "name_required": "B\u016btina nurodyti vard\u0105.",
+            "host_required": "Reikalingas \u0161eimininkas.",
+            "port_range": "Prievadas turi b\u016bti 1-65535.",
+            "correct_fields": "I\u0161taisykite pary\u0161kintus laukus."
+        },
+        "service_save_requested": "Pra\u0161oma i\u0161saugoti paslaug\u0105"
     },
-    "warnings_errors": {
-      "title": "Įspėjimai ir klaidos",
-      "subtitle": "Santrauka iš sveikatos patikrinimo"
+    "bookmarks_page": {
+        "title": "\u017dym\u0117s",
+        "manage": "Tvarkyti \u017eymes",
+        "add_to_browser": "Prid\u0117ti prie nar\u0161ykl\u0117s",
+        "bookmarklet_title": "Nuvilkite tai \u012f \u017eymi\u0173 juost\u0105, kad greitai prid\u0117tum\u0117te dabartin\u012f puslap\u012f",
+        "prompt_tags": "\u017dymos (atskirtos kableliais):",
+        "category": "Kategorija",
+        "all": "Visos",
+        "sort": "Rikiuoti",
+        "sort_updated_desc": "Atnaujinta (naujausia)",
+        "sort_title_asc": "Pavadinimas (A-Z)",
+        "sort_host_asc": "Serveris (A-Z)",
+        "fields": {
+            "title": "Pavadinimas",
+            "url": "URL",
+            "tags": "\u017dymos",
+            "name": "Pavadinimas"
+        },
+        "placeholders": {
+            "optional_title": "Pasirenkamas pavadinimas",
+            "tags": "\u017eymos,atskirtos,kableliais",
+            "new_category_name": "Naujos kategorijos pavadinimas"
+        },
+        "add_category": "Prid\u0117ti kategorij\u0105",
+        "updated": "Atnaujinta",
+        "empty": "Dar n\u0117ra \u017eymi\u0173.",
+        "empty_categories": "Dar n\u0117ra kategorij\u0173.",
+        "modal": {
+            "add_edit": "Prid\u0117ti / redaguoti \u017eym\u0119",
+            "add_categories": "Prid\u0117ti kategorijas"
+        },
+        "uncategorized": "Be kategorijos",
+        "hints": {
+            "bookmark_edit": "\u010cia rodykite \u017eymes su sulankstomomis kategorijomis. Spustel\u0117kite \u017eym\u0119, kad j\u0105 \u012fkeltum\u0117te auk\u0161\u010diau ir gal\u0117tum\u0117te redaguoti arba i\u0161trinti.",
+            "category_edit": "Kategorijos pateikiamos \u010dia. Spustel\u0117kite vien\u0105 i\u0161 j\u0173, kad j\u0105 \u012fkeltum\u0117te auk\u0161\u010diau ir gal\u0117tum\u0117te redaguoti arba i\u0161trinti."
+        },
+        "confirm_delete_category": "I\u0161trinti \u0161i\u0105 kategorij\u0105? \u017dym\u0117s taps Uncategorized.",
+        "confirm_delete_bookmark": "I\u0161trinti \u0161i\u0105 \u017eym\u0119?",
+        "validation": {
+            "category_name_required": "B\u016btinas kategorijos pavadinimas",
+            "url_required": "Reikalingas URL adresas"
+        },
+        "errors": {
+            "all_endpoints_failed": "Visi galiniai ta\u0161kai nepavyko",
+            "bad_json": "Blogas JSON i\u0161 serverio",
+            "api_not_found": "Nepavyko \u012fkelti \u017eym\u0173 (API nerastas). I\u0161bandyta: Bandyta: {tried}",
+            "load_failed": "Nepavyko \u012fkelti \u017eym\u0173: {message}"
+        },
+        "toasts": {
+            "category_saved": "I\u0161saugota kategorija",
+            "save_failed": "I\u0161saugoti nepavyko: {prane\u0161imas}",
+            "category_deleted": "I\u0161braukta kategorija",
+            "delete_failed": "I\u0161trinti nepavyko: {prane\u0161imas}",
+            "order_saved": "I\u0161saugotas u\u017esakymas",
+            "reorder_failed": "U\u017esakymas nepavyko: {prane\u0161imas}",
+            "category_updated": "Kategorija atnaujinta",
+            "category_added": "Prid\u0117ta kategorija",
+            "bookmark_deleted": "I\u0161trinta \u017eyma",
+            "bookmark_updated": "Atnaujinta \u017eyma",
+            "bookmark_added": "Prid\u0117ta \u017eyma"
+        }
     },
-    "raw_snapshot": {
-      "title": "Neapdorotas momentinis vaizdas",
-      "subtitle": "Pagrindinės reikšmės tiesiogiai iš paskutinės JSON būsenos"
-    },
-    "recent_actions": {
-      "title": "Naujausi veiksmai",
-      "subtitle": "Veiksmų iš šios informacijos suvestinės istorija",
-      "none": "Veiksmų dar neužfiksuota."
-    },
-    "orch": {
-      "title": "Atsarginės kopijos orkestravimo vedlys",
-      "subtitle": "Vieną kartą tinkinkite kelius, tada nukopijuokite sugeneruotus scenarijus / cron / systemd vienetus.",
-      "backup_root": "Atsarginė šaknis",
-      "include_health": "Įtraukti sveikatos patikrinimą",
-      "include_integrity": "Įtraukite vientisumo patikrinimą",
-      "include_prune": "Įtraukti slyvų stadiją",
-      "suspend": "Sustabdyti atsargines kopijas",
-      "disable_on_mount_fail": "Išjungti atsargines kopijas, jei nepavyksta prijungti",
-      "nightly_script": "Naktinis scenarijus",
-      "copy_script": "Nukopijuokite scenarijų",
-      "cron_entry": "Cron įrašas",
-      "copy_cron_line": "Nukopijuokite cron eilutę",
-      "systemd_service": "Sisteminis aptarnavimas",
-      "copy_unit": "Kopijavimo vienetas",
-      "systemd_timer": "Sisteminis laikmatis",
-      "copy_timer": "Kopijavimo laikmatis"
-    },
-    "quick_restore": {
-      "title": "Greito atkūrimo pagalbininkai",
-      "subtitle": "Iš anksto užpildytos CLI komandos avarinėms situacijoms (rankinis paleidimas arba mygtukas PAVOJUS)",
-      "hestia_latest_title": "Atkurkite naujausią „Hestia“ naudotojo atsarginę kopiją",
-      "micro_latest_title": "Atkurti iš naujausios mikro momentinės nuotraukos (tik CLI)",
-      "copy_command": "Kopijuoti komandą",
-      "run_restore_danger": "Paleisti atkūrimą (naujausia, PAVOJUS)"
-    },
-    "cli": {
-      "title": "„Hestia“ atsarginių kopijų kūrimo ir atkūrimo CLI",
-      "subtitle": "Greitos nuorodos lapas – paruoštas kopijavimas ir įklijavimas",
-      "create_backups": "Sukurti atsargines kopijas",
-      "list_delete_backups": "Atsarginių kopijų sąrašas ir ištrynimas",
-      "full_restore_user": "Visiškas atkūrimas (vartotojas)",
-      "selective_restore": "Pasirinktinis atkūrimas (žiniatinklis / DB / paštas)",
-      "backup_file_locations": "Atsarginės failų vietos",
-      "backup_tarball_contents": "„Tarball“ turinio atsarginė kopija",
-      "backupctl_help": "backupctl pagalba"
+    "header": {
+        "navigation": "Antra\u0161t\u0117s navigacija",
+        "system_status": "Paslaugos statusas",
+        "loading": "Pakraunama...",
+        "profile": "Mano profilis",
+        "logout": "Atsijungimas",
+        "mobile": {
+            "open_menu": "Atidaryti meniu",
+            "menu": "Meniu"
+        },
+        "nav": {
+            "history": "Istorija",
+            "cron_health": "\"Cron Health",
+            "processes": "Procesai",
+            "databases": "Duomen\u0173 baz\u0117s",
+            "speedtest": "Speedtest",
+            "diagnostics": "Diagnostika",
+            "config": "Konfig\u016bracija",
+            "backups": "Atsargin\u0117s kopijos"
+        }
     }
-  }
 }

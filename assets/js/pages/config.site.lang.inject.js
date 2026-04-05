@@ -1,5 +1,13 @@
 (function () {
   "use strict";
+  function t(key, fallback) {
+    try {
+      if (window.I18N && typeof window.I18N.t === "function") {
+        return window.I18N.t(key, fallback);
+      }
+    } catch (_) {}
+    return fallback != null ? fallback : key;
+  }
   function q(sel, root) {
     return (root || document).querySelector(sel);
   }
@@ -77,14 +85,14 @@
       container.style.gap = "12px";
       // small label
       var label = el("label");
-      label.textContent = "Language";
+      label.textContent = t("i18n.language_picker.title", "Language");
       label.style.minWidth = "120px";
       label.style.fontWeight = "600";
       var sel = el("select", "input");
       sel.id = "siteLangSelect";
       var saveBtn = el("button", "btn");
       saveBtn.id = "siteLangSave";
-      saveBtn.textContent = "Save";
+      saveBtn.textContent = t("common.save", "Save");
       var status = el("span");
       status.className = "muted";
       status.id = "siteLangStatus";
@@ -97,7 +105,7 @@
     } else {
       var card = el("div", "card");
       var h = el("h3");
-      h.textContent = "Language";
+      h.textContent = t("i18n.language_picker.title", "Language");
       card.appendChild(h);
       container = el("div");
       container.style.display = "flex";
@@ -108,7 +116,7 @@
       sel.id = "siteLangSelect";
       var saveBtn = el("button", "btn");
       saveBtn.id = "siteLangSave";
-      saveBtn.textContent = "Save";
+      saveBtn.textContent = t("common.save", "Save");
       var status = el("span");
       status.className = "muted";
       status.id = "siteLangStatus";
@@ -151,7 +159,7 @@
           "api/config_import.php?_csrf=" +
           encodeURIComponent(window.__CONFIG_CSRF__ || "");
         btn.disabled = true;
-        if (status) status.textContent = "Saving…";
+        if (status) status.textContent = t("i18n.language_picker.saving", "Saving...");
         fetch(url, {
           method: "POST",
           credentials: "same-origin",
@@ -165,7 +173,7 @@
           })
           .then(function (j) {
             if (j && j.ok) {
-              if (status) status.textContent = "Saved";
+              if (status) status.textContent = t("i18n.language_picker.saved", "Saved");
               try {
                 document.documentElement.setAttribute("lang", locale);
               } catch (_) {}
@@ -175,11 +183,11 @@
                   window.__CONFIG_DATA__.i18n || {}).locale = locale;
               } catch (_) {}
             } else {
-              if (status) status.textContent = "Save failed";
+              if (status) status.textContent = t("i18n.language_picker.save_failed", "Save failed");
             }
           })
           .catch(function () {
-            if (status) status.textContent = "Save failed";
+            if (status) status.textContent = t("i18n.language_picker.save_failed", "Save failed");
           })
           .finally(function () {
             btn.disabled = false;

@@ -467,72 +467,111 @@ legend {
 
 /* High-contrast mode */
 .theme-contrast {
-  color-scheme: dark;
-  --bg: #000;
-  --bg-0: #000;
-  --bg-1: #000;
-  --bg-2: #0a0a0a;
-  --card: #000;
-  --card-bg: #000;
-  --header-bg: #000;
-  --fg: #fff;
-  --fg-1: #fff;
-  --fg-2: #f5f5f5;
-  --muted: #f0f0f0;
-  --link: #7fd1ff;
-  --accent: #ffd400;
-  --accent-2: #00e5ff;
-  --btn: #000;
-  --btn-bg: #000;
-  --btn-bg-hover: #1a1a1a;
-  --btn-fg: #fff;
-  --btn-border: #fff;
-  --btn-secondary-bg: #000;
-  --chip-bg: #000;
-  --chip-fg: #fff;
-  --chip-border: #fff;
-  --border: #fff;
-  --border-strong: #fff;
-  --border-1: #fff;
-  --border-2: #fff;
-  --card-border: #fff;
-  --menu-border: #fff;
-  --modal-bg: #000;
-  --modal-fg: #fff;
-  --modal-border: #fff;
-  --warning: #ffd400;
-  --warning-fg: #000;
-  --warn: #ffd400;
-  --ok: #00ff66;
-  --error: #ff4d4d;
+  --border: color-mix(in srgb, var(--border, rgba(255, 255, 255, 0.08)) 50%, white);
+  --border-strong: color-mix(in srgb, var(--border-strong, var(--border, rgba(255, 255, 255, 0.08))) 55%, white);
+  --border-1: color-mix(in srgb, var(--border-1, var(--border, rgba(255, 255, 255, 0.08))) 50%, white);
+  --border-2: color-mix(in srgb, var(--border-2, var(--border, rgba(255, 255, 255, 0.08))) 60%, white);
+  --card-border: color-mix(in srgb, var(--card-border, rgba(255, 255, 255, 0.08)) 55%, white);
+  --menu-border: color-mix(in srgb, var(--menu-border, rgba(255, 255, 255, 0.08)) 55%, white);
+  --btn-border: color-mix(in srgb, var(--btn-border, rgba(255, 255, 255, 0.12)) 55%, white);
+  --btn-bg: color-mix(in srgb, var(--btn-bg, rgba(255, 255, 255, 0.04)) 80%, white 20%);
+  --btn-bg-hover: color-mix(in srgb, var(--btn-bg-hover, rgba(255, 255, 255, 0.07)) 75%, white 25%);
+  --card-bg: color-mix(in srgb, var(--card-bg, rgba(255, 255, 255, 0.03)) 85%, white 15%);
+  --header-bg: color-mix(in srgb, var(--header-bg, #141922) 88%, white 12%);
+  --muted: color-mix(in srgb, var(--muted, var(--fg, #e6eef2)) 85%, white 15%);
+  --link: color-mix(in srgb, var(--link, #7fd1ff) 80%, white 20%);
+  --accent: color-mix(in srgb, var(--accent, #ffd400) 85%, white 15%);
+  --accent-2: color-mix(in srgb, var(--accent-2, #00e5ff) 82%, white 18%);
+  --card-shadow: rgba(0, 0, 0, 0.38) 0 10px 28px;
 }
 .theme-contrast :focus-visible {
-  outline: 3px solid #ffd400;
+  outline: 3px solid color-mix(in srgb, var(--accent, #ffd400) 85%, white 15%);
   outline-offset: 2px;
 }
 .theme-contrast a,
 .theme-contrast .linklike {
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
 }
 .theme-contrast .btn.secondary {
-  background: #000;
-  color: #fff;
-  border-color: #fff;
+  background: color-mix(in srgb, var(--btn-secondary-bg, rgba(255, 255, 255, 0.03)) 75%, white 25%);
+  color: var(--btn-fg, var(--fg, #e6eef2));
+  border-color: var(--btn-border, rgba(255, 255, 255, 0.12));
 }
 .theme-contrast input,
 .theme-contrast select,
 .theme-contrast textarea {
-  background: #000;
-  color: #fff;
-  border-color: #fff;
+  background: color-mix(in srgb, var(--card-bg, rgba(255, 255, 255, 0.03)) 86%, white 14%);
+  color: var(--fg, #e6eef2);
+  border-color: var(--border, rgba(255, 255, 255, 0.08));
 }
 .theme-contrast .table thead th {
-  background: #000 !important;
+  background: color-mix(in srgb, var(--header-bg, #141922) 88%, white 12%) !important;
 }
 .theme-contrast .muted {
   opacity: 1;
-  color: var(--fg);
+  color: var(--muted, var(--fg));
+}
+body.theme-contrast,
+html.theme-contrast body,
+.theme-contrast .app-header,
+.theme-contrast .card,
+.theme-contrast .table th,
+.theme-contrast .table td,
+.theme-contrast .btn,
+.theme-contrast input,
+.theme-contrast select,
+.theme-contrast textarea,
+.theme-contrast .chip,
+.theme-contrast .section-title,
+.theme-contrast .card-title,
+.theme-contrast .card-subtitle,
+.theme-contrast .tabs a,
+.theme-contrast .usermenu a,
+.theme-contrast label,
+.theme-contrast strong,
+.theme-contrast th,
+.theme-contrast td {
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.38),
+    0 0 0.55px rgba(255, 255, 255, 0.14);
+}
+.theme-contrast .muted,
+.theme-contrast .small,
+.theme-contrast .summary-meta,
+.theme-contrast .chart-title {
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.28),
+    0 0 0.35px rgba(255, 255, 255, 0.08);
+}
+.theme-contrast .status-pill,
+.theme-contrast .summary-value,
+.theme-contrast .section-title,
+.theme-contrast .card-title {
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.44),
+    0 0 1.2px rgba(255, 255, 255, 0.16);
+}
+.theme-contrast .app-header,
+.theme-contrast .card,
+.theme-contrast .modal-dialog,
+.theme-contrast .modal-card,
+.theme-contrast .usermenu,
+.theme-contrast .table thead th,
+.theme-contrast input,
+.theme-contrast select,
+.theme-contrast textarea {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 0 0 1px rgba(0, 0, 0, 0.14);
+}
+.theme-contrast .table thead th,
+.theme-contrast .app-header .tabs a[aria-current="page"],
+.theme-contrast .app-header .tabs a.is-active,
+.theme-contrast .btn,
+.theme-contrast .chip {
+  font-weight: 600;
 }
 
 /* === Spacing tokens (theme-aware) === */

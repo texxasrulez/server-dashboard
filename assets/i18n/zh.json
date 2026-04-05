@@ -1,314 +1,493 @@
 {
-  "app": {
-    "title": "服务器仪表板"
-  },
-  "nav": {
-    "history": "历史",
-    "logs": "日志",
-    "dashboard": "仪表板",
-    "services": "服务",
-    "alerts": "警报",
-    "tests": "测试",
-    "settings": "设置",
-    "about": "关于"
-  },
-  "history": {
-    "title": "历史",
-    "trends": "发展趋势",
-    "range": "范围",
-    "baseline": "基线",
-    "probe_now": "立即探测",
-    "refresh": "刷新",
-    "export_json": "导出 JSON",
-    "export_alerts_json": "导出警报 JSON",
-    "reset_history": "重置历史记录",
-    "recent_alert_events": "最近的警报事件",
-    "export_preview": "导出预览",
-    "close": "关闭",
-    "copy": "复制",
-    "download": "下载"
-  },
-  "logs": {
-    "title": "日志",
-    "manage": "管理日志",
-    "add": "添加",
-    "delete": "删除",
-    "refresh": "刷新",
-    "search": "搜索",
-    "filter": "过滤器",
-    "lines": "线路",
-    "open": "开放",
-    "close": "关闭",
-    "download": "下载",
-    "copy": "复制"
-  },
-  "common": {
-    "save": "节省",
-    "cancel": "取消",
-    "edit": "编辑",
-    "delete": "删除",
-    "update": "更新",
-    "create": "创建",
-    "enable": "启用",
-    "disable": "禁用",
-    "yes": "是",
-    "no": "没有",
-    "on": "关于",
-    "off": "关闭",
-    "confirm": "确认",
-    "search": "搜索",
-    "filter": "过滤器",
-    "actions": "行动"
-  },
-  "alerts": {
-    "title": "警报",
-    "recent_events": "最近的警报事件",
-    "history": "警报历史",
-    "export_json": "导出警报 JSON",
-    "no_alerts": "无警报",
-    "level": "级别",
-    "message": "留言",
-    "service": "服务",
-    "time": "时间",
-    "probe_now": "立即探测",
-    "refresh": "刷新",
-    "silence": "沉默",
-    "unsilence": "无声",
-    "ack": "确认",
-    "unack": "不承认"
-  },
-  "tests": {
-    "title": "服务器测试",
-    "run_all": "运行所有",
-    "status": "现状",
-    "last_run": "最后一次运行",
-    "duration": "持续时间"
-  },
-  "services": {
-    "title": "服务",
-    "status": "现状",
-    "restart": "重新启动",
-    "start": "开始",
-    "stop": "停止"
-  },
-  "config": {
-    "sections": {
-      "site": "Site",
-      "features": "Features",
-      "capabilities": "Capabilities",
-      "processes": "Processes",
-      "mail": "Mail",
-      "integrations": "Integrations",
-      "security": "Security",
-      "ui": "UI",
-      "server_tests": "Server Tests",
-      "alerts": "Alerts",
-      "cron": "Cron",
-      "history": "History",
-      "logs": "Logs",
-      "backups": "备份",
-      "email": "Email"
+    "app": {
+        "title": "\u670d\u52a1\u5668\u4eea\u8868\u677f"
     },
-    "fields": {
-      "backups": {
-        "require_dedicated_mount": {
-          "label": "需要专用安装座",
-          "help": "旧版兼容性密钥。启用后，备份脚本需要存在备份安装。"
-        },
-        "disable_on_mount_fail": {
-          "label": "如果安装失败则禁用备份",
-          "help": "启用后，如果备份安装丢失，备份操作和生成的脚本将停止。"
-        }
-      },
-      "alerts": {
-        "min_severity": {
-          "label": "警报的最低严重程度"
-        },
-        "email": {
-          "label": "Legacy alert email(s)"
-        }
-      }
+    "nav": {
+        "history": "\u5386\u53f2",
+        "logs": "\u65e5\u5fd7",
+        "dashboard": "\u4eea\u8868\u677f",
+        "services": "\u670d\u52a1",
+        "alerts": "\u8b66\u62a5",
+        "tests": "\u6d4b\u8bd5",
+        "settings": "\u8bbe\u7f6e",
+        "about": "\u5173\u4e8e"
     },
-    "ui": {
-      "unknown": "未知",
-      "unknown_paren": "（未知）",
-      "site_backup": {
-        "title": "备份与恢复",
-        "export_config": "导出配置",
-        "import_config": "导入配置",
-        "choose_file_first": "首先选择一个备份文件",
-        "imported_reloading": "进口的。正在重新加载...",
-        "import_failed": "导入失败",
-        "import_failed_prefix": "导入失败：",
-        "retention_title": "备份 - 保留",
-        "keep_last": "保持最后",
-        "files": "文件",
-        "loading_stats": "（正在加载统计数据...）",
-        "last_backup_loading": "最后一次备份：（加载中...）",
-        "last_backup_none": "上次备份：还没有",
-        "last_backup_prefix": "最后备份：",
-        "last_backup_unknown": "上次备份：未知",
-        "prune_now": "立即修剪",
-        "pruned_kept_deleted": "修剪保留",
-        "deleted_prefix": "已删除",
-        "prune_failed": "修剪失败",
-        "prune_failed_prefix": "修剪失败：",
-        "create_backup_now": "立即创建备份",
-        "backup_saved_prefix": "备份已保存：",
-        "backup_failed": "备份失败",
-        "backup_failed_prefix": "备份失败：",
-        "download_latest_backup": "下载最新备份",
-        "no_backups_found": "未找到备份",
-        "download_failed_prefix": "下载失败：",
-        "redact_secrets": "Redact secrets"
-      }
-    }
-  },
-  "backups": {
+    "history": {
+        "title": "\u5386\u53f2",
+        "trends": "\u53d1\u5c55\u8d8b\u52bf",
+        "range": "\u8303\u56f4",
+        "baseline": "\u57fa\u7ebf",
+        "probe_now": "\u7acb\u5373\u63a2\u6d4b",
+        "refresh": "\u5237\u65b0",
+        "export_json": "\u5bfc\u51fa JSON",
+        "export_alerts_json": "\u5bfc\u51fa\u8b66\u62a5 JSON",
+        "reset_history": "\u91cd\u7f6e\u5386\u53f2\u8bb0\u5f55",
+        "recent_alert_events": "\u6700\u8fd1\u7684\u8b66\u62a5\u4e8b\u4ef6",
+        "export_preview": "\u5bfc\u51fa\u9884\u89c8",
+        "close": "\u5173\u95ed",
+        "copy": "\u590d\u5236",
+        "download": "\u4e0b\u8f7d"
+    },
+    "logs": {
+        "title": "\u65e5\u5fd7",
+        "manage": "\u7ba1\u7406\u65e5\u5fd7",
+        "add": "\u6dfb\u52a0",
+        "delete": "\u5220\u9664",
+        "refresh": "\u5237\u65b0",
+        "search": "\u641c\u7d22",
+        "filter": "\u8fc7\u6ee4\u5668",
+        "lines": "\u7ebf\u8def",
+        "open": "\u5f00\u653e",
+        "close": "\u5173\u95ed",
+        "download": "\u4e0b\u8f7d",
+        "copy": "\u590d\u5236"
+    },
     "common": {
-      "status": "地位：",
-      "timestamp": "时间戳：",
-      "none_dash": "-",
-      "free": "自由的",
-      "used": "用过的",
-      "copy": "复制",
-      "warnings": "警告",
-      "errors": "错误",
-      "loading": "加载中..."
+        "save": "\u8282\u7701",
+        "cancel": "\u53d6\u6d88",
+        "edit": "\u7f16\u8f91",
+        "delete": "\u5220\u9664",
+        "update": "\u66f4\u65b0",
+        "create": "\u521b\u5efa",
+        "enable": "\u542f\u7528",
+        "disable": "\u7981\u7528",
+        "yes": "\u662f",
+        "no": "\u6ca1\u6709",
+        "on": "\u5173\u4e8e",
+        "off": "\u5173\u95ed",
+        "confirm": "\u786e\u8ba4",
+        "search": "\u641c\u7d22",
+        "filter": "\u8fc7\u6ee4\u5668",
+        "actions": "\u884c\u52a8",
+        "close": "\u5173\u95ed",
+        "none": "\u65e0",
+        "none_dash": "-"
     },
-    "status": {
-      "error_loading_json": "加载 JSON 时出错",
-      "ok": "好的",
-      "unmounted": "未安装",
-      "critical": "批判的",
-      "high": "高的",
-      "elevated": "高架",
-      "healthy": "健康",
-      "unknown": "未知",
-      "unknown_cap": "未知"
+    "alerts": {
+        "title": "\u8b66\u62a5",
+        "recent_events": "\u6700\u8fd1\u7684\u8b66\u62a5\u4e8b\u4ef6",
+        "history": "\u8b66\u62a5\u5386\u53f2",
+        "export_json": "\u5bfc\u51fa\u8b66\u62a5 JSON",
+        "no_alerts": "\u65e0\u8b66\u62a5",
+        "level": "\u7ea7\u522b",
+        "message": "\u7559\u8a00",
+        "service": "\u670d\u52a1",
+        "time": "\u65f6\u95f4",
+        "probe_now": "\u7acb\u5373\u63a2\u6d4b",
+        "refresh": "\u5237\u65b0",
+        "silence": "\u6c89\u9ed8",
+        "unsilence": "\u65e0\u58f0",
+        "ack": "\u786e\u8ba4",
+        "unack": "\u4e0d\u627f\u8ba4"
     },
-    "disk": {
-      "unmounted": "磁盘已卸载",
-      "tag": "磁盘：",
-      "sizes_updated": "尺寸更新：",
-      "title": "磁盘利用率",
-      "usage": "用法",
-      "mount": "山"
+    "tests": {
+        "title": "\u670d\u52a1\u5668\u6d4b\u8bd5",
+        "run_all": "\u8fd0\u884c\u6240\u6709",
+        "status": "\u73b0\u72b6",
+        "last_run": "\u6700\u540e\u4e00\u6b21\u8fd0\u884c",
+        "duration": "\u6301\u7eed\u65f6\u95f4"
     },
-    "page": {
-      "freshness_prefix": "新鲜：",
-      "title": "备份控制中心",
-      "subtitle_prefix": "实时状态驱动",
-      "subtitle_suffix": "在您的备份磁盘上。"
+    "services": {
+        "title": "\u670d\u52a1",
+        "status": "\u73b0\u72b6",
+        "restart": "\u91cd\u65b0\u542f\u52a8",
+        "start": "\u5f00\u59cb",
+        "stop": "\u505c\u6b62"
     },
-    "ages": {
-      "no_snapshots_on_disk": "磁盘上未找到快照",
-      "one_snapshot_present": "存在 1 个快照",
-      "snapshots_present_suffix": "存在快照",
-      "no_panel_backups_on_disk": "磁盘上未找到面板备份",
-      "one_panel_backup_present": "存在 1 个面板备份",
-      "panel_backups_present_suffix": "存在面板备份",
-      "no_micro_backups_on_disk": "磁盘上未找到微备份",
-      "one_micro_backup_present": "存在 1 个微备份",
-      "micro_backups_present_suffix": "存在微备份",
-      "snapshot_daily0_chart": "快照（每日.0）",
-      "hestia_latest_chart": "赫斯提亚最新",
-      "micro_latest_chart": "微最新",
-      "age_days": "年龄（天）",
-      "title": "备份时代",
-      "subtitle": "您最新的备份有多新鲜",
-      "snapshot_daily0": "每日快照.0",
-      "latest_hestia": "最新赫斯提亚",
-      "latest_micro": "最新微"
+    "config": {
+        "sections": {
+            "site": "Site",
+            "features": "Features",
+            "capabilities": "Capabilities",
+            "processes": "Processes",
+            "mail": "Mail",
+            "integrations": "Integrations",
+            "security": "Security",
+            "ui": "UI",
+            "server_tests": "Server Tests",
+            "alerts": "Alerts",
+            "cron": "Cron",
+            "history": "History",
+            "logs": "Logs",
+            "backups": "\u5907\u4efd",
+            "email": "Email"
+        },
+        "fields": {
+            "backups": {
+                "require_dedicated_mount": {
+                    "label": "\u9700\u8981\u4e13\u7528\u5b89\u88c5\u5ea7",
+                    "help": "\u65e7\u7248\u517c\u5bb9\u6027\u5bc6\u94a5\u3002\u542f\u7528\u540e\uff0c\u5907\u4efd\u811a\u672c\u9700\u8981\u5b58\u5728\u5907\u4efd\u5b89\u88c5\u3002"
+                },
+                "disable_on_mount_fail": {
+                    "label": "\u5982\u679c\u5b89\u88c5\u5931\u8d25\u5219\u7981\u7528\u5907\u4efd",
+                    "help": "\u542f\u7528\u540e\uff0c\u5982\u679c\u5907\u4efd\u5b89\u88c5\u4e22\u5931\uff0c\u5907\u4efd\u64cd\u4f5c\u548c\u751f\u6210\u7684\u811a\u672c\u5c06\u505c\u6b62\u3002"
+                }
+            },
+            "alerts": {
+                "min_severity": {
+                    "label": "\u8b66\u62a5\u7684\u6700\u4f4e\u4e25\u91cd\u7a0b\u5ea6"
+                },
+                "email": {
+                    "label": "Legacy alert email(s)"
+                }
+            }
+        },
+        "ui": {
+            "unknown": "\u672a\u77e5",
+            "unknown_paren": "\uff08\u672a\u77e5\uff09",
+            "site_backup": {
+                "title": "\u5907\u4efd\u4e0e\u6062\u590d",
+                "export_config": "\u5bfc\u51fa\u914d\u7f6e",
+                "import_config": "\u5bfc\u5165\u914d\u7f6e",
+                "choose_file_first": "\u9996\u5148\u9009\u62e9\u4e00\u4e2a\u5907\u4efd\u6587\u4ef6",
+                "imported_reloading": "\u8fdb\u53e3\u7684\u3002\u6b63\u5728\u91cd\u65b0\u52a0\u8f7d...",
+                "import_failed": "\u5bfc\u5165\u5931\u8d25",
+                "import_failed_prefix": "\u5bfc\u5165\u5931\u8d25\uff1a",
+                "retention_title": "\u5907\u4efd - \u4fdd\u7559",
+                "keep_last": "\u4fdd\u6301\u6700\u540e",
+                "files": "\u6587\u4ef6",
+                "loading_stats": "\uff08\u6b63\u5728\u52a0\u8f7d\u7edf\u8ba1\u6570\u636e...\uff09",
+                "last_backup_loading": "\u6700\u540e\u4e00\u6b21\u5907\u4efd\uff1a\uff08\u52a0\u8f7d\u4e2d...\uff09",
+                "last_backup_none": "\u4e0a\u6b21\u5907\u4efd\uff1a\u8fd8\u6ca1\u6709",
+                "last_backup_prefix": "\u6700\u540e\u5907\u4efd\uff1a",
+                "last_backup_unknown": "\u4e0a\u6b21\u5907\u4efd\uff1a\u672a\u77e5",
+                "prune_now": "\u7acb\u5373\u4fee\u526a",
+                "pruned_kept_deleted": "\u4fee\u526a\u4fdd\u7559",
+                "deleted_prefix": "\u5df2\u5220\u9664",
+                "prune_failed": "\u4fee\u526a\u5931\u8d25",
+                "prune_failed_prefix": "\u4fee\u526a\u5931\u8d25\uff1a",
+                "create_backup_now": "\u7acb\u5373\u521b\u5efa\u5907\u4efd",
+                "backup_saved_prefix": "\u5907\u4efd\u5df2\u4fdd\u5b58\uff1a",
+                "backup_failed": "\u5907\u4efd\u5931\u8d25",
+                "backup_failed_prefix": "\u5907\u4efd\u5931\u8d25\uff1a",
+                "download_latest_backup": "\u4e0b\u8f7d\u6700\u65b0\u5907\u4efd",
+                "no_backups_found": "\u672a\u627e\u5230\u5907\u4efd",
+                "download_failed_prefix": "\u4e0b\u8f7d\u5931\u8d25\uff1a",
+                "redact_secrets": "Redact secrets"
+            }
+        }
     },
-    "errors": {
-      "no_backups_detected": "未检测到快照、Hestia 或微集的备份。"
+    "backups": {
+        "common": {
+            "status": "\u5730\u4f4d\uff1a",
+            "timestamp": "\u65f6\u95f4\u6233\uff1a",
+            "none_dash": "-",
+            "free": "\u81ea\u7531\u7684",
+            "used": "\u7528\u8fc7\u7684",
+            "copy": "\u590d\u5236",
+            "warnings": "\u8b66\u544a",
+            "errors": "\u9519\u8bef",
+            "loading": "\u52a0\u8f7d\u4e2d..."
+        },
+        "status": {
+            "error_loading_json": "\u52a0\u8f7d JSON \u65f6\u51fa\u9519",
+            "ok": "\u597d\u7684",
+            "unmounted": "\u672a\u5b89\u88c5",
+            "critical": "\u6279\u5224\u7684",
+            "high": "\u9ad8\u7684",
+            "elevated": "\u9ad8\u67b6",
+            "healthy": "\u5065\u5eb7",
+            "unknown": "\u672a\u77e5",
+            "unknown_cap": "\u672a\u77e5"
+        },
+        "disk": {
+            "unmounted": "\u78c1\u76d8\u5df2\u5378\u8f7d",
+            "tag": "\u78c1\u76d8\uff1a",
+            "sizes_updated": "\u5c3a\u5bf8\u66f4\u65b0\uff1a",
+            "title": "\u78c1\u76d8\u5229\u7528\u7387",
+            "usage": "\u7528\u6cd5",
+            "mount": "\u5c71"
+        },
+        "page": {
+            "freshness_prefix": "\u65b0\u9c9c\uff1a",
+            "title": "\u5907\u4efd\u63a7\u5236\u4e2d\u5fc3",
+            "subtitle_prefix": "\u5b9e\u65f6\u72b6\u6001\u9a71\u52a8",
+            "subtitle_suffix": "\u5728\u60a8\u7684\u5907\u4efd\u78c1\u76d8\u4e0a\u3002"
+        },
+        "ages": {
+            "no_snapshots_on_disk": "\u78c1\u76d8\u4e0a\u672a\u627e\u5230\u5feb\u7167",
+            "one_snapshot_present": "\u5b58\u5728 1 \u4e2a\u5feb\u7167",
+            "snapshots_present_suffix": "\u5b58\u5728\u5feb\u7167",
+            "no_panel_backups_on_disk": "\u78c1\u76d8\u4e0a\u672a\u627e\u5230\u9762\u677f\u5907\u4efd",
+            "one_panel_backup_present": "\u5b58\u5728 1 \u4e2a\u9762\u677f\u5907\u4efd",
+            "panel_backups_present_suffix": "\u5b58\u5728\u9762\u677f\u5907\u4efd",
+            "no_micro_backups_on_disk": "\u78c1\u76d8\u4e0a\u672a\u627e\u5230\u5fae\u5907\u4efd",
+            "one_micro_backup_present": "\u5b58\u5728 1 \u4e2a\u5fae\u5907\u4efd",
+            "micro_backups_present_suffix": "\u5b58\u5728\u5fae\u5907\u4efd",
+            "snapshot_daily0_chart": "\u5feb\u7167\uff08\u6bcf\u65e5.0\uff09",
+            "hestia_latest_chart": "\u8d6b\u65af\u63d0\u4e9a\u6700\u65b0",
+            "micro_latest_chart": "\u5fae\u6700\u65b0",
+            "age_days": "\u5e74\u9f84\uff08\u5929\uff09",
+            "title": "\u5907\u4efd\u65f6\u4ee3",
+            "subtitle": "\u60a8\u6700\u65b0\u7684\u5907\u4efd\u6709\u591a\u65b0\u9c9c",
+            "snapshot_daily0": "\u6bcf\u65e5\u5feb\u7167.0",
+            "latest_hestia": "\u6700\u65b0\u8d6b\u65af\u63d0\u4e9a",
+            "latest_micro": "\u6700\u65b0\u5fae"
+        },
+        "errors": {
+            "no_backups_detected": "\u672a\u68c0\u6d4b\u5230\u5feb\u7167\u3001Hestia \u6216\u5fae\u96c6\u7684\u5907\u4efd\u3002"
+        },
+        "restore": {
+            "hestia_placeholder_tar": "\u57fa\u56e0.YYYYMMDD-HHMM.tar",
+            "using_latest_backup_prefix": "\u4f7f\u7528 JSON \u4e2d\u62a5\u544a\u7684\u6700\u65b0\u5907\u4efd\uff1a",
+            "adjust_backup_tar": "\u5728\u8fd0\u884c\u4e4b\u524d\u5c06 BACKUP_TAR \u8c03\u6574\u4e3a\u201cv-list-backupsgene\u201d\u4e2d\u7684\u771f\u5b9e\u6587\u4ef6\u3002",
+            "micro_restore_prefix": "\u4ece\u6700\u65b0\u7684\u5fae\u5feb\u7167\u6062\u590d\u57fa\u7840\uff1a",
+            "micro_restore_suffix": "\uff08\u8fd0\u884c\u524d\u68c0\u67e5\u8def\u5f84\u548c\u6392\u9664\u9879\uff09\u3002",
+            "set_correct_snapshot_path": "\u4f7f\u7528\u6b64\u547d\u4ee4\u4e4b\u524d\u8bf7\u8bbe\u7f6e\u6b63\u786e\u7684\u5feb\u7167\u8def\u5f84\u3002",
+            "confirm_body_1": "\u8fd9\u5c06\u4f7f\u7528 backupctl \u5728\u670d\u52a1\u5668\u4e0a\u542f\u52a8 Hestia \u6062\u590d\u4f5c\u4e1a\u3002",
+            "confirm_body_2": "\u8be5\u7528\u6237\u7684\u670d\u52a1\u548c\u6570\u636e\u53ef\u80fd\u4f1a\u88ab\u8986\u76d6\u3002",
+            "confirm_body_3": "\u4f60\u7edd\u5bf9\u786e\u5b9a\u5417\uff1f"
+        },
+        "actions": {
+            "starting_prefix": "\u5f00\u59cb",
+            "failed_to_start_prefix": "\u542f\u52a8\u5931\u8d25",
+            "started_prefix": "\u5f00\u59cb",
+            "started_suffix": "\u3002\u8fd9\u53ef\u80fd\u9700\u8981\u4e00\u6bb5\u65f6\u95f4\uff1b\u72b6\u6001\u5c06\u5728\u4e0b\u6b21\u5065\u5eb7\u68c0\u67e5\u65f6\u66f4\u65b0\u3002",
+            "error_talking_endpoint": "\u4e0e backups_action.php \u5bf9\u8bdd\u65f6\u51fa\u9519",
+            "run_os_snapshot": "\u8fd0\u884c\u64cd\u4f5c\u7cfb\u7edf\u5feb\u7167",
+            "run_micro_backup": "\u8fd0\u884c\u5fae\u5907\u4efd",
+            "run_hestia_backup_user": "\u8fd0\u884c Hestia \u5907\u4efd\uff08\u57fa\u56e0\uff09",
+            "run_all_backups": "\u8fd0\u884c\u6240\u6709\u5907\u4efd",
+            "run_health_check": "\u8fd0\u884c\u5065\u5eb7\u68c0\u67e5",
+            "log_maintenance": "\u65e5\u5fd7\u7ef4\u62a4",
+            "clear_backup_logs": "\u6e05\u9664\u5907\u4efd\u8fd0\u884c\u72b6\u51b5\u65e5\u5fd7",
+            "clear_prune_logs": "\u6e05\u9664\u4fee\u526a\u65e5\u5fd7",
+            "clear_integrity_log": "\u6e05\u9664\u5b8c\u6574\u6027\u65e5\u5fd7"
+        },
+        "cron": {
+            "no_entries": "\u672a\u68c0\u6d4b\u5230 crontab \u6761\u76ee\u3002",
+            "env": "\u73af\u5883",
+            "schedule": "\u65e5\u7a0b",
+            "entries_for_prefix": "crontab \u6761\u76ee",
+            "current_user": "\u5f53\u524d\u7528\u6237",
+            "unable_to_read": "\u65e0\u6cd5\u8bfb\u53d6 crontab\u3002",
+            "failed_to_read": "\u65e0\u6cd5\u8bfb\u53d6 crontab\u3002"
+        },
+        "warnings_errors": {
+            "title": "\u8b66\u544a\u548c\u9519\u8bef",
+            "subtitle": "\u5065\u5eb7\u68c0\u67e5\u6458\u8981"
+        },
+        "raw_snapshot": {
+            "title": "\u539f\u59cb\u5feb\u7167",
+            "subtitle": "\u76f4\u63a5\u6765\u81ea\u6700\u540e\u4e00\u4e2a JSON \u72b6\u6001\u7684\u952e\u503c"
+        },
+        "recent_actions": {
+            "title": "\u6700\u8fd1\u7684\u884c\u52a8",
+            "subtitle": "\u6b64\u4eea\u8868\u677f\u7684\u64cd\u4f5c\u5386\u53f2\u8bb0\u5f55",
+            "none": "\u5c1a\u672a\u8bb0\u5f55\u4efb\u4f55\u64cd\u4f5c\u3002"
+        },
+        "orch": {
+            "title": "\u5907\u4efd\u7f16\u6392\u5411\u5bfc",
+            "subtitle": "\u81ea\u5b9a\u4e49\u8def\u5f84\u4e00\u6b21\uff0c\u7136\u540e\u590d\u5236\u751f\u6210\u7684 script/cron/systemd \u5355\u5143\u3002",
+            "backup_root": "\u5907\u4efd\u6839\u76ee\u5f55",
+            "include_health": "\u5305\u62ec\u5065\u5eb7\u68c0\u67e5",
+            "include_integrity": "\u5305\u62ec\u5b8c\u6574\u6027\u68c0\u67e5",
+            "include_prune": "\u5305\u62ec\u4fee\u526a\u9636\u6bb5",
+            "suspend": "\u6682\u505c\u5907\u4efd",
+            "disable_on_mount_fail": "\u5982\u679c\u5b89\u88c5\u5931\u8d25\u5219\u7981\u7528\u5907\u4efd",
+            "nightly_script": "\u6bcf\u665a\u811a\u672c",
+            "copy_script": "\u590d\u5236\u811a\u672c",
+            "cron_entry": "\u5b9a\u65f6\u4efb\u52a1\u5165\u53e3",
+            "copy_cron_line": "\u590d\u5236 cron \u884c",
+            "systemd_service": "\u7cfb\u7edf\u670d\u52a1",
+            "copy_unit": "\u590d\u5370\u5355\u4f4d",
+            "systemd_timer": "\u7cfb\u7edf\u5b9a\u65f6\u5668",
+            "copy_timer": "\u590d\u5370\u5b9a\u65f6\u5668"
+        },
+        "quick_restore": {
+            "title": "\u5feb\u901f\u6062\u590d\u52a9\u624b",
+            "subtitle": "\u7528\u4e8e\u7d27\u6025\u60c5\u51b5\u7684\u9884\u586b\u5145 CLI \u547d\u4ee4\uff08\u624b\u52a8\u8fd0\u884c\u6216\u5371\u9669\u6309\u94ae\uff09",
+            "hestia_latest_title": "\u6062\u590d\u6700\u65b0\u7684 Hestia \u7528\u6237\u5907\u4efd",
+            "micro_latest_title": "\u4ece\u6700\u65b0\u7684\u5fae\u5feb\u7167\u6062\u590d\uff08\u4ec5\u9650 CLI\uff09",
+            "copy_command": "\u590d\u5236\u547d\u4ee4",
+            "run_restore_danger": "\u8fd0\u884c\u6062\u590d\uff08\u6700\u65b0\uff0c\u5371\u9669\uff09"
+        },
+        "cli": {
+            "title": "Hestia \u5907\u4efd\u548c\u6062\u590d CLI",
+            "subtitle": "\u5feb\u901f\u53c2\u8003\u8868 - \u590d\u5236\u548c\u7c98\u8d34\u5c31\u7eea",
+            "create_backups": "\u521b\u5efa\u5907\u4efd",
+            "list_delete_backups": "\u5217\u51fa\u548c\u5220\u9664\u5907\u4efd",
+            "full_restore_user": "\u5b8c\u5168\u6062\u590d\uff08\u7528\u6237\uff09",
+            "selective_restore": "\u9009\u62e9\u6027\u6062\u590d\uff08Web/\u6570\u636e\u5e93/\u90ae\u4ef6\uff09",
+            "backup_file_locations": "\u5907\u4efd\u6587\u4ef6\u4f4d\u7f6e",
+            "backup_tarball_contents": "\u5907\u4efd\u538b\u7f29\u5305\u5185\u5bb9",
+            "backupctl_help": "\u5907\u4efdctl\u5e2e\u52a9"
+        }
     },
-    "restore": {
-      "hestia_placeholder_tar": "基因.YYYYMMDD-HHMM.tar",
-      "using_latest_backup_prefix": "使用 JSON 中报告的最新备份：",
-      "adjust_backup_tar": "在运行之前将 BACKUP_TAR 调整为“v-list-backupsgene”中的真实文件。",
-      "micro_restore_prefix": "从最新的微快照恢复基础：",
-      "micro_restore_suffix": "（运行前检查路径和排除项）。",
-      "set_correct_snapshot_path": "使用此命令之前请设置正确的快照路径。",
-      "confirm_body_1": "这将使用 backupctl 在服务器上启动 Hestia 恢复作业。",
-      "confirm_body_2": "该用户的服务和数据可能会被覆盖。",
-      "confirm_body_3": "你绝对确定吗？"
+    "footer": {
+        "logged_in_as": "\u5f53\u524d\u767b\u5f55\u4e3a",
+        "theme": "\u4e3b\u9898"
     },
-    "actions": {
-      "starting_prefix": "开始",
-      "failed_to_start_prefix": "启动失败",
-      "started_prefix": "开始",
-      "started_suffix": "。这可能需要一段时间；状态将在下次健康检查时更新。",
-      "error_talking_endpoint": "与 backups_action.php 对话时出错",
-      "run_os_snapshot": "运行操作系统快照",
-      "run_micro_backup": "运行微备份",
-      "run_hestia_backup_user": "运行 Hestia 备份（基因）",
-      "run_all_backups": "运行所有备份",
-      "run_health_check": "运行健康检查",
-      "log_maintenance": "日志维护",
-      "clear_backup_logs": "清除备份运行状况日志",
-      "clear_prune_logs": "清除修剪日志",
-      "clear_integrity_log": "清除完整性日志"
+    "i18n": {
+        "language_picker": {
+            "title": "\u8bed\u8a00",
+            "saving": "\u6b63\u5728\u4fdd\u5b58...",
+            "saved": "\u5df2\u4fdd\u5b58",
+            "save_failed": "\u4fdd\u5b58\u5931\u8d25"
+        }
     },
-    "cron": {
-      "no_entries": "未检测到 crontab 条目。",
-      "env": "环境",
-      "schedule": "日程",
-      "entries_for_prefix": "crontab 条目",
-      "current_user": "当前用户",
-      "unable_to_read": "无法读取 crontab。",
-      "failed_to_read": "无法读取 crontab。"
+    "services_page": {
+        "environment": "\u73af\u5883",
+        "filter_placeholder": "\u7b5b\u9009\u670d\u52a1...",
+        "add_service": "\u6dfb\u52a0\u670d\u52a1",
+        "edit_service": "\u7f16\u8f91\u670d\u52a1",
+        "import": "\u5bfc\u5165",
+        "export_csv": "\u5bfc\u51fa CSV",
+        "auto_probe": "\u81ea\u52a8\u63a2\u6d4b",
+        "every": "\u6bcf",
+        "seconds_short": "\u79d2",
+        "caps": {
+            "panel": "\u9762\u677f",
+            "web": "\u7f51\u9875",
+            "mta": "mta",
+            "db": "\u6570\u636e\u5e93",
+            "nginx": "nginx"
+        },
+        "states": {
+            "active": "\u6d3b\u52a8",
+            "inactive": "\u6d88\u6781"
+        },
+        "columns": {
+            "name": "\u540d\u79f0",
+            "category": "\u7c7b\u522b",
+            "host": "\u4e3b\u6301\u4eba",
+            "port": "\u6e2f\u53e3",
+            "probe": "\u63a2\u5934",
+            "timeout": "\u8d85\u65f6",
+            "path": "\u8def\u5f84",
+            "enabled": "\u5df2\u542f\u7528"
+        },
+        "form": {
+            "name": "\u540d\u79f0",
+            "category": "\u7c7b\u522b",
+            "host": "\u4e3b\u6301\u4eba",
+            "port": "\u6e2f\u53e3",
+            "probe": "\u63a2\u5934",
+            "timeout": "\u8d85\u65f6\uff08\u6beb\u79d2\uff09",
+            "path": "\u8def\u5f84 (HTTP)",
+            "enabled": "\u5df2\u542f\u7528"
+        },
+        "test_on_save": "\u4fdd\u5b58\u6d4b\u8bd5",
+        "path_not_used": "(\u672a\u4f7f\u7528\uff09",
+        "status": {
+            "up": "UP",
+            "warn": "\u8b66\u544a",
+            "down": "\u4e0b\u964d",
+            "unknown": "\u672a\u77e5"
+        },
+        "relative_time": {
+            "just_now": "\u521a\u624d",
+            "minutes_ago": "{count}m\u524d",
+            "hours_ago": "{count}h\u524d",
+            "days_ago": "{count}d\u524d"
+        },
+        "units": {
+            "ms": "\u6beb\u79d2"
+        },
+        "actions": {
+            "test": "\u6d4b\u8bd5"
+        },
+        "uptime": "\u6b63\u5e38\u8fd0\u884c\u65f6\u95f4 {pct}%",
+        "alert_last_seen": "\u8b66\u62a5 {\u65f6\u95f4\uff5d",
+        "alerts_muted_until": "\u9759\u97f3{\u65f6\u95f4\uff5d",
+        "mute_alerts": "\u9759\u97f3\u8b66\u62a5",
+        "confirm_delete": "\u5220\u9664\u8fd9\u9879\u670d\u52a1\uff1f",
+        "probe_kicked": "\u63a2\u6d4b\u5668\u88ab\u8e22",
+        "no_alert_rules": "\u65e0\u9759\u97f3\u8b66\u62a5\u89c4\u5219\u3002",
+        "prompt_mute_minutes": "\u76f8\u5173\u8b66\u62a5\u9759\u97f3\u591a\u5c11\u5206\u949f\uff1f",
+        "alerts_muted_for": "\u8b66\u62a5\u9759\u97f3 {\u5206\u949f}m\u3002",
+        "mute_failed": "\u9759\u97f3\u5931\u8d25\uff1a{\u4fe1\u606f\uff5d",
+        "invalid_json": "\u65e0\u6548 JSON",
+        "import_failed": "\u5bfc\u5165\u5931\u8d25",
+        "validation": {
+            "name_required": "\u59d3\u540d\u4e3a\u5fc5\u586b\u9879\u3002",
+            "host_required": "\u9700\u8981\u4e3b\u673a\u3002",
+            "port_range": "\u7aef\u53e3\u5fc5\u987b\u662f 1-65535\u3002",
+            "correct_fields": "\u8bf7\u66f4\u6b63\u7a81\u51fa\u663e\u793a\u7684\u5b57\u6bb5\u3002"
+        },
+        "service_save_requested": "\u670d\u52a1\u4fdd\u5b58\u8bf7\u6c42"
     },
-    "warnings_errors": {
-      "title": "警告和错误",
-      "subtitle": "健康检查摘要"
+    "bookmarks_page": {
+        "title": "\u4e66\u7b7e",
+        "manage": "\u7ba1\u7406\u4e66\u7b7e",
+        "add_to_browser": "\u6dfb\u52a0\u5230\u6d4f\u89c8\u5668",
+        "bookmarklet_title": "\u5c06\u5176\u62d6\u5230\u4e66\u7b7e\u680f\u5373\u53ef\u5feb\u901f\u6dfb\u52a0\u5f53\u524d\u9875\u9762",
+        "prompt_tags": "\u6807\u7b7e\uff08\u9017\u53f7\u5206\u9694\uff09:",
+        "category": "\u7c7b\u522b",
+        "all": "\u5168\u90e8",
+        "sort": "\u6392\u5e8f",
+        "add_category": "\u6dfb\u52a0\u7c7b\u522b",
+        "updated": "\u5df2\u66f4\u65b0",
+        "empty": "\u8fd8\u6ca1\u6709\u4e66\u7b7e\u3002",
+        "empty_categories": "\u8fd8\u6ca1\u6709\u7c7b\u522b\u3002",
+        "sort_updated_desc": "\u66f4\u65b0\uff08\u6700\u65b0\uff09",
+        "sort_title_asc": "\u6807\u9898\uff08A-Z\uff09",
+        "sort_host_asc": "\u4e3b\u673a\uff08A-Z\uff09",
+        "fields": {
+            "title": "\u6807\u9898",
+            "url": "\u7f51\u5740",
+            "tags": "\u6807\u7b7e",
+            "name": "\u540d\u79f0"
+        },
+        "placeholders": {
+            "optional_title": "\u53ef\u9009\u6807\u9898",
+            "tags": "\u9017\u53f7\u5206\u9694\u6807\u7b7e",
+            "new_category_name": "\u65b0\u7c7b\u522b\u540d\u79f0"
+        },
+        "modal": {
+            "add_edit": "\u6dfb\u52a0/\u7f16\u8f91\u4e66\u7b7e",
+            "add_categories": "\u6dfb\u52a0\u7c7b\u522b"
+        },
+        "hints": {
+            "bookmark_edit": "\u5728\u6b64\u663e\u793a\u53ef\u6298\u53e0\u5206\u7c7b\u7684\u4e66\u7b7e\u3002\u70b9\u51fb\u4e66\u7b7e\u53ef\u5c06\u5176\u52a0\u8f7d\u5230\u4e0a\u9762\u8fdb\u884c\u7f16\u8f91\u6216\u5220\u9664\u3002",
+            "category_edit": "\u6b64\u5904\u663e\u793a\u7c7b\u522b\u3002\u5355\u51fb\u5176\u4e2d\u4e00\u4e2a\u5373\u53ef\u5c06\u5176\u52a0\u8f7d\u5230\u4e0a\u9762\u8fdb\u884c\u7f16\u8f91\u6216\u5220\u9664\u3002"
+        },
+        "uncategorized": "\u672a\u5206\u7c7b",
+        "confirm_delete_category": "\u5220\u9664\u6b64\u7c7b\u522b\uff1f\u4e66\u7b7e\u5c06\u53d8\u6210\u672a\u5206\u7c7b\u3002",
+        "confirm_delete_bookmark": "\u5220\u9664\u6b64\u4e66\u7b7e\uff1f",
+        "validation": {
+            "category_name_required": "\u5fc5\u987b\u586b\u5199\u7c7b\u522b\u540d\u79f0",
+            "url_required": "\u9700\u8981 URL"
+        },
+        "errors": {
+            "all_endpoints_failed": "\u6240\u6709\u7aef\u70b9\u5747\u5931\u8d25",
+            "bad_json": "\u6765\u81ea\u670d\u52a1\u5668\u7684\u4e0d\u826f JSON",
+            "api_not_found": "\u52a0\u8f7d\u4e66\u7b7e\u5931\u8d25\uff08\u672a\u627e\u5230 API\uff09\u3002\u5df2\u5c1d\u8bd5\uff1a{\u5df2\u5c1d\u8bd5\uff5d",
+            "load_failed": "\u52a0\u8f7d\u4e66\u7b7e\u5931\u8d25\uff1a {message}"
+        },
+        "toasts": {
+            "category_saved": "\u4fdd\u5b58\u7684\u7c7b\u522b",
+            "save_failed": "\u4fdd\u5b58\u5931\u8d25\uff1a{\u4fe1\u606f\uff5d",
+            "category_deleted": "\u5220\u9664\u7684\u7c7b\u522b",
+            "delete_failed": "\u5220\u9664\u5931\u8d25\uff1a{\u4fe1\u606f\uff5d",
+            "order_saved": "\u5df2\u4fdd\u5b58\u8ba2\u5355",
+            "reorder_failed": "\u91cd\u65b0\u8ba2\u8d2d\u5931\u8d25\uff1a{\u4fe1\u606f\uff5d",
+            "category_updated": "\u7c7b\u522b\u66f4\u65b0",
+            "category_added": "\u65b0\u589e\u7c7b\u522b",
+            "bookmark_deleted": "\u5220\u9664\u4e66\u7b7e",
+            "bookmark_updated": "\u4e66\u7b7e\u5df2\u66f4\u65b0",
+            "bookmark_added": "\u6dfb\u52a0\u4e66\u7b7e"
+        }
     },
-    "raw_snapshot": {
-      "title": "原始快照",
-      "subtitle": "直接来自最后一个 JSON 状态的键值"
-    },
-    "recent_actions": {
-      "title": "最近的行动",
-      "subtitle": "此仪表板的操作历史记录",
-      "none": "尚未记录任何操作。"
-    },
-    "orch": {
-      "title": "备份编排向导",
-      "subtitle": "自定义路径一次，然后复制生成的 script/cron/systemd 单元。",
-      "backup_root": "备份根目录",
-      "include_health": "包括健康检查",
-      "include_integrity": "包括完整性检查",
-      "include_prune": "包括修剪阶段",
-      "suspend": "暂停备份",
-      "disable_on_mount_fail": "如果安装失败则禁用备份",
-      "nightly_script": "每晚脚本",
-      "copy_script": "复制脚本",
-      "cron_entry": "定时任务入口",
-      "copy_cron_line": "复制 cron 行",
-      "systemd_service": "系统服务",
-      "copy_unit": "复印单位",
-      "systemd_timer": "系统定时器",
-      "copy_timer": "复印定时器"
-    },
-    "quick_restore": {
-      "title": "快速恢复助手",
-      "subtitle": "用于紧急情况的预填充 CLI 命令（手动运行或危险按钮）",
-      "hestia_latest_title": "恢复最新的 Hestia 用户备份",
-      "micro_latest_title": "从最新的微快照恢复（仅限 CLI）",
-      "copy_command": "复制命令",
-      "run_restore_danger": "运行恢复（最新，危险）"
-    },
-    "cli": {
-      "title": "Hestia 备份和恢复 CLI",
-      "subtitle": "快速参考表 - 复制和粘贴就绪",
-      "create_backups": "创建备份",
-      "list_delete_backups": "列出和删除备份",
-      "full_restore_user": "完全恢复（用户）",
-      "selective_restore": "选择性恢复（Web/数据库/邮件）",
-      "backup_file_locations": "备份文件位置",
-      "backup_tarball_contents": "备份压缩包内容",
-      "backupctl_help": "备份ctl帮助"
+    "header": {
+        "navigation": "\u9875\u7709\u5bfc\u822a",
+        "system_status": "\u670d\u52a1\u72b6\u51b5",
+        "loading": "\u6b63\u5728\u52a0\u8f7d...",
+        "profile": "\u6211\u7684\u7b80\u4ecb",
+        "logout": "\u6ce8\u9500",
+        "mobile": {
+            "open_menu": "\u6253\u5f00\u83dc\u5355",
+            "menu": "\u83dc\u5355"
+        },
+        "nav": {
+            "history": "\u5386\u53f2",
+            "cron_health": "Cron Health",
+            "processes": "\u6d41\u7a0b",
+            "databases": "\u6570\u636e\u5e93",
+            "speedtest": "\u901f\u5ea6\u6d4b\u8bd5",
+            "diagnostics": "\u8bca\u65ad",
+            "config": "\u914d\u7f6e",
+            "backups": "\u5907\u4efd"
+        }
     }
-  }
 }

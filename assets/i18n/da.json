@@ -1,314 +1,493 @@
 {
-  "app": {
-    "title": "Server-dashboard"
-  },
-  "nav": {
-    "history": "Historie",
-    "logs": "Logfiler",
-    "dashboard": "Dashboard",
-    "services": "Serviceydelser",
-    "alerts": "Advarsler",
-    "tests": "Test",
-    "settings": "Indstillinger",
-    "about": "Omkring"
-  },
-  "history": {
-    "title": "Historie",
-    "trends": "Tendenser",
-    "range": "Rækkevidde",
-    "baseline": "Baseline",
-    "probe_now": "Sonde nu",
-    "refresh": "Opdatering",
-    "export_json": "Eksporter JSON",
-    "export_alerts_json": "Eksporter advarsler JSON",
-    "reset_history": "Nulstil historik",
-    "recent_alert_events": "Nylige alarmhændelser",
-    "export_preview": "Forhåndsvisning af eksport",
-    "close": "Luk",
-    "copy": "Kopi",
-    "download": "Hent"
-  },
-  "logs": {
-    "title": "Logfiler",
-    "manage": "Administrer logfiler",
-    "add": "Tilføj",
-    "delete": "Sletning",
-    "refresh": "Opdatering",
-    "search": "Søg efter",
-    "filter": "Filter",
-    "lines": "Linjer",
-    "open": "Åben",
-    "close": "Luk",
-    "download": "Download",
-    "copy": "Kopi"
-  },
-  "common": {
-    "save": "Gemme",
-    "cancel": "Annuller",
-    "edit": "Rediger",
-    "delete": "Sletning",
-    "update": "Opdatering",
-    "create": "Opret",
-    "enable": "Gør det muligt",
-    "disable": "Deaktiver",
-    "yes": "Ja",
-    "no": "Nej",
-    "on": "På",
-    "off": "Fra",
-    "confirm": "Bekræft",
-    "search": "Søg efter",
-    "filter": "Filter",
-    "actions": "Handlinger"
-  },
-  "alerts": {
-    "title": "Advarsler",
-    "recent_events": "Nylige alarmhændelser",
-    "history": "Varslingshistorik",
-    "export_json": "Eksporter advarsler JSON",
-    "no_alerts": "Ingen advarsler",
-    "level": "Niveau",
-    "message": "Besked",
-    "service": "Service",
-    "time": "Tid",
-    "probe_now": "Sonde nu",
-    "refresh": "Opdatering",
-    "silence": "Stilhed",
-    "unsilence": "Stilhed",
-    "ack": "Bekræft",
-    "unack": "Manglende anerkendelse"
-  },
-  "tests": {
-    "title": "Test af servere",
-    "run_all": "Kør alle",
-    "status": "Status",
-    "last_run": "Sidste løb",
-    "duration": "Varighed"
-  },
-  "services": {
-    "title": "Serviceydelser",
-    "status": "Status",
-    "restart": "Genstart",
-    "start": "Start",
-    "stop": "Stop"
-  },
-  "config": {
-    "sections": {
-      "site": "websted",
-      "features": "Funktioner",
-      "capabilities": "Evner",
-      "processes": "Processer",
-      "mail": "Post",
-      "integrations": "Integrationer",
-      "security": "Sikkerhed",
-      "ui": "UI",
-      "server_tests": "Server test",
-      "alerts": "Advarsler",
-      "cron": "Cron",
-      "history": "Historie",
-      "logs": "Logs",
-      "backups": "Sikkerhedskopier",
-      "email": "E-mail"
+    "app": {
+        "title": "Server-dashboard"
     },
-    "fields": {
-      "backups": {
-        "require_dedicated_mount": {
-          "label": "Kræver dedikeret montering",
-          "help": "Ældre kompatibilitetsnøgle. Når det er aktiveret, kræver backup-scripts, at backup-mount er til stede."
-        },
-        "disable_on_mount_fail": {
-          "label": "Deaktiver sikkerhedskopier, hvis montering mislykkes",
-          "help": "Når det er aktiveret, stopper sikkerhedskopieringshandlinger og genererede scripts, hvis sikkerhedskopimonteringen mangler."
-        }
-      },
-      "alerts": {
-        "min_severity": {
-          "label": "Minimum sværhedsgrad for at advare"
-        },
-        "email": {
-          "label": "Ældre underretnings-e-mail(s)"
-        }
-      }
+    "nav": {
+        "history": "Historie",
+        "logs": "Logfiler",
+        "dashboard": "Dashboard",
+        "services": "Serviceydelser",
+        "alerts": "Advarsler",
+        "tests": "Test",
+        "settings": "Indstillinger",
+        "about": "Omkring"
     },
-    "ui": {
-      "unknown": "ukendt",
-      "unknown_paren": "(ukendt)",
-      "site_backup": {
-        "title": "Sikkerhedskopiering og gendannelse",
-        "export_config": "Eksporter Konfig",
-        "import_config": "Importer konfiguration",
-        "choose_file_first": "Vælg først en sikkerhedskopi",
-        "imported_reloading": "Importeret. Genindlæser...",
-        "import_failed": "Import mislykkedes",
-        "import_failed_prefix": "Import mislykkedes:",
-        "retention_title": "Sikkerhedskopier - Retention",
-        "keep_last": "Hold til sidst",
-        "files": "filer",
-        "loading_stats": "(indlæser statistik...)",
-        "last_backup_loading": "Sidste backup: (indlæser...)",
-        "last_backup_none": "Sidste backup: ingen endnu",
-        "last_backup_prefix": "Sidste backup:",
-        "last_backup_unknown": "Sidste backup: ukendt",
-        "prune_now": "Beskær nu",
-        "pruned_kept_deleted": "Beskæres - opbevares",
-        "deleted_prefix": "slettet",
-        "prune_failed": "Beskær mislykkedes",
-        "prune_failed_prefix": "Beskær mislykkedes:",
-        "create_backup_now": "Opret backup nu",
-        "backup_saved_prefix": "Backup gemt:",
-        "backup_failed": "Sikkerhedskopiering mislykkedes",
-        "backup_failed_prefix": "Sikkerhedskopiering mislykkedes:",
-        "download_latest_backup": "Download seneste sikkerhedskopi",
-        "no_backups_found": "Ingen sikkerhedskopier fundet",
-        "download_failed_prefix": "Download mislykkedes:",
-        "redact_secrets": "Redact secrets"
-      }
-    }
-  },
-  "backups": {
+    "history": {
+        "title": "Historie",
+        "trends": "Tendenser",
+        "range": "R\u00e6kkevidde",
+        "baseline": "Baseline",
+        "probe_now": "Sonde nu",
+        "refresh": "Opdatering",
+        "export_json": "Eksporter JSON",
+        "export_alerts_json": "Eksporter advarsler JSON",
+        "reset_history": "Nulstil historik",
+        "recent_alert_events": "Nylige alarmh\u00e6ndelser",
+        "export_preview": "Forh\u00e5ndsvisning af eksport",
+        "close": "Luk",
+        "copy": "Kopi",
+        "download": "Hent"
+    },
+    "logs": {
+        "title": "Logfiler",
+        "manage": "Administrer logfiler",
+        "add": "Tilf\u00f8j",
+        "delete": "Sletning",
+        "refresh": "Opdatering",
+        "search": "S\u00f8g efter",
+        "filter": "Filter",
+        "lines": "Linjer",
+        "open": "\u00c5ben",
+        "close": "Luk",
+        "download": "Download",
+        "copy": "Kopi"
+    },
     "common": {
-      "status": "Status:",
-      "timestamp": "Tidsstempel:",
-      "none_dash": "-",
-      "free": "Gratis",
-      "used": "Brugt",
-      "copy": "Kopi",
-      "warnings": "Advarsler",
-      "errors": "Fejl",
-      "loading": "Indlæser..."
+        "save": "Gemme",
+        "cancel": "Annuller",
+        "edit": "Rediger",
+        "delete": "Sletning",
+        "update": "Opdatering",
+        "create": "Opret",
+        "enable": "G\u00f8r det muligt",
+        "disable": "Deaktiver",
+        "yes": "Ja",
+        "no": "Nej",
+        "on": "P\u00e5",
+        "off": "Fra",
+        "confirm": "Bekr\u00e6ft",
+        "search": "S\u00f8g efter",
+        "filter": "Filter",
+        "actions": "Handlinger",
+        "close": "Luk",
+        "none": "ingen",
+        "none_dash": "-"
     },
-    "status": {
-      "error_loading_json": "FEJL VED INDLÆSNING AF JSON",
-      "ok": "OK",
-      "unmounted": "UMONTERET",
-      "critical": "KRITISK",
-      "high": "HØJ",
-      "elevated": "FORØJET",
-      "healthy": "SUND",
-      "unknown": "UKENDT",
-      "unknown_cap": "Ukendt"
+    "alerts": {
+        "title": "Advarsler",
+        "recent_events": "Nylige alarmh\u00e6ndelser",
+        "history": "Varslingshistorik",
+        "export_json": "Eksporter advarsler JSON",
+        "no_alerts": "Ingen advarsler",
+        "level": "Niveau",
+        "message": "Besked",
+        "service": "Service",
+        "time": "Tid",
+        "probe_now": "Sonde nu",
+        "refresh": "Opdatering",
+        "silence": "Stilhed",
+        "unsilence": "Stilhed",
+        "ack": "Bekr\u00e6ft",
+        "unack": "Manglende anerkendelse"
     },
-    "disk": {
-      "unmounted": "Disk AFMONTERET",
-      "tag": "Disk:",
-      "sizes_updated": "Størrelser opdateret:",
-      "title": "Diskudnyttelse",
-      "usage": "Brug",
-      "mount": "Monter"
+    "tests": {
+        "title": "Test af servere",
+        "run_all": "K\u00f8r alle",
+        "status": "Status",
+        "last_run": "Sidste l\u00f8b",
+        "duration": "Varighed"
     },
-    "page": {
-      "freshness_prefix": "Friskhed:",
-      "title": "Backup kontrolcenter",
-      "subtitle_prefix": "Live status drevet af",
-      "subtitle_suffix": "på din backup-disk."
+    "services": {
+        "title": "Serviceydelser",
+        "status": "Status",
+        "restart": "Genstart",
+        "start": "Start",
+        "stop": "Stop"
     },
-    "ages": {
-      "no_snapshots_on_disk": "Ingen snapshots fundet på disken",
-      "one_snapshot_present": "1 øjebliksbillede gave",
-      "snapshots_present_suffix": "øjebliksbilleder til stede",
-      "no_panel_backups_on_disk": "Ingen panelsikkerhedskopier fundet på disken",
-      "one_panel_backup_present": "1 panel backup til stede",
-      "panel_backups_present_suffix": "panel backups til stede",
-      "no_micro_backups_on_disk": "Ingen mikro-backups fundet på disken",
-      "one_micro_backup_present": "1 mikro backup til stede",
-      "micro_backups_present_suffix": "mikro backups til stede",
-      "snapshot_daily0_chart": "Snapshot (dagligt.0)",
-      "hestia_latest_chart": "Hestia seneste",
-      "micro_latest_chart": "Micro seneste",
-      "age_days": "Alder (dage)",
-      "title": "Backup Aldre",
-      "subtitle": "Hvor friske dine seneste sikkerhedskopier er",
-      "snapshot_daily0": "Snapshot dagligt.0",
-      "latest_hestia": "Seneste Hestia",
-      "latest_micro": "Seneste Micro"
+    "config": {
+        "sections": {
+            "site": "websted",
+            "features": "Funktioner",
+            "capabilities": "Evner",
+            "processes": "Processer",
+            "mail": "Post",
+            "integrations": "Integrationer",
+            "security": "Sikkerhed",
+            "ui": "UI",
+            "server_tests": "Server test",
+            "alerts": "Advarsler",
+            "cron": "Cron",
+            "history": "Historie",
+            "logs": "Logs",
+            "backups": "Sikkerhedskopier",
+            "email": "E-mail"
+        },
+        "fields": {
+            "backups": {
+                "require_dedicated_mount": {
+                    "label": "Kr\u00e6ver dedikeret montering",
+                    "help": "\u00c6ldre kompatibilitetsn\u00f8gle. N\u00e5r det er aktiveret, kr\u00e6ver backup-scripts, at backup-mount er til stede."
+                },
+                "disable_on_mount_fail": {
+                    "label": "Deaktiver sikkerhedskopier, hvis montering mislykkes",
+                    "help": "N\u00e5r det er aktiveret, stopper sikkerhedskopieringshandlinger og genererede scripts, hvis sikkerhedskopimonteringen mangler."
+                }
+            },
+            "alerts": {
+                "min_severity": {
+                    "label": "Minimum sv\u00e6rhedsgrad for at advare"
+                },
+                "email": {
+                    "label": "\u00c6ldre underretnings-e-mail(s)"
+                }
+            }
+        },
+        "ui": {
+            "unknown": "ukendt",
+            "unknown_paren": "(ukendt)",
+            "site_backup": {
+                "title": "Sikkerhedskopiering og gendannelse",
+                "export_config": "Eksporter Konfig",
+                "import_config": "Importer konfiguration",
+                "choose_file_first": "V\u00e6lg f\u00f8rst en sikkerhedskopi",
+                "imported_reloading": "Importeret. Genindl\u00e6ser...",
+                "import_failed": "Import mislykkedes",
+                "import_failed_prefix": "Import mislykkedes:",
+                "retention_title": "Sikkerhedskopier - Retention",
+                "keep_last": "Hold til sidst",
+                "files": "filer",
+                "loading_stats": "(indl\u00e6ser statistik...)",
+                "last_backup_loading": "Sidste backup: (indl\u00e6ser...)",
+                "last_backup_none": "Sidste backup: ingen endnu",
+                "last_backup_prefix": "Sidste backup:",
+                "last_backup_unknown": "Sidste backup: ukendt",
+                "prune_now": "Besk\u00e6r nu",
+                "pruned_kept_deleted": "Besk\u00e6res - opbevares",
+                "deleted_prefix": "slettet",
+                "prune_failed": "Besk\u00e6r mislykkedes",
+                "prune_failed_prefix": "Besk\u00e6r mislykkedes:",
+                "create_backup_now": "Opret backup nu",
+                "backup_saved_prefix": "Backup gemt:",
+                "backup_failed": "Sikkerhedskopiering mislykkedes",
+                "backup_failed_prefix": "Sikkerhedskopiering mislykkedes:",
+                "download_latest_backup": "Download seneste sikkerhedskopi",
+                "no_backups_found": "Ingen sikkerhedskopier fundet",
+                "download_failed_prefix": "Download mislykkedes:",
+                "redact_secrets": "Redact secrets"
+            }
+        }
     },
-    "errors": {
-      "no_backups_detected": "Ingen sikkerhedskopier fundet for snapshots, Hestia eller mikrosæt."
+    "backups": {
+        "common": {
+            "status": "Status:",
+            "timestamp": "Tidsstempel:",
+            "none_dash": "-",
+            "free": "Gratis",
+            "used": "Brugt",
+            "copy": "Kopi",
+            "warnings": "Advarsler",
+            "errors": "Fejl",
+            "loading": "Indl\u00e6ser..."
+        },
+        "status": {
+            "error_loading_json": "FEJL VED INDL\u00c6SNING AF JSON",
+            "ok": "OK",
+            "unmounted": "UMONTERET",
+            "critical": "KRITISK",
+            "high": "H\u00d8J",
+            "elevated": "FOR\u00d8JET",
+            "healthy": "SUND",
+            "unknown": "UKENDT",
+            "unknown_cap": "Ukendt"
+        },
+        "disk": {
+            "unmounted": "Disk AFMONTERET",
+            "tag": "Disk:",
+            "sizes_updated": "St\u00f8rrelser opdateret:",
+            "title": "Diskudnyttelse",
+            "usage": "Brug",
+            "mount": "Monter"
+        },
+        "page": {
+            "freshness_prefix": "Friskhed:",
+            "title": "Backup kontrolcenter",
+            "subtitle_prefix": "Live status drevet af",
+            "subtitle_suffix": "p\u00e5 din backup-disk."
+        },
+        "ages": {
+            "no_snapshots_on_disk": "Ingen snapshots fundet p\u00e5 disken",
+            "one_snapshot_present": "1 \u00f8jebliksbillede gave",
+            "snapshots_present_suffix": "\u00f8jebliksbilleder til stede",
+            "no_panel_backups_on_disk": "Ingen panelsikkerhedskopier fundet p\u00e5 disken",
+            "one_panel_backup_present": "1 panel backup til stede",
+            "panel_backups_present_suffix": "panel backups til stede",
+            "no_micro_backups_on_disk": "Ingen mikro-backups fundet p\u00e5 disken",
+            "one_micro_backup_present": "1 mikro backup til stede",
+            "micro_backups_present_suffix": "mikro backups til stede",
+            "snapshot_daily0_chart": "Snapshot (dagligt.0)",
+            "hestia_latest_chart": "Hestia seneste",
+            "micro_latest_chart": "Micro seneste",
+            "age_days": "Alder (dage)",
+            "title": "Backup Aldre",
+            "subtitle": "Hvor friske dine seneste sikkerhedskopier er",
+            "snapshot_daily0": "Snapshot dagligt.0",
+            "latest_hestia": "Seneste Hestia",
+            "latest_micro": "Seneste Micro"
+        },
+        "errors": {
+            "no_backups_detected": "Ingen sikkerhedskopier fundet for snapshots, Hestia eller mikros\u00e6t."
+        },
+        "restore": {
+            "hestia_placeholder_tar": "gen.\u00c5\u00c5\u00c5\u00c5MMDD-HHMM.tar",
+            "using_latest_backup_prefix": "Brug af seneste backup rapporteret i JSON:",
+            "adjust_backup_tar": "Juster BACKUP_TAR til en rigtig fil fra \\\"v-list-backups USER\\\" f\u00f8r k\u00f8rsel.",
+            "micro_restore_prefix": "Gendan base fra seneste mikro-snapshot:",
+            "micro_restore_suffix": "(gennemg\u00e5 stier og ekskluderinger, f\u00f8r du k\u00f8rer).",
+            "set_correct_snapshot_path": "Indstil den korrekte snapshot-sti, f\u00f8r du bruger denne kommando.",
+            "confirm_body_1": "Dette vil starte et Hestia-gendannelsesjob p\u00e5 serveren ved hj\u00e6lp af backupctl.",
+            "confirm_body_2": "Tjenester og data for den p\u00e5g\u00e6ldende bruger kan blive overskrevet.",
+            "confirm_body_3": "Er du helt sikker?"
+        },
+        "actions": {
+            "starting_prefix": "Starter",
+            "failed_to_start_prefix": "Kunne ikke starte",
+            "started_prefix": "Startede",
+            "started_suffix": ". Dette kan tage et stykke tid; status opdateres ved n\u00e6ste sundhedstjek.",
+            "error_talking_endpoint": "Fejl ved at tale med backups_action.php",
+            "run_os_snapshot": "K\u00f8r OS Snapshot",
+            "run_micro_backup": "K\u00f8r Micro Backup",
+            "run_hestia_backup_user": "K\u00f8r Hestia Backup (gen)",
+            "run_all_backups": "K\u00f8r ALLE sikkerhedskopier",
+            "run_health_check": "K\u00f8r sundhedstjek",
+            "log_maintenance": "Vedligeholdelse af log",
+            "clear_backup_logs": "Ryd backup-sundhedslogfiler",
+            "clear_prune_logs": "Ryd sveskestokke",
+            "clear_integrity_log": "Ryd integritetslog"
+        },
+        "cron": {
+            "no_entries": "Ingen crontab-indgange fundet.",
+            "env": "Env",
+            "schedule": "Skema",
+            "entries_for_prefix": "Crontab-indgange til",
+            "current_user": "nuv\u00e6rende bruger",
+            "unable_to_read": "Kan ikke l\u00e6se crontab.",
+            "failed_to_read": "Kunne ikke l\u00e6se crontab."
+        },
+        "warnings_errors": {
+            "title": "Advarsler og fejl",
+            "subtitle": "Resum\u00e9 fra sundhedstjekket"
+        },
+        "raw_snapshot": {
+            "title": "R\u00e5 Snapshot",
+            "subtitle": "N\u00f8glev\u00e6rdier direkte fra den sidste JSON-status"
+        },
+        "recent_actions": {
+            "title": "Seneste handlinger",
+            "subtitle": "Historie over handlinger fra dette dashboard",
+            "none": "Ingen handlinger registreret endnu."
+        },
+        "orch": {
+            "title": "Backup Orchestration Wizard",
+            "subtitle": "Tilpas stier \u00e9n gang, og kopier derefter de genererede script/cron/systemd-enheder.",
+            "backup_root": "Backup rod",
+            "include_health": "Inkluder sundhedstjek",
+            "include_integrity": "Inkluder integritetstjek",
+            "include_prune": "Inkluder sveskestadiet",
+            "suspend": "Suspend\u00e9r sikkerhedskopier",
+            "disable_on_mount_fail": "Deaktiver sikkerhedskopier, hvis montering mislykkes",
+            "nightly_script": "Natlig manuskript",
+            "copy_script": "Kopier script",
+            "cron_entry": "Cron indgang",
+            "copy_cron_line": "Kopier cron linje",
+            "systemd_service": "Systemd service",
+            "copy_unit": "Kopi enhed",
+            "systemd_timer": "Systemd timer",
+            "copy_timer": "Kopier timer"
+        },
+        "quick_restore": {
+            "title": "Hj\u00e6lpere til hurtig gendannelse",
+            "subtitle": "Forudfyldte CLI-kommandoer til n\u00f8dsituationer (manuel k\u00f8rsel eller DANGER-knap)",
+            "hestia_latest_title": "Gendan seneste Hestia bruger backup",
+            "micro_latest_title": "Gendan fra seneste mikrosnapshot (kun CLI)",
+            "copy_command": "Kopi\u00e9r kommando",
+            "run_restore_danger": "K\u00f8r gendannelse (seneste, FARE)"
+        },
+        "cli": {
+            "title": "Hestia Backup & Restore CLI",
+            "subtitle": "Hurtigt referenceark - klar til kopiering og inds\u00e6t",
+            "create_backups": "Opret sikkerhedskopier",
+            "list_delete_backups": "Liste og slette sikkerhedskopier",
+            "full_restore_user": "Fuld gendannelse (bruger)",
+            "selective_restore": "Selektiv gendannelse (Web / DB / Mail)",
+            "backup_file_locations": "Sikkerhedskopier filplaceringer",
+            "backup_tarball_contents": "Backup Tarball-indhold",
+            "backupctl_help": "backupctl hj\u00e6lp"
+        }
     },
-    "restore": {
-      "hestia_placeholder_tar": "gen.ÅÅÅÅMMDD-HHMM.tar",
-      "using_latest_backup_prefix": "Brug af seneste backup rapporteret i JSON:",
-      "adjust_backup_tar": "Juster BACKUP_TAR til en rigtig fil fra \\\"v-list-backups USER\\\" før kørsel.",
-      "micro_restore_prefix": "Gendan base fra seneste mikro-snapshot:",
-      "micro_restore_suffix": "(gennemgå stier og ekskluderinger, før du kører).",
-      "set_correct_snapshot_path": "Indstil den korrekte snapshot-sti, før du bruger denne kommando.",
-      "confirm_body_1": "Dette vil starte et Hestia-gendannelsesjob på serveren ved hjælp af backupctl.",
-      "confirm_body_2": "Tjenester og data for den pågældende bruger kan blive overskrevet.",
-      "confirm_body_3": "Er du helt sikker?"
+    "footer": {
+        "logged_in_as": "Logget ind som",
+        "theme": "Tema"
     },
-    "actions": {
-      "starting_prefix": "Starter",
-      "failed_to_start_prefix": "Kunne ikke starte",
-      "started_prefix": "Startede",
-      "started_suffix": ". Dette kan tage et stykke tid; status opdateres ved næste sundhedstjek.",
-      "error_talking_endpoint": "Fejl ved at tale med backups_action.php",
-      "run_os_snapshot": "Kør OS Snapshot",
-      "run_micro_backup": "Kør Micro Backup",
-      "run_hestia_backup_user": "Kør Hestia Backup (gen)",
-      "run_all_backups": "Kør ALLE sikkerhedskopier",
-      "run_health_check": "Kør sundhedstjek",
-      "log_maintenance": "Vedligeholdelse af log",
-      "clear_backup_logs": "Ryd backup-sundhedslogfiler",
-      "clear_prune_logs": "Ryd sveskestokke",
-      "clear_integrity_log": "Ryd integritetslog"
+    "i18n": {
+        "language_picker": {
+            "title": "Sprog",
+            "saving": "Gemmer...",
+            "saved": "Gemt",
+            "save_failed": "Kunne ikke gemme"
+        }
     },
-    "cron": {
-      "no_entries": "Ingen crontab-indgange fundet.",
-      "env": "Env",
-      "schedule": "Skema",
-      "entries_for_prefix": "Crontab-indgange til",
-      "current_user": "nuværende bruger",
-      "unable_to_read": "Kan ikke læse crontab.",
-      "failed_to_read": "Kunne ikke læse crontab."
+    "services_page": {
+        "environment": "Milj\u00f8",
+        "filter_placeholder": "Filtrer tjenester...",
+        "add_service": "Tilf\u00f8j tjeneste",
+        "edit_service": "Rediger tjeneste",
+        "import": "Import\u00e9r",
+        "export_csv": "Eksport\u00e9r CSV",
+        "auto_probe": "Automatisk kontrol",
+        "every": "Hver",
+        "seconds_short": "s",
+        "columns": {
+            "name": "Navn",
+            "category": "Kategori",
+            "host": "V\u00e6rt",
+            "port": "Port",
+            "probe": "Kontrol",
+            "timeout": "Timeout",
+            "path": "Sti",
+            "enabled": "Aktiveret"
+        },
+        "form": {
+            "name": "Navn",
+            "category": "Kategori",
+            "host": "V\u00e6rt",
+            "port": "Port",
+            "probe": "Kontrol",
+            "timeout": "Timeout (ms)",
+            "path": "Sti (HTTP)",
+            "enabled": "Aktiveret"
+        },
+        "test_on_save": "Test ved gem",
+        "caps": {
+            "panel": "Panel",
+            "web": "web",
+            "mta": "mta",
+            "db": "db",
+            "nginx": "nginx"
+        },
+        "states": {
+            "active": "aktiv",
+            "inactive": "inaktiv"
+        },
+        "path_not_used": "(ikke brugt)",
+        "status": {
+            "up": "UP",
+            "warn": "ADVARSEL",
+            "down": "NED",
+            "unknown": "UBEKENDT"
+        },
+        "relative_time": {
+            "just_now": "lige nu",
+            "minutes_ago": "{count}m siden",
+            "hours_ago": "{count}h ago",
+            "days_ago": "{count}d siden"
+        },
+        "units": {
+            "ms": "ms"
+        },
+        "actions": {
+            "test": "Test"
+        },
+        "uptime": "Oppetid {pct} %.",
+        "alert_last_seen": "Advarsel {tidspunkt}",
+        "alerts_muted_until": "D\u00e6mpet {tidspunkt}",
+        "mute_alerts": "Sl\u00e5 alarmer fra",
+        "confirm_delete": "Slette denne tjeneste?",
+        "probe_kicked": "Sonde sparket",
+        "no_alert_rules": "Ingen alarmregler til at sl\u00e5 lyden fra.",
+        "prompt_mute_minutes": "Hvor mange minutter skal du sl\u00e5 relaterede alarmer fra?",
+        "alerts_muted_for": "Alarmer sl\u00e5et fra i {mins}m.",
+        "mute_failed": "Mute mislykkedes: {meddelelse}",
+        "invalid_json": "Ugyldig JSON",
+        "import_failed": "Import mislykkedes",
+        "validation": {
+            "name_required": "Navn er p\u00e5kr\u00e6vet.",
+            "host_required": "V\u00e6rt er p\u00e5kr\u00e6vet.",
+            "port_range": "Porten skal v\u00e6re 1-65535.",
+            "correct_fields": "Ret venligst de fremh\u00e6vede felter."
+        },
+        "service_save_requested": "Anmodning om at gemme service"
     },
-    "warnings_errors": {
-      "title": "Advarsler og fejl",
-      "subtitle": "Resumé fra sundhedstjekket"
+    "bookmarks_page": {
+        "title": "Bogm\u00e6rker",
+        "manage": "Administrer bogm\u00e6rker",
+        "add_to_browser": "Tilf\u00f8j til browser",
+        "bookmarklet_title": "Tr\u00e6k dette til din bogm\u00e6rkelinje for hurtigt at tilf\u00f8je den aktuelle side",
+        "prompt_tags": "Tags (kommasepareret):",
+        "category": "Kategori",
+        "all": "Alle",
+        "sort": "Sort\u00e9r",
+        "sort_updated_desc": "Opdateret (nyeste)",
+        "sort_title_asc": "Titel (A-Z)",
+        "sort_host_asc": "V\u00e6rt (A-Z)",
+        "fields": {
+            "title": "Titel",
+            "url": "URL",
+            "tags": "Tags",
+            "name": "Navn"
+        },
+        "placeholders": {
+            "optional_title": "Valgfri titel",
+            "tags": "tags,kommasepareret",
+            "new_category_name": "Nyt kategorinavn"
+        },
+        "add_category": "Tilf\u00f8j kategori",
+        "updated": "Opdateret",
+        "empty": "Ingen bogm\u00e6rker endnu.",
+        "empty_categories": "Ingen kategorier endnu.",
+        "modal": {
+            "add_edit": "Tilf\u00f8j / rediger bogm\u00e6rke",
+            "add_categories": "Tilf\u00f8j kategorier"
+        },
+        "uncategorized": "Uden kategori",
+        "hints": {
+            "bookmark_edit": "Vis bogm\u00e6rker her med sammenklappelige kategorier. Klik p\u00e5 et bogm\u00e6rke for at indl\u00e6se det ovenfor til redigering eller sletning.",
+            "category_edit": "Kategorierne vises her. Klik p\u00e5 en af dem for at \u00e5bne den for redigering eller sletning."
+        },
+        "confirm_delete_category": "Slette denne kategori? Bogm\u00e6rker bliver til Uncategorized.",
+        "confirm_delete_bookmark": "Slette dette bogm\u00e6rke?",
+        "validation": {
+            "category_name_required": "Navn p\u00e5 kategori p\u00e5kr\u00e6vet",
+            "url_required": "URL er p\u00e5kr\u00e6vet"
+        },
+        "errors": {
+            "all_endpoints_failed": "Alle slutpunkter mislykkedes",
+            "bad_json": "D\u00e5rlig JSON fra serveren",
+            "api_not_found": "Kunne ikke indl\u00e6se bogm\u00e6rker (API ikke fundet). Har fors\u00f8gt: {fors\u00f8gt}",
+            "load_failed": "Kunne ikke indl\u00e6se bogm\u00e6rker: {message}."
+        },
+        "toasts": {
+            "category_saved": "Kategori gemt",
+            "save_failed": "Gemningen mislykkedes: {meddelelse}",
+            "category_deleted": "Kategori slettet",
+            "delete_failed": "Sletning mislykkedes: {meddelelse}",
+            "order_saved": "Ordre gemt",
+            "reorder_failed": "Genbestilling mislykkedes: {meddelelse}",
+            "category_updated": "Kategori opdateret",
+            "category_added": "Kategori tilf\u00f8jet",
+            "bookmark_deleted": "Bogm\u00e6rke slettet",
+            "bookmark_updated": "Bogm\u00e6rke opdateret",
+            "bookmark_added": "Bogm\u00e6rke tilf\u00f8jet"
+        }
     },
-    "raw_snapshot": {
-      "title": "Rå Snapshot",
-      "subtitle": "Nøgleværdier direkte fra den sidste JSON-status"
-    },
-    "recent_actions": {
-      "title": "Seneste handlinger",
-      "subtitle": "Historie over handlinger fra dette dashboard",
-      "none": "Ingen handlinger registreret endnu."
-    },
-    "orch": {
-      "title": "Backup Orchestration Wizard",
-      "subtitle": "Tilpas stier én gang, og kopier derefter de genererede script/cron/systemd-enheder.",
-      "backup_root": "Backup rod",
-      "include_health": "Inkluder sundhedstjek",
-      "include_integrity": "Inkluder integritetstjek",
-      "include_prune": "Inkluder sveskestadiet",
-      "suspend": "Suspendér sikkerhedskopier",
-      "disable_on_mount_fail": "Deaktiver sikkerhedskopier, hvis montering mislykkes",
-      "nightly_script": "Natlig manuskript",
-      "copy_script": "Kopier script",
-      "cron_entry": "Cron indgang",
-      "copy_cron_line": "Kopier cron linje",
-      "systemd_service": "Systemd service",
-      "copy_unit": "Kopi enhed",
-      "systemd_timer": "Systemd timer",
-      "copy_timer": "Kopier timer"
-    },
-    "quick_restore": {
-      "title": "Hjælpere til hurtig gendannelse",
-      "subtitle": "Forudfyldte CLI-kommandoer til nødsituationer (manuel kørsel eller DANGER-knap)",
-      "hestia_latest_title": "Gendan seneste Hestia bruger backup",
-      "micro_latest_title": "Gendan fra seneste mikrosnapshot (kun CLI)",
-      "copy_command": "Kopiér kommando",
-      "run_restore_danger": "Kør gendannelse (seneste, FARE)"
-    },
-    "cli": {
-      "title": "Hestia Backup & Restore CLI",
-      "subtitle": "Hurtigt referenceark - klar til kopiering og indsæt",
-      "create_backups": "Opret sikkerhedskopier",
-      "list_delete_backups": "Liste og slette sikkerhedskopier",
-      "full_restore_user": "Fuld gendannelse (bruger)",
-      "selective_restore": "Selektiv gendannelse (Web / DB / Mail)",
-      "backup_file_locations": "Sikkerhedskopier filplaceringer",
-      "backup_tarball_contents": "Backup Tarball-indhold",
-      "backupctl_help": "backupctl hjælp"
+    "header": {
+        "navigation": "Navigation i overskriften",
+        "system_status": "Servicestatus",
+        "loading": "Indl\u00e6ser...",
+        "profile": "Min profil",
+        "logout": "Log ud",
+        "mobile": {
+            "open_menu": "\u00c5bn menu",
+            "menu": "Menu"
+        },
+        "nav": {
+            "history": "Historie",
+            "cron_health": "Cron Sundhed",
+            "processes": "Processer",
+            "databases": "Databaser",
+            "speedtest": "Speedtest",
+            "diagnostics": "Diagnostik",
+            "config": "Konfig",
+            "backups": "Sikkerhedskopier"
+        }
     }
-  }
 }

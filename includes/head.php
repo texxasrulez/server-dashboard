@@ -15,11 +15,14 @@ try {
         \App\Config::init(dirname(__DIR__));
         $SITE_NAME = \App\Config::get('site.name', 'Server Dashboard');
         $THEME = \App\Config::get('site.theme', $THEME ?? (defined('THEME_DEFAULT') ? THEME_DEFAULT : 'default'));
+        $UI_HIGH_CONTRAST = (bool)\App\Config::get('ui.high_contrast', false);
     } else {
         $SITE_NAME = 'Server Dashboard';
+        $UI_HIGH_CONTRAST = false;
     }
 } catch (Throwable $e) {
     $SITE_NAME = 'Server Dashboard';
+    $UI_HIGH_CONTRAST = false;
 }
 
 ?>
@@ -54,11 +57,12 @@ try {
   <meta name="toast-position" content="<?= h(\App\Config::get('ui.toast_position', 'bottom-center')) ?>">
   <script src="assets/js/i18n.js"></script>
 </head>
-<body class="theme-<?= h($THEME) ?>"
+<body class="theme-<?= h($THEME) ?><?= !empty($UI_HIGH_CONTRAST) ? ' theme-contrast' : '' ?>"
       data-admin="<?= !empty($_SESSION['user']) && (($_SESSION['user']['role'] ?? '') === 'admin') ? '1' : '0' ?>"
       data-user="<?= h($_SESSION['user']['username'] ?? 'guest') ?>"
       data-role="<?= h($_SESSION['user']['role'] ?? 'user') ?>"
       data-build="<?= h(BUILD) ?>"
+      data-high-contrast="<?= !empty($UI_HIGH_CONTRAST) ? '1' : '0' ?>"
       data-api-metrics="<?= h(project_url('/api/metrics_summary.php')) ?>">
 <link rel="stylesheet" href="<?= h(project_url('/assets/css/ui/buttons-core.css')) ?>?v=<?= h(BUILD) ?>">
 <?php include __DIR__ . '/header.php'; ?>

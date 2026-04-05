@@ -8,6 +8,14 @@
   var API_BASE = null;
   let CATS = [];
   let BOOKS = [];
+  function t(key, fallback, vars) {
+    try {
+      if (window.I18N && typeof window.I18N.t === "function") {
+        return window.I18N.t(key, fallback, vars);
+      }
+    } catch (e) {}
+    return fallback != null ? fallback : key;
+  }
 
   function $(s, root) {
     return (root || document).querySelector(s);
@@ -98,7 +106,12 @@
       var id = (idEl && idEl.value) || "";
       var name = ((nameEl && nameEl.value) || "").trim();
       if (!name) {
-        tWarn("Category name required");
+        tWarn(
+          t(
+            "bookmarks_page.validation.category_name_required",
+            "Category name required",
+          ),
+        );
         nameEl && nameEl.focus();
         return;
       }
@@ -109,7 +122,7 @@
       apiFetch(url, { method: "POST", body })
         .then(parseJsonResponse)
         .then(function () {
-          tOK("Category saved");
+          tOK(t("bookmarks_page.toasts.category_saved", "Category saved"));
           if (nameEl) nameEl.value = "";
           if (idEl) idEl.value = "";
           loadCategories().then(function () {
@@ -117,7 +130,12 @@
           });
         })
         .catch(function (err) {
-          tErr("Save failed: " + ((err && err.message) || err), true);
+          tErr(
+            t("bookmarks_page.toasts.save_failed", "Save failed: {message}", {
+              message: (err && err.message) || err,
+            }),
+            true,
+          );
         });
     });
     if (cancelBtn) {
@@ -210,7 +228,10 @@
       (function step() {
         if (idx >= urls.length)
           return reject({
-            message: "All endpoints failed",
+            message: t(
+              "bookmarks_page.errors.all_endpoints_failed",
+              "All endpoints failed",
+            ),
             tried: tried,
             lastErr: lastErr,
           });
@@ -305,7 +326,9 @@
         return JSON.parse(txt);
       } catch (e) {
         logE("bm_bad_json", { snippet: txt.slice(0, 200) });
-        throw new Error("Bad JSON from server");
+        throw new Error(
+          t("bookmarks_page.errors.bad_json", "Bad JSON from server"),
+        );
       }
     });
   }
@@ -411,7 +434,14 @@
       })
       .catch(function (err) {
         var tried = err && err.tried ? err.tried.slice(0, 3).join(" | ") : "";
-        tErr("Failed to load bookmarks (API not found). Tried: " + tried, true);
+        tErr(
+          t(
+            "bookmarks_page.errors.api_not_found",
+            "Failed to load bookmarks (API not found). Tried: {tried}",
+            { tried: tried || "-" },
+          ),
+          true,
+        );
         logE("bookmarks_api_discovery_failed", err || {});
       });
   }
@@ -451,7 +481,12 @@
         ev.preventDefault();
         if (!$("#catId").value) return;
         if (
-          !confirm("Delete this category? Bookmarks will become Uncategorized.")
+          !confirm(
+            t(
+              "bookmarks_page.confirm_delete_category",
+              "Delete this category? Bookmarks will become Uncategorized.",
+            ),
+          )
         )
           return;
         apiFetch(
@@ -463,11 +498,16 @@
         )
           .then(parseJsonResponse)
           .then(() => {
-            tOK("Category deleted");
+            tOK(t("bookmarks_page.toasts.category_deleted", "Category deleted"));
             loadCategories().then(renderList);
           })
           .catch((err) =>
-            tErr("Delete failed: " + ((err && err.message) || err), true),
+            tErr(
+              t("bookmarks_page.toasts.delete_failed", "Delete failed: {message}", {
+                message: (err && err.message) || err,
+              }),
+              true,
+            ),
           );
       });
     var cl = $("#catList");
@@ -514,8 +554,8 @@
         <span class="actions">
           <button class="btn" data-act="cup">↑</button>
           <button class="btn" data-act="cdn">↓</button>
-          <button class="btn" data-act="cedit">Edit</button>
-          <button class="btn danger" data-act="cdel">Delete</button>
+          <button class="btn" data-act="cedit">${esc(t("common.edit", "Edit"))}</button>
+          <button class="btn danger" data-act="cdel">${esc(t("common.delete", "Delete"))}</button>
         </span>
       </div>`;
     }).join("");
@@ -524,13 +564,13 @@
     var sel = $("#bmCategory");
     if (!sel) return;
     var cf = $("#bmCatFilter");
-    var opts = [`<option value="">Uncategorized</option>`].concat(
+    var opts = [`<option value="">${esc(t("bookmarks_page.uncategorized", "Uncategorized"))}</option>`].concat(
       CATS.map((c) => `<option value="${esc(c.id)}">${esc(c.name)}</option>`),
     );
     sel.innerHTML = opts.join("");
     if (cf) {
       cf.innerHTML =
-        `<option value="">All</option>` +
+        `<option value="">${esc(t("bookmarks_page.all", "All"))}</option>` +
         CATS.map(
           (c) => `<option value="${esc(c.id)}">${esc(c.name)}</option>`,
         ).join("");
@@ -551,7 +591,12 @@
       $("#catName").focus();
     } else if (act === "cdel") {
       if (
-        !confirm("Delete this category? Bookmarks will become Uncategorized.")
+        !confirm(
+          t(
+            "bookmarks_page.confirm_delete_category",
+            "Delete this category? Bookmarks will become Uncategorized.",
+          ),
+        )
       )
         return;
       apiFetch(
@@ -560,11 +605,16 @@
       )
         .then(parseJsonResponse)
         .then(() => {
-          tOK("Category deleted");
+          tOK(t("bookmarks_page.toasts.category_deleted", "Category deleted"));
           loadCategories().then(renderList);
         })
         .catch((err) =>
-          tErr("Delete failed: " + ((err && err.message) || err), true),
+          tErr(
+            t("bookmarks_page.toasts.delete_failed", "Delete failed: {message}", {
+              message: (err && err.message) || err,
+            }),
+            true,
+          ),
         );
     } else if (act === "cup" || act === "cdn") {
       var j =
@@ -584,12 +634,19 @@
       })
         .then(parseJsonResponse)
         .then(() => {
-          tOK("Order saved");
+          tOK(t("bookmarks_page.toasts.order_saved", "Order saved"));
           fillCategorySelects();
           renderList();
         })
         .catch((err) =>
-          tErr("Reorder failed: " + ((err && err.message) || err), true),
+          tErr(
+            t(
+              "bookmarks_page.toasts.reorder_failed",
+              "Reorder failed: {message}",
+              { message: (err && err.message) || err },
+            ),
+            true,
+          ),
         );
     }
   }
@@ -601,7 +658,12 @@
     var id = $("#catId").value || null;
     var name = (($("#catName") && $("#catName").value) || "").trim();
     if (!name) {
-      tWarn("Category name required");
+      tWarn(
+        t(
+          "bookmarks_page.validation.category_name_required",
+          "Category name required",
+        ),
+      );
       return;
     }
     apiFetch(apiUrl("bm_categories_upsert.php"), {
@@ -611,12 +673,21 @@
     })
       .then(parseJsonResponse)
       .then(() => {
-        tOK(id ? "Category updated" : "Category added");
+        tOK(
+          id
+            ? t("bookmarks_page.toasts.category_updated", "Category updated")
+            : t("bookmarks_page.toasts.category_added", "Category added"),
+        );
         catReset();
         loadCategories().then(renderList);
       })
       .catch((err) =>
-        tErr("Save failed: " + ((err && err.message) || err), true),
+        tErr(
+          t("bookmarks_page.toasts.save_failed", "Save failed: {message}", {
+            message: (err && err.message) || err,
+          }),
+          true,
+        ),
       );
   }
 
@@ -632,7 +703,9 @@
       })
       .catch((err) => {
         tErr(
-          "Failed to load bookmarks: " + ((err && err.message) || err),
+          t("bookmarks_page.errors.load_failed", "Failed to load bookmarks: {message}", {
+            message: (err && err.message) || err,
+          }),
           true,
         );
         logE("bookmarks_load_failed", {
@@ -697,8 +770,8 @@
       <span class="tags">${esc(tags)}</span>
       <span class="updated">${esc(upd)}</span>
       <span class="actions">
-        <button class="btn" data-act="edit">Edit</button>
-        <button class="btn danger" data-act="delete">Delete</button>
+        <button class="btn" data-act="edit">${esc(t("common.edit", "Edit"))}</button>
+        <button class="btn danger" data-act="delete">${esc(t("common.delete", "Delete"))}</button>
       </span>
     </div>`;
   }
@@ -711,7 +784,7 @@
     if (btn.dataset.act === "edit") {
       editId = id;
       var saveB = $("#bmSave");
-      if (saveB) saveB.textContent = "Update";
+      if (saveB) saveB.textContent = t("common.update", "Update");
       var it = BOOKS.find((x) => String(x.id) === String(id));
       if (!it) return;
       var t = $("#bmTitle"),
@@ -725,17 +798,22 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
     if (btn.dataset.act === "delete" && id) {
-      if (!confirm("Delete this bookmark?")) return;
+      if (!confirm(t("bookmarks_page.confirm_delete_bookmark", "Delete this bookmark?"))) return;
       apiFetch(apiUrl("bookmarks_delete.php?id=" + encodeURIComponent(id)), {
         method: "POST",
       })
         .then(parseJsonResponse)
         .then(() => {
-          tOK("Bookmark deleted");
+          tOK(t("bookmarks_page.toasts.bookmark_deleted", "Bookmark deleted"));
           loadList();
         })
         .catch((err) => {
-          tErr("Delete failed: " + ((err && err.message) || err), true);
+          tErr(
+            t("bookmarks_page.toasts.delete_failed", "Delete failed: {message}", {
+              message: (err && err.message) || err,
+            }),
+            true,
+          );
         });
     }
   }
@@ -743,7 +821,7 @@
   function resetForm() {
     editId = null;
     var sBtn = $("#bmSave");
-    if (sBtn) sBtn.textContent = "Save";
+    if (sBtn) sBtn.textContent = t("common.save", "Save");
     if ($("#bmTitle")) $("#bmTitle").value = "";
     if ($("#bmUrl")) $("#bmUrl").value = "";
     if ($("#bmTags")) $("#bmTags").value = "";
@@ -762,7 +840,7 @@
       category_id: ($("#bmCategory") && $("#bmCategory").value) || null,
     };
     if (!payload.url) {
-      tWarn("URL is required");
+      tWarn(t("bookmarks_page.validation.url_required", "URL is required"));
       return;
     }
     apiFetch(apiUrl("bookmarks_upsert.php"), {
@@ -773,10 +851,18 @@
       .then(parseJsonResponse)
       .then((resp) => {
         if (!resp || resp.error) {
-          tErr("Save failed: " + ((resp && resp.error) || ""));
+          tErr(
+            t("bookmarks_page.toasts.save_failed", "Save failed: {message}", {
+              message: (resp && resp.error) || "",
+            }),
+          );
           return;
         }
-        tOK(editId ? "Bookmark updated" : "Bookmark added");
+        tOK(
+          editId
+            ? t("bookmarks_page.toasts.bookmark_updated", "Bookmark updated")
+            : t("bookmarks_page.toasts.bookmark_added", "Bookmark added"),
+        );
         editId = null;
         if ($("#bmTitle")) $("#bmTitle").value = "";
         if ($("#bmUrl")) $("#bmUrl").value = "";
@@ -785,7 +871,12 @@
         loadList();
       })
       .catch((err) =>
-        tErr("Save failed: " + ((err && err.message) || err), true),
+        tErr(
+          t("bookmarks_page.toasts.save_failed", "Save failed: {message}", {
+            message: (err && err.message) || err,
+          }),
+          true,
+        ),
       );
   }
 })();

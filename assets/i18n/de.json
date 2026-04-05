@@ -1,314 +1,493 @@
 {
-  "app": {
-    "title": "Server Dashboard"
-  },
-  "nav": {
-    "history": "Geschichte",
-    "logs": "Protokolle",
-    "dashboard": "Dashboard",
-    "services": "Dienstleistungen",
-    "alerts": "Warnungen",
-    "tests": "Tests",
-    "settings": "Einstellungen",
-    "about": "Über"
-  },
-  "history": {
-    "title": "Geschichte",
-    "trends": "Trends",
-    "range": "Bereich",
-    "baseline": "Basislinie",
-    "probe_now": "Probe jetzt",
-    "refresh": "Auffrischen",
-    "export_json": "JSON exportieren",
-    "export_alerts_json": "Warnungen JSON exportieren",
-    "reset_history": "Verlauf zurücksetzen",
-    "recent_alert_events": "Jüngste Alarmereignisse",
-    "export_preview": "Vorschau exportieren",
-    "close": "Schließen Sie",
-    "copy": "Kopieren",
-    "download": "Herunterladen"
-  },
-  "logs": {
-    "title": "Protokolle",
-    "manage": "Protokolle verwalten",
-    "add": "hinzufügen",
-    "delete": "Löschen",
-    "refresh": "Aktualisieren",
-    "search": "Suche",
-    "filter": "Filter",
-    "lines": "Zeilen",
-    "open": "Öffnen Sie",
-    "close": "Schließen Sie",
-    "download": "Herunterladen",
-    "copy": "Kopieren"
-  },
-  "common": {
-    "save": "Speichern Sie",
-    "cancel": "Abbrechen",
-    "edit": "bearbeiten",
-    "delete": "Löschen",
-    "update": "Update",
-    "create": "erstellen.",
-    "enable": "Aktivieren Sie",
-    "disable": "Deaktivieren Sie",
-    "yes": "Ja",
-    "no": "Nein",
-    "on": "Auf",
-    "off": "Aus",
-    "confirm": "Bestätigen Sie",
-    "search": "Suche",
-    "filter": "Filter",
-    "actions": "Aktionen"
-  },
-  "alerts": {
-    "title": "Warnungen",
-    "recent_events": "Jüngste Alarmereignisse",
-    "history": "Geschichte des Alarms",
-    "export_json": "Warnungen JSON exportieren",
-    "no_alerts": "Keine Ausschreibungen",
-    "level": "Ebene",
-    "message": "Nachricht",
-    "service": "Dienst",
-    "time": "Zeit",
-    "probe_now": "Probe jetzt",
-    "refresh": "Aktualisieren",
-    "silence": "Schweigen",
-    "unsilence": "Schweigen",
-    "ack": "Bestätigen Sie",
-    "unack": "Unkenntnis"
-  },
-  "tests": {
-    "title": "Server-Tests",
-    "run_all": "Alle ausführen",
-    "status": "Status",
-    "last_run": "Letzter Lauf",
-    "duration": "Dauer"
-  },
-  "services": {
-    "title": "Dienstleistungen",
-    "status": "Status",
-    "restart": "Neustart",
-    "start": "Start",
-    "stop": "Stopp"
-  },
-  "config": {
-    "sections": {
-      "site": "Site",
-      "features": "Features",
-      "capabilities": "Capabilities",
-      "processes": "Processes",
-      "mail": "Mail",
-      "integrations": "Integrations",
-      "security": "Security",
-      "ui": "UI",
-      "server_tests": "Server Tests",
-      "alerts": "Alerts",
-      "cron": "Cron",
-      "history": "History",
-      "logs": "Logs",
-      "backups": "Sicherungen",
-      "email": "Email"
+    "app": {
+        "title": "Server Dashboard"
     },
-    "fields": {
-      "backups": {
-        "require_dedicated_mount": {
-          "label": "Erfordert eine spezielle Halterung",
-          "help": "Legacy-Kompatibilitätsschlüssel. Wenn diese Option aktiviert ist, erfordern Backup-Skripte, dass der Backup-Mount vorhanden ist."
-        },
-        "disable_on_mount_fail": {
-          "label": "Deaktivieren Sie Sicherungen, wenn die Bereitstellung fehlschlägt",
-          "help": "Wenn diese Option aktiviert ist, werden Backup-Aktionen und generierte Skripts gestoppt, wenn der Backup-Mount fehlt."
-        }
-      },
-      "alerts": {
-        "min_severity": {
-          "label": "Mindestschweregrad für die Warnung"
-        },
-        "email": {
-          "label": "Legacy alert email(s)"
-        }
-      }
+    "nav": {
+        "history": "Geschichte",
+        "logs": "Protokolle",
+        "dashboard": "Dashboard",
+        "services": "Dienstleistungen",
+        "alerts": "Warnungen",
+        "tests": "Tests",
+        "settings": "Einstellungen",
+        "about": "\u00dcber"
     },
-    "ui": {
-      "unknown": "unbekannt",
-      "unknown_paren": "(unbekannt)",
-      "site_backup": {
-        "title": "Sichern und Wiederherstellen",
-        "export_config": "Konfiguration exportieren",
-        "import_config": "Konfiguration importieren",
-        "choose_file_first": "Wählen Sie zunächst eine Sicherungsdatei",
-        "imported_reloading": "Importiert. Neuladen...",
-        "import_failed": "Der Import ist fehlgeschlagen",
-        "import_failed_prefix": "Import fehlgeschlagen:",
-        "retention_title": "Backups – Aufbewahrung",
-        "keep_last": "Bleiben Sie zuletzt",
-        "files": "Dateien",
-        "loading_stats": "(Statistiken werden geladen...)",
-        "last_backup_loading": "Letztes Backup: (Laden...)",
-        "last_backup_none": "Letztes Backup: noch keins",
-        "last_backup_prefix": "Letzte Sicherung:",
-        "last_backup_unknown": "Letzte Sicherung: unbekannt",
-        "prune_now": "Jetzt beschneiden",
-        "pruned_kept_deleted": "Beschnitten – behalten",
-        "deleted_prefix": "gelöscht",
-        "prune_failed": "Prune ist fehlgeschlagen",
-        "prune_failed_prefix": "Prune fehlgeschlagen:",
-        "create_backup_now": "Jetzt Backup erstellen",
-        "backup_saved_prefix": "Sicherung gespeichert:",
-        "backup_failed": "Die Sicherung ist fehlgeschlagen",
-        "backup_failed_prefix": "Sicherung fehlgeschlagen:",
-        "download_latest_backup": "Laden Sie das neueste Backup herunter",
-        "no_backups_found": "Keine Backups gefunden",
-        "download_failed_prefix": "Download fehlgeschlagen:",
-        "redact_secrets": "Redact secrets"
-      }
-    }
-  },
-  "backups": {
+    "history": {
+        "title": "Geschichte",
+        "trends": "Trends",
+        "range": "Bereich",
+        "baseline": "Basislinie",
+        "probe_now": "Probe jetzt",
+        "refresh": "Auffrischen",
+        "export_json": "JSON exportieren",
+        "export_alerts_json": "Warnungen JSON exportieren",
+        "reset_history": "Verlauf zur\u00fccksetzen",
+        "recent_alert_events": "J\u00fcngste Alarmereignisse",
+        "export_preview": "Vorschau exportieren",
+        "close": "Schlie\u00dfen Sie",
+        "copy": "Kopieren",
+        "download": "Herunterladen"
+    },
+    "logs": {
+        "title": "Protokolle",
+        "manage": "Protokolle verwalten",
+        "add": "hinzuf\u00fcgen",
+        "delete": "L\u00f6schen",
+        "refresh": "Aktualisieren",
+        "search": "Suche",
+        "filter": "Filter",
+        "lines": "Zeilen",
+        "open": "\u00d6ffnen Sie",
+        "close": "Schlie\u00dfen Sie",
+        "download": "Herunterladen",
+        "copy": "Kopieren"
+    },
     "common": {
-      "status": "Status:",
-      "timestamp": "Zeitstempel:",
-      "none_dash": "-",
-      "free": "Frei",
-      "used": "Gebraucht",
-      "copy": "Kopie",
-      "warnings": "Warnungen",
-      "errors": "Fehler",
-      "loading": "Laden..."
+        "save": "Speichern Sie",
+        "cancel": "Abbrechen",
+        "edit": "bearbeiten",
+        "delete": "L\u00f6schen",
+        "update": "Update",
+        "create": "erstellen.",
+        "enable": "Aktivieren Sie",
+        "disable": "Deaktivieren Sie",
+        "yes": "Ja",
+        "no": "Nein",
+        "on": "Auf",
+        "off": "Aus",
+        "confirm": "Best\u00e4tigen Sie",
+        "search": "Suche",
+        "filter": "Filter",
+        "actions": "Aktionen",
+        "close": "Schlie\u00dfen",
+        "none": "keine",
+        "none_dash": "-"
     },
-    "status": {
-      "error_loading_json": "FEHLER BEIM LADEN VON JSON",
-      "ok": "OK",
-      "unmounted": "UNMONTIERT",
-      "critical": "KRITISCH",
-      "high": "HOCH",
-      "elevated": "ERHÖHT",
-      "healthy": "GESUND",
-      "unknown": "UNBEKANNT",
-      "unknown_cap": "Unbekannt"
+    "alerts": {
+        "title": "Warnungen",
+        "recent_events": "J\u00fcngste Alarmereignisse",
+        "history": "Geschichte des Alarms",
+        "export_json": "Warnungen JSON exportieren",
+        "no_alerts": "Keine Ausschreibungen",
+        "level": "Ebene",
+        "message": "Nachricht",
+        "service": "Dienst",
+        "time": "Zeit",
+        "probe_now": "Probe jetzt",
+        "refresh": "Aktualisieren",
+        "silence": "Schweigen",
+        "unsilence": "Schweigen",
+        "ack": "Best\u00e4tigen Sie",
+        "unack": "Unkenntnis"
     },
-    "disk": {
-      "unmounted": "Festplatte nicht bereitgestellt",
-      "tag": "Scheibe:",
-      "sizes_updated": "Aktualisierte Größen:",
-      "title": "Festplattennutzung",
-      "usage": "Verwendung",
-      "mount": "Montieren"
+    "tests": {
+        "title": "Server-Tests",
+        "run_all": "Alle ausf\u00fchren",
+        "status": "Status",
+        "last_run": "Letzter Lauf",
+        "duration": "Dauer"
     },
-    "page": {
-      "freshness_prefix": "Frische:",
-      "title": "Backup-Kontrollzentrum",
-      "subtitle_prefix": "Live-Status gesteuert von",
-      "subtitle_suffix": "auf Ihrer Sicherungsdiskette."
+    "services": {
+        "title": "Dienstleistungen",
+        "status": "Status",
+        "restart": "Neustart",
+        "start": "Start",
+        "stop": "Stopp"
     },
-    "ages": {
-      "no_snapshots_on_disk": "Auf der Festplatte wurden keine Snapshots gefunden",
-      "one_snapshot_present": "1 Schnappschuss vorhanden",
-      "snapshots_present_suffix": "Schnappschüsse vorhanden",
-      "no_panel_backups_on_disk": "Auf der Festplatte wurden keine Panel-Backups gefunden",
-      "one_panel_backup_present": "1 Panel-Backup vorhanden",
-      "panel_backups_present_suffix": "Panel-Backups vorhanden",
-      "no_micro_backups_on_disk": "Auf der Festplatte wurden keine Mikro-Backups gefunden",
-      "one_micro_backup_present": "1 Mikro-Backup vorhanden",
-      "micro_backups_present_suffix": "Mikro-Backups vorhanden",
-      "snapshot_daily0_chart": "Schnappschuss (täglich.0)",
-      "hestia_latest_chart": "Hestia spätestens",
-      "micro_latest_chart": "Micro spätestens",
-      "age_days": "Alter (Tage)",
-      "title": "Sicherungsalter",
-      "subtitle": "Wie aktuell Ihre neuesten Backups sind",
-      "snapshot_daily0": "Schnappschuss täglich.0",
-      "latest_hestia": "Neueste Hestia",
-      "latest_micro": "Neuestes Mikro"
+    "config": {
+        "sections": {
+            "site": "Site",
+            "features": "Features",
+            "capabilities": "Capabilities",
+            "processes": "Processes",
+            "mail": "Mail",
+            "integrations": "Integrations",
+            "security": "Security",
+            "ui": "UI",
+            "server_tests": "Server Tests",
+            "alerts": "Alerts",
+            "cron": "Cron",
+            "history": "History",
+            "logs": "Logs",
+            "backups": "Sicherungen",
+            "email": "Email"
+        },
+        "fields": {
+            "backups": {
+                "require_dedicated_mount": {
+                    "label": "Erfordert eine spezielle Halterung",
+                    "help": "Legacy-Kompatibilit\u00e4tsschl\u00fcssel. Wenn diese Option aktiviert ist, erfordern Backup-Skripte, dass der Backup-Mount vorhanden ist."
+                },
+                "disable_on_mount_fail": {
+                    "label": "Deaktivieren Sie Sicherungen, wenn die Bereitstellung fehlschl\u00e4gt",
+                    "help": "Wenn diese Option aktiviert ist, werden Backup-Aktionen und generierte Skripts gestoppt, wenn der Backup-Mount fehlt."
+                }
+            },
+            "alerts": {
+                "min_severity": {
+                    "label": "Mindestschweregrad f\u00fcr die Warnung"
+                },
+                "email": {
+                    "label": "Legacy alert email(s)"
+                }
+            }
+        },
+        "ui": {
+            "unknown": "unbekannt",
+            "unknown_paren": "(unbekannt)",
+            "site_backup": {
+                "title": "Sichern und Wiederherstellen",
+                "export_config": "Konfiguration exportieren",
+                "import_config": "Konfiguration importieren",
+                "choose_file_first": "W\u00e4hlen Sie zun\u00e4chst eine Sicherungsdatei",
+                "imported_reloading": "Importiert. Neuladen...",
+                "import_failed": "Der Import ist fehlgeschlagen",
+                "import_failed_prefix": "Import fehlgeschlagen:",
+                "retention_title": "Backups \u2013 Aufbewahrung",
+                "keep_last": "Bleiben Sie zuletzt",
+                "files": "Dateien",
+                "loading_stats": "(Statistiken werden geladen...)",
+                "last_backup_loading": "Letztes Backup: (Laden...)",
+                "last_backup_none": "Letztes Backup: noch keins",
+                "last_backup_prefix": "Letzte Sicherung:",
+                "last_backup_unknown": "Letzte Sicherung: unbekannt",
+                "prune_now": "Jetzt beschneiden",
+                "pruned_kept_deleted": "Beschnitten \u2013 behalten",
+                "deleted_prefix": "gel\u00f6scht",
+                "prune_failed": "Prune ist fehlgeschlagen",
+                "prune_failed_prefix": "Prune fehlgeschlagen:",
+                "create_backup_now": "Jetzt Backup erstellen",
+                "backup_saved_prefix": "Sicherung gespeichert:",
+                "backup_failed": "Die Sicherung ist fehlgeschlagen",
+                "backup_failed_prefix": "Sicherung fehlgeschlagen:",
+                "download_latest_backup": "Laden Sie das neueste Backup herunter",
+                "no_backups_found": "Keine Backups gefunden",
+                "download_failed_prefix": "Download fehlgeschlagen:",
+                "redact_secrets": "Redact secrets"
+            }
+        }
     },
-    "errors": {
-      "no_backups_detected": "Für Snapshots, Hestia oder Microsets wurden keine Backups erkannt."
+    "backups": {
+        "common": {
+            "status": "Status:",
+            "timestamp": "Zeitstempel:",
+            "none_dash": "-",
+            "free": "Frei",
+            "used": "Gebraucht",
+            "copy": "Kopie",
+            "warnings": "Warnungen",
+            "errors": "Fehler",
+            "loading": "Laden..."
+        },
+        "status": {
+            "error_loading_json": "FEHLER BEIM LADEN VON JSON",
+            "ok": "OK",
+            "unmounted": "UNMONTIERT",
+            "critical": "KRITISCH",
+            "high": "HOCH",
+            "elevated": "ERH\u00d6HT",
+            "healthy": "GESUND",
+            "unknown": "UNBEKANNT",
+            "unknown_cap": "Unbekannt"
+        },
+        "disk": {
+            "unmounted": "Festplatte nicht bereitgestellt",
+            "tag": "Scheibe:",
+            "sizes_updated": "Aktualisierte Gr\u00f6\u00dfen:",
+            "title": "Festplattennutzung",
+            "usage": "Verwendung",
+            "mount": "Montieren"
+        },
+        "page": {
+            "freshness_prefix": "Frische:",
+            "title": "Backup-Kontrollzentrum",
+            "subtitle_prefix": "Live-Status gesteuert von",
+            "subtitle_suffix": "auf Ihrer Sicherungsdiskette."
+        },
+        "ages": {
+            "no_snapshots_on_disk": "Auf der Festplatte wurden keine Snapshots gefunden",
+            "one_snapshot_present": "1 Schnappschuss vorhanden",
+            "snapshots_present_suffix": "Schnappsch\u00fcsse vorhanden",
+            "no_panel_backups_on_disk": "Auf der Festplatte wurden keine Panel-Backups gefunden",
+            "one_panel_backup_present": "1 Panel-Backup vorhanden",
+            "panel_backups_present_suffix": "Panel-Backups vorhanden",
+            "no_micro_backups_on_disk": "Auf der Festplatte wurden keine Mikro-Backups gefunden",
+            "one_micro_backup_present": "1 Mikro-Backup vorhanden",
+            "micro_backups_present_suffix": "Mikro-Backups vorhanden",
+            "snapshot_daily0_chart": "Schnappschuss (t\u00e4glich.0)",
+            "hestia_latest_chart": "Hestia sp\u00e4testens",
+            "micro_latest_chart": "Micro sp\u00e4testens",
+            "age_days": "Alter (Tage)",
+            "title": "Sicherungsalter",
+            "subtitle": "Wie aktuell Ihre neuesten Backups sind",
+            "snapshot_daily0": "Schnappschuss t\u00e4glich.0",
+            "latest_hestia": "Neueste Hestia",
+            "latest_micro": "Neuestes Mikro"
+        },
+        "errors": {
+            "no_backups_detected": "F\u00fcr Snapshots, Hestia oder Microsets wurden keine Backups erkannt."
+        },
+        "restore": {
+            "hestia_placeholder_tar": "USER.YYYYMMDD-HHMM.tar",
+            "using_latest_backup_prefix": "Verwendung der neuesten in JSON gemeldeten Sicherung:",
+            "adjust_backup_tar": "Passen Sie BACKUP_TAR vor der Ausf\u00fchrung an eine echte Datei aus \u201ev-list-backups USER\u201c an.",
+            "micro_restore_prefix": "Basis vom letzten Mikro-Snapshot wiederherstellen:",
+            "micro_restore_suffix": "(\u00dcberpr\u00fcfen Sie Pfade und Ausschl\u00fcsse vor der Ausf\u00fchrung).",
+            "set_correct_snapshot_path": "Legen Sie den richtigen Snapshot-Pfad fest, bevor Sie diesen Befehl verwenden.",
+            "confirm_body_1": "Dadurch wird ein Hestia-Wiederherstellungsauftrag auf dem Server mithilfe von \u201ebackupctl\u201c gestartet.",
+            "confirm_body_2": "Dienste und Daten f\u00fcr diesen Benutzer k\u00f6nnen \u00fcberschrieben werden.",
+            "confirm_body_3": "Bist du absolut sicher?"
+        },
+        "actions": {
+            "starting_prefix": "Beginnt",
+            "failed_to_start_prefix": "Der Start ist fehlgeschlagen",
+            "started_prefix": "Begonnen",
+            "started_suffix": ". Dies kann eine Weile dauern; Der Status wird bei der n\u00e4chsten Gesundheitspr\u00fcfung aktualisiert.",
+            "error_talking_endpoint": "Fehler beim Sprechen mit backups_action.php",
+            "run_os_snapshot": "F\u00fchren Sie den Betriebssystem-Snapshot aus",
+            "run_micro_backup": "F\u00fchren Sie Micro Backup aus",
+            "run_hestia_backup_user": "F\u00fchren Sie Hestia Backup (Gen) aus.",
+            "run_all_backups": "F\u00fchren Sie ALLE Backups aus",
+            "run_health_check": "F\u00fchren Sie den Gesundheitscheck durch",
+            "log_maintenance": "Protokollpflege",
+            "clear_backup_logs": "L\u00f6schen Sie Backup-Integrit\u00e4tsprotokolle",
+            "clear_prune_logs": "Bereinigungsprotokolle l\u00f6schen",
+            "clear_integrity_log": "Integrit\u00e4tsprotokoll l\u00f6schen"
+        },
+        "cron": {
+            "no_entries": "Keine Crontab-Eintr\u00e4ge erkannt.",
+            "env": "Env",
+            "schedule": "Zeitplan",
+            "entries_for_prefix": "Crontab-Eintr\u00e4ge f\u00fcr",
+            "current_user": "aktueller Benutzer",
+            "unable_to_read": "Crontab kann nicht gelesen werden.",
+            "failed_to_read": "Crontab konnte nicht gelesen werden."
+        },
+        "warnings_errors": {
+            "title": "Warnungen und Fehler",
+            "subtitle": "Zusammenfassung vom Gesundheitscheck"
+        },
+        "raw_snapshot": {
+            "title": "Roher Schnappschuss",
+            "subtitle": "Schl\u00fcsselwerte direkt aus dem letzten JSON-Status"
+        },
+        "recent_actions": {
+            "title": "Letzte Aktionen",
+            "subtitle": "Verlauf der Aktionen von diesem Dashboard",
+            "none": "Es wurden noch keine Aktionen aufgezeichnet."
+        },
+        "orch": {
+            "title": "Assistent f\u00fcr die Backup-Orchestrierung",
+            "subtitle": "Passen Sie die Pfade einmal an und kopieren Sie dann die generierten Skript-/Cron-/Systemd-Einheiten.",
+            "backup_root": "Backup-Root",
+            "include_health": "Integrieren Sie einen Gesundheitscheck",
+            "include_integrity": "Integrieren Sie eine Integrit\u00e4tspr\u00fcfung",
+            "include_prune": "Ber\u00fccksichtigen Sie die Schnittphase",
+            "suspend": "Backups unterbrechen",
+            "disable_on_mount_fail": "Deaktivieren Sie Sicherungen, wenn die Bereitstellung fehlschl\u00e4gt",
+            "nightly_script": "N\u00e4chtliches Drehbuch",
+            "copy_script": "Skript kopieren",
+            "cron_entry": "Cron-Eintrag",
+            "copy_cron_line": "Cron-Zeile kopieren",
+            "systemd_service": "Systemd-Dienst",
+            "copy_unit": "Kopiereinheit",
+            "systemd_timer": "Systemd-Timer",
+            "copy_timer": "Timer kopieren"
+        },
+        "quick_restore": {
+            "title": "Schnelle Wiederherstellungshelfer",
+            "subtitle": "Vorgef\u00fcllte CLI-Befehle f\u00fcr Notf\u00e4lle (manuelle Ausf\u00fchrung oder GEFAHR-Taste)",
+            "hestia_latest_title": "Stellen Sie die neueste Hestia-Benutzersicherung wieder her",
+            "micro_latest_title": "Wiederherstellung vom neuesten Mikro-Snapshot (nur CLI)",
+            "copy_command": "Befehl kopieren",
+            "run_restore_danger": "F\u00fchren Sie die Wiederherstellung aus (aktuell, GEFAHR)"
+        },
+        "cli": {
+            "title": "Hestia Backup & Restore-CLI",
+            "subtitle": "Kurzreferenzblatt \u2013 zum Kopieren und Einf\u00fcgen bereit",
+            "create_backups": "Erstellen Sie Backups",
+            "list_delete_backups": "Backups auflisten und l\u00f6schen",
+            "full_restore_user": "Vollst\u00e4ndige Wiederherstellung (Benutzer)",
+            "selective_restore": "Selektive Wiederherstellung (Web/DB/Mail)",
+            "backup_file_locations": "Speicherorte der Sicherungsdateien",
+            "backup_tarball_contents": "Tarball-Inhalte sichern",
+            "backupctl_help": "backupctl-Hilfe"
+        }
     },
-    "restore": {
-      "hestia_placeholder_tar": "USER.YYYYMMDD-HHMM.tar",
-      "using_latest_backup_prefix": "Verwendung der neuesten in JSON gemeldeten Sicherung:",
-      "adjust_backup_tar": "Passen Sie BACKUP_TAR vor der Ausführung an eine echte Datei aus „v-list-backups USER“ an.",
-      "micro_restore_prefix": "Basis vom letzten Mikro-Snapshot wiederherstellen:",
-      "micro_restore_suffix": "(Überprüfen Sie Pfade und Ausschlüsse vor der Ausführung).",
-      "set_correct_snapshot_path": "Legen Sie den richtigen Snapshot-Pfad fest, bevor Sie diesen Befehl verwenden.",
-      "confirm_body_1": "Dadurch wird ein Hestia-Wiederherstellungsauftrag auf dem Server mithilfe von „backupctl“ gestartet.",
-      "confirm_body_2": "Dienste und Daten für diesen Benutzer können überschrieben werden.",
-      "confirm_body_3": "Bist du absolut sicher?"
+    "footer": {
+        "logged_in_as": "Angemeldet als",
+        "theme": "Design"
     },
-    "actions": {
-      "starting_prefix": "Beginnt",
-      "failed_to_start_prefix": "Der Start ist fehlgeschlagen",
-      "started_prefix": "Begonnen",
-      "started_suffix": ". Dies kann eine Weile dauern; Der Status wird bei der nächsten Gesundheitsprüfung aktualisiert.",
-      "error_talking_endpoint": "Fehler beim Sprechen mit backups_action.php",
-      "run_os_snapshot": "Führen Sie den Betriebssystem-Snapshot aus",
-      "run_micro_backup": "Führen Sie Micro Backup aus",
-      "run_hestia_backup_user": "Führen Sie Hestia Backup (Gen) aus.",
-      "run_all_backups": "Führen Sie ALLE Backups aus",
-      "run_health_check": "Führen Sie den Gesundheitscheck durch",
-      "log_maintenance": "Protokollpflege",
-      "clear_backup_logs": "Löschen Sie Backup-Integritätsprotokolle",
-      "clear_prune_logs": "Bereinigungsprotokolle löschen",
-      "clear_integrity_log": "Integritätsprotokoll löschen"
+    "i18n": {
+        "language_picker": {
+            "title": "Sprache",
+            "saving": "Wird gespeichert...",
+            "saved": "Gespeichert",
+            "save_failed": "Speichern fehlgeschlagen"
+        }
     },
-    "cron": {
-      "no_entries": "Keine Crontab-Einträge erkannt.",
-      "env": "Env",
-      "schedule": "Zeitplan",
-      "entries_for_prefix": "Crontab-Einträge für",
-      "current_user": "aktueller Benutzer",
-      "unable_to_read": "Crontab kann nicht gelesen werden.",
-      "failed_to_read": "Crontab konnte nicht gelesen werden."
+    "services_page": {
+        "environment": "Umgebung",
+        "filter_placeholder": "Dienste filtern...",
+        "add_service": "Dienst hinzuf\u00fcgen",
+        "edit_service": "Dienst bearbeiten",
+        "import": "Importieren",
+        "export_csv": "CSV exportieren",
+        "auto_probe": "Automatische Pr\u00fcfung",
+        "every": "Alle",
+        "seconds_short": "s",
+        "columns": {
+            "name": "Name",
+            "category": "Kategorie",
+            "host": "Host",
+            "port": "Port",
+            "probe": "Pr\u00fcfung",
+            "timeout": "Zeitlimit",
+            "path": "Pfad",
+            "enabled": "Aktiviert"
+        },
+        "form": {
+            "name": "Name",
+            "category": "Kategorie",
+            "host": "Host",
+            "port": "Port",
+            "probe": "Pr\u00fcfung",
+            "timeout": "Zeitlimit (ms)",
+            "path": "Pfad (HTTP)",
+            "enabled": "Aktiviert"
+        },
+        "test_on_save": "Beim Speichern testen",
+        "path_not_used": "(nicht verwendet)",
+        "status": {
+            "up": "AKTIV",
+            "warn": "WARNUNG",
+            "down": "INAKTIV",
+            "unknown": "UNBEKANNT"
+        },
+        "relative_time": {
+            "just_now": "gerade eben",
+            "minutes_ago": "vor {count} Min.",
+            "hours_ago": "vor {count} Std.",
+            "days_ago": "vor {count} T."
+        },
+        "actions": {
+            "test": "Test"
+        },
+        "uptime": "Verf\u00fcgbarkeit {pct}%",
+        "alert_last_seen": "Alarm {time}",
+        "alerts_muted_until": "Alarme stumm {time}",
+        "mute_alerts": "Alarme stummschalten",
+        "confirm_delete": "Diesen Dienst l\u00f6schen?",
+        "caps": {
+            "panel": "Panel",
+            "web": "Web",
+            "mta": "mta",
+            "db": "db",
+            "nginx": "nginx"
+        },
+        "states": {
+            "active": "aktiv",
+            "inactive": "inaktiv"
+        },
+        "units": {
+            "ms": "ms"
+        },
+        "probe_kicked": "Probe getreten",
+        "no_alert_rules": "Keine Alarmregeln zum Stummschalten.",
+        "prompt_mute_minutes": "Wie viele Minuten lang werden Alarme stummgeschaltet?",
+        "alerts_muted_for": "Alarme stummgeschaltet f\u00fcr {mins}m.",
+        "mute_failed": "Stummschaltung fehlgeschlagen: {Meldung}",
+        "invalid_json": "Ung\u00fcltiges JSON",
+        "import_failed": "Import fehlgeschlagen",
+        "validation": {
+            "name_required": "Name ist erforderlich.",
+            "host_required": "Gastgeber ist erforderlich.",
+            "port_range": "Der Anschluss muss 1-65535 sein.",
+            "correct_fields": "Bitte korrigieren Sie die hervorgehobenen Felder."
+        },
+        "service_save_requested": "Service speichern angefordert"
     },
-    "warnings_errors": {
-      "title": "Warnungen und Fehler",
-      "subtitle": "Zusammenfassung vom Gesundheitscheck"
+    "bookmarks_page": {
+        "title": "Lesezeichen",
+        "manage": "Lesezeichen verwalten",
+        "add_to_browser": "Zum Browser hinzuf\u00fcgen",
+        "bookmarklet_title": "Ziehe dies in deine Lesezeichenleiste, um die aktuelle Seite schnell hinzuzuf\u00fcgen",
+        "prompt_tags": "Tags (kommagetrennt):",
+        "category": "Kategorie",
+        "all": "Alle",
+        "sort": "Sortierung",
+        "sort_updated_desc": "Aktualisiert (neueste)",
+        "sort_title_asc": "Titel (A-Z)",
+        "sort_host_asc": "Host (A-Z)",
+        "fields": {
+            "title": "Titel",
+            "url": "URL",
+            "tags": "Tags",
+            "name": "Name"
+        },
+        "placeholders": {
+            "optional_title": "Optionaler Titel",
+            "tags": "komma,getrennte,tags",
+            "new_category_name": "Neuer Kategoriename"
+        },
+        "add_category": "Kategorie hinzuf\u00fcgen",
+        "updated": "Aktualisiert",
+        "empty": "Noch keine Lesezeichen.",
+        "empty_categories": "Noch keine Kategorien.",
+        "modal": {
+            "add_edit": "Lesezeichen hinzuf\u00fcgen / bearbeiten",
+            "add_categories": "Kategorien hinzuf\u00fcgen"
+        },
+        "hints": {
+            "bookmark_edit": "Lesezeichen werden hier in aufklappbaren Kategorien angezeigt. Klicke auf ein Lesezeichen, um es oben zum Bearbeiten oder L\u00f6schen zu laden.",
+            "category_edit": "Kategorien werden hier angezeigt. Klicke auf eine Kategorie, um sie oben zum Bearbeiten oder L\u00f6schen zu laden."
+        },
+        "uncategorized": "Ohne Kategorie",
+        "confirm_delete_category": "Diese Kategorie l\u00f6schen? Lesezeichen werden dann ohne Kategorie gef\u00fchrt.",
+        "confirm_delete_bookmark": "Dieses Lesezeichen l\u00f6schen?",
+        "validation": {
+            "category_name_required": "Name der Kategorie erforderlich",
+            "url_required": "URL ist erforderlich"
+        },
+        "errors": {
+            "all_endpoints_failed": "Alle Endpunkte sind fehlgeschlagen",
+            "bad_json": "Schlechtes JSON vom Server",
+            "api_not_found": "Lesezeichen konnten nicht geladen werden (API nicht gefunden). Versucht: {Versucht}",
+            "load_failed": "Lesezeichen konnten nicht geladen werden: {Meldung}"
+        },
+        "toasts": {
+            "category_saved": "Gespeicherte Kategorie",
+            "save_failed": "Speichern fehlgeschlagen: {Meldung}",
+            "category_deleted": "Kategorie gel\u00f6scht",
+            "delete_failed": "L\u00f6schen fehlgeschlagen: {Meldung}",
+            "order_saved": "Gespeicherte Bestellung",
+            "reorder_failed": "Wiederbestellung fehlgeschlagen: {Meldung}",
+            "category_updated": "Kategorie aktualisiert",
+            "category_added": "Kategorie hinzugef\u00fcgt",
+            "bookmark_deleted": "Lesezeichen gel\u00f6scht",
+            "bookmark_updated": "Lesezeichen aktualisiert",
+            "bookmark_added": "Lesezeichen hinzugef\u00fcgt"
+        }
     },
-    "raw_snapshot": {
-      "title": "Roher Schnappschuss",
-      "subtitle": "Schlüsselwerte direkt aus dem letzten JSON-Status"
-    },
-    "recent_actions": {
-      "title": "Letzte Aktionen",
-      "subtitle": "Verlauf der Aktionen von diesem Dashboard",
-      "none": "Es wurden noch keine Aktionen aufgezeichnet."
-    },
-    "orch": {
-      "title": "Assistent für die Backup-Orchestrierung",
-      "subtitle": "Passen Sie die Pfade einmal an und kopieren Sie dann die generierten Skript-/Cron-/Systemd-Einheiten.",
-      "backup_root": "Backup-Root",
-      "include_health": "Integrieren Sie einen Gesundheitscheck",
-      "include_integrity": "Integrieren Sie eine Integritätsprüfung",
-      "include_prune": "Berücksichtigen Sie die Schnittphase",
-      "suspend": "Backups unterbrechen",
-      "disable_on_mount_fail": "Deaktivieren Sie Sicherungen, wenn die Bereitstellung fehlschlägt",
-      "nightly_script": "Nächtliches Drehbuch",
-      "copy_script": "Skript kopieren",
-      "cron_entry": "Cron-Eintrag",
-      "copy_cron_line": "Cron-Zeile kopieren",
-      "systemd_service": "Systemd-Dienst",
-      "copy_unit": "Kopiereinheit",
-      "systemd_timer": "Systemd-Timer",
-      "copy_timer": "Timer kopieren"
-    },
-    "quick_restore": {
-      "title": "Schnelle Wiederherstellungshelfer",
-      "subtitle": "Vorgefüllte CLI-Befehle für Notfälle (manuelle Ausführung oder GEFAHR-Taste)",
-      "hestia_latest_title": "Stellen Sie die neueste Hestia-Benutzersicherung wieder her",
-      "micro_latest_title": "Wiederherstellung vom neuesten Mikro-Snapshot (nur CLI)",
-      "copy_command": "Befehl kopieren",
-      "run_restore_danger": "Führen Sie die Wiederherstellung aus (aktuell, GEFAHR)"
-    },
-    "cli": {
-      "title": "Hestia Backup & Restore-CLI",
-      "subtitle": "Kurzreferenzblatt – zum Kopieren und Einfügen bereit",
-      "create_backups": "Erstellen Sie Backups",
-      "list_delete_backups": "Backups auflisten und löschen",
-      "full_restore_user": "Vollständige Wiederherstellung (Benutzer)",
-      "selective_restore": "Selektive Wiederherstellung (Web/DB/Mail)",
-      "backup_file_locations": "Speicherorte der Sicherungsdateien",
-      "backup_tarball_contents": "Tarball-Inhalte sichern",
-      "backupctl_help": "backupctl-Hilfe"
+    "header": {
+        "navigation": "Kopfzeilen-Navigation",
+        "system_status": "Dienststatus",
+        "loading": "Laden...",
+        "profile": "Mein Profil",
+        "logout": "Abmeldung",
+        "mobile": {
+            "open_menu": "Men\u00fc \u00f6ffnen",
+            "menu": "Men\u00fc"
+        },
+        "nav": {
+            "history": "Geschichte",
+            "cron_health": "Cron Gesundheit",
+            "processes": "Prozesse",
+            "databases": "Datenbanken",
+            "speedtest": "Geschwindigkeitstest",
+            "diagnostics": "Diagnostik",
+            "config": "Konfigurieren Sie",
+            "backups": "Backups"
+        }
     }
-  }
 }

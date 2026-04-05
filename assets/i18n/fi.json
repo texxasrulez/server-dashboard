@@ -1,314 +1,493 @@
 {
-  "app": {
-    "title": "Palvelimen kojelauta"
-  },
-  "nav": {
-    "history": "Historia",
-    "logs": "Lokit",
-    "dashboard": "Kojelauta",
-    "services": "Palvelut",
-    "alerts": "Hälytykset",
-    "tests": "Testit",
-    "settings": "Asetukset",
-    "about": "Tietoja"
-  },
-  "history": {
-    "title": "Historia",
-    "trends": "Suuntaukset",
-    "range": "Valikoima",
-    "baseline": "Perustaso",
-    "probe_now": "Koettele nyt",
-    "refresh": "Päivitä",
-    "export_json": "Vie JSON",
-    "export_alerts_json": "Vie hälytykset JSON",
-    "reset_history": "Nollaa historia",
-    "recent_alert_events": "Viimeaikaiset hälytystapahtumat",
-    "export_preview": "Viennin esikatselu",
-    "close": "Sulje",
-    "copy": "Kopioi",
-    "download": "Lataa"
-  },
-  "logs": {
-    "title": "Lokit",
-    "manage": "Hallitse lokit",
-    "add": "Lisää",
-    "delete": "Poista",
-    "refresh": "Päivitä",
-    "search": "Etsi",
-    "filter": "Suodatin",
-    "lines": "Rivit",
-    "open": "Avaa",
-    "close": "Sulje",
-    "download": "Lataa",
-    "copy": "Kopioi"
-  },
-  "common": {
-    "save": "Tallenna",
-    "cancel": "Peruuta",
-    "edit": "Muokkaa",
-    "delete": "Poista",
-    "update": "Päivitys",
-    "create": "Luo",
-    "enable": "Ota käyttöön",
-    "disable": "Poista käytöstä",
-    "yes": "Kyllä",
-    "no": "Ei",
-    "on": "Osoitteessa",
-    "off": "Off",
-    "confirm": "Vahvista",
-    "search": "Etsi",
-    "filter": "Suodatin",
-    "actions": "Toimet"
-  },
-  "alerts": {
-    "title": "Hälytykset",
-    "recent_events": "Viimeaikaiset hälytystapahtumat",
-    "history": "Hälytyshistoria",
-    "export_json": "Vie hälytykset JSON",
-    "no_alerts": "Ei hälytyksiä",
-    "level": "Taso",
-    "message": "Viesti",
-    "service": "Palvelu",
-    "time": "Aika",
-    "probe_now": "Koettele nyt",
-    "refresh": "Päivitä",
-    "silence": "Hiljaisuus",
-    "unsilence": "Hiljaisuus",
-    "ack": "Kuittaa",
-    "unack": "Unacknowledge"
-  },
-  "tests": {
-    "title": "Palvelimen testit",
-    "run_all": "Suorita kaikki",
-    "status": "Tila",
-    "last_run": "Viimeinen ajo",
-    "duration": "Kesto"
-  },
-  "services": {
-    "title": "Palvelut",
-    "status": "Tila",
-    "restart": "Käynnistä uudelleen",
-    "start": "Aloita",
-    "stop": "Stop"
-  },
-  "config": {
-    "sections": {
-      "site": "Site",
-      "features": "Features",
-      "capabilities": "Capabilities",
-      "processes": "Processes",
-      "mail": "Mail",
-      "integrations": "Integrations",
-      "security": "Security",
-      "ui": "UI",
-      "server_tests": "Server Tests",
-      "alerts": "Alerts",
-      "cron": "Cron",
-      "history": "History",
-      "logs": "Logs",
-      "backups": "Varmuuskopiot",
-      "email": "Email"
+    "app": {
+        "title": "Palvelimen kojelauta"
     },
-    "fields": {
-      "backups": {
-        "require_dedicated_mount": {
-          "label": "Vaatii erillisen kiinnityksen",
-          "help": "Vanha yhteensopivuusavain. Kun tämä on käytössä, varmuuskopiointikomentosarjat edellyttävät varmuuskopiokiinnityksen olevan läsnä."
-        },
-        "disable_on_mount_fail": {
-          "label": "Poista varmuuskopiot käytöstä, jos asennus epäonnistuu",
-          "help": "Kun tämä on käytössä, varmuuskopiointitoiminnot ja luodut komentosarjat pysähtyvät, jos varmuuskopiokiinnitys puuttuu."
-        }
-      },
-      "alerts": {
-        "min_severity": {
-          "label": "Vähimmäisvakavuus hälytettäväksi"
-        },
-        "email": {
-          "label": "Legacy alert email(s)"
-        }
-      }
+    "nav": {
+        "history": "Historia",
+        "logs": "Lokit",
+        "dashboard": "Kojelauta",
+        "services": "Palvelut",
+        "alerts": "H\u00e4lytykset",
+        "tests": "Testit",
+        "settings": "Asetukset",
+        "about": "Tietoja"
     },
-    "ui": {
-      "unknown": "tuntematon",
-      "unknown_paren": "(tuntematon)",
-      "site_backup": {
-        "title": "Varmuuskopiointi ja palautus",
-        "export_config": "Vie kokoonpano",
-        "import_config": "Tuo kokoonpano",
-        "choose_file_first": "Valitse ensin varmuuskopiotiedosto",
-        "imported_reloading": "Tuotu. Ladataan uudelleen...",
-        "import_failed": "Tuonti epäonnistui",
-        "import_failed_prefix": "Tuonti epäonnistui:",
-        "retention_title": "Varmuuskopiot - Säilytys",
-        "keep_last": "Pysy viimeisenä",
-        "files": "tiedostot",
-        "loading_stats": "(ladataan tilastoja...)",
-        "last_backup_loading": "Viimeisin varmuuskopio: (ladataan...)",
-        "last_backup_none": "Viimeisin varmuuskopio: ei vielä",
-        "last_backup_prefix": "Viimeisin varmuuskopio:",
-        "last_backup_unknown": "Viimeisin varmuuskopio: tuntematon",
-        "prune_now": "Leikkaa nyt",
-        "pruned_kept_deleted": "Leikattu - säilytetty",
-        "deleted_prefix": "poistettu",
-        "prune_failed": "Prune epäonnistui",
-        "prune_failed_prefix": "Luumuus epäonnistui:",
-        "create_backup_now": "Luo varmuuskopio nyt",
-        "backup_saved_prefix": "Varmuuskopio tallennettu:",
-        "backup_failed": "Varmuuskopiointi epäonnistui",
-        "backup_failed_prefix": "Varmuuskopiointi epäonnistui:",
-        "download_latest_backup": "Lataa uusin varmuuskopio",
-        "no_backups_found": "Varmuuskopioita ei löytynyt",
-        "download_failed_prefix": "Lataus epäonnistui:",
-        "redact_secrets": "Redact secrets"
-      }
-    }
-  },
-  "backups": {
+    "history": {
+        "title": "Historia",
+        "trends": "Suuntaukset",
+        "range": "Valikoima",
+        "baseline": "Perustaso",
+        "probe_now": "Koettele nyt",
+        "refresh": "P\u00e4ivit\u00e4",
+        "export_json": "Vie JSON",
+        "export_alerts_json": "Vie h\u00e4lytykset JSON",
+        "reset_history": "Nollaa historia",
+        "recent_alert_events": "Viimeaikaiset h\u00e4lytystapahtumat",
+        "export_preview": "Viennin esikatselu",
+        "close": "Sulje",
+        "copy": "Kopioi",
+        "download": "Lataa"
+    },
+    "logs": {
+        "title": "Lokit",
+        "manage": "Hallitse lokit",
+        "add": "Lis\u00e4\u00e4",
+        "delete": "Poista",
+        "refresh": "P\u00e4ivit\u00e4",
+        "search": "Etsi",
+        "filter": "Suodatin",
+        "lines": "Rivit",
+        "open": "Avaa",
+        "close": "Sulje",
+        "download": "Lataa",
+        "copy": "Kopioi"
+    },
     "common": {
-      "status": "Status:",
-      "timestamp": "Aikaleima:",
-      "none_dash": "-",
-      "free": "Ilmainen",
-      "used": "Käytetty",
-      "copy": "Kopioida",
-      "warnings": "Varoitukset",
-      "errors": "Virheet",
-      "loading": "Ladataan..."
+        "save": "Tallenna",
+        "cancel": "Peruuta",
+        "edit": "Muokkaa",
+        "delete": "Poista",
+        "update": "P\u00e4ivitys",
+        "create": "Luo",
+        "enable": "Ota k\u00e4ytt\u00f6\u00f6n",
+        "disable": "Poista k\u00e4yt\u00f6st\u00e4",
+        "yes": "Kyll\u00e4",
+        "no": "Ei",
+        "on": "Osoitteessa",
+        "off": "Off",
+        "confirm": "Vahvista",
+        "search": "Etsi",
+        "filter": "Suodatin",
+        "actions": "Toimet",
+        "close": "Sulje",
+        "none": "ei mit\u00e4\u00e4n",
+        "none_dash": "-"
     },
-    "status": {
-      "error_loading_json": "VIRHE JSON-LAATAMISESSA",
-      "ok": "OK",
-      "unmounted": "EI KIINNITYS",
-      "critical": "KRIITTINEN",
-      "high": "KORKEA",
-      "elevated": "KOSKETTU",
-      "healthy": "TERVE",
-      "unknown": "TUNTEMATON",
-      "unknown_cap": "Tuntematon"
+    "alerts": {
+        "title": "H\u00e4lytykset",
+        "recent_events": "Viimeaikaiset h\u00e4lytystapahtumat",
+        "history": "H\u00e4lytyshistoria",
+        "export_json": "Vie h\u00e4lytykset JSON",
+        "no_alerts": "Ei h\u00e4lytyksi\u00e4",
+        "level": "Taso",
+        "message": "Viesti",
+        "service": "Palvelu",
+        "time": "Aika",
+        "probe_now": "Koettele nyt",
+        "refresh": "P\u00e4ivit\u00e4",
+        "silence": "Hiljaisuus",
+        "unsilence": "Hiljaisuus",
+        "ack": "Kuittaa",
+        "unack": "Unacknowledge"
     },
-    "disk": {
-      "unmounted": "Levy EI LIITTYNYT",
-      "tag": "Levy:",
-      "sizes_updated": "Koot päivitetty:",
-      "title": "Levyn käyttö",
-      "usage": "Käyttö",
-      "mount": "Kiinnitä"
+    "tests": {
+        "title": "Palvelimen testit",
+        "run_all": "Suorita kaikki",
+        "status": "Tila",
+        "last_run": "Viimeinen ajo",
+        "duration": "Kesto"
     },
-    "page": {
-      "freshness_prefix": "Tuoreus:",
-      "title": "Backup Control Center",
-      "subtitle_prefix": "Live-tila ohjaa",
-      "subtitle_suffix": "varmuuskopiolevyllesi."
+    "services": {
+        "title": "Palvelut",
+        "status": "Tila",
+        "restart": "K\u00e4ynnist\u00e4 uudelleen",
+        "start": "Aloita",
+        "stop": "Stop"
     },
-    "ages": {
-      "no_snapshots_on_disk": "Levyltä ei löytynyt tilannekuvia",
-      "one_snapshot_present": "1 tilannekuva esillä",
-      "snapshots_present_suffix": "tilannekuvia",
-      "no_panel_backups_on_disk": "Levyltä ei löytynyt paneelin varmuuskopioita",
-      "one_panel_backup_present": "1 paneelin varmuuskopio olemassa",
-      "panel_backups_present_suffix": "paneelin varmuuskopiot olemassa",
-      "no_micro_backups_on_disk": "Levyltä ei löytynyt mikrovarmuuskopioita",
-      "one_micro_backup_present": "1 mikrovarmistus löytyy",
-      "micro_backups_present_suffix": "mikrovarmuuskopiot olemassa",
-      "snapshot_daily0_chart": "Tilannekuva (päivittäin.0)",
-      "hestia_latest_chart": "Hestia uusin",
-      "micro_latest_chart": "Mikro uusin",
-      "age_days": "Ikä (päiviä)",
-      "title": "Varmuuskopioinnit",
-      "subtitle": "Kuinka tuoreita uusimmat varmuuskopiosi ovat",
-      "snapshot_daily0": "Tilannekuva päivittäin.0",
-      "latest_hestia": "Uusin Hestia",
-      "latest_micro": "Uusin Micro"
+    "config": {
+        "sections": {
+            "site": "Site",
+            "features": "Features",
+            "capabilities": "Capabilities",
+            "processes": "Processes",
+            "mail": "Mail",
+            "integrations": "Integrations",
+            "security": "Security",
+            "ui": "UI",
+            "server_tests": "Server Tests",
+            "alerts": "Alerts",
+            "cron": "Cron",
+            "history": "History",
+            "logs": "Logs",
+            "backups": "Varmuuskopiot",
+            "email": "Email"
+        },
+        "fields": {
+            "backups": {
+                "require_dedicated_mount": {
+                    "label": "Vaatii erillisen kiinnityksen",
+                    "help": "Vanha yhteensopivuusavain. Kun t\u00e4m\u00e4 on k\u00e4yt\u00f6ss\u00e4, varmuuskopiointikomentosarjat edellytt\u00e4v\u00e4t varmuuskopiokiinnityksen olevan l\u00e4sn\u00e4."
+                },
+                "disable_on_mount_fail": {
+                    "label": "Poista varmuuskopiot k\u00e4yt\u00f6st\u00e4, jos asennus ep\u00e4onnistuu",
+                    "help": "Kun t\u00e4m\u00e4 on k\u00e4yt\u00f6ss\u00e4, varmuuskopiointitoiminnot ja luodut komentosarjat pys\u00e4htyv\u00e4t, jos varmuuskopiokiinnitys puuttuu."
+                }
+            },
+            "alerts": {
+                "min_severity": {
+                    "label": "V\u00e4himm\u00e4isvakavuus h\u00e4lytett\u00e4v\u00e4ksi"
+                },
+                "email": {
+                    "label": "Legacy alert email(s)"
+                }
+            }
+        },
+        "ui": {
+            "unknown": "tuntematon",
+            "unknown_paren": "(tuntematon)",
+            "site_backup": {
+                "title": "Varmuuskopiointi ja palautus",
+                "export_config": "Vie kokoonpano",
+                "import_config": "Tuo kokoonpano",
+                "choose_file_first": "Valitse ensin varmuuskopiotiedosto",
+                "imported_reloading": "Tuotu. Ladataan uudelleen...",
+                "import_failed": "Tuonti ep\u00e4onnistui",
+                "import_failed_prefix": "Tuonti ep\u00e4onnistui:",
+                "retention_title": "Varmuuskopiot - S\u00e4ilytys",
+                "keep_last": "Pysy viimeisen\u00e4",
+                "files": "tiedostot",
+                "loading_stats": "(ladataan tilastoja...)",
+                "last_backup_loading": "Viimeisin varmuuskopio: (ladataan...)",
+                "last_backup_none": "Viimeisin varmuuskopio: ei viel\u00e4",
+                "last_backup_prefix": "Viimeisin varmuuskopio:",
+                "last_backup_unknown": "Viimeisin varmuuskopio: tuntematon",
+                "prune_now": "Leikkaa nyt",
+                "pruned_kept_deleted": "Leikattu - s\u00e4ilytetty",
+                "deleted_prefix": "poistettu",
+                "prune_failed": "Prune ep\u00e4onnistui",
+                "prune_failed_prefix": "Luumuus ep\u00e4onnistui:",
+                "create_backup_now": "Luo varmuuskopio nyt",
+                "backup_saved_prefix": "Varmuuskopio tallennettu:",
+                "backup_failed": "Varmuuskopiointi ep\u00e4onnistui",
+                "backup_failed_prefix": "Varmuuskopiointi ep\u00e4onnistui:",
+                "download_latest_backup": "Lataa uusin varmuuskopio",
+                "no_backups_found": "Varmuuskopioita ei l\u00f6ytynyt",
+                "download_failed_prefix": "Lataus ep\u00e4onnistui:",
+                "redact_secrets": "Redact secrets"
+            }
+        }
     },
-    "errors": {
-      "no_backups_detected": "Varmuuskopioita ei havaittu tilannekuville, Hestialle tai mikrosarjoille."
+    "backups": {
+        "common": {
+            "status": "Status:",
+            "timestamp": "Aikaleima:",
+            "none_dash": "-",
+            "free": "Ilmainen",
+            "used": "K\u00e4ytetty",
+            "copy": "Kopioida",
+            "warnings": "Varoitukset",
+            "errors": "Virheet",
+            "loading": "Ladataan..."
+        },
+        "status": {
+            "error_loading_json": "VIRHE JSON-LAATAMISESSA",
+            "ok": "OK",
+            "unmounted": "EI KIINNITYS",
+            "critical": "KRIITTINEN",
+            "high": "KORKEA",
+            "elevated": "KOSKETTU",
+            "healthy": "TERVE",
+            "unknown": "TUNTEMATON",
+            "unknown_cap": "Tuntematon"
+        },
+        "disk": {
+            "unmounted": "Levy EI LIITTYNYT",
+            "tag": "Levy:",
+            "sizes_updated": "Koot p\u00e4ivitetty:",
+            "title": "Levyn k\u00e4ytt\u00f6",
+            "usage": "K\u00e4ytt\u00f6",
+            "mount": "Kiinnit\u00e4"
+        },
+        "page": {
+            "freshness_prefix": "Tuoreus:",
+            "title": "Backup Control Center",
+            "subtitle_prefix": "Live-tila ohjaa",
+            "subtitle_suffix": "varmuuskopiolevyllesi."
+        },
+        "ages": {
+            "no_snapshots_on_disk": "Levylt\u00e4 ei l\u00f6ytynyt tilannekuvia",
+            "one_snapshot_present": "1 tilannekuva esill\u00e4",
+            "snapshots_present_suffix": "tilannekuvia",
+            "no_panel_backups_on_disk": "Levylt\u00e4 ei l\u00f6ytynyt paneelin varmuuskopioita",
+            "one_panel_backup_present": "1 paneelin varmuuskopio olemassa",
+            "panel_backups_present_suffix": "paneelin varmuuskopiot olemassa",
+            "no_micro_backups_on_disk": "Levylt\u00e4 ei l\u00f6ytynyt mikrovarmuuskopioita",
+            "one_micro_backup_present": "1 mikrovarmistus l\u00f6ytyy",
+            "micro_backups_present_suffix": "mikrovarmuuskopiot olemassa",
+            "snapshot_daily0_chart": "Tilannekuva (p\u00e4ivitt\u00e4in.0)",
+            "hestia_latest_chart": "Hestia uusin",
+            "micro_latest_chart": "Mikro uusin",
+            "age_days": "Ik\u00e4 (p\u00e4ivi\u00e4)",
+            "title": "Varmuuskopioinnit",
+            "subtitle": "Kuinka tuoreita uusimmat varmuuskopiosi ovat",
+            "snapshot_daily0": "Tilannekuva p\u00e4ivitt\u00e4in.0",
+            "latest_hestia": "Uusin Hestia",
+            "latest_micro": "Uusin Micro"
+        },
+        "errors": {
+            "no_backups_detected": "Varmuuskopioita ei havaittu tilannekuville, Hestialle tai mikrosarjoille."
+        },
+        "restore": {
+            "hestia_placeholder_tar": "geeni.VVVVKKPP-HHMM.tar",
+            "using_latest_backup_prefix": "Viimeisimm\u00e4n JSON-tiedoston varmuuskopion k\u00e4ytt\u00e4minen:",
+            "adjust_backup_tar": "S\u00e4\u00e4d\u00e4 BACKUP_TAR oikeaksi tiedostoksi \\\"v-list-backups USER\\\" -tiedostosta ennen suorittamista.",
+            "micro_restore_prefix": "Palauta pohja uusimmasta mikrotilanteesta:",
+            "micro_restore_suffix": "(tarkista polut ja poissulkemiset ennen suorittamista).",
+            "set_correct_snapshot_path": "Aseta oikea tilannekuvan polku ennen t\u00e4m\u00e4n komennon k\u00e4ytt\u00e4mist\u00e4.",
+            "confirm_body_1": "T\u00e4m\u00e4 k\u00e4ynnist\u00e4\u00e4 Hestia-palautusty\u00f6n palvelimella k\u00e4ytt\u00e4m\u00e4ll\u00e4 backupctl.",
+            "confirm_body_2": "T\u00e4m\u00e4n k\u00e4ytt\u00e4j\u00e4n palvelut ja tiedot voidaan korvata.",
+            "confirm_body_3": "Oletko aivan varma?"
+        },
+        "actions": {
+            "starting_prefix": "Alkaa",
+            "failed_to_start_prefix": "K\u00e4ynnistys ep\u00e4onnistui",
+            "started_prefix": "Aloitettu",
+            "started_suffix": ". T\u00e4m\u00e4 voi kest\u00e4\u00e4 hetken; tila p\u00e4ivitet\u00e4\u00e4n seuraavassa terveystarkastuksessa.",
+            "error_talking_endpoint": "Virhe puhuttaessa tiedostolle backups_action.php",
+            "run_os_snapshot": "Suorita OS Snapshot",
+            "run_micro_backup": "Suorita Micro Backup",
+            "run_hestia_backup_user": "Suorita Hestia Backup (geeni)",
+            "run_all_backups": "Suorita KAIKKI varmuuskopiot",
+            "run_health_check": "Suorita terveystarkastus",
+            "log_maintenance": "Tukkien huolto",
+            "clear_backup_logs": "Tyhjenn\u00e4 varmuuskopion terveyslokit",
+            "clear_prune_logs": "Tyhjenn\u00e4 luumutukit",
+            "clear_integrity_log": "Tyhjenn\u00e4 eheysloki"
+        },
+        "cron": {
+            "no_entries": "Crontab-merkint\u00f6j\u00e4 ei havaittu.",
+            "env": "Env",
+            "schedule": "Ajoittaa",
+            "entries_for_prefix": "Crontab-merkinn\u00e4t kohteelle",
+            "current_user": "nykyinen k\u00e4ytt\u00e4j\u00e4",
+            "unable_to_read": "Crontabin lukeminen ei onnistu.",
+            "failed_to_read": "Crontabin lukeminen ep\u00e4onnistui."
+        },
+        "warnings_errors": {
+            "title": "Varoitukset ja virheet",
+            "subtitle": "Yhteenveto terveystarkastuksesta"
+        },
+        "raw_snapshot": {
+            "title": "Raw Snapshot",
+            "subtitle": "Avainarvot suoraan viimeisest\u00e4 JSON-tilasta"
+        },
+        "recent_actions": {
+            "title": "Viimeaikaiset toimet",
+            "subtitle": "Toimintojen historia t\u00e4st\u00e4 hallintapaneelista",
+            "none": "Toimintoja ei ole viel\u00e4 tallennettu."
+        },
+        "orch": {
+            "title": "Ohjattu varmuuskopiointitoiminto",
+            "subtitle": "Mukauta polkuja kerran ja kopioi sitten luodut script/cron/systemd-yksik\u00f6t.",
+            "backup_root": "Varmuuskopio root",
+            "include_health": "Sis\u00e4llyt\u00e4 terveystarkastus",
+            "include_integrity": "Sis\u00e4llyt\u00e4 eheystarkastus",
+            "include_prune": "Sis\u00e4llyt\u00e4 luumuvaihe",
+            "suspend": "Keskeyt\u00e4 varmuuskopiot",
+            "disable_on_mount_fail": "Poista varmuuskopiot k\u00e4yt\u00f6st\u00e4, jos asennus ep\u00e4onnistuu",
+            "nightly_script": "Iltainen k\u00e4sikirjoitus",
+            "copy_script": "Kopioi skripti",
+            "cron_entry": "Cronin merkint\u00e4",
+            "copy_cron_line": "Kopioi cron rivi",
+            "systemd_service": "J\u00e4rjestelm\u00e4llinen palvelu",
+            "copy_unit": "Kopioi yksikk\u00f6",
+            "systemd_timer": "J\u00e4rjestelm\u00e4llinen ajastin",
+            "copy_timer": "Kopioi ajastin"
+        },
+        "quick_restore": {
+            "title": "Pikapalautusapulaiset",
+            "subtitle": "Esit\u00e4ytetyt CLI-komennot h\u00e4t\u00e4tilanteita varten (manuaalinen k\u00e4ytt\u00f6 tai VAARA-painike)",
+            "hestia_latest_title": "Palauta uusin Hestia-k\u00e4ytt\u00e4j\u00e4n varmuuskopio",
+            "micro_latest_title": "Palauta uusimmasta mikrotilanteesta (vain CLI)",
+            "copy_command": "Kopioi komento",
+            "run_restore_danger": "Suorita palautus (viimeisin, VAARA)"
+        },
+        "cli": {
+            "title": "Hestia Backup & Restore CLI",
+            "subtitle": "Pikaopas - kopioi ja liit\u00e4 valmis",
+            "create_backups": "Luo varmuuskopioita",
+            "list_delete_backups": "Luettelo ja poista varmuuskopiot",
+            "full_restore_user": "T\u00e4ysi palautus (k\u00e4ytt\u00e4j\u00e4)",
+            "selective_restore": "Valikoiva palautus (Web / DB / Mail)",
+            "backup_file_locations": "Varmuuskopioi tiedostojen sijainnit",
+            "backup_tarball_contents": "Varmuuskopioi Tarballin sis\u00e4lt\u00f6",
+            "backupctl_help": "backupctl apua"
+        }
     },
-    "restore": {
-      "hestia_placeholder_tar": "geeni.VVVVKKPP-HHMM.tar",
-      "using_latest_backup_prefix": "Viimeisimmän JSON-tiedoston varmuuskopion käyttäminen:",
-      "adjust_backup_tar": "Säädä BACKUP_TAR oikeaksi tiedostoksi \\\"v-list-backups USER\\\" -tiedostosta ennen suorittamista.",
-      "micro_restore_prefix": "Palauta pohja uusimmasta mikrotilanteesta:",
-      "micro_restore_suffix": "(tarkista polut ja poissulkemiset ennen suorittamista).",
-      "set_correct_snapshot_path": "Aseta oikea tilannekuvan polku ennen tämän komennon käyttämistä.",
-      "confirm_body_1": "Tämä käynnistää Hestia-palautustyön palvelimella käyttämällä backupctl.",
-      "confirm_body_2": "Tämän käyttäjän palvelut ja tiedot voidaan korvata.",
-      "confirm_body_3": "Oletko aivan varma?"
+    "footer": {
+        "logged_in_as": "Kirjautunut k\u00e4ytt\u00e4j\u00e4n\u00e4",
+        "theme": "Teema"
     },
-    "actions": {
-      "starting_prefix": "Alkaa",
-      "failed_to_start_prefix": "Käynnistys epäonnistui",
-      "started_prefix": "Aloitettu",
-      "started_suffix": ". Tämä voi kestää hetken; tila päivitetään seuraavassa terveystarkastuksessa.",
-      "error_talking_endpoint": "Virhe puhuttaessa tiedostolle backups_action.php",
-      "run_os_snapshot": "Suorita OS Snapshot",
-      "run_micro_backup": "Suorita Micro Backup",
-      "run_hestia_backup_user": "Suorita Hestia Backup (geeni)",
-      "run_all_backups": "Suorita KAIKKI varmuuskopiot",
-      "run_health_check": "Suorita terveystarkastus",
-      "log_maintenance": "Tukkien huolto",
-      "clear_backup_logs": "Tyhjennä varmuuskopion terveyslokit",
-      "clear_prune_logs": "Tyhjennä luumutukit",
-      "clear_integrity_log": "Tyhjennä eheysloki"
+    "i18n": {
+        "language_picker": {
+            "title": "Kieli",
+            "saving": "Tallennetaan...",
+            "saved": "Tallennettu",
+            "save_failed": "Tallennus ep\u00e4onnistui"
+        }
     },
-    "cron": {
-      "no_entries": "Crontab-merkintöjä ei havaittu.",
-      "env": "Env",
-      "schedule": "Ajoittaa",
-      "entries_for_prefix": "Crontab-merkinnät kohteelle",
-      "current_user": "nykyinen käyttäjä",
-      "unable_to_read": "Crontabin lukeminen ei onnistu.",
-      "failed_to_read": "Crontabin lukeminen epäonnistui."
+    "services_page": {
+        "environment": "Ymp\u00e4rist\u00f6",
+        "filter_placeholder": "Suodata palveluita...",
+        "add_service": "Lis\u00e4\u00e4 palvelu",
+        "edit_service": "Muokkaa palvelua",
+        "import": "Tuo",
+        "export_csv": "Vie CSV",
+        "auto_probe": "Automaattinen tarkistus",
+        "every": "Joka",
+        "seconds_short": "s",
+        "columns": {
+            "name": "Nimi",
+            "category": "Luokka",
+            "host": "Is\u00e4nt\u00e4",
+            "port": "Portti",
+            "probe": "Tarkistus",
+            "timeout": "Aikakatkaisu",
+            "path": "Polku",
+            "enabled": "K\u00e4yt\u00f6ss\u00e4"
+        },
+        "form": {
+            "name": "Nimi",
+            "category": "Luokka",
+            "host": "Is\u00e4nt\u00e4",
+            "port": "Portti",
+            "probe": "Tarkistus",
+            "timeout": "Aikakatkaisu (ms)",
+            "path": "Polku (HTTP)",
+            "enabled": "K\u00e4yt\u00f6ss\u00e4"
+        },
+        "test_on_save": "Testaa tallennettaessa",
+        "caps": {
+            "panel": "paneeli",
+            "web": "web",
+            "mta": "mta",
+            "db": "db",
+            "nginx": "nginx"
+        },
+        "states": {
+            "active": "aktiivinen",
+            "inactive": "inaktiivinen"
+        },
+        "path_not_used": "(ei k\u00e4ytetty)",
+        "status": {
+            "up": "UP",
+            "warn": "WARN",
+            "down": "ALAS",
+            "unknown": "TUNTEMATON"
+        },
+        "relative_time": {
+            "just_now": "juuri nyt",
+            "minutes_ago": "{count}m sitten",
+            "hours_ago": "{count}h sitten",
+            "days_ago": "{count}d sitten"
+        },
+        "units": {
+            "ms": "ms"
+        },
+        "actions": {
+            "test": "Testi"
+        },
+        "uptime": "K\u00e4yntiaika {pct}%",
+        "alert_last_seen": "H\u00e4lytys {time}",
+        "alerts_muted_until": "Mykistetty {time}",
+        "mute_alerts": "H\u00e4lytysten mykist\u00e4minen",
+        "confirm_delete": "Poista t\u00e4m\u00e4 palvelu?",
+        "probe_kicked": "Sondi potkaisi",
+        "no_alert_rules": "Ei h\u00e4lytyss\u00e4\u00e4nt\u00f6j\u00e4 mykist\u00e4mist\u00e4 varten.",
+        "prompt_mute_minutes": "Mykist\u00e4 h\u00e4lytykset kuinka moneksi minuutiksi?",
+        "alerts_muted_for": "H\u00e4lytykset mykistetty {mins}m.",
+        "mute_failed": "Mykistys ep\u00e4onnistui: {viesti}",
+        "invalid_json": "Virheellinen JSON",
+        "import_failed": "Tuonti ep\u00e4onnistui",
+        "validation": {
+            "name_required": "Nimi vaaditaan.",
+            "host_required": "Is\u00e4nt\u00e4 vaaditaan.",
+            "port_range": "Portin on oltava 1-65535.",
+            "correct_fields": "Korjaa korostetut kent\u00e4t."
+        },
+        "service_save_requested": "Pyydetty palvelun tallennus"
     },
-    "warnings_errors": {
-      "title": "Varoitukset ja virheet",
-      "subtitle": "Yhteenveto terveystarkastuksesta"
+    "bookmarks_page": {
+        "title": "Kirjanmerkit",
+        "manage": "Hallitse kirjanmerkkej\u00e4",
+        "add_to_browser": "Lis\u00e4\u00e4 selaimeen",
+        "bookmarklet_title": "Ved\u00e4 t\u00e4m\u00e4 kirjanmerkkipalkkiin lis\u00e4t\u00e4ksesi nykyisen sivun nopeasti",
+        "prompt_tags": "Tunnisteet (pilkuilla eroteltuna):",
+        "category": "Luokka",
+        "all": "Kaikki",
+        "sort": "Lajittele",
+        "sort_updated_desc": "P\u00e4ivitetty (uusin)",
+        "sort_title_asc": "Otsikko (A-Z)",
+        "sort_host_asc": "Is\u00e4nt\u00e4 (A-Z)",
+        "fields": {
+            "title": "Otsikko",
+            "url": "URL",
+            "tags": "Tunnisteet",
+            "name": "Nimi"
+        },
+        "placeholders": {
+            "optional_title": "Valinnainen otsikko",
+            "tags": "tunnisteet,pilkuilla,eroteltuna",
+            "new_category_name": "Uuden luokan nimi"
+        },
+        "add_category": "Lis\u00e4\u00e4 luokka",
+        "updated": "P\u00e4ivitetty",
+        "empty": "Ei viel\u00e4 kirjanmerkkej\u00e4.",
+        "empty_categories": "Ei viel\u00e4 luokkia.",
+        "modal": {
+            "add_edit": "Lis\u00e4\u00e4 / muokkaa kirjanmerkki\u00e4",
+            "add_categories": "Lis\u00e4\u00e4 luokkia"
+        },
+        "uncategorized": "Luokittelematon",
+        "hints": {
+            "bookmark_edit": "N\u00e4yt\u00e4 kirjanmerkit t\u00e4ss\u00e4 kokoontaitettavilla luokilla. Lataa kirjanmerkki yl\u00e4puolelle muokattavaksi tai poistettavaksi napsauttamalla sit\u00e4.",
+            "category_edit": "Kategoriat n\u00e4kyv\u00e4t t\u00e4ss\u00e4. Klikkaa jotakin niist\u00e4 ladataksesi sen yl\u00e4puolelle muokattavaksi tai poistettavaksi."
+        },
+        "confirm_delete_category": "Poistetaanko t\u00e4m\u00e4 luokka? Kirjanmerkeist\u00e4 tulee Uncategorized.",
+        "confirm_delete_bookmark": "Poista t\u00e4m\u00e4 kirjanmerkki?",
+        "validation": {
+            "category_name_required": "Luokan nimi vaaditaan",
+            "url_required": "URL-osoite vaaditaan"
+        },
+        "errors": {
+            "all_endpoints_failed": "Kaikki p\u00e4\u00e4tepisteet eiv\u00e4t onnistuneet",
+            "bad_json": "Huono JSON palvelimelta",
+            "api_not_found": "Kirjanmerkkien lataaminen ep\u00e4onnistui (API:ta ei l\u00f6ytynyt). Kokeiltu: {tried}",
+            "load_failed": "Kirjanmerkkien lataaminen ep\u00e4onnistui: {message}"
+        },
+        "toasts": {
+            "category_saved": "Luokka tallennettu",
+            "save_failed": "Tallennus ep\u00e4onnistui: {message}",
+            "category_deleted": "Luokka poistettu",
+            "delete_failed": "Poista ep\u00e4onnistui: {message}",
+            "order_saved": "Tilaus tallennettu",
+            "reorder_failed": "Uudelleentilaus ep\u00e4onnistui: {message}",
+            "category_updated": "Luokka p\u00e4ivitetty",
+            "category_added": "Kategoria lis\u00e4tty",
+            "bookmark_deleted": "Kirjanmerkki poistettu",
+            "bookmark_updated": "Kirjanmerkki p\u00e4ivitetty",
+            "bookmark_added": "Kirjanmerkki lis\u00e4tty"
+        }
     },
-    "raw_snapshot": {
-      "title": "Raw Snapshot",
-      "subtitle": "Avainarvot suoraan viimeisestä JSON-tilasta"
-    },
-    "recent_actions": {
-      "title": "Viimeaikaiset toimet",
-      "subtitle": "Toimintojen historia tästä hallintapaneelista",
-      "none": "Toimintoja ei ole vielä tallennettu."
-    },
-    "orch": {
-      "title": "Ohjattu varmuuskopiointitoiminto",
-      "subtitle": "Mukauta polkuja kerran ja kopioi sitten luodut script/cron/systemd-yksiköt.",
-      "backup_root": "Varmuuskopio root",
-      "include_health": "Sisällytä terveystarkastus",
-      "include_integrity": "Sisällytä eheystarkastus",
-      "include_prune": "Sisällytä luumuvaihe",
-      "suspend": "Keskeytä varmuuskopiot",
-      "disable_on_mount_fail": "Poista varmuuskopiot käytöstä, jos asennus epäonnistuu",
-      "nightly_script": "Iltainen käsikirjoitus",
-      "copy_script": "Kopioi skripti",
-      "cron_entry": "Cronin merkintä",
-      "copy_cron_line": "Kopioi cron rivi",
-      "systemd_service": "Järjestelmällinen palvelu",
-      "copy_unit": "Kopioi yksikkö",
-      "systemd_timer": "Järjestelmällinen ajastin",
-      "copy_timer": "Kopioi ajastin"
-    },
-    "quick_restore": {
-      "title": "Pikapalautusapulaiset",
-      "subtitle": "Esitäytetyt CLI-komennot hätätilanteita varten (manuaalinen käyttö tai VAARA-painike)",
-      "hestia_latest_title": "Palauta uusin Hestia-käyttäjän varmuuskopio",
-      "micro_latest_title": "Palauta uusimmasta mikrotilanteesta (vain CLI)",
-      "copy_command": "Kopioi komento",
-      "run_restore_danger": "Suorita palautus (viimeisin, VAARA)"
-    },
-    "cli": {
-      "title": "Hestia Backup & Restore CLI",
-      "subtitle": "Pikaopas - kopioi ja liitä valmis",
-      "create_backups": "Luo varmuuskopioita",
-      "list_delete_backups": "Luettelo ja poista varmuuskopiot",
-      "full_restore_user": "Täysi palautus (käyttäjä)",
-      "selective_restore": "Valikoiva palautus (Web / DB / Mail)",
-      "backup_file_locations": "Varmuuskopioi tiedostojen sijainnit",
-      "backup_tarball_contents": "Varmuuskopioi Tarballin sisältö",
-      "backupctl_help": "backupctl apua"
+    "header": {
+        "navigation": "Otsikon navigointi",
+        "system_status": "Palvelun tila",
+        "loading": "Ladataan...",
+        "profile": "Oma profiili",
+        "logout": "Kirjaudu ulos",
+        "mobile": {
+            "open_menu": "Avaa valikko",
+            "menu": "Valikko"
+        },
+        "nav": {
+            "history": "Historia",
+            "cron_health": "Cron Health",
+            "processes": "Prosessit",
+            "databases": "Tietokannat",
+            "speedtest": "Speedtest",
+            "diagnostics": "Diagnostiikka",
+            "config": "Config",
+            "backups": "Varmuuskopiot"
+        }
     }
-  }
 }

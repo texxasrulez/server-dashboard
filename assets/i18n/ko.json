@@ -1,314 +1,493 @@
 {
-  "app": {
-    "title": "서버 대시보드"
-  },
-  "nav": {
-    "history": "역사",
-    "logs": "로그",
-    "dashboard": "대시보드",
-    "services": "서비스",
-    "alerts": "알림",
-    "tests": "테스트",
-    "settings": "설정",
-    "about": "정보"
-  },
-  "history": {
-    "title": "역사",
-    "trends": "트렌드",
-    "range": "범위",
-    "baseline": "기준선",
-    "probe_now": "지금 프로브",
-    "refresh": "새로 고침",
-    "export_json": "JSON 내보내기",
-    "export_alerts_json": "알림 JSON 내보내기",
-    "reset_history": "기록 초기화",
-    "recent_alert_events": "최근 알림 이벤트",
-    "export_preview": "내보내기 미리 보기",
-    "close": "닫기",
-    "copy": "복사",
-    "download": "다운로드"
-  },
-  "logs": {
-    "title": "로그",
-    "manage": "로그 관리",
-    "add": "추가",
-    "delete": "삭제",
-    "refresh": "새로 고침",
-    "search": "검색",
-    "filter": "필터",
-    "lines": "라인",
-    "open": "열기",
-    "close": "닫기",
-    "download": "다운로드",
-    "copy": "복사"
-  },
-  "common": {
-    "save": "저장",
-    "cancel": "취소",
-    "edit": "편집",
-    "delete": "삭제",
-    "update": "업데이트",
-    "create": "만들기",
-    "enable": "사용",
-    "disable": "비활성화",
-    "yes": "예",
-    "no": "아니요",
-    "on": "켜짐",
-    "off": "꺼짐",
-    "confirm": "확인",
-    "search": "검색",
-    "filter": "필터",
-    "actions": "작업"
-  },
-  "alerts": {
-    "title": "알림",
-    "recent_events": "최근 알림 이벤트",
-    "history": "알림 기록",
-    "export_json": "알림 JSON 내보내기",
-    "no_alerts": "알림 없음",
-    "level": "레벨",
-    "message": "메시지",
-    "service": "서비스",
-    "time": "시간",
-    "probe_now": "지금 프로브",
-    "refresh": "새로 고침",
-    "silence": "침묵",
-    "unsilence": "침묵",
-    "ack": "인정",
-    "unack": "승인 취소"
-  },
-  "tests": {
-    "title": "서버 테스트",
-    "run_all": "모두 실행",
-    "status": "상태",
-    "last_run": "마지막 실행",
-    "duration": "기간"
-  },
-  "services": {
-    "title": "서비스",
-    "status": "상태",
-    "restart": "다시 시작",
-    "start": "시작",
-    "stop": "중지"
-  },
-  "config": {
-    "sections": {
-      "site": "Site",
-      "features": "Features",
-      "capabilities": "Capabilities",
-      "processes": "Processes",
-      "mail": "Mail",
-      "integrations": "Integrations",
-      "security": "Security",
-      "ui": "UI",
-      "server_tests": "Server Tests",
-      "alerts": "Alerts",
-      "cron": "Cron",
-      "history": "History",
-      "logs": "Logs",
-      "backups": "백업",
-      "email": "Email"
+    "app": {
+        "title": "\uc11c\ubc84 \ub300\uc2dc\ubcf4\ub4dc"
     },
-    "fields": {
-      "backups": {
-        "require_dedicated_mount": {
-          "label": "전용 마운트 필요",
-          "help": "레거시 호환성 키. 활성화되면 백업 스크립트를 사용하려면 백업 마운트가 있어야 합니다."
-        },
-        "disable_on_mount_fail": {
-          "label": "마운트 실패 시 백업 비활성화",
-          "help": "활성화되면 백업 마운트가 누락되면 백업 작업 및 생성된 스크립트가 중지됩니다."
-        }
-      },
-      "alerts": {
-        "min_severity": {
-          "label": "경고할 최소 심각도"
-        },
-        "email": {
-          "label": "Legacy alert email(s)"
-        }
-      }
+    "nav": {
+        "history": "\uc5ed\uc0ac",
+        "logs": "\ub85c\uadf8",
+        "dashboard": "\ub300\uc2dc\ubcf4\ub4dc",
+        "services": "\uc11c\ube44\uc2a4",
+        "alerts": "\uc54c\ub9bc",
+        "tests": "\ud14c\uc2a4\ud2b8",
+        "settings": "\uc124\uc815",
+        "about": "\uc815\ubcf4"
     },
-    "ui": {
-      "unknown": "알려지지 않은",
-      "unknown_paren": "(알려지지 않은)",
-      "site_backup": {
-        "title": "백업 및 복원",
-        "export_config": "구성 내보내기",
-        "import_config": "구성 가져오기",
-        "choose_file_first": "먼저 백업 파일을 선택하세요",
-        "imported_reloading": "수입. 새로고침 중...",
-        "import_failed": "가져오기 실패",
-        "import_failed_prefix": "가져오기 실패:",
-        "retention_title": "백업 - 보존",
-        "keep_last": "마지막에 보관",
-        "files": "파일",
-        "loading_stats": "(통계 로드 중...)",
-        "last_backup_loading": "마지막 백업: (로드 중...)",
-        "last_backup_none": "마지막 백업: 아직 없음",
-        "last_backup_prefix": "마지막 백업:",
-        "last_backup_unknown": "마지막 백업: 알 수 없음",
-        "prune_now": "지금 가지치기",
-        "pruned_kept_deleted": "가지치기 - 보관",
-        "deleted_prefix": "삭제됨",
-        "prune_failed": "정리 실패",
-        "prune_failed_prefix": "정리 실패:",
-        "create_backup_now": "지금 백업 만들기",
-        "backup_saved_prefix": "백업 저장됨:",
-        "backup_failed": "백업 실패",
-        "backup_failed_prefix": "백업 실패:",
-        "download_latest_backup": "최신 백업 다운로드",
-        "no_backups_found": "백업을 찾을 수 없습니다.",
-        "download_failed_prefix": "다운로드 실패:",
-        "redact_secrets": "Redact secrets"
-      }
-    }
-  },
-  "backups": {
+    "history": {
+        "title": "\uc5ed\uc0ac",
+        "trends": "\ud2b8\ub80c\ub4dc",
+        "range": "\ubc94\uc704",
+        "baseline": "\uae30\uc900\uc120",
+        "probe_now": "\uc9c0\uae08 \ud504\ub85c\ube0c",
+        "refresh": "\uc0c8\ub85c \uace0\uce68",
+        "export_json": "JSON \ub0b4\ubcf4\ub0b4\uae30",
+        "export_alerts_json": "\uc54c\ub9bc JSON \ub0b4\ubcf4\ub0b4\uae30",
+        "reset_history": "\uae30\ub85d \ucd08\uae30\ud654",
+        "recent_alert_events": "\ucd5c\uadfc \uc54c\ub9bc \uc774\ubca4\ud2b8",
+        "export_preview": "\ub0b4\ubcf4\ub0b4\uae30 \ubbf8\ub9ac \ubcf4\uae30",
+        "close": "\ub2eb\uae30",
+        "copy": "\ubcf5\uc0ac",
+        "download": "\ub2e4\uc6b4\ub85c\ub4dc"
+    },
+    "logs": {
+        "title": "\ub85c\uadf8",
+        "manage": "\ub85c\uadf8 \uad00\ub9ac",
+        "add": "\ucd94\uac00",
+        "delete": "\uc0ad\uc81c",
+        "refresh": "\uc0c8\ub85c \uace0\uce68",
+        "search": "\uac80\uc0c9",
+        "filter": "\ud544\ud130",
+        "lines": "\ub77c\uc778",
+        "open": "\uc5f4\uae30",
+        "close": "\ub2eb\uae30",
+        "download": "\ub2e4\uc6b4\ub85c\ub4dc",
+        "copy": "\ubcf5\uc0ac"
+    },
     "common": {
-      "status": "상태:",
-      "timestamp": "타임스탬프:",
-      "none_dash": "-",
-      "free": "무료",
-      "used": "사용된",
-      "copy": "복사",
-      "warnings": "경고",
-      "errors": "오류",
-      "loading": "로드 중..."
+        "save": "\uc800\uc7a5",
+        "cancel": "\ucde8\uc18c",
+        "edit": "\ud3b8\uc9d1",
+        "delete": "\uc0ad\uc81c",
+        "update": "\uc5c5\ub370\uc774\ud2b8",
+        "create": "\ub9cc\ub4e4\uae30",
+        "enable": "\uc0ac\uc6a9",
+        "disable": "\ube44\ud65c\uc131\ud654",
+        "yes": "\uc608",
+        "no": "\uc544\ub2c8\uc694",
+        "on": "\ucf1c\uc9d0",
+        "off": "\uaebc\uc9d0",
+        "confirm": "\ud655\uc778",
+        "search": "\uac80\uc0c9",
+        "filter": "\ud544\ud130",
+        "actions": "\uc791\uc5c5",
+        "close": "\ub2eb\uae30",
+        "none": "\uc5c6\uc74c",
+        "none_dash": "-"
     },
-    "status": {
-      "error_loading_json": "JSON을 로드하는 중 오류가 발생했습니다.",
-      "ok": "좋아요",
-      "unmounted": "말 타지 않은",
-      "critical": "비판적인",
-      "high": "높은",
-      "elevated": "높은",
-      "healthy": "건강한",
-      "unknown": "알려지지 않은",
-      "unknown_cap": "알려지지 않은"
+    "alerts": {
+        "title": "\uc54c\ub9bc",
+        "recent_events": "\ucd5c\uadfc \uc54c\ub9bc \uc774\ubca4\ud2b8",
+        "history": "\uc54c\ub9bc \uae30\ub85d",
+        "export_json": "\uc54c\ub9bc JSON \ub0b4\ubcf4\ub0b4\uae30",
+        "no_alerts": "\uc54c\ub9bc \uc5c6\uc74c",
+        "level": "\ub808\ubca8",
+        "message": "\uba54\uc2dc\uc9c0",
+        "service": "\uc11c\ube44\uc2a4",
+        "time": "\uc2dc\uac04",
+        "probe_now": "\uc9c0\uae08 \ud504\ub85c\ube0c",
+        "refresh": "\uc0c8\ub85c \uace0\uce68",
+        "silence": "\uce68\ubb35",
+        "unsilence": "\uce68\ubb35",
+        "ack": "\uc778\uc815",
+        "unack": "\uc2b9\uc778 \ucde8\uc18c"
     },
-    "disk": {
-      "unmounted": "디스크가 마운트 해제됨",
-      "tag": "디스크:",
-      "sizes_updated": "업데이트된 크기:",
-      "title": "디스크 활용도",
-      "usage": "용법",
-      "mount": "산"
+    "tests": {
+        "title": "\uc11c\ubc84 \ud14c\uc2a4\ud2b8",
+        "run_all": "\ubaa8\ub450 \uc2e4\ud589",
+        "status": "\uc0c1\ud0dc",
+        "last_run": "\ub9c8\uc9c0\ub9c9 \uc2e4\ud589",
+        "duration": "\uae30\uac04"
     },
-    "page": {
-      "freshness_prefix": "선도:",
-      "title": "백업 제어 센터",
-      "subtitle_prefix": "실시간 상태",
-      "subtitle_suffix": "백업 디스크에."
+    "services": {
+        "title": "\uc11c\ube44\uc2a4",
+        "status": "\uc0c1\ud0dc",
+        "restart": "\ub2e4\uc2dc \uc2dc\uc791",
+        "start": "\uc2dc\uc791",
+        "stop": "\uc911\uc9c0"
     },
-    "ages": {
-      "no_snapshots_on_disk": "디스크에서 스냅샷을 찾을 수 없습니다.",
-      "one_snapshot_present": "스냅샷 1개 있음",
-      "snapshots_present_suffix": "스냅샷 존재",
-      "no_panel_backups_on_disk": "디스크에서 패널 백업을 찾을 수 없습니다.",
-      "one_panel_backup_present": "1개의 패널 백업 있음",
-      "panel_backups_present_suffix": "패널 백업 존재",
-      "no_micro_backups_on_disk": "디스크에서 마이크로 백업을 찾을 수 없습니다.",
-      "one_micro_backup_present": "마이크로 백업 현재 1개",
-      "micro_backups_present_suffix": "마이크로 백업 존재",
-      "snapshot_daily0_chart": "스냅샷(일일.0)",
-      "hestia_latest_chart": "헤스티아 최신",
-      "micro_latest_chart": "마이크로 최신",
-      "age_days": "연령(일)",
-      "title": "백업 기간",
-      "subtitle": "최신 백업이 얼마나 최신 상태인지",
-      "snapshot_daily0": "매일 스냅샷.0",
-      "latest_hestia": "최신 헤스티아",
-      "latest_micro": "최신 마이크로"
+    "config": {
+        "sections": {
+            "site": "Site",
+            "features": "Features",
+            "capabilities": "Capabilities",
+            "processes": "Processes",
+            "mail": "Mail",
+            "integrations": "Integrations",
+            "security": "Security",
+            "ui": "UI",
+            "server_tests": "Server Tests",
+            "alerts": "Alerts",
+            "cron": "Cron",
+            "history": "History",
+            "logs": "Logs",
+            "backups": "\ubc31\uc5c5",
+            "email": "Email"
+        },
+        "fields": {
+            "backups": {
+                "require_dedicated_mount": {
+                    "label": "\uc804\uc6a9 \ub9c8\uc6b4\ud2b8 \ud544\uc694",
+                    "help": "\ub808\uac70\uc2dc \ud638\ud658\uc131 \ud0a4. \ud65c\uc131\ud654\ub418\uba74 \ubc31\uc5c5 \uc2a4\ud06c\ub9bd\ud2b8\ub97c \uc0ac\uc6a9\ud558\ub824\uba74 \ubc31\uc5c5 \ub9c8\uc6b4\ud2b8\uac00 \uc788\uc5b4\uc57c \ud569\ub2c8\ub2e4."
+                },
+                "disable_on_mount_fail": {
+                    "label": "\ub9c8\uc6b4\ud2b8 \uc2e4\ud328 \uc2dc \ubc31\uc5c5 \ube44\ud65c\uc131\ud654",
+                    "help": "\ud65c\uc131\ud654\ub418\uba74 \ubc31\uc5c5 \ub9c8\uc6b4\ud2b8\uac00 \ub204\ub77d\ub418\uba74 \ubc31\uc5c5 \uc791\uc5c5 \ubc0f \uc0dd\uc131\ub41c \uc2a4\ud06c\ub9bd\ud2b8\uac00 \uc911\uc9c0\ub429\ub2c8\ub2e4."
+                }
+            },
+            "alerts": {
+                "min_severity": {
+                    "label": "\uacbd\uace0\ud560 \ucd5c\uc18c \uc2ec\uac01\ub3c4"
+                },
+                "email": {
+                    "label": "Legacy alert email(s)"
+                }
+            }
+        },
+        "ui": {
+            "unknown": "\uc54c\ub824\uc9c0\uc9c0 \uc54a\uc740",
+            "unknown_paren": "(\uc54c\ub824\uc9c0\uc9c0 \uc54a\uc740)",
+            "site_backup": {
+                "title": "\ubc31\uc5c5 \ubc0f \ubcf5\uc6d0",
+                "export_config": "\uad6c\uc131 \ub0b4\ubcf4\ub0b4\uae30",
+                "import_config": "\uad6c\uc131 \uac00\uc838\uc624\uae30",
+                "choose_file_first": "\uba3c\uc800 \ubc31\uc5c5 \ud30c\uc77c\uc744 \uc120\ud0dd\ud558\uc138\uc694",
+                "imported_reloading": "\uc218\uc785. \uc0c8\ub85c\uace0\uce68 \uc911...",
+                "import_failed": "\uac00\uc838\uc624\uae30 \uc2e4\ud328",
+                "import_failed_prefix": "\uac00\uc838\uc624\uae30 \uc2e4\ud328:",
+                "retention_title": "\ubc31\uc5c5 - \ubcf4\uc874",
+                "keep_last": "\ub9c8\uc9c0\ub9c9\uc5d0 \ubcf4\uad00",
+                "files": "\ud30c\uc77c",
+                "loading_stats": "(\ud1b5\uacc4 \ub85c\ub4dc \uc911...)",
+                "last_backup_loading": "\ub9c8\uc9c0\ub9c9 \ubc31\uc5c5: (\ub85c\ub4dc \uc911...)",
+                "last_backup_none": "\ub9c8\uc9c0\ub9c9 \ubc31\uc5c5: \uc544\uc9c1 \uc5c6\uc74c",
+                "last_backup_prefix": "\ub9c8\uc9c0\ub9c9 \ubc31\uc5c5:",
+                "last_backup_unknown": "\ub9c8\uc9c0\ub9c9 \ubc31\uc5c5: \uc54c \uc218 \uc5c6\uc74c",
+                "prune_now": "\uc9c0\uae08 \uac00\uc9c0\uce58\uae30",
+                "pruned_kept_deleted": "\uac00\uc9c0\uce58\uae30 - \ubcf4\uad00",
+                "deleted_prefix": "\uc0ad\uc81c\ub428",
+                "prune_failed": "\uc815\ub9ac \uc2e4\ud328",
+                "prune_failed_prefix": "\uc815\ub9ac \uc2e4\ud328:",
+                "create_backup_now": "\uc9c0\uae08 \ubc31\uc5c5 \ub9cc\ub4e4\uae30",
+                "backup_saved_prefix": "\ubc31\uc5c5 \uc800\uc7a5\ub428:",
+                "backup_failed": "\ubc31\uc5c5 \uc2e4\ud328",
+                "backup_failed_prefix": "\ubc31\uc5c5 \uc2e4\ud328:",
+                "download_latest_backup": "\ucd5c\uc2e0 \ubc31\uc5c5 \ub2e4\uc6b4\ub85c\ub4dc",
+                "no_backups_found": "\ubc31\uc5c5\uc744 \ucc3e\uc744 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.",
+                "download_failed_prefix": "\ub2e4\uc6b4\ub85c\ub4dc \uc2e4\ud328:",
+                "redact_secrets": "Redact secrets"
+            }
+        }
     },
-    "errors": {
-      "no_backups_detected": "스냅샷, Hestia 또는 마이크로 세트에 대한 백업이 감지되지 않았습니다."
+    "backups": {
+        "common": {
+            "status": "\uc0c1\ud0dc:",
+            "timestamp": "\ud0c0\uc784\uc2a4\ud0ec\ud504:",
+            "none_dash": "-",
+            "free": "\ubb34\ub8cc",
+            "used": "\uc0ac\uc6a9\ub41c",
+            "copy": "\ubcf5\uc0ac",
+            "warnings": "\uacbd\uace0",
+            "errors": "\uc624\ub958",
+            "loading": "\ub85c\ub4dc \uc911..."
+        },
+        "status": {
+            "error_loading_json": "JSON\uc744 \ub85c\ub4dc\ud558\ub294 \uc911 \uc624\ub958\uac00 \ubc1c\uc0dd\ud588\uc2b5\ub2c8\ub2e4.",
+            "ok": "\uc88b\uc544\uc694",
+            "unmounted": "\ub9d0 \ud0c0\uc9c0 \uc54a\uc740",
+            "critical": "\ube44\ud310\uc801\uc778",
+            "high": "\ub192\uc740",
+            "elevated": "\ub192\uc740",
+            "healthy": "\uac74\uac15\ud55c",
+            "unknown": "\uc54c\ub824\uc9c0\uc9c0 \uc54a\uc740",
+            "unknown_cap": "\uc54c\ub824\uc9c0\uc9c0 \uc54a\uc740"
+        },
+        "disk": {
+            "unmounted": "\ub514\uc2a4\ud06c\uac00 \ub9c8\uc6b4\ud2b8 \ud574\uc81c\ub428",
+            "tag": "\ub514\uc2a4\ud06c:",
+            "sizes_updated": "\uc5c5\ub370\uc774\ud2b8\ub41c \ud06c\uae30:",
+            "title": "\ub514\uc2a4\ud06c \ud65c\uc6a9\ub3c4",
+            "usage": "\uc6a9\ubc95",
+            "mount": "\uc0b0"
+        },
+        "page": {
+            "freshness_prefix": "\uc120\ub3c4:",
+            "title": "\ubc31\uc5c5 \uc81c\uc5b4 \uc13c\ud130",
+            "subtitle_prefix": "\uc2e4\uc2dc\uac04 \uc0c1\ud0dc",
+            "subtitle_suffix": "\ubc31\uc5c5 \ub514\uc2a4\ud06c\uc5d0."
+        },
+        "ages": {
+            "no_snapshots_on_disk": "\ub514\uc2a4\ud06c\uc5d0\uc11c \uc2a4\ub0c5\uc0f7\uc744 \ucc3e\uc744 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.",
+            "one_snapshot_present": "\uc2a4\ub0c5\uc0f7 1\uac1c \uc788\uc74c",
+            "snapshots_present_suffix": "\uc2a4\ub0c5\uc0f7 \uc874\uc7ac",
+            "no_panel_backups_on_disk": "\ub514\uc2a4\ud06c\uc5d0\uc11c \ud328\ub110 \ubc31\uc5c5\uc744 \ucc3e\uc744 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.",
+            "one_panel_backup_present": "1\uac1c\uc758 \ud328\ub110 \ubc31\uc5c5 \uc788\uc74c",
+            "panel_backups_present_suffix": "\ud328\ub110 \ubc31\uc5c5 \uc874\uc7ac",
+            "no_micro_backups_on_disk": "\ub514\uc2a4\ud06c\uc5d0\uc11c \ub9c8\uc774\ud06c\ub85c \ubc31\uc5c5\uc744 \ucc3e\uc744 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.",
+            "one_micro_backup_present": "\ub9c8\uc774\ud06c\ub85c \ubc31\uc5c5 \ud604\uc7ac 1\uac1c",
+            "micro_backups_present_suffix": "\ub9c8\uc774\ud06c\ub85c \ubc31\uc5c5 \uc874\uc7ac",
+            "snapshot_daily0_chart": "\uc2a4\ub0c5\uc0f7(\uc77c\uc77c.0)",
+            "hestia_latest_chart": "\ud5e4\uc2a4\ud2f0\uc544 \ucd5c\uc2e0",
+            "micro_latest_chart": "\ub9c8\uc774\ud06c\ub85c \ucd5c\uc2e0",
+            "age_days": "\uc5f0\ub839(\uc77c)",
+            "title": "\ubc31\uc5c5 \uae30\uac04",
+            "subtitle": "\ucd5c\uc2e0 \ubc31\uc5c5\uc774 \uc5bc\ub9c8\ub098 \ucd5c\uc2e0 \uc0c1\ud0dc\uc778\uc9c0",
+            "snapshot_daily0": "\ub9e4\uc77c \uc2a4\ub0c5\uc0f7.0",
+            "latest_hestia": "\ucd5c\uc2e0 \ud5e4\uc2a4\ud2f0\uc544",
+            "latest_micro": "\ucd5c\uc2e0 \ub9c8\uc774\ud06c\ub85c"
+        },
+        "errors": {
+            "no_backups_detected": "\uc2a4\ub0c5\uc0f7, Hestia \ub610\ub294 \ub9c8\uc774\ud06c\ub85c \uc138\ud2b8\uc5d0 \ub300\ud55c \ubc31\uc5c5\uc774 \uac10\uc9c0\ub418\uc9c0 \uc54a\uc558\uc2b5\ub2c8\ub2e4."
+        },
+        "restore": {
+            "hestia_placeholder_tar": "\uc720\uc804\uc790.YYYYMMDD-HHMM.tar",
+            "using_latest_backup_prefix": "JSON\uc73c\ub85c \ubcf4\uace0\ub41c \ucd5c\uc2e0 \ubc31\uc5c5 \uc0ac\uc6a9:",
+            "adjust_backup_tar": "\uc2e4\ud589\ud558\uae30 \uc804\uc5d0 BACKUP_TAR\uc744 \\\"v-list-backups USER\\\"\uc758 \uc2e4\uc81c \ud30c\uc77c\ub85c \uc870\uc815\ud558\uc138\uc694.",
+            "micro_restore_prefix": "\ucd5c\uc2e0 \ub9c8\uc774\ud06c\ub85c \uc2a4\ub0c5\uc0f7\uc5d0\uc11c \uae30\ubcf8 \ubcf5\uc6d0:",
+            "micro_restore_suffix": "(\uc2e4\ud589\ud558\uae30 \uc804\uc5d0 \uacbd\ub85c \ubc0f \uc81c\uc678\ub97c \uac80\ud1a0\ud558\uc138\uc694).",
+            "set_correct_snapshot_path": "\uc774 \uba85\ub839\uc744 \uc0ac\uc6a9\ud558\uae30 \uc804\uc5d0 \uc62c\ubc14\ub978 \uc2a4\ub0c5\uc0f7 \uacbd\ub85c\ub97c \uc124\uc815\ud558\uc2ed\uc2dc\uc624.",
+            "confirm_body_1": "\uadf8\ub7ec\uba74 backupctl\uc744 \uc0ac\uc6a9\ud558\uc5ec \uc11c\ubc84\uc5d0\uc11c Hestia \ubcf5\uc6d0 \uc791\uc5c5\uc774 \uc2dc\uc791\ub429\ub2c8\ub2e4.",
+            "confirm_body_2": "\ud574\ub2f9 \uc0ac\uc6a9\uc790\uc758 \uc11c\ube44\uc2a4\uc640 \ub370\uc774\ud130\ub97c \ub36e\uc5b4\uc4f8 \uc218 \uc788\uc2b5\ub2c8\ub2e4.",
+            "confirm_body_3": "\uc815\ub9d0 \ud655\uc2e0\ud558\uc2dc\ub098\uc694?"
+        },
+        "actions": {
+            "starting_prefix": "\uc2dc\uc791",
+            "failed_to_start_prefix": "\uc2dc\uc791\ud558\uc9c0 \ubabb\ud588\uc2b5\ub2c8\ub2e4.",
+            "started_prefix": "\uc2dc\uc791\ub428",
+            "started_suffix": ". \uc2dc\uac04\uc774 \uc880 \uac78\ub9b4 \uc218 \uc788\uc2b5\ub2c8\ub2e4. \uc0c1\ud0dc\ub294 \ub2e4\uc74c \uc0c1\ud0dc \ud655\uc778 \uc2dc \uc5c5\ub370\uc774\ud2b8\ub429\ub2c8\ub2e4.",
+            "error_talking_endpoint": "backups_action.php\uc640 \ud1b5\uc2e0 \uc911 \uc624\ub958\uac00 \ubc1c\uc0dd\ud588\uc2b5\ub2c8\ub2e4.",
+            "run_os_snapshot": "OS \uc2a4\ub0c5\uc0f7 \uc2e4\ud589",
+            "run_micro_backup": "\ub9c8\uc774\ud06c\ub85c \ubc31\uc5c5 \uc2e4\ud589",
+            "run_hestia_backup_user": "\ud5e4\uc2a4\ud2f0\uc544 \ubc31\uc5c5(user) \uc2e4\ud589",
+            "run_all_backups": "\ubaa8\ub4e0 \ubc31\uc5c5 \uc2e4\ud589",
+            "run_health_check": "\uc0c1\ud0dc \ud655\uc778 \uc2e4\ud589",
+            "log_maintenance": "\ub85c\uadf8 \uc720\uc9c0 \uad00\ub9ac",
+            "clear_backup_logs": "\ubc31\uc5c5 \uc0c1\ud0dc \ub85c\uadf8 \uc9c0\uc6b0\uae30",
+            "clear_prune_logs": "\uc815\ub9ac \ub85c\uadf8 \uc9c0\uc6b0\uae30",
+            "clear_integrity_log": "\ubb34\uacb0\uc131 \ub85c\uadf8 \uc9c0\uc6b0\uae30"
+        },
+        "cron": {
+            "no_entries": "crontab \ud56d\ubaa9\uc774 \uac10\uc9c0\ub418\uc9c0 \uc54a\uc558\uc2b5\ub2c8\ub2e4.",
+            "env": "\ud658\uacbd",
+            "schedule": "\uc77c\uc815",
+            "entries_for_prefix": "\ub2e4\uc74c\uc5d0 \ub300\ud55c Crontab \ud56d\ubaa9",
+            "current_user": "\ud604\uc7ac \uc0ac\uc6a9\uc790",
+            "unable_to_read": "\ud06c\ub860\ud0ed\uc744 \uc77d\uc744 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.",
+            "failed_to_read": "crontab\uc744 \uc77d\uc9c0 \ubabb\ud588\uc2b5\ub2c8\ub2e4."
+        },
+        "warnings_errors": {
+            "title": "\uacbd\uace0 \ubc0f \uc624\ub958",
+            "subtitle": "\uc0c1\ud0dc \uc810\uac80 \uc694\uc57d"
+        },
+        "raw_snapshot": {
+            "title": "\uc6d0\uc2dc \uc2a4\ub0c5\uc0f7",
+            "subtitle": "\ub9c8\uc9c0\ub9c9 JSON \uc0c1\ud0dc\uc5d0\uc11c \uc9c1\uc811 \uac00\uc838\uc628 \ud0a4 \uac12"
+        },
+        "recent_actions": {
+            "title": "\ucd5c\uadfc \ud65c\ub3d9",
+            "subtitle": "\uc774 \ub300\uc2dc\ubcf4\ub4dc\uc758 \uc791\uc5c5 \uae30\ub85d",
+            "none": "\uc544\uc9c1 \uae30\ub85d\ub41c \uc791\uc5c5\uc774 \uc5c6\uc2b5\ub2c8\ub2e4."
+        },
+        "orch": {
+            "title": "\ubc31\uc5c5 \uc870\uc815 \ub9c8\ubc95\uc0ac",
+            "subtitle": "\uacbd\ub85c\ub97c \ud55c \ubc88 \uc0ac\uc6a9\uc790 \uc815\uc758\ud55c \ub2e4\uc74c \uc0dd\uc131\ub41c \uc2a4\ud06c\ub9bd\ud2b8/cron/systemd \ub2e8\uc704\ub97c \ubcf5\uc0ac\ud569\ub2c8\ub2e4.",
+            "backup_root": "\ubc31\uc5c5 \ub8e8\ud2b8",
+            "include_health": "\uc0c1\ud0dc \ud655\uc778 \ud3ec\ud568",
+            "include_integrity": "\ubb34\uacb0\uc131 \uac80\uc0ac \ud3ec\ud568",
+            "include_prune": "\uac00\uc9c0\uce58\uae30 \ub2e8\uacc4 \ud3ec\ud568",
+            "suspend": "\ubc31\uc5c5 \uc77c\uc2dc \uc911\uc9c0",
+            "disable_on_mount_fail": "\ub9c8\uc6b4\ud2b8 \uc2e4\ud328 \uc2dc \ubc31\uc5c5 \ube44\ud65c\uc131\ud654",
+            "nightly_script": "\uc57c\uac04 \uc2a4\ud06c\ub9bd\ud2b8",
+            "copy_script": "\uc2a4\ud06c\ub9bd\ud2b8 \ubcf5\uc0ac",
+            "cron_entry": "\ud06c\ub860 \ud56d\ubaa9",
+            "copy_cron_line": "\ud06c\ub860 \ub77c\uc778 \ubcf5\uc0ac",
+            "systemd_service": "\uccb4\uacc4\ud654\ub41c \uc11c\ube44\uc2a4",
+            "copy_unit": "\ubcf5\uc0ac \uc7a5\uce58",
+            "systemd_timer": "\uc2dc\uc2a4\ud15c \ud0c0\uc774\uba38",
+            "copy_timer": "\ubcf5\uc0ac \ud0c0\uc774\uba38"
+        },
+        "quick_restore": {
+            "title": "\ube60\ub978 \ubcf5\uc6d0 \ub3c4\uc6b0\ubbf8",
+            "subtitle": "\uae34\uae09 \uc0c1\ud669\uc5d0 \ub300\ud55c \uc0ac\uc804 \uc785\ub825\ub41c CLI \uba85\ub839(\uc218\ub3d9 \uc2e4\ud589 \ub610\ub294 DANGER \ubc84\ud2bc)",
+            "hestia_latest_title": "\ucd5c\uc2e0 Hestia \uc0ac\uc6a9\uc790 \ubc31\uc5c5 \ubcf5\uc6d0",
+            "micro_latest_title": "\ucd5c\uc2e0 \ub9c8\uc774\ud06c\ub85c \uc2a4\ub0c5\uc0f7\uc5d0\uc11c \ubcf5\uc6d0(CLI\uc5d0\ub9cc \ud574\ub2f9)",
+            "copy_command": "\ubcf5\uc0ac \uba85\ub839",
+            "run_restore_danger": "\ubcf5\uc6d0 \uc2e4\ud589(\ucd5c\uc2e0, \uc704\ud5d8)"
+        },
+        "cli": {
+            "title": "\ud5e4\uc2a4\ud2f0\uc544 \ubc31\uc5c5 \ubc0f \ubcf5\uc6d0 CLI",
+            "subtitle": "\ube60\ub978 \ucc38\uc870 \uc2dc\ud2b8 - \ubcf5\uc0ac \ubc0f \ubd99\uc5ec\ub123\uae30 \uc900\ube44\ub428",
+            "create_backups": "\ubc31\uc5c5 \uc0dd\uc131",
+            "list_delete_backups": "\ubc31\uc5c5 \ub098\uc5f4 \ubc0f \uc0ad\uc81c",
+            "full_restore_user": "\uc804\uccb4 \ubcf5\uc6d0(\uc0ac\uc6a9\uc790)",
+            "selective_restore": "\uc120\ud0dd\uc801 \ubcf5\uc6d0(\uc6f9/DB/\uba54\uc77c)",
+            "backup_file_locations": "\ubc31\uc5c5 \ud30c\uc77c \uc704\uce58",
+            "backup_tarball_contents": "\ubc31\uc5c5 \ud0c0\ub974\ubcfc \ucf58\ud150\uce20",
+            "backupctl_help": "backupctl \ub3c4\uc6c0\ub9d0"
+        }
     },
-    "restore": {
-      "hestia_placeholder_tar": "유전자.YYYYMMDD-HHMM.tar",
-      "using_latest_backup_prefix": "JSON으로 보고된 최신 백업 사용:",
-      "adjust_backup_tar": "실행하기 전에 BACKUP_TAR을 \\\"v-list-backups USER\\\"의 실제 파일로 조정하세요.",
-      "micro_restore_prefix": "최신 마이크로 스냅샷에서 기본 복원:",
-      "micro_restore_suffix": "(실행하기 전에 경로 및 제외를 검토하세요).",
-      "set_correct_snapshot_path": "이 명령을 사용하기 전에 올바른 스냅샷 경로를 설정하십시오.",
-      "confirm_body_1": "그러면 backupctl을 사용하여 서버에서 Hestia 복원 작업이 시작됩니다.",
-      "confirm_body_2": "해당 사용자의 서비스와 데이터를 덮어쓸 수 있습니다.",
-      "confirm_body_3": "정말 확신하시나요?"
+    "footer": {
+        "logged_in_as": "\ub85c\uadf8\uc778 \uacc4\uc815",
+        "theme": "\ud14c\ub9c8"
     },
-    "actions": {
-      "starting_prefix": "시작",
-      "failed_to_start_prefix": "시작하지 못했습니다.",
-      "started_prefix": "시작됨",
-      "started_suffix": ". 시간이 좀 걸릴 수 있습니다. 상태는 다음 상태 확인 시 업데이트됩니다.",
-      "error_talking_endpoint": "backups_action.php와 통신 중 오류가 발생했습니다.",
-      "run_os_snapshot": "OS 스냅샷 실행",
-      "run_micro_backup": "마이크로 백업 실행",
-      "run_hestia_backup_user": "헤스티아 백업(user) 실행",
-      "run_all_backups": "모든 백업 실행",
-      "run_health_check": "상태 확인 실행",
-      "log_maintenance": "로그 유지 관리",
-      "clear_backup_logs": "백업 상태 로그 지우기",
-      "clear_prune_logs": "정리 로그 지우기",
-      "clear_integrity_log": "무결성 로그 지우기"
+    "i18n": {
+        "language_picker": {
+            "title": "\uc5b8\uc5b4",
+            "saving": "\uc800\uc7a5 \uc911...",
+            "saved": "\uc800\uc7a5\ub428",
+            "save_failed": "\uc800\uc7a5 \uc2e4\ud328"
+        }
     },
-    "cron": {
-      "no_entries": "crontab 항목이 감지되지 않았습니다.",
-      "env": "환경",
-      "schedule": "일정",
-      "entries_for_prefix": "다음에 대한 Crontab 항목",
-      "current_user": "현재 사용자",
-      "unable_to_read": "크론탭을 읽을 수 없습니다.",
-      "failed_to_read": "crontab을 읽지 못했습니다."
+    "services_page": {
+        "environment": "\ud658\uacbd",
+        "filter_placeholder": "\uc11c\ube44\uc2a4 \ud544\ud130\ub9c1...",
+        "add_service": "\uc11c\ube44\uc2a4 \ucd94\uac00",
+        "edit_service": "\uc11c\ube44\uc2a4 \ud3b8\uc9d1",
+        "import": "\uac00\uc838\uc624\uae30",
+        "export_csv": "CSV \ub0b4\ubcf4\ub0b4\uae30",
+        "auto_probe": "\uc790\ub3d9 \ud504\ub85c\ube0c",
+        "every": "\ub9e4",
+        "seconds_short": "\ucd08",
+        "columns": {
+            "name": "\uc774\ub984",
+            "category": "\uce74\ud14c\uace0\ub9ac",
+            "host": "\ud638\uc2a4\ud2b8",
+            "port": "\ud3ec\ud2b8",
+            "probe": "\ud504\ub85c\ube0c",
+            "timeout": "\uc2dc\uac04 \uc81c\ud55c",
+            "path": "\uacbd\ub85c",
+            "enabled": "\uc0ac\uc6a9"
+        },
+        "form": {
+            "name": "\uc774\ub984",
+            "category": "\uce74\ud14c\uace0\ub9ac",
+            "host": "\ud638\uc2a4\ud2b8",
+            "port": "\ud3ec\ud2b8",
+            "probe": "\ud504\ub85c\ube0c",
+            "timeout": "\uc2dc\uac04 \uc81c\ud55c (ms)",
+            "path": "\uacbd\ub85c (HTTP)",
+            "enabled": "\uc0ac\uc6a9"
+        },
+        "test_on_save": "\uc800\uc7a5 \uc2dc \ud14c\uc2a4\ud2b8",
+        "caps": {
+            "panel": "\ud328\ub110",
+            "web": "\uc6f9",
+            "mta": "mta",
+            "db": "db",
+            "nginx": "nginx"
+        },
+        "states": {
+            "active": "\ud65c\uc131",
+            "inactive": "\ube44\ud65c\uc131"
+        },
+        "path_not_used": "(\uc0ac\uc6a9\ub418\uc9c0 \uc54a\uc74c)",
+        "status": {
+            "up": "UP",
+            "warn": "\uacbd\uace0",
+            "down": "DOWN",
+            "unknown": "\uc54c \uc218 \uc5c6\uc74c"
+        },
+        "relative_time": {
+            "just_now": "\ubc29\uae08",
+            "minutes_ago": "{\uce74\uc6b4\ud2b8}m \uc804",
+            "hours_ago": "{\uce74\uc6b4\ud2b8}\uc2dc\uac04 \uc804",
+            "days_ago": "{\uce74\uc6b4\ud2b8}\uc77c \uc804"
+        },
+        "units": {
+            "ms": "ms"
+        },
+        "actions": {
+            "test": "\ud14c\uc2a4\ud2b8"
+        },
+        "uptime": "\uac00\ub3d9 \uc2dc\uac04 {pct}%",
+        "alert_last_seen": "\uc54c\ub9bc {\uc2dc\uac04}",
+        "alerts_muted_until": "\uc74c\uc18c\uac70 {\uc2dc\uac04}",
+        "mute_alerts": "\uc54c\ub9bc \uc74c\uc18c\uac70",
+        "confirm_delete": "\uc774 \uc11c\ube44\uc2a4\ub97c \uc0ad\uc81c\ud558\uc2dc\uaca0\uc2b5\ub2c8\uae4c?",
+        "probe_kicked": "\ud504\ub85c\ube0c \ud0a5",
+        "no_alert_rules": "\ubba4\ud2b8\ud560 \uc54c\ub9bc \uaddc\uce59\uc774 \uc5c6\uc2b5\ub2c8\ub2e4.",
+        "prompt_mute_minutes": "\uad00\ub828 \uc54c\ub9bc\uc744 \uba87 \ubd84 \ub3d9\uc548 \uc74c\uc18c\uac70\ud558\ub098\uc694?",
+        "alerts_muted_for": "\ubd84}m \ub3d9\uc548 \uc54c\ub9bc\uc774 \uc74c\uc18c\uac70\ub429\ub2c8\ub2e4.",
+        "mute_failed": "\uc74c\uc18c\uac70\ud558\uc9c0 \ubabb\ud588\uc2b5\ub2c8\ub2e4: {\uba54\uc2dc\uc9c0}",
+        "invalid_json": "\uc798\ubabb\ub41c JSON",
+        "import_failed": "\uac00\uc838\uc624\uae30\uc5d0 \uc2e4\ud328\ud588\uc2b5\ub2c8\ub2e4.",
+        "validation": {
+            "name_required": "\uc774\ub984\uc740 \ud544\uc218 \uc785\ub825 \uc0ac\ud56d\uc785\ub2c8\ub2e4.",
+            "host_required": "\ud638\uc2a4\ud2b8\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.",
+            "port_range": "\ud3ec\ud2b8\ub294 1-65535\uc5ec\uc57c \ud569\ub2c8\ub2e4.",
+            "correct_fields": "\uac15\uc870 \ud45c\uc2dc\ub41c \ud544\ub4dc\ub97c \uc218\uc815\ud558\uc138\uc694."
+        },
+        "service_save_requested": "\uc11c\ube44\uc2a4 \uc800\uc7a5 \uc694\uccad\ub428"
     },
-    "warnings_errors": {
-      "title": "경고 및 오류",
-      "subtitle": "상태 점검 요약"
+    "bookmarks_page": {
+        "title": "\ubd81\ub9c8\ud06c",
+        "manage": "\ubd81\ub9c8\ud06c \uad00\ub9ac",
+        "add_to_browser": "\ube0c\ub77c\uc6b0\uc800\uc5d0 \ucd94\uac00",
+        "bookmarklet_title": "\ud604\uc7ac \ud398\uc774\uc9c0\ub97c \ube60\ub974\uac8c \ucd94\uac00\ud558\ub824\uba74 \uc774\uac83\uc744 \ubd81\ub9c8\ud06c \ubc14\ub85c \ub4dc\ub798\uadf8\ud558\uc138\uc694",
+        "prompt_tags": "\ud0dc\uadf8(\uc27c\ud45c\ub85c \uad6c\ubd84):",
+        "category": "\uce74\ud14c\uace0\ub9ac",
+        "all": "\uc804\uccb4",
+        "sort": "\uc815\ub82c",
+        "sort_updated_desc": "\uc5c5\ub370\uc774\ud2b8\ub428(\ucd5c\uc2e0\uc21c)",
+        "sort_title_asc": "\uc81c\ubaa9 (A-Z)",
+        "sort_host_asc": "\ud638\uc2a4\ud2b8 (A-Z)",
+        "fields": {
+            "title": "\uc81c\ubaa9",
+            "url": "URL",
+            "tags": "\ud0dc\uadf8",
+            "name": "\uc774\ub984"
+        },
+        "placeholders": {
+            "optional_title": "\uc120\ud0dd\uc801 \uc81c\ubaa9",
+            "tags": "\ud0dc\uadf8,\uc27c\ud45c,\uad6c\ubd84",
+            "new_category_name": "\uc0c8 \uce74\ud14c\uace0\ub9ac \uc774\ub984"
+        },
+        "add_category": "\uce74\ud14c\uace0\ub9ac \ucd94\uac00",
+        "updated": "\uc5c5\ub370\uc774\ud2b8\ub428",
+        "empty": "\uc544\uc9c1 \ubd81\ub9c8\ud06c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4.",
+        "empty_categories": "\uc544\uc9c1 \uce74\ud14c\uace0\ub9ac\uac00 \uc5c6\uc2b5\ub2c8\ub2e4.",
+        "modal": {
+            "add_edit": "\ubd81\ub9c8\ud06c \ucd94\uac00 / \ud3b8\uc9d1",
+            "add_categories": "\uce74\ud14c\uace0\ub9ac \ucd94\uac00"
+        },
+        "uncategorized": "\ubbf8\ubd84\ub958",
+        "hints": {
+            "bookmark_edit": "\uc5ec\uae30\uc5d0 \uc811\uc744 \uc218 \uc788\ub294 \uce74\ud14c\uace0\ub9ac\ub85c \ubd81\ub9c8\ud06c\ub97c \ud45c\uc2dc\ud569\ub2c8\ub2e4. \ubd81\ub9c8\ud06c\ub97c \ud074\ub9ad\ud558\uba74 \uc704\uc5d0\uc11c \ub85c\ub4dc\ud558\uc5ec \ud3b8\uc9d1\ud558\uac70\ub098 \uc0ad\uc81c\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4.",
+            "category_edit": "\uce74\ud14c\uace0\ub9ac\uac00 \uc5ec\uae30\uc5d0 \ud45c\uc2dc\ub429\ub2c8\ub2e4. \ud558\ub098\ub97c \ud074\ub9ad\ud558\uc5ec \uc704\uc5d0\uc11c \ub85c\ub4dc\ud558\uc5ec \ud3b8\uc9d1\ud558\uac70\ub098 \uc0ad\uc81c\ud569\ub2c8\ub2e4."
+        },
+        "confirm_delete_category": "\uc774 \uce74\ud14c\uace0\ub9ac\ub97c \uc0ad\uc81c\ud558\uc2dc\uaca0\uc2b5\ub2c8\uae4c? \ubd81\ub9c8\ud06c\uac00 \ubd84\ub958\ub418\uc9c0 \uc54a\uc2b5\ub2c8\ub2e4.",
+        "confirm_delete_bookmark": "\uc774 \ubd81\ub9c8\ud06c\ub97c \uc0ad\uc81c\ud558\uc2dc\uaca0\uc2b5\ub2c8\uae4c?",
+        "validation": {
+            "category_name_required": "\uce74\ud14c\uace0\ub9ac \uc774\ub984 \ud544\uc218",
+            "url_required": "URL\uc740 \ud544\uc218\uc785\ub2c8\ub2e4."
+        },
+        "errors": {
+            "all_endpoints_failed": "\ubaa8\ub4e0 \uc5d4\ub4dc\ud3ec\uc778\ud2b8 \uc2e4\ud328",
+            "bad_json": "\uc11c\ubc84\uc758 \uc798\ubabb\ub41c JSON",
+            "api_not_found": "\ubd81\ub9c8\ud06c\ub97c \ub85c\ub4dc\ud558\uc9c0 \ubabb\ud588\uc2b5\ub2c8\ub2e4(API\ub97c \ucc3e\uc744 \uc218 \uc5c6\uc74c). \uc2dc\ub3c4\ud588\uc2b5\ub2c8\ub2e4: {\uc2dc\ub3c4\ub428}",
+            "load_failed": "\ubd81\ub9c8\ud06c\ub97c \ub85c\ub4dc\ud558\uc9c0 \ubabb\ud588\uc2b5\ub2c8\ub2e4: {\uba54\uc2dc\uc9c0}"
+        },
+        "toasts": {
+            "category_saved": "\uce74\ud14c\uace0\ub9ac \uc800\uc7a5",
+            "save_failed": "\uc800\uc7a5\ud558\uc9c0 \ubabb\ud588\uc2b5\ub2c8\ub2e4: {\uba54\uc2dc\uc9c0}",
+            "category_deleted": "\uce74\ud14c\uace0\ub9ac \uc0ad\uc81c\ub428",
+            "delete_failed": "\uc0ad\uc81c\ud558\uc9c0 \ubabb\ud588\uc2b5\ub2c8\ub2e4: {\uba54\uc2dc\uc9c0}",
+            "order_saved": "\uc8fc\ubb38 \uc800\uc7a5",
+            "reorder_failed": "\uc7ac\uc8fc\ubb38\ud558\uc9c0 \ubabb\ud588\uc2b5\ub2c8\ub2e4: {\uba54\uc2dc\uc9c0}",
+            "category_updated": "\uce74\ud14c\uace0\ub9ac \uc5c5\ub370\uc774\ud2b8",
+            "category_added": "\uce74\ud14c\uace0\ub9ac \ucd94\uac00",
+            "bookmark_deleted": "\ubd81\ub9c8\ud06c \uc0ad\uc81c\ub428",
+            "bookmark_updated": "\ubd81\ub9c8\ud06c \uc5c5\ub370\uc774\ud2b8",
+            "bookmark_added": "\ubd81\ub9c8\ud06c \ucd94\uac00"
+        }
     },
-    "raw_snapshot": {
-      "title": "원시 스냅샷",
-      "subtitle": "마지막 JSON 상태에서 직접 가져온 키 값"
-    },
-    "recent_actions": {
-      "title": "최근 활동",
-      "subtitle": "이 대시보드의 작업 기록",
-      "none": "아직 기록된 작업이 없습니다."
-    },
-    "orch": {
-      "title": "백업 조정 마법사",
-      "subtitle": "경로를 한 번 사용자 정의한 다음 생성된 스크립트/cron/systemd 단위를 복사합니다.",
-      "backup_root": "백업 루트",
-      "include_health": "상태 확인 포함",
-      "include_integrity": "무결성 검사 포함",
-      "include_prune": "가지치기 단계 포함",
-      "suspend": "백업 일시 중지",
-      "disable_on_mount_fail": "마운트 실패 시 백업 비활성화",
-      "nightly_script": "야간 스크립트",
-      "copy_script": "스크립트 복사",
-      "cron_entry": "크론 항목",
-      "copy_cron_line": "크론 라인 복사",
-      "systemd_service": "체계화된 서비스",
-      "copy_unit": "복사 장치",
-      "systemd_timer": "시스템 타이머",
-      "copy_timer": "복사 타이머"
-    },
-    "quick_restore": {
-      "title": "빠른 복원 도우미",
-      "subtitle": "긴급 상황에 대한 사전 입력된 CLI 명령(수동 실행 또는 DANGER 버튼)",
-      "hestia_latest_title": "최신 Hestia 사용자 백업 복원",
-      "micro_latest_title": "최신 마이크로 스냅샷에서 복원(CLI에만 해당)",
-      "copy_command": "복사 명령",
-      "run_restore_danger": "복원 실행(최신, 위험)"
-    },
-    "cli": {
-      "title": "헤스티아 백업 및 복원 CLI",
-      "subtitle": "빠른 참조 시트 - 복사 및 붙여넣기 준비됨",
-      "create_backups": "백업 생성",
-      "list_delete_backups": "백업 나열 및 삭제",
-      "full_restore_user": "전체 복원(사용자)",
-      "selective_restore": "선택적 복원(웹/DB/메일)",
-      "backup_file_locations": "백업 파일 위치",
-      "backup_tarball_contents": "백업 타르볼 콘텐츠",
-      "backupctl_help": "backupctl 도움말"
+    "header": {
+        "navigation": "\ud5e4\ub354 \ud0d0\uc0c9",
+        "system_status": "\uc11c\ube44\uc2a4 \uc0c1\ud0dc",
+        "loading": "\ub85c\ub4dc \uc911...",
+        "profile": "\ub0b4 \ud504\ub85c\ud544",
+        "logout": "\ub85c\uadf8\uc544\uc6c3",
+        "mobile": {
+            "open_menu": "\uba54\ub274 \uc5f4\uae30",
+            "menu": "\uba54\ub274"
+        },
+        "nav": {
+            "history": "\uc5ed\uc0ac",
+            "cron_health": "\ud06c\ub860 \uac74\uac15",
+            "processes": "\ud504\ub85c\uc138\uc2a4",
+            "databases": "\ub370\uc774\ud130\ubca0\uc774\uc2a4",
+            "speedtest": "\uc18d\ub3c4 \ud14c\uc2a4\ud2b8",
+            "diagnostics": "\uc9c4\ub2e8",
+            "config": "\uad6c\uc131",
+            "backups": "\ubc31\uc5c5"
+        }
     }
-  }
 }

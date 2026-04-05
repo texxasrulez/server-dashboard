@@ -2,6 +2,37 @@
   "use strict";
   var LOCALE = document.documentElement.getAttribute("lang") || "en";
   var MAP = {};
+  function merge(base, extra) {
+    var out = {};
+    var k;
+    base = base && typeof base === "object" ? base : {};
+    extra = extra && typeof extra === "object" ? extra : {};
+    for (k in base) {
+      if (Object.prototype.hasOwnProperty.call(base, k)) out[k] = base[k];
+    }
+    for (k in extra) {
+      if (!Object.prototype.hasOwnProperty.call(extra, k)) continue;
+      if (
+        out[k] &&
+        typeof out[k] === "object" &&
+        !Array.isArray(out[k]) &&
+        extra[k] &&
+        typeof extra[k] === "object" &&
+        !Array.isArray(extra[k])
+      ) {
+        out[k] = merge(out[k], extra[k]);
+      } else {
+        out[k] = extra[k];
+      }
+    }
+    return out;
+  }
+  function format(val, vars) {
+    if (!vars || typeof vars !== "object") return val;
+    return String(val).replace(/\{([^}]+)\}/g, function (m, key) {
+      return Object.prototype.hasOwnProperty.call(vars, key) ? vars[key] : m;
+    });
+  }
   function setText(el, key) {
     var val = t(key);
     if (val == null) return;
@@ -18,7 +49,11 @@
       setText(n, n.getAttribute("data-i18n"));
     });
   }
-  function t(key, fallback) {
+  function t(key, fallback, vars) {
+    if (fallback && typeof fallback === "object" && vars == null) {
+      vars = fallback;
+      fallback = null;
+    }
     var cur = MAP;
     String(key || "")
       .split(".")
@@ -30,8 +65,10 @@
         cur = null;
         return true;
       });
-    if (cur == null) return fallback != null ? fallback : key;
-    return String(cur);
+    if (cur == null) {
+      return format(fallback != null ? fallback : key, vars);
+    }
+    return format(String(cur), vars);
   }
   window.I18N = {
     t: t,
@@ -43,15 +80,34 @@
   };
   function load(locale) {
     LOCALE = locale || LOCALE;
-    var url = "assets/i18n/" + LOCALE + ".json?_=" + Date.now();
-    return fetch(url, { credentials: "same-origin" })
+    var stamp = Date.now();
+    var enUrl = "assets/i18n/en.json?_=" + stamp;
+    var localeUrl = "assets/i18n/" + LOCALE + ".json?_=" + stamp;
+    return fetch(enUrl, { credentials: "same-origin" })
       .then(function (r) {
-        return r.json();
+        return r.ok ? r.json() : {};
       })
-      .then(function (j) {
-        MAP = j || {};
-        applyDOM();
-        return MAP;
+      .catch(function () {
+        return {};
+      })
+      .then(function (enMap) {
+        if (LOCALE === "en") {
+          MAP = enMap || {};
+          applyDOM();
+          return MAP;
+        }
+        return fetch(localeUrl, { credentials: "same-origin" })
+          .then(function (r) {
+            return r.ok ? r.json() : {};
+          })
+          .catch(function () {
+            return {};
+          })
+          .then(function (localeMap) {
+            MAP = merge(enMap || {}, localeMap || {});
+            applyDOM();
+            return MAP;
+          });
       })
       .catch(function () {
         MAP = {};

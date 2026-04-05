@@ -1,314 +1,493 @@
 {
-  "app": {
-    "title": "Ταμπλό διακομιστή"
-  },
-  "nav": {
-    "history": "Ιστορία",
-    "logs": "Ημερολόγια",
-    "dashboard": "Ταμπλό",
-    "services": "Υπηρεσίες",
-    "alerts": "Ειδοποιήσεις",
-    "tests": "Δοκιμές",
-    "settings": "Ρυθμίσεις",
-    "about": "Σχετικά με το"
-  },
-  "history": {
-    "title": "Ιστορία",
-    "trends": "Τάσεις",
-    "range": "Εύρος",
-    "baseline": "Βασική γραμμή",
-    "probe_now": "Δοκιμή τώρα",
-    "refresh": "Ανανέωση",
-    "export_json": "Εξαγωγή JSON",
-    "export_alerts_json": "Εξαγωγή ειδοποιήσεων JSON",
-    "reset_history": "Επαναφορά ιστορικού",
-    "recent_alert_events": "Πρόσφατα συμβάντα συναγερμού",
-    "export_preview": "Προεπισκόπηση εξαγωγής",
-    "close": "Κλείστε το",
-    "copy": "Αντιγραφή",
-    "download": "Λήψη"
-  },
-  "logs": {
-    "title": "Ημερολόγια",
-    "manage": "Διαχείριση αρχείων καταγραφής",
-    "add": "Προσθέστε",
-    "delete": "Διαγραφή",
-    "refresh": "Ανανέωση",
-    "search": "Αναζήτηση",
-    "filter": "Φίλτρο",
-    "lines": "Γραμμές",
-    "open": "Ανοίξτε το",
-    "close": "Κλείστε το",
-    "download": "Λήψη",
-    "copy": "Αντιγραφή"
-  },
-  "common": {
-    "save": "Αποθήκευση",
-    "cancel": "Ακύρωση",
-    "edit": "Επεξεργασία",
-    "delete": "Διαγραφή",
-    "update": "Ενημέρωση",
-    "create": "Δημιουργία",
-    "enable": "Ενεργοποίηση",
-    "disable": "Απενεργοποίηση",
-    "yes": "Ναι",
-    "no": "Όχι",
-    "on": "Στο",
-    "off": "Off",
-    "confirm": "Επιβεβαίωση",
-    "search": "Αναζήτηση",
-    "filter": "Φίλτρο",
-    "actions": "Δράσεις"
-  },
-  "alerts": {
-    "title": "Ειδοποιήσεις",
-    "recent_events": "Πρόσφατα συμβάντα συναγερμού",
-    "history": "Ιστορικό ειδοποιήσεων",
-    "export_json": "Εξαγωγή ειδοποιήσεων JSON",
-    "no_alerts": "Δεν υπάρχουν ειδοποιήσεις",
-    "level": "Επίπεδο",
-    "message": "Μήνυμα",
-    "service": "Υπηρεσία",
-    "time": "Χρόνος",
-    "probe_now": "Δοκιμή τώρα",
-    "refresh": "Ανανέωση",
-    "silence": "Σιωπή",
-    "unsilence": "Σιωπή",
-    "ack": "Αναγνώριση",
-    "unack": "Μη αναγνώριση"
-  },
-  "tests": {
-    "title": "Δοκιμές διακομιστή",
-    "run_all": "Τρέξτε όλα",
-    "status": "Κατάσταση",
-    "last_run": "Τελευταία εκτέλεση",
-    "duration": "Διάρκεια"
-  },
-  "services": {
-    "title": "Υπηρεσίες",
-    "status": "Κατάσταση",
-    "restart": "Επανεκκίνηση",
-    "start": "Έναρξη",
-    "stop": "Σταματήστε το"
-  },
-  "config": {
-    "sections": {
-      "site": "Site",
-      "features": "Features",
-      "capabilities": "Capabilities",
-      "processes": "Processes",
-      "mail": "Mail",
-      "integrations": "Integrations",
-      "security": "Security",
-      "ui": "UI",
-      "server_tests": "Server Tests",
-      "alerts": "Alerts",
-      "cron": "Cron",
-      "history": "History",
-      "logs": "Logs",
-      "backups": "Αντίγραφα ασφαλείας",
-      "email": "Email"
+    "app": {
+        "title": "\u03a4\u03b1\u03bc\u03c0\u03bb\u03cc \u03b4\u03b9\u03b1\u03ba\u03bf\u03bc\u03b9\u03c3\u03c4\u03ae"
     },
-    "fields": {
-      "backups": {
-        "require_dedicated_mount": {
-          "label": "Απαιτείται ειδική βάση",
-          "help": "Κλειδί συμβατότητας παλαιού τύπου. Όταν είναι ενεργοποιημένο, τα σενάρια δημιουργίας αντιγράφων ασφαλείας απαιτούν να υπάρχει η βάση αντιγράφου ασφαλείας."
-        },
-        "disable_on_mount_fail": {
-          "label": "Απενεργοποιήστε τα αντίγραφα ασφαλείας εάν αποτύχει η προσάρτηση",
-          "help": "Όταν είναι ενεργοποιημένο, οι ενέργειες δημιουργίας αντιγράφων ασφαλείας και τα σενάρια που δημιουργούνται σταματούν εάν λείπει η βάση αντιγράφου ασφαλείας."
-        }
-      },
-      "alerts": {
-        "min_severity": {
-          "label": "Ελάχιστη σοβαρότητα για ειδοποίηση"
-        },
-        "email": {
-          "label": "Legacy alert email(s)"
-        }
-      }
+    "nav": {
+        "history": "\u0399\u03c3\u03c4\u03bf\u03c1\u03af\u03b1",
+        "logs": "\u0397\u03bc\u03b5\u03c1\u03bf\u03bb\u03cc\u03b3\u03b9\u03b1",
+        "dashboard": "\u03a4\u03b1\u03bc\u03c0\u03bb\u03cc",
+        "services": "\u03a5\u03c0\u03b7\u03c1\u03b5\u03c3\u03af\u03b5\u03c2",
+        "alerts": "\u0395\u03b9\u03b4\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03b5\u03b9\u03c2",
+        "tests": "\u0394\u03bf\u03ba\u03b9\u03bc\u03ad\u03c2",
+        "settings": "\u03a1\u03c5\u03b8\u03bc\u03af\u03c3\u03b5\u03b9\u03c2",
+        "about": "\u03a3\u03c7\u03b5\u03c4\u03b9\u03ba\u03ac \u03bc\u03b5 \u03c4\u03bf"
     },
-    "ui": {
-      "unknown": "άγνωστος",
-      "unknown_paren": "(άγνωστος)",
-      "site_backup": {
-        "title": "Δημιουργία αντιγράφων ασφαλείας και επαναφορά",
-        "export_config": "Εξαγωγή διαμόρφωσης",
-        "import_config": "Εισαγωγή διαμόρφωσης",
-        "choose_file_first": "Επιλέξτε πρώτα ένα αρχείο αντιγράφου ασφαλείας",
-        "imported_reloading": "Εισαγόμενος. Επαναφόρτωση...",
-        "import_failed": "Η εισαγωγή απέτυχε",
-        "import_failed_prefix": "Η εισαγωγή απέτυχε:",
-        "retention_title": "Αντίγραφα ασφαλείας - Διατήρηση",
-        "keep_last": "Μείνε τελευταίος",
-        "files": "αρχεία",
-        "loading_stats": "(φόρτωση στατιστικών...)",
-        "last_backup_loading": "Τελευταίο αντίγραφο ασφαλείας: (φόρτωση...)",
-        "last_backup_none": "Τελευταίο αντίγραφο ασφαλείας: κανένα ακόμα",
-        "last_backup_prefix": "Τελευταίο αντίγραφο ασφαλείας:",
-        "last_backup_unknown": "Τελευταίο αντίγραφο ασφαλείας: άγνωστο",
-        "prune_now": "Κλαδέψτε τώρα",
-        "pruned_kept_deleted": "Κλαδεμένοι - διατηρημένοι",
-        "deleted_prefix": "διαγράφηκε",
-        "prune_failed": "Το Prune απέτυχε",
-        "prune_failed_prefix": "Το Prune απέτυχε:",
-        "create_backup_now": "Δημιουργήστε αντίγραφο ασφαλείας τώρα",
-        "backup_saved_prefix": "Το αντίγραφο ασφαλείας αποθηκεύτηκε:",
-        "backup_failed": "Η δημιουργία αντιγράφων ασφαλείας απέτυχε",
-        "backup_failed_prefix": "Η δημιουργία αντιγράφων ασφαλείας απέτυχε:",
-        "download_latest_backup": "Κατεβάστε το πιο πρόσφατο αντίγραφο ασφαλείας",
-        "no_backups_found": "Δεν βρέθηκαν αντίγραφα ασφαλείας",
-        "download_failed_prefix": "Η λήψη απέτυχε:",
-        "redact_secrets": "Redact secrets"
-      }
-    }
-  },
-  "backups": {
+    "history": {
+        "title": "\u0399\u03c3\u03c4\u03bf\u03c1\u03af\u03b1",
+        "trends": "\u03a4\u03ac\u03c3\u03b5\u03b9\u03c2",
+        "range": "\u0395\u03cd\u03c1\u03bf\u03c2",
+        "baseline": "\u0392\u03b1\u03c3\u03b9\u03ba\u03ae \u03b3\u03c1\u03b1\u03bc\u03bc\u03ae",
+        "probe_now": "\u0394\u03bf\u03ba\u03b9\u03bc\u03ae \u03c4\u03ce\u03c1\u03b1",
+        "refresh": "\u0391\u03bd\u03b1\u03bd\u03ad\u03c9\u03c3\u03b7",
+        "export_json": "\u0395\u03be\u03b1\u03b3\u03c9\u03b3\u03ae JSON",
+        "export_alerts_json": "\u0395\u03be\u03b1\u03b3\u03c9\u03b3\u03ae \u03b5\u03b9\u03b4\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03b5\u03c9\u03bd JSON",
+        "reset_history": "\u0395\u03c0\u03b1\u03bd\u03b1\u03c6\u03bf\u03c1\u03ac \u03b9\u03c3\u03c4\u03bf\u03c1\u03b9\u03ba\u03bf\u03cd",
+        "recent_alert_events": "\u03a0\u03c1\u03cc\u03c3\u03c6\u03b1\u03c4\u03b1 \u03c3\u03c5\u03bc\u03b2\u03ac\u03bd\u03c4\u03b1 \u03c3\u03c5\u03bd\u03b1\u03b3\u03b5\u03c1\u03bc\u03bf\u03cd",
+        "export_preview": "\u03a0\u03c1\u03bf\u03b5\u03c0\u03b9\u03c3\u03ba\u03cc\u03c0\u03b7\u03c3\u03b7 \u03b5\u03be\u03b1\u03b3\u03c9\u03b3\u03ae\u03c2",
+        "close": "\u039a\u03bb\u03b5\u03af\u03c3\u03c4\u03b5 \u03c4\u03bf",
+        "copy": "\u0391\u03bd\u03c4\u03b9\u03b3\u03c1\u03b1\u03c6\u03ae",
+        "download": "\u039b\u03ae\u03c8\u03b7"
+    },
+    "logs": {
+        "title": "\u0397\u03bc\u03b5\u03c1\u03bf\u03bb\u03cc\u03b3\u03b9\u03b1",
+        "manage": "\u0394\u03b9\u03b1\u03c7\u03b5\u03af\u03c1\u03b9\u03c3\u03b7 \u03b1\u03c1\u03c7\u03b5\u03af\u03c9\u03bd \u03ba\u03b1\u03c4\u03b1\u03b3\u03c1\u03b1\u03c6\u03ae\u03c2",
+        "add": "\u03a0\u03c1\u03bf\u03c3\u03b8\u03ad\u03c3\u03c4\u03b5",
+        "delete": "\u0394\u03b9\u03b1\u03b3\u03c1\u03b1\u03c6\u03ae",
+        "refresh": "\u0391\u03bd\u03b1\u03bd\u03ad\u03c9\u03c3\u03b7",
+        "search": "\u0391\u03bd\u03b1\u03b6\u03ae\u03c4\u03b7\u03c3\u03b7",
+        "filter": "\u03a6\u03af\u03bb\u03c4\u03c1\u03bf",
+        "lines": "\u0393\u03c1\u03b1\u03bc\u03bc\u03ad\u03c2",
+        "open": "\u0391\u03bd\u03bf\u03af\u03be\u03c4\u03b5 \u03c4\u03bf",
+        "close": "\u039a\u03bb\u03b5\u03af\u03c3\u03c4\u03b5 \u03c4\u03bf",
+        "download": "\u039b\u03ae\u03c8\u03b7",
+        "copy": "\u0391\u03bd\u03c4\u03b9\u03b3\u03c1\u03b1\u03c6\u03ae"
+    },
     "common": {
-      "status": "Κατάσταση:",
-      "timestamp": "Χρονική σήμανση:",
-      "none_dash": "-",
-      "free": "Δωρεάν",
-      "used": "Μεταχειρισμένος",
-      "copy": "Αντίγραφο",
-      "warnings": "Προειδοποιήσεις",
-      "errors": "Σφάλματα",
-      "loading": "Φόρτωση..."
+        "save": "\u0391\u03c0\u03bf\u03b8\u03ae\u03ba\u03b5\u03c5\u03c3\u03b7",
+        "cancel": "\u0391\u03ba\u03cd\u03c1\u03c9\u03c3\u03b7",
+        "edit": "\u0395\u03c0\u03b5\u03be\u03b5\u03c1\u03b3\u03b1\u03c3\u03af\u03b1",
+        "delete": "\u0394\u03b9\u03b1\u03b3\u03c1\u03b1\u03c6\u03ae",
+        "update": "\u0395\u03bd\u03b7\u03bc\u03ad\u03c1\u03c9\u03c3\u03b7",
+        "create": "\u0394\u03b7\u03bc\u03b9\u03bf\u03c5\u03c1\u03b3\u03af\u03b1",
+        "enable": "\u0395\u03bd\u03b5\u03c1\u03b3\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b7",
+        "disable": "\u0391\u03c0\u03b5\u03bd\u03b5\u03c1\u03b3\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b7",
+        "yes": "\u039d\u03b1\u03b9",
+        "no": "\u038c\u03c7\u03b9",
+        "on": "\u03a3\u03c4\u03bf",
+        "off": "Off",
+        "confirm": "\u0395\u03c0\u03b9\u03b2\u03b5\u03b2\u03b1\u03af\u03c9\u03c3\u03b7",
+        "search": "\u0391\u03bd\u03b1\u03b6\u03ae\u03c4\u03b7\u03c3\u03b7",
+        "filter": "\u03a6\u03af\u03bb\u03c4\u03c1\u03bf",
+        "actions": "\u0394\u03c1\u03ac\u03c3\u03b5\u03b9\u03c2",
+        "close": "\u039a\u03bb\u03b5\u03af\u03c3\u03b9\u03bc\u03bf",
+        "none": "\u03ba\u03b1\u03bd\u03ad\u03bd\u03b1",
+        "none_dash": "-"
     },
-    "status": {
-      "error_loading_json": "ΣΦΑΛΜΑ ΦΟΡΤΩΣΗΣ JSON",
-      "ok": "ΕΝΤΑΞΕΙ",
-      "unmounted": "ΑΠΟΣΠΟΝΗΜΕΝΟ",
-      "critical": "ΚΡΙΣΙΜΟΣ",
-      "high": "ΨΗΛΑ",
-      "elevated": "ΥΨΗΜΕΝΟ",
-      "healthy": "ΥΓΙΗΣ",
-      "unknown": "ΑΓΝΩΣΤΟΣ",
-      "unknown_cap": "Αγνωστος"
+    "alerts": {
+        "title": "\u0395\u03b9\u03b4\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03b5\u03b9\u03c2",
+        "recent_events": "\u03a0\u03c1\u03cc\u03c3\u03c6\u03b1\u03c4\u03b1 \u03c3\u03c5\u03bc\u03b2\u03ac\u03bd\u03c4\u03b1 \u03c3\u03c5\u03bd\u03b1\u03b3\u03b5\u03c1\u03bc\u03bf\u03cd",
+        "history": "\u0399\u03c3\u03c4\u03bf\u03c1\u03b9\u03ba\u03cc \u03b5\u03b9\u03b4\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03b5\u03c9\u03bd",
+        "export_json": "\u0395\u03be\u03b1\u03b3\u03c9\u03b3\u03ae \u03b5\u03b9\u03b4\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03b5\u03c9\u03bd JSON",
+        "no_alerts": "\u0394\u03b5\u03bd \u03c5\u03c0\u03ac\u03c1\u03c7\u03bf\u03c5\u03bd \u03b5\u03b9\u03b4\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03b5\u03b9\u03c2",
+        "level": "\u0395\u03c0\u03af\u03c0\u03b5\u03b4\u03bf",
+        "message": "\u039c\u03ae\u03bd\u03c5\u03bc\u03b1",
+        "service": "\u03a5\u03c0\u03b7\u03c1\u03b5\u03c3\u03af\u03b1",
+        "time": "\u03a7\u03c1\u03cc\u03bd\u03bf\u03c2",
+        "probe_now": "\u0394\u03bf\u03ba\u03b9\u03bc\u03ae \u03c4\u03ce\u03c1\u03b1",
+        "refresh": "\u0391\u03bd\u03b1\u03bd\u03ad\u03c9\u03c3\u03b7",
+        "silence": "\u03a3\u03b9\u03c9\u03c0\u03ae",
+        "unsilence": "\u03a3\u03b9\u03c9\u03c0\u03ae",
+        "ack": "\u0391\u03bd\u03b1\u03b3\u03bd\u03ce\u03c1\u03b9\u03c3\u03b7",
+        "unack": "\u039c\u03b7 \u03b1\u03bd\u03b1\u03b3\u03bd\u03ce\u03c1\u03b9\u03c3\u03b7"
     },
-    "disk": {
-      "unmounted": "Ο ΔΙΣΚΟΣ ΑΠΟΣΠΟΝΗΘΗΚΕ",
-      "tag": "Δίσκος:",
-      "sizes_updated": "Ενημερωμένα μεγέθη:",
-      "title": "Χρήση Δίσκου",
-      "usage": "Χρήση",
-      "mount": "Βουνό"
+    "tests": {
+        "title": "\u0394\u03bf\u03ba\u03b9\u03bc\u03ad\u03c2 \u03b4\u03b9\u03b1\u03ba\u03bf\u03bc\u03b9\u03c3\u03c4\u03ae",
+        "run_all": "\u03a4\u03c1\u03ad\u03be\u03c4\u03b5 \u03cc\u03bb\u03b1",
+        "status": "\u039a\u03b1\u03c4\u03ac\u03c3\u03c4\u03b1\u03c3\u03b7",
+        "last_run": "\u03a4\u03b5\u03bb\u03b5\u03c5\u03c4\u03b1\u03af\u03b1 \u03b5\u03ba\u03c4\u03ad\u03bb\u03b5\u03c3\u03b7",
+        "duration": "\u0394\u03b9\u03ac\u03c1\u03ba\u03b5\u03b9\u03b1"
     },
-    "page": {
-      "freshness_prefix": "Φρεσκάδα:",
-      "title": "Κέντρο ελέγχου αντιγράφων ασφαλείας",
-      "subtitle_prefix": "Ζωντανή κατάσταση καθοδηγούμενη από",
-      "subtitle_suffix": "στον αντίγραφο ασφαλείας σας."
+    "services": {
+        "title": "\u03a5\u03c0\u03b7\u03c1\u03b5\u03c3\u03af\u03b5\u03c2",
+        "status": "\u039a\u03b1\u03c4\u03ac\u03c3\u03c4\u03b1\u03c3\u03b7",
+        "restart": "\u0395\u03c0\u03b1\u03bd\u03b5\u03ba\u03ba\u03af\u03bd\u03b7\u03c3\u03b7",
+        "start": "\u0388\u03bd\u03b1\u03c1\u03be\u03b7",
+        "stop": "\u03a3\u03c4\u03b1\u03bc\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf"
     },
-    "ages": {
-      "no_snapshots_on_disk": "Δεν βρέθηκαν στιγμιότυπα στο δίσκο",
-      "one_snapshot_present": "1 στιγμιότυπο δώρο",
-      "snapshots_present_suffix": "στιγμιότυπα παρόντα",
-      "no_panel_backups_on_disk": "Δεν βρέθηκαν αντίγραφα ασφαλείας του πίνακα στο δίσκο",
-      "one_panel_backup_present": "Υπάρχει 1 αντίγραφο ασφαλείας πίνακα",
-      "panel_backups_present_suffix": "υπάρχουν αντίγραφα ασφαλείας του πίνακα",
-      "no_micro_backups_on_disk": "Δεν βρέθηκαν μικρο αντίγραφα ασφαλείας στο δίσκο",
-      "one_micro_backup_present": "1 micro backup υπάρχει",
-      "micro_backups_present_suffix": "υπάρχουν μικρο αντίγραφα ασφαλείας",
-      "snapshot_daily0_chart": "Στιγμιότυπο (καθημερινά.0)",
-      "hestia_latest_chart": "Εστία τελευταία",
-      "micro_latest_chart": "Micro τελευταία",
-      "age_days": "Ηλικία (ημέρες)",
-      "title": "Ηλικίες δημιουργίας αντιγράφων ασφαλείας",
-      "subtitle": "Πόσο φρέσκα είναι τα τελευταία σας αντίγραφα ασφαλείας",
-      "snapshot_daily0": "Στιγμιότυπο καθημερινά.0",
-      "latest_hestia": "Τελευταία Εστία",
-      "latest_micro": "Τελευταίο Micro"
+    "config": {
+        "sections": {
+            "site": "Site",
+            "features": "Features",
+            "capabilities": "Capabilities",
+            "processes": "Processes",
+            "mail": "Mail",
+            "integrations": "Integrations",
+            "security": "Security",
+            "ui": "UI",
+            "server_tests": "Server Tests",
+            "alerts": "Alerts",
+            "cron": "Cron",
+            "history": "History",
+            "logs": "Logs",
+            "backups": "\u0391\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03b1 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2",
+            "email": "Email"
+        },
+        "fields": {
+            "backups": {
+                "require_dedicated_mount": {
+                    "label": "\u0391\u03c0\u03b1\u03b9\u03c4\u03b5\u03af\u03c4\u03b1\u03b9 \u03b5\u03b9\u03b4\u03b9\u03ba\u03ae \u03b2\u03ac\u03c3\u03b7",
+                    "help": "\u039a\u03bb\u03b5\u03b9\u03b4\u03af \u03c3\u03c5\u03bc\u03b2\u03b1\u03c4\u03cc\u03c4\u03b7\u03c4\u03b1\u03c2 \u03c0\u03b1\u03bb\u03b1\u03b9\u03bf\u03cd \u03c4\u03cd\u03c0\u03bf\u03c5. \u038c\u03c4\u03b1\u03bd \u03b5\u03af\u03bd\u03b1\u03b9 \u03b5\u03bd\u03b5\u03c1\u03b3\u03bf\u03c0\u03bf\u03b9\u03b7\u03bc\u03ad\u03bd\u03bf, \u03c4\u03b1 \u03c3\u03b5\u03bd\u03ac\u03c1\u03b9\u03b1 \u03b4\u03b7\u03bc\u03b9\u03bf\u03c5\u03c1\u03b3\u03af\u03b1\u03c2 \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03c9\u03bd \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2 \u03b1\u03c0\u03b1\u03b9\u03c4\u03bf\u03cd\u03bd \u03bd\u03b1 \u03c5\u03c0\u03ac\u03c1\u03c7\u03b5\u03b9 \u03b7 \u03b2\u03ac\u03c3\u03b7 \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03bf\u03c5 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2."
+                },
+                "disable_on_mount_fail": {
+                    "label": "\u0391\u03c0\u03b5\u03bd\u03b5\u03c1\u03b3\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03b1 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2 \u03b5\u03ac\u03bd \u03b1\u03c0\u03bf\u03c4\u03cd\u03c7\u03b5\u03b9 \u03b7 \u03c0\u03c1\u03bf\u03c3\u03ac\u03c1\u03c4\u03b7\u03c3\u03b7",
+                    "help": "\u038c\u03c4\u03b1\u03bd \u03b5\u03af\u03bd\u03b1\u03b9 \u03b5\u03bd\u03b5\u03c1\u03b3\u03bf\u03c0\u03bf\u03b9\u03b7\u03bc\u03ad\u03bd\u03bf, \u03bf\u03b9 \u03b5\u03bd\u03ad\u03c1\u03b3\u03b5\u03b9\u03b5\u03c2 \u03b4\u03b7\u03bc\u03b9\u03bf\u03c5\u03c1\u03b3\u03af\u03b1\u03c2 \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03c9\u03bd \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2 \u03ba\u03b1\u03b9 \u03c4\u03b1 \u03c3\u03b5\u03bd\u03ac\u03c1\u03b9\u03b1 \u03c0\u03bf\u03c5 \u03b4\u03b7\u03bc\u03b9\u03bf\u03c5\u03c1\u03b3\u03bf\u03cd\u03bd\u03c4\u03b1\u03b9 \u03c3\u03c4\u03b1\u03bc\u03b1\u03c4\u03bf\u03cd\u03bd \u03b5\u03ac\u03bd \u03bb\u03b5\u03af\u03c0\u03b5\u03b9 \u03b7 \u03b2\u03ac\u03c3\u03b7 \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03bf\u03c5 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2."
+                }
+            },
+            "alerts": {
+                "min_severity": {
+                    "label": "\u0395\u03bb\u03ac\u03c7\u03b9\u03c3\u03c4\u03b7 \u03c3\u03bf\u03b2\u03b1\u03c1\u03cc\u03c4\u03b7\u03c4\u03b1 \u03b3\u03b9\u03b1 \u03b5\u03b9\u03b4\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b7"
+                },
+                "email": {
+                    "label": "Legacy alert email(s)"
+                }
+            }
+        },
+        "ui": {
+            "unknown": "\u03ac\u03b3\u03bd\u03c9\u03c3\u03c4\u03bf\u03c2",
+            "unknown_paren": "(\u03ac\u03b3\u03bd\u03c9\u03c3\u03c4\u03bf\u03c2)",
+            "site_backup": {
+                "title": "\u0394\u03b7\u03bc\u03b9\u03bf\u03c5\u03c1\u03b3\u03af\u03b1 \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03c9\u03bd \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2 \u03ba\u03b1\u03b9 \u03b5\u03c0\u03b1\u03bd\u03b1\u03c6\u03bf\u03c1\u03ac",
+                "export_config": "\u0395\u03be\u03b1\u03b3\u03c9\u03b3\u03ae \u03b4\u03b9\u03b1\u03bc\u03cc\u03c1\u03c6\u03c9\u03c3\u03b7\u03c2",
+                "import_config": "\u0395\u03b9\u03c3\u03b1\u03b3\u03c9\u03b3\u03ae \u03b4\u03b9\u03b1\u03bc\u03cc\u03c1\u03c6\u03c9\u03c3\u03b7\u03c2",
+                "choose_file_first": "\u0395\u03c0\u03b9\u03bb\u03ad\u03be\u03c4\u03b5 \u03c0\u03c1\u03ce\u03c4\u03b1 \u03ad\u03bd\u03b1 \u03b1\u03c1\u03c7\u03b5\u03af\u03bf \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03bf\u03c5 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2",
+                "imported_reloading": "\u0395\u03b9\u03c3\u03b1\u03b3\u03cc\u03bc\u03b5\u03bd\u03bf\u03c2. \u0395\u03c0\u03b1\u03bd\u03b1\u03c6\u03cc\u03c1\u03c4\u03c9\u03c3\u03b7...",
+                "import_failed": "\u0397 \u03b5\u03b9\u03c3\u03b1\u03b3\u03c9\u03b3\u03ae \u03b1\u03c0\u03ad\u03c4\u03c5\u03c7\u03b5",
+                "import_failed_prefix": "\u0397 \u03b5\u03b9\u03c3\u03b1\u03b3\u03c9\u03b3\u03ae \u03b1\u03c0\u03ad\u03c4\u03c5\u03c7\u03b5:",
+                "retention_title": "\u0391\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03b1 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2 - \u0394\u03b9\u03b1\u03c4\u03ae\u03c1\u03b7\u03c3\u03b7",
+                "keep_last": "\u039c\u03b5\u03af\u03bd\u03b5 \u03c4\u03b5\u03bb\u03b5\u03c5\u03c4\u03b1\u03af\u03bf\u03c2",
+                "files": "\u03b1\u03c1\u03c7\u03b5\u03af\u03b1",
+                "loading_stats": "(\u03c6\u03cc\u03c1\u03c4\u03c9\u03c3\u03b7 \u03c3\u03c4\u03b1\u03c4\u03b9\u03c3\u03c4\u03b9\u03ba\u03ce\u03bd...)",
+                "last_backup_loading": "\u03a4\u03b5\u03bb\u03b5\u03c5\u03c4\u03b1\u03af\u03bf \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03bf \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2: (\u03c6\u03cc\u03c1\u03c4\u03c9\u03c3\u03b7...)",
+                "last_backup_none": "\u03a4\u03b5\u03bb\u03b5\u03c5\u03c4\u03b1\u03af\u03bf \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03bf \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2: \u03ba\u03b1\u03bd\u03ad\u03bd\u03b1 \u03b1\u03ba\u03cc\u03bc\u03b1",
+                "last_backup_prefix": "\u03a4\u03b5\u03bb\u03b5\u03c5\u03c4\u03b1\u03af\u03bf \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03bf \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2:",
+                "last_backup_unknown": "\u03a4\u03b5\u03bb\u03b5\u03c5\u03c4\u03b1\u03af\u03bf \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03bf \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2: \u03ac\u03b3\u03bd\u03c9\u03c3\u03c4\u03bf",
+                "prune_now": "\u039a\u03bb\u03b1\u03b4\u03ad\u03c8\u03c4\u03b5 \u03c4\u03ce\u03c1\u03b1",
+                "pruned_kept_deleted": "\u039a\u03bb\u03b1\u03b4\u03b5\u03bc\u03ad\u03bd\u03bf\u03b9 - \u03b4\u03b9\u03b1\u03c4\u03b7\u03c1\u03b7\u03bc\u03ad\u03bd\u03bf\u03b9",
+                "deleted_prefix": "\u03b4\u03b9\u03b1\u03b3\u03c1\u03ac\u03c6\u03b7\u03ba\u03b5",
+                "prune_failed": "\u03a4\u03bf Prune \u03b1\u03c0\u03ad\u03c4\u03c5\u03c7\u03b5",
+                "prune_failed_prefix": "\u03a4\u03bf Prune \u03b1\u03c0\u03ad\u03c4\u03c5\u03c7\u03b5:",
+                "create_backup_now": "\u0394\u03b7\u03bc\u03b9\u03bf\u03c5\u03c1\u03b3\u03ae\u03c3\u03c4\u03b5 \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03bf \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2 \u03c4\u03ce\u03c1\u03b1",
+                "backup_saved_prefix": "\u03a4\u03bf \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03bf \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2 \u03b1\u03c0\u03bf\u03b8\u03b7\u03ba\u03b5\u03cd\u03c4\u03b7\u03ba\u03b5:",
+                "backup_failed": "\u0397 \u03b4\u03b7\u03bc\u03b9\u03bf\u03c5\u03c1\u03b3\u03af\u03b1 \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03c9\u03bd \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2 \u03b1\u03c0\u03ad\u03c4\u03c5\u03c7\u03b5",
+                "backup_failed_prefix": "\u0397 \u03b4\u03b7\u03bc\u03b9\u03bf\u03c5\u03c1\u03b3\u03af\u03b1 \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03c9\u03bd \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2 \u03b1\u03c0\u03ad\u03c4\u03c5\u03c7\u03b5:",
+                "download_latest_backup": "\u039a\u03b1\u03c4\u03b5\u03b2\u03ac\u03c3\u03c4\u03b5 \u03c4\u03bf \u03c0\u03b9\u03bf \u03c0\u03c1\u03cc\u03c3\u03c6\u03b1\u03c4\u03bf \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03bf \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2",
+                "no_backups_found": "\u0394\u03b5\u03bd \u03b2\u03c1\u03ad\u03b8\u03b7\u03ba\u03b1\u03bd \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03b1 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2",
+                "download_failed_prefix": "\u0397 \u03bb\u03ae\u03c8\u03b7 \u03b1\u03c0\u03ad\u03c4\u03c5\u03c7\u03b5:",
+                "redact_secrets": "Redact secrets"
+            }
+        }
     },
-    "errors": {
-      "no_backups_detected": "Δεν εντοπίστηκαν αντίγραφα ασφαλείας για στιγμιότυπα, Hestia ή micro set."
+    "backups": {
+        "common": {
+            "status": "\u039a\u03b1\u03c4\u03ac\u03c3\u03c4\u03b1\u03c3\u03b7:",
+            "timestamp": "\u03a7\u03c1\u03bf\u03bd\u03b9\u03ba\u03ae \u03c3\u03ae\u03bc\u03b1\u03bd\u03c3\u03b7:",
+            "none_dash": "-",
+            "free": "\u0394\u03c9\u03c1\u03b5\u03ac\u03bd",
+            "used": "\u039c\u03b5\u03c4\u03b1\u03c7\u03b5\u03b9\u03c1\u03b9\u03c3\u03bc\u03ad\u03bd\u03bf\u03c2",
+            "copy": "\u0391\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03bf",
+            "warnings": "\u03a0\u03c1\u03bf\u03b5\u03b9\u03b4\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03b5\u03b9\u03c2",
+            "errors": "\u03a3\u03c6\u03ac\u03bb\u03bc\u03b1\u03c4\u03b1",
+            "loading": "\u03a6\u03cc\u03c1\u03c4\u03c9\u03c3\u03b7..."
+        },
+        "status": {
+            "error_loading_json": "\u03a3\u03a6\u0391\u039b\u039c\u0391 \u03a6\u039f\u03a1\u03a4\u03a9\u03a3\u0397\u03a3 JSON",
+            "ok": "\u0395\u039d\u03a4\u0391\u039e\u0395\u0399",
+            "unmounted": "\u0391\u03a0\u039f\u03a3\u03a0\u039f\u039d\u0397\u039c\u0395\u039d\u039f",
+            "critical": "\u039a\u03a1\u0399\u03a3\u0399\u039c\u039f\u03a3",
+            "high": "\u03a8\u0397\u039b\u0391",
+            "elevated": "\u03a5\u03a8\u0397\u039c\u0395\u039d\u039f",
+            "healthy": "\u03a5\u0393\u0399\u0397\u03a3",
+            "unknown": "\u0391\u0393\u039d\u03a9\u03a3\u03a4\u039f\u03a3",
+            "unknown_cap": "\u0391\u03b3\u03bd\u03c9\u03c3\u03c4\u03bf\u03c2"
+        },
+        "disk": {
+            "unmounted": "\u039f \u0394\u0399\u03a3\u039a\u039f\u03a3 \u0391\u03a0\u039f\u03a3\u03a0\u039f\u039d\u0397\u0398\u0397\u039a\u0395",
+            "tag": "\u0394\u03af\u03c3\u03ba\u03bf\u03c2:",
+            "sizes_updated": "\u0395\u03bd\u03b7\u03bc\u03b5\u03c1\u03c9\u03bc\u03ad\u03bd\u03b1 \u03bc\u03b5\u03b3\u03ad\u03b8\u03b7:",
+            "title": "\u03a7\u03c1\u03ae\u03c3\u03b7 \u0394\u03af\u03c3\u03ba\u03bf\u03c5",
+            "usage": "\u03a7\u03c1\u03ae\u03c3\u03b7",
+            "mount": "\u0392\u03bf\u03c5\u03bd\u03cc"
+        },
+        "page": {
+            "freshness_prefix": "\u03a6\u03c1\u03b5\u03c3\u03ba\u03ac\u03b4\u03b1:",
+            "title": "\u039a\u03ad\u03bd\u03c4\u03c1\u03bf \u03b5\u03bb\u03ad\u03b3\u03c7\u03bf\u03c5 \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03c9\u03bd \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2",
+            "subtitle_prefix": "\u0396\u03c9\u03bd\u03c4\u03b1\u03bd\u03ae \u03ba\u03b1\u03c4\u03ac\u03c3\u03c4\u03b1\u03c3\u03b7 \u03ba\u03b1\u03b8\u03bf\u03b4\u03b7\u03b3\u03bf\u03cd\u03bc\u03b5\u03bd\u03b7 \u03b1\u03c0\u03cc",
+            "subtitle_suffix": "\u03c3\u03c4\u03bf\u03bd \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03bf \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2 \u03c3\u03b1\u03c2."
+        },
+        "ages": {
+            "no_snapshots_on_disk": "\u0394\u03b5\u03bd \u03b2\u03c1\u03ad\u03b8\u03b7\u03ba\u03b1\u03bd \u03c3\u03c4\u03b9\u03b3\u03bc\u03b9\u03cc\u03c4\u03c5\u03c0\u03b1 \u03c3\u03c4\u03bf \u03b4\u03af\u03c3\u03ba\u03bf",
+            "one_snapshot_present": "1 \u03c3\u03c4\u03b9\u03b3\u03bc\u03b9\u03cc\u03c4\u03c5\u03c0\u03bf \u03b4\u03ce\u03c1\u03bf",
+            "snapshots_present_suffix": "\u03c3\u03c4\u03b9\u03b3\u03bc\u03b9\u03cc\u03c4\u03c5\u03c0\u03b1 \u03c0\u03b1\u03c1\u03cc\u03bd\u03c4\u03b1",
+            "no_panel_backups_on_disk": "\u0394\u03b5\u03bd \u03b2\u03c1\u03ad\u03b8\u03b7\u03ba\u03b1\u03bd \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03b1 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2 \u03c4\u03bf\u03c5 \u03c0\u03af\u03bd\u03b1\u03ba\u03b1 \u03c3\u03c4\u03bf \u03b4\u03af\u03c3\u03ba\u03bf",
+            "one_panel_backup_present": "\u03a5\u03c0\u03ac\u03c1\u03c7\u03b5\u03b9 1 \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03bf \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2 \u03c0\u03af\u03bd\u03b1\u03ba\u03b1",
+            "panel_backups_present_suffix": "\u03c5\u03c0\u03ac\u03c1\u03c7\u03bf\u03c5\u03bd \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03b1 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2 \u03c4\u03bf\u03c5 \u03c0\u03af\u03bd\u03b1\u03ba\u03b1",
+            "no_micro_backups_on_disk": "\u0394\u03b5\u03bd \u03b2\u03c1\u03ad\u03b8\u03b7\u03ba\u03b1\u03bd \u03bc\u03b9\u03ba\u03c1\u03bf \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03b1 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2 \u03c3\u03c4\u03bf \u03b4\u03af\u03c3\u03ba\u03bf",
+            "one_micro_backup_present": "1 micro backup \u03c5\u03c0\u03ac\u03c1\u03c7\u03b5\u03b9",
+            "micro_backups_present_suffix": "\u03c5\u03c0\u03ac\u03c1\u03c7\u03bf\u03c5\u03bd \u03bc\u03b9\u03ba\u03c1\u03bf \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03b1 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2",
+            "snapshot_daily0_chart": "\u03a3\u03c4\u03b9\u03b3\u03bc\u03b9\u03cc\u03c4\u03c5\u03c0\u03bf (\u03ba\u03b1\u03b8\u03b7\u03bc\u03b5\u03c1\u03b9\u03bd\u03ac.0)",
+            "hestia_latest_chart": "\u0395\u03c3\u03c4\u03af\u03b1 \u03c4\u03b5\u03bb\u03b5\u03c5\u03c4\u03b1\u03af\u03b1",
+            "micro_latest_chart": "Micro \u03c4\u03b5\u03bb\u03b5\u03c5\u03c4\u03b1\u03af\u03b1",
+            "age_days": "\u0397\u03bb\u03b9\u03ba\u03af\u03b1 (\u03b7\u03bc\u03ad\u03c1\u03b5\u03c2)",
+            "title": "\u0397\u03bb\u03b9\u03ba\u03af\u03b5\u03c2 \u03b4\u03b7\u03bc\u03b9\u03bf\u03c5\u03c1\u03b3\u03af\u03b1\u03c2 \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03c9\u03bd \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2",
+            "subtitle": "\u03a0\u03cc\u03c3\u03bf \u03c6\u03c1\u03ad\u03c3\u03ba\u03b1 \u03b5\u03af\u03bd\u03b1\u03b9 \u03c4\u03b1 \u03c4\u03b5\u03bb\u03b5\u03c5\u03c4\u03b1\u03af\u03b1 \u03c3\u03b1\u03c2 \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03b1 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2",
+            "snapshot_daily0": "\u03a3\u03c4\u03b9\u03b3\u03bc\u03b9\u03cc\u03c4\u03c5\u03c0\u03bf \u03ba\u03b1\u03b8\u03b7\u03bc\u03b5\u03c1\u03b9\u03bd\u03ac.0",
+            "latest_hestia": "\u03a4\u03b5\u03bb\u03b5\u03c5\u03c4\u03b1\u03af\u03b1 \u0395\u03c3\u03c4\u03af\u03b1",
+            "latest_micro": "\u03a4\u03b5\u03bb\u03b5\u03c5\u03c4\u03b1\u03af\u03bf Micro"
+        },
+        "errors": {
+            "no_backups_detected": "\u0394\u03b5\u03bd \u03b5\u03bd\u03c4\u03bf\u03c0\u03af\u03c3\u03c4\u03b7\u03ba\u03b1\u03bd \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03b1 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2 \u03b3\u03b9\u03b1 \u03c3\u03c4\u03b9\u03b3\u03bc\u03b9\u03cc\u03c4\u03c5\u03c0\u03b1, Hestia \u03ae micro set."
+        },
+        "restore": {
+            "hestia_placeholder_tar": "\u03b3\u03bf\u03bd\u03af\u03b4\u03b9\u03bf.YYYYMMDD-HHMM.tar",
+            "using_latest_backup_prefix": "\u03a7\u03c1\u03ae\u03c3\u03b7 \u03c4\u03bf\u03c5 \u03c0\u03b9\u03bf \u03c0\u03c1\u03cc\u03c3\u03c6\u03b1\u03c4\u03bf\u03c5 \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03bf\u03c5 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2 \u03c0\u03bf\u03c5 \u03b1\u03bd\u03b1\u03c6\u03ad\u03c1\u03b8\u03b7\u03ba\u03b5 \u03c3\u03b5 JSON:",
+            "adjust_backup_tar": "\u03a0\u03c1\u03bf\u03c3\u03b1\u03c1\u03bc\u03cc\u03c3\u03c4\u03b5 \u03c4\u03bf BACKUP_TAR \u03c3\u03b5 \u03ad\u03bd\u03b1 \u03c0\u03c1\u03b1\u03b3\u03bc\u03b1\u03c4\u03b9\u03ba\u03cc \u03b1\u03c1\u03c7\u03b5\u03af\u03bf \u03b1\u03c0\u03cc \u03c4\u03bf \\\"v-list-backups USER\\\" \u03c0\u03c1\u03b9\u03bd \u03b1\u03c0\u03cc \u03c4\u03b7\u03bd \u03b5\u03ba\u03c4\u03ad\u03bb\u03b5\u03c3\u03b7.",
+            "micro_restore_prefix": "\u0395\u03c0\u03b1\u03bd\u03b1\u03c6\u03ad\u03c1\u03b5\u03c4\u03b5 \u03c4\u03b7 \u03b2\u03ac\u03c3\u03b7 \u03b1\u03c0\u03cc \u03c4\u03bf \u03c0\u03b9\u03bf \u03c0\u03c1\u03cc\u03c3\u03c6\u03b1\u03c4\u03bf micro snapshot:",
+            "micro_restore_suffix": "(\u03b5\u03bb\u03ad\u03b3\u03be\u03c4\u03b5 \u03c4\u03b9\u03c2 \u03b4\u03b9\u03b1\u03b4\u03c1\u03bf\u03bc\u03ad\u03c2 \u03ba\u03b1\u03b9 \u03c4\u03b9\u03c2 \u03b5\u03be\u03b1\u03b9\u03c1\u03ad\u03c3\u03b5\u03b9\u03c2 \u03c0\u03c1\u03b9\u03bd \u03c4\u03b7\u03bd \u03b5\u03ba\u03c4\u03ad\u03bb\u03b5\u03c3\u03b7).",
+            "set_correct_snapshot_path": "\u039f\u03c1\u03af\u03c3\u03c4\u03b5 \u03c4\u03b7 \u03c3\u03c9\u03c3\u03c4\u03ae \u03b4\u03b9\u03b1\u03b4\u03c1\u03bf\u03bc\u03ae \u03c3\u03c4\u03b9\u03b3\u03bc\u03b9\u03cc\u03c4\u03c5\u03c0\u03bf\u03c5 \u03c0\u03c1\u03b9\u03bd \u03c7\u03c1\u03b7\u03c3\u03b9\u03bc\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03b5\u03c4\u03b5 \u03b1\u03c5\u03c4\u03ae\u03bd \u03c4\u03b7\u03bd \u03b5\u03bd\u03c4\u03bf\u03bb\u03ae.",
+            "confirm_body_1": "\u0391\u03c5\u03c4\u03cc \u03b8\u03b1 \u03be\u03b5\u03ba\u03b9\u03bd\u03ae\u03c3\u03b5\u03b9 \u03bc\u03b9\u03b1 \u03b5\u03c1\u03b3\u03b1\u03c3\u03af\u03b1 \u03b5\u03c0\u03b1\u03bd\u03b1\u03c6\u03bf\u03c1\u03ac\u03c2 Hestia \u03c3\u03c4\u03bf\u03bd \u03b4\u03b9\u03b1\u03ba\u03bf\u03bc\u03b9\u03c3\u03c4\u03ae \u03c7\u03c1\u03b7\u03c3\u03b9\u03bc\u03bf\u03c0\u03bf\u03b9\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf backupctl.",
+            "confirm_body_2": "\u039f\u03b9 \u03c5\u03c0\u03b7\u03c1\u03b5\u03c3\u03af\u03b5\u03c2 \u03ba\u03b1\u03b9 \u03c4\u03b1 \u03b4\u03b5\u03b4\u03bf\u03bc\u03ad\u03bd\u03b1 \u03b3\u03b9\u03b1 \u03b1\u03c5\u03c4\u03cc\u03bd \u03c4\u03bf\u03bd \u03c7\u03c1\u03ae\u03c3\u03c4\u03b7 \u03b5\u03bd\u03b4\u03ad\u03c7\u03b5\u03c4\u03b1\u03b9 \u03bd\u03b1 \u03b1\u03bd\u03c4\u03b9\u03ba\u03b1\u03c4\u03b1\u03c3\u03c4\u03b1\u03b8\u03bf\u03cd\u03bd.",
+            "confirm_body_3": "\u0395\u03af\u03c3\u03b1\u03b9 \u03b1\u03c0\u03bf\u03bb\u03cd\u03c4\u03c9\u03c2 \u03c3\u03af\u03b3\u03bf\u03c5\u03c1\u03bf\u03c2;"
+        },
+        "actions": {
+            "starting_prefix": "\u0395\u03ba\u03ba\u03af\u03bd\u03b7\u03c3\u03b7",
+            "failed_to_start_prefix": "\u0391\u03a0\u039f\u03a4\u03a5\u03a7\u0395 \u03bd\u03b1 \u03be\u03b5\u03ba\u03b9\u03bd\u03ae\u03c3\u03b5\u03b9",
+            "started_prefix": "\u039e\u03b5\u03ba\u03af\u03bd\u03b7\u03c3\u03b5",
+            "started_suffix": ". \u0391\u03c5\u03c4\u03cc \u03bc\u03c0\u03bf\u03c1\u03b5\u03af \u03bd\u03b1 \u03b4\u03b9\u03b1\u03c1\u03ba\u03ad\u03c3\u03b5\u03b9 \u03bb\u03af\u03b3\u03bf. \u03b7 \u03ba\u03b1\u03c4\u03ac\u03c3\u03c4\u03b1\u03c3\u03b7 \u03b8\u03b1 \u03b5\u03bd\u03b7\u03bc\u03b5\u03c1\u03c9\u03b8\u03b5\u03af \u03c3\u03c4\u03bf\u03bd \u03b5\u03c0\u03cc\u03bc\u03b5\u03bd\u03bf \u03ad\u03bb\u03b5\u03b3\u03c7\u03bf \u03c5\u03b3\u03b5\u03af\u03b1\u03c2.",
+            "error_talking_endpoint": "\u03a3\u03c6\u03ac\u03bb\u03bc\u03b1 \u03ba\u03b1\u03c4\u03ac \u03c4\u03b7 \u03c3\u03c5\u03bd\u03bf\u03bc\u03b9\u03bb\u03af\u03b1 \u03bc\u03b5 \u03c4\u03bf backups_action.php",
+            "run_os_snapshot": "\u0395\u03ba\u03c4\u03b5\u03bb\u03ad\u03c3\u03c4\u03b5 \u03c4\u03bf \u03c3\u03c4\u03b9\u03b3\u03bc\u03b9\u03cc\u03c4\u03c5\u03c0\u03bf \u03c4\u03bf\u03c5 \u03bb\u03b5\u03b9\u03c4\u03bf\u03c5\u03c1\u03b3\u03b9\u03ba\u03bf\u03cd \u03c3\u03c5\u03c3\u03c4\u03ae\u03bc\u03b1\u03c4\u03bf\u03c2",
+            "run_micro_backup": "\u0395\u03ba\u03c4\u03b5\u03bb\u03ad\u03c3\u03c4\u03b5 \u03c4\u03bf Micro Backup",
+            "run_hestia_backup_user": "\u0395\u03ba\u03c4\u03ad\u03bb\u03b5\u03c3\u03b7 Hestia Backup (\u03b3\u03bf\u03bd\u03af\u03b4\u03b9\u03bf)",
+            "run_all_backups": "\u0395\u03ba\u03c4\u03b5\u03bb\u03ad\u03c3\u03c4\u03b5 \u039f\u039b\u0391 \u03c4\u03b1 \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03b1 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2",
+            "run_health_check": "\u0395\u03ba\u03c4\u03b5\u03bb\u03ad\u03c3\u03c4\u03b5 \u03ad\u03bb\u03b5\u03b3\u03c7\u03bf \u03c5\u03b3\u03b5\u03af\u03b1\u03c2",
+            "log_maintenance": "\u03a3\u03c5\u03bd\u03c4\u03ae\u03c1\u03b7\u03c3\u03b7 \u03ba\u03bf\u03c1\u03bc\u03bf\u03cd",
+            "clear_backup_logs": "\u0395\u03ba\u03ba\u03b1\u03b8\u03ac\u03c1\u03b9\u03c3\u03b7 \u03b1\u03c1\u03c7\u03b5\u03af\u03c9\u03bd \u03ba\u03b1\u03c4\u03b1\u03b3\u03c1\u03b1\u03c6\u03ae\u03c2 \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03c9\u03bd \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2",
+            "clear_prune_logs": "\u039a\u03b1\u03b8\u03b1\u03c1\u03af\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03ba\u03bf\u03cd\u03c4\u03c3\u03bf\u03c5\u03c1\u03b1 \u03b4\u03b1\u03bc\u03ac\u03c3\u03ba\u03b7\u03bd\u03bf\u03c5",
+            "clear_integrity_log": "\u0395\u03ba\u03ba\u03b1\u03b8\u03ac\u03c1\u03b9\u03c3\u03b7 \u03b1\u03c1\u03c7\u03b5\u03af\u03bf\u03c5 \u03ba\u03b1\u03c4\u03b1\u03b3\u03c1\u03b1\u03c6\u03ae\u03c2 \u03b1\u03ba\u03b5\u03c1\u03b1\u03b9\u03cc\u03c4\u03b7\u03c4\u03b1\u03c2"
+        },
+        "cron": {
+            "no_entries": "\u0394\u03b5\u03bd \u03b5\u03bd\u03c4\u03bf\u03c0\u03af\u03c3\u03c4\u03b7\u03ba\u03b1\u03bd \u03ba\u03b1\u03c4\u03b1\u03c7\u03c9\u03c1\u03ae\u03c3\u03b5\u03b9\u03c2 crontab.",
+            "env": "Env",
+            "schedule": "\u03a0\u03c1\u03cc\u03b3\u03c1\u03b1\u03bc\u03bc\u03b1",
+            "entries_for_prefix": "\u0395\u03b3\u03b3\u03c1\u03b1\u03c6\u03ad\u03c2 Crontab \u03b3\u03b9\u03b1",
+            "current_user": "\u03c4\u03c1\u03ad\u03c7\u03bf\u03bd \u03c7\u03c1\u03ae\u03c3\u03c4\u03b7",
+            "unable_to_read": "\u0394\u03b5\u03bd \u03b5\u03af\u03bd\u03b1\u03b9 \u03b4\u03c5\u03bd\u03b1\u03c4\u03ae \u03b7 \u03b1\u03bd\u03ac\u03b3\u03bd\u03c9\u03c3\u03b7 \u03c4\u03bf\u03c5 crontab.",
+            "failed_to_read": "\u0391\u03c0\u03ad\u03c4\u03c5\u03c7\u03b5 \u03b7 \u03b1\u03bd\u03ac\u03b3\u03bd\u03c9\u03c3\u03b7 \u03c4\u03bf\u03c5 crontab."
+        },
+        "warnings_errors": {
+            "title": "\u03a0\u03c1\u03bf\u03b5\u03b9\u03b4\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03b5\u03b9\u03c2 & \u03a3\u03c6\u03ac\u03bb\u03bc\u03b1\u03c4\u03b1",
+            "subtitle": "\u03a0\u03b5\u03c1\u03af\u03bb\u03b7\u03c8\u03b7 \u03b1\u03c0\u03cc \u03c4\u03bf\u03bd \u03c5\u03b3\u03b5\u03b9\u03bf\u03bd\u03bf\u03bc\u03b9\u03ba\u03cc \u03ad\u03bb\u03b5\u03b3\u03c7\u03bf"
+        },
+        "raw_snapshot": {
+            "title": "\u0391\u03ba\u03b1\u03c4\u03ad\u03c1\u03b3\u03b1\u03c3\u03c4\u03bf \u03c3\u03c4\u03b9\u03b3\u03bc\u03b9\u03cc\u03c4\u03c5\u03c0\u03bf",
+            "subtitle": "\u0392\u03b1\u03c3\u03b9\u03ba\u03ad\u03c2 \u03c4\u03b9\u03bc\u03ad\u03c2 \u03b1\u03c0\u03b5\u03c5\u03b8\u03b5\u03af\u03b1\u03c2 \u03b1\u03c0\u03cc \u03c4\u03b7\u03bd \u03c4\u03b5\u03bb\u03b5\u03c5\u03c4\u03b1\u03af\u03b1 \u03ba\u03b1\u03c4\u03ac\u03c3\u03c4\u03b1\u03c3\u03b7 JSON"
+        },
+        "recent_actions": {
+            "title": "\u03a0\u03c1\u03cc\u03c3\u03c6\u03b1\u03c4\u03b5\u03c2 \u03b5\u03bd\u03ad\u03c1\u03b3\u03b5\u03b9\u03b5\u03c2",
+            "subtitle": "\u0399\u03c3\u03c4\u03bf\u03c1\u03b9\u03ba\u03cc \u03b5\u03bd\u03b5\u03c1\u03b3\u03b5\u03b9\u03ce\u03bd \u03b1\u03c0\u03cc \u03b1\u03c5\u03c4\u03cc\u03bd \u03c4\u03bf\u03bd \u03c0\u03af\u03bd\u03b1\u03ba\u03b1 \u03b5\u03bb\u03ad\u03b3\u03c7\u03bf\u03c5",
+            "none": "\u0394\u03b5\u03bd \u03ad\u03c7\u03bf\u03c5\u03bd \u03ba\u03b1\u03c4\u03b1\u03b3\u03c1\u03b1\u03c6\u03b5\u03af \u03b1\u03ba\u03cc\u03bc\u03b7 \u03b5\u03bd\u03ad\u03c1\u03b3\u03b5\u03b9\u03b5\u03c2."
+        },
+        "orch": {
+            "title": "Backup Orchestration Wizard",
+            "subtitle": "\u03a0\u03c1\u03bf\u03c3\u03b1\u03c1\u03bc\u03cc\u03c3\u03c4\u03b5 \u03c4\u03b9\u03c2 \u03b4\u03b9\u03b1\u03b4\u03c1\u03bf\u03bc\u03ad\u03c2 \u03bc\u03af\u03b1 \u03c6\u03bf\u03c1\u03ac \u03ba\u03b1\u03b9, \u03c3\u03c4\u03b7 \u03c3\u03c5\u03bd\u03ad\u03c7\u03b5\u03b9\u03b1, \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c8\u03c4\u03b5 \u03c4\u03b9\u03c2 \u03b4\u03b7\u03bc\u03b9\u03bf\u03c5\u03c1\u03b3\u03b7\u03bc\u03ad\u03bd\u03b5\u03c2 \u03bc\u03bf\u03bd\u03ac\u03b4\u03b5\u03c2 script/cron/systemd.",
+            "backup_root": "Backup root",
+            "include_health": "\u03a3\u03c5\u03bc\u03c0\u03b5\u03c1\u03b9\u03bb\u03ac\u03b2\u03b5\u03c4\u03b5 \u03ad\u03bb\u03b5\u03b3\u03c7\u03bf \u03c5\u03b3\u03b5\u03af\u03b1\u03c2",
+            "include_integrity": "\u03a3\u03c5\u03bc\u03c0\u03b5\u03c1\u03b9\u03bb\u03ac\u03b2\u03b5\u03c4\u03b5 \u03ad\u03bb\u03b5\u03b3\u03c7\u03bf \u03b1\u03ba\u03b5\u03c1\u03b1\u03b9\u03cc\u03c4\u03b7\u03c4\u03b1\u03c2",
+            "include_prune": "\u03a3\u03c5\u03bc\u03c0\u03b5\u03c1\u03b9\u03bb\u03ac\u03b2\u03b5\u03c4\u03b5 \u03c4\u03bf \u03c3\u03c4\u03ac\u03b4\u03b9\u03bf \u03ba\u03bb\u03b1\u03b4\u03b5\u03cd\u03bc\u03b1\u03c4\u03bf\u03c2",
+            "suspend": "\u0391\u03bd\u03b1\u03c3\u03c4\u03bf\u03bb\u03ae \u03b4\u03b7\u03bc\u03b9\u03bf\u03c5\u03c1\u03b3\u03af\u03b1\u03c2 \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03c9\u03bd \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2",
+            "disable_on_mount_fail": "\u0391\u03c0\u03b5\u03bd\u03b5\u03c1\u03b3\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03b1 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2 \u03b5\u03ac\u03bd \u03b1\u03c0\u03bf\u03c4\u03cd\u03c7\u03b5\u03b9 \u03b7 \u03c0\u03c1\u03bf\u03c3\u03ac\u03c1\u03c4\u03b7\u03c3\u03b7",
+            "nightly_script": "\u039d\u03c5\u03c7\u03c4\u03b5\u03c1\u03b9\u03bd\u03cc \u03c3\u03b5\u03bd\u03ac\u03c1\u03b9\u03bf",
+            "copy_script": "\u0391\u03bd\u03c4\u03b9\u03b3\u03c1\u03b1\u03c6\u03ae \u03c3\u03b5\u03bd\u03b1\u03c1\u03af\u03bf\u03c5",
+            "cron_entry": "\u039a\u03b1\u03c4\u03b1\u03c7\u03ce\u03c1\u03b7\u03c3\u03b7 Cron",
+            "copy_cron_line": "\u0391\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c8\u03c4\u03b5 \u03c4\u03b7 \u03b3\u03c1\u03b1\u03bc\u03bc\u03ae cron",
+            "systemd_service": "\u03a3\u03c5\u03c3\u03c4\u03b7\u03bc\u03b9\u03ba\u03ae \u03c5\u03c0\u03b7\u03c1\u03b5\u03c3\u03af\u03b1",
+            "copy_unit": "\u039c\u03bf\u03bd\u03ac\u03b4\u03b1 \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03b1\u03c6\u03ae\u03c2",
+            "systemd_timer": "\u03a3\u03c5\u03c3\u03c4\u03b7\u03bc\u03b9\u03ba\u03cc \u03c7\u03c1\u03bf\u03bd\u03cc\u03bc\u03b5\u03c4\u03c1\u03bf",
+            "copy_timer": "\u03a7\u03c1\u03bf\u03bd\u03cc\u03bc\u03b5\u03c4\u03c1\u03bf \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03b1\u03c6\u03ae\u03c2"
+        },
+        "quick_restore": {
+            "title": "\u0392\u03bf\u03b7\u03b8\u03bf\u03af \u03b3\u03c1\u03ae\u03b3\u03bf\u03c1\u03b7\u03c2 \u03b5\u03c0\u03b1\u03bd\u03b1\u03c6\u03bf\u03c1\u03ac\u03c2",
+            "subtitle": "\u03a0\u03c1\u03bf\u03c3\u03c5\u03bc\u03c0\u03bb\u03b7\u03c1\u03c9\u03bc\u03ad\u03bd\u03b5\u03c2 \u03b5\u03bd\u03c4\u03bf\u03bb\u03ad\u03c2 CLI \u03b3\u03b9\u03b1 \u03ba\u03b1\u03c4\u03b1\u03c3\u03c4\u03ac\u03c3\u03b5\u03b9\u03c2 \u03ad\u03ba\u03c4\u03b1\u03ba\u03c4\u03b7\u03c2 \u03b1\u03bd\u03ac\u03b3\u03ba\u03b7\u03c2 (\u03c7\u03b5\u03b9\u03c1\u03bf\u03ba\u03af\u03bd\u03b7\u03c4\u03b7 \u03b5\u03ba\u03c4\u03ad\u03bb\u03b5\u03c3\u03b7 \u03ae \u03ba\u03bf\u03c5\u03bc\u03c0\u03af \u039a\u0399\u039d\u0394\u03a5\u039d\u039f\u03a3)",
+            "hestia_latest_title": "\u0395\u03c0\u03b1\u03bd\u03b1\u03c6\u03ad\u03c1\u03b5\u03c4\u03b5 \u03c4\u03bf \u03c4\u03b5\u03bb\u03b5\u03c5\u03c4\u03b1\u03af\u03bf \u03b1\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03bf \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2 \u03c7\u03c1\u03ae\u03c3\u03c4\u03b7 Hestia",
+            "micro_latest_title": "\u0395\u03c0\u03b1\u03bd\u03b1\u03c6\u03bf\u03c1\u03ac \u03b1\u03c0\u03cc \u03c4\u03bf \u03c0\u03b9\u03bf \u03c0\u03c1\u03cc\u03c3\u03c6\u03b1\u03c4\u03bf \u03bc\u03b9\u03ba\u03c1\u03bf\u03c3\u03c4\u03b9\u03b3\u03bc\u03b9\u03cc\u03c4\u03c5\u03c0\u03bf (\u03bc\u03cc\u03bd\u03bf CLI)",
+            "copy_command": "\u0395\u03bd\u03c4\u03bf\u03bb\u03ae \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03b1\u03c6\u03ae\u03c2",
+            "run_restore_danger": "\u0395\u03ba\u03c4\u03ad\u03bb\u03b5\u03c3\u03b7 \u03b5\u03c0\u03b1\u03bd\u03b1\u03c6\u03bf\u03c1\u03ac\u03c2 (\u03c0\u03b9\u03bf \u03c0\u03c1\u03cc\u03c3\u03c6\u03b1\u03c4\u03b7, \u039a\u0399\u039d\u0394\u03a5\u039d\u039f\u03a3)"
+        },
+        "cli": {
+            "title": "Hestia Backup & Restore CLI",
+            "subtitle": "\u03a6\u03cd\u03bb\u03bb\u03bf \u03b3\u03c1\u03ae\u03b3\u03bf\u03c1\u03b7\u03c2 \u03b1\u03bd\u03b1\u03c6\u03bf\u03c1\u03ac\u03c2 - \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03b1\u03c6\u03ae & \u03b5\u03c0\u03b9\u03ba\u03cc\u03bb\u03bb\u03b7\u03c3\u03b7 \u03ad\u03c4\u03bf\u03b9\u03bc\u03bf",
+            "create_backups": "\u0394\u03b7\u03bc\u03b9\u03bf\u03c5\u03c1\u03b3\u03af\u03b1 \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03c9\u03bd \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2",
+            "list_delete_backups": "\u039b\u03af\u03c3\u03c4\u03b1 & \u0394\u03b9\u03b1\u03b3\u03c1\u03b1\u03c6\u03ae \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03c9\u03bd \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2",
+            "full_restore_user": "\u03a0\u03bb\u03ae\u03c1\u03b7\u03c2 \u03b5\u03c0\u03b1\u03bd\u03b1\u03c6\u03bf\u03c1\u03ac (\u03a7\u03c1\u03ae\u03c3\u03c4\u03b7\u03c2)",
+            "selective_restore": "\u0395\u03c0\u03b9\u03bb\u03b5\u03ba\u03c4\u03b9\u03ba\u03ae \u03b5\u03c0\u03b1\u03bd\u03b1\u03c6\u03bf\u03c1\u03ac (Web / DB / Mail)",
+            "backup_file_locations": "\u03a4\u03bf\u03c0\u03bf\u03b8\u03b5\u03c3\u03af\u03b5\u03c2 \u03b1\u03c1\u03c7\u03b5\u03af\u03c9\u03bd \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03c9\u03bd \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2",
+            "backup_tarball_contents": "\u0394\u03b7\u03bc\u03b9\u03bf\u03c5\u03c1\u03b3\u03af\u03b1 \u03b1\u03bd\u03c4\u03b9\u03b3\u03c1\u03ac\u03c6\u03c9\u03bd \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2 \u03c0\u03b5\u03c1\u03b9\u03b5\u03c7\u03bf\u03bc\u03ad\u03bd\u03bf\u03c5 Tarball",
+            "backupctl_help": "backupctl \u03b2\u03bf\u03ae\u03b8\u03b5\u03b9\u03b1"
+        }
     },
-    "restore": {
-      "hestia_placeholder_tar": "γονίδιο.YYYYMMDD-HHMM.tar",
-      "using_latest_backup_prefix": "Χρήση του πιο πρόσφατου αντιγράφου ασφαλείας που αναφέρθηκε σε JSON:",
-      "adjust_backup_tar": "Προσαρμόστε το BACKUP_TAR σε ένα πραγματικό αρχείο από το \\\"v-list-backups USER\\\" πριν από την εκτέλεση.",
-      "micro_restore_prefix": "Επαναφέρετε τη βάση από το πιο πρόσφατο micro snapshot:",
-      "micro_restore_suffix": "(ελέγξτε τις διαδρομές και τις εξαιρέσεις πριν την εκτέλεση).",
-      "set_correct_snapshot_path": "Ορίστε τη σωστή διαδρομή στιγμιότυπου πριν χρησιμοποιήσετε αυτήν την εντολή.",
-      "confirm_body_1": "Αυτό θα ξεκινήσει μια εργασία επαναφοράς Hestia στον διακομιστή χρησιμοποιώντας το backupctl.",
-      "confirm_body_2": "Οι υπηρεσίες και τα δεδομένα για αυτόν τον χρήστη ενδέχεται να αντικατασταθούν.",
-      "confirm_body_3": "Είσαι απολύτως σίγουρος;"
+    "footer": {
+        "logged_in_as": "\u03a3\u03c5\u03bd\u03b4\u03b5\u03b4\u03b5\u03bc\u03ad\u03bd\u03bf\u03c2 \u03c9\u03c2",
+        "theme": "\u0398\u03ad\u03bc\u03b1"
     },
-    "actions": {
-      "starting_prefix": "Εκκίνηση",
-      "failed_to_start_prefix": "ΑΠΟΤΥΧΕ να ξεκινήσει",
-      "started_prefix": "Ξεκίνησε",
-      "started_suffix": ". Αυτό μπορεί να διαρκέσει λίγο. η κατάσταση θα ενημερωθεί στον επόμενο έλεγχο υγείας.",
-      "error_talking_endpoint": "Σφάλμα κατά τη συνομιλία με το backups_action.php",
-      "run_os_snapshot": "Εκτελέστε το στιγμιότυπο του λειτουργικού συστήματος",
-      "run_micro_backup": "Εκτελέστε το Micro Backup",
-      "run_hestia_backup_user": "Εκτέλεση Hestia Backup (γονίδιο)",
-      "run_all_backups": "Εκτελέστε ΟΛΑ τα αντίγραφα ασφαλείας",
-      "run_health_check": "Εκτελέστε έλεγχο υγείας",
-      "log_maintenance": "Συντήρηση κορμού",
-      "clear_backup_logs": "Εκκαθάριση αρχείων καταγραφής αντιγράφων ασφαλείας",
-      "clear_prune_logs": "Καθαρίστε τα κούτσουρα δαμάσκηνου",
-      "clear_integrity_log": "Εκκαθάριση αρχείου καταγραφής ακεραιότητας"
+    "i18n": {
+        "language_picker": {
+            "title": "\u0393\u03bb\u03ce\u03c3\u03c3\u03b1",
+            "saving": "\u0391\u03c0\u03bf\u03b8\u03ae\u03ba\u03b5\u03c5\u03c3\u03b7...",
+            "saved": "\u0391\u03c0\u03bf\u03b8\u03b7\u03ba\u03b5\u03cd\u03c4\u03b7\u03ba\u03b5",
+            "save_failed": "\u0397 \u03b1\u03c0\u03bf\u03b8\u03ae\u03ba\u03b5\u03c5\u03c3\u03b7 \u03b1\u03c0\u03ad\u03c4\u03c5\u03c7\u03b5"
+        }
     },
-    "cron": {
-      "no_entries": "Δεν εντοπίστηκαν καταχωρήσεις crontab.",
-      "env": "Env",
-      "schedule": "Πρόγραμμα",
-      "entries_for_prefix": "Εγγραφές Crontab για",
-      "current_user": "τρέχον χρήστη",
-      "unable_to_read": "Δεν είναι δυνατή η ανάγνωση του crontab.",
-      "failed_to_read": "Απέτυχε η ανάγνωση του crontab."
+    "services_page": {
+        "environment": "\u03a0\u03b5\u03c1\u03b9\u03b2\u03ac\u03bb\u03bb\u03bf\u03bd",
+        "filter_placeholder": "\u03a6\u03b9\u03bb\u03c4\u03c1\u03ac\u03c1\u03b9\u03c3\u03bc\u03b1 \u03c5\u03c0\u03b7\u03c1\u03b5\u03c3\u03b9\u03ce\u03bd...",
+        "add_service": "\u03a0\u03c1\u03bf\u03c3\u03b8\u03ae\u03ba\u03b7 \u03c5\u03c0\u03b7\u03c1\u03b5\u03c3\u03af\u03b1\u03c2",
+        "edit_service": "\u0395\u03c0\u03b5\u03be\u03b5\u03c1\u03b3\u03b1\u03c3\u03af\u03b1 \u03c5\u03c0\u03b7\u03c1\u03b5\u03c3\u03af\u03b1\u03c2",
+        "import": "\u0395\u03b9\u03c3\u03b1\u03b3\u03c9\u03b3\u03ae",
+        "export_csv": "\u0395\u03be\u03b1\u03b3\u03c9\u03b3\u03ae CSV",
+        "auto_probe": "\u0391\u03c5\u03c4\u03cc\u03bc\u03b1\u03c4\u03bf\u03c2 \u03ad\u03bb\u03b5\u03b3\u03c7\u03bf\u03c2",
+        "every": "\u039a\u03ac\u03b8\u03b5",
+        "seconds_short": "\u03b4",
+        "columns": {
+            "name": "\u038c\u03bd\u03bf\u03bc\u03b1",
+            "category": "\u039a\u03b1\u03c4\u03b7\u03b3\u03bf\u03c1\u03af\u03b1",
+            "host": "Host",
+            "port": "\u0398\u03cd\u03c1\u03b1",
+            "probe": "\u0388\u03bb\u03b5\u03b3\u03c7\u03bf\u03c2",
+            "timeout": "\u03a7\u03c1\u03bf\u03bd\u03b9\u03ba\u03cc \u03cc\u03c1\u03b9\u03bf",
+            "path": "\u0394\u03b9\u03b1\u03b4\u03c1\u03bf\u03bc\u03ae",
+            "enabled": "\u0395\u03bd\u03b5\u03c1\u03b3\u03cc"
+        },
+        "form": {
+            "name": "\u038c\u03bd\u03bf\u03bc\u03b1",
+            "category": "\u039a\u03b1\u03c4\u03b7\u03b3\u03bf\u03c1\u03af\u03b1",
+            "host": "Host",
+            "port": "\u0398\u03cd\u03c1\u03b1",
+            "probe": "\u0388\u03bb\u03b5\u03b3\u03c7\u03bf\u03c2",
+            "timeout": "\u03a7\u03c1\u03bf\u03bd\u03b9\u03ba\u03cc \u03cc\u03c1\u03b9\u03bf (ms)",
+            "path": "\u0394\u03b9\u03b1\u03b4\u03c1\u03bf\u03bc\u03ae (HTTP)",
+            "enabled": "\u0395\u03bd\u03b5\u03c1\u03b3\u03cc"
+        },
+        "test_on_save": "\u0394\u03bf\u03ba\u03b9\u03bc\u03ae \u03ba\u03b1\u03c4\u03ac \u03c4\u03b7\u03bd \u03b1\u03c0\u03bf\u03b8\u03ae\u03ba\u03b5\u03c5\u03c3\u03b7",
+        "caps": {
+            "panel": "\u03c0\u03ac\u03bd\u03b5\u03bb",
+            "web": "web",
+            "mta": "mta",
+            "db": "db",
+            "nginx": "nginx"
+        },
+        "states": {
+            "active": "\u03b5\u03bd\u03b5\u03c1\u03b3\u03cc",
+            "inactive": "\u03b1\u03bd\u03b5\u03bd\u03b5\u03c1\u03b3\u03cc"
+        },
+        "path_not_used": "(\u03b4\u03b5\u03bd \u03c7\u03c1\u03b7\u03c3\u03b9\u03bc\u03bf\u03c0\u03bf\u03b9\u03ae\u03b8\u03b7\u03ba\u03b5)",
+        "status": {
+            "up": "UP",
+            "warn": "\u03a0\u03a1\u039f\u0395\u0399\u0394\u039f\u03a0\u039f\u0399\u0397\u03a3\u0397",
+            "down": "\u039a\u0391\u03a4\u03a9",
+            "unknown": "\u0391\u0393\u039d\u03a9\u03a3\u03a4\u039f"
+        },
+        "relative_time": {
+            "just_now": "\u03bc\u03cc\u03bb\u03b9\u03c2 \u03c4\u03ce\u03c1\u03b1",
+            "minutes_ago": "{count}m ago",
+            "hours_ago": "{count}h ago",
+            "days_ago": "{count}d ago"
+        },
+        "units": {
+            "ms": "ms"
+        },
+        "actions": {
+            "test": "\u0394\u03bf\u03ba\u03b9\u03bc\u03ae"
+        },
+        "uptime": "\u03a7\u03c1\u03cc\u03bd\u03bf\u03c2 \u03b4\u03b9\u03b1\u03b8\u03b5\u03c3\u03b9\u03bc\u03cc\u03c4\u03b7\u03c4\u03b1\u03c2 {pct}%",
+        "alert_last_seen": "Alert {time}",
+        "alerts_muted_until": "Muted {time}",
+        "mute_alerts": "\u03a3\u03af\u03b3\u03b1\u03c3\u03b7 \u03b5\u03b9\u03b4\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03b5\u03c9\u03bd",
+        "confirm_delete": "\u039d\u03b1 \u03b4\u03b9\u03b1\u03b3\u03c1\u03ac\u03c8\u03c9 \u03b1\u03c5\u03c4\u03ae \u03c4\u03b7\u03bd \u03c5\u03c0\u03b7\u03c1\u03b5\u03c3\u03af\u03b1;",
+        "probe_kicked": "\u039f \u03b1\u03bd\u03b9\u03c7\u03bd\u03b5\u03c5\u03c4\u03ae\u03c2 \u03ba\u03bb\u03ce\u03c4\u03c3\u03b7\u03c3\u03b5",
+        "no_alert_rules": "\u0394\u03b5\u03bd \u03c5\u03c0\u03ac\u03c1\u03c7\u03bf\u03c5\u03bd \u03ba\u03b1\u03bd\u03cc\u03bd\u03b5\u03c2 \u03b5\u03b9\u03b4\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b7\u03c2 \u03b3\u03b9\u03b1 \u03c3\u03af\u03b3\u03b1\u03c3\u03b7.",
+        "prompt_mute_minutes": "\u03a3\u03af\u03b3\u03b1\u03c3\u03b7 \u03c3\u03c5\u03bd\u03b1\u03c6\u03ce\u03bd \u03b5\u03b9\u03b4\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03b5\u03c9\u03bd \u03b3\u03b9\u03b1 \u03c0\u03cc\u03c3\u03b1 \u03bb\u03b5\u03c0\u03c4\u03ac;",
+        "alerts_muted_for": "\u03a3\u03af\u03b3\u03b1\u03c3\u03b7 \u03c4\u03c9\u03bd \u03b5\u03b9\u03b4\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03b5\u03c9\u03bd \u03b3\u03b9\u03b1 {mins}m.",
+        "mute_failed": "\u0397 \u03c3\u03af\u03b3\u03b1\u03c3\u03b7 \u03b1\u03c0\u03ad\u03c4\u03c5\u03c7\u03b5: {message}",
+        "invalid_json": "\u039c\u03b7 \u03ad\u03b3\u03ba\u03c5\u03c1\u03bf JSON",
+        "import_failed": "\u0397 \u03b5\u03b9\u03c3\u03b1\u03b3\u03c9\u03b3\u03ae \u03b1\u03c0\u03ad\u03c4\u03c5\u03c7\u03b5",
+        "validation": {
+            "name_required": "\u03a4\u03bf \u03cc\u03bd\u03bf\u03bc\u03b1 \u03b5\u03af\u03bd\u03b1\u03b9 \u03c5\u03c0\u03bf\u03c7\u03c1\u03b5\u03c9\u03c4\u03b9\u03ba\u03cc.",
+            "host_required": "\u0391\u03c0\u03b1\u03b9\u03c4\u03b5\u03af\u03c4\u03b1\u03b9 \u03c5\u03c0\u03bf\u03b4\u03bf\u03c7\u03ae\u03c2.",
+            "port_range": "\u0397 \u03b8\u03cd\u03c1\u03b1 \u03c0\u03c1\u03ad\u03c0\u03b5\u03b9 \u03bd\u03b1 \u03b5\u03af\u03bd\u03b1\u03b9 1-65535.",
+            "correct_fields": "\u0394\u03b9\u03bf\u03c1\u03b8\u03ce\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03b5\u03c0\u03b9\u03c3\u03b7\u03bc\u03b1\u03c3\u03bc\u03ad\u03bd\u03b1 \u03c0\u03b5\u03b4\u03af\u03b1."
+        },
+        "service_save_requested": "\u03a5\u03c0\u03b7\u03c1\u03b5\u03c3\u03af\u03b1 save requested"
     },
-    "warnings_errors": {
-      "title": "Προειδοποιήσεις & Σφάλματα",
-      "subtitle": "Περίληψη από τον υγειονομικό έλεγχο"
+    "bookmarks_page": {
+        "title": "\u03a3\u03b5\u03bb\u03b9\u03b4\u03bf\u03b4\u03b5\u03af\u03ba\u03c4\u03b5\u03c2",
+        "manage": "\u0394\u03b9\u03b1\u03c7\u03b5\u03af\u03c1\u03b9\u03c3\u03b7 \u03c3\u03b5\u03bb\u03b9\u03b4\u03bf\u03b4\u03b5\u03b9\u03ba\u03c4\u03ce\u03bd",
+        "add_to_browser": "\u03a0\u03c1\u03bf\u03c3\u03b8\u03ae\u03ba\u03b7 \u03c3\u03c4\u03bf \u03c0\u03c1\u03cc\u03b3\u03c1\u03b1\u03bc\u03bc\u03b1 \u03c0\u03b5\u03c1\u03b9\u03ae\u03b3\u03b7\u03c3\u03b7\u03c2",
+        "bookmarklet_title": "\u03a3\u03cd\u03c1\u03b5\u03c4\u03ad \u03c4\u03bf \u03c3\u03c4\u03b7 \u03b3\u03c1\u03b1\u03bc\u03bc\u03ae \u03c3\u03b5\u03bb\u03b9\u03b4\u03bf\u03b4\u03b5\u03b9\u03ba\u03c4\u03ce\u03bd \u03b3\u03b9\u03b1 \u03b3\u03c1\u03ae\u03b3\u03bf\u03c1\u03b7 \u03c0\u03c1\u03bf\u03c3\u03b8\u03ae\u03ba\u03b7 \u03c4\u03b7\u03c2 \u03c4\u03c1\u03ad\u03c7\u03bf\u03c5\u03c3\u03b1\u03c2 \u03c3\u03b5\u03bb\u03af\u03b4\u03b1\u03c2",
+        "prompt_tags": "\u0395\u03c4\u03b9\u03ba\u03ad\u03c4\u03b5\u03c2 (\u03c7\u03c9\u03c1\u03b9\u03c3\u03bc\u03ad\u03bd\u03b5\u03c2 \u03bc\u03b5 \u03ba\u03cc\u03bc\u03bc\u03b1):",
+        "category": "\u039a\u03b1\u03c4\u03b7\u03b3\u03bf\u03c1\u03af\u03b1",
+        "all": "\u038c\u03bb\u03b1",
+        "sort": "\u03a4\u03b1\u03be\u03b9\u03bd\u03cc\u03bc\u03b7\u03c3\u03b7",
+        "sort_updated_desc": "\u0395\u03bd\u03b7\u03bc\u03b5\u03c1\u03ce\u03b8\u03b7\u03ba\u03b5 (\u03bd\u03b5\u03cc\u03c4\u03b5\u03c1\u03bf)",
+        "sort_title_asc": "\u03a4\u03af\u03c4\u03bb\u03bf\u03c2 (A-Z)",
+        "sort_host_asc": "Host (A-Z)",
+        "fields": {
+            "title": "\u03a4\u03af\u03c4\u03bb\u03bf\u03c2",
+            "url": "URL",
+            "tags": "\u0395\u03c4\u03b9\u03ba\u03ad\u03c4\u03b5\u03c2",
+            "name": "\u038c\u03bd\u03bf\u03bc\u03b1"
+        },
+        "placeholders": {
+            "optional_title": "\u03a0\u03c1\u03bf\u03b1\u03b9\u03c1\u03b5\u03c4\u03b9\u03ba\u03cc\u03c2 \u03c4\u03af\u03c4\u03bb\u03bf\u03c2",
+            "tags": "\u03b5\u03c4\u03b9\u03ba\u03ad\u03c4\u03b5\u03c2,\u03c7\u03c9\u03c1\u03b9\u03c3\u03bc\u03ad\u03bd\u03b5\u03c2,\u03bc\u03b5,\u03ba\u03cc\u03bc\u03bc\u03b1",
+            "new_category_name": "\u039d\u03ad\u03bf \u03cc\u03bd\u03bf\u03bc\u03b1 \u03ba\u03b1\u03c4\u03b7\u03b3\u03bf\u03c1\u03af\u03b1\u03c2"
+        },
+        "add_category": "\u03a0\u03c1\u03bf\u03c3\u03b8\u03ae\u03ba\u03b7 \u03ba\u03b1\u03c4\u03b7\u03b3\u03bf\u03c1\u03af\u03b1\u03c2",
+        "updated": "\u0395\u03bd\u03b7\u03bc\u03b5\u03c1\u03ce\u03b8\u03b7\u03ba\u03b5",
+        "empty": "\u0394\u03b5\u03bd \u03c5\u03c0\u03ac\u03c1\u03c7\u03bf\u03c5\u03bd \u03b1\u03ba\u03cc\u03bc\u03b7 \u03c3\u03b5\u03bb\u03b9\u03b4\u03bf\u03b4\u03b5\u03af\u03ba\u03c4\u03b5\u03c2.",
+        "empty_categories": "\u0394\u03b5\u03bd \u03c5\u03c0\u03ac\u03c1\u03c7\u03bf\u03c5\u03bd \u03b1\u03ba\u03cc\u03bc\u03b7 \u03ba\u03b1\u03c4\u03b7\u03b3\u03bf\u03c1\u03af\u03b5\u03c2.",
+        "modal": {
+            "add_edit": "\u03a0\u03c1\u03bf\u03c3\u03b8\u03ae\u03ba\u03b7 / \u03b5\u03c0\u03b5\u03be\u03b5\u03c1\u03b3\u03b1\u03c3\u03af\u03b1 \u03c3\u03b5\u03bb\u03b9\u03b4\u03bf\u03b4\u03b5\u03af\u03ba\u03c4\u03b7",
+            "add_categories": "\u03a0\u03c1\u03bf\u03c3\u03b8\u03ae\u03ba\u03b7 \u03ba\u03b1\u03c4\u03b7\u03b3\u03bf\u03c1\u03b9\u03ce\u03bd"
+        },
+        "uncategorized": "\u03a7\u03c9\u03c1\u03af\u03c2 \u03ba\u03b1\u03c4\u03b7\u03b3\u03bf\u03c1\u03af\u03b1",
+        "hints": {
+            "bookmark_edit": "\u0395\u03bc\u03c6\u03ac\u03bd\u03b9\u03c3\u03b7 \u03c3\u03b5\u03bb\u03b9\u03b4\u03bf\u03b4\u03b5\u03b9\u03ba\u03c4\u03ce\u03bd \u03b5\u03b4\u03ce \u03bc\u03b5 \u03c0\u03c4\u03c5\u03c3\u03c3\u03cc\u03bc\u03b5\u03bd\u03b5\u03c2 \u03ba\u03b1\u03c4\u03b7\u03b3\u03bf\u03c1\u03af\u03b5\u03c2. \u039a\u03ac\u03bd\u03c4\u03b5 \u03ba\u03bb\u03b9\u03ba \u03c3\u03b5 \u03ad\u03bd\u03b1\u03bd \u03c3\u03b5\u03bb\u03b9\u03b4\u03bf\u03b4\u03b5\u03af\u03ba\u03c4\u03b7 \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03c4\u03bf\u03bd \u03c6\u03bf\u03c1\u03c4\u03ce\u03c3\u03b5\u03c4\u03b5 \u03c0\u03b1\u03c1\u03b1\u03c0\u03ac\u03bd\u03c9 \u03b3\u03b9\u03b1 \u03b5\u03c0\u03b5\u03be\u03b5\u03c1\u03b3\u03b1\u03c3\u03af\u03b1 \u03ae \u03b4\u03b9\u03b1\u03b3\u03c1\u03b1\u03c6\u03ae.",
+            "category_edit": "\u039f\u03b9 \u03ba\u03b1\u03c4\u03b7\u03b3\u03bf\u03c1\u03af\u03b5\u03c2 \u03b5\u03bc\u03c6\u03b1\u03bd\u03af\u03b6\u03bf\u03bd\u03c4\u03b1\u03b9 \u03b5\u03b4\u03ce. \u039a\u03ac\u03bd\u03c4\u03b5 \u03ba\u03bb\u03b9\u03ba \u03c3\u03b5 \u03bc\u03af\u03b1 \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03c4\u03b7 \u03c6\u03bf\u03c1\u03c4\u03ce\u03c3\u03b5\u03c4\u03b5 \u03c0\u03b1\u03c1\u03b1\u03c0\u03ac\u03bd\u03c9 \u03b3\u03b9\u03b1 \u03b5\u03c0\u03b5\u03be\u03b5\u03c1\u03b3\u03b1\u03c3\u03af\u03b1 \u03ae \u03b4\u03b9\u03b1\u03b3\u03c1\u03b1\u03c6\u03ae."
+        },
+        "confirm_delete_category": "\u039d\u03b1 \u03b4\u03b9\u03b1\u03b3\u03c1\u03ac\u03c8\u03b5\u03c4\u03b5 \u03b1\u03c5\u03c4\u03ae \u03c4\u03b7\u03bd \u03ba\u03b1\u03c4\u03b7\u03b3\u03bf\u03c1\u03af\u03b1; \u039f\u03b9 \u03c3\u03b5\u03bb\u03b9\u03b4\u03bf\u03b4\u03b5\u03af\u03ba\u03c4\u03b5\u03c2 \u03b8\u03b1 \u03b3\u03af\u03bd\u03bf\u03c5\u03bd Uncategorized.",
+        "confirm_delete_bookmark": "\u039d\u03b1 \u03b4\u03b9\u03b1\u03b3\u03c1\u03ac\u03c8\u03c9 \u03b1\u03c5\u03c4\u03cc \u03c4\u03bf \u03c3\u03b5\u03bb\u03b9\u03b4\u03bf\u03b4\u03b5\u03af\u03ba\u03c4\u03b7;",
+        "validation": {
+            "category_name_required": "\u0391\u03c0\u03b1\u03b9\u03c4\u03bf\u03cd\u03bc\u03b5\u03bd\u03bf \u03cc\u03bd\u03bf\u03bc\u03b1 \u03ba\u03b1\u03c4\u03b7\u03b3\u03bf\u03c1\u03af\u03b1\u03c2",
+            "url_required": "\u0391\u03c0\u03b1\u03b9\u03c4\u03b5\u03af\u03c4\u03b1\u03b9 URL"
+        },
+        "errors": {
+            "all_endpoints_failed": "\u038c\u03bb\u03b1 \u03c4\u03b1 \u03c4\u03b5\u03bb\u03b9\u03ba\u03ac \u03c3\u03b7\u03bc\u03b5\u03af\u03b1 \u03b1\u03c0\u03ad\u03c4\u03c5\u03c7\u03b1\u03bd",
+            "bad_json": "\u039a\u03b1\u03ba\u03cc JSON \u03b1\u03c0\u03cc \u03c4\u03bf\u03bd \u03b4\u03b9\u03b1\u03ba\u03bf\u03bc\u03b9\u03c3\u03c4\u03ae",
+            "api_not_found": "\u0391\u03c0\u03ad\u03c4\u03c5\u03c7\u03b5 \u03b7 \u03c6\u03cc\u03c1\u03c4\u03c9\u03c3\u03b7 \u03c3\u03b5\u03bb\u03b9\u03b4\u03bf\u03b4\u03b5\u03b9\u03ba\u03c4\u03ce\u03bd (\u03b4\u03b5\u03bd \u03b2\u03c1\u03ad\u03b8\u03b7\u03ba\u03b5 \u03c4\u03bf API). \u0394\u03bf\u03ba\u03af\u03bc\u03b1\u03c3\u03b1: {tried}",
+            "load_failed": "\u0391\u03c0\u03ad\u03c4\u03c5\u03c7\u03b5 \u03b7 \u03c6\u03cc\u03c1\u03c4\u03c9\u03c3\u03b7 \u03c3\u03b5\u03bb\u03b9\u03b4\u03bf\u03b4\u03b5\u03b9\u03ba\u03c4\u03ce\u03bd: {message}"
+        },
+        "toasts": {
+            "category_saved": "\u039a\u03b1\u03c4\u03b7\u03b3\u03bf\u03c1\u03af\u03b1 \u03b1\u03c0\u03bf\u03b8\u03b7\u03ba\u03b5\u03c5\u03bc\u03ad\u03bd\u03b7",
+            "save_failed": "\u0397 \u03b1\u03c0\u03bf\u03b8\u03ae\u03ba\u03b5\u03c5\u03c3\u03b7 \u03b1\u03c0\u03ad\u03c4\u03c5\u03c7\u03b5: {message}",
+            "category_deleted": "\u039a\u03b1\u03c4\u03b7\u03b3\u03bf\u03c1\u03af\u03b1 \u03c0\u03bf\u03c5 \u03b4\u03b9\u03b1\u03b3\u03c1\u03ac\u03c6\u03b7\u03ba\u03b5",
+            "delete_failed": "\u0397 \u03b4\u03b9\u03b1\u03b3\u03c1\u03b1\u03c6\u03ae \u03b1\u03c0\u03ad\u03c4\u03c5\u03c7\u03b5: {message}",
+            "order_saved": "\u0391\u03c0\u03bf\u03b8\u03b7\u03ba\u03b5\u03c5\u03bc\u03ad\u03bd\u03b7 \u03c0\u03b1\u03c1\u03b1\u03b3\u03b3\u03b5\u03bb\u03af\u03b1",
+            "reorder_failed": "\u0397 \u03b1\u03bd\u03b1\u03c0\u03b1\u03c1\u03b1\u03b3\u03b3\u03b5\u03bb\u03af\u03b1 \u03b1\u03c0\u03ad\u03c4\u03c5\u03c7\u03b5: {message}",
+            "category_updated": "\u039a\u03b1\u03c4\u03b7\u03b3\u03bf\u03c1\u03af\u03b1 \u03b5\u03bd\u03b7\u03bc\u03b5\u03c1\u03c9\u03bc\u03ad\u03bd\u03b7",
+            "category_added": "\u0397 \u03ba\u03b1\u03c4\u03b7\u03b3\u03bf\u03c1\u03af\u03b1 \u03c0\u03c1\u03bf\u03c3\u03c4\u03ad\u03b8\u03b7\u03ba\u03b5",
+            "bookmark_deleted": "\u03a3\u03b5\u03bb\u03b9\u03b4\u03bf\u03b4\u03b5\u03af\u03ba\u03c4\u03b7\u03c2 \u03b4\u03b9\u03b1\u03b3\u03c1\u03ac\u03c6\u03b7\u03ba\u03b5",
+            "bookmark_updated": "\u03a3\u03b5\u03bb\u03b9\u03b4\u03bf\u03b4\u03b5\u03af\u03ba\u03c4\u03b7\u03c2 \u03b5\u03bd\u03b7\u03bc\u03b5\u03c1\u03c9\u03bc\u03ad\u03bd\u03bf\u03c2",
+            "bookmark_added": "\u03a0\u03c1\u03bf\u03c3\u03c4\u03ad\u03b8\u03b7\u03ba\u03b5 \u03c3\u03b5\u03bb\u03b9\u03b4\u03bf\u03b4\u03b5\u03af\u03ba\u03c4\u03b7\u03c2"
+        }
     },
-    "raw_snapshot": {
-      "title": "Ακατέργαστο στιγμιότυπο",
-      "subtitle": "Βασικές τιμές απευθείας από την τελευταία κατάσταση JSON"
-    },
-    "recent_actions": {
-      "title": "Πρόσφατες ενέργειες",
-      "subtitle": "Ιστορικό ενεργειών από αυτόν τον πίνακα ελέγχου",
-      "none": "Δεν έχουν καταγραφεί ακόμη ενέργειες."
-    },
-    "orch": {
-      "title": "Backup Orchestration Wizard",
-      "subtitle": "Προσαρμόστε τις διαδρομές μία φορά και, στη συνέχεια, αντιγράψτε τις δημιουργημένες μονάδες script/cron/systemd.",
-      "backup_root": "Backup root",
-      "include_health": "Συμπεριλάβετε έλεγχο υγείας",
-      "include_integrity": "Συμπεριλάβετε έλεγχο ακεραιότητας",
-      "include_prune": "Συμπεριλάβετε το στάδιο κλαδεύματος",
-      "suspend": "Αναστολή δημιουργίας αντιγράφων ασφαλείας",
-      "disable_on_mount_fail": "Απενεργοποιήστε τα αντίγραφα ασφαλείας εάν αποτύχει η προσάρτηση",
-      "nightly_script": "Νυχτερινό σενάριο",
-      "copy_script": "Αντιγραφή σεναρίου",
-      "cron_entry": "Καταχώρηση Cron",
-      "copy_cron_line": "Αντιγράψτε τη γραμμή cron",
-      "systemd_service": "Συστημική υπηρεσία",
-      "copy_unit": "Μονάδα αντιγραφής",
-      "systemd_timer": "Συστημικό χρονόμετρο",
-      "copy_timer": "Χρονόμετρο αντιγραφής"
-    },
-    "quick_restore": {
-      "title": "Βοηθοί γρήγορης επαναφοράς",
-      "subtitle": "Προσυμπληρωμένες εντολές CLI για καταστάσεις έκτακτης ανάγκης (χειροκίνητη εκτέλεση ή κουμπί ΚΙΝΔΥΝΟΣ)",
-      "hestia_latest_title": "Επαναφέρετε το τελευταίο αντίγραφο ασφαλείας χρήστη Hestia",
-      "micro_latest_title": "Επαναφορά από το πιο πρόσφατο μικροστιγμιότυπο (μόνο CLI)",
-      "copy_command": "Εντολή αντιγραφής",
-      "run_restore_danger": "Εκτέλεση επαναφοράς (πιο πρόσφατη, ΚΙΝΔΥΝΟΣ)"
-    },
-    "cli": {
-      "title": "Hestia Backup & Restore CLI",
-      "subtitle": "Φύλλο γρήγορης αναφοράς - αντιγραφή & επικόλληση έτοιμο",
-      "create_backups": "Δημιουργία αντιγράφων ασφαλείας",
-      "list_delete_backups": "Λίστα & Διαγραφή αντιγράφων ασφαλείας",
-      "full_restore_user": "Πλήρης επαναφορά (Χρήστης)",
-      "selective_restore": "Επιλεκτική επαναφορά (Web / DB / Mail)",
-      "backup_file_locations": "Τοποθεσίες αρχείων αντιγράφων ασφαλείας",
-      "backup_tarball_contents": "Δημιουργία αντιγράφων ασφαλείας περιεχομένου Tarball",
-      "backupctl_help": "backupctl βοήθεια"
+    "header": {
+        "navigation": "\u03a0\u03bb\u03bf\u03ae\u03b3\u03b7\u03c3\u03b7 \u03c3\u03c4\u03b7\u03bd \u03ba\u03b5\u03c6\u03b1\u03bb\u03af\u03b4\u03b1",
+        "system_status": "\u039a\u03b1\u03c4\u03ac\u03c3\u03c4\u03b1\u03c3\u03b7 \u03c5\u03c0\u03b7\u03c1\u03b5\u03c3\u03af\u03b1\u03c2",
+        "loading": "\u03a6\u03cc\u03c1\u03c4\u03c9\u03c3\u03b7...",
+        "profile": "\u03a4\u03bf \u03c0\u03c1\u03bf\u03c6\u03af\u03bb \u03bc\u03bf\u03c5",
+        "logout": "\u0391\u03c0\u03bf\u03c3\u03cd\u03bd\u03b4\u03b5\u03c3\u03b7",
+        "mobile": {
+            "open_menu": "\u0386\u03bd\u03bf\u03b9\u03b3\u03bc\u03b1 \u03bc\u03b5\u03bd\u03bf\u03cd",
+            "menu": "\u039c\u03b5\u03bd\u03bf\u03cd"
+        },
+        "nav": {
+            "history": "\u0399\u03c3\u03c4\u03bf\u03c1\u03af\u03b1",
+            "cron_health": "Cron \u03a5\u03b3\u03b5\u03af\u03b1",
+            "processes": "\u0394\u03b9\u03b1\u03b4\u03b9\u03ba\u03b1\u03c3\u03af\u03b5\u03c2",
+            "databases": "\u0392\u03ac\u03c3\u03b5\u03b9\u03c2 \u03b4\u03b5\u03b4\u03bf\u03bc\u03ad\u03bd\u03c9\u03bd",
+            "speedtest": "Speedtest",
+            "diagnostics": "\u0394\u03b9\u03b1\u03b3\u03bd\u03c9\u03c3\u03c4\u03b9\u03ba\u03ac",
+            "config": "\u0394\u03b9\u03b1\u03bc\u03cc\u03c1\u03c6\u03c9\u03c3\u03b7",
+            "backups": "\u0391\u03bd\u03c4\u03af\u03b3\u03c1\u03b1\u03c6\u03b1 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b5\u03af\u03b1\u03c2"
+        }
     }
-  }
 }

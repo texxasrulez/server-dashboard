@@ -13,7 +13,7 @@ foreach ($it as $f) {
     if ($s === false) {
         continue;
     }
-    if (preg_match_all('/__\(\s*[\'\"]([^\'\"]+)[\'\"]\s*\)/', $s, $m)) {
+    if (preg_match_all('/(?:__|_e)\(\s*[\'\"]([^\'\"]+)[\'\"]\s*\)/', $s, $m)) {
         foreach ($m[1] as $k) {
             $keys[$k] = $keys[$k] ?? '';
         }

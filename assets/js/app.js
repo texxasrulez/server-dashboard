@@ -38,6 +38,9 @@ window.APP_READY = true;
 
     var cfg = window.__CONFIG_DATA__ || {};
     var hc = false;
+    if (document.body && document.body.dataset && document.body.dataset.highContrast) {
+      hc = document.body.dataset.highContrast === "1";
+    }
     if (cfg && cfg.ui && typeof cfg.ui.high_contrast !== "undefined")
       hc = !!cfg.ui.high_contrast;
     applyHighContrastMode(hc);

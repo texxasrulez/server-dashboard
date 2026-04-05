@@ -1,314 +1,493 @@
 {
-  "app": {
-    "title": "サーバー・ダッシュボード"
-  },
-  "nav": {
-    "history": "歴史",
-    "logs": "過去ログ",
-    "dashboard": "ダッシュボード",
-    "services": "サービス",
-    "alerts": "アラート",
-    "tests": "テスト",
-    "settings": "設定",
-    "about": "について"
-  },
-  "history": {
-    "title": "歴史",
-    "trends": "トレンド",
-    "range": "レンジ",
-    "baseline": "ベースライン",
-    "probe_now": "プローブ",
-    "refresh": "リフレッシュ",
-    "export_json": "JSONエクスポート",
-    "export_alerts_json": "アラートJSONエクスポート",
-    "reset_history": "履歴をリセット",
-    "recent_alert_events": "最近の警告イベント",
-    "export_preview": "輸出プレビュー",
-    "close": "閉じる",
-    "copy": "コピー",
-    "download": "ダウンロード"
-  },
-  "logs": {
-    "title": "過去ログ",
-    "manage": "ログの管理",
-    "add": "追加",
-    "delete": "削除",
-    "refresh": "リフレッシュ",
-    "search": "検索",
-    "filter": "フィルター",
-    "lines": "ライン",
-    "open": "オープン",
-    "close": "閉じる",
-    "download": "ダウンロード",
-    "copy": "コピー"
-  },
-  "common": {
-    "save": "セーブ",
-    "cancel": "キャンセル",
-    "edit": "編集",
-    "delete": "削除",
-    "update": "更新",
-    "create": "作成",
-    "enable": "有効にする",
-    "disable": "無効",
-    "yes": "はい",
-    "no": "いいえ",
-    "on": "オン",
-    "off": "オフ",
-    "confirm": "確認",
-    "search": "検索",
-    "filter": "フィルター",
-    "actions": "行動"
-  },
-  "alerts": {
-    "title": "アラート",
-    "recent_events": "最近の警告イベント",
-    "history": "アラート履歴",
-    "export_json": "アラートJSONエクスポート",
-    "no_alerts": "アラートなし",
-    "level": "レベル",
-    "message": "メッセージ",
-    "service": "サービス",
-    "time": "時間",
-    "probe_now": "プローブ",
-    "refresh": "リフレッシュ",
-    "silence": "沈黙",
-    "unsilence": "沈黙",
-    "ack": "認める",
-    "unack": "認識不足"
-  },
-  "tests": {
-    "title": "サーバーテスト",
-    "run_all": "すべてを実行する",
-    "status": "ステータス",
-    "last_run": "ラストラン",
-    "duration": "期間"
-  },
-  "services": {
-    "title": "サービス",
-    "status": "ステータス",
-    "restart": "リスタート",
-    "start": "スタート",
-    "stop": "ストップ"
-  },
-  "config": {
-    "sections": {
-      "site": "Site",
-      "features": "Features",
-      "capabilities": "Capabilities",
-      "processes": "Processes",
-      "mail": "Mail",
-      "integrations": "Integrations",
-      "security": "Security",
-      "ui": "UI",
-      "server_tests": "Server Tests",
-      "alerts": "Alerts",
-      "cron": "Cron",
-      "history": "History",
-      "logs": "Logs",
-      "backups": "バックアップ",
-      "email": "Email"
+    "app": {
+        "title": "\u30b5\u30fc\u30d0\u30fc\u30fb\u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9"
     },
-    "fields": {
-      "backups": {
-        "require_dedicated_mount": {
-          "label": "専用マウントが必要",
-          "help": "従来の互換性キー。有効にすると、バックアップ スクリプトにはバックアップ マウントが存在する必要があります。"
-        },
-        "disable_on_mount_fail": {
-          "label": "マウントが失敗した場合はバックアップを無効にする",
-          "help": "有効にすると、バックアップ マウントが見つからない場合、バックアップ アクションと生成されたスクリプトが停止します。"
-        }
-      },
-      "alerts": {
-        "min_severity": {
-          "label": "アラートの最小重大度"
-        },
-        "email": {
-          "label": "Legacy alert email(s)"
-        }
-      }
+    "nav": {
+        "history": "\u6b74\u53f2",
+        "logs": "\u904e\u53bb\u30ed\u30b0",
+        "dashboard": "\u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9",
+        "services": "\u30b5\u30fc\u30d3\u30b9",
+        "alerts": "\u30a2\u30e9\u30fc\u30c8",
+        "tests": "\u30c6\u30b9\u30c8",
+        "settings": "\u8a2d\u5b9a",
+        "about": "\u306b\u3064\u3044\u3066"
     },
-    "ui": {
-      "unknown": "未知",
-      "unknown_paren": "（未知）",
-      "site_backup": {
-        "title": "バックアップと復元",
-        "export_config": "設定のエクスポート",
-        "import_config": "構成のインポート",
-        "choose_file_first": "最初にバックアップ ファイルを選択してください",
-        "imported_reloading": "輸入済み。再読み込み中...",
-        "import_failed": "インポートに失敗しました",
-        "import_failed_prefix": "インポートに失敗しました:",
-        "retention_title": "バックアップ - 保存",
-        "keep_last": "最後に残す",
-        "files": "ファイル",
-        "loading_stats": "(統計を読み込んでいます...)",
-        "last_backup_loading": "最後のバックアップ: (読み込み中...)",
-        "last_backup_none": "最後のバックアップ: まだありません",
-        "last_backup_prefix": "最後のバックアップ:",
-        "last_backup_unknown": "最終バックアップ: 不明",
-        "prune_now": "今すぐ剪定する",
-        "pruned_kept_deleted": "剪定済み - 保管済み",
-        "deleted_prefix": "削除されました",
-        "prune_failed": "プルーンに失敗しました",
-        "prune_failed_prefix": "プルーンに失敗しました:",
-        "create_backup_now": "今すぐバックアップを作成する",
-        "backup_saved_prefix": "バックアップが保存されました:",
-        "backup_failed": "バックアップに失敗しました",
-        "backup_failed_prefix": "バックアップに失敗しました:",
-        "download_latest_backup": "最新のバックアップをダウンロードする",
-        "no_backups_found": "バックアップが見つかりませんでした",
-        "download_failed_prefix": "ダウンロードに失敗しました:",
-        "redact_secrets": "Redact secrets"
-      }
-    }
-  },
-  "backups": {
+    "history": {
+        "title": "\u6b74\u53f2",
+        "trends": "\u30c8\u30ec\u30f3\u30c9",
+        "range": "\u30ec\u30f3\u30b8",
+        "baseline": "\u30d9\u30fc\u30b9\u30e9\u30a4\u30f3",
+        "probe_now": "\u30d7\u30ed\u30fc\u30d6",
+        "refresh": "\u30ea\u30d5\u30ec\u30c3\u30b7\u30e5",
+        "export_json": "JSON\u30a8\u30af\u30b9\u30dd\u30fc\u30c8",
+        "export_alerts_json": "\u30a2\u30e9\u30fc\u30c8JSON\u30a8\u30af\u30b9\u30dd\u30fc\u30c8",
+        "reset_history": "\u5c65\u6b74\u3092\u30ea\u30bb\u30c3\u30c8",
+        "recent_alert_events": "\u6700\u8fd1\u306e\u8b66\u544a\u30a4\u30d9\u30f3\u30c8",
+        "export_preview": "\u8f38\u51fa\u30d7\u30ec\u30d3\u30e5\u30fc",
+        "close": "\u9589\u3058\u308b",
+        "copy": "\u30b3\u30d4\u30fc",
+        "download": "\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9"
+    },
+    "logs": {
+        "title": "\u904e\u53bb\u30ed\u30b0",
+        "manage": "\u30ed\u30b0\u306e\u7ba1\u7406",
+        "add": "\u8ffd\u52a0",
+        "delete": "\u524a\u9664",
+        "refresh": "\u30ea\u30d5\u30ec\u30c3\u30b7\u30e5",
+        "search": "\u691c\u7d22",
+        "filter": "\u30d5\u30a3\u30eb\u30bf\u30fc",
+        "lines": "\u30e9\u30a4\u30f3",
+        "open": "\u30aa\u30fc\u30d7\u30f3",
+        "close": "\u9589\u3058\u308b",
+        "download": "\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9",
+        "copy": "\u30b3\u30d4\u30fc"
+    },
     "common": {
-      "status": "状態：",
-      "timestamp": "タイムスタンプ:",
-      "none_dash": "-",
-      "free": "無料",
-      "used": "使用済み",
-      "copy": "コピー",
-      "warnings": "警告",
-      "errors": "エラー",
-      "loading": "読み込み中..."
+        "save": "\u30bb\u30fc\u30d6",
+        "cancel": "\u30ad\u30e3\u30f3\u30bb\u30eb",
+        "edit": "\u7de8\u96c6",
+        "delete": "\u524a\u9664",
+        "update": "\u66f4\u65b0",
+        "create": "\u4f5c\u6210",
+        "enable": "\u6709\u52b9\u306b\u3059\u308b",
+        "disable": "\u7121\u52b9",
+        "yes": "\u306f\u3044",
+        "no": "\u3044\u3044\u3048",
+        "on": "\u30aa\u30f3",
+        "off": "\u30aa\u30d5",
+        "confirm": "\u78ba\u8a8d",
+        "search": "\u691c\u7d22",
+        "filter": "\u30d5\u30a3\u30eb\u30bf\u30fc",
+        "actions": "\u884c\u52d5",
+        "close": "\u9589\u3058\u308b",
+        "none": "\u306a\u3057",
+        "none_dash": "-"
     },
-    "status": {
-      "error_loading_json": "JSON の読み込みエラー",
-      "ok": "わかりました",
-      "unmounted": "マウントされていない",
-      "critical": "致命的",
-      "high": "高い",
-      "elevated": "高められた",
-      "healthy": "健康",
-      "unknown": "未知",
-      "unknown_cap": "未知"
+    "alerts": {
+        "title": "\u30a2\u30e9\u30fc\u30c8",
+        "recent_events": "\u6700\u8fd1\u306e\u8b66\u544a\u30a4\u30d9\u30f3\u30c8",
+        "history": "\u30a2\u30e9\u30fc\u30c8\u5c65\u6b74",
+        "export_json": "\u30a2\u30e9\u30fc\u30c8JSON\u30a8\u30af\u30b9\u30dd\u30fc\u30c8",
+        "no_alerts": "\u30a2\u30e9\u30fc\u30c8\u306a\u3057",
+        "level": "\u30ec\u30d9\u30eb",
+        "message": "\u30e1\u30c3\u30bb\u30fc\u30b8",
+        "service": "\u30b5\u30fc\u30d3\u30b9",
+        "time": "\u6642\u9593",
+        "probe_now": "\u30d7\u30ed\u30fc\u30d6",
+        "refresh": "\u30ea\u30d5\u30ec\u30c3\u30b7\u30e5",
+        "silence": "\u6c88\u9ed9",
+        "unsilence": "\u6c88\u9ed9",
+        "ack": "\u8a8d\u3081\u308b",
+        "unack": "\u8a8d\u8b58\u4e0d\u8db3"
     },
-    "disk": {
-      "unmounted": "ディスクがマウントされていません",
-      "tag": "ディスク：",
-      "sizes_updated": "更新されたサイズ:",
-      "title": "ディスク使用率",
-      "usage": "使用法",
-      "mount": "マウント"
+    "tests": {
+        "title": "\u30b5\u30fc\u30d0\u30fc\u30c6\u30b9\u30c8",
+        "run_all": "\u3059\u3079\u3066\u3092\u5b9f\u884c\u3059\u308b",
+        "status": "\u30b9\u30c6\u30fc\u30bf\u30b9",
+        "last_run": "\u30e9\u30b9\u30c8\u30e9\u30f3",
+        "duration": "\u671f\u9593"
     },
-    "page": {
-      "freshness_prefix": "鮮度：",
-      "title": "バックアップ コントロール センター",
-      "subtitle_prefix": "ライブステータスの原動力は",
-      "subtitle_suffix": "バックアップディスク上にあります。"
+    "services": {
+        "title": "\u30b5\u30fc\u30d3\u30b9",
+        "status": "\u30b9\u30c6\u30fc\u30bf\u30b9",
+        "restart": "\u30ea\u30b9\u30bf\u30fc\u30c8",
+        "start": "\u30b9\u30bf\u30fc\u30c8",
+        "stop": "\u30b9\u30c8\u30c3\u30d7"
     },
-    "ages": {
-      "no_snapshots_on_disk": "ディスク上にスナップショットが見つかりません",
-      "one_snapshot_present": "スナップショットが 1 つ存在します",
-      "snapshots_present_suffix": "スナップショットが存在する",
-      "no_panel_backups_on_disk": "ディスク上にパネルのバックアップが見つかりません",
-      "one_panel_backup_present": "バックアップパネル1枚プレゼント",
-      "panel_backups_present_suffix": "パネルのバックアップが存在する",
-      "no_micro_backups_on_disk": "ディスク上にマイクロバックアップが見つかりません",
-      "one_micro_backup_present": "マイクロバックアップ1個プレゼント",
-      "micro_backups_present_suffix": "マイクロバックアップが存在する",
-      "snapshot_daily0_chart": "スナップショット (毎日.0)",
-      "hestia_latest_chart": "ヘスティア最新作",
-      "micro_latest_chart": "マイクロ最新",
-      "age_days": "年齢（日数）",
-      "title": "バックアップ期間",
-      "subtitle": "最新のバックアップの鮮度",
-      "snapshot_daily0": "毎日のスナップショット.0",
-      "latest_hestia": "最新のヘスティア",
-      "latest_micro": "最新マイクロ"
+    "config": {
+        "sections": {
+            "site": "Site",
+            "features": "Features",
+            "capabilities": "Capabilities",
+            "processes": "Processes",
+            "mail": "Mail",
+            "integrations": "Integrations",
+            "security": "Security",
+            "ui": "UI",
+            "server_tests": "Server Tests",
+            "alerts": "Alerts",
+            "cron": "Cron",
+            "history": "History",
+            "logs": "Logs",
+            "backups": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7",
+            "email": "Email"
+        },
+        "fields": {
+            "backups": {
+                "require_dedicated_mount": {
+                    "label": "\u5c02\u7528\u30de\u30a6\u30f3\u30c8\u304c\u5fc5\u8981",
+                    "help": "\u5f93\u6765\u306e\u4e92\u63db\u6027\u30ad\u30fc\u3002\u6709\u52b9\u306b\u3059\u308b\u3068\u3001\u30d0\u30c3\u30af\u30a2\u30c3\u30d7 \u30b9\u30af\u30ea\u30d7\u30c8\u306b\u306f\u30d0\u30c3\u30af\u30a2\u30c3\u30d7 \u30de\u30a6\u30f3\u30c8\u304c\u5b58\u5728\u3059\u308b\u5fc5\u8981\u304c\u3042\u308a\u307e\u3059\u3002"
+                },
+                "disable_on_mount_fail": {
+                    "label": "\u30de\u30a6\u30f3\u30c8\u304c\u5931\u6557\u3057\u305f\u5834\u5408\u306f\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3092\u7121\u52b9\u306b\u3059\u308b",
+                    "help": "\u6709\u52b9\u306b\u3059\u308b\u3068\u3001\u30d0\u30c3\u30af\u30a2\u30c3\u30d7 \u30de\u30a6\u30f3\u30c8\u304c\u898b\u3064\u304b\u3089\u306a\u3044\u5834\u5408\u3001\u30d0\u30c3\u30af\u30a2\u30c3\u30d7 \u30a2\u30af\u30b7\u30e7\u30f3\u3068\u751f\u6210\u3055\u308c\u305f\u30b9\u30af\u30ea\u30d7\u30c8\u304c\u505c\u6b62\u3057\u307e\u3059\u3002"
+                }
+            },
+            "alerts": {
+                "min_severity": {
+                    "label": "\u30a2\u30e9\u30fc\u30c8\u306e\u6700\u5c0f\u91cd\u5927\u5ea6"
+                },
+                "email": {
+                    "label": "Legacy alert email(s)"
+                }
+            }
+        },
+        "ui": {
+            "unknown": "\u672a\u77e5",
+            "unknown_paren": "\uff08\u672a\u77e5\uff09",
+            "site_backup": {
+                "title": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3068\u5fa9\u5143",
+                "export_config": "\u8a2d\u5b9a\u306e\u30a8\u30af\u30b9\u30dd\u30fc\u30c8",
+                "import_config": "\u69cb\u6210\u306e\u30a4\u30f3\u30dd\u30fc\u30c8",
+                "choose_file_first": "\u6700\u521d\u306b\u30d0\u30c3\u30af\u30a2\u30c3\u30d7 \u30d5\u30a1\u30a4\u30eb\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044",
+                "imported_reloading": "\u8f38\u5165\u6e08\u307f\u3002\u518d\u8aad\u307f\u8fbc\u307f\u4e2d...",
+                "import_failed": "\u30a4\u30f3\u30dd\u30fc\u30c8\u306b\u5931\u6557\u3057\u307e\u3057\u305f",
+                "import_failed_prefix": "\u30a4\u30f3\u30dd\u30fc\u30c8\u306b\u5931\u6557\u3057\u307e\u3057\u305f:",
+                "retention_title": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7 - \u4fdd\u5b58",
+                "keep_last": "\u6700\u5f8c\u306b\u6b8b\u3059",
+                "files": "\u30d5\u30a1\u30a4\u30eb",
+                "loading_stats": "(\u7d71\u8a08\u3092\u8aad\u307f\u8fbc\u3093\u3067\u3044\u307e\u3059...)",
+                "last_backup_loading": "\u6700\u5f8c\u306e\u30d0\u30c3\u30af\u30a2\u30c3\u30d7: (\u8aad\u307f\u8fbc\u307f\u4e2d...)",
+                "last_backup_none": "\u6700\u5f8c\u306e\u30d0\u30c3\u30af\u30a2\u30c3\u30d7: \u307e\u3060\u3042\u308a\u307e\u305b\u3093",
+                "last_backup_prefix": "\u6700\u5f8c\u306e\u30d0\u30c3\u30af\u30a2\u30c3\u30d7:",
+                "last_backup_unknown": "\u6700\u7d42\u30d0\u30c3\u30af\u30a2\u30c3\u30d7: \u4e0d\u660e",
+                "prune_now": "\u4eca\u3059\u3050\u526a\u5b9a\u3059\u308b",
+                "pruned_kept_deleted": "\u526a\u5b9a\u6e08\u307f - \u4fdd\u7ba1\u6e08\u307f",
+                "deleted_prefix": "\u524a\u9664\u3055\u308c\u307e\u3057\u305f",
+                "prune_failed": "\u30d7\u30eb\u30fc\u30f3\u306b\u5931\u6557\u3057\u307e\u3057\u305f",
+                "prune_failed_prefix": "\u30d7\u30eb\u30fc\u30f3\u306b\u5931\u6557\u3057\u307e\u3057\u305f:",
+                "create_backup_now": "\u4eca\u3059\u3050\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3092\u4f5c\u6210\u3059\u308b",
+                "backup_saved_prefix": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u304c\u4fdd\u5b58\u3055\u308c\u307e\u3057\u305f:",
+                "backup_failed": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u306b\u5931\u6557\u3057\u307e\u3057\u305f",
+                "backup_failed_prefix": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u306b\u5931\u6557\u3057\u307e\u3057\u305f:",
+                "download_latest_backup": "\u6700\u65b0\u306e\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3092\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3059\u308b",
+                "no_backups_found": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f",
+                "download_failed_prefix": "\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u306b\u5931\u6557\u3057\u307e\u3057\u305f:",
+                "redact_secrets": "Redact secrets"
+            }
+        }
     },
-    "errors": {
-      "no_backups_detected": "スナップショット、Hestia、またはマイクロ セットのバックアップは検出されませんでした。"
+    "backups": {
+        "common": {
+            "status": "\u72b6\u614b\uff1a",
+            "timestamp": "\u30bf\u30a4\u30e0\u30b9\u30bf\u30f3\u30d7:",
+            "none_dash": "-",
+            "free": "\u7121\u6599",
+            "used": "\u4f7f\u7528\u6e08\u307f",
+            "copy": "\u30b3\u30d4\u30fc",
+            "warnings": "\u8b66\u544a",
+            "errors": "\u30a8\u30e9\u30fc",
+            "loading": "\u8aad\u307f\u8fbc\u307f\u4e2d..."
+        },
+        "status": {
+            "error_loading_json": "JSON \u306e\u8aad\u307f\u8fbc\u307f\u30a8\u30e9\u30fc",
+            "ok": "\u308f\u304b\u308a\u307e\u3057\u305f",
+            "unmounted": "\u30de\u30a6\u30f3\u30c8\u3055\u308c\u3066\u3044\u306a\u3044",
+            "critical": "\u81f4\u547d\u7684",
+            "high": "\u9ad8\u3044",
+            "elevated": "\u9ad8\u3081\u3089\u308c\u305f",
+            "healthy": "\u5065\u5eb7",
+            "unknown": "\u672a\u77e5",
+            "unknown_cap": "\u672a\u77e5"
+        },
+        "disk": {
+            "unmounted": "\u30c7\u30a3\u30b9\u30af\u304c\u30de\u30a6\u30f3\u30c8\u3055\u308c\u3066\u3044\u307e\u305b\u3093",
+            "tag": "\u30c7\u30a3\u30b9\u30af\uff1a",
+            "sizes_updated": "\u66f4\u65b0\u3055\u308c\u305f\u30b5\u30a4\u30ba:",
+            "title": "\u30c7\u30a3\u30b9\u30af\u4f7f\u7528\u7387",
+            "usage": "\u4f7f\u7528\u6cd5",
+            "mount": "\u30de\u30a6\u30f3\u30c8"
+        },
+        "page": {
+            "freshness_prefix": "\u9bae\u5ea6\uff1a",
+            "title": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7 \u30b3\u30f3\u30c8\u30ed\u30fc\u30eb \u30bb\u30f3\u30bf\u30fc",
+            "subtitle_prefix": "\u30e9\u30a4\u30d6\u30b9\u30c6\u30fc\u30bf\u30b9\u306e\u539f\u52d5\u529b\u306f",
+            "subtitle_suffix": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u30c7\u30a3\u30b9\u30af\u4e0a\u306b\u3042\u308a\u307e\u3059\u3002"
+        },
+        "ages": {
+            "no_snapshots_on_disk": "\u30c7\u30a3\u30b9\u30af\u4e0a\u306b\u30b9\u30ca\u30c3\u30d7\u30b7\u30e7\u30c3\u30c8\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093",
+            "one_snapshot_present": "\u30b9\u30ca\u30c3\u30d7\u30b7\u30e7\u30c3\u30c8\u304c 1 \u3064\u5b58\u5728\u3057\u307e\u3059",
+            "snapshots_present_suffix": "\u30b9\u30ca\u30c3\u30d7\u30b7\u30e7\u30c3\u30c8\u304c\u5b58\u5728\u3059\u308b",
+            "no_panel_backups_on_disk": "\u30c7\u30a3\u30b9\u30af\u4e0a\u306b\u30d1\u30cd\u30eb\u306e\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093",
+            "one_panel_backup_present": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u30d1\u30cd\u30eb1\u679a\u30d7\u30ec\u30bc\u30f3\u30c8",
+            "panel_backups_present_suffix": "\u30d1\u30cd\u30eb\u306e\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u304c\u5b58\u5728\u3059\u308b",
+            "no_micro_backups_on_disk": "\u30c7\u30a3\u30b9\u30af\u4e0a\u306b\u30de\u30a4\u30af\u30ed\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093",
+            "one_micro_backup_present": "\u30de\u30a4\u30af\u30ed\u30d0\u30c3\u30af\u30a2\u30c3\u30d71\u500b\u30d7\u30ec\u30bc\u30f3\u30c8",
+            "micro_backups_present_suffix": "\u30de\u30a4\u30af\u30ed\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u304c\u5b58\u5728\u3059\u308b",
+            "snapshot_daily0_chart": "\u30b9\u30ca\u30c3\u30d7\u30b7\u30e7\u30c3\u30c8 (\u6bce\u65e5.0)",
+            "hestia_latest_chart": "\u30d8\u30b9\u30c6\u30a3\u30a2\u6700\u65b0\u4f5c",
+            "micro_latest_chart": "\u30de\u30a4\u30af\u30ed\u6700\u65b0",
+            "age_days": "\u5e74\u9f62\uff08\u65e5\u6570\uff09",
+            "title": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u671f\u9593",
+            "subtitle": "\u6700\u65b0\u306e\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u306e\u9bae\u5ea6",
+            "snapshot_daily0": "\u6bce\u65e5\u306e\u30b9\u30ca\u30c3\u30d7\u30b7\u30e7\u30c3\u30c8.0",
+            "latest_hestia": "\u6700\u65b0\u306e\u30d8\u30b9\u30c6\u30a3\u30a2",
+            "latest_micro": "\u6700\u65b0\u30de\u30a4\u30af\u30ed"
+        },
+        "errors": {
+            "no_backups_detected": "\u30b9\u30ca\u30c3\u30d7\u30b7\u30e7\u30c3\u30c8\u3001Hestia\u3001\u307e\u305f\u306f\u30de\u30a4\u30af\u30ed \u30bb\u30c3\u30c8\u306e\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u306f\u691c\u51fa\u3055\u308c\u307e\u305b\u3093\u3067\u3057\u305f\u3002"
+        },
+        "restore": {
+            "hestia_placeholder_tar": "\u907a\u4f1d\u5b50.YYYYMMDD-HHMM.tar",
+            "using_latest_backup_prefix": "JSON \u3067\u5831\u544a\u3055\u308c\u305f\u6700\u65b0\u306e\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3092\u4f7f\u7528\u3059\u308b:",
+            "adjust_backup_tar": "\u5b9f\u884c\u3059\u308b\u524d\u306b\u3001BACKUP_TAR \u3092\u300cv-list-backupsgene\u300d\u304b\u3089\u5b9f\u969b\u306e\u30d5\u30a1\u30a4\u30eb\u306b\u8abf\u6574\u3057\u307e\u3059\u3002",
+            "micro_restore_prefix": "\u6700\u65b0\u306e\u30de\u30a4\u30af\u30ed\u30b9\u30ca\u30c3\u30d7\u30b7\u30e7\u30c3\u30c8\u304b\u3089\u30d9\u30fc\u30b9\u3092\u5fa9\u5143\u3057\u307e\u3059\u3002",
+            "micro_restore_suffix": "(\u5b9f\u884c\u524d\u306b\u30d1\u30b9\u3068\u9664\u5916\u3092\u78ba\u8a8d\u3057\u3066\u304f\u3060\u3055\u3044)\u3002",
+            "set_correct_snapshot_path": "\u3053\u306e\u30b3\u30de\u30f3\u30c9\u3092\u4f7f\u7528\u3059\u308b\u524d\u306b\u3001\u6b63\u3057\u3044\u30b9\u30ca\u30c3\u30d7\u30b7\u30e7\u30c3\u30c8 \u30d1\u30b9\u3092\u8a2d\u5b9a\u3057\u3066\u304f\u3060\u3055\u3044\u3002",
+            "confirm_body_1": "\u3053\u308c\u306b\u3088\u308a\u3001backupctl \u3092\u4f7f\u7528\u3057\u3066\u30b5\u30fc\u30d0\u30fc\u4e0a\u3067 Hestia \u5fa9\u5143\u30b8\u30e7\u30d6\u304c\u958b\u59cb\u3055\u308c\u307e\u3059\u3002",
+            "confirm_body_2": "\u305d\u306e\u30e6\u30fc\u30b6\u30fc\u306e\u30b5\u30fc\u30d3\u30b9\u3068\u30c7\u30fc\u30bf\u306f\u4e0a\u66f8\u304d\u3055\u308c\u308b\u53ef\u80fd\u6027\u304c\u3042\u308a\u307e\u3059\u3002",
+            "confirm_body_3": "\u7d76\u5bfe\u306b\u9593\u9055\u3044\u3042\u308a\u307e\u305b\u3093\u304b\uff1f"
+        },
+        "actions": {
+            "starting_prefix": "\u8d77\u52d5",
+            "failed_to_start_prefix": "\u958b\u59cb\u306b\u5931\u6557\u3057\u307e\u3057\u305f",
+            "started_prefix": "\u958b\u59cb\u3057\u307e\u3057\u305f",
+            "started_suffix": "\u3002\u3053\u308c\u306b\u306f\u6642\u9593\u304c\u304b\u304b\u308b\u5834\u5408\u304c\u3042\u308a\u307e\u3059\u3002\u30b9\u30c6\u30fc\u30bf\u30b9\u306f\u6b21\u56de\u306e\u30d8\u30eb\u30b9\u30c1\u30a7\u30c3\u30af\u6642\u306b\u66f4\u65b0\u3055\u308c\u307e\u3059\u3002",
+            "error_talking_endpoint": "backups_action.php \u3068\u306e\u901a\u4fe1\u4e2d\u306b\u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f",
+            "run_os_snapshot": "OS\u30b9\u30ca\u30c3\u30d7\u30b7\u30e7\u30c3\u30c8\u3092\u5b9f\u884c",
+            "run_micro_backup": "\u30de\u30a4\u30af\u30ed\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3092\u5b9f\u884c\u3059\u308b",
+            "run_hestia_backup_user": "Hestia \u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3092\u5b9f\u884c\u3059\u308b (\u907a\u4f1d\u5b50)",
+            "run_all_backups": "\u3059\u3079\u3066\u306e\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3092\u5b9f\u884c",
+            "run_health_check": "\u30d8\u30eb\u30b9\u30c1\u30a7\u30c3\u30af\u3092\u5b9f\u884c\u3059\u308b",
+            "log_maintenance": "\u30ed\u30b0\u306e\u30e1\u30f3\u30c6\u30ca\u30f3\u30b9",
+            "clear_backup_logs": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u306e\u5065\u5168\u6027\u30ed\u30b0\u3092\u30af\u30ea\u30a2\u3059\u308b",
+            "clear_prune_logs": "\u30d7\u30eb\u30fc\u30f3 \u30ed\u30b0\u3092\u30af\u30ea\u30a2\u3059\u308b",
+            "clear_integrity_log": "\u6574\u5408\u6027\u30ed\u30b0\u3092\u30af\u30ea\u30a2\u3059\u308b"
+        },
+        "cron": {
+            "no_entries": "crontab \u30a8\u30f3\u30c8\u30ea\u304c\u691c\u51fa\u3055\u308c\u307e\u305b\u3093\u3067\u3057\u305f\u3002",
+            "env": "\u74b0\u5883",
+            "schedule": "\u30b9\u30b1\u30b8\u30e5\u30fc\u30eb",
+            "entries_for_prefix": "Crontab \u30a8\u30f3\u30c8\u30ea",
+            "current_user": "\u73fe\u5728\u306e\u30e6\u30fc\u30b6\u30fc",
+            "unable_to_read": "crontab\u3092\u8aad\u307f\u53d6\u308c\u307e\u305b\u3093\u3002",
+            "failed_to_read": "crontab\u306e\u8aad\u307f\u8fbc\u307f\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002"
+        },
+        "warnings_errors": {
+            "title": "\u8b66\u544a\u3068\u30a8\u30e9\u30fc",
+            "subtitle": "\u5065\u5eb7\u8a3a\u65ad\u306e\u307e\u3068\u3081"
+        },
+        "raw_snapshot": {
+            "title": "\u751f\u306e\u30b9\u30ca\u30c3\u30d7\u30b7\u30e7\u30c3\u30c8",
+            "subtitle": "\u6700\u5f8c\u306e JSON \u30b9\u30c6\u30fc\u30bf\u30b9\u304b\u3089\u76f4\u63a5\u30ad\u30fc\u5024\u3092\u53d6\u5f97"
+        },
+        "recent_actions": {
+            "title": "\u6700\u8fd1\u306e\u30a2\u30af\u30b7\u30e7\u30f3",
+            "subtitle": "\u3053\u306e\u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9\u304b\u3089\u306e\u30a2\u30af\u30b7\u30e7\u30f3\u306e\u5c65\u6b74",
+            "none": "\u307e\u3060\u30a2\u30af\u30b7\u30e7\u30f3\u306f\u8a18\u9332\u3055\u308c\u3066\u3044\u307e\u305b\u3093\u3002"
+        },
+        "orch": {
+            "title": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7 \u30aa\u30fc\u30b1\u30b9\u30c8\u30ec\u30fc\u30b7\u30e7\u30f3 \u30a6\u30a3\u30b6\u30fc\u30c9",
+            "subtitle": "\u30d1\u30b9\u3092\u4e00\u5ea6\u30ab\u30b9\u30bf\u30de\u30a4\u30ba\u3057\u3066\u304b\u3089\u3001\u751f\u6210\u3055\u308c\u305f script/cron/systemd \u30e6\u30cb\u30c3\u30c8\u3092\u30b3\u30d4\u30fc\u3057\u307e\u3059\u3002",
+            "backup_root": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u30eb\u30fc\u30c8",
+            "include_health": "\u5065\u5eb7\u8a3a\u65ad\u3082\u542b\u3081\u3066",
+            "include_integrity": "\u6574\u5408\u6027\u30c1\u30a7\u30c3\u30af\u3092\u542b\u3081\u308b",
+            "include_prune": "\u30d7\u30eb\u30fc\u30f3\u6bb5\u968e\u3092\u542b\u3080",
+            "suspend": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3092\u4e00\u6642\u505c\u6b62\u3059\u308b",
+            "disable_on_mount_fail": "\u30de\u30a6\u30f3\u30c8\u304c\u5931\u6557\u3057\u305f\u5834\u5408\u306f\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3092\u7121\u52b9\u306b\u3059\u308b",
+            "nightly_script": "\u6bce\u6669\u306e\u30b9\u30af\u30ea\u30d7\u30c8",
+            "copy_script": "\u30b9\u30af\u30ea\u30d7\u30c8\u306e\u30b3\u30d4\u30fc",
+            "cron_entry": "cron \u30a8\u30f3\u30c8\u30ea",
+            "copy_cron_line": "cron\u884c\u3092\u30b3\u30d4\u30fc\u3059\u308b",
+            "systemd_service": "Systemd\u30b5\u30fc\u30d3\u30b9",
+            "copy_unit": "\u30b3\u30d4\u30fc\u30e6\u30cb\u30c3\u30c8",
+            "systemd_timer": "\u30b7\u30b9\u30c6\u30e0\u30bf\u30a4\u30de\u30fc",
+            "copy_timer": "\u30b3\u30d4\u30fc\u30bf\u30a4\u30de\u30fc"
+        },
+        "quick_restore": {
+            "title": "\u30af\u30a4\u30c3\u30af\u5fa9\u5143\u30d8\u30eb\u30d1\u30fc",
+            "subtitle": "\u7dca\u6025\u7528\u306e\u4e8b\u524d\u5165\u529b\u3055\u308c\u305f CLI \u30b3\u30de\u30f3\u30c9 (\u624b\u52d5\u5b9f\u884c\u307e\u305f\u306f DANGER \u30dc\u30bf\u30f3)",
+            "hestia_latest_title": "\u6700\u65b0\u306e Hestia \u30e6\u30fc\u30b6\u30fc \u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3092\u5fa9\u5143\u3059\u308b",
+            "micro_latest_title": "\u6700\u65b0\u306e\u30de\u30a4\u30af\u30ed \u30b9\u30ca\u30c3\u30d7\u30b7\u30e7\u30c3\u30c8\u304b\u3089\u306e\u5fa9\u5143 (CLI \u306e\u307f)",
+            "copy_command": "\u30b3\u30d4\u30fc\u30b3\u30de\u30f3\u30c9",
+            "run_restore_danger": "\u5fa9\u5143\u306e\u5b9f\u884c (\u6700\u65b0\u3001\u5371\u967a)"
+        },
+        "cli": {
+            "title": "Hestia \u306e\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3068\u5fa9\u5143 CLI",
+            "subtitle": "\u30af\u30a4\u30c3\u30af\u30ea\u30d5\u30a1\u30ec\u30f3\u30b9\u30b7\u30fc\u30c8 - \u30b3\u30d4\u30fc\uff06\u30da\u30fc\u30b9\u30c8\u304c\u53ef\u80fd",
+            "create_backups": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u306e\u4f5c\u6210",
+            "list_delete_backups": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u306e\u4e00\u89a7\u8868\u793a\u3068\u524a\u9664",
+            "full_restore_user": "\u5b8c\u5168\u5fa9\u5143 (\u30e6\u30fc\u30b6\u30fc)",
+            "selective_restore": "\u9078\u629e\u7684\u5fa9\u5143 (Web / DB / \u30e1\u30fc\u30eb)",
+            "backup_file_locations": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u30d5\u30a1\u30a4\u30eb\u306e\u5834\u6240",
+            "backup_tarball_contents": "Tarball \u30b3\u30f3\u30c6\u30f3\u30c4\u306e\u30d0\u30c3\u30af\u30a2\u30c3\u30d7",
+            "backupctl_help": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7ctl\u306e\u30d8\u30eb\u30d7"
+        }
     },
-    "restore": {
-      "hestia_placeholder_tar": "遺伝子.YYYYMMDD-HHMM.tar",
-      "using_latest_backup_prefix": "JSON で報告された最新のバックアップを使用する:",
-      "adjust_backup_tar": "実行する前に、BACKUP_TAR を「v-list-backupsgene」から実際のファイルに調整します。",
-      "micro_restore_prefix": "最新のマイクロスナップショットからベースを復元します。",
-      "micro_restore_suffix": "(実行前にパスと除外を確認してください)。",
-      "set_correct_snapshot_path": "このコマンドを使用する前に、正しいスナップショット パスを設定してください。",
-      "confirm_body_1": "これにより、backupctl を使用してサーバー上で Hestia 復元ジョブが開始されます。",
-      "confirm_body_2": "そのユーザーのサービスとデータは上書きされる可能性があります。",
-      "confirm_body_3": "絶対に間違いありませんか？"
+    "footer": {
+        "logged_in_as": "\u30ed\u30b0\u30a4\u30f3\u4e2d",
+        "theme": "\u30c6\u30fc\u30de"
     },
-    "actions": {
-      "starting_prefix": "起動",
-      "failed_to_start_prefix": "開始に失敗しました",
-      "started_prefix": "開始しました",
-      "started_suffix": "。これには時間がかかる場合があります。ステータスは次回のヘルスチェック時に更新されます。",
-      "error_talking_endpoint": "backups_action.php との通信中にエラーが発生しました",
-      "run_os_snapshot": "OSスナップショットを実行",
-      "run_micro_backup": "マイクロバックアップを実行する",
-      "run_hestia_backup_user": "Hestia バックアップを実行する (遺伝子)",
-      "run_all_backups": "すべてのバックアップを実行",
-      "run_health_check": "ヘルスチェックを実行する",
-      "log_maintenance": "ログのメンテナンス",
-      "clear_backup_logs": "バックアップの健全性ログをクリアする",
-      "clear_prune_logs": "プルーン ログをクリアする",
-      "clear_integrity_log": "整合性ログをクリアする"
+    "i18n": {
+        "language_picker": {
+            "title": "\u8a00\u8a9e",
+            "saving": "\u4fdd\u5b58\u4e2d...",
+            "saved": "\u4fdd\u5b58\u3057\u307e\u3057\u305f",
+            "save_failed": "\u4fdd\u5b58\u306b\u5931\u6557\u3057\u307e\u3057\u305f"
+        }
     },
-    "cron": {
-      "no_entries": "crontab エントリが検出されませんでした。",
-      "env": "環境",
-      "schedule": "スケジュール",
-      "entries_for_prefix": "Crontab エントリ",
-      "current_user": "現在のユーザー",
-      "unable_to_read": "crontabを読み取れません。",
-      "failed_to_read": "crontabの読み込みに失敗しました。"
+    "services_page": {
+        "environment": "\u74b0\u5883",
+        "filter_placeholder": "\u30b5\u30fc\u30d3\u30b9\u3092\u7d5e\u308a\u8fbc\u3080...",
+        "add_service": "\u30b5\u30fc\u30d3\u30b9\u3092\u8ffd\u52a0",
+        "edit_service": "\u30b5\u30fc\u30d3\u30b9\u3092\u7de8\u96c6",
+        "import": "\u30a4\u30f3\u30dd\u30fc\u30c8",
+        "export_csv": "CSV \u3092\u30a8\u30af\u30b9\u30dd\u30fc\u30c8",
+        "auto_probe": "\u81ea\u52d5\u30d7\u30ed\u30fc\u30d6",
+        "every": "\u9593\u9694",
+        "seconds_short": "\u79d2",
+        "columns": {
+            "name": "\u540d\u524d",
+            "category": "\u30ab\u30c6\u30b4\u30ea",
+            "host": "\u30db\u30b9\u30c8",
+            "port": "\u30dd\u30fc\u30c8",
+            "probe": "\u30d7\u30ed\u30fc\u30d6",
+            "timeout": "\u30bf\u30a4\u30e0\u30a2\u30a6\u30c8",
+            "path": "\u30d1\u30b9",
+            "enabled": "\u6709\u52b9"
+        },
+        "form": {
+            "name": "\u540d\u524d",
+            "category": "\u30ab\u30c6\u30b4\u30ea",
+            "host": "\u30db\u30b9\u30c8",
+            "port": "\u30dd\u30fc\u30c8",
+            "probe": "\u30d7\u30ed\u30fc\u30d6",
+            "timeout": "\u30bf\u30a4\u30e0\u30a2\u30a6\u30c8 (ms)",
+            "path": "\u30d1\u30b9 (HTTP)",
+            "enabled": "\u6709\u52b9"
+        },
+        "test_on_save": "\u4fdd\u5b58\u6642\u306b\u30c6\u30b9\u30c8",
+        "caps": {
+            "panel": "\u30d1\u30cd\u30eb",
+            "web": "\u30a6\u30a7\u30d6",
+            "mta": "\u30de\u30fc\u30bf",
+            "db": "\u30c7\u30d6",
+            "nginx": "nginx"
+        },
+        "states": {
+            "active": "\u30a2\u30af\u30c6\u30a3\u30d6",
+            "inactive": "\u4e0d\u6d3b\u767a"
+        },
+        "path_not_used": "(\u4f7f\u7528\u305b\u305a\uff09",
+        "status": {
+            "up": "UP",
+            "warn": "\u30a6\u30a9\u30fc\u30f3",
+            "down": "\u30c0\u30a6\u30f3",
+            "unknown": "\u4e0d\u660e"
+        },
+        "relative_time": {
+            "just_now": "\u305f\u3060\u3044\u307e",
+            "minutes_ago": "{\u6570}m\u524d",
+            "hours_ago": "{\u6642\u9593\u524d",
+            "days_ago": "\u65e5\u524d"
+        },
+        "units": {
+            "ms": "ms"
+        },
+        "actions": {
+            "test": "\u30c6\u30b9\u30c8"
+        },
+        "uptime": "\u30a2\u30c3\u30d7\u30bf\u30a4\u30e0{\u30d1\u30fc\u30bb\u30f3\u30c8\uff5d",
+        "alert_last_seen": "\u30a2\u30e9\u30fc\u30c8",
+        "alerts_muted_until": "\u30df\u30e5\u30fc\u30c8",
+        "mute_alerts": "\u30df\u30e5\u30fc\u30c8\u30fb\u30a2\u30e9\u30fc\u30c8",
+        "confirm_delete": "\u3053\u306e\u30b5\u30fc\u30d3\u30b9\u3092\u524a\u9664\u3057\u307e\u3059\u304b\uff1f",
+        "probe_kicked": "\u30d7\u30ed\u30fc\u30d6\u304c\u8e74\u3089\u308c\u305f",
+        "no_alert_rules": "\u30df\u30e5\u30fc\u30c8\u3059\u308b\u8b66\u544a\u30eb\u30fc\u30eb\u306f\u306a\u3044\u3002",
+        "prompt_mute_minutes": "\u95a2\u9023\u3059\u308b\u30a2\u30e9\u30fc\u30c8\u3092\u4f55\u5206\u9593\u30df\u30e5\u30fc\u30c8\u3057\u307e\u3059\u304b\uff1f",
+        "alerts_muted_for": "\u5206\u9593\u3001\u8b66\u544a\u3092\u30df\u30e5\u30fc\u30c8\u3002",
+        "mute_failed": "\u30df\u30e5\u30fc\u30c8\u306b\u5931\u6557\u3057\u307e\u3057\u305f\uff1a{\u30e1\u30c3\u30bb\u30fc\u30b8\uff5d",
+        "invalid_json": "\u7121\u52b9\u306aJSON",
+        "import_failed": "\u30a4\u30f3\u30dd\u30fc\u30c8\u5931\u6557",
+        "validation": {
+            "name_required": "\u540d\u524d\u306f\u5fc5\u9808\u3002",
+            "host_required": "\u30db\u30b9\u30c8\u304c\u5fc5\u8981\u3002",
+            "port_range": "\u30dd\u30fc\u30c8\u306f1-65535\u3067\u306a\u3051\u308c\u3070\u306a\u3089\u306a\u3044\u3002",
+            "correct_fields": "\u30cf\u30a4\u30e9\u30a4\u30c8\u3055\u308c\u305f\u30d5\u30a3\u30fc\u30eb\u30c9\u3092\u4fee\u6b63\u3057\u3066\u304f\u3060\u3055\u3044\u3002"
+        },
+        "service_save_requested": "\u30bb\u30fc\u30d6\u3092\u8981\u6c42\u3055\u308c\u305f\u30b5\u30fc\u30d3\u30b9"
     },
-    "warnings_errors": {
-      "title": "警告とエラー",
-      "subtitle": "健康診断のまとめ"
+    "bookmarks_page": {
+        "title": "\u30d6\u30c3\u30af\u30de\u30fc\u30af",
+        "manage": "\u30d6\u30c3\u30af\u30de\u30fc\u30af\u7ba1\u7406",
+        "add_to_browser": "\u30d6\u30e9\u30a6\u30b6\u306b\u8ffd\u52a0",
+        "bookmarklet_title": "\u3053\u308c\u3092\u30d6\u30c3\u30af\u30de\u30fc\u30af\u30d0\u30fc\u306b\u30c9\u30e9\u30c3\u30b0\u3059\u308b\u3068\u73fe\u5728\u306e\u30da\u30fc\u30b8\u3092\u3059\u3070\u3084\u304f\u8ffd\u52a0\u3067\u304d\u307e\u3059",
+        "prompt_tags": "\u30bf\u30b0\uff08\u30ab\u30f3\u30de\u533a\u5207\u308a\uff09:",
+        "category": "\u30ab\u30c6\u30b4\u30ea",
+        "all": "\u3059\u3079\u3066",
+        "sort": "\u4e26\u3073\u66ff\u3048",
+        "sort_updated_desc": "\u66f4\u65b0\u65e5\u6642\uff08\u65b0\u3057\u3044\u9806\uff09",
+        "sort_title_asc": "\u30bf\u30a4\u30c8\u30eb (A-Z)",
+        "sort_host_asc": "\u30db\u30b9\u30c8 (A-Z)",
+        "fields": {
+            "title": "\u30bf\u30a4\u30c8\u30eb",
+            "url": "URL",
+            "tags": "\u30bf\u30b0",
+            "name": "\u540d\u524d"
+        },
+        "placeholders": {
+            "optional_title": "\u4efb\u610f\u306e\u30bf\u30a4\u30c8\u30eb",
+            "tags": "\u30bf\u30b0,\u30ab\u30f3\u30de,\u533a\u5207\u308a",
+            "new_category_name": "\u65b0\u3057\u3044\u30ab\u30c6\u30b4\u30ea\u540d"
+        },
+        "add_category": "\u30ab\u30c6\u30b4\u30ea\u3092\u8ffd\u52a0",
+        "updated": "\u66f4\u65b0\u65e5\u6642",
+        "empty": "\u307e\u3060\u30d6\u30c3\u30af\u30de\u30fc\u30af\u306f\u3042\u308a\u307e\u305b\u3093\u3002",
+        "empty_categories": "\u307e\u3060\u30ab\u30c6\u30b4\u30ea\u306f\u3042\u308a\u307e\u305b\u3093\u3002",
+        "modal": {
+            "add_edit": "\u30d6\u30c3\u30af\u30de\u30fc\u30af\u3092\u8ffd\u52a0 / \u7de8\u96c6",
+            "add_categories": "\u30ab\u30c6\u30b4\u30ea\u3092\u8ffd\u52a0"
+        },
+        "uncategorized": "\u672a\u5206\u985e",
+        "hints": {
+            "bookmark_edit": "\u6298\u308a\u305f\u305f\u307f\u53ef\u80fd\u306a\u30ab\u30c6\u30b4\u30ea\u30fc\u3067\u30d6\u30c3\u30af\u30de\u30fc\u30af\u3092\u8868\u793a\u3057\u307e\u3059\u3002\u30d6\u30c3\u30af\u30de\u30fc\u30af\u3092\u30af\u30ea\u30c3\u30af\u3059\u308b\u3068\u3001\u7de8\u96c6\u3084\u524a\u9664\u306e\u305f\u3081\u306b\u4e0a\u306b\u8aad\u307f\u8fbc\u307e\u308c\u307e\u3059\u3002",
+            "category_edit": "\u30ab\u30c6\u30b4\u30ea\u30fc\u306f\u3053\u3053\u306b\u8868\u793a\u3055\u308c\u307e\u3059\u3002\u7de8\u96c6\u3084\u524a\u9664\u3092\u884c\u3046\u5834\u5408\u306f\u3001\u305d\u306e\u30ab\u30c6\u30b4\u30ea\u30fc\u3092\u30af\u30ea\u30c3\u30af\u3057\u3066\u304f\u3060\u3055\u3044\u3002"
+        },
+        "confirm_delete_category": "\u3053\u306e\u30ab\u30c6\u30b4\u30ea\u30fc\u3092\u524a\u9664\u3057\u307e\u3059\u304b\uff1f\u30d6\u30c3\u30af\u30de\u30fc\u30af\u306f\u672a\u5206\u985e\u306b\u306a\u308a\u307e\u3059\u3002",
+        "confirm_delete_bookmark": "\u3053\u306e\u30d6\u30c3\u30af\u30de\u30fc\u30af\u3092\u524a\u9664\u3057\u307e\u3059\u304b\uff1f",
+        "validation": {
+            "category_name_required": "\u30ab\u30c6\u30b4\u30ea\u30fc\u540d\u5fc5\u9808",
+            "url_required": "URL\u306f\u5fc5\u9808"
+        },
+        "errors": {
+            "all_endpoints_failed": "\u3059\u3079\u3066\u306e\u30a8\u30f3\u30c9\u30dd\u30a4\u30f3\u30c8\u304c\u5931\u6557",
+            "bad_json": "\u30b5\u30fc\u30d0\u30fc\u304b\u3089\u306e\u4e0d\u6b63\u306aJSON",
+            "api_not_found": "\u30d6\u30c3\u30af\u30de\u30fc\u30af\u306e\u8aad\u307f\u8fbc\u307f\u306b\u5931\u6557\u3057\u307e\u3057\u305f\uff08API\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093\uff09\u3002\u8a66\u884c\u3057\u307e\u3057\u305f\uff1a\u8a66\u884c",
+            "load_failed": "\u30d6\u30c3\u30af\u30de\u30fc\u30af\u306e\u8aad\u307f\u8fbc\u307f\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002"
+        },
+        "toasts": {
+            "category_saved": "\u4fdd\u5b58\u3055\u308c\u305f\u30ab\u30c6\u30b4\u30ea\u30fc",
+            "save_failed": "\u4fdd\u5b58\u306b\u5931\u6557\u3057\u307e\u3057\u305f\uff1a{\u30e1\u30c3\u30bb\u30fc\u30b8\uff5d",
+            "category_deleted": "\u30ab\u30c6\u30b4\u30ea\u30fc\u524a\u9664",
+            "delete_failed": "\u524a\u9664\u306b\u5931\u6557\u3057\u307e\u3057\u305f\uff1a{\u30e1\u30c3\u30bb\u30fc\u30b8\uff5d",
+            "order_saved": "\u6ce8\u6587\u306e\u4fdd\u5b58",
+            "reorder_failed": "\u518d\u6ce8\u6587\u306b\u5931\u6557\u3057\u307e\u3057\u305f\uff1a{\u30e1\u30c3\u30bb\u30fc\u30b8\uff5d",
+            "category_updated": "\u30ab\u30c6\u30b4\u30ea\u30fc\u66f4\u65b0",
+            "category_added": "\u30ab\u30c6\u30b4\u30ea\u30fc\u8ffd\u52a0",
+            "bookmark_deleted": "\u30d6\u30c3\u30af\u30de\u30fc\u30af\u524a\u9664",
+            "bookmark_updated": "\u30d6\u30c3\u30af\u30de\u30fc\u30af\u66f4\u65b0",
+            "bookmark_added": "\u30d6\u30c3\u30af\u30de\u30fc\u30af\u8ffd\u52a0"
+        }
     },
-    "raw_snapshot": {
-      "title": "生のスナップショット",
-      "subtitle": "最後の JSON ステータスから直接キー値を取得"
-    },
-    "recent_actions": {
-      "title": "最近のアクション",
-      "subtitle": "このダッシュボードからのアクションの履歴",
-      "none": "まだアクションは記録されていません。"
-    },
-    "orch": {
-      "title": "バックアップ オーケストレーション ウィザード",
-      "subtitle": "パスを一度カスタマイズしてから、生成された script/cron/systemd ユニットをコピーします。",
-      "backup_root": "バックアップルート",
-      "include_health": "健康診断も含めて",
-      "include_integrity": "整合性チェックを含める",
-      "include_prune": "プルーン段階を含む",
-      "suspend": "バックアップを一時停止する",
-      "disable_on_mount_fail": "マウントが失敗した場合はバックアップを無効にする",
-      "nightly_script": "毎晩のスクリプト",
-      "copy_script": "スクリプトのコピー",
-      "cron_entry": "cron エントリ",
-      "copy_cron_line": "cron行をコピーする",
-      "systemd_service": "Systemdサービス",
-      "copy_unit": "コピーユニット",
-      "systemd_timer": "システムタイマー",
-      "copy_timer": "コピータイマー"
-    },
-    "quick_restore": {
-      "title": "クイック復元ヘルパー",
-      "subtitle": "緊急用の事前入力された CLI コマンド (手動実行または DANGER ボタン)",
-      "hestia_latest_title": "最新の Hestia ユーザー バックアップを復元する",
-      "micro_latest_title": "最新のマイクロ スナップショットからの復元 (CLI のみ)",
-      "copy_command": "コピーコマンド",
-      "run_restore_danger": "復元の実行 (最新、危険)"
-    },
-    "cli": {
-      "title": "Hestia のバックアップと復元 CLI",
-      "subtitle": "クイックリファレンスシート - コピー＆ペーストが可能",
-      "create_backups": "バックアップの作成",
-      "list_delete_backups": "バックアップの一覧表示と削除",
-      "full_restore_user": "完全復元 (ユーザー)",
-      "selective_restore": "選択的復元 (Web / DB / メール)",
-      "backup_file_locations": "バックアップファイルの場所",
-      "backup_tarball_contents": "Tarball コンテンツのバックアップ",
-      "backupctl_help": "バックアップctlのヘルプ"
+    "header": {
+        "navigation": "\u30d8\u30c3\u30c0\u30fc\u30ca\u30d3\u30b2\u30fc\u30b7\u30e7\u30f3",
+        "system_status": "\u30b5\u30fc\u30d3\u30b9\u72b6\u6cc1",
+        "loading": "\u8aad\u307f\u8fbc\u307f\u4e2d...",
+        "profile": "\u30d7\u30ed\u30d5\u30a3\u30fc\u30eb",
+        "logout": "\u30ed\u30b0\u30a2\u30a6\u30c8",
+        "mobile": {
+            "open_menu": "\u30e1\u30cb\u30e5\u30fc\u3092\u958b\u304f",
+            "menu": "\u30e1\u30cb\u30e5\u30fc"
+        },
+        "nav": {
+            "history": "\u6b74\u53f2",
+            "cron_health": "\u30af\u30ed\u30f3\u30d8\u30eb\u30b9",
+            "processes": "\u30d7\u30ed\u30bb\u30b9",
+            "databases": "\u30c7\u30fc\u30bf\u30d9\u30fc\u30b9",
+            "speedtest": "\u30b9\u30d4\u30fc\u30c9\u30c6\u30b9\u30c8",
+            "diagnostics": "\u8a3a\u65ad",
+            "config": "\u30b3\u30f3\u30d5\u30a3\u30b0",
+            "backups": "\u30d0\u30c3\u30af\u30a2\u30c3\u30d7"
+        }
     }
-  }
 }

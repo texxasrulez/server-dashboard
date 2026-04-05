@@ -1,4 +1,5 @@
 <?php require_once __DIR__ . '/init.php'; ?>
+<?php require_once __DIR__ . '/i18n.php'; ?>
 <?php
 // Pull site name for brand alt from central config if available
 if (!isset($SITE_NAME)) {
@@ -18,7 +19,7 @@ if (!isset($SITE_NAME)) {
 ?>
 <header class="app-header">
   <div class="mobile-bar">
-    <button id="mobileToggle" class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+    <button id="mobileToggle" class="hamburger" aria-label="<?= h(__('header.mobile.open_menu', 'Open menu')) ?>" aria-expanded="false" aria-controls="site-nav">
       <span class="bar"></span>&#9776;</button>
     <a class="mobile-logo" href="<?= h(project_url('/index.php')) ?>"><img src="assets/images/mobile-header-logo.png" alt="Logo"></a>
   </div>
@@ -43,19 +44,19 @@ if (!isset($SITE_NAME)) {
       $headerNavMode = 'buttons';
   }
 $candidates_admin = [
-  ['History', 'history.php'],
-  ['Logs', 'logs.php'],
-  ['Cron Health', 'cron.php'],
-  ['Processes', 'processes.php'],
-  ['Services', 'services.php'],
-  ['Databases', 'database.php'],
-  ['Server Tests', 'server_tests.php'],
-  ['Alerts', file_exists(__DIR__.'/../alerts_admin.php') ? 'alerts_admin.php' : (file_exists(__DIR__.'/../alerts.php') ? 'alerts.php' : null)],
-  ['Speedtest', 'speedtest.php'],
-  ['Bookmarks', 'bookmarks.php'],
-  ['Diagnostics', 'diag.php'],
-  ['Config', 'config.php'],
-  ['Backups', 'backups.php'],
+  [__('header.nav.history', 'History'), 'history.php'],
+  [__('logs.title', 'Logs'), 'logs.php'],
+  [__('header.nav.cron_health', 'Cron Health'), 'cron.php'],
+  [__('header.nav.processes', 'Processes'), 'processes.php'],
+  [__('services.title', 'Services'), 'services.php'],
+  [__('header.nav.databases', 'Databases'), 'database.php'],
+  [__('tests.title', 'Server Tests'), 'server_tests.php'],
+  [__('alerts.title', 'Alerts'), file_exists(__DIR__.'/../alerts_admin.php') ? 'alerts_admin.php' : (file_exists(__DIR__.'/../alerts.php') ? 'alerts.php' : null)],
+  [__('header.nav.speedtest', 'Speedtest'), 'speedtest.php'],
+  [__('bookmarks_page.title', 'Bookmarks'), 'bookmarks.php'],
+  [__('header.nav.diagnostics', 'Diagnostics'), 'diag.php'],
+  [__('header.nav.config', 'Config'), 'config.php'],
+  [__('header.nav.backups', 'Backups'), 'backups.php'],
 ];
 $links_public = [
 ];
@@ -82,10 +83,12 @@ if ($isAdmin) {
       echo '<a href="'.h($href).'">'.h($label).'</a>';
   }
   if ($headerNavMode === 'dropdown' && $navLinks) {
+      $dropdownLinks = $navLinks;
+      array_unshift($dropdownLinks, [__('header.nav.main_page', 'Main Page'), 'index.php']);
       echo '<label class="header-nav-select-wrap" for="headerNavSelect">';
-      echo '<span class="sr-only">Header navigation</span>';
-      echo '<select id="headerNavSelect" class="header-nav-select" aria-label="Header navigation">';
-      foreach ($navLinks as $L) {
+      echo '<span class="sr-only">' . h(__('header.navigation', 'Header navigation')) . '</span>';
+      echo '<select id="headerNavSelect" class="header-nav-select" aria-label="' . h(__('header.navigation', 'Header navigation')) . '">';
+      foreach ($dropdownLinks as $L) {
           [$label, $href] = $L;
           echo '<option value="' . h(project_url('/' . ltrim($href, '/'))) . '"' . ($currentPage === basename($href) ? ' selected' : '') . '>' . h($label) . '</option>';
       }
@@ -95,11 +98,10 @@ if ($isAdmin) {
 ?>
   </nav>
   
-  <a href="services.php" id="sys-badge" class="sys-badge" role="status" title="Service status">
-  <span class="dot"></span><span class="txt">Loading…</span>
-  </a>
-
   <div class="spacer"></div>
+  <a href="services.php" id="sys-badge" class="sys-badge" role="status" title="<?= h(__('header.system_status', 'Service status')) ?>">
+  <span class="dot"></span><span class="txt"><?= h(__('header.loading', 'Loading...')) ?></span>
+  </a>
   <div class="userbox" data-open="0">
     <?php $cu = current_user(); ?>
     <button  class="userbtn" type="button" id="userbtn" aria-haspopup="menu" aria-expanded="false" autocomplete="off">
@@ -109,8 +111,8 @@ if ($isAdmin) {
       <svg class="chev" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z" fill="currentColor"/></svg>
     </button>
     <div class="usermenu" id="usermenu" hidden>
-      <a href="<?= h(project_url('/users.php')) ?>">My Profile</a>
-      <a href="<?= h(project_url('/auth/logout.php')) ?>">Logout</a>
+      <a href="<?= h(project_url('/users.php')) ?>"><?= h(__('header.profile', 'My Profile')) ?></a>
+      <a href="<?= h(project_url('/auth/logout.php')) ?>"><?= h(__('header.logout', 'Logout')) ?></a>
     </div>
   </div>
 </header>
@@ -195,9 +197,9 @@ if ($isAdmin) {
     }).join('') : '';
     drawer.innerHTML = '<div class="panel">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">' +
-      '<strong>Menu</strong><button id="mdClose" class="btn">Close</button>' +
+      '<strong><?= h(__('header.mobile.menu', 'Menu')) ?></strong><button id="mdClose" class="btn"><?= h(__('common.close', 'Close')) ?></button>' +
       '</div><nav>' + links + '</nav></div>' +
-      '<a class="backdrop" href="#" aria-label="Close"></a>';
+      '<a class="backdrop" href="#" aria-label="<?= h(__('common.close', 'Close')) ?>"></a>';
   }
   function openD(e){ if (e) e.preventDefault(); ensure(); drawer.hidden=false; drawer.classList.add('show'); document.body.style.overflow='hidden'; }
   function closeD(e){ if (e) e.preventDefault(); drawer.classList.remove('show'); drawer.hidden=true; document.body.style.overflow=''; }

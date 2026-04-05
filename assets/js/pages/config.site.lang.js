@@ -1,5 +1,13 @@
 (function () {
   "use strict";
+  function t(key, fallback, vars) {
+    try {
+      if (window.I18N && typeof window.I18N.t === "function") {
+        return window.I18N.t(key, fallback, vars);
+      }
+    } catch (_) {}
+    return fallback != null ? fallback : key;
+  }
   function el(tag, cls) {
     var n = document.createElement(tag);
     if (cls) n.className = cls;
@@ -35,7 +43,7 @@
     var card = el("div", "card");
     card.id = "lang-card";
     var h = el("h3");
-    h.textContent = "Language";
+    h.textContent = t("i18n.language_picker.title", "Language");
     card.appendChild(h);
     var row = el("div");
     row.style.display = "flex";
@@ -48,7 +56,7 @@
     var saveBtn = el("button");
     saveBtn.className = "btn";
     saveBtn.id = "siteLangSave";
-    saveBtn.textContent = "Save";
+    saveBtn.textContent = t("common.save", "Save");
     var status = el("span");
     status.className = "muted";
     status.id = "siteLangStatus";
@@ -84,7 +92,7 @@
         "api/config_import.php?_csrf=" +
         encodeURIComponent(window.__CONFIG_CSRF__ || "");
       saveBtn.disabled = true;
-      status.textContent = "Saving…";
+      status.textContent = t("i18n.language_picker.saving", "Saving...");
       fetch(url, {
         method: "POST",
         credentials: "same-origin",
@@ -98,7 +106,7 @@
         })
         .then(function (j) {
           if (j && j.ok) {
-            status.textContent = "Saved";
+            status.textContent = t("i18n.language_picker.saved", "Saved");
             try {
               document.documentElement.setAttribute("lang", locale);
             } catch (_) {}
@@ -107,12 +115,23 @@
               (window.__CONFIG_DATA__.i18n =
                 window.__CONFIG_DATA__.i18n || {}).locale = locale;
             } catch (_) {}
+            try {
+              if (window.I18N && typeof window.I18N.load === "function") {
+                window.I18N.load(locale);
+              }
+            } catch (_) {}
           } else {
-            status.textContent = "Save failed";
+            status.textContent = t(
+              "i18n.language_picker.save_failed",
+              "Save failed",
+            );
           }
         })
         .catch(function () {
-          status.textContent = "Save failed";
+          status.textContent = t(
+            "i18n.language_picker.save_failed",
+            "Save failed",
+          );
         })
         .finally(function () {
           saveBtn.disabled = false;

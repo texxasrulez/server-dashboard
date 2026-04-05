@@ -106,7 +106,7 @@ return [
     'toast_position' => ['type' => 'enum','label' => 'Toast Position','values' => ['bottom-center','bottom-right','bottom-left','top-right','top-left','top-center','center']],
     'items_per_page' => ['type' => 'int','label' => 'Items/Page','min' => 5,'max' => 500],
     'header_navigation_mode' => ['type' => 'enum','label' => 'Header navigation','values' => ['buttons','dropdown'],'value_labels' => ['buttons' => 'Header buttons','dropdown' => 'Dropdown menu']],
-    'high_contrast' => ['type' => 'bool','label' => 'High contrast mode'],
+    'high_contrast' => ['type' => 'bool','label' => 'High visibility mode (Experimental)'],
   ],
 
   'server_tests' => [

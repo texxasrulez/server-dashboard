@@ -1,5 +1,13 @@
 /* userbox.js — ultra-resilient header dropdown (no-flash) */
 (function () {
+  function t(key, fallback) {
+    try {
+      if (window.I18N && typeof window.I18N.t === "function") {
+        return window.I18N.t(key, fallback);
+      }
+    } catch (e) {}
+    return fallback != null ? fallback : key;
+  }
   function ready(fn) {
     if (document.readyState !== "loading") fn();
     else document.addEventListener("DOMContentLoaded", fn);
@@ -39,7 +47,7 @@
       const b = document.createElement("button");
       b.className = "userbtn";
       b.type = "button";
-      b.innerHTML = '<span class="name">Menu</span>';
+      b.innerHTML = '<span class="name">' + t("header.mobile.menu", "Menu") + "</span>";
       box.insertBefore(b, box.firstChild);
       btn = b;
     }
@@ -70,9 +78,9 @@
       menu.innerHTML =
         '<a href="' +
         users +
-        '">My Profile</a><a href="' +
+        '">' + t("header.profile", "My Profile") + '</a><a href="' +
         logout +
-        '">Logout</a>';
+        '">' + t("header.logout", "Logout") + "</a>";
       box.appendChild(menu);
       log("created missing .usermenu");
     }

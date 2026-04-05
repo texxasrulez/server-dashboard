@@ -1,9 +1,10 @@
 <?php
 require_once __DIR__ . '/includes/init.php';
 require_once __DIR__ . '/includes/auth.php';
+require_once __DIR__ . '/includes/i18n.php';
 require_admin();
 
-$PAGE_TITLE = 'Services';
+$PAGE_TITLE = __('services.title', 'Services');
 $PAGE_CSS   = 'assets/css/pages/services.css';
 $REQUIRE_ADMIN = true;
 include __DIR__.'/includes/head.php'; ?>
@@ -15,35 +16,35 @@ $platformStatus = $platformAdapter->getServiceStatus();
 ?>
 <div class="card">
 <div class="row between" style="gap:.5rem; flex-wrap:wrap; margin-bottom:.5rem;">
-  <div class="section-title">Environment</div>
+  <div class="section-title" data-i18n="services_page.environment">Environment</div>
   <div class="row gap" style="flex-wrap:wrap;">
-    <span class="chip neutral">panel: <?= h((string)($platformCaps['panel'] ?? 'none')) ?></span>
-    <span class="chip neutral">web: <?= h((string)($platformCaps['web'] ?? 'none')) ?></span>
-    <span class="chip neutral">mta: <?= h((string)($platformCaps['mta'] ?? 'none')) ?></span>
-    <span class="chip neutral">db: <?= h((string)($platformCaps['db'] ?? 'none')) ?></span>
-    <span class="chip neutral">nginx: <?= h(($platformStatus['nginx'] === true) ? 'active' : (($platformStatus['nginx'] === false) ? 'inactive' : 'unknown')) ?></span>
+    <span class="chip neutral"><?= h(__('services_page.caps.panel', 'panel')) ?>: <?= h((string)($platformCaps['panel'] ?? __('common.none', 'none'))) ?></span>
+    <span class="chip neutral"><?= h(__('services_page.caps.web', 'web')) ?>: <?= h((string)($platformCaps['web'] ?? __('common.none', 'none'))) ?></span>
+    <span class="chip neutral"><?= h(__('services_page.caps.mta', 'mta')) ?>: <?= h((string)($platformCaps['mta'] ?? __('common.none', 'none'))) ?></span>
+    <span class="chip neutral"><?= h(__('services_page.caps.db', 'db')) ?>: <?= h((string)($platformCaps['db'] ?? __('common.none', 'none'))) ?></span>
+    <span class="chip neutral"><?= h(__('services_page.caps.nginx', 'nginx')) ?>: <?= h(($platformStatus['nginx'] === true) ? __('services_page.states.active', 'active') : (($platformStatus['nginx'] === false) ? __('services_page.states.inactive', 'inactive') : __('config.ui.unknown', 'unknown'))) ?></span>
   </div>
 </div>
 <div class="card">
 <div class="row between">
-  <div class="section-title">Services</div>
+  <div class="section-title" data-i18n="services.title">Services</div>
   <div class="row gap">
-    <input id="svcSearch" placeholder="Filter services..." />
+    <input id="svcSearch" placeholder="<?= h(__('services_page.filter_placeholder', 'Filter services...')) ?>" data-i18n="services_page.filter_placeholder" data-i18n-attr="placeholder" />
     <nav class="tabs inline">
-      <button id="btnAddService" class="btn small">Add Service</button>
-      <button id="btnImport" class="btn small">Import</button>
+      <button id="btnAddService" class="btn small" data-i18n="services_page.add_service">Add Service</button>
+      <button id="btnImport" class="btn small" data-i18n="services_page.import">Import</button>
       <button id="btnExportJson" class="btn small"><span data-i18n="history.export_json">Export JSON</span></button>
-      <button id="btnExportCsv" class="btn small">Export CSV</button>
+      <button id="btnExportCsv" class="btn small" data-i18n="services_page.export_csv">Export CSV</button>
     </nav>
     <div class="row gap" id="autoprobeWrap" style="margin-left:.5rem">
       <label class="row" style="gap:.35rem">
         <input type="checkbox" id="autoProbe" />
-        <span class="muted">Auto‑probe</span>
+        <span class="muted" data-i18n="services_page.auto_probe">Auto-probe</span>
       </label>
       <label class="row" style="gap:.35rem">
-        <span class="muted">Every</span>
+        <span class="muted" data-i18n="services_page.every">Every</span>
         <input id="autoProbeSec" type="number" min="5" max="3600" value="60" style="width:72px;padding:.35rem .5rem;border:1px solid var(--border);border-radius:10px;background:color-mix(in srgb,var(--card) 92%, transparent)"/>
-        <span class="muted">s</span>
+        <span class="muted" data-i18n="services_page.seconds_short">s</span>
       </label>
     </div>
     <input id="importFile" type="file" accept=".json,.csv" hidden />
@@ -54,14 +55,14 @@ $platformStatus = $platformAdapter->getServiceStatus();
     <div class="table-scroll"><table class="js-sortable table" id="servicesTable">
       <thead>
         <tr>
-          <th style="width:24%" data-sort="name" class="sortable">Name</th>
-          <th style="width:10%" data-sort="type" class="sortable">Category</th>
-          <th style="width:12%" data-sort="host" class="sortable">Host</th>
-          <th style="width:7%" data-sort="port" class="sortable">Port</th>
-          <th style="width:10%" data-sort="check" class="sortable">Probe</th>
-          <th style="width:9%" data-sort="timeout_ms" class="sortable">Timeout</th>
-          <th style="width:12%" data-sort="path" class="sortable">Path</th>
-          <th style="width:8%" data-sort="enabled" class="sortable">Enabled</th>
+          <th style="width:24%" data-sort="name" class="sortable" data-i18n="services_page.columns.name">Name</th>
+          <th style="width:10%" data-sort="type" class="sortable" data-i18n="services_page.columns.category">Category</th>
+          <th style="width:12%" data-sort="host" class="sortable" data-i18n="services_page.columns.host">Host</th>
+          <th style="width:7%" data-sort="port" class="sortable" data-i18n="services_page.columns.port">Port</th>
+          <th style="width:10%" data-sort="check" class="sortable" data-i18n="services_page.columns.probe">Probe</th>
+          <th style="width:9%" data-sort="timeout_ms" class="sortable" data-i18n="services_page.columns.timeout">Timeout</th>
+          <th style="width:12%" data-sort="path" class="sortable" data-i18n="services_page.columns.path">Path</th>
+          <th style="width:8%" data-sort="enabled" class="sortable" data-i18n="services_page.columns.enabled">Enabled</th>
           <th class="actions-col"></th>
         </tr>
       </thead>
@@ -74,14 +75,15 @@ $platformStatus = $platformAdapter->getServiceStatus();
 <div id="svcModal" class="modal" hidden>
   <div class="modal-card">
     <div class="modal-head">
-      <div class="title" id="modalTitle">Add Service</div>
-      <nav class="tabs inline"><a href="#" id="modalClose">Close</a></nav>
+      <div class="title" id="modalTitle" data-i18n="services_page.add_service">Add Service</div>
+      <nav class="tabs inline"><a href="#" id="modalClose" data-i18n="common.close">Close</a></nav>
     </div>
     <form id="svcForm" class="form" onsubmit="return false;">
       <input type="hidden" name="id" id="f_id" />
+      <div id="formAlert" class="muted" hidden></div>
       <div class="grid">
-        <label>Name<input required name="name" id="f_name" /></label>
-        <label>Category
+        <label><span data-i18n="services_page.form.name">Name</span><input required name="name" id="f_name" /></label>
+        <label><span data-i18n="services_page.form.category">Category</span>
           <select name="type" id="f_type">
             <option value="app">app</option>
             <option value="db">db</option>
@@ -90,23 +92,23 @@ $platformStatus = $platformAdapter->getServiceStatus();
             <option value="other">other</option>
           </select>
         </label>
-        <label>Host<input required name="host" id="f_host" placeholder="127.0.0.1"/></label>
-        <label>Port<input required type="number" min="1" max="65535" name="port" id="f_port"/></label>
-        <label>Probe
+        <label><span data-i18n="services_page.form.host">Host</span><input required name="host" id="f_host" placeholder="127.0.0.1"/></label>
+        <label><span data-i18n="services_page.form.port">Port</span><input required type="number" min="1" max="65535" name="port" id="f_port"/></label>
+        <label><span data-i18n="services_page.form.probe">Probe</span>
           <select name="check" id="f_check">
             <option value="tcp">tcp</option>
             <option value="http">http</option>
             <option value="ping">ping</option>
           </select>
         </label>
-        <label>Timeout (ms)<input required type="number" min="100" max="60000" step="100" name="timeout_ms" id="f_timeout" value="800"/></label>
-        <label>Path (HTTP)<input name="path" id="f_path" placeholder="/health"/></label>
-        <label class="row">Enabled
+        <label><span data-i18n="services_page.form.timeout">Timeout (ms)</span><input required type="number" min="100" max="60000" step="100" name="timeout_ms" id="f_timeout" value="800"/></label>
+        <label><span data-i18n="services_page.form.path">Path (HTTP)</span><input name="path" id="f_path" placeholder="/health"/></label>
+        <label class="row"><span data-i18n="services_page.form.enabled">Enabled</span>
           <input type="checkbox" name="enabled" id="f_enabled" checked style="margin-left:.5rem"/>
         </label>
       </div>
       <div class="row between" style="margin-top:.75rem">
-        <label class="row" style="gap:.35rem"><input type="checkbox" id="f_testOnSave"/><span class="muted">Test on save</span></label>
+        <label class="row" style="gap:.35rem"><input type="checkbox" id="f_testOnSave"/><span class="muted" data-i18n="services_page.test_on_save">Test on save</span></label>
         <div class="row gap"><button class="btn" id="saveService"><span data-i18n="common.save">Save</span></button></div>
       </div>
     </form>

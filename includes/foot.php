@@ -5,7 +5,7 @@
 $footer_role = $_SESSION['user']['role']     ?? 'user';
 ?>
 <footer class="footer muted">
-  Logged in as<strong>: <?= h($footer_user) ?></strong> (<?= h($footer_role) ?>) <strong>&#9679;</strong> <?= h(BUILD) ?> <strong>&#9679;</strong> Theme<strong>: <?= h($THEME) ?></strong>
+  <?= h(__('footer.logged_in_as', 'Logged in as')) ?><strong>: <?= h($footer_user) ?></strong> (<?= h($footer_role) ?>) <strong>&#9679;</strong> <?= h(BUILD) ?> <strong>&#9679;</strong> <?= h(__('footer.theme', 'Theme')) ?><strong>: <?= h($THEME) ?></strong>
 </footer>
 
 <!-- Keep a single autoprobe include -->

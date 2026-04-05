@@ -1,6 +1,14 @@
 (function () {
   const $ = (s, c) => (c || document).querySelector(s);
   const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+  const t = (key, fallback, vars) => {
+    try {
+      if (window.I18N && typeof window.I18N.t === "function") {
+        return window.I18N.t(key, fallback, vars);
+      }
+    } catch (_e) {}
+    return fallback != null ? fallback : key;
+  };
   const csrfToken = () => {
     const m = document.querySelector('meta[name="csrf-token"]');
     return m && m.content ? String(m.content) : "";
@@ -168,20 +176,31 @@
     const s = status === "up" ? "up" : status === "warn" ? "warn" : "down";
     const span = document.createElement("span");
     span.className = "chip " + s;
-    span.textContent = s.toUpperCase();
+    span.textContent = t(
+      "services_page.status." + s,
+      s.toUpperCase(),
+    );
     return span;
   }
   function relTime(ts) {
     if (!ts) return "";
     if (ts > 1e12) ts = Math.floor(ts / 1000);
     const diff = Math.max(0, Math.floor(Date.now() / 1000) - ts);
-    if (diff < 45) return "just now";
+    if (diff < 45) return t("services_page.relative_time.just_now", "just now");
     const m = Math.floor(diff / 60);
-    if (m < 60) return m + "m ago";
+    if (m < 60)
+      return t("services_page.relative_time.minutes_ago", "{count}m ago", {
+        count: m,
+      });
     const h = Math.floor(m / 60);
-    if (h < 24) return h + "h ago";
+    if (h < 24)
+      return t("services_page.relative_time.hours_ago", "{count}h ago", {
+        count: h,
+      });
     const d = Math.floor(h / 24);
-    return d + "d ago";
+    return t("services_page.relative_time.days_ago", "{count}d ago", {
+      count: d,
+    });
   }
   function badge(text, cls) {
     const span = document.createElement("span");
@@ -229,19 +248,19 @@
       <td>${it.host || ""}</td>
       <td class="center">${it.port || ""}</td>
       <td class="center">${it.check || "tcp"}</td>
-      <td class="center">${it.timeout_ms || 800} ms</td>
-      <td class="center">${it.check === "http" ? it.path || "/" : "-"}</td>
+      <td class="center">${it.timeout_ms || 800} ${t("services_page.units.ms", "ms")}</td>
+      <td class="center">${it.check === "http" ? it.path || "/" : t("common.none_dash", "-")}</td>
       <td class="center enabled-pill ${it.enabled ? "on" : "off"}">
         <div class="cell-center">
-          <nav class="tabs compact"><a href="#" data-act="toggle">${it.enabled ? "On" : "Off"}</a></nav>
+          <nav class="tabs compact"><a href="#" data-act="toggle">${it.enabled ? t("common.on", "On") : t("common.off", "Off")}</a></nav>
         </div>
       </td>
       <td class="actions-tabs">
         <div class="cell-center">
           <nav class="tabs compact">
-            <a href="#" data-act="test">Test</a>
-            <a href="#" data-act="edit">Edit</a>
-            <a href="#" data-act="del">Delete</a>
+            <a href="#" data-act="test">${t("services_page.actions.test", "Test")}</a>
+            <a href="#" data-act="edit">${t("common.edit", "Edit")}</a>
+            <a href="#" data-act="del">${t("common.delete", "Delete")}</a>
           </nav>
         </div>
       </td>`;
@@ -260,7 +279,9 @@
     } catch (_) {}
 
     clearErrors();
-    $("#modalTitle").textContent = editing ? "Edit Service" : "Add Service";
+    $("#modalTitle").textContent = editing
+      ? t("services_page.edit_service", "Edit Service")
+      : t("services_page.add_service", "Add Service");
     if (form) form.reset();
     $("#f_id").value = data?.id || "";
     $("#f_name").value = data?.name || "";
@@ -283,7 +304,9 @@
   function togglePath() {
     const isHttp = $("#f_check").value === "http";
     $("#f_path").disabled = !isHttp;
-    $("#f_path").placeholder = isHttp ? "/health" : "(not used)";
+    $("#f_path").placeholder = isHttp
+      ? "/health"
+      : t("services_page.path_not_used", "(not used)");
   }
   $("#f_check")?.addEventListener("change", togglePath);
 
@@ -327,7 +350,9 @@
     if (uptime && uptime.uptime_pct != null) {
       mini.appendChild(
         badge(
-          "Uptime " + uptime.uptime_pct + "%",
+          t("services_page.uptime", "Uptime {pct}%", {
+            pct: uptime.uptime_pct,
+          }),
           uptime.uptime_pct >= 95
             ? "ok"
             : uptime.uptime_pct >= 80
@@ -339,13 +364,20 @@
     const alertMeta = svc.alert_meta || {};
     if (alertMeta.last_alert && alertMeta.last_alert.ts) {
       const last = alertMeta.last_alert;
-      const chip = badge("Alert " + relTime(last.ts), "warn");
+      const chip = badge(
+        t("services_page.alert_last_seen", "Alert {time}", {
+          time: relTime(last.ts),
+        }),
+        "warn",
+      );
       chip.title = (last.name || "") + " (" + (last.severity || "warn") + ")";
       mini.appendChild(chip);
     }
     if (alertMeta.silenced_until) {
       const mute = badge(
-        "Muted " + relTime(alertMeta.silenced_until),
+        t("services_page.alerts_muted_until", "Muted {time}", {
+          time: relTime(alertMeta.silenced_until),
+        }),
         "neutral",
       );
       mini.appendChild(mute);
@@ -355,7 +387,7 @@
     if (svc.id) {
       const hist = document.createElement("a");
       hist.className = "chip neutral small";
-      hist.textContent = "History";
+      hist.textContent = t("history.title", "History");
       hist.href = "history.php?service=" + encodeURIComponent(svc.id);
       hist.target = "_blank";
       hist.rel = "noopener";
@@ -367,7 +399,7 @@
       muteBtn.dataset.act = "silence-service";
       muteBtn.dataset.rules = alertMeta.rule_ids.join(",");
       muteBtn.className = "chip warn small";
-      muteBtn.textContent = "Mute alerts";
+      muteBtn.textContent = t("services_page.mute_alerts", "Mute alerts");
       linkRow.appendChild(muteBtn);
     }
     if (linkRow.childNodes.length) mini.appendChild(linkRow);
@@ -406,13 +438,13 @@
     if (act === "edit") {
       openModal(true, it);
     } else if (act === "del") {
-      if (confirm("Delete this service?")) {
+      if (confirm(t("services_page.confirm_delete", "Delete this service?"))) {
         await api.del(id);
         refresh();
       }
     } else if (act === "test") {
       try {
-        if (window.toast) toast.info("Probe kicked");
+        if (window.toast) toast.info(t("services_page.probe_kicked", "Probe kicked"));
       } catch (e) {}
       const res = await api.probe(it);
       applyProbe(tr, res);
@@ -424,8 +456,8 @@
         cell.classList.toggle("off", !res.item.enabled);
         cell.querySelector('a[data-act="toggle"]').textContent = res.item
           .enabled
-          ? "On"
-          : "Off";
+          ? t("common.on", "On")
+          : t("common.off", "Off");
         SERVICE_CACHE.set(id, Object.assign({}, it, res.item));
       }
     } else if (act === "silence-service") {
@@ -436,11 +468,16 @@
       if (!ruleIds.length) {
         window.toast &&
           window.toast.warn &&
-          window.toast.warn("No alert rules to mute.");
+          window.toast.warn(
+            t("services_page.no_alert_rules", "No alert rules to mute."),
+          );
         return;
       }
       const minsInput = prompt(
-        "Mute related alerts for how many minutes?",
+        t(
+          "services_page.prompt_mute_minutes",
+          "Mute related alerts for how many minutes?",
+        ),
         "60",
       );
       if (!minsInput) return;
@@ -449,12 +486,20 @@
         await api.silenceRules(ruleIds, mins);
         window.toast &&
           window.toast.success &&
-          window.toast.success("Alerts muted for " + mins + "m.");
+          window.toast.success(
+            t("services_page.alerts_muted_for", "Alerts muted for {mins}m.", {
+              mins,
+            }),
+          );
         refresh();
       } catch (err) {
         window.toast &&
           window.toast.error &&
-          window.toast.error("Mute failed: " + (err.message || err));
+          window.toast.error(
+            t("services_page.mute_failed", "Mute failed: {message}", {
+              message: err.message || err,
+            }),
+          );
       }
     }
   });
@@ -463,15 +508,22 @@
     /* TOAST: probe result */
     try {
       if (window.toast) {
-        var name = tr.querySelector(".nm")?.textContent?.trim() || "Service";
+        var name =
+          tr.querySelector(".nm")?.textContent?.trim() ||
+          t("services.title", "Service");
         var lat =
-          res && res.latency_ms != null ? " " + res.latency_ms + " ms" : "";
+          res && res.latency_ms != null
+            ? " " + res.latency_ms + " " + t("services_page.units.ms", "ms")
+            : "";
         var code =
           res && res.http_code != null ? " • HTTP " + res.http_code : "";
         var msg =
           name +
           ": " +
-          String(res.status || "unknown").toUpperCase() +
+          t(
+            "services_page.status." + String(res.status || "unknown"),
+            String(res.status || "unknown").toUpperCase(),
+          ) +
           lat +
           code;
         if (res.status === "up") toast.success(msg);
@@ -513,14 +565,14 @@
       try {
         json = JSON.parse(text);
       } catch {
-        alert("Invalid JSON");
+        alert(t("services_page.invalid_json", "Invalid JSON"));
         return;
       }
       res = await api.importJson(json);
     }
     if (res && !res.error) {
       refresh();
-    } else alert(res.error || "Import failed");
+    } else alert(res.error || t("services_page.import_failed", "Import failed"));
     e.target.value = "";
   });
 
@@ -558,14 +610,15 @@
       span.textContent = (r.status || "").toUpperCase();
       mini.appendChild(span);
       if (r.latency_ms != null) {
-        const t = document.createElement("span");
-        t.className = "muted";
-        t.textContent =
+        const meta = document.createElement("span");
+        meta.className = "muted";
+        meta.textContent =
           " " +
           r.latency_ms +
-          " ms" +
+          " " +
+          t("services_page.units.ms", "ms") +
           (r.http_code ? " • HTTP " + r.http_code : "");
-        mini.appendChild(t);
+        mini.appendChild(meta);
       }
     });
   });
@@ -602,15 +655,24 @@
 
     let valid = true;
     if (!item.name) {
-      setErr($("#f_name"), "Name is required.");
+      setErr(
+        $("#f_name"),
+        t("services_page.validation.name_required", "Name is required."),
+      );
       valid = false;
     }
     if (!item.host) {
-      setErr($("#f_host"), "Host is required.");
+      setErr(
+        $("#f_host"),
+        t("services_page.validation.host_required", "Host is required."),
+      );
       valid = false;
     }
     if (!Number.isFinite(item.port) || !isPort(item.port)) {
-      setErr($("#f_port"), "Port must be 1–65535.");
+      setErr(
+        $("#f_port"),
+        t("services_page.validation.port_range", "Port must be 1-65535."),
+      );
       valid = false;
     }
     if (item.check === "http" && (!item.path || item.path[0] !== "/")) {
@@ -618,7 +680,12 @@
       item.path = $("#f_path").value;
     }
     if (!valid) {
-      showAlert("Please correct the highlighted fields.");
+      showAlert(
+        t(
+          "services_page.validation.correct_fields",
+          "Please correct the highlighted fields.",
+        ),
+      );
       return;
     }
 
@@ -664,13 +731,3 @@
 
   document.addEventListener("DOMContentLoaded", refresh);
 })();
-
-// Toast helpers: hook into common actions if present
-try {
-  document.getElementById("saveService")?.addEventListener("click", () => {
-    if (window.toast) toast.success("Service save requested");
-  });
-  document.getElementById("btnAddService")?.addEventListener("click", () => {
-    if (window.toast) toast.info("Add service");
-  });
-} catch (e) {}

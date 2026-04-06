@@ -1,3 +1,0 @@
-
-/* Hide any legacy history.js tiny toasts if they are ever created */
-#tinyToasts, .tinyToast { display: none !important; visibility: hidden !important; }

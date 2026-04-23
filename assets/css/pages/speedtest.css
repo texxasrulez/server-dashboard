@@ -1,0 +1,161 @@
+.speedtest-page .toolbar {
+  align-items: center;
+}
+
+.speedtest-page .toolbar select {
+  min-width: 110px;
+}
+
+.speedtest-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.summary-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.summary-label {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.summary-value {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 6px 0 4px;
+}
+
+.summary-value.summary-status-success {
+  color: #8be28f;
+}
+
+.summary-value.summary-status-failure {
+  color: #ff9c9c;
+}
+
+.summary-meta {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.62);
+  min-height: 1.2em;
+}
+
+.speedtest-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.chart-card {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.chart-title {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.chart-card canvas {
+  display: block;
+  width: 100%;
+  min-height: 220px;
+  cursor: crosshair;
+}
+
+.speedtest-chart-tooltip {
+  position: fixed;
+  z-index: 9999;
+  min-width: 160px;
+  max-width: 240px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: rgba(9, 15, 28, 0.96);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  pointer-events: none;
+}
+
+.speedtest-chart-tooltip .tooltip-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.speedtest-state {
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.speedtest-state.error {
+  background: rgba(255, 96, 96, 0.12);
+  border: 1px solid rgba(255, 96, 96, 0.24);
+}
+
+.speedtest-state.warning {
+  background: rgba(255, 205, 86, 0.12);
+  border: 1px solid rgba(255, 205, 86, 0.24);
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 74px;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 0.82rem;
+  text-transform: capitalize;
+}
+
+.status-success {
+  background: rgba(82, 196, 26, 0.15);
+  color: #8be28f;
+}
+
+.status-failure {
+  background: rgba(255, 102, 102, 0.15);
+  color: #ff9c9c;
+}
+
+#speedtestTable td,
+#speedtestTable th {
+  white-space: nowrap;
+}
+
+#speedtestTable td:last-child {
+  max-width: 300px;
+  white-space: normal;
+}
+
+.speedtest-pagination {
+  margin-top: 12px;
+  align-items: center;
+}
+
+.speedtest-pagination select {
+  min-width: 72px;
+}
+
+@media (max-width: 720px) {
+  .speedtest-page .toolbar {
+    width: 100%;
+  }
+
+  .speedtest-page .toolbar > * {
+    flex: 1 1 100%;
+  }
+}

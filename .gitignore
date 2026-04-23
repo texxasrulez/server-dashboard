@@ -1,0 +1,45 @@
+# Local configuration, secrets, and compatibility state
+config/local.json
+data/config.json
+data/security_config.json
+data/users.json
+data/cron_token.txt
+state/cron_token.txt
+data/oauth/*.json
+
+# Installed dependencies
+node_modules/
+vendor/
+
+# Runtime logs, caches, exports, and generated state
+state/*.log
+state/*.json
+state/*.jsonl
+state/*.txt
+state/ratelimit/
+state/history/
+state/logs_mirror/
+state/auth/
+state/cache/
+state/heartbeats/
+state/logs/
+state/reports/
+state/generated/
+state/speedtest/
+state/support_bundles/
+config/backups/
+data/history/
+data/heartbeats/
+data/favicons/
+data/speedtest/
+scripts/tmp/
+
+# Test and tool caches
+.phpunit.result.cache
+npm-debug.log*
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+__pycache__/
+.tmp

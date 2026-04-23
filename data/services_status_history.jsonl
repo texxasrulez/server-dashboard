@@ -1,0 +1,2 @@
+{"id":"svc_smoke_web","ts":1776960662,"status":"down","latency_ms":1400,"http_code":502}
+{"id":"svc_smoke_web","ts":1776960842,"status":"up","latency_ms":110,"http_code":200}

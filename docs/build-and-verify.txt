@@ -1,0 +1,5 @@
+1) Hard refresh.
+2) Container full width with side padding.
+3) Theme dropdown: only 'nord'.
+4) Header badge single instance.
+5) Hamburger below 720px only.

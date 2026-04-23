@@ -1,0 +1,15 @@
+{
+    "items": [
+        {
+            "id": "svc_smoke_web",
+            "name": "Smoke Web",
+            "type": "app",
+            "host": "127.0.0.1",
+            "port": 8080,
+            "check": "http",
+            "path": "/health",
+            "timeout_ms": 800,
+            "enabled": true
+        }
+    ]
+}

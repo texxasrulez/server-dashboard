@@ -1,0 +1,472 @@
+{
+    "app": {
+        "title": "Server Dashboard"
+    },
+    "nav": {
+        "history": "History",
+        "logs": "Logs",
+        "dashboard": "Dashboard",
+        "services": "Services",
+        "alerts": "Alerts",
+        "tests": "Tests",
+        "settings": "Settings",
+        "about": "About"
+    },
+    "history": {
+        "title": "History",
+        "trends": "Trends",
+        "range": "Range",
+        "baseline": "Baseline",
+        "probe_now": "Probe now",
+        "refresh": "Refresh",
+        "export_json": "Export JSON",
+        "export_alerts_json": "Export Alerts JSON",
+        "reset_history": "Reset history",
+        "recent_alert_events": "Recent alert events",
+        "export_preview": "Export preview",
+        "close": "Close",
+        "copy": "Copy",
+        "download": "Download"
+    },
+    "logs": {
+        "title": "Logs",
+        "manage": "Manage Logs",
+        "add": "Add",
+        "delete": "Delete",
+        "refresh": "Refresh",
+        "search": "Search",
+        "filter": "Filter",
+        "lines": "Lines",
+        "open": "Open",
+        "close": "Close",
+        "download": "Download",
+        "copy": "Copy"
+    },
+    "common": {
+        "save": "Save",
+        "cancel": "Cancel",
+        "edit": "Edit",
+        "delete": "Delete",
+        "update": "Update",
+        "create": "Create",
+        "enable": "Enable",
+        "disable": "Disable",
+        "yes": "Yes",
+        "no": "No",
+        "on": "On",
+        "off": "Off",
+        "confirm": "Confirm",
+        "search": "Search",
+        "filter": "Filter",
+        "actions": "Actions",
+        "close": "Close",
+        "none": "none",
+        "none_dash": "-"
+    },
+    "alerts": {
+        "title": "Alerts",
+        "recent_events": "Recent alert events",
+        "history": "Alert history",
+        "export_json": "Export Alerts JSON",
+        "no_alerts": "No alerts",
+        "level": "Level",
+        "message": "Message",
+        "service": "Service",
+        "time": "Time",
+        "probe_now": "Probe now",
+        "refresh": "Refresh",
+        "silence": "Silence",
+        "unsilence": "Unsilence",
+        "ack": "Acknowledge",
+        "unack": "Unacknowledge"
+    },
+    "tests": {
+        "title": "Server Tests",
+        "run_all": "Run all",
+        "status": "Status",
+        "last_run": "Last run",
+        "duration": "Duration"
+    },
+    "services": {
+        "title": "Services",
+        "status": "Status",
+        "restart": "Restart",
+        "start": "Start",
+        "stop": "Stop"
+    },
+    "config": {
+        "sections": {
+            "site": "Site",
+            "features": "Features",
+            "capabilities": "Capabilities",
+            "processes": "Processes",
+            "mail": "Mail",
+            "integrations": "Integrations",
+            "security": "Security",
+            "ui": "UI",
+            "server_tests": "Server Tests",
+            "alerts": "Alerts",
+            "cron": "Cron",
+            "history": "History",
+            "logs": "Logs",
+            "backups": "Backups",
+            "email": "Email"
+        },
+        "fields": {
+            "backups": {
+                "require_dedicated_mount": {
+                    "label": "Require dedicated mount",
+                    "help": "Legacy compatibility key. When enabled, backup scripts require the backup mount to be present."
+                },
+                "disable_on_mount_fail": {
+                    "label": "Disable backups if mount fails",
+                    "help": "When enabled, backup actions and generated scripts stop if the backup mount is missing."
+                }
+            },
+            "alerts": {
+                "min_severity": {
+                    "label": "Minimum severity to alert"
+                },
+                "email": {
+                    "label": "Legacy alert email(s)"
+                }
+            }
+        },
+        "ui": {
+            "unknown": "unknown",
+            "unknown_paren": "(unknown)",
+            "site_backup": {
+                "title": "Backup & Restore",
+                "export_config": "Export Config",
+                "import_config": "Import Config",
+                "choose_file_first": "Choose a backup file first",
+                "imported_reloading": "Imported. Reloading...",
+                "import_failed": "Import failed",
+                "import_failed_prefix": "Import failed: ",
+                "retention_title": "Backups - Retention",
+                "keep_last": "Keep last",
+                "files": "files",
+                "loading_stats": "(loading stats...)",
+                "last_backup_loading": "Last backup: (loading...)",
+                "last_backup_none": "Last backup: none yet",
+                "last_backup_prefix": "Last backup: ",
+                "last_backup_unknown": "Last backup: unknown",
+                "prune_now": "Prune now",
+                "pruned_kept_deleted": "Pruned - kept ",
+                "deleted_prefix": "deleted ",
+                "prune_failed": "Prune failed",
+                "prune_failed_prefix": "Prune failed: ",
+                "create_backup_now": "Create backup now",
+                "backup_saved_prefix": "Backup saved: ",
+                "backup_failed": "Backup failed",
+                "backup_failed_prefix": "Backup failed: ",
+                "download_latest_backup": "Download latest backup",
+                "no_backups_found": "No backups found",
+                "download_failed_prefix": "Download failed: ",
+                "redact_secrets": "Redact secrets"
+            }
+        }
+    },
+    "backups": {
+        "common": {
+            "status": "Status:",
+            "timestamp": "Timestamp:",
+            "none_dash": "-",
+            "free": "Free",
+            "used": "Used",
+            "copy": "Copy",
+            "warnings": "Warnings",
+            "errors": "Errors",
+            "loading": "Loading..."
+        },
+        "status": {
+            "error_loading_json": "ERROR LOADING JSON",
+            "ok": "OK",
+            "unmounted": "UNMOUNTED",
+            "critical": "CRITICAL",
+            "high": "HIGH",
+            "elevated": "ELEVATED",
+            "healthy": "HEALTHY",
+            "unknown": "UNKNOWN",
+            "unknown_cap": "Unknown"
+        },
+        "disk": {
+            "unmounted": "Disk UNMOUNTED",
+            "tag": "Disk:",
+            "sizes_updated": "Sizes updated:",
+            "title": "Disk Utilization",
+            "usage": "Usage",
+            "mount": "Mount"
+        },
+        "page": {
+            "freshness_prefix": "Freshness:",
+            "title": "Backup Control Center",
+            "subtitle_prefix": "Live status driven by",
+            "subtitle_suffix": "on your backup disk."
+        },
+        "ages": {
+            "no_snapshots_on_disk": "No snapshots found on disk",
+            "one_snapshot_present": "1 snapshot present",
+            "snapshots_present_suffix": "snapshots present",
+            "no_panel_backups_on_disk": "No panel backups found on disk",
+            "one_panel_backup_present": "1 panel backup present",
+            "panel_backups_present_suffix": "panel backups present",
+            "no_micro_backups_on_disk": "No micro backups found on disk",
+            "one_micro_backup_present": "1 micro backup present",
+            "micro_backups_present_suffix": "micro backups present",
+            "snapshot_daily0_chart": "Snapshot (daily.0)",
+            "hestia_latest_chart": "Hestia latest",
+            "micro_latest_chart": "Micro latest",
+            "age_days": "Age (days)",
+            "title": "Backup Ages",
+            "subtitle": "How fresh your latest backups are",
+            "snapshot_daily0": "Snapshot daily.0",
+            "latest_hestia": "Latest Hestia",
+            "latest_micro": "Latest Micro"
+        },
+        "errors": {
+            "no_backups_detected": "No backups detected for snapshots, Hestia, or micro sets."
+        },
+        "restore": {
+            "hestia_placeholder_tar": "USER.YYYYMMDD-HHMM.tar",
+            "using_latest_backup_prefix": "Using latest backup reported in JSON: ",
+            "adjust_backup_tar": "Adjust BACKUP_TAR to a real file from \\\"v-list-backups USER\\\" before running.",
+            "micro_restore_prefix": "Restore base from latest micro snapshot: ",
+            "micro_restore_suffix": " (review paths and exclusions before running).",
+            "set_correct_snapshot_path": "Set the correct snapshot path before using this command.",
+            "confirm_body_1": "This will start a Hestia restore job on the server using backupctl.",
+            "confirm_body_2": "Services and data for that user may be overwritten.",
+            "confirm_body_3": "Are you absolutely sure?"
+        },
+        "actions": {
+            "starting_prefix": "Starting ",
+            "failed_to_start_prefix": "FAILED to start ",
+            "started_prefix": "Started ",
+            "started_suffix": ". This may take a while; status will update on next health check.",
+            "error_talking_endpoint": "Error talking to backups_action.php",
+            "run_os_snapshot": "Run OS Snapshot",
+            "run_micro_backup": "Run Micro Backup",
+            "run_hestia_backup_user": "Run Hestia Backup (user)",
+            "run_all_backups": "Run ALL Backups",
+            "run_health_check": "Run Health Check",
+            "log_maintenance": "Log maintenance",
+            "clear_backup_logs": "Clear backup-health logs",
+            "clear_prune_logs": "Clear prune logs",
+            "clear_integrity_log": "Clear integrity log"
+        },
+        "cron": {
+            "no_entries": "No crontab entries detected.",
+            "env": "Env",
+            "schedule": "Schedule",
+            "entries_for_prefix": "Crontab entries for ",
+            "current_user": "current user",
+            "unable_to_read": "Unable to read crontab.",
+            "failed_to_read": "Failed to read crontab."
+        },
+        "warnings_errors": {
+            "title": "Warnings & Errors",
+            "subtitle": "Summary from the health check"
+        },
+        "raw_snapshot": {
+            "title": "Raw Snapshot",
+            "subtitle": "Key values directly from the last JSON status"
+        },
+        "recent_actions": {
+            "title": "Recent Actions",
+            "subtitle": "History of actions from this dashboard",
+            "none": "No actions recorded yet."
+        },
+        "orch": {
+            "title": "Backup Orchestration Wizard",
+            "subtitle": "Customize paths once, then copy the generated script/cron/systemd units.",
+            "backup_root": "Backup root",
+            "include_health": "Include health check",
+            "include_integrity": "Include integrity check",
+            "include_prune": "Include prune stage",
+            "suspend": "Suspend backups",
+            "disable_on_mount_fail": "Disable backups if mount fails",
+            "nightly_script": "Nightly script",
+            "copy_script": "Copy script",
+            "cron_entry": "Cron entry",
+            "copy_cron_line": "Copy cron line",
+            "systemd_service": "Systemd service",
+            "copy_unit": "Copy unit",
+            "systemd_timer": "Systemd timer",
+            "copy_timer": "Copy timer"
+        },
+        "quick_restore": {
+            "title": "Quick Restore Helpers",
+            "subtitle": "Pre-filled CLI commands for emergencies (manual run or DANGER button)",
+            "hestia_latest_title": "Restore latest Hestia user backup",
+            "micro_latest_title": "Restore from latest micro snapshot (CLI only)",
+            "copy_command": "Copy command",
+            "run_restore_danger": "Run restore (latest, DANGER)"
+        },
+        "cli": {
+            "title": "Hestia Backup & Restore CLI",
+            "subtitle": "Quick reference sheet - copy & paste ready",
+            "create_backups": "Create Backups",
+            "list_delete_backups": "List & Delete Backups",
+            "full_restore_user": "Full Restore (User)",
+            "selective_restore": "Selective Restore (Web / DB / Mail)",
+            "backup_file_locations": "Backup File Locations",
+            "backup_tarball_contents": "Backup Tarball Contents",
+            "backupctl_help": "backupctl help"
+        }
+    },
+    "footer": {
+        "logged_in_as": "Logged in as",
+        "theme": "Theme"
+    },
+    "i18n": {
+        "language_picker": {
+            "title": "Language",
+            "saving": "Saving...",
+            "saved": "Saved",
+            "save_failed": "Save failed"
+        }
+    },
+    "services_page": {
+        "environment": "Environment",
+        "caps": {
+            "panel": "panel",
+            "web": "web",
+            "mta": "mta",
+            "db": "db",
+            "nginx": "nginx"
+        },
+        "states": {
+            "active": "active",
+            "inactive": "inactive"
+        },
+        "filter_placeholder": "Filter services...",
+        "add_service": "Add Service",
+        "edit_service": "Edit Service",
+        "import": "Import",
+        "export_csv": "Export CSV",
+        "auto_probe": "Auto-probe",
+        "every": "Every",
+        "seconds_short": "s",
+        "columns": {
+            "name": "Name",
+            "category": "Category",
+            "host": "Host",
+            "port": "Port",
+            "probe": "Probe",
+            "timeout": "Timeout",
+            "path": "Path",
+            "enabled": "Enabled"
+        },
+        "form": {
+            "name": "Name",
+            "category": "Category",
+            "host": "Host",
+            "port": "Port",
+            "probe": "Probe",
+            "timeout": "Timeout (ms)",
+            "path": "Path (HTTP)",
+            "enabled": "Enabled"
+        },
+        "test_on_save": "Test on save",
+        "path_not_used": "(not used)",
+        "status": {
+            "up": "UP",
+            "warn": "WARN",
+            "down": "DOWN",
+            "unknown": "UNKNOWN"
+        },
+        "relative_time": {
+            "just_now": "just now",
+            "minutes_ago": "{count}m ago",
+            "hours_ago": "{count}h ago",
+            "days_ago": "{count}d ago"
+        },
+        "units": {
+            "ms": "ms"
+        },
+        "actions": {
+            "test": "Test"
+        },
+        "uptime": "Uptime {pct}%",
+        "alert_last_seen": "Alert {time}",
+        "alerts_muted_until": "Muted {time}",
+        "mute_alerts": "Mute alerts",
+        "confirm_delete": "Delete this service?",
+        "probe_kicked": "Probe kicked",
+        "no_alert_rules": "No alert rules to mute.",
+        "prompt_mute_minutes": "Mute related alerts for how many minutes?",
+        "alerts_muted_for": "Alerts muted for {mins}m.",
+        "mute_failed": "Mute failed: {message}",
+        "invalid_json": "Invalid JSON",
+        "import_failed": "Import failed",
+        "validation": {
+            "name_required": "Name is required.",
+            "host_required": "Host is required.",
+            "port_range": "Port must be 1-65535.",
+            "correct_fields": "Please correct the highlighted fields."
+        },
+        "service_save_requested": "Service save requested"
+    },
+    "bookmarks_page": {
+        "title": "Bookmarks",
+        "manage": "Manage Bookmarks",
+        "add_to_browser": "Add to Browser",
+        "bookmarklet_title": "Drag this to your bookmarks bar to quickly add the current page",
+        "prompt_tags": "Tags (comma,separated):",
+        "category": "Category",
+        "all": "All",
+        "sort": "Sort",
+        "sort_updated_desc": "Updated (newest)",
+        "sort_title_asc": "Title (A-Z)",
+        "sort_host_asc": "Host (A-Z)",
+        "fields": {
+            "title": "Title",
+            "url": "URL",
+            "tags": "Tags",
+            "name": "Name"
+        },
+        "placeholders": {
+            "optional_title": "Optional title",
+            "tags": "comma,separated,tags",
+            "new_category_name": "New category name"
+        },
+        "add_category": "Add Category",
+        "updated": "Updated",
+        "empty": "No bookmarks yet.",
+        "empty_categories": "No categories yet.",
+        "modal": {
+            "add_edit": "Add / Edit Bookmark",
+            "add_categories": "Add Categories"
+        },
+        "hints": {
+            "bookmark_edit": "Display bookmarks here with collapsible categories. Click a bookmark to load it above for editing or deletion.",
+            "category_edit": "Categories appear here. Click one to load it above for editing or deletion."
+        },
+        "uncategorized": "Uncategorized",
+        "confirm_delete_category": "Delete this category? Bookmarks will become Uncategorized.",
+        "confirm_delete_bookmark": "Delete this bookmark?",
+        "validation": {
+            "category_name_required": "Category name required",
+            "url_required": "URL is required"
+        },
+        "errors": {
+            "all_endpoints_failed": "All endpoints failed",
+            "bad_json": "Bad JSON from server",
+            "api_not_found": "Failed to load bookmarks (API not found). Tried: {tried}",
+            "load_failed": "Failed to load bookmarks: {message}"
+        },
+        "toasts": {
+            "category_saved": "Category saved",
+            "save_failed": "Save failed: {message}",
+            "category_deleted": "Category deleted",
+            "delete_failed": "Delete failed: {message}",
+            "order_saved": "Order saved",
+            "reorder_failed": "Reorder failed: {message}",
+            "category_updated": "Category updated",
+            "category_added": "Category added",
+            "bookmark_deleted": "Bookmark deleted",
+            "bookmark_updated": "Bookmark updated",
+            "bookmark_added": "Bookmark added"
+        }
+    }
+}

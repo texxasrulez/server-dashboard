@@ -1,0 +1,1 @@
+{"ts":1776960872,"alert_id":"alert_smoke","alert_name":"Smoke Web latency high","service_id":"svc_smoke_web","service_name":"Smoke Web","metric":"latency_ms","op":">=","threshold":1000,"value":1200,"severity":"warn"}

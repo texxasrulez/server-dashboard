@@ -1,0 +1,493 @@
+{
+    "app": {
+        "title": "Kiszolg\u00e1l\u00f3 m\u0171szerfal"
+    },
+    "nav": {
+        "history": "T\u00f6rt\u00e9nelem",
+        "logs": "Napl\u00f3k",
+        "dashboard": "M\u0171szerfal",
+        "services": "Szolg\u00e1ltat\u00e1sok",
+        "alerts": "Riaszt\u00e1sok",
+        "tests": "Vizsg\u00e1latok",
+        "settings": "Be\u00e1ll\u00edt\u00e1sok",
+        "about": "A  oldalr\u00f3l"
+    },
+    "history": {
+        "title": "T\u00f6rt\u00e9nelem",
+        "trends": "Trendek",
+        "range": "Tartom\u00e1ny",
+        "baseline": "Alapvonal",
+        "probe_now": "Szonda most",
+        "refresh": "Friss\u00edt\u00e9s",
+        "export_json": "JSON export\u00e1l\u00e1sa",
+        "export_alerts_json": "Riaszt\u00e1sok export\u00e1l\u00e1sa JSON",
+        "reset_history": "El\u0151zm\u00e9nyek vissza\u00e1ll\u00edt\u00e1sa",
+        "recent_alert_events": "Legut\u00f3bbi riaszt\u00e1si esem\u00e9nyek",
+        "export_preview": "Export el\u0151n\u00e9zet",
+        "close": "Z\u00e1rja be a",
+        "copy": "M\u00e1sol\u00e1s",
+        "download": "Let\u00f6lt\u00e9s"
+    },
+    "logs": {
+        "title": "Napl\u00f3k",
+        "manage": "Napl\u00f3k kezel\u00e9se",
+        "add": "Add",
+        "delete": "T\u00f6r\u00f6lje a  c\u00edmet.",
+        "refresh": "Friss\u00edt\u00e9s",
+        "search": "Keres\u00e9s",
+        "filter": "Sz\u0171r\u0151",
+        "lines": "Vonalak",
+        "open": "Nyissa meg a  c\u00edmet.",
+        "close": "Z\u00e1rja be a",
+        "download": "Let\u00f6lt\u00e9s",
+        "copy": "M\u00e1sol\u00e1s"
+    },
+    "common": {
+        "save": "Ment\u00e9s",
+        "cancel": "T\u00f6r\u00f6lje",
+        "edit": "Szerkeszt\u00e9s",
+        "delete": "T\u00f6r\u00f6lje a  c\u00edmet.",
+        "update": "Friss\u00edt\u00e9s",
+        "create": "Hozzon l\u00e9tre",
+        "enable": "Enged\u00e9lyezze a",
+        "disable": "A  letilt\u00e1sa",
+        "yes": "Igen",
+        "no": "Nem",
+        "on": "A  oldalon.",
+        "off": "Off",
+        "confirm": "Meger\u0151s\u00edt\u00e9s",
+        "search": "Keres\u00e9s",
+        "filter": "Sz\u0171r\u0151",
+        "actions": "Tev\u00e9kenys\u00e9gek",
+        "close": "Bez\u00e1r\u00e1s",
+        "none": "nincs",
+        "none_dash": "-"
+    },
+    "alerts": {
+        "title": "Riaszt\u00e1sok",
+        "recent_events": "Legut\u00f3bbi riaszt\u00e1si esem\u00e9nyek",
+        "history": "Riaszt\u00e1si el\u0151zm\u00e9nyek",
+        "export_json": "Riaszt\u00e1sok export\u00e1l\u00e1sa JSON",
+        "no_alerts": "Nincsenek riaszt\u00e1sok",
+        "level": "Szint",
+        "message": "\u00dczenet",
+        "service": "Szolg\u00e1ltat\u00e1s",
+        "time": "Id\u0151",
+        "probe_now": "Szonda most",
+        "refresh": "Friss\u00edt\u00e9s",
+        "silence": "Csend",
+        "unsilence": "Elhallgathatatlan",
+        "ack": "Visszaigazol\u00e1s",
+        "unack": "Vissza nem ismer\u00e9s"
+    },
+    "tests": {
+        "title": "Szerver tesztek",
+        "run_all": "Futtassa az \u00f6sszes",
+        "status": "\u00c1llapot",
+        "last_run": "Utols\u00f3 fut\u00e1s",
+        "duration": "Id\u0151tartam"
+    },
+    "services": {
+        "title": "Szolg\u00e1ltat\u00e1sok",
+        "status": "\u00c1llapot",
+        "restart": "\u00dajraind\u00edt\u00e1s",
+        "start": "Ind\u00edtsa el a  oldalt.",
+        "stop": "Stop"
+    },
+    "config": {
+        "sections": {
+            "site": "Site",
+            "features": "Features",
+            "capabilities": "Capabilities",
+            "processes": "Processes",
+            "mail": "Mail",
+            "integrations": "Integrations",
+            "security": "Security",
+            "ui": "UI",
+            "server_tests": "Server Tests",
+            "alerts": "Alerts",
+            "cron": "Cron",
+            "history": "History",
+            "logs": "Logs",
+            "backups": "Biztons\u00e1gi ment\u00e9sek",
+            "email": "Email"
+        },
+        "fields": {
+            "backups": {
+                "require_dedicated_mount": {
+                    "label": "Dedik\u00e1lt r\u00f6gz\u00edt\u00e9st ig\u00e9nyel",
+                    "help": "Kor\u00e1bbi kompatibilit\u00e1si kulcs. Ha enged\u00e9lyezve van, a biztons\u00e1gi ment\u00e9si szkriptekhez sz\u00fcks\u00e9g van a biztons\u00e1gi ment\u00e9si r\u00f6gz\u00edt\u00e9sre."
+                },
+                "disable_on_mount_fail": {
+                    "label": "Ha a csatlakoztat\u00e1s sikertelen, tiltsa le a biztons\u00e1gi ment\u00e9seket",
+                    "help": "Ha enged\u00e9lyezve van, a biztons\u00e1gi ment\u00e9si m\u0171veletek \u00e9s a gener\u00e1lt szkriptek le\u00e1llnak, ha hi\u00e1nyzik a biztons\u00e1gi ment\u00e9s."
+                }
+            },
+            "alerts": {
+                "min_severity": {
+                    "label": "A riaszt\u00e1s minim\u00e1lis s\u00falyoss\u00e1ga"
+                },
+                "email": {
+                    "label": "Legacy alert email(s)"
+                }
+            }
+        },
+        "ui": {
+            "unknown": "ismeretlen",
+            "unknown_paren": "(ismeretlen)",
+            "site_backup": {
+                "title": "Biztons\u00e1gi ment\u00e9s \u00e9s vissza\u00e1ll\u00edt\u00e1s",
+                "export_config": "Konfigur\u00e1ci\u00f3 export\u00e1l\u00e1sa",
+                "import_config": "Konfigur\u00e1ci\u00f3 import\u00e1l\u00e1sa",
+                "choose_file_first": "El\u0151sz\u00f6r v\u00e1lasszon biztons\u00e1gi m\u00e1solatot",
+                "imported_reloading": "Import\u00e1lt. \u00dajrat\u00f6lt\u00e9s...",
+                "import_failed": "Az import\u00e1l\u00e1s sikertelen",
+                "import_failed_prefix": "Sikertelen import\u00e1l\u00e1s:",
+                "retention_title": "Biztons\u00e1gi m\u00e1solatok \u2013 meg\u0151rz\u00e9s",
+                "keep_last": "Maradjon az utols\u00f3",
+                "files": "f\u00e1jlokat",
+                "loading_stats": "(statisztika bet\u00f6lt\u00e9se...)",
+                "last_backup_loading": "Utols\u00f3 biztons\u00e1gi ment\u00e9s: (bet\u00f6lt\u00e9s...)",
+                "last_backup_none": "Utols\u00f3 biztons\u00e1gi ment\u00e9s: m\u00e9g nincs",
+                "last_backup_prefix": "Utols\u00f3 biztons\u00e1gi ment\u00e9s:",
+                "last_backup_unknown": "Utols\u00f3 biztons\u00e1gi ment\u00e9s: ismeretlen",
+                "prune_now": "Metsd meg most",
+                "pruned_kept_deleted": "Metszett \u2013 tartott",
+                "deleted_prefix": "t\u00f6r\u00f6lve",
+                "prune_failed": "Aszalt szilva nem siker\u00fclt",
+                "prune_failed_prefix": "Sikertelen szilva:",
+                "create_backup_now": "K\u00e9sz\u00edtsen biztons\u00e1gi m\u00e1solatot most",
+                "backup_saved_prefix": "Biztons\u00e1gi m\u00e1solat mentve:",
+                "backup_failed": "A biztons\u00e1gi ment\u00e9s nem siker\u00fclt",
+                "backup_failed_prefix": "A biztons\u00e1gi ment\u00e9s nem siker\u00fclt:",
+                "download_latest_backup": "T\u00f6ltse le a leg\u00fajabb biztons\u00e1gi m\u00e1solatot",
+                "no_backups_found": "Nem tal\u00e1lhat\u00f3 biztons\u00e1gi m\u00e1solat",
+                "download_failed_prefix": "Sikertelen let\u00f6lt\u00e9s:",
+                "redact_secrets": "Redact secrets"
+            }
+        }
+    },
+    "backups": {
+        "common": {
+            "status": "\u00c1llapot:",
+            "timestamp": "Id\u0151b\u00e9lyeg:",
+            "none_dash": "-",
+            "free": "Ingyenes",
+            "used": "Haszn\u00e1lt",
+            "copy": "M\u00e1solat",
+            "warnings": "Figyelmeztet\u00e9sek",
+            "errors": "Hib\u00e1k",
+            "loading": "Terhel\u00e9s..."
+        },
+        "status": {
+            "error_loading_json": "HIBA JSON BET\u00d6LT\u00c9S\u00c9VEL",
+            "ok": "RENDBEN",
+            "unmounted": "SZERELETLEN",
+            "critical": "KRITIKAI",
+            "high": "MAGAS",
+            "elevated": "EMELTETT",
+            "healthy": "EG\u00c9SZS\u00c9GES",
+            "unknown": "ISMERETLEN",
+            "unknown_cap": "Ismeretlen"
+        },
+        "disk": {
+            "unmounted": "Lemez BEcsatolva",
+            "tag": "Korong:",
+            "sizes_updated": "M\u00e9retek friss\u00edtve:",
+            "title": "Lemezhaszn\u00e1lat",
+            "usage": "Haszn\u00e1lat",
+            "mount": "Hegy"
+        },
+        "page": {
+            "freshness_prefix": "Frissess\u00e9g:",
+            "title": "Backup Control Center",
+            "subtitle_prefix": "\u00c9l\u0151 \u00e1llapot vez\u00e9rli",
+            "subtitle_suffix": "a biztons\u00e1gi ment\u00e9si lemez\u00e9n."
+        },
+        "ages": {
+            "no_snapshots_on_disk": "Nem tal\u00e1lhat\u00f3k pillanatk\u00e9pek a lemezen",
+            "one_snapshot_present": "1 pillanatfelv\u00e9tel van jelen",
+            "snapshots_present_suffix": "pillanatfelv\u00e9telek jelen vannak",
+            "no_panel_backups_on_disk": "Nem tal\u00e1lhat\u00f3 panel biztons\u00e1gi m\u00e1solat a lemezen",
+            "one_panel_backup_present": "1 panel tartal\u00e9k van",
+            "panel_backups_present_suffix": "panel biztons\u00e1gi ment\u00e9sek jelen vannak",
+            "no_micro_backups_on_disk": "Nem tal\u00e1lhat\u00f3 mikroment\u00e9s a lemezen",
+            "one_micro_backup_present": "1 mikro tartal\u00e9k van jelen",
+            "micro_backups_present_suffix": "mikro biztons\u00e1gi ment\u00e9sek jelen vannak",
+            "snapshot_daily0_chart": "Pillanatk\u00e9p (napi.0)",
+            "hestia_latest_chart": "Hestia leg\u00fajabb",
+            "micro_latest_chart": "Mikro leg\u00fajabb",
+            "age_days": "\u00c9letkor (nap)",
+            "title": "Biztons\u00e1gi korok",
+            "subtitle": "Mennyire frissek a leg\u00fajabb biztons\u00e1gi m\u00e1solatok",
+            "snapshot_daily0": "Napi pillanatfelv\u00e9tel.0",
+            "latest_hestia": "A leg\u00fajabb Hestia",
+            "latest_micro": "Leg\u00fajabb Micro"
+        },
+        "errors": {
+            "no_backups_detected": "Nem \u00e9szlelt\u00fcnk biztons\u00e1gi m\u00e1solatot a pillanatk\u00e9pekr\u0151l, a Hesti\u00e1r\u00f3l vagy a mikrok\u00e9szletekr\u0151l."
+        },
+        "restore": {
+            "hestia_placeholder_tar": "g\u00e9n.\u00c9\u00c9\u00c9\u00c9HHNN-\u00d3\u00d3PP.tar",
+            "using_latest_backup_prefix": "A JSON-ban jelentett leg\u00fajabb biztons\u00e1gi m\u00e1solat haszn\u00e1lata:",
+            "adjust_backup_tar": "Fut\u00e1s el\u0151tt \u00e1ll\u00edtsa be a BACKUP_TAR-t val\u00f3di f\u00e1jlra a \\\"v-list-backups USER\\\" f\u00e1jlb\u00f3l.",
+            "micro_restore_prefix": "Az alap vissza\u00e1ll\u00edt\u00e1sa a leg\u00fajabb mikropillanatfelv\u00e9telr\u0151l:",
+            "micro_restore_suffix": "(futtat\u00e1s el\u0151tt tekintse \u00e1t az \u00fatvonalakat \u00e9s a kiz\u00e1r\u00e1sokat).",
+            "set_correct_snapshot_path": "A parancs haszn\u00e1lata el\u0151tt \u00e1ll\u00edtsa be a pillanatk\u00e9p helyes el\u00e9r\u00e9si \u00fatj\u00e1t.",
+            "confirm_body_1": "Ez elind\u00edt egy Hestia vissza\u00e1ll\u00edt\u00e1si feladatot a kiszolg\u00e1l\u00f3n a backupctl haszn\u00e1lat\u00e1val.",
+            "confirm_body_2": "Az adott felhaszn\u00e1l\u00f3 szolg\u00e1ltat\u00e1sai \u00e9s adatai fel\u00fcl\u00edrhat\u00f3k.",
+            "confirm_body_3": "Teljesen biztos vagy benne?"
+        },
+        "actions": {
+            "starting_prefix": "Indul\u00e1s",
+            "failed_to_start_prefix": "AZ ind\u00edt\u00e1s SIKERTELEN",
+            "started_prefix": "Elindult",
+            "started_suffix": ". Ez eltarthat egy ideig; \u00e1llapota a k\u00f6vetkez\u0151 \u00e1llapotfelm\u00e9r\u00e9skor friss\u00fcl.",
+            "error_talking_endpoint": "Hiba a backups_action.php f\u00e1jllal val\u00f3 besz\u00e9lget\u00e9s sor\u00e1n",
+            "run_os_snapshot": "Futtassa az OS Snapshot alkalmaz\u00e1st",
+            "run_micro_backup": "Futtassa a Micro Backup programot",
+            "run_hestia_backup_user": "Futtassa a Hestia biztons\u00e1gi m\u00e1solatot (g\u00e9n)",
+            "run_all_backups": "Futtassa az \u00d6SSZES biztons\u00e1gi m\u00e1solatot",
+            "run_health_check": "Futtassa az \u00e1llapotfelm\u00e9r\u00e9st",
+            "log_maintenance": "R\u00f6nk karbantart\u00e1s",
+            "clear_backup_logs": "T\u00f6r\u00f6lje a biztons\u00e1gi ment\u00e9si \u00e1llapotnapl\u00f3kat",
+            "clear_prune_logs": "Tiszt\u00edtsa meg a szilva r\u00f6nk\u00f6ket",
+            "clear_integrity_log": "Az integrit\u00e1snapl\u00f3 t\u00f6rl\u00e9se"
+        },
+        "cron": {
+            "no_entries": "Nem \u00e9szleltek crontab bejegyz\u00e9seket.",
+            "env": "Env",
+            "schedule": "Menetrend",
+            "entries_for_prefix": "Crontab bejegyz\u00e9sek ehhez",
+            "current_user": "jelenlegi felhaszn\u00e1l\u00f3",
+            "unable_to_read": "A crontab nem olvashat\u00f3.",
+            "failed_to_read": "A crontab beolvas\u00e1sa nem siker\u00fclt."
+        },
+        "warnings_errors": {
+            "title": "Figyelmeztet\u00e9sek \u00e9s hib\u00e1k",
+            "subtitle": "\u00d6sszefoglal\u00f3 az \u00e1llapotfelm\u00e9r\u00e9sr\u0151l"
+        },
+        "raw_snapshot": {
+            "title": "Nyers pillanatfelv\u00e9tel",
+            "subtitle": "Kulcs\u00e9rt\u00e9kek k\u00f6zvetlen\u00fcl az utols\u00f3 JSON-\u00e1llapotb\u00f3l"
+        },
+        "recent_actions": {
+            "title": "Legut\u00f3bbi m\u0171veletek",
+            "subtitle": "M\u0171veletek el\u0151zm\u00e9nyei err\u0151l az ir\u00e1ny\u00edt\u00f3pultr\u00f3l",
+            "none": "M\u00e9g nincsenek r\u00f6gz\u00edtett m\u0171veletek."
+        },
+        "orch": {
+            "title": "Biztons\u00e1gi ment\u00e9s hangszerel\u00e9si var\u00e1zsl\u00f3",
+            "subtitle": "Egyszer szabja testre az el\u00e9r\u00e9si utat, majd m\u00e1solja a gener\u00e1lt script/cron/systemd egys\u00e9geket.",
+            "backup_root": "Biztons\u00e1gi m\u00e1solat gy\u00f6k\u00e9r",
+            "include_health": "Tartalmazza az eg\u00e9szs\u00e9g\u00fcgyi ellen\u0151rz\u00e9st",
+            "include_integrity": "Tartalmazza az integrit\u00e1s ellen\u0151rz\u00e9s\u00e9t",
+            "include_prune": "Tartalmazza a szilva szakaszt",
+            "suspend": "A biztons\u00e1gi ment\u00e9sek felf\u00fcggeszt\u00e9se",
+            "disable_on_mount_fail": "Ha a csatlakoztat\u00e1s sikertelen, tiltsa le a biztons\u00e1gi ment\u00e9seket",
+            "nightly_script": "\u00c9jszakai forgat\u00f3k\u00f6nyv",
+            "copy_script": "Szkript m\u00e1sol\u00e1sa",
+            "cron_entry": "Cron bejegyz\u00e9s",
+            "copy_cron_line": "cron vonal m\u00e1sol\u00e1sa",
+            "systemd_service": "Rendszeres szolg\u00e1ltat\u00e1s",
+            "copy_unit": "M\u00e1sol\u00f3 egys\u00e9g",
+            "systemd_timer": "Rendszeres id\u0151z\u00edt\u0151",
+            "copy_timer": "Id\u0151z\u00edt\u0151 m\u00e1sol\u00e1sa"
+        },
+        "quick_restore": {
+            "title": "Gyors-vissza\u00e1ll\u00edt\u00e1si seg\u00edt\u0151k",
+            "subtitle": "El\u0151re kit\u00f6lt\u00f6tt CLI-parancsok v\u00e9szhelyzetekhez (k\u00e9zi fut\u00e1s vagy VESZ\u00c9LY gomb)",
+            "hestia_latest_title": "\u00c1ll\u00edtsa vissza a leg\u00fajabb Hestia felhaszn\u00e1l\u00f3i biztons\u00e1gi m\u00e1solatot",
+            "micro_latest_title": "Vissza\u00e1ll\u00edt\u00e1s a leg\u00fajabb mikropillanatk\u00e9pb\u0151l (csak CLI)",
+            "copy_command": "M\u00e1sol\u00e1s parancs",
+            "run_restore_danger": "Futtassa a vissza\u00e1ll\u00edt\u00e1st (leg\u00fajabb, VESZ\u00c9LY)"
+        },
+        "cli": {
+            "title": "Hestia biztons\u00e1gi ment\u00e9s \u00e9s vissza\u00e1ll\u00edt\u00e1s CLI",
+            "subtitle": "Gyors referencialap \u2013 k\u00e9sz a m\u00e1sol\u00e1s \u00e9s beilleszt\u00e9s",
+            "create_backups": "Biztons\u00e1gi m\u00e1solatok l\u00e9trehoz\u00e1sa",
+            "list_delete_backups": "Biztons\u00e1gi m\u00e1solatok list\u00e1z\u00e1sa \u00e9s t\u00f6rl\u00e9se",
+            "full_restore_user": "Teljes vissza\u00e1ll\u00edt\u00e1s (felhaszn\u00e1l\u00f3)",
+            "selective_restore": "Szelekt\u00edv vissza\u00e1ll\u00edt\u00e1s (Web / DB / Mail)",
+            "backup_file_locations": "F\u00e1jlhelyek biztons\u00e1gi ment\u00e9se",
+            "backup_tarball_contents": "Tartalom ment\u00e9se",
+            "backupctl_help": "backupctl seg\u00edts\u00e9g"
+        }
+    },
+    "footer": {
+        "logged_in_as": "Bejelentkezve mint",
+        "theme": "T\u00e9ma"
+    },
+    "i18n": {
+        "language_picker": {
+            "title": "Nyelv",
+            "saving": "Ment\u00e9s...",
+            "saved": "Mentve",
+            "save_failed": "A ment\u00e9s sikertelen"
+        }
+    },
+    "services_page": {
+        "environment": "K\u00f6rnyezet",
+        "filter_placeholder": "Szolg\u00e1ltat\u00e1sok sz\u0171r\u00e9se...",
+        "add_service": "Szolg\u00e1ltat\u00e1s hozz\u00e1ad\u00e1sa",
+        "edit_service": "Szolg\u00e1ltat\u00e1s szerkeszt\u00e9se",
+        "import": "Import\u00e1l\u00e1s",
+        "export_csv": "CSV export\u00e1l\u00e1sa",
+        "auto_probe": "Automatikus ellen\u0151rz\u00e9s",
+        "every": "Minden",
+        "seconds_short": "mp",
+        "columns": {
+            "name": "N\u00e9v",
+            "category": "Kateg\u00f3ria",
+            "host": "Hoszt",
+            "port": "Port",
+            "probe": "Ellen\u0151rz\u00e9s",
+            "timeout": "Id\u0151t\u00fall\u00e9p\u00e9s",
+            "path": "\u00datvonal",
+            "enabled": "Enged\u00e9lyezve"
+        },
+        "form": {
+            "name": "N\u00e9v",
+            "category": "Kateg\u00f3ria",
+            "host": "Hoszt",
+            "port": "Port",
+            "probe": "Ellen\u0151rz\u00e9s",
+            "timeout": "Id\u0151t\u00fall\u00e9p\u00e9s (ms)",
+            "path": "\u00datvonal (HTTP)",
+            "enabled": "Enged\u00e9lyezve"
+        },
+        "test_on_save": "Tesztel\u00e9s ment\u00e9skor",
+        "caps": {
+            "panel": "panel",
+            "web": "web",
+            "mta": "mta",
+            "db": "db",
+            "nginx": "nginx"
+        },
+        "states": {
+            "active": "akt\u00edv",
+            "inactive": "inakt\u00edv"
+        },
+        "path_not_used": "(nem haszn\u00e1lt)",
+        "status": {
+            "up": "UP",
+            "warn": "WARN",
+            "down": "LEFEL\u00c9",
+            "unknown": "ISMERETLEN"
+        },
+        "relative_time": {
+            "just_now": "most \u00e9ppen",
+            "minutes_ago": "{count}m ago",
+            "hours_ago": "{count}h ago",
+            "days_ago": "{count}d ago"
+        },
+        "units": {
+            "ms": "Ms"
+        },
+        "actions": {
+            "test": "Teszt"
+        },
+        "uptime": "\u00dczemid\u0151 {pct}%",
+        "alert_last_seen": "Riaszt\u00e1s {time}",
+        "alerts_muted_until": "Muted {time}",
+        "mute_alerts": "Riaszt\u00e1sok n\u00e9m\u00edt\u00e1sa",
+        "confirm_delete": "T\u00f6r\u00f6lje ezt a szolg\u00e1ltat\u00e1st?",
+        "probe_kicked": "Szonda r\u00fagott",
+        "no_alert_rules": "Nincsenek eln\u00e9m\u00edthat\u00f3 riaszt\u00e1si szab\u00e1lyok.",
+        "prompt_mute_minutes": "H\u00e1ny percig n\u00e9m\u00edtsa el a kapcsol\u00f3d\u00f3 riaszt\u00e1sokat?",
+        "alerts_muted_for": "A riaszt\u00e1sok {perc}m-re eln\u00e9mulnak.",
+        "mute_failed": "A n\u00e9m\u00edt\u00e1s sikertelen: {\u00fczenet}",
+        "invalid_json": "\u00c9rv\u00e9nytelen JSON",
+        "import_failed": "Az import\u00e1l\u00e1s sikertelen",
+        "validation": {
+            "name_required": "A n\u00e9v megad\u00e1sa k\u00f6telez\u0151.",
+            "host_required": "Gazd\u00e1ra van sz\u00fcks\u00e9g.",
+            "port_range": "A portnak 1-65535-nek kell lennie.",
+            "correct_fields": "K\u00e9rj\u00fck, jav\u00edtsa ki a kiemelt mez\u0151ket."
+        },
+        "service_save_requested": "Szolg\u00e1ltat\u00e1s ment\u00e9se k\u00e9rt"
+    },
+    "bookmarks_page": {
+        "title": "K\u00f6nyvjelz\u0151k",
+        "manage": "K\u00f6nyvjelz\u0151k kezel\u00e9se",
+        "add_to_browser": "Hozz\u00e1ad\u00e1s a b\u00f6ng\u00e9sz\u0151h\u00f6z",
+        "bookmarklet_title": "H\u00fazza ezt a k\u00f6nyvjelz\u0151s\u00e1vra az aktu\u00e1lis oldal gyors hozz\u00e1ad\u00e1s\u00e1hoz",
+        "prompt_tags": "C\u00edmk\u00e9k (vessz\u0151vel elv\u00e1lasztva):",
+        "category": "Kateg\u00f3ria",
+        "all": "\u00d6sszes",
+        "sort": "Rendez\u00e9s",
+        "sort_updated_desc": "Friss\u00edtve (leg\u00fajabb)",
+        "sort_title_asc": "C\u00edm (A-Z)",
+        "sort_host_asc": "Hoszt (A-Z)",
+        "fields": {
+            "title": "C\u00edm",
+            "url": "URL",
+            "tags": "C\u00edmk\u00e9k",
+            "name": "N\u00e9v"
+        },
+        "placeholders": {
+            "optional_title": "Opcion\u00e1lis c\u00edm",
+            "tags": "c\u00edmk\u00e9k,vessz\u0151vel,elv\u00e1lasztva",
+            "new_category_name": "\u00daj kateg\u00f3rian\u00e9v"
+        },
+        "add_category": "Kateg\u00f3ria hozz\u00e1ad\u00e1sa",
+        "updated": "Friss\u00edtve",
+        "empty": "M\u00e9g nincsenek k\u00f6nyvjelz\u0151k.",
+        "empty_categories": "M\u00e9g nincsenek kateg\u00f3ri\u00e1k.",
+        "modal": {
+            "add_edit": "K\u00f6nyvjelz\u0151 hozz\u00e1ad\u00e1sa / szerkeszt\u00e9se",
+            "add_categories": "Kateg\u00f3ri\u00e1k hozz\u00e1ad\u00e1sa"
+        },
+        "uncategorized": "Kateg\u00f3ria n\u00e9lk\u00fcl",
+        "hints": {
+            "bookmark_edit": "K\u00f6nyvjelz\u0151k megjelen\u00edt\u00e9se itt \u00f6sszecsukhat\u00f3 kateg\u00f3ri\u00e1kkal. Kattintson egy k\u00f6nyvjelz\u0151re, hogy fel\u00fclr\u0151l t\u00f6ltse be szerkeszt\u00e9shez vagy t\u00f6rl\u00e9shez.",
+            "category_edit": "A kateg\u00f3ri\u00e1k itt jelennek meg. Kattintson az egyikre, hogy bet\u00f6ltse a fenti szerkeszt\u00e9shez vagy t\u00f6rl\u00e9shez."
+        },
+        "confirm_delete_category": "T\u00f6r\u00f6lje ezt a kateg\u00f3ri\u00e1t? A k\u00f6nyvjelz\u0151k kategoriz\u00e1latlann\u00e1 v\u00e1lnak.",
+        "confirm_delete_bookmark": "T\u00f6r\u00f6lje ezt a k\u00f6nyvjelz\u0151t?",
+        "validation": {
+            "category_name_required": "Kateg\u00f3ria neve k\u00f6telez\u0151",
+            "url_required": "URL sz\u00fcks\u00e9ges"
+        },
+        "errors": {
+            "all_endpoints_failed": "Minden v\u00e9gpont sikertelen",
+            "bad_json": "Rossz JSON a kiszolg\u00e1l\u00f3t\u00f3l",
+            "api_not_found": "Nem siker\u00fclt bet\u00f6lteni a k\u00f6nyvjelz\u0151ket (API nem tal\u00e1lhat\u00f3). Pr\u00f3b\u00e1ltam: {tried}",
+            "load_failed": "Siker\u00fclt bet\u00f6lteni a k\u00f6nyvjelz\u0151ket: {message}"
+        },
+        "toasts": {
+            "category_saved": "Mentett kateg\u00f3ria",
+            "save_failed": "A ment\u00e9s sikertelen: {\u00fczenet}",
+            "category_deleted": "Kateg\u00f3ria t\u00f6r\u00f6lve",
+            "delete_failed": "A t\u00f6rl\u00e9s sikertelen: {\u00fczenet}",
+            "order_saved": "Elmentett rendel\u00e9s",
+            "reorder_failed": "Az \u00fajrarendel\u00e9s sikertelen: {\u00fczenet}",
+            "category_updated": "Friss\u00edtett kateg\u00f3ria",
+            "category_added": "Hozz\u00e1adott kateg\u00f3ria",
+            "bookmark_deleted": "K\u00f6nyvjelz\u0151 t\u00f6r\u00f6lve",
+            "bookmark_updated": "K\u00f6nyvjelz\u0151 friss\u00edtve",
+            "bookmark_added": "Hozz\u00e1adott k\u00f6nyvjelz\u0151"
+        }
+    },
+    "header": {
+        "navigation": "Fejl\u00e9c navig\u00e1ci\u00f3",
+        "system_status": "A szolg\u00e1ltat\u00e1s \u00e1llapota",
+        "loading": "Bet\u00f6lt\u00e9s...",
+        "profile": "Profilom",
+        "logout": "Kijelentkez\u00e9s",
+        "mobile": {
+            "open_menu": "Men\u00fc megnyit\u00e1sa",
+            "menu": "Men\u00fc"
+        },
+        "nav": {
+            "history": "T\u00f6rt\u00e9nelem",
+            "cron_health": "Cron Health",
+            "processes": "Folyamatok",
+            "databases": "Adatb\u00e1zisok",
+            "speedtest": "Speedtest",
+            "diagnostics": "Diagnosztika",
+            "config": "Konfigur\u00e1ci\u00f3",
+            "backups": "Biztons\u00e1gi ment\u00e9sek"
+        }
+    }
+}

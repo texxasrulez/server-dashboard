@@ -1,0 +1,493 @@
+{
+    "app": {
+        "title": "Server Dashboard"
+    },
+    "nav": {
+        "history": "Geschiedenis",
+        "logs": "Logboeken",
+        "dashboard": "Dashboard",
+        "services": "Diensten",
+        "alerts": "Waarschuwingen",
+        "tests": "Tests",
+        "settings": "Instellingen",
+        "about": "Over"
+    },
+    "history": {
+        "title": "Geschiedenis",
+        "trends": "Trends",
+        "range": "Bereik",
+        "baseline": "Basislijn",
+        "probe_now": "Nu sonderen",
+        "refresh": "Vernieuw",
+        "export_json": "JSON exporteren",
+        "export_alerts_json": "JSON-waarschuwingen exporteren",
+        "reset_history": "Geschiedenis resetten",
+        "recent_alert_events": "Recente waarschuwingsgebeurtenissen",
+        "export_preview": "Voorbeeld exporteren",
+        "close": "Sluit",
+        "copy": "Kopie",
+        "download": "Downloaden"
+    },
+    "logs": {
+        "title": "Logboeken",
+        "manage": "Logboeken beheren",
+        "add": "Voeg  toe",
+        "delete": "Verwijder",
+        "refresh": "Vernieuw",
+        "search": "Zoek op",
+        "filter": "Filter",
+        "lines": "Lijnen",
+        "open": "Open",
+        "close": "Sluit",
+        "download": "Downloaden",
+        "copy": "Kopie"
+    },
+    "common": {
+        "save": "Sla",
+        "cancel": "Annuleren",
+        "edit": "Bewerk",
+        "delete": "Verwijder",
+        "update": "Update",
+        "create": "Maak",
+        "enable": "inschakelen",
+        "disable": "uitschakelen",
+        "yes": "Ja",
+        "no": "Geen",
+        "on": "Op",
+        "off": "Uit",
+        "confirm": "Bevestig",
+        "search": "Zoek op",
+        "filter": "Filter",
+        "actions": "Acties",
+        "close": "Sluiten",
+        "none": "geen",
+        "none_dash": "-"
+    },
+    "alerts": {
+        "title": "Waarschuwingen",
+        "recent_events": "Recente waarschuwingsgebeurtenissen",
+        "history": "Waarschuwingsgeschiedenis",
+        "export_json": "JSON-waarschuwingen exporteren",
+        "no_alerts": "Geen waarschuwingen",
+        "level": "Niveau",
+        "message": "Bericht",
+        "service": "Service",
+        "time": "Tijd",
+        "probe_now": "Nu sonderen",
+        "refresh": "Vernieuw",
+        "silence": "Stilte",
+        "unsilence": "Stilte",
+        "ack": "erkennen",
+        "unack": "Niet-erkennen"
+    },
+    "tests": {
+        "title": "Servertests",
+        "run_all": "Alles uitvoeren",
+        "status": "Status",
+        "last_run": "Laatste run",
+        "duration": "Duur"
+    },
+    "services": {
+        "title": "Diensten",
+        "status": "Status",
+        "restart": "Herstart",
+        "start": "Start",
+        "stop": "Stop"
+    },
+    "config": {
+        "sections": {
+            "site": "Site",
+            "features": "Features",
+            "capabilities": "Capabilities",
+            "processes": "Processes",
+            "mail": "Mail",
+            "integrations": "Integrations",
+            "security": "Security",
+            "ui": "UI",
+            "server_tests": "Server Tests",
+            "alerts": "Alerts",
+            "cron": "Cron",
+            "history": "History",
+            "logs": "Logs",
+            "backups": "Back-ups",
+            "email": "Email"
+        },
+        "fields": {
+            "backups": {
+                "require_dedicated_mount": {
+                    "label": "Vereist een speciale houder",
+                    "help": "Verouderde compatibiliteitssleutel. Indien ingeschakeld, vereisen back-upscripts dat de back-upkoppeling aanwezig is."
+                },
+                "disable_on_mount_fail": {
+                    "label": "Schakel back-ups uit als het koppelen mislukt",
+                    "help": "Indien ingeschakeld, stoppen back-upacties en gegenereerde scripts als de back-upkoppeling ontbreekt."
+                }
+            },
+            "alerts": {
+                "min_severity": {
+                    "label": "Minimale ernst om te waarschuwen"
+                },
+                "email": {
+                    "label": "Legacy alert email(s)"
+                }
+            }
+        },
+        "ui": {
+            "unknown": "onbekend",
+            "unknown_paren": "(onbekend)",
+            "site_backup": {
+                "title": "Back-up en herstel",
+                "export_config": "Configuratie exporteren",
+                "import_config": "Configuratie importeren",
+                "choose_file_first": "Kies eerst een back-upbestand",
+                "imported_reloading": "Ge\u00efmporteerd. Herladen...",
+                "import_failed": "Importeren is mislukt",
+                "import_failed_prefix": "Importeren mislukt:",
+                "retention_title": "Back-ups - Bewaring",
+                "keep_last": "Blijf als laatste",
+                "files": "bestanden",
+                "loading_stats": "(statistieken laden...)",
+                "last_backup_loading": "Laatste back-up: (laden...)",
+                "last_backup_none": "Laatste back-up: nog geen",
+                "last_backup_prefix": "Laatste back-up:",
+                "last_backup_unknown": "Laatste back-up: onbekend",
+                "prune_now": "Snoei nu",
+                "pruned_kept_deleted": "Gesnoeid - bewaard",
+                "deleted_prefix": "verwijderd",
+                "prune_failed": "Snoeien is mislukt",
+                "prune_failed_prefix": "Snoeien mislukt:",
+                "create_backup_now": "Maak nu een back-up",
+                "backup_saved_prefix": "Back-up opgeslagen:",
+                "backup_failed": "Back-up mislukt",
+                "backup_failed_prefix": "Back-up mislukt:",
+                "download_latest_backup": "Download de nieuwste back-up",
+                "no_backups_found": "Geen back-ups gevonden",
+                "download_failed_prefix": "Downloaden mislukt:",
+                "redact_secrets": "Redact secrets"
+            }
+        }
+    },
+    "backups": {
+        "common": {
+            "status": "Status:",
+            "timestamp": "Tijdstempel:",
+            "none_dash": "-",
+            "free": "Vrij",
+            "used": "Gebruikt",
+            "copy": "Kopi\u00ebren",
+            "warnings": "Waarschuwingen",
+            "errors": "Fouten",
+            "loading": "Laden..."
+        },
+        "status": {
+            "error_loading_json": "FOUT BIJ HET LADEN VAN JSON",
+            "ok": "OK",
+            "unmounted": "ONGEMONTEERD",
+            "critical": "KRITIEK",
+            "high": "HOOG",
+            "elevated": "VERHOOGD",
+            "healthy": "GEZOND",
+            "unknown": "ONBEKEND",
+            "unknown_cap": "Onbekend"
+        },
+        "disk": {
+            "unmounted": "Schijf NIET GEMONTEERD",
+            "tag": "Schijf:",
+            "sizes_updated": "Maten bijgewerkt:",
+            "title": "Schijfgebruik",
+            "usage": "Gebruik",
+            "mount": "Monteren"
+        },
+        "page": {
+            "freshness_prefix": "Versheid:",
+            "title": "Back-upcontrolecentrum",
+            "subtitle_prefix": "Livestatus gedreven door",
+            "subtitle_suffix": "op uw back-upschijf."
+        },
+        "ages": {
+            "no_snapshots_on_disk": "Geen momentopnamen gevonden op schijf",
+            "one_snapshot_present": "1 momentopname aanwezig",
+            "snapshots_present_suffix": "momentopnames aanwezig",
+            "no_panel_backups_on_disk": "Geen paneelback-ups gevonden op schijf",
+            "one_panel_backup_present": "1 paneelback-up aanwezig",
+            "panel_backups_present_suffix": "paneelback-ups aanwezig",
+            "no_micro_backups_on_disk": "Geen micro-back-ups gevonden op schijf",
+            "one_micro_backup_present": "1 micro backup aanwezig",
+            "micro_backups_present_suffix": "micro-back-ups aanwezig",
+            "snapshot_daily0_chart": "Momentopname (dagelijks.0)",
+            "hestia_latest_chart": "Hestia laatste",
+            "micro_latest_chart": "Micro nieuwste",
+            "age_days": "Leeftijd (dagen)",
+            "title": "Back-upleeftijden",
+            "subtitle": "Hoe vers uw nieuwste back-ups zijn",
+            "snapshot_daily0": "Momentopname dagelijks.0",
+            "latest_hestia": "Nieuwste Hestia",
+            "latest_micro": "Nieuwste Micro"
+        },
+        "errors": {
+            "no_backups_detected": "Er zijn geen back-ups gedetecteerd voor snapshots, Hestia of microsets."
+        },
+        "restore": {
+            "hestia_placeholder_tar": "USER.JJJJMMDD-UUMM.tar",
+            "using_latest_backup_prefix": "Met behulp van de nieuwste back-up gerapporteerd in JSON:",
+            "adjust_backup_tar": "Pas BACKUP_TAR aan naar een echt bestand uit \\\"v-list-backups USER\\\" voordat u het uitvoert.",
+            "micro_restore_prefix": "Basis herstellen vanaf de laatste micro-snapshot:",
+            "micro_restore_suffix": "(bekijk paden en uitsluitingen voordat u deze uitvoert).",
+            "set_correct_snapshot_path": "Stel het juiste snapshotpad in voordat u deze opdracht gebruikt.",
+            "confirm_body_1": "Hierdoor wordt een Hestia-hersteltaak op de server gestart met behulp van backupctl.",
+            "confirm_body_2": "Services en gegevens voor die gebruiker kunnen worden overschreven.",
+            "confirm_body_3": "Weet je het absoluut zeker?"
+        },
+        "actions": {
+            "starting_prefix": "Beginnen",
+            "failed_to_start_prefix": "Kan niet starten",
+            "started_prefix": "Gestart",
+            "started_suffix": ". Dit kan even duren; de status wordt bijgewerkt bij de volgende gezondheidscontrole.",
+            "error_talking_endpoint": "Fout bij praten met backups_action.php",
+            "run_os_snapshot": "Voer OS-momentopname uit",
+            "run_micro_backup": "Voer Micro-back-up uit",
+            "run_hestia_backup_user": "Voer Hestia Backup uit (gen)",
+            "run_all_backups": "Voer ALLE back-ups uit",
+            "run_health_check": "Voer een statuscheck uit",
+            "log_maintenance": "Onderhoud van logboeken",
+            "clear_backup_logs": "Wis back-upstatuslogboeken",
+            "clear_prune_logs": "Snoeilogboeken opruimen",
+            "clear_integrity_log": "Integriteitslogboek wissen"
+        },
+        "cron": {
+            "no_entries": "Geen crontab-items gedetecteerd.",
+            "env": "Omgeving",
+            "schedule": "Schema",
+            "entries_for_prefix": "Crontab-vermeldingen voor",
+            "current_user": "huidige gebruiker",
+            "unable_to_read": "Kan crontab niet lezen.",
+            "failed_to_read": "Kan crontab niet lezen."
+        },
+        "warnings_errors": {
+            "title": "Waarschuwingen en fouten",
+            "subtitle": "Samenvatting van de gezondheidscheck"
+        },
+        "raw_snapshot": {
+            "title": "Ruwe momentopname",
+            "subtitle": "Sleutelwaarden rechtstreeks uit de laatste JSON-status"
+        },
+        "recent_actions": {
+            "title": "Recente acties",
+            "subtitle": "Geschiedenis van acties van dit dashboard",
+            "none": "Er zijn nog geen acties geregistreerd."
+        },
+        "orch": {
+            "title": "Wizard Back-uporkestratie",
+            "subtitle": "Pas de paden \u00e9\u00e9n keer aan en kopieer vervolgens de gegenereerde script/cron/systemd-eenheden.",
+            "backup_root": "Back-up root",
+            "include_health": "Inclusief gezondheidscheck",
+            "include_integrity": "Inclusief integriteitscontrole",
+            "include_prune": "Inclusief snoeifase",
+            "suspend": "Back-ups opschorten",
+            "disable_on_mount_fail": "Schakel back-ups uit als het koppelen mislukt",
+            "nightly_script": "Nachtelijk script",
+            "copy_script": "Script kopi\u00ebren",
+            "cron_entry": "Cron-invoer",
+            "copy_cron_line": "Kopieer de cron-regel",
+            "systemd_service": "Systematische service",
+            "copy_unit": "Kopieer eenheid",
+            "systemd_timer": "Systeemtimer",
+            "copy_timer": "Kopieertimer"
+        },
+        "quick_restore": {
+            "title": "Helpers voor snel herstel",
+            "subtitle": "Vooraf ingevulde CLI-opdrachten voor noodgevallen (handmatige uitvoering of knop GEVAAR)",
+            "hestia_latest_title": "Herstel de nieuwste Hestia-gebruikersback-up",
+            "micro_latest_title": "Herstellen vanaf de nieuwste micro-snapshot (alleen CLI)",
+            "copy_command": "Kopieer opdracht",
+            "run_restore_danger": "Herstel uitvoeren (nieuwste, GEVAAR)"
+        },
+        "cli": {
+            "title": "Hestia Back-up en herstel CLI",
+            "subtitle": "Snel referentieblad - gereed voor kopi\u00ebren en plakken",
+            "create_backups": "Back-ups maken",
+            "list_delete_backups": "Back-ups weergeven en verwijderen",
+            "full_restore_user": "Volledig herstel (gebruiker)",
+            "selective_restore": "Selectief herstel (web / database / e-mail)",
+            "backup_file_locations": "Back-upbestandslocaties",
+            "backup_tarball_contents": "Maak een back-up van de Tarball-inhoud",
+            "backupctl_help": "backupctl hulp"
+        }
+    },
+    "footer": {
+        "logged_in_as": "Ingelogd als",
+        "theme": "Thema"
+    },
+    "i18n": {
+        "language_picker": {
+            "title": "Taal",
+            "saving": "Opslaan...",
+            "saved": "Opgeslagen",
+            "save_failed": "Opslaan mislukt"
+        }
+    },
+    "services_page": {
+        "environment": "Omgeving",
+        "filter_placeholder": "Services filteren...",
+        "add_service": "Service toevoegen",
+        "edit_service": "Service bewerken",
+        "import": "Importeren",
+        "export_csv": "CSV exporteren",
+        "auto_probe": "Automatische probe",
+        "every": "Elke",
+        "seconds_short": "s",
+        "columns": {
+            "name": "Naam",
+            "category": "Categorie",
+            "host": "Host",
+            "port": "Poort",
+            "probe": "Probe",
+            "timeout": "Timeout",
+            "path": "Pad",
+            "enabled": "Ingeschakeld"
+        },
+        "form": {
+            "name": "Naam",
+            "category": "Categorie",
+            "host": "Host",
+            "port": "Poort",
+            "probe": "Probe",
+            "timeout": "Timeout (ms)",
+            "path": "Pad (HTTP)",
+            "enabled": "Ingeschakeld"
+        },
+        "test_on_save": "Testen bij opslaan",
+        "caps": {
+            "panel": "paneel",
+            "web": "web",
+            "mta": "mta",
+            "db": "db",
+            "nginx": "nginx"
+        },
+        "states": {
+            "active": "actief",
+            "inactive": "inactief"
+        },
+        "path_not_used": "(niet gebruikt)",
+        "status": {
+            "up": "UP",
+            "warn": "WARN",
+            "down": "OMLAAG",
+            "unknown": "UNKNOWN"
+        },
+        "relative_time": {
+            "just_now": "zojuist",
+            "minutes_ago": "{telling}m geleden",
+            "hours_ago": "{telling}h geleden",
+            "days_ago": "{geteld}d geleden"
+        },
+        "units": {
+            "ms": "ms"
+        },
+        "actions": {
+            "test": "Test"
+        },
+        "uptime": "Uptime {pct}%",
+        "alert_last_seen": "Waarschuwing {tijd}",
+        "alerts_muted_until": "Gedempt {tijd}",
+        "mute_alerts": "Waarschuwingen dempen",
+        "confirm_delete": "Deze service verwijderen?",
+        "probe_kicked": "Sonde geschopt",
+        "no_alert_rules": "Geen waarschuwingsregels om te dempen.",
+        "prompt_mute_minutes": "Hoeveel minuten lang worden gerelateerde meldingen gedempt?",
+        "alerts_muted_for": "Waarschuwingen gedempt voor {mins}m.",
+        "mute_failed": "Dempen mislukt: {bericht}",
+        "invalid_json": "Ongeldige JSON",
+        "import_failed": "Importeren mislukt",
+        "validation": {
+            "name_required": "Naam is vereist.",
+            "host_required": "Host is vereist.",
+            "port_range": "De poort moet 1-65535 zijn.",
+            "correct_fields": "Corrigeer de gemarkeerde velden."
+        },
+        "service_save_requested": "Aangevraagde service opslaan"
+    },
+    "bookmarks_page": {
+        "title": "Bladwijzers",
+        "manage": "Bladwijzers beheren",
+        "add_to_browser": "Toevoegen aan browser",
+        "bookmarklet_title": "Sleep dit naar je bladwijzerbalk om de huidige pagina snel toe te voegen",
+        "prompt_tags": "Tags (komma-gescheiden):",
+        "category": "Categorie",
+        "all": "Alle",
+        "sort": "Sorteren",
+        "sort_updated_desc": "Bijgewerkt (nieuwste)",
+        "sort_title_asc": "Titel (A-Z)",
+        "sort_host_asc": "Host (A-Z)",
+        "fields": {
+            "title": "Titel",
+            "url": "URL",
+            "tags": "Tags",
+            "name": "Naam"
+        },
+        "placeholders": {
+            "optional_title": "Optionele titel",
+            "tags": "komma,gescheiden,tags",
+            "new_category_name": "Nieuwe categorienaam"
+        },
+        "add_category": "Categorie toevoegen",
+        "updated": "Bijgewerkt",
+        "empty": "Nog geen bladwijzers.",
+        "empty_categories": "Nog geen categorie\u00ebn.",
+        "modal": {
+            "add_edit": "Bladwijzer toevoegen / bewerken",
+            "add_categories": "Categorie\u00ebn toevoegen"
+        },
+        "uncategorized": "Zonder categorie",
+        "hints": {
+            "bookmark_edit": "Geef hier bladwijzers weer met inklapbare categorie\u00ebn. Klik op een bladwijzer om deze boven te laden voor bewerking of verwijdering.",
+            "category_edit": "Categorie\u00ebn worden hier weergegeven. Klik op een categorie om deze te laden en te bewerken of te verwijderen."
+        },
+        "confirm_delete_category": "Deze categorie verwijderen? Bladwijzers worden Uncategorized.",
+        "confirm_delete_bookmark": "Deze bladwijzer verwijderen?",
+        "validation": {
+            "category_name_required": "Categorienaam verplicht",
+            "url_required": "URL is vereist"
+        },
+        "errors": {
+            "all_endpoints_failed": "Alle eindpunten zijn mislukt",
+            "bad_json": "Slechte JSON van server",
+            "api_not_found": "Mislukt bij het laden van bladwijzers (API niet gevonden). Geprobeerd: {tried}",
+            "load_failed": "Mislukt bij het laden van bladwijzers: {boodschap}"
+        },
+        "toasts": {
+            "category_saved": "Categorie opgeslagen",
+            "save_failed": "Opslaan mislukt: {boodschap}",
+            "category_deleted": "Categorie verwijderd",
+            "delete_failed": "Verwijderen mislukt: {boodschap}",
+            "order_saved": "Bestelling opgeslagen",
+            "reorder_failed": "Nabestelling mislukt: {bericht}",
+            "category_updated": "Categorie bijgewerkt",
+            "category_added": "Categorie toegevoegd",
+            "bookmark_deleted": "Bladwijzer verwijderd",
+            "bookmark_updated": "Bladwijzer bijgewerkt",
+            "bookmark_added": "Bladwijzer toegevoegd"
+        }
+    },
+    "header": {
+        "navigation": "Navigatie koptekst",
+        "system_status": "Servicestatus",
+        "loading": "Aan het laden...",
+        "profile": "Mijn profiel",
+        "logout": "Afmelden",
+        "mobile": {
+            "open_menu": "Menu openen",
+            "menu": "Menu"
+        },
+        "nav": {
+            "history": "Geschiedenis",
+            "cron_health": "Cron Gezondheid",
+            "processes": "Processen",
+            "databases": "Databases",
+            "speedtest": "Snelheidstest",
+            "diagnostics": "Diagnostiek",
+            "config": "Config",
+            "backups": "Back-ups"
+        }
+    }
+}

@@ -1,0 +1,221 @@
+<?php
+
+// config/defaults.php
+// Authoritative default settings for the entire app.
+// Keep this file in VCS. Do not edit in production; use config/local.json for overrides.
+return [
+  // Site & Branding
+  'site' => [
+    'name' => 'Server Dashboard',
+    'base_url' => 'https://example.com/',
+    'timezone' => 'UTC',
+    'theme' => 'dark',
+  ],
+  // Feature toggles
+  'features' => \App\Config::featureDefaults(),
+  'bookmarks' => [
+    'default_source' => 'local',
+    'rounddav' => [
+      'enabled' => false,
+      'base_url' => '',
+      'username' => '',
+      'password' => '',
+      'visibility' => 'private',
+    ],
+  ],
+  // Optional capability hints (leave as "auto" for detection)
+  'capabilities' => [
+    'panel' => 'auto',
+    'web' => 'auto',
+    'mta' => 'auto',
+    'db' => 'auto',
+  ],
+  'mail' => [
+    'mail_transport' => 'phpmail',
+    'mail_from' => '',
+    'mail_envelope_from' => '',
+    'mail_replyto' => '',
+    'sendmail_path' => '/usr/sbin/sendmail',
+    'smtp_host' => '',
+    'smtp_port' => 587,
+    'smtp_secure' => 'tls',
+    'smtp_user' => '',
+    'smtp_pass' => '',
+    'smtp_timeout' => 12,
+    'sec_email' => [],
+  ],
+  // Processes page/API defaults
+  'processes' => [
+    'default_limit' => 50,
+    'cache_ttl_sec' => 2,
+  ],
+  // Integrations
+  'integrations' => [
+    'smtp' => [
+      'host' => 'localhost',
+      'port' => 587,
+      'username' => '',
+      'password' => '',
+      'encryption' => 'STARTTLS'
+    ],
+    'mysql' => [
+      'host' => '127.0.0.1',
+      'port' => 3306,
+      'database' => 'appdb',
+      'username' => 'appuser',
+      'password' => '',
+    ],
+    'redis' => [
+      'host' => '127.0.0.1',
+      'port' => 6379,
+      'db'   => 0,
+    ]
+  ],
+
+// Server Tests thresholds
+'server_tests' => [
+  'rate_limit_ms' => 1500,
+  'service_targets' => [],
+  'service_timeout_ms' => 1500,
+  'tls_warn_days' => 21,
+  'tls_fail_days' => 7,
+  'inode_ok_free_pct' => 15,
+  'inode_warn_free_pct' => 8,
+  'disk_warn_free_pct' => 10,
+  'disk_fail_free_pct' => 5,
+  'load_warn_per_core' => 1.0,
+  'load_fail_per_core' => 2.0,
+  'updates_warn_count' => 1,
+  'updates_fail_count' => 5,
+  'audit_log' => false
+],
+  // Security
+'security' => [
+    'admin_emails' => ['admin@example.com'],
+    'csrf_secret'  => null, // if null, a random secret will be userrated into local.json
+    'allowed_origins' => ['*'],
+
+// Hardening defaults
+'api_tokens' => [],
+'api_rate_limit_ms' => 300,
+'ip_allowlist' => [],
+'trusted_proxies' => [],
+'allow_web_bootstrap_admin' => false,
+'favicon_allowed_hosts' => [],
+'favicon_allow_http' => false,
+'favicon_require_admin' => true,
+'favicon_timeout_sec' => 4,
+'favicon_max_bytes' => 262144,
+'login_rate_limit' => [
+  'enabled' => true,
+  'max_attempts' => 5,
+  'window_sec' => 900,
+  'base_delay_sec' => 30,
+  'max_delay_sec' => 900,
+],
+],
+// Alerts
+'alerts' => [
+  'enabled' => false,
+  'webhook_url' => '',
+  'email' => '',
+  'min_severity' => 'warn', // 'warn' or 'fail'
+  'cron_token' => '',
+  'quiet_hours' => '', // e.g. '22:00-07:00' (local time) or '' for none
+
+// Cron default expectations
+'cron_interval_min' => 10,
+// Noise control defaults
+'debounce_hours' => 6,
+'daily_digest' => false,
+'digest_hour' => '08:00',
+  'mute_presets' => '30,60,120',
+  'service_defaults' => [
+    'latency_warn_ms' => 1500,
+    'latency_fail_ms' => 5000,
+  ],
+],
+// History
+'history' => [
+  'enabled' => true,
+  'retain_days' => 90,
+  'sample_limit' => 500,
+
+// History default expectations
+'append_interval_min' => 5,
+],
+// Speedtest
+'speedtest' => [
+  'enabled' => false,
+  'interval_minutes' => 240,
+  'timeout_seconds' => 90,
+  'preferred_backend' => 'auto',
+  'preferred_server_ookla' => '',
+  'preferred_server_librespeed' => '',
+  'retention_days' => 90,
+  'max_history_entries' => 2000,
+  'log_failed_tests' => true,
+  'randomize_schedule_window' => true,
+  'randomize_window_minutes' => 10,
+  'quiet_hours' => [
+    'enabled' => false,
+    'start_hour' => 0,
+    'end_hour' => 6,
+  ],
+],
+  // UI Defaults
+  'ui' => [
+        'high_contrast' => false,
+    'toast_position' => 'bottom-center',
+    'items_per_page' => 25,
+    'header_navigation_mode' => 'buttons',
+  ],
+
+// Logs
+'logs' => [
+  'allow' => [],
+  'tail_bytes' => 65536,
+  'poll_ms' => 2000,
+  'grep_max_lines' => 1000,
+],
+
+// Backups + log watcher helpers
+'backups' => [
+  'fs_root' => '/mnt/backupz',
+  'script_path' => dirname(__DIR__) . '/scripts',
+  'snap_script' => dirname(__DIR__) . '/scripts/make-snapshots.sh',
+  'micro_script' => dirname(__DIR__) . '/scripts/make-micro-backups.sh',
+  'health_script' => dirname(__DIR__) . '/scripts/backup_health_check.sh',
+  'integrity_script' => dirname(__DIR__) . '/scripts/backup_integrity_watch.sh',
+  'prune_snap_script' => dirname(__DIR__) . '/scripts/prune_snapshots.sh',
+  'prune_micro_script' => dirname(__DIR__) . '/scripts/prune-micro-backups.sh',
+  'prune_hestia_script' => dirname(__DIR__) . '/scripts/prune_hestia_backups.sh',
+  'backupctl' => dirname(__DIR__) . '/scripts/backupctl',
+  'hestia_cmd' => '/usr/local/hestia/bin/v-backup-user',
+  'hestia_user' => 'user',
+  'pipeline_script' => '/usr/local/bin/backup-nightly.sh',
+  'log_file' => '/var/log/backup-nightly.log',
+  'cron_time' => '02:00',
+  'service_name' => 'backup-nightly',
+  'system_user' => 'root',
+  'include_health' => true,
+  'include_integrity' => true,
+  'include_prune' => true,
+  'hestia_source_dir' => '/backup',
+  'hestia_bind_source' => '',
+  'hestia_bind_target' => '/backup',
+  'hestia_bind_options' => 'bind,nofail',
+  'fs_dirs' => "hestia\nmicro\nsnapshots",
+  'exclude_dirs' => '',
+  'suspend' => false,
+  'require_dedicated_mount' => false, // legacy alias for disable_on_mount_fail
+  'disable_on_mount_fail' => false,
+  'debug' => false,
+  'log_dest' => '/var/log-export',
+  'log_owner' => 'root:root',
+  'log_mode' => '0640',
+  'log_service_name' => 'log-watcher',
+  'log_initial_copy' => true,
+  'log_enable_now' => true,
+],
+];

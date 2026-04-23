@@ -1,0 +1,119 @@
+/* History extras: compact cards + tooltip + selection + badge */
+.grid.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 12px;
+}
+#cardsGrid .card {
+  padding: 10px 12px;
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.08));
+}
+.card .subtitle {
+  font-size: 12px;
+  opacity: 0.8;
+}
+.spark {
+  width: 100%;
+  height: 56px;
+  display: block;
+  cursor: crosshair;
+}
+.legend .chip {
+  font-size: 11px;
+}
+#exportModal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.35);
+}
+#exportModal[hidden] {
+  display: none;
+}
+#exportModal .box {
+  width: min(920px, 92vw);
+  max-height: 80vh;
+  overflow: auto;
+  background: var(--card-bg, #111);
+  color: inherit;
+  border-radius: 10px;
+  padding: 12px;
+}
+#exportPre {
+  white-space: pre;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 12px;
+  max-height: 60vh;
+  overflow: auto;
+}
+
+/* micro button in card header */
+.btn.micro {
+  padding: 2px 6px;
+  font-size: 12px;
+  border-radius: 8px;
+}
+
+/* tooltip */
+#historyTip {
+  backdrop-filter: blur(2px);
+}
+
+/* meta chips */
+#zoomBadge,
+#lastProbeChip {
+  /* use default .chip styles */
+}
+
+#cardsGrid .svc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.55rem;
+}
+#cardsGrid .svc-actions .chip {
+  font-size: 0.78rem;
+  padding: 0 0.65rem;
+}
+
+/* hr tags */
+.hr {
+  border-color: var(--card);
+}
+
+.sev-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.sev-warn {
+  background: rgba(255, 200, 0, 0.18);
+  color: #ffd66a;
+}
+.sev-crit {
+  background: rgba(215, 81, 64, 0.18);
+  color: #ff9c90;
+}
+.sev-info {
+  background: rgba(80, 160, 255, 0.18);
+  color: #a7d0ff;
+}
+.time-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.time-cell .time-rel {
+  font-weight: 600;
+}
+.time-cell .time-abs {
+  font-size: 0.75rem;
+  opacity: 0.75;
+}

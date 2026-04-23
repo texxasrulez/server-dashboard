@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Backup Control Center</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      :root {
+        --bg: #0b0c10;
+        --panel: #141821;
+        --panel-alt: #171b24;
+        --accent-ok: #4caf50;
+        --accent-warn: #ff9800;
+        --accent-crit: #f44336;
+        --accent-info: #2196f3;
+        --text-main: #f5f5f5;
+        --text-muted: #9ea4b8;
+        --border-soft: #252b3a;
+      }
+
+      /* this wrapper lets us counteract whatever padding the dashboard adds */
+      .backup-root {
+        margin-top: -400px important!; /* tweak -16 / -18 / -22 to taste */
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 1px;
+        background: radial-gradient(circle at top, #181c25, #050609);
+        color: var(--text-main);
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+      h1,
+      h2,
+      h3 {
+        margin: 0 0 8px 0;
+        font-weight: 600;
+      }
+      h1 {
+        font-size: 24px;
+      }
+      .subtitle {
+        color: var(--text-muted);
+        font-size: 13px;
+        margin-bottom: 20px;
+      }
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+      }
+      .status-ok {
+        background: rgba(76, 175, 80, 0.1);
+        color: var(--accent-ok);
+        border: 1px solid rgba(76, 175, 80, 0.5);
+      }
+      .status-warn {
+        background: rgba(255, 152, 0, 0.1);
+        color: var(--accent-warn);
+        border: 1px solid rgba(255, 152, 0, 0.5);
+      }
+      .status-crit {
+        background: rgba(244, 67, 54, 0.1);
+        color: var(--accent-crit);
+        border: 1px solid rgba(244, 67, 54, 0.5);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+        gap: 16px;
+      }
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        background: linear-gradient(135deg, var(--panel), var(--panel-alt));
+        border-radius: 12px;
+        padding: 14px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        box-shadow: 0 16px 35px rgba(0, 0, 0, 0.45);
+      }
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+      .card-title {
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-muted);
+      }
+      .card-main {
+        font-size: 24px;
+        font-weight: 600;
+      }
+      .card-sub {
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 6px;
+      }
+
+      .kpi-row {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 8px;
+      }
+      @media (max-width: 900px) {
+        .kpi-row {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      .kpi {
+        padding: 8px 10px;
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid var(--border-soft);
+      }
+      .kpi-label {
+        font-size: 11px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 4px;
+      }
+      .kpi-value {
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .flex {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .flex-space {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      canvas {
+        max-width: 100%;
+      }
+
+      .list-block {
+        max-height: 150px;
+        overflow-y: auto;
+        font-size: 12px;
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+        padding: 8px;
+        border: 1px solid var(--border-soft);
+      }
+      .list-block ul {
+        margin: 0;
+        padding-left: 16px;
+      }
+      .list-block li {
+        margin-bottom: 3px;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 11px;
+        border: 1px solid var(--border-soft);
+        color: var(--text-muted);
+      }
+
+      .timestamp {
+        font-size: 11px;
+        color: var(--text-muted);
+      }
+
+      .badge-disk-ok {
+        color: var(--accent-ok);
+      }
+      .badge-disk-warn {
+        color: var(--accent-warn);
+      }
+      .badge-disk-crit {
+        color: var(--accent-crit);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="backup-root">
+      <header style="margin-bottom: 16px">
+        <div class="flex-space">
+          <div>
+            <h1>Backup Control Center</h1>
+            <div class="subtitle">
+              Live status driven by <code>backup_status.json</code> on your
+              backup disk.
+            </div>
+          </div>
+          <div class="flex" style="gap: 12px">
+            <div class="timestamp" id="timestamp">Timestamp: --</div>
+            <div id="status-pill" class="status-pill status-crit">
+              Status: UNKNOWN
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="grid" style="margin-bottom: 16px">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Disk Utilization</div>
+              <div class="card-sub">/mnt/backupz capacity &amp; health</div>
+            </div>
+            <span class="tag" id="disk-tag">Disk: --</span>
+          </div>
+          <div
+            style="
+              display: flex;
+              gap: 16px;
+              align-items: center;
+              flex-wrap: wrap;
+            "
+          >
+            <div style="flex: 0 0 180px">
+              <canvas id="diskChart" width="180" height="180"></canvas>
+            </div>
+            <div style="flex: 1 1 0">
+              <div class="kpi-row">
+                <div class="kpi">
+                  <div class="kpi-label">Usage</div>
+                  <div class="kpi-value" id="disk-usage">--%</div>
+                </div>
+                <div class="kpi">
+                  <div class="kpi-label">Mount</div>
+                  <div class="kpi-value" style="font-size: 13px">
+                    /mnt/backupz
+                  </div>
+                </div>
+                <div class="kpi">
+                  <div class="kpi-label">Status</div>
+                  <div class="kpi-value" id="disk-status-label">Unknown</div>
+                </div>
+              </div>
+              <div style="margin-top: 10px">
+                <pre id="disk-df" style="margin: 0; font-size: 11px"></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Backup Ages</div>
+              <div class="card-sub">
+                How fresh your latest backups are (days old)
+              </div>
+            </div>
+          </div>
+          <div>
+            <canvas id="ageChart" height="170"></canvas>
+          </div>
+          <div class="kpi-row" style="margin-top: 10px">
+            <div class="kpi">
+              <div class="kpi-label">Snapshot daily.0</div>
+              <div class="kpi-value" id="age-snap">-- d</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-label">Latest Hestia</div>
+              <div class="kpi-value" id="age-hestia">-- d</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-label">Latest Micro</div>
+              <div class="kpi-value" id="age-micro">-- d</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Warnings &amp; Errors</div>
+              <div class="card-sub">
+                Human-readable summary from the health check
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px">
+            <div>
+              <h3
+                style="
+                  font-size: 13px;
+                  color: var(--accent-warn);
+                  margin-bottom: 4px;
+                "
+              >
+                Warnings
+              </h3>
+              <div class="list-block" id="warn-list">-</div>
+            </div>
+            <div>
+              <h3
+                style="
+                  font-size: 13px;
+                  color: var(--accent-crit);
+                  margin-bottom: 4px;
+                "
+              >
+                Errors
+              </h3>
+              <div class="list-block" id="err-list">-</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Raw Snapshot</div>
+              <div class="card-sub">
+                Key values directly from the last JSON status
+              </div>
+            </div>
+          </div>
+          <pre
+            id="raw-json"
+            style="
+              font-size: 11px;
+              max-height: 260px;
+              overflow: auto;
+              background: #05060a;
+              border-radius: 8px;
+              border: 1px solid var(--border-soft);
+              padding: 8px;
+            "
+          ></pre>
+        </div>
+      </section>
+    </div>
+    <!-- /.backup-root -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      async function loadStatus() {
+        try {
+          const res = await fetch("state/backup_status.json?_=" + Date.now());
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          const data = await res.json();
+          renderStatus(data);
+        } catch (e) {
+          console.error("Failed to load backup_status.json:", e);
+          document.getElementById("status-pill").className =
+            "status-pill status-crit";
+          document.getElementById("status-pill").textContent =
+            "Status: ERROR LOADING JSON";
+        }
+      }
+
+      let diskChart, ageChart;
+
+      function renderStatus(data) {
+        // Timestamp
+        document.getElementById("timestamp").textContent =
+          "Timestamp: " + (data.timestamp || "--");
+
+        // Overall status pill
+        const pill = document.getElementById("status-pill");
+        pill.className = "status-pill";
+        if (data.status === "OK") {
+          pill.classList.add("status-ok");
+        } else if (data.status === "WARN") {
+          pill.classList.add("status-warn");
+        } else {
+          pill.classList.add("status-crit");
+        }
+        pill.textContent = "Status: " + (data.status || "UNKNOWN");
+
+        // Disk
+        const usage =
+          typeof data.disk?.usage_percent === "number"
+            ? data.disk.usage_percent
+            : parseInt(data.disk?.usage_percent || "0", 10);
+
+        document.getElementById("disk-usage").textContent = usage + "%";
+        document.getElementById("disk-df").textContent = data.disk?.df || "";
+
+        const diskTag = document.getElementById("disk-tag");
+        const diskStatusLabel = document.getElementById("disk-status-label");
+        diskTag.className = "tag";
+        let diskStatusText = "OK";
+
+        if (usage >= 95) {
+          diskTag.classList.add("badge-disk-crit");
+          diskStatusText = "CRITICAL";
+        } else if (usage >= 90) {
+          diskTag.classList.add("badge-disk-warn");
+          diskStatusText = "HIGH";
+        } else if (usage >= 80) {
+          diskTag.classList.add("badge-disk-warn");
+          diskStatusText = "ELEVATED";
+        } else {
+          diskTag.classList.add("badge-disk-ok");
+          diskStatusText = "HEALTHY";
+        }
+        diskTag.textContent = "Disk " + usage + "%";
+        diskStatusLabel.textContent = diskStatusText;
+
+        // Snapshot ages
+        const snapAge = data.snapshots?.daily0_age_days ?? null;
+        const hestiaAge = data.hestia?.latest_age_days ?? null;
+        const microAge = data.micro?.latest_age_days ?? null;
+
+        document.getElementById("age-snap").textContent =
+          (snapAge !== null ? snapAge : "--") + " d";
+        document.getElementById("age-hestia").textContent =
+          (hestiaAge !== null ? hestiaAge : "--") + " d";
+        document.getElementById("age-micro").textContent =
+          (microAge !== null ? microAge : "--") + " d";
+
+        // Warnings
+        const warnContainer = document.getElementById("warn-list");
+        warnContainer.innerHTML = "";
+        const warns = data.warnings || [];
+        if (!warns.length) {
+          warnContainer.textContent = "-";
+        } else {
+          const ul = document.createElement("ul");
+          warns.forEach((w) => {
+            if (!w) return;
+            const li = document.createElement("li");
+            li.textContent = w;
+            ul.appendChild(li);
+          });
+          warnContainer.appendChild(ul);
+        }
+
+        // Errors
+        const errContainer = document.getElementById("err-list");
+        errContainer.innerHTML = "";
+        const errs = data.errors || [];
+        if (!errs.length) {
+          errContainer.textContent = "-";
+        } else {
+          const ul = document.createElement("ul");
+          errs.forEach((w) => {
+            if (!w) return;
+            const li = document.createElement("li");
+            li.textContent = w;
+            ul.appendChild(li);
+          });
+          errContainer.appendChild(ul);
+        }
+
+        // Raw JSON pane
+        document.getElementById("raw-json").textContent = JSON.stringify(
+          data,
+          null,
+          2,
+        );
+
+        // Charts
+        renderCharts(usage, snapAge, hestiaAge, microAge);
+      }
+
+      function renderCharts(diskUsage, snapAge, hestiaAge, microAge) {
+        const diskCtx = document.getElementById("diskChart").getContext("2d");
+        const ageCtx = document.getElementById("ageChart").getContext("2d");
+
+        const used = diskUsage;
+        const free = Math.max(0, 100 - used);
+
+        if (diskChart) diskChart.destroy();
+        diskChart = new Chart(diskCtx, {
+          type: "doughnut",
+          data: {
+            labels: ["Used", "Free"],
+            datasets: [
+              {
+                data: [used, free],
+                backgroundColor: ["#42a5f5", "#4caf50"],
+                borderWidth: 0,
+              },
+            ],
+          },
+          options: {
+            plugins: {
+              legend: {
+                labels: { color: "#ddd", font: { size: 11 } },
+              },
+            },
+            cutout: "65%",
+          },
+        });
+
+        if (ageChart) ageChart.destroy();
+        ageChart = new Chart(ageCtx, {
+          type: "bar",
+          data: {
+            labels: ["Snapshot (daily.0)", "Hestia latest", "Micro latest"],
+            datasets: [
+              {
+                label: "Age (days)",
+                data: [
+                  snapAge != null ? snapAge : 0,
+                  hestiaAge != null ? hestiaAge : 0,
+                  microAge != null ? microAge : 0,
+                ],
+                backgroundColor: ["#66bb6a", "#ffa726", "#ab47bc"],
+                borderWidth: 0,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              x: {
+                ticks: { color: "#ddd", font: { size: 11 } },
+                grid: { color: "rgba(255,255,255,0.05)" },
+              },
+              y: {
+                ticks: { color: "#ddd", font: { size: 11 } },
+                grid: { color: "rgba(255,255,255,0.07)" },
+              },
+            },
+            plugins: {
+              legend: {
+                labels: { color: "#ddd", font: { size: 11 } },
+              },
+            },
+          },
+        });
+      }
+
+      // Initial load and periodic refresh
+      loadStatus();
+      // Refresh every 60s so you can leave tab open
+      setInterval(loadStatus, 60000);
+    </script>
+  </body>
+</html>

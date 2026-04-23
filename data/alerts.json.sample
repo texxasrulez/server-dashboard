@@ -1,0 +1,11 @@
+{
+  "email": {
+    "from": "Dashboard Alerts <alerts@example.com>",
+    "to": [
+      "ops@example.com"
+    ]
+  },
+  "thresholds": {
+    "service_down_minutes": 5
+  }
+}

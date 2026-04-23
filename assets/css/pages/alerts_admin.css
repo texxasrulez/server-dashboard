@@ -1,0 +1,120 @@
+/* per-page styles (optional) */
+
+/* Hidden must always win, even if .is-open is present momentarily */
+.app-header .userbox .usermenu[hidden] {
+  display: none !important;
+  opacity: 0 !important;
+  transform: translateY(-4px) !important;
+  transition: none !important;
+}
+
+/* Normalize user button to theme variables */
+.app-header .userbox .userbtn {
+  background: var(--surface-2, transparent);
+  color: var(--text-1, inherit);
+  border: 1px solid var(--border-2, transparent);
+  border-radius: 9999px;
+  padding: 0.25rem 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.app-header .userbox .userbtn:hover {
+  background: var(--surface-3, rgba(0, 0, 0, 0.06));
+}
+.app-header .userbox .userbtn .role.muted {
+  color: var(--text-3, currentColor);
+}
+
+/* hr tags */
+.hr {
+  border-color: var(--card);
+}
+
+/* Alerts admin helpers */
+.table td {
+  vertical-align: top;
+}
+.card-actions .chip-label,
+.quick-mute .chip-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.status-pill.ok {
+  background: rgba(60, 200, 120, 0.18);
+  color: #a6f3c2;
+}
+.status-pill.quiet {
+  background: rgba(255, 170, 0, 0.18);
+  color: #ffd39a;
+}
+.status-pill.muted {
+  background: rgba(120, 120, 120, 0.2);
+  color: #cccccc;
+}
+.status-pill .status-sub {
+  font-size: 0.7rem;
+  font-weight: 400;
+  opacity: 0.8;
+  text-transform: none;
+}
+.last-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.85rem;
+}
+.last-meta .last-rel {
+  font-weight: 600;
+}
+.last-meta .last-abs {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+.actions-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.btn-chip {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: inherit;
+  font-size: 0.8rem;
+  padding: 0.1rem 0.6rem;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    opacity 0.15s ease;
+}
+.btn-chip:hover:not([disabled]) {
+  background: rgba(255, 255, 255, 0.12);
+}
+.btn-chip[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.btn-chip.ghost {
+  border-style: dashed;
+  opacity: 0.8;
+}
+.mute-quick {
+  align-items: center;
+}
+.quick-mute {
+  align-items: center;
+}

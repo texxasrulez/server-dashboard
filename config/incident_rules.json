@@ -1,0 +1,13 @@
+{
+  "window_sec": 1800,
+  "recent_window_sec": 259200,
+  "dependencies": {
+    "nginx": ["php-fpm", "apache", "webmail"],
+    "apache": ["php-fpm"],
+    "mysql": ["mariadb", "postgresql"],
+    "mariadb": ["nextcloud", "roundcube"],
+    "redis": ["nextcloud"],
+    "dovecot": ["roundcube", "webmail"],
+    "exim": ["dovecot", "spamassassin"]
+  }
+}

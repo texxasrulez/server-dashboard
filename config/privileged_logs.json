@@ -1,0 +1,88 @@
+{
+  "logs": [
+    {
+      "key": "exim_main",
+      "label": "Exim Main Log",
+      "description": "Mail delivery and routing events.",
+      "source": {
+        "type": "file",
+        "path": "/var/log/exim4/mainlog"
+      },
+      "allow_search": true,
+      "default_lines": 120,
+      "max_lines": 400
+    },
+    {
+      "key": "exim_reject",
+      "label": "Exim Reject Log",
+      "description": "Mail rejection and deny events.",
+      "source": {
+        "type": "file",
+        "path": "/var/log/exim4/rejectlog"
+      },
+      "allow_search": true,
+      "default_lines": 120,
+      "max_lines": 400
+    },
+    {
+      "key": "nginx_error",
+      "label": "Nginx Error Log",
+      "description": "Web server errors and upstream failures.",
+      "source": {
+        "type": "file",
+        "path": "/var/log/nginx/error.log"
+      },
+      "allow_search": true,
+      "default_lines": 150,
+      "max_lines": 400
+    },
+    {
+      "key": "nginx_access",
+      "label": "Nginx Access Log",
+      "description": "HTTP request access log.",
+      "source": {
+        "type": "file",
+        "path": "/var/log/nginx/access.log"
+      },
+      "allow_search": true,
+      "default_lines": 120,
+      "max_lines": 300
+    },
+    {
+      "key": "syslog",
+      "label": "System Log",
+      "description": "General system log output.",
+      "source": {
+        "type": "file",
+        "path": "/var/log/syslog"
+      },
+      "allow_search": true,
+      "default_lines": 150,
+      "max_lines": 400
+    },
+    {
+      "key": "auth",
+      "label": "Auth Log",
+      "description": "Authentication and sudo events.",
+      "source": {
+        "type": "file",
+        "path": "/var/log/auth.log"
+      },
+      "allow_search": true,
+      "default_lines": 150,
+      "max_lines": 400
+    },
+    {
+      "key": "fail2ban",
+      "label": "Fail2ban Log",
+      "description": "Ban and jail activity.",
+      "source": {
+        "type": "file",
+        "path": "/var/log/fail2ban.log"
+      },
+      "allow_search": true,
+      "default_lines": 120,
+      "max_lines": 300
+    }
+  ]
+}

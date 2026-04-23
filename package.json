@@ -1,0 +1,32 @@
+{
+  "name": "server-dashboard",
+  "version": "1.0.0",
+  "description": "Server Dashboard formatting/tooling configuration",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/texxasrulez/server-dashboard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/texxasrulez/server-dashboard/issues"
+  },
+  "homepage": "https://github.com/texxasrulez/server-dashboard#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "format": "npm run format:web && npm run format:php",
+    "format:check": "npm run format:check:web && npm run format:check:php",
+    "format:check:baseline": "npm run format:check:baseline:web && npm run format:check:baseline:php",
+    "format:check:baseline:web": "prettier --check .github/workflows/ci.yml composer.json package-lock.json README.md docs/ADMIN_MANUAL.md docs/IMPLEMENTATION_FOUNDATION_PLAN.md docs/INSTRUCTIONS_Diagnostics.md docs/TESTING_AND_SMOKE.md docs/diagnostics-modals.md assets/css/page_diag.css assets/css/tools/assets_audit.css assets/js/pages/diag.js assets/js/pages/config.security.js assets/js/pages/history.reports.js assets/js/pages/speedtest.js assets/js/tools/assets_audit.js --ignore-unknown",
+    "format:check:baseline:php": "prettier --check diag.php config.php history.php api/alerts_bulk.php api/alerts_delete.php api/alerts_list.php api/alerts_run.php api/alerts_upsert.php api/autoprobe_set.php api/bm_categories_delete.php api/bm_categories_list.php api/bm_categories_reorder.php api/bm_categories_upsert.php api/bookmarks_delete.php api/bookmarks_list.php api/bookmarks_upsert.php api/cron_token_admin.php api/index_refresh_set.php api/report_uptime.php api/service_delete.php api/services_import.php api/services_list.php api/services_probe_all.php includes/config.inc.php includes/init.php includes/paths.php lib/AdminAudit.php lib/AdminMaintenance.php lib/Config.php lib/ServerDiag.php lib/UptimeReport.php bin/smoke-admin.php tools/admin_audit.php tools/assets_audit.php tests/bootstrap.php tests/AdminMaintenanceTest.php tests/ApiSmokeTest.php tests/ConfigAndDiagTest.php tests/ConfigMutationTest.php tests/PageSmokeTest.php tests/PathWriteHelperTest.php tests/UptimeReportTest.php tests/support/browser_smoke_client.php tests/support/browser_smoke_router.php tests/support/run_endpoint.php --plugin=@prettier/plugin-php",
+    "format:web": "prettier --write \"**/*.{css,js,mjs,cjs,json,md,html,yml,yaml}\" --ignore-unknown",
+    "format:check:web": "prettier --check \"**/*.{css,js,mjs,cjs,json,md,html,yml,yaml}\" --ignore-unknown",
+    "format:php": "prettier --write \"**/*.php\" --plugin=@prettier/plugin-php",
+    "format:check:php": "prettier --check \"**/*.php\" --plugin=@prettier/plugin-php"
+  },
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.24.0",
+    "prettier": "^3.8.1"
+  }
+}

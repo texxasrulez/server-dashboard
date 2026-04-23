@@ -8,6 +8,7 @@ This document is the release-facing map of the current `server-dashboard` codeba
 - `api/` contains JSON endpoints and export/report actions.
 - `includes/` contains bootstrap, auth, logging, header/footer chrome, and other shared page glue.
 - `lib/` contains application logic, refactored helpers, and domain code.
+  Notable internal helper areas now include `lib/Backups/`, `lib/Logs/`, `lib/Speedtest/`, `lib/ServerDiag/`, and `lib/Api/`.
 - `assets/` contains shipped CSS, JS, images, and support scripts.
 - `bin/` contains CLI-oriented validation, admin, and maintenance helpers.
 - `config/` contains defaults, schema, and local override storage.
@@ -46,6 +47,7 @@ Writable-path assumptions should remain visible in docs and diagnostics. Do not 
 - `\App\Config` keeps the public config API stable while delegating internal work to focused helpers under `lib/Config/`.
 - `includes/auth.php` keeps the existing global auth helper names stable while delegating to `lib/Auth/`.
 - NVMe public entry classes remain `\App\NvmeCollector` and `\App\NvmeHealth`, with parsing/history/insight internals split under `lib/Nvme/`.
+- Large page/API routes should stay deployed in place while moving prep, scanning, normalization, and action logic into these internal helper directories.
 - `data/security_config.json` is still synced as a legacy compatibility artifact for existing workflows.
 - Legacy feature keys such as `enable_server_tests`, `enable_bookmarks`, and `enable_diagnostics` are still normalized on read.
 

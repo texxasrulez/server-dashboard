@@ -1,146 +1,22 @@
 <?php
 require_once __DIR__.'/includes/init.php';
 require_once __DIR__.'/includes/auth.php';
+require_once __DIR__.'/lib/Backups/BackupsConfig.php';
 require_login();
 
-// per-session CSRF token for this page
-$csrf_token = csrf_token();
-
-// FS-level backup presence check under configured root/subdirs
-$HAS_ANY_BACKUP_FS = false;
-$backup_root = (string) cfg_local('backups.fs_root', '/mnt/backupz');
-if ($backup_root === '') {
-    $backup_root = '/mnt/backupz';
-}
-$hestia_source_dir = (string) cfg_local('backups.hestia_source_dir', '/backup');
-if ($hestia_source_dir === '') {
-    $hestia_source_dir = '/backup';
-}
-$hestia_bind_source = (string) cfg_local('backups.hestia_bind_source', '');
-$hestia_bind_target = (string) cfg_local('backups.hestia_bind_target', $hestia_source_dir);
-if ($hestia_bind_target === '') {
-    $hestia_bind_target = $hestia_source_dir;
-}
-$hestia_bind_options = (string) cfg_local('backups.hestia_bind_options', 'bind,nofail');
-if ($hestia_bind_options === '') {
-    $hestia_bind_options = 'bind,nofail';
-}
-$hestia_user = (string) cfg_local('backups.hestia_user', 'user');
-if ($hestia_user === '') {
-    $hestia_user = 'user';
-}
-$backup_script_path = (string) cfg_local('backups.script_path', __DIR__ . '/scripts');
-if ($backup_script_path === '') {
-    $backup_script_path = __DIR__ . '/scripts';
-}
-$dirs_raw = (string) cfg_local('backups.fs_dirs', "hestia\nmicro\nsnapshots");
-$backup_dirs = array_values(array_filter(array_map('trim', preg_split('/[\s,]+/', $dirs_raw) ?: [])));
-if (!$backup_dirs) {
-    $backup_dirs = ['hestia','micro','snapshots'];
-}
-
-$backup_orchestrator_defaults = [
-    'backup_root'     => $backup_root,
-    'script_path'     => $backup_script_path,
-    'snap_script'     => (string) cfg_local('backups.snap_script', rtrim($backup_script_path, '/') . '/make-snapshots.sh'),
-    'micro_script'    => (string) cfg_local('backups.micro_script', rtrim($backup_script_path, '/') . '/make-micro-backups.sh'),
-    'hestia_cmd'      => (string) cfg_local('backups.hestia_cmd', '/usr/local/hestia/bin/v-backup-user'),
-    'hestia_user'     => $hestia_user,
-    'hestia_source_dir' => $hestia_source_dir,
-    'hestia_bind_source' => $hestia_bind_source,
-    'hestia_bind_target' => $hestia_bind_target,
-    'hestia_bind_options' => $hestia_bind_options,
-    'exclude_dirs'    => (string) cfg_local('backups.exclude_dirs', ''),
-    'backupctl'       => (string) cfg_local('backups.backupctl', rtrim($backup_script_path, '/') . '/backupctl'),
-    'pipeline_script' => (string) cfg_local('backups.pipeline_script', '/usr/local/bin/backup-nightly.sh'),
-    'log_file'        => (string) cfg_local('backups.log_file', '/var/log/backup-nightly.log'),
-    'cron_time'       => (string) cfg_local('backups.cron_time', '02:00'),
-    'service_name'    => (string) cfg_local('backups.service_name', 'backup-nightly'),
-    'system_user'     => (string) cfg_local('backups.system_user', 'root'),
-    'include_health'     => cfg_local('backups.include_health', true),
-    'include_integrity' => cfg_local('backups.include_integrity', true),
-    'include_prune'      => cfg_local('backups.include_prune', true),
-    'suspend'            => cfg_local('backups.suspend', false),
-    'disable_on_mount_fail' => cfg_local('backups.disable_on_mount_fail', cfg_local('backups.require_dedicated_mount', false)),
-];
-$backup_orchestrator_json = json_encode($backup_orchestrator_defaults, JSON_UNESCAPED_SLASHES);
-
-foreach ($backup_dirs as $sub) {
-    $p = $backup_root . '/' . $sub;
-    if (is_dir($p)) {
-        try {
-            $it = new FilesystemIterator($p, FilesystemIterator::SKIP_DOTS);
-            if ($it->valid()) {
-                $HAS_ANY_BACKUP_FS = true;
-                break;
-            }
-        } catch (Throwable $e) {
-            // If we can't iterate, treat as no backups in that dir and move on
-        }
-    }
-}
-
-$initial_status = 'UNKNOWN';
-$initial_status_class = 'status-crit';
-$initial_disk_usage = '--%';
-$initial_disk_status = 'Unknown';
-try {
-    $status_file = __DIR__ . '/state/backup_status.json';
-    if (is_readable($status_file)) {
-        $raw = @file_get_contents($status_file);
-        $j = is_string($raw) ? json_decode($raw, true) : null;
-        if (is_array($j)) {
-            $raw_status = strtoupper(trim((string)($j['status'] ?? '')));
-            $mount_ok = !array_key_exists('backup_mount_ok', $j) || ($j['backup_mount_ok'] !== false);
-            $warnings = (isset($j['warnings']) && is_array($j['warnings'])) ? $j['warnings'] : [];
-            $errors = (isset($j['errors']) && is_array($j['errors'])) ? $j['errors'] : [];
-            $usage = null;
-            if (isset($j['disk']) && is_array($j['disk']) && isset($j['disk']['usage_percent']) && is_numeric($j['disk']['usage_percent'])) {
-                $usage = (int)$j['disk']['usage_percent'];
-            }
-            if ($usage !== null) {
-                $initial_disk_usage = $usage . '%';
-            }
-
-            if (in_array($raw_status, ['OK','HEALTHY','PASS'], true)) {
-                $initial_status = 'OK';
-            } elseif (in_array($raw_status, ['WARN','WARNING','DEGRADED'], true)) {
-                $initial_status = 'WARN';
-            } elseif (in_array($raw_status, ['CRIT','CRITICAL','FAIL','ERROR'], true)) {
-                $initial_status = 'CRIT';
-            } else {
-                if ($mount_ok === false || count($errors) > 0 || ($usage !== null && $usage >= 95)) {
-                    $initial_status = 'CRIT';
-                } elseif (count($warnings) > 0 || ($usage !== null && $usage >= 80)) {
-                    $initial_status = 'WARN';
-                } else {
-                    $initial_status = 'OK';
-                }
-            }
-
-            if ($mount_ok === false) {
-                $initial_disk_status = 'UNMOUNTED';
-            } elseif ($usage !== null) {
-                if ($usage >= 95) {
-                    $initial_disk_status = 'CRITICAL';
-                } elseif ($usage >= 90) {
-                    $initial_disk_status = 'HIGH';
-                } elseif ($usage >= 80) {
-                    $initial_disk_status = 'ELEVATED';
-                } else {
-                    $initial_disk_status = 'HEALTHY';
-                }
-            }
-        }
-    }
-} catch (Throwable $e) {
-    // Keep UNKNOWN fallback.
-}
-if ($initial_status === 'OK') {
-    $initial_status_class = 'status-ok';
-} elseif ($initial_status === 'WARN') {
-    $initial_status_class = 'status-warn';
-}
+$backupPage = \App\Backups\BackupsConfig::pageData(__DIR__);
+$backupDefaults = \App\Backups\BackupsConfig::orchestratorDefaults(__DIR__);
+$csrf_token = $backupPage['csrf_token'];
+$HAS_ANY_BACKUP_FS = $backupPage['has_any_backup_fs'];
+$backup_orchestrator_json = $backupPage['backup_orchestrator_json'];
+$initial_status = $backupPage['initial_status']['status'];
+$initial_status_class = $backupPage['initial_status']['status_class'];
+$initial_disk_usage = $backupPage['initial_status']['disk_usage'];
+$initial_disk_status = $backupPage['initial_status']['disk_status'];
+$backup_root = (string) ($backupDefaults['backup_root'] ?? '/mnt/backupz');
+$hestia_source_dir = (string) ($backupDefaults['hestia_source_dir'] ?? '/backup');
+$hestia_user = (string) ($backupDefaults['hestia_user'] ?? 'user');
+$hestia_bind_source = (string) ($backupDefaults['hestia_bind_source'] ?? '');
 
 $PAGE_TITLE = 'Backups';
 $PAGE_CSS   = null; // Using inline styles for this page

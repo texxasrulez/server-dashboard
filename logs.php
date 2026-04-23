@@ -3,164 +3,50 @@ require_once __DIR__.'/includes/init.php';
 require_once __DIR__.'/includes/auth.php';
 require_once __DIR__.'/includes/logger.php';
 require_once __DIR__.'/lib/PrivilegedLogs.php';
+require_once __DIR__.'/lib/Logs/LogsPageSupport.php';
 require_login();
 
 $PAGE_TITLE = 'Logs';
 $PAGE_CSS   = 'assets/css/pages/logs.css';
 
 /* ====================== Paths & Setup ====================== */
-$LOG_SRC   = '/var/log';
-$STATE_DIR = __DIR__ . '/state';
-$LOG_DEST  = $STATE_DIR . '/logs_mirror';
-$LOG_CFG   = $STATE_DIR . '/logs_config.json';
-
-@umask(0002);
-if (!is_dir($STATE_DIR)) {
-    @mkdir($STATE_DIR, 0775, true);
-}
-@mkdir($LOG_DEST, 0775, true);
-if (!is_dir($LOG_DEST)) {
-    @mkdir($LOG_DEST, 0775, true);
-}
-if (!file_exists($LOG_CFG)) {
-    @file_put_contents($LOG_CFG, json_encode(array()));
-    @chmod($LOG_CFG, 0664);
-}
+$logsSetup = \App\Logs\LogsPageSupport::setup(__DIR__);
+$LOG_SRC   = $logsSetup['log_src'];
+$STATE_DIR = $logsSetup['state_dir'];
+$LOG_DEST  = $logsSetup['log_dest'];
+$LOG_CFG   = $logsSetup['log_cfg'];
 
 /* ====================== Helpers ====================== */
 function mirror_activity_log($status, $action, $name, $note = '')
 {
-    $state = __DIR__ . '/state';
-    @mkdir($state, 0775, true);
-    $logf = $state . '/mirror_activity.log';
-    dashboard_log_append($logf, 'logs_mirror', $action . ' ' . $name, [
-        'status' => (string)$status,
-        'note' => (string)$note,
-    ]);
-    @chmod($logf, 0664);
+    \App\Logs\LogsPageSupport::mirrorActivityLog(__DIR__, (string)$status, (string)$action, (string)$name, (string)$note);
 }
 
 // Accept relative under /var/log or absolute; allow .log, .log.N, .log.gz; must live under allowed roots
 function resolve_candidate_path($input, $roots)
 {
-    $input = trim(strval($input));
-    if ($input === '') {
-        return array(null, null);
-    }
-    if ($input[0] !== '/') {
-        $input = '/var/log/' . ltrim($input, '/');
-    }
-    $real = @realpath($input);
-    if (!$real) {
-        return array(null, null);
-    }
-    if (!preg_match('/\.log(?:\.\d+)?(?:\.gz)?$/i', basename($real))) {
-        return array(null, null);
-    }
-    foreach ($roots as $r) {
-        $rreal = @realpath($r);
-        if ($rreal && strpos($real, rtrim($rreal, '/')) === 0) {
-            return array($real, $rreal);
-        }
-    }
-    return array(null, null);
+    return \App\Logs\LogsPageSupport::resolveCandidatePath(strval($input), is_array($roots) ? $roots : []);
 }
 
 function copy_log_file($srcFile, $destDir)
 {
-    if (!is_file($srcFile) || is_link($srcFile) || !is_readable($srcFile)) {
-        mirror_activity_log('fail', 'copy', basename($srcFile), 'not-readable');
-        return false;
-    }
-    if (!preg_match('/\.log(?:\.\d+)?(?:\.gz)?$/i', basename($srcFile))) {
-        mirror_activity_log('skip', 'copy', basename($srcFile), 'not-log');
-        return false;
-    }
-    $srcReal = @realpath($srcFile);
-    if (!$srcReal) {
-        mirror_activity_log('fail', 'copy', basename($srcFile), 'no-realpath');
-        return false;
-    }
-
-    // Flatten subpaths for uniqueness (nginx/error.log -> nginx__error.log)
     global $LOG_SRC, $LOG_DEST;
-    $rel = null;
-    foreach (array($LOG_SRC, $LOG_DEST) as $rt) {
-        $rreal = @realpath($rt);
-        if ($rreal && strpos($srcReal, rtrim($rreal, '/')) === 0) {
-            $rel = ltrim(substr($srcReal, strlen(rtrim($rreal, '/'))), '/');
-            break;
-        }
-    }
-    if ($rel === null || $rel === '') {
-        $rel = basename($srcReal);
-    }
-    $safe = preg_replace('/[^a-zA-Z0-9._-]+/', '__', $rel);
-    if (!preg_match('/\.log(?:\.\d+)?(?:\.gz)?$/i', $safe)) {
-        mirror_activity_log('skip', 'copy', $safe, 'not-log');
-        return false;
-    }
-
-    $dest = rtrim($destDir, '/').'/'.$safe;
-    $need = !file_exists($dest) || (filemtime($srcReal) > @filemtime($dest));
-    if (!$need) {
-        mirror_activity_log('skip', 'copy', $safe, 'up-to-date');
-        return true;
-    }
-
-    $in = @fopen($srcReal, 'rb');
-    $out = @fopen($dest, 'wb');
-    if (!$in || !$out) {
-        if ($in) {
-            fclose($in);
-        } if ($out) {
-            fclose($out);
-        } mirror_activity_log('fail', 'copy', $safe, 'open');
-        return false;
-    }
-    stream_copy_to_stream($in, $out);
-    fclose($in);
-    fclose($out);
-    @chmod($dest, 0644);
-    mirror_activity_log('ok', 'copy', $safe);
-    return true;
+    return \App\Logs\LogsPageSupport::copyLogFile(__DIR__, (string)$srcFile, (string)$destDir, (string)$LOG_SRC, (string)$LOG_DEST);
 }
 
 function mirror_logs_dir($srcDir, $destDir)
 {
-    if (!is_dir($srcDir) || !is_readable($srcDir)) {
-        return;
-    }
-    $dh = @opendir($srcDir);
-    if (!$dh) {
-        return;
-    }
-    while (($e = readdir($dh)) !== false) {
-        if ($e === '.' || $e === '..') {
-            continue;
-        }
-        $sp = $srcDir.'/'.$e;
-        if (!is_file($sp) || is_link($sp)) {
-            continue;
-        }
-        if (!preg_match('/\.log(?:\.\d+)?(?:\.gz)?$/i', $e)) {
-            continue;
-        } // .log + rotations
-        copy_log_file($sp, $destDir);
-    }
-    closedir($dh);
+    global $LOG_SRC, $LOG_DEST;
+    \App\Logs\LogsPageSupport::mirrorLogsDir(__DIR__, (string)$srcDir, (string)$destDir, (string)$LOG_SRC, (string)$LOG_DEST);
 }
 
 function read_log_cfg($path)
 {
-    $raw = @file_get_contents($path);
-    $arr = json_decode($raw, true);
-    return is_array($arr) ? $arr : array();
+    return \App\Logs\LogsPageSupport::readLogConfig((string)$path);
 }
 function write_log_cfg($path, $arr)
 {
-    @file_put_contents($path, json_encode(array_values($arr), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    @chmod($path, 0664);
+    \App\Logs\LogsPageSupport::writeLogConfig((string)$path, is_array($arr) ? $arr : []);
 }
 
 /* ------ time helpers ------ */

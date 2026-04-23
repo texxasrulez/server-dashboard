@@ -3,6 +3,8 @@
 namespace App;
 
 require_once __DIR__ . '/Config.php';
+require_once __DIR__ . '/Speedtest/SpeedtestSettings.php';
+require_once __DIR__ . '/Speedtest/SpeedtestStorage.php';
 require_once dirname(__DIR__) . '/api/_state_path.php';
 
 final class Speedtest
@@ -31,124 +33,37 @@ final class Speedtest
 
     public static function settings(): array
     {
-        self::ensureConfig();
-        $cfg = Config::get('speedtest', []);
-        $quiet = is_array($cfg['quiet_hours'] ?? null) ? $cfg['quiet_hours'] : [];
-        $legacyPreferredServer = self::sanitizePreferredServer($cfg['preferred_server'] ?? '');
-
-        return [
-            'enabled' => (bool)($cfg['enabled'] ?? false),
-            'interval_minutes' => max(1, min(10080, (int)($cfg['interval_minutes'] ?? 240))),
-            'timeout_seconds' => max(5, min(300, (int)($cfg['timeout_seconds'] ?? 90))),
-            'preferred_backend' => self::normalizeBackend((string)($cfg['preferred_backend'] ?? 'auto')),
-            'preferred_server_ookla' => self::sanitizePreferredServer($cfg['preferred_server_ookla'] ?? $legacyPreferredServer),
-            'preferred_server_librespeed' => self::sanitizePreferredServer($cfg['preferred_server_librespeed'] ?? $legacyPreferredServer),
-            'retention_days' => max(1, min(3650, (int)($cfg['retention_days'] ?? 90))),
-            'max_history_entries' => max(10, min(50000, (int)($cfg['max_history_entries'] ?? 2000))),
-            'log_failed_tests' => (bool)($cfg['log_failed_tests'] ?? true),
-            'randomize_schedule_window' => (bool)($cfg['randomize_schedule_window'] ?? false),
-            'randomize_window_minutes' => max(0, min(240, (int)($cfg['randomize_window_minutes'] ?? 10))),
-            'quiet_hours' => [
-                'enabled' => (bool)($quiet['enabled'] ?? false),
-                'start_hour' => max(0, min(23, (int)($quiet['start_hour'] ?? 0))),
-                'end_hour' => max(0, min(23, (int)($quiet['end_hour'] ?? 0))),
-            ],
-        ];
+        return \App\Speedtest\SpeedtestSettings::load([self::class, 'ensureConfig']);
     }
 
     public static function validatePatch(array $patch): void
     {
-        if (!isset($patch['speedtest']) || !is_array($patch['speedtest'])) {
-            return;
-        }
-        $speedtest = $patch['speedtest'];
-        if (array_key_exists('preferred_backend', $speedtest)) {
-            $backend = strtolower(trim((string)$speedtest['preferred_backend']));
-            if (!in_array($backend, ['auto', 'ookla', 'librespeed', 'speedtest'], true)) {
-                throw new \InvalidArgumentException('Preferred backend must be auto, Ookla speedtest, or librespeed-cli');
-            }
-        }
-        foreach (['preferred_server', 'preferred_server_ookla', 'preferred_server_librespeed'] as $key) {
-            if (array_key_exists($key, $speedtest)) {
-                $rawServer = trim((string)$speedtest[$key]);
-                $server = self::sanitizePreferredServer($speedtest[$key]);
-                if ($rawServer !== '' && $server !== $rawServer) {
-                    throw new \InvalidArgumentException('Preferred server values must use only letters, numbers, dots, colons, dashes, underscores, or slashes');
-                }
-            }
-        }
-        if (isset($speedtest['quiet_hours']) && is_array($speedtest['quiet_hours'])) {
-            $quiet = $speedtest['quiet_hours'];
-            $start = array_key_exists('start_hour', $quiet) ? (int)$quiet['start_hour'] : null;
-            $end = array_key_exists('end_hour', $quiet) ? (int)$quiet['end_hour'] : null;
-            foreach (['start_hour' => $start, 'end_hour' => $end] as $label => $hour) {
-                if ($hour !== null && ($hour < 0 || $hour > 23)) {
-                    throw new \InvalidArgumentException('Quiet hours ' . str_replace('_', ' ', $label) . ' must be 0 through 23');
-                }
-            }
-            if (!empty($quiet['enabled']) && $start !== null && $end !== null && $start === $end) {
-                throw new \InvalidArgumentException('Quiet hours start and end hour must differ when quiet hours are enabled');
-            }
-        }
+        \App\Speedtest\SpeedtestSettings::validatePatch($patch);
     }
 
     public static function stateDir(): string
     {
-        $baseDir = dirname(dashboard_state_path('speedtest/.keep'));
-        $legacyDir = $baseDir . '/speedtest';
-        foreach ([$baseDir, $legacyDir] as $candidate) {
-            if (is_file($candidate . '/speedtest_history.ndjson') || is_file($candidate . '/speedtest_meta.json')) {
-                if (!is_dir($candidate)) {
-                    @mkdir($candidate, 0775, true);
-                }
-                return $candidate;
-            }
-        }
-        if (!is_dir($baseDir)) {
-            @mkdir($baseDir, 0775, true);
-        }
-        return $baseDir;
+        return \App\Speedtest\SpeedtestStorage::stateDir();
     }
 
     public static function historyPath(): string
     {
-        return self::stateDir() . '/speedtest_history.ndjson';
+        return \App\Speedtest\SpeedtestStorage::historyPath();
     }
 
     public static function metaPath(): string
     {
-        return self::stateDir() . '/speedtest_meta.json';
+        return \App\Speedtest\SpeedtestStorage::metaPath();
     }
 
     public static function loadMeta(): array
     {
-        $defaults = [
-            'last_attempted_at' => null,
-            'last_success_at' => null,
-            'last_backend' => '',
-            'last_backend_version' => '',
-            'last_error' => '',
-            'next_due_at' => null,
-            'last_duration_ms' => null,
-            'history_invalid_lines' => 0,
-        ];
-        $path = self::metaPath();
-        if (!is_file($path)) {
-            return $defaults;
-        }
-        $raw = @file_get_contents($path);
-        $json = is_string($raw) ? json_decode($raw, true) : null;
-        if (!is_array($json)) {
-            return $defaults;
-        }
-        return array_merge($defaults, $json);
+        return \App\Speedtest\SpeedtestStorage::loadMeta();
     }
 
     public static function saveMeta(array $patch): array
     {
-        $meta = array_merge(self::loadMeta(), $patch);
-        dashboard_atomic_write(self::metaPath(), json_encode($meta, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . PHP_EOL);
-        return $meta;
+        return \App\Speedtest\SpeedtestStorage::saveMeta($patch);
     }
 
     public static function backendStatus(): array

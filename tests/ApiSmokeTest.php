@@ -62,6 +62,14 @@ final class ApiSmokeTest extends TestCase
         $this->assertStringContainsString("<table>", $html);
     }
 
+    public function testProcessesEndpointReturnsJsonPayload(): void
+    {
+        $payload = $this->runEndpoint("api/processes.php", "limit=10", true);
+        $this->assertTrue($payload["ok"]);
+        $this->assertArrayHasKey("processes", $payload);
+        $this->assertArrayHasKey("host", $payload);
+    }
+
     private function runEndpoint(
         string $path,
         string $query = "",

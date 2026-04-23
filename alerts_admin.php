@@ -4,14 +4,9 @@ require_once __DIR__ . '/includes/auth.php';
 require_admin();
 
 require_once __DIR__ . '/lib/Config.php';
+require_once __DIR__ . '/lib/Alerts/AlertsAdminPage.php';
 \App\Config::init(__DIR__);
-$alertsUi = [
-  'mute_presets' => (string) \App\Config::get('alerts.mute_presets', ''),
-  'service_defaults' => [
-    'latency_warn_ms' => (int) \App\Config::get('alerts.service_defaults.latency_warn_ms', 0),
-    'latency_fail_ms' => (int) \App\Config::get('alerts.service_defaults.latency_fail_ms', 0),
-  ],
-];
+$alertsUi = \App\Alerts\AlertsAdminPage::uiConfig();
 
 $PAGE_TITLE = 'Alerts';
 $PAGE_CSS   = 'assets/css/pages/alerts_admin.css';

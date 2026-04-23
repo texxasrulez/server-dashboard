@@ -7,6 +7,8 @@ require_once __DIR__ . "/Config.php";
 require_once __DIR__ . "/../lib/AdminMaintenance.php";
 require_once __DIR__ . "/../Adapters/AdapterFactory.php";
 require_once __DIR__ . "/../api/_state_path.php";
+require_once __DIR__ . "/ServerDiag/ServerDiagRuntimeChecks.php";
+require_once __DIR__ . "/ServerDiag/ServerDiagEnvironmentChecks.php";
 
 class ServerDiag
 {
@@ -62,23 +64,10 @@ class ServerDiag
     {
         Config::init(dirname(__DIR__));
 
-        $checks = [];
-        $checks[] = self::checkPhpVersion();
-        foreach (self::checkPhpExtensions() as $check) {
-            $checks[] = $check;
-        }
-        $checks[] = self::checkRuntimeIni();
-        $checks[] = self::checkConfigFile();
-        $checks[] = self::checkGeneratedEnv();
-        $checks[] = self::checkCronToken();
-        $checks[] = self::checkMailTransport();
-        $checks[] = self::checkAdapter();
-        foreach (self::checkWritablePaths() as $check) {
-            $checks[] = $check;
-        }
-        foreach (self::checkDangerousConditions() as $check) {
-            $checks[] = $check;
-        }
+        $checks = array_merge(
+            \App\ServerDiag\ServerDiagRuntimeChecks::build(),
+            \App\ServerDiag\ServerDiagEnvironmentChecks::build(),
+        );
 
         $buckets = ["fail" => [], "warn" => [], "ok" => []];
         foreach ($checks as $check) {

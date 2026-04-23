@@ -44,15 +44,30 @@ cleanup() {
 }
 trap cleanup EXIT
 
+print_php_log() {
+  if [[ -f "${PHP_LOG}" ]]; then
+    echo "php built-in server log:" >&2
+    cat "${PHP_LOG}" >&2
+  fi
+}
+
 php -S "${HOST}:${PORT}" "${ROOT}/tests/support/browser_smoke_router.php" >"${PHP_LOG}" 2>&1 &
 SERVER_PID=$!
 
+ready=0
 for _ in $(seq 1 40); do
   if php -r '$u=$argv[1]; $c=@file_get_contents($u); exit($c===false ? 1 : 0);' "${BASE_URL}/tests/support/browser_smoke_client.php?check=diag" >/dev/null 2>&1; then
+    ready=1
     break
   fi
   sleep 0.25
 done
+
+if [[ "${ready}" != "1" ]]; then
+  echo "browser smoke failed: php built-in server did not become ready at ${BASE_URL}" >&2
+  print_php_log
+  exit 1
+fi
 
 run_check() {
   local check="$1"
@@ -75,6 +90,7 @@ run_check() {
   if [[ "${output}" != *'data-status="pass"'* ]]; then
     echo "browser smoke failed: ${check}" >&2
     echo "${output}" >&2
+    print_php_log
     return 1
   fi
   echo "browser smoke passed: ${check}"

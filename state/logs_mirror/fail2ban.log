@@ -1,0 +1,24 @@
+2026-04-19 00:00:00,624 fail2ban.server         [1607]: INFO    rollover performed on /var/log/fail2ban.log
+2026-04-20 13:01:48,895 fail2ban.server         [1607]: INFO    Shutdown in progress...
+2026-04-20 13:01:48,895 fail2ban.observer       [1607]: INFO    Observer stop ... try to end queue 5 seconds
+2026-04-20 13:01:48,915 fail2ban.observer       [1607]: INFO    Observer stopped, 0 events remaining.
+2026-04-20 13:01:48,955 fail2ban.server         [1607]: INFO    Stopping all jails
+2026-04-20 13:01:49,188 fail2ban.actions        [1607]: NOTICE  [sshd] Flush ticket(s) with nftables
+2026-04-20 13:01:49,189 fail2ban.jail           [1607]: INFO    Jail 'sshd' stopped
+2026-04-20 13:01:49,189 fail2ban.database       [1607]: INFO    Connection to database closed.
+2026-04-20 13:01:49,189 fail2ban.server         [1607]: INFO    Exiting Fail2ban
+2026-04-20 13:02:03,520 fail2ban.server         [1602]: INFO    --------------------------------------------------
+2026-04-20 13:02:03,523 fail2ban.server         [1602]: INFO    Starting Fail2ban v1.0.2
+2026-04-20 13:02:03,523 fail2ban.observer       [1602]: INFO    Observer start...
+2026-04-20 13:02:03,552 fail2ban.database       [1602]: INFO    Connected to fail2ban persistent database '/var/lib/fail2ban/fail2ban.sqlite3'
+2026-04-20 13:02:03,554 fail2ban.jail           [1602]: INFO    Creating new jail 'sshd'
+2026-04-20 13:02:04,052 fail2ban.jail           [1602]: INFO    Jail 'sshd' uses systemd {}
+2026-04-20 13:02:04,052 fail2ban.jail           [1602]: INFO    Initiated 'systemd' backend
+2026-04-20 13:02:04,053 fail2ban.filter         [1602]: INFO      maxLines: 1
+2026-04-20 13:02:04,060 fail2ban.filtersystemd  [1602]: INFO    [sshd] Added journal match for: '_SYSTEMD_UNIT=sshd.service + _COMM=sshd'
+2026-04-20 13:02:04,060 fail2ban.filter         [1602]: INFO      maxRetry: 5
+2026-04-20 13:02:04,060 fail2ban.filter         [1602]: INFO      findtime: 600
+2026-04-20 13:02:04,060 fail2ban.actions        [1602]: INFO      banTime: 600
+2026-04-20 13:02:04,060 fail2ban.filter         [1602]: INFO      encoding: UTF-8
+2026-04-20 13:02:04,060 fail2ban.filtersystemd  [1602]: INFO    [sshd] Jail is in operation now (process new journal entries)
+2026-04-20 13:02:04,061 fail2ban.jail           [1602]: INFO    Jail 'sshd' started

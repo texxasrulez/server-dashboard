@@ -1,0 +1,10 @@
+{
+    "last_attempted_at": 1775889594,
+    "last_success_at": null,
+    "last_backend": "speedtest-cli",
+    "last_backend_version": "speedtest-cli 2.1.3",
+    "last_error": "Cannot retrieve speedtest configuration\nERROR: <urlopen error [Errno -2] Name or service not known>",
+    "next_due_at": 1775904590,
+    "last_duration_ms": 129,
+    "history_invalid_lines": 0
+}

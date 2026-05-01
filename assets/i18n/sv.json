@@ -1,0 +1,493 @@
+{
+    "app": {
+        "title": "Kontrollpanel f\u00f6r server"
+    },
+    "nav": {
+        "history": "Historia",
+        "logs": "Loggar",
+        "dashboard": "Instrumentpanel",
+        "services": "Tj\u00e4nster",
+        "alerts": "Varningar",
+        "tests": "Tester",
+        "settings": "Inst\u00e4llningar",
+        "about": "Om"
+    },
+    "history": {
+        "title": "Historia",
+        "trends": "Trender",
+        "range": "R\u00e4ckvidd",
+        "baseline": "Baslinje",
+        "probe_now": "Prova nu",
+        "refresh": "Uppdatera",
+        "export_json": "Exportera JSON",
+        "export_alerts_json": "Exportera varningar JSON",
+        "reset_history": "\u00c5terst\u00e4ll historik",
+        "recent_alert_events": "Nyligen intr\u00e4ffade larmh\u00e4ndelser",
+        "export_preview": "F\u00f6rhandsgranskning av export",
+        "close": "N\u00e4ra",
+        "copy": "Kopia",
+        "download": "Nedladdningar"
+    },
+    "logs": {
+        "title": "Loggar",
+        "manage": "Hantera loggar",
+        "add": "L\u00e4gg till",
+        "delete": "Radera",
+        "refresh": "Uppdatera",
+        "search": "S\u00f6k",
+        "filter": "Filter",
+        "lines": "Linjer",
+        "open": "\u00d6ppna",
+        "close": "N\u00e4ra",
+        "download": "Nedladdningar",
+        "copy": "Kopia"
+    },
+    "common": {
+        "save": "Spara",
+        "cancel": "Avbryt",
+        "edit": "Redigera",
+        "delete": "Radera",
+        "update": "Uppdatering",
+        "create": "Skapa",
+        "enable": "Aktivera",
+        "disable": "Avaktivera",
+        "yes": "Ja",
+        "no": "Nej",
+        "on": "P\u00e5",
+        "off": "Av",
+        "confirm": "Bekr\u00e4fta",
+        "search": "S\u00f6k",
+        "filter": "Filter",
+        "actions": "\u00c5tg\u00e4rder",
+        "close": "St\u00e4ng",
+        "none": "ingen",
+        "none_dash": "-"
+    },
+    "alerts": {
+        "title": "Varningar",
+        "recent_events": "Nyligen intr\u00e4ffade larmh\u00e4ndelser",
+        "history": "Varningshistorik",
+        "export_json": "Exportera varningar JSON",
+        "no_alerts": "Inga varningar",
+        "level": "Niv\u00e5",
+        "message": "Meddelande",
+        "service": "Service",
+        "time": "Tid",
+        "probe_now": "Prova nu",
+        "refresh": "Uppdatera",
+        "silence": "Tystnad",
+        "unsilence": "Tystnad",
+        "ack": "Bekr\u00e4fta",
+        "unack": "Okunskap"
+    },
+    "tests": {
+        "title": "Test av server",
+        "run_all": "K\u00f6r alla",
+        "status": "Status",
+        "last_run": "Sista k\u00f6rningen",
+        "duration": "Varaktighet"
+    },
+    "services": {
+        "title": "Tj\u00e4nster",
+        "status": "Status",
+        "restart": "Omstart",
+        "start": "Start",
+        "stop": "Stopp"
+    },
+    "config": {
+        "sections": {
+            "site": "Site",
+            "features": "Features",
+            "capabilities": "Capabilities",
+            "processes": "Processes",
+            "mail": "Mail",
+            "integrations": "Integrations",
+            "security": "Security",
+            "ui": "UI",
+            "server_tests": "Server Tests",
+            "alerts": "Alerts",
+            "cron": "Cron",
+            "history": "History",
+            "logs": "Logs",
+            "backups": "S\u00e4kerhetskopieringar",
+            "email": "Email"
+        },
+        "fields": {
+            "backups": {
+                "require_dedicated_mount": {
+                    "label": "Kr\u00e4v dedikerad montering",
+                    "help": "\u00c4ldre kompatibilitetsnyckel. N\u00e4r det \u00e4r aktiverat kr\u00e4ver s\u00e4kerhetskopieringsskript att s\u00e4kerhetskopieringsf\u00e4stet finns."
+                },
+                "disable_on_mount_fail": {
+                    "label": "Inaktivera s\u00e4kerhetskopior om monteringen misslyckas",
+                    "help": "N\u00e4r det \u00e4r aktiverat stoppas s\u00e4kerhetskopierings\u00e5tg\u00e4rder och genererade skript om s\u00e4kerhetskopieringsf\u00e4stet saknas."
+                }
+            },
+            "alerts": {
+                "min_severity": {
+                    "label": "Minsta sv\u00e5righetsgrad f\u00f6r att varna"
+                },
+                "email": {
+                    "label": "Legacy alert email(s)"
+                }
+            }
+        },
+        "ui": {
+            "unknown": "ok\u00e4nd",
+            "unknown_paren": "(ok\u00e4nd)",
+            "site_backup": {
+                "title": "S\u00e4kerhetskopiera och \u00e5terst\u00e4lla",
+                "export_config": "Exportera konfiguration",
+                "import_config": "Importera konfiguration",
+                "choose_file_first": "V\u00e4lj en s\u00e4kerhetskopia f\u00f6rst",
+                "imported_reloading": "Importerad. Laddar om...",
+                "import_failed": "Importen misslyckades",
+                "import_failed_prefix": "Import misslyckades:",
+                "retention_title": "S\u00e4kerhetskopiering - Retention",
+                "keep_last": "H\u00e5ll sist",
+                "files": "filer",
+                "loading_stats": "(laddar in statistik...)",
+                "last_backup_loading": "Senaste s\u00e4kerhetskopian: (laddar in...)",
+                "last_backup_none": "Senaste backup: ingen \u00e4nnu",
+                "last_backup_prefix": "Senaste backup:",
+                "last_backup_unknown": "Senaste backup: ok\u00e4nd",
+                "prune_now": "Besk\u00e4r nu",
+                "pruned_kept_deleted": "Besk\u00e4rs - h\u00e5lls",
+                "deleted_prefix": "raderad",
+                "prune_failed": "Besk\u00e4rning misslyckades",
+                "prune_failed_prefix": "Besk\u00e4rning misslyckades:",
+                "create_backup_now": "Skapa s\u00e4kerhetskopia nu",
+                "backup_saved_prefix": "S\u00e4kerhetskopiering sparad:",
+                "backup_failed": "S\u00e4kerhetskopieringen misslyckades",
+                "backup_failed_prefix": "S\u00e4kerhetskopieringen misslyckades:",
+                "download_latest_backup": "Ladda ner senaste s\u00e4kerhetskopian",
+                "no_backups_found": "Inga s\u00e4kerhetskopior hittades",
+                "download_failed_prefix": "Nedladdning misslyckades:",
+                "redact_secrets": "Redact secrets"
+            }
+        }
+    },
+    "backups": {
+        "common": {
+            "status": "Status:",
+            "timestamp": "Tidsst\u00e4mpel:",
+            "none_dash": "-",
+            "free": "Gratis",
+            "used": "Begagnad",
+            "copy": "Kopiera",
+            "warnings": "Varningar",
+            "errors": "Fel",
+            "loading": "Belastning..."
+        },
+        "status": {
+            "error_loading_json": "FEL ATT LADDA JSON",
+            "ok": "OK",
+            "unmounted": "OMONTERAD",
+            "critical": "KRITISK",
+            "high": "H\u00d6G",
+            "elevated": "UPPH\u00d6JD",
+            "healthy": "H\u00c4LSOSAM",
+            "unknown": "OK\u00c4ND",
+            "unknown_cap": "Ok\u00e4nd"
+        },
+        "disk": {
+            "unmounted": "Disk OMONTERAD",
+            "tag": "Disk:",
+            "sizes_updated": "Uppdaterade storlekar:",
+            "title": "Diskanv\u00e4ndning",
+            "usage": "Anv\u00e4ndande",
+            "mount": "Montera"
+        },
+        "page": {
+            "freshness_prefix": "Friskhet:",
+            "title": "Backup Control Center",
+            "subtitle_prefix": "Livestatus drivs av",
+            "subtitle_suffix": "p\u00e5 din backup-skiva."
+        },
+        "ages": {
+            "no_snapshots_on_disk": "Inga \u00f6gonblicksbilder hittades p\u00e5 disken",
+            "one_snapshot_present": "1 \u00f6gonblicksbild present",
+            "snapshots_present_suffix": "\u00f6gonblicksbilder n\u00e4rvarande",
+            "no_panel_backups_on_disk": "Inga panels\u00e4kerhetskopior hittades p\u00e5 disken",
+            "one_panel_backup_present": "1 panel backup n\u00e4rvarande",
+            "panel_backups_present_suffix": "panels\u00e4kerhetskopior finns",
+            "no_micro_backups_on_disk": "Inga mikrobackuper hittades p\u00e5 disken",
+            "one_micro_backup_present": "1 mikro backup n\u00e4rvarande",
+            "micro_backups_present_suffix": "mikro backuper finns",
+            "snapshot_daily0_chart": "\u00d6gonblicksbild (dagligen.0)",
+            "hestia_latest_chart": "Hestia senaste",
+            "micro_latest_chart": "Micro senaste",
+            "age_days": "\u00c5lder (dagar)",
+            "title": "Backup \u00c5ldrar",
+            "subtitle": "Hur f\u00e4rska dina senaste s\u00e4kerhetskopior \u00e4r",
+            "snapshot_daily0": "\u00d6gonblicksbild dagligen.0",
+            "latest_hestia": "Senaste Hestia",
+            "latest_micro": "Senaste Micro"
+        },
+        "errors": {
+            "no_backups_detected": "Inga s\u00e4kerhetskopior uppt\u00e4cktes f\u00f6r \u00f6gonblicksbilder, Hestia eller mikroupps\u00e4ttningar."
+        },
+        "restore": {
+            "hestia_placeholder_tar": "gen.\u00c5\u00c5\u00c5\u00c5MMDD-HHMM.tar",
+            "using_latest_backup_prefix": "Anv\u00e4nder den senaste s\u00e4kerhetskopieringen som rapporterats i JSON:",
+            "adjust_backup_tar": "Justera BACKUP_TAR till en riktig fil fr\u00e5n \\\"v-list-backups gen\\\" innan du k\u00f6r.",
+            "micro_restore_prefix": "\u00c5terst\u00e4ll bas fr\u00e5n senaste mikro\u00f6gonblicksbild:",
+            "micro_restore_suffix": "(granska s\u00f6kv\u00e4gar och uteslutningar innan du k\u00f6r).",
+            "set_correct_snapshot_path": "St\u00e4ll in r\u00e4tt \u00f6gonblicksbildsv\u00e4g innan du anv\u00e4nder det h\u00e4r kommandot.",
+            "confirm_body_1": "Detta kommer att starta ett Hestia-\u00e5terst\u00e4llningsjobb p\u00e5 servern med backupctl.",
+            "confirm_body_2": "Tj\u00e4nster och data f\u00f6r den anv\u00e4ndaren kan skrivas \u00f6ver.",
+            "confirm_body_3": "\u00c4r du helt s\u00e4ker?"
+        },
+        "actions": {
+            "starting_prefix": "Startande",
+            "failed_to_start_prefix": "Det gick inte att starta",
+            "started_prefix": "Startade",
+            "started_suffix": ". Detta kan ta ett tag; status uppdateras vid n\u00e4sta h\u00e4lsokontroll.",
+            "error_talking_endpoint": "Det gick inte att prata med backups_action.php",
+            "run_os_snapshot": "K\u00f6r OS Snapshot",
+            "run_micro_backup": "K\u00f6r Micro Backup",
+            "run_hestia_backup_user": "K\u00f6r Hestia Backup (gen)",
+            "run_all_backups": "K\u00f6r ALLA s\u00e4kerhetskopieringar",
+            "run_health_check": "K\u00f6r h\u00e4lsokontroll",
+            "log_maintenance": "Loggunderh\u00e5ll",
+            "clear_backup_logs": "Rensa backup-h\u00e4lsologgar",
+            "clear_prune_logs": "Rensa besk\u00e4rningsstockar",
+            "clear_integrity_log": "Rensa integritetslogg"
+        },
+        "cron": {
+            "no_entries": "Inga crontab-poster uppt\u00e4cktes.",
+            "env": "Env",
+            "schedule": "Schema",
+            "entries_for_prefix": "Crontab-poster f\u00f6r",
+            "current_user": "nuvarande anv\u00e4ndare",
+            "unable_to_read": "Det g\u00e5r inte att l\u00e4sa crontab.",
+            "failed_to_read": "Det gick inte att l\u00e4sa crontab."
+        },
+        "warnings_errors": {
+            "title": "Varningar och fel",
+            "subtitle": "Sammanfattning fr\u00e5n h\u00e4lsokontrollen"
+        },
+        "raw_snapshot": {
+            "title": "R\u00e5 \u00f6gonblicksbild",
+            "subtitle": "Nyckelv\u00e4rden direkt fr\u00e5n den senaste JSON-statusen"
+        },
+        "recent_actions": {
+            "title": "Senaste \u00e5tg\u00e4rder",
+            "subtitle": "Historik \u00f6ver \u00e5tg\u00e4rder fr\u00e5n den h\u00e4r instrumentpanelen",
+            "none": "Inga \u00e5tg\u00e4rder registrerade \u00e4nnu."
+        },
+        "orch": {
+            "title": "Backup Orchestration Wizard",
+            "subtitle": "Anpassa s\u00f6kv\u00e4gar en g\u00e5ng, kopiera sedan de genererade script/cron/systemd-enheterna.",
+            "backup_root": "Backup rot",
+            "include_health": "Inkludera h\u00e4lsokontroll",
+            "include_integrity": "Inkludera integritetskontroll",
+            "include_prune": "Inkludera besk\u00e4rningsstadiet",
+            "suspend": "St\u00e4ng av s\u00e4kerhetskopior",
+            "disable_on_mount_fail": "Inaktivera s\u00e4kerhetskopior om monteringen misslyckas",
+            "nightly_script": "Nattligt manus",
+            "copy_script": "Kopiera skript",
+            "cron_entry": "Cron intr\u00e4de",
+            "copy_cron_line": "Kopiera cron-raden",
+            "systemd_service": "Systemad tj\u00e4nst",
+            "copy_unit": "Kopieringsenhet",
+            "systemd_timer": "Systemad timer",
+            "copy_timer": "Kopiera timer"
+        },
+        "quick_restore": {
+            "title": "Hj\u00e4lpare f\u00f6r snabb \u00e5terst\u00e4llning",
+            "subtitle": "F\u00f6rifyllda CLI-kommandon f\u00f6r n\u00f6dsituationer (manuell k\u00f6rning eller FARA-knapp)",
+            "hestia_latest_title": "\u00c5terst\u00e4ll senaste Hestia anv\u00e4ndars\u00e4kerhetskopia",
+            "micro_latest_title": "\u00c5terst\u00e4ll fr\u00e5n senaste mikro\u00f6gonblicksbild (endast CLI)",
+            "copy_command": "Kopiera kommando",
+            "run_restore_danger": "K\u00f6r \u00e5terst\u00e4llning (senast, FARA)"
+        },
+        "cli": {
+            "title": "Hestia Backup & Restore CLI",
+            "subtitle": "Snabbreferensblad - kopiera & klistra klart",
+            "create_backups": "Skapa s\u00e4kerhetskopior",
+            "list_delete_backups": "Lista och ta bort s\u00e4kerhetskopior",
+            "full_restore_user": "Fullst\u00e4ndig \u00e5terst\u00e4llning (anv\u00e4ndare)",
+            "selective_restore": "Selektiv \u00e5terst\u00e4llning (Webb / DB / Mail)",
+            "backup_file_locations": "Platser f\u00f6r s\u00e4kerhetskopiering av filer",
+            "backup_tarball_contents": "Backup Tarball-inneh\u00e5ll",
+            "backupctl_help": "backupctl hj\u00e4lp"
+        }
+    },
+    "footer": {
+        "logged_in_as": "Inloggad som",
+        "theme": "Tema"
+    },
+    "i18n": {
+        "language_picker": {
+            "title": "Spr\u00e5k",
+            "saving": "Sparar...",
+            "saved": "Sparat",
+            "save_failed": "Kunde inte spara"
+        }
+    },
+    "services_page": {
+        "environment": "Milj\u00f6",
+        "filter_placeholder": "Filtrera tj\u00e4nster...",
+        "add_service": "L\u00e4gg till tj\u00e4nst",
+        "edit_service": "Redigera tj\u00e4nst",
+        "import": "Importera",
+        "export_csv": "Exportera CSV",
+        "auto_probe": "Automatisk kontroll",
+        "every": "Var",
+        "seconds_short": "s",
+        "columns": {
+            "name": "Namn",
+            "category": "Kategori",
+            "host": "V\u00e4rd",
+            "port": "Port",
+            "probe": "Kontroll",
+            "timeout": "Tidsgr\u00e4ns",
+            "path": "S\u00f6kv\u00e4g",
+            "enabled": "Aktiverad"
+        },
+        "form": {
+            "name": "Namn",
+            "category": "Kategori",
+            "host": "V\u00e4rd",
+            "port": "Port",
+            "probe": "Kontroll",
+            "timeout": "Tidsgr\u00e4ns (ms)",
+            "path": "S\u00f6kv\u00e4g (HTTP)",
+            "enabled": "Aktiverad"
+        },
+        "test_on_save": "Testa vid sparning",
+        "caps": {
+            "panel": "panel",
+            "web": "webb",
+            "mta": "mta",
+            "db": "db",
+            "nginx": "nginx"
+        },
+        "states": {
+            "active": "aktiv",
+            "inactive": "inaktiv"
+        },
+        "path_not_used": "(ej anv\u00e4nd)",
+        "status": {
+            "up": "UP",
+            "warn": "VARNING",
+            "down": "NER",
+            "unknown": "OK\u00c4ND"
+        },
+        "relative_time": {
+            "just_now": "just nu",
+            "minutes_ago": "{f\u00f6r}m sedan",
+            "hours_ago": "{f\u00f6r}h sedan",
+            "days_ago": "{f\u00f6r}d sedan"
+        },
+        "units": {
+            "ms": "ms"
+        },
+        "actions": {
+            "test": "Test"
+        },
+        "uptime": "Drifttid {pct}%.",
+        "alert_last_seen": "Varning {tid}",
+        "alerts_muted_until": "Muted {time}",
+        "mute_alerts": "St\u00e4ng av varningar",
+        "confirm_delete": "Ta bort den h\u00e4r tj\u00e4nsten?",
+        "probe_kicked": "Probe sparkad",
+        "no_alert_rules": "Inga larmregler f\u00f6r att st\u00e4nga av ljudet.",
+        "prompt_mute_minutes": "Hur m\u00e5nga minuter tar det att st\u00e4nga av relaterade varningar?",
+        "alerts_muted_for": "Varningar avst\u00e4ngda i {mins}m.",
+        "mute_failed": "Mute misslyckades: {meddelande}",
+        "invalid_json": "Ogiltig JSON",
+        "import_failed": "Importen misslyckades",
+        "validation": {
+            "name_required": "Namn \u00e4r obligatoriskt.",
+            "host_required": "V\u00e4rd kr\u00e4vs.",
+            "port_range": "Port m\u00e5ste vara 1-65535.",
+            "correct_fields": "V\u00e4nligen korrigera de markerade f\u00e4lten."
+        },
+        "service_save_requested": "Service spara beg\u00e4rd"
+    },
+    "bookmarks_page": {
+        "title": "Bokm\u00e4rken",
+        "manage": "Hantera bokm\u00e4rken",
+        "add_to_browser": "L\u00e4gg till i webbl\u00e4saren",
+        "bookmarklet_title": "Dra detta till bokm\u00e4rkesf\u00e4ltet f\u00f6r att snabbt l\u00e4gga till den aktuella sidan",
+        "prompt_tags": "Taggar (kommaseparerade):",
+        "category": "Kategori",
+        "all": "Alla",
+        "sort": "Sortera",
+        "sort_updated_desc": "Uppdaterad (nyast)",
+        "sort_title_asc": "Titel (A-Z)",
+        "sort_host_asc": "V\u00e4rd (A-Z)",
+        "fields": {
+            "title": "Titel",
+            "url": "URL",
+            "tags": "Taggar",
+            "name": "Namn"
+        },
+        "placeholders": {
+            "optional_title": "Valfri titel",
+            "tags": "taggar,kommaseparerade",
+            "new_category_name": "Nytt kategorinamn"
+        },
+        "add_category": "L\u00e4gg till kategori",
+        "updated": "Uppdaterad",
+        "empty": "Inga bokm\u00e4rken \u00e4nnu.",
+        "empty_categories": "Inga kategorier \u00e4nnu.",
+        "modal": {
+            "add_edit": "L\u00e4gg till / redigera bokm\u00e4rke",
+            "add_categories": "L\u00e4gg till kategorier"
+        },
+        "uncategorized": "Utan kategori",
+        "hints": {
+            "bookmark_edit": "Visa bokm\u00e4rken h\u00e4r med hopf\u00e4llbara kategorier. Klicka p\u00e5 ett bokm\u00e4rke f\u00f6r att ladda det ovan f\u00f6r redigering eller borttagning.",
+            "category_edit": "Kategorier visas h\u00e4r. Klicka p\u00e5 en f\u00f6r att ladda den ovan f\u00f6r redigering eller borttagning."
+        },
+        "confirm_delete_category": "Ta bort den h\u00e4r kategorin? Bokm\u00e4rken kommer att bli Okategoriserade.",
+        "confirm_delete_bookmark": "Ta bort det h\u00e4r bokm\u00e4rket?",
+        "validation": {
+            "category_name_required": "Kategorinamn kr\u00e4vs",
+            "url_required": "URL kr\u00e4vs"
+        },
+        "errors": {
+            "all_endpoints_failed": "Alla slutpunkter misslyckades",
+            "bad_json": "D\u00e5lig JSON fr\u00e5n servern",
+            "api_not_found": "Det gick inte att ladda bokm\u00e4rken (API hittades inte). Har f\u00f6rs\u00f6kt: {f\u00f6rs\u00f6kt}",
+            "load_failed": "Det gick inte att ladda bokm\u00e4rken: {message}"
+        },
+        "toasts": {
+            "category_saved": "Kategori sparad",
+            "save_failed": "Spara misslyckades: {meddelande}",
+            "category_deleted": "Kategori borttagen",
+            "delete_failed": "Radering misslyckades: {meddelande}",
+            "order_saved": "Sparad order",
+            "reorder_failed": "Ombest\u00e4llning misslyckades: {meddelande}",
+            "category_updated": "Kategori uppdaterad",
+            "category_added": "Kategori tillagd",
+            "bookmark_deleted": "Bokm\u00e4rke raderat",
+            "bookmark_updated": "Bokm\u00e4rke uppdaterat",
+            "bookmark_added": "Bokm\u00e4rke tillagt"
+        }
+    },
+    "header": {
+        "navigation": "Navigering i sidhuvudet",
+        "system_status": "Status f\u00f6r tj\u00e4nsten",
+        "loading": "Laddar...",
+        "profile": "Min profil",
+        "logout": "Logga ut",
+        "mobile": {
+            "open_menu": "\u00d6ppna menyn",
+            "menu": "Meny"
+        },
+        "nav": {
+            "history": "Historia",
+            "cron_health": "Cron H\u00e4lsa",
+            "processes": "Processer",
+            "databases": "Databaser",
+            "speedtest": "Hastighetstest",
+            "diagnostics": "Diagnostik",
+            "config": "Konfig",
+            "backups": "S\u00e4kerhetskopior"
+        }
+    }
+}

@@ -1,0 +1,493 @@
+{
+    "app": {
+        "title": "P\u0159\u00edstrojov\u00fd panel serveru"
+    },
+    "nav": {
+        "history": "Historie",
+        "logs": "Protokoly",
+        "dashboard": "P\u0159\u00edstrojov\u00e1 deska",
+        "services": "Slu\u017eby",
+        "alerts": "Upozorn\u011bn\u00ed",
+        "tests": "Testy",
+        "settings": "Nastaven\u00ed",
+        "about": "O str\u00e1nk\u00e1ch"
+    },
+    "history": {
+        "title": "Historie",
+        "trends": "Trendy",
+        "range": "Rozsah",
+        "baseline": "Z\u00e1kladn\u00ed \u00fadaje",
+        "probe_now": "Sonda nyn\u00ed",
+        "refresh": "Obnovit",
+        "export_json": "Exportovat JSON",
+        "export_alerts_json": "Export v\u00fdstrah JSON",
+        "reset_history": "Obnoven\u00ed historie",
+        "recent_alert_events": "Ned\u00e1vn\u00e9 v\u00fdstra\u017en\u00e9 ud\u00e1losti",
+        "export_preview": "N\u00e1hled exportu",
+        "close": "Zav\u0159\u00edt",
+        "copy": "Kop\u00edrovat",
+        "download": "St\u00e1hnout"
+    },
+    "logs": {
+        "title": "Protokoly",
+        "manage": "Spr\u00e1va protokol\u016f",
+        "add": "P\u0159idat",
+        "delete": "Odstranit",
+        "refresh": "Obnovit",
+        "search": "Vyhled\u00e1v\u00e1n\u00ed",
+        "filter": "Filtr",
+        "lines": "\u0158\u00e1dky",
+        "open": "Otev\u0159\u00edt",
+        "close": "Zav\u0159\u00edt",
+        "download": "St\u00e1hnout",
+        "copy": "Kop\u00edrovat"
+    },
+    "common": {
+        "save": "Ulo\u017eit",
+        "cancel": "Zru\u0161it",
+        "edit": "Upravit",
+        "delete": "Odstranit",
+        "update": "Aktualizace",
+        "create": "Vytvo\u0159it",
+        "enable": "Povolit",
+        "disable": "Zak\u00e1zat",
+        "yes": "Ano",
+        "no": "Ne",
+        "on": "Na adrese",
+        "off": "Vypnuto",
+        "confirm": "Potvr\u010fte",
+        "search": "Vyhled\u00e1v\u00e1n\u00ed",
+        "filter": "Filtr",
+        "actions": "Akce",
+        "close": "Zav\u0159\u00edt",
+        "none": "\u017e\u00e1dn\u00e9",
+        "none_dash": "-"
+    },
+    "alerts": {
+        "title": "Upozorn\u011bn\u00ed",
+        "recent_events": "Ned\u00e1vn\u00e9 v\u00fdstra\u017en\u00e9 ud\u00e1losti",
+        "history": "Historie v\u00fdstrah",
+        "export_json": "Export v\u00fdstrah JSON",
+        "no_alerts": "\u017d\u00e1dn\u00e1 upozorn\u011bn\u00ed",
+        "level": "\u00darove\u0148",
+        "message": "Zpr\u00e1va",
+        "service": "Slu\u017eba",
+        "time": "\u010cas",
+        "probe_now": "Sonda nyn\u00ed",
+        "refresh": "Obnovit",
+        "silence": "Ticho",
+        "unsilence": "Unsilence",
+        "ack": "Potvrzen\u00ed",
+        "unack": "Neuzn\u00e1n\u00ed"
+    },
+    "tests": {
+        "title": "Testy serveru",
+        "run_all": "Spus\u0165te v\u0161echny",
+        "status": "Stav",
+        "last_run": "Posledn\u00ed b\u011bh",
+        "duration": "Doba trv\u00e1n\u00ed"
+    },
+    "services": {
+        "title": "Slu\u017eby",
+        "status": "Stav",
+        "restart": "Restartov\u00e1n\u00ed",
+        "start": "Start",
+        "stop": "Zastavte"
+    },
+    "config": {
+        "sections": {
+            "site": "m\u00edsto",
+            "features": "Vlastnosti",
+            "capabilities": "Schopnosti",
+            "processes": "Procesy",
+            "mail": "Mail",
+            "integrations": "Integrace",
+            "security": "Zabezpe\u010den\u00ed",
+            "ui": "UI",
+            "server_tests": "Testy serveru",
+            "alerts": "Upozorn\u011bn\u00ed",
+            "cron": "Cron",
+            "history": "D\u011bjiny",
+            "logs": "Protokoly",
+            "backups": "Z\u00e1lohy",
+            "email": "E-mail"
+        },
+        "fields": {
+            "backups": {
+                "require_dedicated_mount": {
+                    "label": "Vy\u017eadovat vyhrazen\u00fd dr\u017e\u00e1k",
+                    "help": "Star\u0161\u00ed kl\u00ed\u010d kompatibility. Pokud je povoleno, skripty z\u00e1lohov\u00e1n\u00ed vy\u017eaduj\u00ed, aby byl p\u0159\u00edtomen z\u00e1lo\u017en\u00ed soubor."
+                },
+                "disable_on_mount_fail": {
+                    "label": "Pokud se p\u0159ipojen\u00ed nezda\u0159\u00ed, zaka\u017ete z\u00e1lohov\u00e1n\u00ed",
+                    "help": "Pokud je tato mo\u017enost povolena, akce z\u00e1lohov\u00e1n\u00ed a generovan\u00e9 skripty se zastav\u00ed, pokud chyb\u00ed p\u0159ipojen\u00ed z\u00e1lohy."
+                }
+            },
+            "alerts": {
+                "min_severity": {
+                    "label": "Minim\u00e1ln\u00ed z\u00e1va\u017enost upozorn\u011bn\u00ed"
+                },
+                "email": {
+                    "label": "Star\u0161\u00ed e-maily s upozorn\u011bn\u00edm"
+                }
+            }
+        },
+        "ui": {
+            "unknown": "nezn\u00e1m\u00fd",
+            "unknown_paren": "(nezn\u00e1m\u00fd)",
+            "site_backup": {
+                "title": "Z\u00e1lohov\u00e1n\u00ed a obnoven\u00ed",
+                "export_config": "Export konfigurace",
+                "import_config": "Importovat konfiguraci",
+                "choose_file_first": "Nejprve vyberte z\u00e1lo\u017en\u00ed soubor",
+                "imported_reloading": "Importov\u00e1no. Znovu na\u010d\u00edt\u00e1n\u00ed...",
+                "import_failed": "Import se nezda\u0159il",
+                "import_failed_prefix": "Import se nezda\u0159il:",
+                "retention_title": "Z\u00e1lohy \u2013 uchov\u00e1n\u00ed",
+                "keep_last": "Z\u016fsta\u0148te posledn\u00ed",
+                "files": "soubory",
+                "loading_stats": "(na\u010d\u00edt\u00e1n\u00ed statistik...)",
+                "last_backup_loading": "Posledn\u00ed z\u00e1loha: (na\u010d\u00edt\u00e1n\u00ed...)",
+                "last_backup_none": "Posledn\u00ed z\u00e1loha: zat\u00edm \u017e\u00e1dn\u00e1",
+                "last_backup_prefix": "Posledn\u00ed z\u00e1loha:",
+                "last_backup_unknown": "Posledn\u00ed z\u00e1loha: nezn\u00e1m\u00e1",
+                "prune_now": "Nyn\u00ed pro\u0159ez\u00e1vejte",
+                "pruned_kept_deleted": "Pro\u0159ezan\u00e1 - udr\u017eovan\u00e1",
+                "deleted_prefix": "smaz\u00e1no",
+                "prune_failed": "Prune neusp\u011bl",
+                "prune_failed_prefix": "Pro\u0159ez\u00e1v\u00e1n\u00ed se nezda\u0159ilo:",
+                "create_backup_now": "Vytvo\u0159te z\u00e1lohu nyn\u00ed",
+                "backup_saved_prefix": "Z\u00e1loha ulo\u017eena:",
+                "backup_failed": "Z\u00e1lohov\u00e1n\u00ed se nezda\u0159ilo",
+                "backup_failed_prefix": "Z\u00e1lohov\u00e1n\u00ed se nezda\u0159ilo:",
+                "download_latest_backup": "St\u00e1hn\u011bte si nejnov\u011bj\u0161\u00ed z\u00e1lohu",
+                "no_backups_found": "Nebyly nalezeny \u017e\u00e1dn\u00e9 z\u00e1lohy",
+                "download_failed_prefix": "Stahov\u00e1n\u00ed se nezda\u0159ilo:",
+                "redact_secrets": "Redact secrets"
+            }
+        }
+    },
+    "backups": {
+        "common": {
+            "status": "Postaven\u00ed:",
+            "timestamp": "\u010casov\u00e9 raz\u00edtko:",
+            "none_dash": "-",
+            "free": "Uvolnit",
+            "used": "Pou\u017eit\u00fd",
+            "copy": "Kopie",
+            "warnings": "Varov\u00e1n\u00ed",
+            "errors": "Chyby",
+            "loading": "Na\u010d\u00edt\u00e1n\u00ed..."
+        },
+        "status": {
+            "error_loading_json": "CHYBA NA\u010c\u00cdT\u00c1N\u00cd JSON",
+            "ok": "OK",
+            "unmounted": "NEMONTOVAN\u00c9",
+            "critical": "KRITICK\u00dd",
+            "high": "VYSOK\u00dd",
+            "elevated": "ZV\u00dd\u0160EN\u00dd",
+            "healthy": "ZDRAV\u00dd",
+            "unknown": "NEZN\u00c1M\u00dd",
+            "unknown_cap": "Nezn\u00e1m\u00fd"
+        },
+        "disk": {
+            "unmounted": "Disk ODPOJEN\u00dd",
+            "tag": "Disk:",
+            "sizes_updated": "Aktualizovan\u00e9 velikosti:",
+            "title": "Vyu\u017eit\u00ed disku",
+            "usage": "Pou\u017e\u00edv\u00e1n\u00ed",
+            "mount": "Mount"
+        },
+        "page": {
+            "freshness_prefix": "Sv\u011b\u017eest:",
+            "title": "\u0158\u00eddic\u00ed centrum z\u00e1lohov\u00e1n\u00ed",
+            "subtitle_prefix": "\u017div\u00fd stav \u0159\u00edzen\u00fd",
+            "subtitle_suffix": "na z\u00e1lohovac\u00ed disk."
+        },
+        "ages": {
+            "no_snapshots_on_disk": "Na disku nebyly nalezeny \u017e\u00e1dn\u00e9 sn\u00edmky",
+            "one_snapshot_present": "Je p\u0159\u00edtomen 1 sn\u00edmek",
+            "snapshots_present_suffix": "snapshots present",
+            "no_panel_backups_on_disk": "Na disku nebyly nalezeny \u017e\u00e1dn\u00e9 z\u00e1lohy panelu",
+            "one_panel_backup_present": "Je k dispozici 1 z\u00e1loha panelu",
+            "panel_backups_present_suffix": "p\u0159\u00edtomny z\u00e1lohy panelu",
+            "no_micro_backups_on_disk": "Na disku nebyly nalezeny \u017e\u00e1dn\u00e9 mikroz\u00e1lohy",
+            "one_micro_backup_present": "Je k dispozici 1 mikro z\u00e1loha",
+            "micro_backups_present_suffix": "p\u0159\u00edtomny mikroz\u00e1lohy",
+            "snapshot_daily0_chart": "Sn\u00edmek (denn\u011b 0)",
+            "hestia_latest_chart": "Hestia nejnov\u011bj\u0161\u00ed",
+            "micro_latest_chart": "Micro nejnov\u011bj\u0161\u00ed",
+            "age_days": "v\u011bk (dny)",
+            "title": "V\u011bk z\u00e1lohov\u00e1n\u00ed",
+            "subtitle": "Jak \u010derstv\u00e9 jsou va\u0161e posledn\u00ed z\u00e1lohy",
+            "snapshot_daily0": "Sn\u00edmek denn\u011b.0",
+            "latest_hestia": "Nejnov\u011bj\u0161\u00ed Hestia",
+            "latest_micro": "Nejnov\u011bj\u0161\u00ed Micro"
+        },
+        "errors": {
+            "no_backups_detected": "Nebyly zji\u0161t\u011bny \u017e\u00e1dn\u00e9 z\u00e1lohy pro sn\u00edmky, Hestia nebo mikro sady."
+        },
+        "restore": {
+            "hestia_placeholder_tar": "gen.RRRRMMDD-HHMM.tar",
+            "using_latest_backup_prefix": "Pou\u017eit\u00ed nejnov\u011bj\u0161\u00ed z\u00e1lohy hl\u00e1\u0161en\u00e9 v JSON:",
+            "adjust_backup_tar": "P\u0159ed spu\u0161t\u011bn\u00edm upravte BACKUP_TAR na skute\u010dn\u00fd soubor z \\\"v-list-backups USER\\\".",
+            "micro_restore_prefix": "Obnovte z\u00e1kladnu z nejnov\u011bj\u0161\u00edho mikrosn\u00edmku:",
+            "micro_restore_suffix": "(p\u0159ed spu\u0161t\u011bn\u00edm zkontrolujte cesty a vylou\u010den\u00ed).",
+            "set_correct_snapshot_path": "P\u0159ed pou\u017eit\u00edm tohoto p\u0159\u00edkazu nastavte spr\u00e1vnou cestu ke sn\u00edmku.",
+            "confirm_body_1": "T\u00edm se spust\u00ed \u00faloha obnoven\u00ed Hestia na serveru pomoc\u00ed backupctl.",
+            "confirm_body_2": "Slu\u017eby a data pro dan\u00e9ho u\u017eivatele mohou b\u00fdt p\u0159eps\u00e1ny.",
+            "confirm_body_3": "jsi si naprosto jist\u00fd?"
+        },
+        "actions": {
+            "starting_prefix": "Spu\u0161t\u011bn\u00ed",
+            "failed_to_start_prefix": "Spu\u0161t\u011bn\u00ed se nezda\u0159ilo",
+            "started_prefix": "Zah\u00e1jeno",
+            "started_suffix": ". To m\u016f\u017ee chv\u00edli trvat; stav bude aktualizov\u00e1n p\u0159i p\u0159\u00ed\u0161t\u00ed kontrole stavu.",
+            "error_talking_endpoint": "Chyba p\u0159i komunikaci s backups_action.php",
+            "run_os_snapshot": "Spus\u0165te sn\u00edmek OS",
+            "run_micro_backup": "Spus\u0165te Micro Backup",
+            "run_hestia_backup_user": "Spus\u0165te Hestia Backup (gen)",
+            "run_all_backups": "Spus\u0165te V\u0160ECHNY z\u00e1lohy",
+            "run_health_check": "Spus\u0165te kontrolu stavu",
+            "log_maintenance": "\u00dadr\u017eba protokolu",
+            "clear_backup_logs": "Vymazat protokoly stavu z\u00e1lohov\u00e1n\u00ed",
+            "clear_prune_logs": "Vy\u010dist\u011bte protokoly pro\u0159ez\u00e1v\u00e1n\u00ed",
+            "clear_integrity_log": "Vymazat protokol integrity"
+        },
+        "cron": {
+            "no_entries": "Nebyly zji\u0161t\u011bny \u017e\u00e1dn\u00e9 polo\u017eky crontab.",
+            "env": "Env",
+            "schedule": "Napl\u00e1novat",
+            "entries_for_prefix": "Z\u00e1znamy Crontab pro",
+            "current_user": "aktu\u00e1ln\u00ed u\u017eivatel",
+            "unable_to_read": "Nelze \u010d\u00edst crontab.",
+            "failed_to_read": "Nepoda\u0159ilo se p\u0159e\u010d\u00edst crontab."
+        },
+        "warnings_errors": {
+            "title": "Varov\u00e1n\u00ed a chyby",
+            "subtitle": "Shrnut\u00ed ze zdravotn\u00ed prohl\u00eddky"
+        },
+        "raw_snapshot": {
+            "title": "Syrov\u00fd sn\u00edmek",
+            "subtitle": "Kl\u00ed\u010dov\u00e9 hodnoty p\u0159\u00edmo z posledn\u00edho stavu JSON"
+        },
+        "recent_actions": {
+            "title": "Ned\u00e1vn\u00e9 akce",
+            "subtitle": "Historie akc\u00ed z tohoto \u0159\u00eddic\u00edho panelu",
+            "none": "Dosud nebyly zaznamen\u00e1ny \u017e\u00e1dn\u00e9 akce."
+        },
+        "orch": {
+            "title": "Pr\u016fvodce z\u00e1lohov\u00e1n\u00edm orchestru",
+            "subtitle": "P\u0159izp\u016fsobte cesty jednou a pot\u00e9 zkop\u00edrujte vygenerovan\u00e9 jednotky skriptu/cron/systemd.",
+            "backup_root": "Ko\u0159en z\u00e1lohy",
+            "include_health": "Zahrnout zdravotn\u00ed prohl\u00eddku",
+            "include_integrity": "Zahrnout kontrolu integrity",
+            "include_prune": "Zahr\u0148te f\u00e1zi su\u0161en\u00fdch \u0161vestek",
+            "suspend": "Pozastavit z\u00e1lohov\u00e1n\u00ed",
+            "disable_on_mount_fail": "Pokud se p\u0159ipojen\u00ed nezda\u0159\u00ed, zaka\u017ete z\u00e1lohov\u00e1n\u00ed",
+            "nightly_script": "No\u010dn\u00ed sc\u00e9n\u00e1\u0159",
+            "copy_script": "Kop\u00edrovat skript",
+            "cron_entry": "Cron z\u00e1znam",
+            "copy_cron_line": "Zkop\u00edrujte cron line",
+            "systemd_service": "Systemd slu\u017eba",
+            "copy_unit": "Kop\u00edrovat jednotku",
+            "systemd_timer": "Systemd \u010dasova\u010d",
+            "copy_timer": "Kop\u00edrovat \u010dasova\u010d"
+        },
+        "quick_restore": {
+            "title": "Pomocn\u00edci pro rychlou obnovu",
+            "subtitle": "P\u0159edvypln\u011bn\u00e9 p\u0159\u00edkazy CLI pro p\u0159\u00edpad nouze (ru\u010dn\u00ed spu\u0161t\u011bn\u00ed nebo tla\u010d\u00edtko DANGER)",
+            "hestia_latest_title": "Obnovte nejnov\u011bj\u0161\u00ed z\u00e1lohu u\u017eivatele Hestia",
+            "micro_latest_title": "Obnovit z nejnov\u011bj\u0161\u00edho mikrosn\u00edmku (pouze CLI)",
+            "copy_command": "Kop\u00edrovat p\u0159\u00edkaz",
+            "run_restore_danger": "Spustit obnoven\u00ed (nejnov\u011bj\u0161\u00ed, NEBEZPE\u010c\u00cd)"
+        },
+        "cli": {
+            "title": "Hestia Backup & Restore CLI",
+            "subtitle": "Rychl\u00fd referen\u010dn\u00ed list \u2013 p\u0159ipraveno ke kop\u00edrov\u00e1n\u00ed a vkl\u00e1d\u00e1n\u00ed",
+            "create_backups": "Vytv\u00e1\u0159ejte z\u00e1lohy",
+            "list_delete_backups": "Seznam a odstran\u011bn\u00ed z\u00e1loh",
+            "full_restore_user": "\u00dapln\u00e9 obnoven\u00ed (u\u017eivatel)",
+            "selective_restore": "Selektivn\u00ed obnoven\u00ed (Web / DB / Mail)",
+            "backup_file_locations": "Um\u00edst\u011bn\u00ed z\u00e1lo\u017en\u00edch soubor\u016f",
+            "backup_tarball_contents": "Z\u00e1lohujte obsah Tarballu",
+            "backupctl_help": "n\u00e1pov\u011bda backupctl"
+        }
+    },
+    "footer": {
+        "logged_in_as": "P\u0159ihl\u00e1\u0161en jako",
+        "theme": "Motiv"
+    },
+    "i18n": {
+        "language_picker": {
+            "title": "Jazyk",
+            "saving": "Ukl\u00e1d\u00e1n\u00ed...",
+            "saved": "Ulo\u017eeno",
+            "save_failed": "Ulo\u017een\u00ed se nezda\u0159ilo"
+        }
+    },
+    "services_page": {
+        "environment": "Prost\u0159ed\u00ed",
+        "caps": {
+            "panel": "panel",
+            "web": "web",
+            "mta": "po\u0161ta",
+            "db": "db",
+            "nginx": "nginx"
+        },
+        "states": {
+            "active": "aktivn\u00ed",
+            "inactive": "neaktivn\u00ed"
+        },
+        "filter_placeholder": "Filtrovat slu\u017eby...",
+        "add_service": "P\u0159idat slu\u017ebu",
+        "edit_service": "Upravit slu\u017ebu",
+        "import": "Import",
+        "export_csv": "Export CSV",
+        "auto_probe": "Automatick\u00e1 kontrola",
+        "every": "Ka\u017ed\u00fdch",
+        "seconds_short": "s",
+        "columns": {
+            "name": "N\u00e1zev",
+            "category": "Kategorie",
+            "host": "Hostitel",
+            "port": "Port",
+            "probe": "Kontrola",
+            "timeout": "\u010casov\u00fd limit",
+            "path": "Cesta",
+            "enabled": "Povoleno"
+        },
+        "form": {
+            "name": "N\u00e1zev",
+            "category": "Kategorie",
+            "host": "Hostitel",
+            "port": "Port",
+            "probe": "Kontrola",
+            "timeout": "\u010casov\u00fd limit (ms)",
+            "path": "Cesta (HTTP)",
+            "enabled": "Povoleno"
+        },
+        "test_on_save": "Otestovat p\u0159i ulo\u017een\u00ed",
+        "path_not_used": "(nepou\u017e\u00edv\u00e1 se)",
+        "status": {
+            "up": "B\u011a\u017d\u00cd",
+            "warn": "VAROV\u00c1N\u00cd",
+            "down": "NEB\u011a\u017d\u00cd",
+            "unknown": "NEZN\u00c1M\u00c9"
+        },
+        "relative_time": {
+            "just_now": "pr\u00e1v\u011b te\u010f",
+            "minutes_ago": "p\u0159ed {count} min",
+            "hours_ago": "p\u0159ed {count} h",
+            "days_ago": "p\u0159ed {count} d"
+        },
+        "units": {
+            "ms": "ms"
+        },
+        "actions": {
+            "test": "Test"
+        },
+        "uptime": "Dostupnost {pct}%",
+        "alert_last_seen": "Upozorn\u011bn\u00ed {time}",
+        "alerts_muted_until": "Upozorn\u011bn\u00ed ztlumena {time}",
+        "mute_alerts": "Ztlumit upozorn\u011bn\u00ed",
+        "confirm_delete": "Smazat tuto slu\u017ebu?",
+        "probe_kicked": "Kontrola spu\u0161t\u011bna",
+        "no_alert_rules": "\u017d\u00e1dn\u00e1 pravidla upozorn\u011bn\u00ed ke ztlumen\u00ed.",
+        "prompt_mute_minutes": "Na kolik minut ztlumit souvisej\u00edc\u00ed upozorn\u011bn\u00ed?",
+        "alerts_muted_for": "Upozorn\u011bn\u00ed ztlumena na {mins} min.",
+        "mute_failed": "Ztlumen\u00ed selhalo: {message}",
+        "invalid_json": "Neplatn\u00fd JSON",
+        "import_failed": "Import selhal",
+        "validation": {
+            "name_required": "N\u00e1zev je povinn\u00fd.",
+            "host_required": "Hostitel je povinn\u00fd.",
+            "port_range": "Port mus\u00ed b\u00fdt v rozsahu 1-65535.",
+            "correct_fields": "Opravte zv\u00fdrazn\u011bn\u00e1 pole."
+        },
+        "service_save_requested": "Bylo vy\u017e\u00e1d\u00e1no ulo\u017een\u00ed slu\u017eby"
+    },
+    "bookmarks_page": {
+        "title": "Z\u00e1lo\u017eky",
+        "manage": "Spr\u00e1va z\u00e1lo\u017eek",
+        "add_to_browser": "P\u0159idat do prohl\u00ed\u017ee\u010de",
+        "bookmarklet_title": "P\u0159et\u00e1hn\u011bte toto do li\u0161ty z\u00e1lo\u017eek pro rychl\u00e9 p\u0159id\u00e1n\u00ed aktu\u00e1ln\u00ed str\u00e1nky",
+        "prompt_tags": "\u0160t\u00edtky (odd\u011blen\u00e9 \u010d\u00e1rkami):",
+        "category": "Kategorie",
+        "all": "V\u0161e",
+        "sort": "\u0158azen\u00ed",
+        "sort_updated_desc": "Aktualizov\u00e1no (nejnov\u011bj\u0161\u00ed)",
+        "sort_title_asc": "N\u00e1zev (A-Z)",
+        "sort_host_asc": "Hostitel (A-Z)",
+        "fields": {
+            "title": "N\u00e1zev",
+            "url": "URL",
+            "tags": "\u0160t\u00edtky",
+            "name": "N\u00e1zev"
+        },
+        "placeholders": {
+            "optional_title": "Voliteln\u00fd n\u00e1zev",
+            "tags": "\u0161t\u00edtky,odd\u011blen\u00e9,\u010d\u00e1rkami",
+            "new_category_name": "N\u00e1zev nov\u00e9 kategorie"
+        },
+        "add_category": "P\u0159idat kategorii",
+        "updated": "Aktualizov\u00e1no",
+        "empty": "Zat\u00edm \u017e\u00e1dn\u00e9 z\u00e1lo\u017eky.",
+        "empty_categories": "Zat\u00edm \u017e\u00e1dn\u00e9 kategorie.",
+        "modal": {
+            "add_edit": "P\u0159idat / upravit z\u00e1lo\u017eku",
+            "add_categories": "P\u0159idat kategorie"
+        },
+        "hints": {
+            "bookmark_edit": "Zde se zobrazuj\u00ed z\u00e1lo\u017eky ve sbaliteln\u00fdch kategori\u00edch. Kliknut\u00edm na z\u00e1lo\u017eku ji na\u010dtete v\u00fd\u0161e pro \u00fapravu nebo smaz\u00e1n\u00ed.",
+            "category_edit": "Zde se zobrazuj\u00ed kategorie. Kliknut\u00edm na kategorii ji na\u010dtete v\u00fd\u0161e pro \u00fapravu nebo smaz\u00e1n\u00ed."
+        },
+        "uncategorized": "Bez kategorie",
+        "confirm_delete_category": "Smazat tuto kategorii? Z\u00e1lo\u017eky budou bez kategorie.",
+        "confirm_delete_bookmark": "Smazat tuto z\u00e1lo\u017eku?",
+        "validation": {
+            "category_name_required": "N\u00e1zev kategorie je povinn\u00fd",
+            "url_required": "URL je povinn\u00e9"
+        },
+        "errors": {
+            "all_endpoints_failed": "V\u0161echny koncov\u00e9 body selhaly",
+            "bad_json": "Neplatn\u00fd JSON ze serveru",
+            "api_not_found": "Z\u00e1lo\u017eky se nepoda\u0159ilo na\u010d\u00edst (API nebylo nalezeno). Vyzkou\u0161eno: {tried}",
+            "load_failed": "Na\u010dten\u00ed z\u00e1lo\u017eek se nezda\u0159ilo: {message}"
+        },
+        "toasts": {
+            "category_saved": "Kategorie ulo\u017eena",
+            "save_failed": "Ulo\u017een\u00ed se nezda\u0159ilo: {message}",
+            "category_deleted": "Kategorie smaz\u00e1na",
+            "delete_failed": "Maz\u00e1n\u00ed se nezda\u0159ilo: {message}",
+            "order_saved": "Po\u0159ad\u00ed ulo\u017eeno",
+            "reorder_failed": "P\u0159e\u0159azen\u00ed se nezda\u0159ilo: {message}",
+            "category_updated": "Kategorie aktualizov\u00e1na",
+            "category_added": "Kategorie p\u0159id\u00e1na",
+            "bookmark_deleted": "Z\u00e1lo\u017eka smaz\u00e1na",
+            "bookmark_updated": "Z\u00e1lo\u017eka aktualizov\u00e1na",
+            "bookmark_added": "Z\u00e1lo\u017eka p\u0159id\u00e1na"
+        }
+    },
+    "header": {
+        "navigation": "Navigace v z\u00e1hlav\u00ed",
+        "system_status": "Stav slu\u017eby",
+        "loading": "Na\u010d\u00edt\u00e1n\u00ed...",
+        "profile": "M\u016fj profil",
+        "logout": "Odhl\u00e1\u0161en\u00ed",
+        "mobile": {
+            "open_menu": "Otev\u0159\u00edt nab\u00eddku",
+            "menu": "Nab\u00eddka"
+        },
+        "nav": {
+            "history": "Historie",
+            "cron_health": "Cron Health",
+            "processes": "Procesy",
+            "databases": "Datab\u00e1ze",
+            "speedtest": "Speedtest",
+            "diagnostics": "Diagnostika",
+            "config": "Konfigurace",
+            "backups": "Z\u00e1lohov\u00e1n\u00ed"
+        }
+    }
+}

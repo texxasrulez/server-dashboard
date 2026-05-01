@@ -1,0 +1,38 @@
+update-alternatives 2026-04-01 14:17:12: run with --remove editor /usr/bin/code
+update-alternatives 2026-04-01 14:17:18: run with --install /usr/bin/editor editor /usr/bin/code 0
+update-alternatives 2026-04-01 14:17:20: run with --install /usr/bin/editor editor /usr/bin/code 0
+update-alternatives 2026-04-03 08:18:35: run with --install /usr/bin/php php /usr/bin/php8.3 83 --slave /usr/share/man/man1/php.1.gz php.1.gz /usr/share/man/man1/php8.3.1.gz
+update-alternatives 2026-04-03 08:18:35: run with --install /usr/bin/phar phar /usr/bin/phar8.3 83 --slave /usr/share/man/man1/phar.1.gz phar.1.gz /usr/share/man/man1/phar8.3.1.gz
+update-alternatives 2026-04-03 08:18:35: run with --install /usr/bin/phar.phar phar.phar /usr/bin/phar.phar8.3 83 --slave /usr/share/man/man1/phar.phar.1.gz phar.phar.1.gz /usr/share/man/man1/phar.phar8.3.1.gz
+update-alternatives 2026-04-07 18:17:32: run with --install /usr/bin/x-www-browser x-www-browser /usr/bin/google-chrome-stable 200
+update-alternatives 2026-04-07 18:17:32: run with --install /usr/bin/gnome-www-browser gnome-www-browser /usr/bin/google-chrome-stable 200
+update-alternatives 2026-04-07 18:17:32: run with --install /usr/bin/google-chrome google-chrome /usr/bin/google-chrome-stable 200
+update-alternatives 2026-04-08 07:17:38: run with --remove editor /usr/bin/code
+update-alternatives 2026-04-08 07:17:45: run with --install /usr/bin/editor editor /usr/bin/code 0
+update-alternatives 2026-04-08 07:17:47: run with --install /usr/bin/editor editor /usr/bin/code 0
+update-alternatives 2026-04-12 19:27:18: run with --install /etc/mysql/my.cnf my.cnf /etc/mysql/mariadb.cnf 200
+update-alternatives 2026-04-12 19:27:18: link group my.cnf updated to point to /etc/mysql/mariadb.cnf
+update-alternatives 2026-04-13 18:45:26: run with --install /usr/bin/editor editor /usr/bin/vim.tiny 15 --slave /usr/share/man/man1/editor.1.gz editor.1.gz /usr/share/man/man1/vim.1.gz --slave /usr/share/man/da/man1/editor.1.gz editor.da.1.gz /usr/share/man/da/man1/vim.1.gz --slave /usr/share/man/de/man1/editor.1.gz editor.de.1.gz /usr/share/man/de/man1/vim.1.gz --slave /usr/share/man/fr/man1/editor.1.gz editor.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/editor.1.gz editor.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/ja/man1/editor.1.gz editor.ja.1.gz /usr/share/man/ja/man1/vim.1.gz --slave /usr/share/man/pl/man1/editor.1.gz editor.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/editor.1.gz editor.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/tr/man1/editor.1.gz editor.tr.1.gz /usr/share/man/tr/man1/vim.1.gz
+update-alternatives 2026-04-13 18:45:26: run with --install /usr/bin/ex ex /usr/bin/vim.tiny 15 --slave /usr/share/man/man1/ex.1.gz ex.1.gz /usr/share/man/man1/vim.1.gz --slave /usr/share/man/da/man1/ex.1.gz ex.da.1.gz /usr/share/man/da/man1/vim.1.gz --slave /usr/share/man/de/man1/ex.1.gz ex.de.1.gz /usr/share/man/de/man1/vim.1.gz --slave /usr/share/man/fr/man1/ex.1.gz ex.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/ex.1.gz ex.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/ja/man1/ex.1.gz ex.ja.1.gz /usr/share/man/ja/man1/vim.1.gz --slave /usr/share/man/pl/man1/ex.1.gz ex.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/ex.1.gz ex.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/tr/man1/ex.1.gz ex.tr.1.gz /usr/share/man/tr/man1/vim.1.gz
+update-alternatives 2026-04-13 18:45:26: run with --install /usr/bin/rview rview /usr/bin/vim.tiny 15
+update-alternatives 2026-04-13 18:45:26: run with --install /usr/bin/vi vi /usr/bin/vim.tiny 15 --slave /usr/share/man/man1/vi.1.gz vi.1.gz /usr/share/man/man1/vim.1.gz --slave /usr/share/man/da/man1/vi.1.gz vi.da.1.gz /usr/share/man/da/man1/vim.1.gz --slave /usr/share/man/de/man1/vi.1.gz vi.de.1.gz /usr/share/man/de/man1/vim.1.gz --slave /usr/share/man/fr/man1/vi.1.gz vi.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/vi.1.gz vi.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/ja/man1/vi.1.gz vi.ja.1.gz /usr/share/man/ja/man1/vim.1.gz --slave /usr/share/man/pl/man1/vi.1.gz vi.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/vi.1.gz vi.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/tr/man1/vi.1.gz vi.tr.1.gz /usr/share/man/tr/man1/vim.1.gz
+update-alternatives 2026-04-13 18:45:26: run with --install /usr/bin/view view /usr/bin/vim.tiny 15 --slave /usr/share/man/man1/view.1.gz view.1.gz /usr/share/man/man1/vim.1.gz --slave /usr/share/man/da/man1/view.1.gz view.da.1.gz /usr/share/man/da/man1/vim.1.gz --slave /usr/share/man/de/man1/view.1.gz view.de.1.gz /usr/share/man/de/man1/vim.1.gz --slave /usr/share/man/fr/man1/view.1.gz view.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/view.1.gz view.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/ja/man1/view.1.gz view.ja.1.gz /usr/share/man/ja/man1/vim.1.gz --slave /usr/share/man/pl/man1/view.1.gz view.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/view.1.gz view.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/tr/man1/view.1.gz view.tr.1.gz /usr/share/man/tr/man1/vim.1.gz
+update-alternatives 2026-04-15 09:32:59: run with --remove editor /usr/bin/code
+update-alternatives 2026-04-15 09:33:06: run with --install /usr/bin/editor editor /usr/bin/code 0
+update-alternatives 2026-04-15 09:33:09: run with --install /usr/bin/editor editor /usr/bin/code 0
+update-alternatives 2026-04-16 11:13:37: run with --install /usr/bin/x-www-browser x-www-browser /usr/bin/google-chrome-stable 200
+update-alternatives 2026-04-16 11:13:37: run with --install /usr/bin/gnome-www-browser gnome-www-browser /usr/bin/google-chrome-stable 200
+update-alternatives 2026-04-16 11:13:37: run with --install /usr/bin/google-chrome google-chrome /usr/bin/google-chrome-stable 200
+update-alternatives 2026-04-20 19:32:21: run with --install /usr/bin/x-www-browser x-www-browser /usr/bin/vivaldi-stable 200
+update-alternatives 2026-04-20 19:32:21: run with --install /usr/bin/gnome-www-browser gnome-www-browser /usr/bin/vivaldi-stable 200
+update-alternatives 2026-04-20 19:32:21: run with --install /usr/bin/vivaldi vivaldi /usr/bin/vivaldi-stable 200
+update-alternatives 2026-04-20 19:32:21: link group vivaldi updated to point to /usr/bin/vivaldi-stable
+update-alternatives 2026-04-22 16:12:41: run with --remove editor /usr/bin/code
+update-alternatives 2026-04-22 16:12:50: run with --install /usr/bin/editor editor /usr/bin/code 0
+update-alternatives 2026-04-22 16:12:51: run with --install /usr/bin/editor editor /usr/bin/code 0
+update-alternatives 2026-04-22 16:12:54: run with --install /usr/bin/x-www-browser x-www-browser /usr/bin/google-chrome-stable 200
+update-alternatives 2026-04-22 16:12:54: run with --install /usr/bin/gnome-www-browser gnome-www-browser /usr/bin/google-chrome-stable 200
+update-alternatives 2026-04-22 16:12:54: run with --install /usr/bin/google-chrome google-chrome /usr/bin/google-chrome-stable 200
+update-alternatives 2026-04-23 08:54:41: run with --install /usr/bin/x-www-browser x-www-browser /usr/bin/vivaldi-stable 200
+update-alternatives 2026-04-23 08:54:41: run with --install /usr/bin/gnome-www-browser gnome-www-browser /usr/bin/vivaldi-stable 200
+update-alternatives 2026-04-23 08:54:41: run with --install /usr/bin/vivaldi vivaldi /usr/bin/vivaldi-stable 200

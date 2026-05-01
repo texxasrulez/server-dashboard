@@ -1,0 +1,1 @@
+/* placeholder bootstrap.js to satisfy references; real bootstrap is loaded elsewhere */

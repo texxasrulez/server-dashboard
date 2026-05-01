@@ -1,0 +1,87 @@
+{
+  "db": {
+    "charset": "utf8mb4",
+    "collation": "utf8mb4_unicode_ci",
+    "database": "dashboard",
+    "driver": "mysql",
+    "host": "127.0.0.1",
+    "password": "CHANGE_ME",
+    "port": 3306,
+    "username": "dashboard_user"
+  },
+  "features": {
+    "alerts": true,
+    "backups": true,
+    "bookmarks": true,
+    "cron_health": true,
+    "databases": true,
+    "diagnostics": true,
+    "drive_health": true,
+    "history": true,
+    "logs": true,
+    "processes": true,
+    "server_tests": true,
+    "services": true,
+    "speedtest": true
+  },
+  "mail": {
+    "mail_transport": "sendmail",
+    "mail_from": "alerts@example.com",
+    "mail_envelope_from": "alerts@example.com",
+    "mail_replyto": "alerts@example.com",
+    "sendmail_path": "/usr/sbin/sendmail",
+    "smtp_host": "",
+    "smtp_port": 587,
+    "smtp_secure": "tls",
+    "smtp_user": "",
+    "smtp_pass": "",
+    "smtp_timeout": 12,
+    "sec_email": [
+      "alerts@example.com"
+    ]
+  },
+  "integrations": {
+    "slack": {
+      "webhook_url": ""
+    },
+    "smtp": {
+      "encryption": "",
+      "host": "localhost",
+      "password": "",
+      "port": 25,
+      "username": ""
+    }
+  },
+  "security": {
+    "admin_email": "alerts@example.com",
+    "allow_web_bootstrap_admin": false,
+    "trusted_proxies": [],
+    "ip_allowlist": [],
+    "favicon_require_admin": true,
+    "favicon_allow_http": false,
+    "favicon_allowed_hosts": [],
+    "login_rate_limit": {
+      "enabled": true,
+      "max_attempts": 5,
+      "window_sec": 900,
+      "base_delay_sec": 30,
+      "max_delay_sec": 900
+    },
+    "csp": {
+      "enabled": false,
+      "policy": ""
+    },
+    "csrf_protection": true,
+    "session_timeout_minutes": 60
+  },
+  "site": {
+    "logo_url": "",
+    "name": "My Dashboard",
+    "theme": "professional",
+    "title": "My Dashboard"
+  },
+  "ui": {
+    "toast_duration_ms": 3000,
+    "toast_position": "bottom-center"
+  }
+}

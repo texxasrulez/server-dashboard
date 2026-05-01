@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "email": "admin@example.com",
+      "id": 1,
+      "password_hash": "$2y$10$REPLACE_WITH_BCRYPT_HASH",
+      "role": "admin",
+      "username": "admin"
+    }
+  ]
+}

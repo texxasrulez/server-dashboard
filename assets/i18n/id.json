@@ -1,0 +1,493 @@
+{
+    "app": {
+        "title": "Dasbor Server"
+    },
+    "nav": {
+        "history": "Sejarah",
+        "logs": "Log",
+        "dashboard": "Dasbor",
+        "services": "Layanan",
+        "alerts": "Peringatan",
+        "tests": "Tes",
+        "settings": "Pengaturan",
+        "about": "Tentang"
+    },
+    "history": {
+        "title": "Sejarah",
+        "trends": "Tren",
+        "range": "Jangkauan",
+        "baseline": "Baseline",
+        "probe_now": "Selidiki sekarang",
+        "refresh": "Menyegarkan",
+        "export_json": "Ekspor JSON",
+        "export_alerts_json": "Ekspor Peringatan JSON",
+        "reset_history": "Atur ulang riwayat",
+        "recent_alert_events": "Peristiwa peringatan terbaru",
+        "export_preview": "Pratinjau ekspor",
+        "close": "Tutup",
+        "copy": "Salin",
+        "download": "Unduh"
+    },
+    "logs": {
+        "title": "Log",
+        "manage": "Mengelola Log",
+        "add": "Menambahkan",
+        "delete": "Menghapus",
+        "refresh": "Menyegarkan",
+        "search": "Pencarian",
+        "filter": "Filter",
+        "lines": "Garis",
+        "open": "Buka",
+        "close": "Tutup",
+        "download": "Unduh",
+        "copy": "Salin"
+    },
+    "common": {
+        "save": "Simpan",
+        "cancel": "Batal",
+        "edit": "Sunting",
+        "delete": "Menghapus",
+        "update": "Memperbarui",
+        "create": "Membuat",
+        "enable": "Aktifkan",
+        "disable": "Nonaktifkan",
+        "yes": "Ya.",
+        "no": "Tidak.",
+        "on": "Pada",
+        "off": "Mati",
+        "confirm": "Konfirmasi",
+        "search": "Pencarian",
+        "filter": "Filter",
+        "actions": "Tindakan",
+        "close": "Tutup",
+        "none": "tidak ada",
+        "none_dash": "-"
+    },
+    "alerts": {
+        "title": "Peringatan",
+        "recent_events": "Peristiwa peringatan terbaru",
+        "history": "Riwayat peringatan",
+        "export_json": "Ekspor Peringatan JSON",
+        "no_alerts": "Tidak ada peringatan",
+        "level": "Tingkat",
+        "message": "Pesan",
+        "service": "Layanan",
+        "time": "Waktu",
+        "probe_now": "Selidiki sekarang",
+        "refresh": "Menyegarkan",
+        "silence": "Diam.",
+        "unsilence": "Ketidakmampuan",
+        "ack": "Mengakui",
+        "unack": "Tidak mengakui"
+    },
+    "tests": {
+        "title": "Tes Server",
+        "run_all": "Jalankan semua",
+        "status": "Status",
+        "last_run": "Jalankan terakhir",
+        "duration": "Durasi"
+    },
+    "services": {
+        "title": "Layanan",
+        "status": "Status",
+        "restart": "Mulai ulang",
+        "start": "Mulai",
+        "stop": "Berhenti."
+    },
+    "config": {
+        "sections": {
+            "site": "Site",
+            "features": "Features",
+            "capabilities": "Capabilities",
+            "processes": "Processes",
+            "mail": "Mail",
+            "integrations": "Integrations",
+            "security": "Security",
+            "ui": "UI",
+            "server_tests": "Server Tests",
+            "alerts": "Alerts",
+            "cron": "Cron",
+            "history": "History",
+            "logs": "Logs",
+            "backups": "Cadangan",
+            "email": "Email"
+        },
+        "fields": {
+            "backups": {
+                "require_dedicated_mount": {
+                    "label": "Memerlukan pemasangan khusus",
+                    "help": "Kunci kompatibilitas lama. Jika diaktifkan, skrip pencadangan memerlukan pemasangan cadangan."
+                },
+                "disable_on_mount_fail": {
+                    "label": "Nonaktifkan pencadangan jika pemasangan gagal",
+                    "help": "Jika diaktifkan, tindakan pencadangan dan skrip yang dibuat akan berhenti jika pemasangan cadangan tidak ada."
+                }
+            },
+            "alerts": {
+                "min_severity": {
+                    "label": "Tingkat keparahan minimum untuk diwaspadai"
+                },
+                "email": {
+                    "label": "Legacy alert email(s)"
+                }
+            }
+        },
+        "ui": {
+            "unknown": "tidak dikenal",
+            "unknown_paren": "(tidak dikenal)",
+            "site_backup": {
+                "title": "Cadangkan & Pulihkan",
+                "export_config": "Ekspor Konfigurasi",
+                "import_config": "Impor Konfigurasi",
+                "choose_file_first": "Pilih file cadangan terlebih dahulu",
+                "imported_reloading": "Impor. Memuat ulang...",
+                "import_failed": "Impor gagal",
+                "import_failed_prefix": "Impor gagal:",
+                "retention_title": "Cadangan - Retensi",
+                "keep_last": "Tetap terakhir",
+                "files": "file",
+                "loading_stats": "(memuat statistik...)",
+                "last_backup_loading": "Cadangan terakhir: (memuat...)",
+                "last_backup_none": "Cadangan terakhir: belum ada",
+                "last_backup_prefix": "Cadangan terakhir:",
+                "last_backup_unknown": "Cadangan terakhir: tidak diketahui",
+                "prune_now": "Pangkas sekarang",
+                "pruned_kept_deleted": "Dipangkas - disimpan",
+                "deleted_prefix": "dihapus",
+                "prune_failed": "Pemangkasan gagal",
+                "prune_failed_prefix": "Pemangkasan gagal:",
+                "create_backup_now": "Buat cadangan sekarang",
+                "backup_saved_prefix": "Cadangan disimpan:",
+                "backup_failed": "Pencadangan gagal",
+                "backup_failed_prefix": "Pencadangan gagal:",
+                "download_latest_backup": "Unduh cadangan terbaru",
+                "no_backups_found": "Tidak ada cadangan yang ditemukan",
+                "download_failed_prefix": "Pengunduhan gagal:",
+                "redact_secrets": "Redact secrets"
+            }
+        }
+    },
+    "backups": {
+        "common": {
+            "status": "Status:",
+            "timestamp": "Stempel waktu:",
+            "none_dash": "-",
+            "free": "Bebas",
+            "used": "Digunakan",
+            "copy": "Menyalin",
+            "warnings": "Peringatan",
+            "errors": "Kesalahan",
+            "loading": "Memuat..."
+        },
+        "status": {
+            "error_loading_json": "KESALAHAN PEMUATAN JSON",
+            "ok": "OKE",
+            "unmounted": "LEPAS",
+            "critical": "KRITIS",
+            "high": "TINGGI",
+            "elevated": "TINGGI",
+            "healthy": "SEHAT",
+            "unknown": "TIDAK DIKENAL",
+            "unknown_cap": "Tidak dikenal"
+        },
+        "disk": {
+            "unmounted": "Disk TIDAK DIPASANG",
+            "tag": "Disk:",
+            "sizes_updated": "Ukuran diperbarui:",
+            "title": "Pemanfaatan Disk",
+            "usage": "Penggunaan",
+            "mount": "Gunung"
+        },
+        "page": {
+            "freshness_prefix": "Kesegaran:",
+            "title": "Pusat Kontrol Cadangan",
+            "subtitle_prefix": "Status langsung didorong oleh",
+            "subtitle_suffix": "pada disk cadangan Anda."
+        },
+        "ages": {
+            "no_snapshots_on_disk": "Tidak ada snapshot yang ditemukan pada disk",
+            "one_snapshot_present": "1 cuplikan hadir",
+            "snapshots_present_suffix": "snapshot hadir",
+            "no_panel_backups_on_disk": "Tidak ada cadangan panel yang ditemukan pada disk",
+            "one_panel_backup_present": "Ada 1 panel cadangan",
+            "panel_backups_present_suffix": "cadangan panel ada",
+            "no_micro_backups_on_disk": "Tidak ada cadangan mikro yang ditemukan pada disk",
+            "one_micro_backup_present": "1 cadangan mikro hadir",
+            "micro_backups_present_suffix": "cadangan mikro hadir",
+            "snapshot_daily0_chart": "Cuplikan (harian.0)",
+            "hestia_latest_chart": "Hestia terbaru",
+            "micro_latest_chart": "Mikro terbaru",
+            "age_days": "Usia (hari)",
+            "title": "Usia Cadangan",
+            "subtitle": "Seberapa segar cadangan terbaru Anda",
+            "snapshot_daily0": "Cuplikan setiap hari.0",
+            "latest_hestia": "Hestia terbaru",
+            "latest_micro": "Mikro Terbaru"
+        },
+        "errors": {
+            "no_backups_detected": "Tidak ada cadangan yang terdeteksi untuk snapshot, Hestia, atau set mikro."
+        },
+        "restore": {
+            "hestia_placeholder_tar": "gen.YYYYMMDD-HHMM.tar",
+            "using_latest_backup_prefix": "Menggunakan cadangan terbaru yang dilaporkan di JSON:",
+            "adjust_backup_tar": "Sesuaikan BACKUP_TAR ke file asli dari \\\"v-list-backups USER\\\" sebelum dijalankan.",
+            "micro_restore_prefix": "Pulihkan basis dari snapshot mikro terbaru:",
+            "micro_restore_suffix": "(tinjau jalur dan pengecualian sebelum dijalankan).",
+            "set_correct_snapshot_path": "Tetapkan jalur snapshot yang benar sebelum menggunakan perintah ini.",
+            "confirm_body_1": "Ini akan memulai pekerjaan pemulihan Hestia di server menggunakan backupctl.",
+            "confirm_body_2": "Layanan dan data untuk pengguna tersebut mungkin ditimpa.",
+            "confirm_body_3": "Apakah Anda benar-benar yakin?"
+        },
+        "actions": {
+            "starting_prefix": "Mulai",
+            "failed_to_start_prefix": "GAGAL untuk memulai",
+            "started_prefix": "Dimulai",
+            "started_suffix": ". Ini mungkin memakan waktu cukup lama; status akan diperbarui pada pemeriksaan kesehatan berikutnya.",
+            "error_talking_endpoint": "Terjadi kesalahan saat berbicara dengan backups_action.php",
+            "run_os_snapshot": "Jalankan Cuplikan OS",
+            "run_micro_backup": "Jalankan Pencadangan Mikro",
+            "run_hestia_backup_user": "Jalankan Hestia Backup (gen)",
+            "run_all_backups": "Jalankan SEMUA Cadangan",
+            "run_health_check": "Jalankan Pemeriksaan Kesehatan",
+            "log_maintenance": "Pemeliharaan log",
+            "clear_backup_logs": "Hapus log kesehatan cadangan",
+            "clear_prune_logs": "Hapus log pemangkasan",
+            "clear_integrity_log": "Hapus log integritas"
+        },
+        "cron": {
+            "no_entries": "Tidak ada entri crontab yang terdeteksi.",
+            "env": "Env",
+            "schedule": "Jadwal",
+            "entries_for_prefix": "Entri crontab untuk",
+            "current_user": "pengguna saat ini",
+            "unable_to_read": "Tidak dapat membaca crontab.",
+            "failed_to_read": "Gagal membaca crontab."
+        },
+        "warnings_errors": {
+            "title": "Peringatan & Kesalahan",
+            "subtitle": "Ringkasan dari pemeriksaan kesehatan"
+        },
+        "raw_snapshot": {
+            "title": "Cuplikan Mentah",
+            "subtitle": "Nilai kunci langsung dari status JSON terakhir"
+        },
+        "recent_actions": {
+            "title": "Tindakan Terbaru",
+            "subtitle": "Riwayat tindakan dari dasbor ini",
+            "none": "Belum ada tindakan yang tercatat."
+        },
+        "orch": {
+            "title": "Wizard Orkestrasi Cadangan",
+            "subtitle": "Sesuaikan jalur satu kali, lalu salin unit skrip/cron/systemd yang dihasilkan.",
+            "backup_root": "Akar cadangan",
+            "include_health": "Termasuk pemeriksaan kesehatan",
+            "include_integrity": "Sertakan pemeriksaan integritas",
+            "include_prune": "Sertakan tahap pemangkasan",
+            "suspend": "Tangguhkan pencadangan",
+            "disable_on_mount_fail": "Nonaktifkan pencadangan jika pemasangan gagal",
+            "nightly_script": "Naskah malam",
+            "copy_script": "Salin skrip",
+            "cron_entry": "Entri cron",
+            "copy_cron_line": "Salin baris cron",
+            "systemd_service": "Layanan sistem",
+            "copy_unit": "Salin satuan",
+            "systemd_timer": "Pengatur waktu sistem",
+            "copy_timer": "Salin pengatur waktu"
+        },
+        "quick_restore": {
+            "title": "Pembantu Pemulihan Cepat",
+            "subtitle": "Perintah CLI yang telah diisi sebelumnya untuk keadaan darurat (jalankan manual atau tombol BAHAYA)",
+            "hestia_latest_title": "Pulihkan cadangan pengguna Hestia terbaru",
+            "micro_latest_title": "Pulihkan dari snapshot mikro terbaru (khusus CLI)",
+            "copy_command": "Salin perintah",
+            "run_restore_danger": "Jalankan pemulihan (terbaru, BAHAYA)"
+        },
+        "cli": {
+            "title": "CLI Pencadangan & Pemulihan Hestia",
+            "subtitle": "Lembar referensi cepat - salin & tempel siap",
+            "create_backups": "Buat Cadangan",
+            "list_delete_backups": "Daftar & Hapus Cadangan",
+            "full_restore_user": "Pemulihan Penuh (Pengguna)",
+            "selective_restore": "Pemulihan Selektif (Web / DB / Mail)",
+            "backup_file_locations": "Lokasi File Cadangan",
+            "backup_tarball_contents": "Cadangan Isi Tarball",
+            "backupctl_help": "bantuan cadangan"
+        }
+    },
+    "footer": {
+        "logged_in_as": "Masuk sebagai",
+        "theme": "Tema"
+    },
+    "i18n": {
+        "language_picker": {
+            "title": "Bahasa",
+            "saving": "Menyimpan...",
+            "saved": "Tersimpan",
+            "save_failed": "Gagal menyimpan"
+        }
+    },
+    "services_page": {
+        "environment": "Lingkungan",
+        "filter_placeholder": "Filter layanan...",
+        "add_service": "Tambah layanan",
+        "edit_service": "Edit layanan",
+        "import": "Impor",
+        "export_csv": "Ekspor CSV",
+        "auto_probe": "Pemeriksaan otomatis",
+        "every": "Setiap",
+        "seconds_short": "d",
+        "columns": {
+            "name": "Nama",
+            "category": "Kategori",
+            "host": "Host",
+            "port": "Port",
+            "probe": "Pemeriksaan",
+            "timeout": "Batas waktu",
+            "path": "Jalur",
+            "enabled": "Diaktifkan"
+        },
+        "form": {
+            "name": "Nama",
+            "category": "Kategori",
+            "host": "Host",
+            "port": "Port",
+            "probe": "Pemeriksaan",
+            "timeout": "Batas waktu (ms)",
+            "path": "Jalur (HTTP)",
+            "enabled": "Diaktifkan"
+        },
+        "test_on_save": "Uji saat simpan",
+        "caps": {
+            "panel": "panel",
+            "web": "web",
+            "mta": "mta",
+            "db": "db",
+            "nginx": "nginx"
+        },
+        "states": {
+            "active": "aktif",
+            "inactive": "tidak aktif"
+        },
+        "path_not_used": "(tidak digunakan)",
+        "status": {
+            "up": "UP",
+            "warn": "PERINGATAN",
+            "down": "TURUN",
+            "unknown": "TIDAK DIKETAHUI"
+        },
+        "relative_time": {
+            "just_now": "baru saja",
+            "minutes_ago": "[menghitung] m lalu",
+            "hours_ago": "[hitungan] jam yang lalu",
+            "days_ago": "[menghitung] d lalu"
+        },
+        "units": {
+            "ms": "ms"
+        },
+        "actions": {
+            "test": "Tes"
+        },
+        "uptime": "Waktu aktif {pct}%",
+        "alert_last_seen": "Peringatan {waktu}",
+        "alerts_muted_until": "Bisu {time}",
+        "mute_alerts": "Membisukan peringatan",
+        "confirm_delete": "Menghapus layanan ini?",
+        "probe_kicked": "Probe menendang",
+        "no_alert_rules": "Tidak ada aturan peringatan yang harus dibisukan.",
+        "prompt_mute_minutes": "Membisukan peringatan terkait selama berapa menit?",
+        "alerts_muted_for": "Peringatan dibisukan selama {menit}m.",
+        "mute_failed": "Bisu gagal: [pesan]",
+        "invalid_json": "JSON tidak valid",
+        "import_failed": "Impor gagal",
+        "validation": {
+            "name_required": "Nama harus diisi.",
+            "host_required": "Diperlukan tuan rumah.",
+            "port_range": "Port harus 1-65535.",
+            "correct_fields": "Harap perbaiki bidang yang disorot."
+        },
+        "service_save_requested": "Penyimpanan layanan yang diminta"
+    },
+    "bookmarks_page": {
+        "title": "Bookmark",
+        "manage": "Kelola bookmark",
+        "add_to_browser": "Tambahkan ke browser",
+        "bookmarklet_title": "Seret ini ke bilah bookmark untuk menambahkan halaman saat ini dengan cepat",
+        "prompt_tags": "Tag (dipisahkan koma):",
+        "category": "Kategori",
+        "all": "Semua",
+        "sort": "Urutkan",
+        "sort_updated_desc": "Diperbarui (terbaru)",
+        "sort_title_asc": "Judul (A-Z)",
+        "sort_host_asc": "Host (A-Z)",
+        "fields": {
+            "title": "Judul",
+            "url": "URL",
+            "tags": "Tag",
+            "name": "Nama"
+        },
+        "placeholders": {
+            "optional_title": "Judul opsional",
+            "tags": "tag,dipisahkan,koma",
+            "new_category_name": "Nama kategori baru"
+        },
+        "add_category": "Tambah kategori",
+        "updated": "Diperbarui",
+        "empty": "Belum ada bookmark.",
+        "empty_categories": "Belum ada kategori.",
+        "modal": {
+            "add_edit": "Tambah / edit bookmark",
+            "add_categories": "Tambah kategori"
+        },
+        "uncategorized": "Tanpa kategori",
+        "hints": {
+            "bookmark_edit": "Tampilkan penanda di sini dengan kategori yang dapat dilipat. Klik penanda untuk memuatnya di atas untuk diedit atau dihapus.",
+            "category_edit": "Kategori muncul di sini. Klik salah satu untuk memuatnya di atas untuk mengedit atau menghapus."
+        },
+        "confirm_delete_category": "Menghapus kategori ini? Penanda akan berubah menjadi Uncategorized.",
+        "confirm_delete_bookmark": "Menghapus penanda ini?",
+        "validation": {
+            "category_name_required": "Diperlukan nama kategori",
+            "url_required": "URL diperlukan"
+        },
+        "errors": {
+            "all_endpoints_failed": "Semua titik akhir gagal",
+            "bad_json": "JSON buruk dari server",
+            "api_not_found": "Gagal memuat penanda (API tidak ditemukan). Mencoba: {mencoba}",
+            "load_failed": "Gagal memuat penanda: {pesan}"
+        },
+        "toasts": {
+            "category_saved": "Kategori disimpan",
+            "save_failed": "Simpan gagal: [pesan]",
+            "category_deleted": "Kategori dihapus",
+            "delete_failed": "Hapus gagal: [pesan]",
+            "order_saved": "Pesanan disimpan",
+            "reorder_failed": "Pemesanan ulang gagal: [pesan]",
+            "category_updated": "Kategori diperbarui",
+            "category_added": "Kategori ditambahkan",
+            "bookmark_deleted": "Penanda dihapus",
+            "bookmark_updated": "Penanda diperbarui",
+            "bookmark_added": "Penanda ditambahkan"
+        }
+    },
+    "header": {
+        "navigation": "Navigasi tajuk",
+        "system_status": "Status layanan",
+        "loading": "Memuat...",
+        "profile": "Profil Saya",
+        "logout": "Keluar",
+        "mobile": {
+            "open_menu": "Buka menu",
+            "menu": "Menu"
+        },
+        "nav": {
+            "history": "Sejarah",
+            "cron_health": "Cron Health",
+            "processes": "Proses",
+            "databases": "Basis data",
+            "speedtest": "Tes kecepatan",
+            "diagnostics": "Diagnostik",
+            "config": "Konfigurasi",
+            "backups": "Cadangan"
+        }
+    }
+}

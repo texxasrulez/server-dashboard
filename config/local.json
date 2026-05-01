@@ -1,0 +1,13 @@
+{
+    "mail": {
+        "mail_transport": "sendmail",
+        "mail_from": "",
+        "mail_envelope_from": "",
+        "mail_replyto": "",
+        "sendmail_path": "/usr/sbin/sendmail",
+        "smtp_timeout": 12
+    },
+    "security": {
+        "csrf_secret": ""
+    }
+}

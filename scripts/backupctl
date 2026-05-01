@@ -1,0 +1,370 @@
+#!/usr/bin/env bash
+# backupctl - friendly wrapper for snapshots, micro backups, Hestia backups,
+#             health checks, integrity watch, and prune scripts.
+
+set -euo pipefail
+
+# --- ENVIRONMENT ---------------------------------------------------------
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+export PATH
+umask 027
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BACKUP_SCRIPT_PATH="${BACKUP_SCRIPT_PATH:-$SCRIPT_DIR}"
+
+# --- CONFIG --------------------------------------------------------------
+
+DEFAULT_USER="${BACKUP_DEFAULT_USER:-$(id -un 2>/dev/null || echo admin)}"
+
+# Hestia binaries
+HESTIA_BIN_DIR="/usr/local/hestia/bin"
+H_BACKUP_USER="$HESTIA_BIN_DIR/v-backup-user"
+H_LIST_BACKUPS="$HESTIA_BIN_DIR/v-list-backups"
+H_DELETE_BACKUP="$HESTIA_BIN_DIR/v-delete-backup"
+H_RESTORE_USER="$HESTIA_BIN_DIR/v-restore-user"
+H_RESTORE_WEB="$HESTIA_BIN_DIR/v-restore-web"
+H_RESTORE_DB="$HESTIA_BIN_DIR/v-restore-database"
+H_RESTORE_MAIL="$HESTIA_BIN_DIR/v-restore-mail"
+
+# --- UTILS ---------------------------------------------------------------
+
+usage() {
+  cat <<EOF
+backupctl - unified backup helper
+
+Usage:
+  backupctl snap
+      Run OS snapshots via: ${SNAP_SCRIPT}
+
+  backupctl micro
+      Run micro backups via: ${MICRO_SCRIPT}
+
+  backupctl all [USER]
+      Run snapshots + micro + Hestia backup for USER
+      Default USER: ${DEFAULT_USER}
+
+  backupctl h-backup [USER]
+      Hestia: v-backup-user USER
+      Default USER: ${DEFAULT_USER}
+
+  backupctl h-list [USER]
+      Hestia: v-list-backups USER
+      Default USER: ${DEFAULT_USER}
+
+  backupctl h-delete USER BACKUP_TAR
+      Hestia: v-delete-backup USER BACKUP_TAR
+
+  backupctl h-restore-user USER BACKUP_TAR
+      Hestia: v-restore-user USER BACKUP_TAR
+
+  backupctl h-restore-web USER DOMAIN BACKUP_TAR
+      Hestia: v-restore-web USER DOMAIN BACKUP_TAR
+
+  backupctl h-restore-db USER DB_NAME BACKUP_TAR
+      Hestia: v-restore-database USER DB_NAME BACKUP_TAR
+
+  backupctl h-restore-mail USER BACKUP_TAR
+      Hestia: v-restore-mail USER BACKUP_TAR
+
+  backupctl health
+      Run backup_health_check.sh (updates backup_status.json for dashboard)
+
+  backupctl integrity
+      Run backup_integrity_watch.sh (size regression checks + email alert)
+
+  backupctl prune
+      Run prune scripts:
+        - ${PRUNE_SNAP_SCRIPT}
+        - ${PRUNE_MICRO_SCRIPT}
+        - ${PRUNE_HESTIA_SCRIPT}
+
+  backupctl nightly
+      Opinionated nightly pipeline:
+        snap -> micro -> h-backup ${DEFAULT_USER} -> health -> integrity -> prune
+
+  backupctl help
+      Show this help text
+
+Notes:
+  - You probably want to run this as root or via sudo.
+  - Paths are hard-coded to Hestia defaults on Debian.
+EOF
+}
+
+error() {
+  echo "backupctl: $*" >&2
+  exit 1
+}
+
+resolve_exec_path() {
+  local preferred="$1"
+  shift || true
+  local candidates=("$@")
+
+  if [[ -n "${preferred:-}" && -x "$preferred" ]]; then
+    echo "$preferred"
+    return 0
+  fi
+  if [[ -n "${preferred:-}" && ! -x "$preferred" ]]; then
+    echo "backupctl: warning: preferred path not executable: $preferred" >&2
+  fi
+
+  local p
+  for p in "${candidates[@]}"; do
+    [[ -n "$p" ]] || continue
+    if [[ -x "$p" ]]; then
+      echo "$p"
+      return 0
+    fi
+  done
+
+  if [[ -n "${preferred:-}" ]]; then
+    echo "$preferred"
+    return 0
+  fi
+  echo ""
+}
+
+ensure_rootish() {
+  if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
+    echo "backupctl: warning: not running as root; some commands may fail" >&2
+  fi
+}
+
+ensure_executable() {
+  local path="$1"
+  [[ -x "$path" ]] || error "required executable not found or not executable: $path"
+}
+
+SNAP_SCRIPT="$(resolve_exec_path "${SNAP_SCRIPT:-}" \
+  "${BACKUP_SCRIPT_PATH}/make-snapshots.sh" \
+  "${SCRIPT_DIR}/make-snapshots.sh" \
+  "/usr/local/sbin/make-snapshots.sh" \
+  "/usr/local/sbin/make-snapshot.sh" \
+  "/usr/local/bin/make-snapshots.sh")"
+MICRO_SCRIPT="$(resolve_exec_path "${MICRO_SCRIPT:-}" \
+  "${BACKUP_SCRIPT_PATH}/make-micro-backups.sh" \
+  "${SCRIPT_DIR}/make-micro-backups.sh" \
+  "/usr/local/sbin/make-micro-backups.sh" \
+  "/usr/local/bin/make-micro-backups.sh")"
+
+# Health / integrity
+HEALTH_SCRIPT="$(resolve_exec_path "${HEALTH_SCRIPT:-}" \
+  "${BACKUP_SCRIPT_PATH}/backup_health_check.sh" \
+  "${SCRIPT_DIR}/backup_health_check.sh" \
+  "/usr/local/sbin/backup_health_check.sh" \
+  "/usr/local/bin/backup_health_check.sh")"
+INTEGRITY_SCRIPT="$(resolve_exec_path "${INTEGRITY_SCRIPT:-}" \
+  "${BACKUP_SCRIPT_PATH}/backup_integrity_watch.sh" \
+  "${SCRIPT_DIR}/backup_integrity_watch.sh" \
+  "/usr/local/sbin/backup_integrity_watch.sh" \
+  "/usr/local/bin/backup_integrity_watch.sh")"
+
+# Prune scripts
+PRUNE_SNAP_SCRIPT="$(resolve_exec_path "${PRUNE_SNAP_SCRIPT:-}" \
+  "${BACKUP_SCRIPT_PATH}/prune_snapshots.sh" \
+  "${SCRIPT_DIR}/prune_snapshots.sh" \
+  "/usr/local/sbin/prune_snapshots.sh" \
+  "/usr/local/bin/prune_snapshots.sh")"
+PRUNE_MICRO_SCRIPT="$(resolve_exec_path "${PRUNE_MICRO_SCRIPT:-}" \
+  "${BACKUP_SCRIPT_PATH}/prune-micro-backups.sh" \
+  "${SCRIPT_DIR}/prune-micro-backups.sh" \
+  "/usr/local/sbin/prune-micro-backups.sh" \
+  "/usr/local/bin/prune-micro-backups.sh")"
+PRUNE_HESTIA_SCRIPT="$(resolve_exec_path "${PRUNE_HESTIA_SCRIPT:-}" \
+  "${BACKUP_SCRIPT_PATH}/prune_hestia_backups.sh" \
+  "${SCRIPT_DIR}/prune_hestia_backups.sh" \
+  "/usr/local/sbin/prune_hestia_backups.sh" \
+  "/usr/local/bin/prune_hestia_backups.sh")"
+
+# --- ARG PARSING ---------------------------------------------------------
+
+if [[ $# -lt 1 ]]; then
+  usage
+  exit 1
+fi
+
+cmd="$1"
+shift || true
+
+case "$cmd" in
+  help|-h|--help)
+    usage
+    exit 0
+    ;;
+esac
+
+# For anything that actually runs backups, gently warn if not root-ish
+ensure_rootish
+
+# --- COMMANDS ------------------------------------------------------------
+
+case "$cmd" in
+  snap)
+    ensure_executable "$SNAP_SCRIPT"
+    echo "[backupctl] Running OS snapshots: $SNAP_SCRIPT"
+    exec "$SNAP_SCRIPT"
+    ;;
+
+  micro)
+    ensure_executable "$MICRO_SCRIPT"
+    echo "[backupctl] Running micro backups: $MICRO_SCRIPT"
+    exec "$MICRO_SCRIPT"
+    ;;
+
+  all)
+    user="${1:-$DEFAULT_USER}"
+    ensure_executable "$SNAP_SCRIPT"
+    ensure_executable "$MICRO_SCRIPT"
+    ensure_executable "$H_BACKUP_USER"
+
+    echo "[backupctl] Running OS snapshots..."
+    "$SNAP_SCRIPT"
+
+    echo "[backupctl] Running micro backups..."
+    "$MICRO_SCRIPT"
+
+    echo "[backupctl] Running Hestia backup for user: $user"
+    exec "$H_BACKUP_USER" "$user"
+    ;;
+
+  h-backup)
+    user="${1:-$DEFAULT_USER}"
+    ensure_executable "$H_BACKUP_USER"
+    echo "[backupctl] Hestia full backup for user: $user"
+    exec "$H_BACKUP_USER" "$user"
+    ;;
+
+  h-list)
+    user="${1:-$DEFAULT_USER}"
+    ensure_executable "$H_LIST_BACKUPS"
+    echo "[backupctl] Listing backups for user: $user"
+    exec "$H_LIST_BACKUPS" "$user"
+    ;;
+
+  h-delete)
+    if [[ $# -ne 2 ]]; then
+      error "h-delete requires USER and BACKUP_TAR"
+    fi
+    user="$1"
+    tarfile="$2"
+    ensure_executable "$H_DELETE_BACKUP"
+    echo "[backupctl] Deleting backup $tarfile for user $user"
+    exec "$H_DELETE_BACKUP" "$user" "$tarfile"
+    ;;
+
+  h-restore-user)
+    if [[ $# -ne 2 ]]; then
+      error "h-restore-user requires USER and BACKUP_TAR"
+    fi
+    user="$1"
+    tarfile="$2"
+    ensure_executable "$H_RESTORE_USER"
+    echo "[backupctl] Restoring user $user from $tarfile"
+    exec "$H_RESTORE_USER" "$user" "$tarfile"
+    ;;
+
+  h-restore-web)
+    if [[ $# -ne 3 ]]; then
+      error "h-restore-web requires USER DOMAIN BACKUP_TAR"
+    fi
+    user="$1"
+    domain="$2"
+    tarfile="$3"
+    ensure_executable "$H_RESTORE_WEB"
+    echo "[backupctl] Restoring web for $user / $domain from $tarfile"
+    exec "$H_RESTORE_WEB" "$user" "$domain" "$tarfile"
+    ;;
+
+  h-restore-db)
+    if [[ $# -ne 3 ]]; then
+      error "h-restore-db requires USER DB_NAME BACKUP_TAR"
+    fi
+    user="$1"
+    dbname="$2"
+    tarfile="$3"
+    ensure_executable "$H_RESTORE_DB"
+    echo "[backupctl] Restoring database $dbname for $user from $tarfile"
+    exec "$H_RESTORE_DB" "$user" "$dbname" "$tarfile"
+    ;;
+
+  h-restore-mail)
+    if [[ $# -ne 2 ]]; then
+      error "h-restore-mail requires USER and BACKUP_TAR"
+    fi
+    user="$1"
+    tarfile="$2"
+    ensure_executable "$H_RESTORE_MAIL"
+    echo "[backupctl] Restoring mail for $user from $tarfile"
+    exec "$H_RESTORE_MAIL" "$user" "$tarfile"
+    ;;
+
+  health)
+    ensure_executable "$HEALTH_SCRIPT"
+    echo "[backupctl] Running backup health check: $HEALTH_SCRIPT"
+    exec "$HEALTH_SCRIPT"
+    ;;
+
+  integrity)
+    ensure_executable "$INTEGRITY_SCRIPT"
+    echo "[backupctl] Running backup integrity watch: $INTEGRITY_SCRIPT"
+    exec "$INTEGRITY_SCRIPT"
+    ;;
+
+  prune)
+    # All three are expected to exist in your setup; if one is missing we fail fast
+    ensure_executable "$PRUNE_SNAP_SCRIPT"
+    ensure_executable "$PRUNE_MICRO_SCRIPT"
+    ensure_executable "$PRUNE_HESTIA_SCRIPT"
+
+    echo "[backupctl] Pruning snapshots..."
+    "$PRUNE_SNAP_SCRIPT"
+
+    echo "[backupctl] Pruning micro backups..."
+    "$PRUNE_MICRO_SCRIPT"
+
+    echo "[backupctl] Pruning Hestia backups..."
+    exec "$PRUNE_HESTIA_SCRIPT"
+    ;;
+
+  nightly)
+    # Nightly pipeline: snap -> micro -> h-backup (DEFAULT_USER) -> health -> integrity -> prune
+    ensure_executable "$SNAP_SCRIPT"
+    ensure_executable "$MICRO_SCRIPT"
+    ensure_executable "$H_BACKUP_USER"
+    ensure_executable "$HEALTH_SCRIPT"
+    ensure_executable "$INTEGRITY_SCRIPT"
+    ensure_executable "$PRUNE_SNAP_SCRIPT"
+    ensure_executable "$PRUNE_MICRO_SCRIPT"
+    ensure_executable "$PRUNE_HESTIA_SCRIPT"
+
+    user="${1:-$DEFAULT_USER}"
+
+    echo "[backupctl] [nightly] Running OS snapshots..."
+    "$SNAP_SCRIPT"
+
+    echo "[backupctl] [nightly] Running micro backups..."
+    "$MICRO_SCRIPT"
+
+    echo "[backupctl] [nightly] Running Hestia backup for user: $user"
+    "$H_BACKUP_USER" "$user"
+
+    echo "[backupctl] [nightly] Running backup health check..."
+    "$HEALTH_SCRIPT"
+
+    echo "[backupctl] [nightly] Running backup integrity watch..."
+    "$INTEGRITY_SCRIPT"
+
+    echo "[backupctl] [nightly] Pruning snapshots..."
+    "$PRUNE_SNAP_SCRIPT"
+
+    echo "[backupctl] [nightly] Pruning micro backups..."
+    "$PRUNE_MICRO_SCRIPT"
+
+    echo "[backupctl] [nightly] Pruning Hestia backups..."
+    exec "$PRUNE_HESTIA_SCRIPT"
+    ;;
+
+  *)
+    error "unknown command: $cmd (see: backupctl help)"
+    ;;
+esac

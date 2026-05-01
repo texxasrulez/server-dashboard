@@ -1,0 +1,105 @@
+2026-04-22 16:12:56 - mintSystem started
+Executed:
+  /usr/share/linuxmint/adjustments/15-ubuntu-system-adjustments.execute
+  /usr/share/linuxmint/adjustments/20-apt-set-recommends.execute
+Replaced:
+  /usr/lib/firefox/distribution/distribution.ini
+Edited:
+Skipped:
+  /etc/apt/preferences.d/official-package-repositories.pref
+  /etc/xdg/autostart/user-dirs-update-gtk.desktop (onlyshowin)
+  /usr/share/applications/im-config.desktop (hide)
+  /usr/share/applications/info.desktop (hide)
+  /usr/share/applications/libreoffice-math.desktop (categories)
+  /usr/share/applications/mate-color-select.desktop (categories)
+  /usr/share/applications/mate-color-select.desktop (name)
+  /usr/share/applications/mimeapps.list
+  /usr/share/applications/org.freedesktop.IBus.Setup.desktop (notshowin)
+  /usr/share/applications/steam.desktop (exec)
+  /usr/share/applications/yelp.desktop (hide)
+  /usr/share/cups/data/default-testpage.pdf
+  /usr/share/icons/ContrastHigh/16x16/places/distributor-logo.png
+  /usr/share/icons/ContrastHigh/16x16/places/start-here.png
+  /usr/share/icons/ContrastHigh/22x22/places/distributor-logo.png
+  /usr/share/icons/ContrastHigh/22x22/places/start-here.png
+  /usr/share/icons/ContrastHigh/24x24/places/distributor-logo.png
+  /usr/share/icons/ContrastHigh/24x24/places/start-here.png
+  /usr/share/icons/ContrastHigh/32x32/places/distributor-logo.png
+  /usr/share/icons/ContrastHigh/32x32/places/start-here.png
+  /usr/share/icons/ContrastHigh/48x48/places/distributor-logo.png
+  /usr/share/icons/ContrastHigh/48x48/places/start-here.png
+  /usr/share/icons/ContrastHigh/scalable/places/start-here.svg
+  /usr/share/icons/HighContrast/16x16/places/start-here.png
+  /usr/share/icons/HighContrast/22x22/places/start-here.png
+  /usr/share/icons/HighContrast/24x24/places/start-here.png
+  /usr/share/icons/HighContrast/32x32/places/start-here.png
+  /usr/share/icons/HighContrast/48x48/places/start-here.png
+  /usr/share/icons/HighContrast/scalable/places/start-here.svg
+  /usr/share/icons/Ubuntu-Cinnamon/16x16/places/start-here.png
+  /usr/share/icons/Ubuntu-Cinnamon/22x22/places/start-here.png
+  /usr/share/icons/Ubuntu-Cinnamon/24x24/places/start-here.png
+  /usr/share/icons/Ubuntu-Cinnamon/32x32/places/start-here.png
+  /usr/share/icons/Ubuntu-Cinnamon/48x48/places/start-here.png
+  /usr/share/icons/Yaru-cinnamon/16x16/places/start-here.png
+  /usr/share/icons/Yaru-cinnamon/22x22/places/start-here.png
+  /usr/share/icons/Yaru-cinnamon/24x24/places/start-here.png
+  /usr/share/icons/Yaru-cinnamon/32x32/places/start-here.png
+  /usr/share/icons/Yaru-cinnamon/48x48/places/start-here.png
+  /usr/share/icons/Yaru/16x16/places/start-here.png
+  /usr/share/icons/Yaru/22x22/places/start-here.png
+  /usr/share/icons/Yaru/24x24/places/start-here.png
+  /usr/share/icons/Yaru/32x32/places/start-here.png
+  /usr/share/icons/Yaru/48x48/places/start-here.png
+  /usr/share/icons/crystal-remix/22x22/places/start-here.png
+  /usr/share/icons/crystal-remix/32x32/places/start-here.png
+  /usr/share/icons/crystal-remix/48x48/places/start-here.png
+  /usr/share/icons/gnome/16x16/places/distributor-logo.png
+  /usr/share/icons/gnome/16x16/places/gnome-main-menu.png
+  /usr/share/icons/gnome/16x16/places/start-here.png
+  /usr/share/icons/gnome/22x22/places/distributor-logo.png
+  /usr/share/icons/gnome/22x22/places/gnome-main-menu.png
+  /usr/share/icons/gnome/22x22/places/start-here.png
+  /usr/share/icons/gnome/24x24/places/distributor-logo.png
+  /usr/share/icons/gnome/24x24/places/gnome-main-menu.png
+  /usr/share/icons/gnome/24x24/places/start-here.png
+  /usr/share/icons/gnome/32x32/places/distributor-logo.png
+  /usr/share/icons/gnome/32x32/places/gnome-main-menu.png
+  /usr/share/icons/gnome/32x32/places/start-here.png
+  /usr/share/icons/gnome/48x48/places/distributor-logo.png
+  /usr/share/icons/gnome/48x48/places/gnome-main-menu.png
+  /usr/share/icons/gnome/48x48/places/start-here.png
+  /usr/share/icons/gnome/scalable/places/start-here.svg
+  /usr/share/icons/mate/16x16/places/distributor-logo.png
+  /usr/share/icons/mate/16x16/places/gnome-main-menu.png
+  /usr/share/icons/mate/16x16/places/start-here.png
+  /usr/share/icons/mate/22x22/places/distributor-logo.png
+  /usr/share/icons/mate/22x22/places/gnome-main-menu.png
+  /usr/share/icons/mate/22x22/places/start-here.png
+  /usr/share/icons/mate/24x24/places/distributor-logo.png
+  /usr/share/icons/mate/24x24/places/gnome-main-menu.png
+  /usr/share/icons/mate/24x24/places/start-here.png
+  /usr/share/icons/mate/32x32/places/distributor-logo.png
+  /usr/share/icons/mate/32x32/places/gnome-main-menu.png
+  /usr/share/icons/mate/32x32/places/start-here.png
+  /usr/share/icons/mate/48x48/places/distributor-logo.png
+  /usr/share/icons/mate/48x48/places/gnome-main-menu.png
+  /usr/share/icons/mate/48x48/places/start-here.png
+  /usr/share/icons/menta/16x16/places/distributor-logo.png
+  /usr/share/icons/menta/16x16/places/gnome-main-menu.png
+  /usr/share/icons/menta/16x16/places/start-here.png
+  /usr/share/icons/menta/22x22/places/distributor-logo.png
+  /usr/share/icons/menta/22x22/places/gnome-main-menu.png
+  /usr/share/icons/menta/22x22/places/start-here.png
+  /usr/share/icons/menta/24x24/places/distributor-logo.png
+  /usr/share/icons/menta/24x24/places/gnome-main-menu.png
+  /usr/share/icons/menta/24x24/places/start-here.png
+  /usr/share/icons/menta/32x32/places/distributor-logo.png
+  /usr/share/icons/menta/32x32/places/gnome-main-menu.png
+  /usr/share/icons/menta/32x32/places/start-here.png
+  /usr/share/icons/menta/48x48/places/distributor-logo.png
+  /usr/share/icons/menta/48x48/places/gnome-main-menu.png
+  /usr/share/icons/menta/48x48/places/start-here.png
+  /usr/share/sounds/freedesktop/stereo/device-added.oga
+  /usr/share/sounds/freedesktop/stereo/device-removed.oga
+  /usr/share/ubuntu-system-adjustments/renamed-menu-entries/mate-color-select.desktop (name)
+Execution time: 0:00:00.047275

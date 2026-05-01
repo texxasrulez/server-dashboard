@@ -1,0 +1,155 @@
+Font directories:
+	/usr/share/fonts
+	/usr/local/share/fonts
+	/usr/share/texmf/fonts/opentype/public/tex-gyre-math
+	/usr/share/texmf/fonts/opentype/public/tex-gyre
+	/usr/share/fonts/X11
+	/usr/share/fonts/cMap
+	/usr/share/fonts/cmap
+	/usr/share/fonts/opentype
+	/usr/share/fonts/truetype
+	/usr/share/fonts/type1
+	/usr/share/fonts/woff
+	/usr/share/fonts/X11/Type1
+	/usr/share/fonts/X11/encodings
+	/usr/share/fonts/X11/misc
+	/usr/share/fonts/X11/util
+	/usr/share/fonts/cmap/adobe-cns1
+	/usr/share/fonts/cmap/adobe-gb1
+	/usr/share/fonts/cmap/adobe-japan1
+	/usr/share/fonts/cmap/adobe-japan2
+	/usr/share/fonts/cmap/adobe-korea1
+	/usr/share/fonts/opentype/ebgaramond
+	/usr/share/fonts/opentype/ipafont-gothic
+	/usr/share/fonts/opentype/ipafont-mincho
+	/usr/share/fonts/opentype/league-spartan
+	/usr/share/fonts/opentype/linux-libertine
+	/usr/share/fonts/opentype/mathjax
+	/usr/share/fonts/opentype/noto
+	/usr/share/fonts/opentype/urw-base35
+	/usr/share/fonts/truetype/aenigma
+	/usr/share/fonts/truetype/ancient-scripts
+	/usr/share/fonts/truetype/arphic
+	/usr/share/fonts/truetype/dejavu
+	/usr/share/fonts/truetype/droid
+	/usr/share/fonts/truetype/dustin
+	/usr/share/fonts/truetype/ebgaramond
+	/usr/share/fonts/truetype/freefont
+	/usr/share/fonts/truetype/gentium
+	/usr/share/fonts/truetype/glyphicons
+	/usr/share/fonts/truetype/hack
+	/usr/share/fonts/truetype/isabella
+	/usr/share/fonts/truetype/lato
+	/usr/share/fonts/truetype/liberation
+	/usr/share/fonts/truetype/libreoffice
+	/usr/share/fonts/truetype/noto
+	/usr/share/fonts/truetype/quicksand
+	/usr/share/fonts/truetype/takao-gothic
+	/usr/share/fonts/truetype/ubuntu
+	/usr/share/fonts/truetype/uralic
+	/usr/share/fonts/truetype/wqy
+	/usr/share/fonts/type1/urw-base35
+	/usr/share/fonts/woff/ebgaramond
+	/usr/share/fonts/X11/encodings/large
+/usr/share/fonts: skipping, existing cache is valid: 0 fonts, 7 dirs
+/usr/share/fonts/X11: skipping, existing cache is valid: 0 fonts, 4 dirs
+/usr/share/fonts/X11/Type1: skipping, existing cache is valid: 43 fonts, 0 dirs
+/usr/share/fonts/X11/encodings: skipping, existing cache is valid: 0 fonts, 1 dirs
+/usr/share/fonts/X11/encodings/large: skipping, existing cache is valid: 0 fonts, 0 dirs
+/usr/share/fonts/X11/misc: skipping, existing cache is valid: 89 fonts, 0 dirs
+/usr/share/fonts/X11/util: skipping, existing cache is valid: 0 fonts, 0 dirs
+/usr/share/fonts/cMap: skipping, existing cache is valid: 0 fonts, 0 dirs
+/usr/share/fonts/cmap: skipping, existing cache is valid: 0 fonts, 5 dirs
+/usr/share/fonts/cmap/adobe-cns1: skipping, existing cache is valid: 0 fonts, 0 dirs
+/usr/share/fonts/cmap/adobe-gb1: skipping, existing cache is valid: 0 fonts, 0 dirs
+/usr/share/fonts/cmap/adobe-japan1: skipping, existing cache is valid: 0 fonts, 0 dirs
+/usr/share/fonts/cmap/adobe-japan2: skipping, existing cache is valid: 0 fonts, 0 dirs
+/usr/share/fonts/cmap/adobe-korea1: skipping, existing cache is valid: 0 fonts, 0 dirs
+/usr/share/fonts/opentype: skipping, existing cache is valid: 0 fonts, 8 dirs
+/usr/share/fonts/opentype/ebgaramond: skipping, existing cache is valid: 6 fonts, 0 dirs
+/usr/share/fonts/opentype/ipafont-gothic: skipping, existing cache is valid: 2 fonts, 0 dirs
+/usr/share/fonts/opentype/ipafont-mincho: skipping, existing cache is valid: 2 fonts, 0 dirs
+/usr/share/fonts/opentype/league-spartan: skipping, existing cache is valid: 8 fonts, 0 dirs
+/usr/share/fonts/opentype/linux-libertine: skipping, existing cache is valid: 13 fonts, 0 dirs
+/usr/share/fonts/opentype/mathjax: skipping, existing cache is valid: 24 fonts, 0 dirs
+/usr/share/fonts/opentype/noto: skipping, existing cache is valid: 30 fonts, 0 dirs
+/usr/share/fonts/opentype/urw-base35: skipping, existing cache is valid: 35 fonts, 0 dirs
+/usr/share/fonts/truetype: skipping, existing cache is valid: 2 fonts, 21 dirs
+/usr/share/fonts/truetype/aenigma: skipping, existing cache is valid: 465 fonts, 0 dirs
+/usr/share/fonts/truetype/ancient-scripts: skipping, existing cache is valid: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/arphic: skipping, existing cache is valid: 4 fonts, 0 dirs
+/usr/share/fonts/truetype/dejavu: skipping, existing cache is valid: 22 fonts, 0 dirs
+/usr/share/fonts/truetype/droid: skipping, existing cache is valid: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/dustin: skipping, existing cache is valid: 20 fonts, 0 dirs
+/usr/share/fonts/truetype/ebgaramond: skipping, existing cache is valid: 11 fonts, 0 dirs
+/usr/share/fonts/truetype/freefont: skipping, existing cache is valid: 12 fonts, 0 dirs
+/usr/share/fonts/truetype/gentium: skipping, existing cache is valid: 4 fonts, 0 dirs
+/usr/share/fonts/truetype/glyphicons: skipping, existing cache is valid: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/hack: skipping, existing cache is valid: 4 fonts, 0 dirs
+/usr/share/fonts/truetype/isabella: skipping, existing cache is valid: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/lato: skipping, existing cache is valid: 18 fonts, 0 dirs
+/usr/share/fonts/truetype/liberation: skipping, existing cache is valid: 12 fonts, 0 dirs
+/usr/share/fonts/truetype/libreoffice: skipping, existing cache is valid: 1 fonts, 0 dirs
+/usr/share/fonts/truetype/noto: skipping, existing cache is valid: 308 fonts, 0 dirs
+/usr/share/fonts/truetype/quicksand: skipping, existing cache is valid: 4 fonts, 0 dirs
+/usr/share/fonts/truetype/takao-gothic: skipping, existing cache is valid: 2 fonts, 0 dirs
+/usr/share/fonts/truetype/ubuntu: skipping, existing cache is valid: 232 fonts, 0 dirs
+/usr/share/fonts/truetype/uralic: skipping, existing cache is valid: 22 fonts, 0 dirs
+/usr/share/fonts/truetype/wqy: skipping, existing cache is valid: 3 fonts, 0 dirs
+/usr/share/fonts/type1: skipping, existing cache is valid: 0 fonts, 1 dirs
+/usr/share/fonts/type1/urw-base35: skipping, existing cache is valid: 35 fonts, 0 dirs
+/usr/share/fonts/woff: skipping, existing cache is valid: 0 fonts, 1 dirs
+/usr/share/fonts/woff/ebgaramond: skipping, existing cache is valid: 11 fonts, 0 dirs
+/usr/local/share/fonts: skipping, existing cache is valid: 0 fonts, 0 dirs
+/usr/share/texmf/fonts/opentype/public/tex-gyre-math: skipping, existing cache is valid: 5 fonts, 0 dirs
+/usr/share/texmf/fonts/opentype/public/tex-gyre: skipping, existing cache is valid: 33 fonts, 0 dirs
+/usr/share/fonts/X11: skipping, looped directory detected
+/usr/share/fonts/cMap: skipping, looped directory detected
+/usr/share/fonts/cmap: skipping, looped directory detected
+/usr/share/fonts/opentype: skipping, looped directory detected
+/usr/share/fonts/truetype: skipping, looped directory detected
+/usr/share/fonts/type1: skipping, looped directory detected
+/usr/share/fonts/woff: skipping, looped directory detected
+/usr/share/fonts/X11/Type1: skipping, looped directory detected
+/usr/share/fonts/X11/encodings: skipping, looped directory detected
+/usr/share/fonts/X11/misc: skipping, looped directory detected
+/usr/share/fonts/X11/util: skipping, looped directory detected
+/usr/share/fonts/cmap/adobe-cns1: skipping, looped directory detected
+/usr/share/fonts/cmap/adobe-gb1: skipping, looped directory detected
+/usr/share/fonts/cmap/adobe-japan1: skipping, looped directory detected
+/usr/share/fonts/cmap/adobe-japan2: skipping, looped directory detected
+/usr/share/fonts/cmap/adobe-korea1: skipping, looped directory detected
+/usr/share/fonts/opentype/ebgaramond: skipping, looped directory detected
+/usr/share/fonts/opentype/ipafont-gothic: skipping, looped directory detected
+/usr/share/fonts/opentype/ipafont-mincho: skipping, looped directory detected
+/usr/share/fonts/opentype/league-spartan: skipping, looped directory detected
+/usr/share/fonts/opentype/linux-libertine: skipping, looped directory detected
+/usr/share/fonts/opentype/mathjax: skipping, looped directory detected
+/usr/share/fonts/opentype/noto: skipping, looped directory detected
+/usr/share/fonts/opentype/urw-base35: skipping, looped directory detected
+/usr/share/fonts/truetype/aenigma: skipping, looped directory detected
+/usr/share/fonts/truetype/ancient-scripts: skipping, looped directory detected
+/usr/share/fonts/truetype/arphic: skipping, looped directory detected
+/usr/share/fonts/truetype/dejavu: skipping, looped directory detected
+/usr/share/fonts/truetype/droid: skipping, looped directory detected
+/usr/share/fonts/truetype/dustin: skipping, looped directory detected
+/usr/share/fonts/truetype/ebgaramond: skipping, looped directory detected
+/usr/share/fonts/truetype/freefont: skipping, looped directory detected
+/usr/share/fonts/truetype/gentium: skipping, looped directory detected
+/usr/share/fonts/truetype/glyphicons: skipping, looped directory detected
+/usr/share/fonts/truetype/hack: skipping, looped directory detected
+/usr/share/fonts/truetype/isabella: skipping, looped directory detected
+/usr/share/fonts/truetype/lato: skipping, looped directory detected
+/usr/share/fonts/truetype/liberation: skipping, looped directory detected
+/usr/share/fonts/truetype/libreoffice: skipping, looped directory detected
+/usr/share/fonts/truetype/noto: skipping, looped directory detected
+/usr/share/fonts/truetype/quicksand: skipping, looped directory detected
+/usr/share/fonts/truetype/takao-gothic: skipping, looped directory detected
+/usr/share/fonts/truetype/ubuntu: skipping, looped directory detected
+/usr/share/fonts/truetype/uralic: skipping, looped directory detected
+/usr/share/fonts/truetype/wqy: skipping, looped directory detected
+/usr/share/fonts/type1/urw-base35: skipping, looped directory detected
+/usr/share/fonts/woff/ebgaramond: skipping, looped directory detected
+/usr/share/fonts/X11/encodings/large: skipping, looped directory detected
+/var/cache/fontconfig: cleaning cache directory
+fc-cache: succeeded

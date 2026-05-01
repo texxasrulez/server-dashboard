@@ -1,0 +1,275 @@
+.drive-health-page .toolbar {
+  align-items: center;
+}
+
+.drive-health-page .toolbar select {
+  min-width: 110px;
+}
+
+.drive-health-meta {
+  margin-bottom: 14px;
+}
+
+.drive-health-section + .drive-health-section {
+  margin-top: 20px;
+}
+
+.drive-health-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 14px;
+}
+
+.drive-device-panels {
+  display: grid;
+  gap: 18px;
+}
+
+.drive-panel {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
+    rgba(255,255,255,0.02);
+}
+
+.drive-panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.drive-panel-title {
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.drive-panel-meta,
+.drive-panel-count {
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 0.84rem;
+}
+
+.drive-insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.drive-insight {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.drive-insight-label,
+.chart-label {
+  font-size: 0.78rem;
+  fill: rgba(255, 255, 255, 0.58);
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.drive-insight-value {
+  margin-top: 6px;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.drive-insight-meta {
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+}
+
+.drive-charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.drive-chart-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.drive-chart-title {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.drive-chart-svg {
+  width: 100%;
+  height: 190px;
+  display: block;
+}
+
+.chart-axis {
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 1;
+}
+
+.chart-line {
+  fill: none;
+  stroke: var(--chart-color, #6ec7ff);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.chart-area {
+  fill: var(--chart-color, #6ec7ff);
+  opacity: 0.16;
+}
+
+.chart-label-end {
+  text-anchor: end;
+}
+
+.chart-empty {
+  min-height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.84rem;
+}
+
+.drive-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.drive-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.drive-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.drive-card-meta {
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.84rem;
+}
+
+.drive-status {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.drive-status-good {
+  background: rgba(82, 196, 26, 0.15);
+  color: #8be28f;
+}
+
+.drive-status-bad {
+  background: rgba(255, 102, 102, 0.15);
+  color: #ff9c9c;
+}
+
+.drive-card-identity {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.drive-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.drive-stat {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.drive-stat-label {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.drive-stat-value {
+  margin-top: 5px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.drive-card-foot {
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.82rem;
+}
+
+.drive-unavailable {
+  border: 1px solid rgba(255, 96, 96, 0.2);
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(255, 96, 96, 0.1);
+  color: rgba(255, 230, 230, 0.94);
+}
+
+.drive-health-state {
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.drive-health-state.error {
+  background: rgba(255, 96, 96, 0.12);
+  border: 1px solid rgba(255, 96, 96, 0.24);
+}
+
+#driveHealthHistoryTable td,
+#driveHealthHistoryTable th {
+  white-space: nowrap;
+}
+
+#driveHealthHistoryTable td:nth-child(2) {
+  white-space: normal;
+}
+
+@media (max-width: 720px) {
+  .drive-health-page .toolbar {
+    width: 100%;
+  }
+
+  .drive-health-page .toolbar > * {
+    flex: 1 1 100%;
+  }
+
+  .drive-card-identity,
+  .drive-stats-grid,
+  .drive-charts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .drive-panel-head {
+    flex-direction: column;
+  }
+}

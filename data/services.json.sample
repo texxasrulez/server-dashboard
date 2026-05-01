@@ -1,0 +1,12 @@
+{
+  "services": [
+    {
+      "enabled": true,
+      "group": "Web",
+      "heartbeat_url": "",
+      "id": 1,
+      "name": "Homepage",
+      "url": "https://example.com"
+    }
+  ]
+}

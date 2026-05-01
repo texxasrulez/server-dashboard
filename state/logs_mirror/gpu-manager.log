@@ -1,0 +1,44 @@
+log_file: /var/log/gpu-manager.log
+last_boot_file: /var/lib/ubuntu-drivers-common/last_gfx_boot
+new_boot_file: /var/lib/ubuntu-drivers-common/last_gfx_boot
+can't access /run/u-d-c-nvidia-was-loaded file
+can't access /opt/amdgpu-pro/bin/amdgpu-pro-px
+Looking for nvidia modules in /lib/modules/6.8.0-110-generic/kernel
+Looking for nvidia modules in /lib/modules/6.8.0-110-generic/updates/dkms
+Looking for amdgpu modules in /lib/modules/6.8.0-110-generic/kernel
+Looking for amdgpu modules in /lib/modules/6.8.0-110-generic/updates/dkms
+Is nvidia loaded? no
+Was nvidia unloaded? no
+Is nvidia blacklisted? no
+Is intel loaded? no
+Is radeon loaded? no
+Is radeon blacklisted? no
+Is amdgpu loaded? yes
+Is amdgpu blacklisted? no
+Is amdgpu versioned? no
+Is amdgpu pro stack? no
+Is nouveau loaded? no
+Is nouveau blacklisted? no
+Is nvidia kernel module available? no
+Is amdgpu kernel module available? no
+Vendor/Device Id: 1002:1681
+BusID "PCI:3@0:0:0"
+Is boot vga? yes
+Found "/dev/dri/card1", driven by "amdgpu"
+output 0:
+	card1-eDP-1
+Number of connected outputs for /dev/dri/card1: 1
+Skipping "/dev/dri/card1", driven by "amdgpu"
+Skipping "/dev/dri/card1", driven by "amdgpu"
+Skipping "/dev/dri/card1", driven by "amdgpu"
+can't access /etc/prime-discrete
+No prime-settings found. Assuming prime is not set to ON (ONDEMAND could be on).
+Does it require offloading? no
+last cards number = 1
+Has amd? yes
+Has intel? no
+Has nvidia? no
+How many cards? 1
+Has the system changed? No
+Single card detected
+Nothing to do

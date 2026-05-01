@@ -1,0 +1,16 @@
+{
+  "name": "texxasrulez/server-dashboard",
+  "description": "Minimal PHP test scaffolding for Server Dashboard",
+  "type": "project",
+  "license": "GPL-3.0-or-later",
+  "require": {
+    "php": ">=8.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.6"
+  },
+  "scripts": {
+    "lint": "bash bin/php-lint.sh",
+    "test": "phpunit --configuration phpunit.xml.dist"
+  }
+}
